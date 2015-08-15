@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"John Lewis"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"mirahezemessages-description": "Messages specific for Miraheze",
+	"group-donator": "Donators",
+	"group-donator-member": "Donator",
+	"grouppage-donator": "m:Finance",
+	"group-steward": "Stewards",
+	"group-steward-member": "steward",
+	"grouppage-steward": "m:Stewards",
+	"group-sysadmin": "System administrators",
+	"group-sysadmin-member": "system administrator",
+	"grouppage-sysadmin": "m:System administrators",
+	"group-wikicreator": "Wiki Creators",
+	"group-wikicreator-member": "wiki creator",
+	"grouppage-wikicreator": "m:Wiki creator",
+	"privacypage": "m:Privacy Policy",
+	"restriction-delete": "Delete",
+	"sitematrix": "List of Miraheze wikis",
+	"sitematrix-summary": "This special page lists all Miraheze wikis.",
+	"sitematrix-desc": "Displays a [[Special:SiteMatrix|list of Miraheze wikis]]",
+	"sitematrix-others": "Other Miraheze wikis",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"tooltip-n-sitesupport": "",
+}
