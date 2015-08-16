@@ -19,7 +19,7 @@
  * @ingroup Maintenance
  * @ingroup Wikimedia
  */
-require_once( "$IP/maintenance/Maintenance.php" );
+require_once( '/srv/mediawiki/w/maintenance/Maintenance.php' );
 class RemoveDeletedWikis extends Maintenance {
 	function __construct() {
 		parent::__construct();

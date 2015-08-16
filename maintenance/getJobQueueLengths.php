@@ -3,7 +3,7 @@
  * Get the length of the job queue on all wikis
  * Sourced from WikimediaMaintenance
  */
-require_once( "$IP/maintenance/Maintenance.php" );
+require_once( '/srv/mediawiki/w/maintenance/Maintenance.php' );
 class GetJobQueueLengths extends Maintenance {
 	function __construct() {
 		parent::__construct();
