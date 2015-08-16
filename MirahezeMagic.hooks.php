@@ -1,5 +1,5 @@
 <?php
-class MirahezeMessagesHooks {
+class MirahezeMagicHooks {
         /**
          * From WikimediaMessages
          *

@@ -5,7 +5,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
-	"mirahezemessages-description": "Messages specific for Miraheze",
+	"mirahezemagic-description": "MediaWiki messages, scripts and hooks specific for Miraheze",
 	"group-donator": "Donators",
 	"group-donator-member": "Donator",
 	"grouppage-donator": "m:Finance",

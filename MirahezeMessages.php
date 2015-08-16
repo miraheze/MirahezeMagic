@@ -4,15 +4,15 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 }
 $wgExtensionCredits['other'][] = array(
         'author'         => 'John Lewis',
-        'descriptionmsg' => 'mirahezemessages-description',
-        'name'           => 'MirahezeMessages',
+        'descriptionmsg' => 'mirahezemagic-description',
+        'name'           => 'MirahezeMagic',
         'path'           => __FILE__,
-        'url'            => '//github.com/Miraheze/MirahezeMessages',
+        'url'            => '//github.com/Miraheze/MirahezeMagic',
 );
 
-$wgMessagesDirs['MirahezeMessages'] = dirname( __FILE__ ) . '/i18n/miraheze';
-$wgMessagesDirs['MirahezeOverrideMessages'] = dirname( __FILE__ ) . '/i18n/overrides';
+$wgMessagesDirs['MirahezeMagic'] = dirname( __FILE__ ) . '/i18n/miraheze';
+$wgMessagesDirs['MirahezeOverrideMessagesMagic'] = dirname( __FILE__ ) . '/i18n/overrides';
 
-$wgAutoloadClasses['MirahezeMessagesHooks'] = __DIR__ . '/MirahezeMessages.hooks.php';
+$wgAutoloadClasses['MirahezeMagicHooks'] = __DIR__ . '/MirahezeMagic.hooks.php';
 
-$wgHooks['MessageCache::get'][] = 'MirahezeMessagesHooks::onMessageCacheGet';
+$wgHooks['MessageCache::get'][] = 'MirahezeMagicHooks::onMessageCacheGet';
