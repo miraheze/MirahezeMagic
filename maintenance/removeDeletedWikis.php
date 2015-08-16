@@ -26,7 +26,7 @@ class RemoveDeletedWikis extends Maintenance {
 		$this->mDescription = "Remove any remaining entries in globalimagelinks, localuser and localnames for deleted wikis.\n";
 	}
 	function execute() {
-		$wikis = file( '/srv/mediawiki/dblists/deleted.dblist' );
+		$wikis = file( '/srv/mediawiki/dblist/deleted.dblist' );
 		if ( $wikis === false ) {
 			$this->error( 'Unable to open deleted.dblist', 1 );
 		}
