@@ -13,6 +13,7 @@
                 ]
         },
         "AutoloadClasses": {
+                "MirahezeIRCRCFeedFormatter": "MirahezeIRCRCFeedFormatter.php",
                 "MirahezeMagicHooks": "MirahezeMagic.hooks.php"
         },
         "Hooks": {
