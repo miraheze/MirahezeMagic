@@ -19,6 +19,9 @@
         "Hooks": {
                 "MessageCache::get": [
                         "MirahezeMagicHooks::onMessageCacheGet"
+                ],
+                "SkinAfterBottomScripts": [
+                        "MirahezeMagicHooks::piwikScript"
                 ]
         }
 }
