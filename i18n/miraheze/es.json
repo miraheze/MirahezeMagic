@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wynter"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"mirahezemagic-description": "Mensajes de MediaWiki, scripts y ganchos específicos para Miraheze",
+	"group-donator": "Donadores",
+	"group-donator-member": "Donador",
+	"grouppage-donator": "m:Finance",
+	"group-steward": "Stewards",
+	"group-steward-member": "steward",
+	"grouppage-steward": "m:Stewards",
+	"group-sysadmin": "Administradores de sistema",
+	"group-sysadmin-member": "administrador de sistema",
+	"grouppage-sysadmin": "m:System administrators",
+	"group-wikicreator": "Creadores de Wiki",
+	"group-wikicreator-member": "creador de wiki",
+	"grouppage-wikicreator": "m:Wiki creators",
+	"privacypage": "m:Privacy Policy",
+	"protect-level-user": "Permitir solo los usuarios registrados",
+	"restriction-delete": "Borrar",
+	"restriction-level-user": "Permitir solo los usuarios registrados",
+	"sitematrix": "Lista de wikis de Miraheze",
+	"sitematrix-summary": "Esta página especial lista todas wikis de Miraheze.",
+	"sitematrix-desc": "Muestra una [[Special:SiteMatrix|lista de wikis de Miraheze]]",
+	"sitematrix-others": "Otras wikis de Miraheze",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"tooltip-n-sitesupport": ""
+}
