@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Southparkfan"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"mirahezemagic-description": "Systeemberichten, scripts en hooks gemaakt voor Miraheze",
+	"group-donator": "Donateurs",
+	"group-donator-member": "Donateur",
+	"grouppage-donator": "m:Finance",
+	"group-steward": "Stewards",
+	"group-steward-member": "steward",
+	"grouppage-steward": "m:Stewards",
+	"group-sysadmin": "Systeembeheerders",
+	"group-sysadmin-member": "systeembeheerder",
+	"grouppage-sysadmin": "m:System administrators",
+	"group-wikicreator": "Wiki Creators",
+	"group-wikicreator-member": "wiki creator",
+	"grouppage-wikicreator": "m:Wiki creators",
+	"privacypage": "m:Privacy Policy",
+	"protect-level-user": "Alleen ingelogde gebruikers toestaan",
+	"restriction-delete": "Verwijderen",
+	"restriction-level-user": "Alleen ingelogde gebruikers toestaan",
+	"sitematrix": "Lijst van Miraheze wiki's",
+	"sitematrix-summary": "Deze special pagina laat een lijst van alle Miraheze wiki's zien.",
+	"sitematrix-desc": "Laat [[Special:SiteMatrix|een lijst van Miraheze wiki's]] zien",
+	"sitematrix-others": "Andere Miraheze wiki's",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"tooltip-n-sitesupport": ""
+}
