@@ -1,0 +1,33 @@
+{
+	"@metadata": {
+		"authors": [
+			"John Lewis",
+			"Revi"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"mirahezemagic-description": "Miraheze에 특성화된 번역, 스크립트 등",
+	"group-donator": "기부자",
+	"group-donator-member": "기부자",
+	"grouppage-donator": "m:Finance",
+	"group-steward": "사무장",
+	"group-steward-member": "사무장",
+	"grouppage-steward": "m:Stewards",
+	"group-sysadmin": "시스템 관리자",
+	"group-sysadmin-member": "시스템 관리자",
+	"grouppage-sysadmin": "m:System administrators",
+	"group-wikicreator": "위키 생성자",
+	"group-wikicreator-member": "위키 생성자",
+	"grouppage-wikicreator": "m:Wiki creators",
+	"privacypage": "m:Privacy Policy",
+	"protect-level-user": "로그인 사용자에게만 허용",
+	"restriction-delete": "삭제",
+	"restriction-level-user": "로그인한 사용자에게만 허용",
+	"sitematrix": "Miraheze 위키의 목록",
+	"sitematrix-summary": "모든 Miraheze 위키의 목록입니다.",
+	"sitematrix-desc": "[[Special:SiteMatrix|Miraheze 위키 목록]]을 보여줍니다",
+	"sitematrix-others": "다른 Miraheze 위키",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"tooltip-n-sitesupport": ""
+}
