@@ -1,0 +1,32 @@
+{
+	"@metadata": {
+		"authors": [
+			"Reception123"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"mirahezemagic-description": "Messages Mediawiki, scripts et hooks specifiques pour Miraheze",
+	"group-donator": "Donateurs",
+	"group-donator-member": "Donateur",
+	"grouppage-donator": "m:Finances",
+	"group-steward": "Stewards",
+	"group-steward-member": "steward",
+	"grouppage-steward": "m:Stewards",
+	"group-sysadmin": "Administrateur de systeme",
+	"group-sysadmin-member": "Administrateur de systeme",
+	"grouppage-sysadmin": "m:Administrateur de systeme",
+	"group-wikicreator": "Createur de wikis",
+	"group-wikicreator-member": "createur de wikis",
+	"grouppage-wikicreator": "m:Createurs de wikis",
+	"privacypage": "m:Privacy Policy",
+	"protect-level-user": "Laisser les utilisateurs enregistrees seulement",
+	"restriction-delete": "Effacer",
+	"restriction-level-user": "Laisser les utilisateurs enregistrees seulement",
+	"sitematrix": "List de wikis de Miraheze ",
+	"sitematrix-summary": "Cette page a toutes les wikis de Miraheze.",
+	"sitematrix-desc": "[[Special:SiteMatrix|Liste des of  wikis de Miraheze]]",
+	"sitematrix-others": "Autres wiki de Miraheze",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"tooltip-n-sitesupport": ""
+}
