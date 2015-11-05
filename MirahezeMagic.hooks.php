@@ -41,6 +41,7 @@ class MirahezeMagicHooks {
 			$id = strval( $wmgPiwikSiteID );
 			$title = $skin->getRelevantTitle();
 			$jstitle = Xml::encodeJsVar( $title->getPrefixedText() );
+			$dbname = Xml::encodeJsVar( $wgDBname );
 			$urltitle = $title->getPrefixedURL();
 			$userType = $wgUser->isLoggedIn() ? "User" : "Anonymous";
 			$text .= <<<SCRIPT
@@ -52,7 +53,7 @@ class MirahezeMagicHooks {
 	(function() {
 		var u = "//piwik.miraheze.org/";
 		_paq.push(["setTrackerUrl", u+"piwik.php"]);
-		_paq.push(['setDocumentTitle', {$jstitle}]);
+		_paq.push(['setDocumentTitle', {$dbname} + " - " + {$jstitle}]);
 		_paq.push(["setSiteId", "{$id}"]);
 		_paq.push(["setCustomVariable", 1, "userType", "{$userType}", "visit"]);
 		var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
