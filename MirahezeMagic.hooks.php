@@ -34,7 +34,7 @@ class MirahezeMagicHooks {
                 return true;
         }
 	function piwikScript( $skin, &$text = '' ) {
-			global $wmgPiwikSiteID, $wgUser;
+			global $wmgPiwikSiteID, $wgUser, $wgDBname;
 			if ( !$wmgPiwikSiteID ) {
 				$wmgPiwikSiteID = 1;
 			}
