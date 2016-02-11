@@ -22,6 +22,9 @@
                 ],
                 "SkinAfterBottomScripts": [
                         "MirahezeMagicHooks::piwikScript"
+                ],
+                "TitleReadWhitelist": [
+                        "MirahezeMagicHooks::onTitleReadWhitelist"
                 ]
-        }
+	}
 }

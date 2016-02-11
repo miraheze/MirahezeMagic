@@ -33,7 +33,8 @@ class MirahezeMagicHooks {
                 }
                 return true;
         }
-	function piwikScript( $skin, &$text = '' ) {
+
+	public function piwikScript( $skin, &$text = '' ) {
 			global $wmgPiwikSiteID, $wgUser, $wgDBname;
 			if ( !$wmgPiwikSiteID ) {
 				$wmgPiwikSiteID = 1;
@@ -52,7 +53,7 @@ class MirahezeMagicHooks {
 	_paq.push(["enableLinkTracking"]);
 	(function() {
 		var u = "//piwik.miraheze.org/";
-		_paq.push(["setTrackerUrl", u+"piwik.php"]);
+		_paq.push(["setTrackerUrl", u + "piwik.php"]);
 		_paq.push(['setDocumentTitle', {$dbname} + " - " + {$jstitle}]);
 		_paq.push(["setSiteId", "{$id}"]);
 		_paq.push(["setCustomVariable", 1, "userType", "{$userType}", "visit"]);
@@ -69,5 +70,15 @@ class MirahezeMagicHooks {
 SCRIPT;
 			return true;
 	}
+
+        public function onTitleReadWhitelist( $title, $user, &$whitelisted ) {
+                global $wgContLang;
+
+                $regexLine = "/^" . preg_quote( $wgContLang->getNsText( NS_SPECIAL ), '/' ) . ":Central(Auto)?Login/i";
+
+                if ( preg_match( $regexLine, $title->getPrefixedDBKey() ) === 1 ) {
+                        $whitelisted = true;
+                }
+        }
 }
 
