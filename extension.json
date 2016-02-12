@@ -25,6 +25,9 @@
                 ],
                 "TitleReadWhitelist": [
                         "MirahezeMagicHooks::onTitleReadWhitelist"
+                ],
+                "MakeGlobalVariablesScript": [
+                        "MirahezeMagicHooks::onMakeGlobalVariablesScript"
                 ]
 	}
 }
