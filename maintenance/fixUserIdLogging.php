@@ -21,7 +21,7 @@
 * @version 1.0
 */
 
-require_once( __DIR__ . "../../../maintenance/Maintenance.php" );
+require_once( __DIR__ . "/Maintenance.php" );
 
 class FixUserIdLogging extends Maintenance {
         public $mUserCache;
@@ -29,7 +29,7 @@ class FixUserIdLogging extends Maintenance {
         public function __construct() {
                 parent::__construct();
                 $this->addOption( 'fix', 'Actually fix the attribution instead of just checking for wrong entries', false, false );
-                $this->mDescription = 'Fixes user attribution in logs and revisions';
+                $this->mDescription = 'Fixes user attribution in logs';
                 $this->setBatchSize( 100 );
         }
 
@@ -65,7 +65,7 @@ class FixUserIdLogging extends Maintenance {
                                         }
                                 }
                         }
-                        
+
 			$lastCheckedLogId = $lastCheckedLogId + $this->mBatchSize;
                 } while ( $lastCheckedLogId <= $end );
 
@@ -79,29 +79,35 @@ class FixUserIdLogging extends Maintenance {
         }
 
         public function getGoodUserId( $username ) {
-                $dbr = wfGetDB( DB_SLAVE );
-
                 $whitelist = array( 'Maintenance script', 'MediaWiki default' );
 
                 if ( in_array( $username, $whitelist ) ) {
                         return 0;
                 }
 
-                $userRes = $dbr->selectRow(
-                                'user',
-                                array( 'user_name', 'user_id' ),
-                                array( 'user_name' => $username ),
-                                __METHOD__
-                );
 
-                if ( is_object( $userRes ) ) {
-                                $goodUserId = $userRes->user_id;
-                } else {
+		if ( isset( $this->mUserCache[$username] ) ) {
+			$goodUserId = $this->mUserCache[$username];
+		} else {	
+	                $userId = $dbr->selectField(
+        	                        'user',
+                	               	'user_id',
+                        	        array( 'user_name' => $username ),
+                                	__METHOD__
+	                );
+
+
+	                if ( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) {
+				$goodUserId = $userId;
+                	} else {
                                 $goodUserId = 0;
-                }
+	                }
 
-                return $goodUserId;
-        }
+			$this->mUserCache[$username] = $goodUserId;
+
+        	        return $goodUserId;
+        	}
+	}
 
         protected function fixLogEntry( $row ) {
                 $dbr = wfGetDB( DB_SLAVE );

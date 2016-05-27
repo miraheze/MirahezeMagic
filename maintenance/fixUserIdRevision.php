@@ -21,7 +21,7 @@
 * @version 1.0
 */
 
-require_once( __DIR__ . "../../../maintenance/Maintenance.php" );
+require_once( __DIR__ . "/Maintenance.php" );
 
 class FixUserIdRevision extends Maintenance {
         public $mUserCache;
@@ -65,7 +65,7 @@ class FixUserIdRevision extends Maintenance {
                                         }
                                 }
                         }
-                        
+
 			$lastCheckedRevId = $lastCheckedRevId + $this->mBatchSize;
                 } while ( $lastCheckedRevId <= $end );
 
@@ -79,31 +79,37 @@ class FixUserIdRevision extends Maintenance {
         }
 
         public function getGoodUserId( $username ) {
-                $dbr = wfGetDB( DB_SLAVE );
-
                 $whitelist = array( 'Maintenance script', 'MediaWiki default' );
 
                 if ( in_array( $username, $whitelist ) ) {
                         return 0;
                 }
 
-                $userRes = $dbr->selectRow(
-                                'user',
-                                array( 'user_name', 'user_id' ),
-                                array( 'user_name' => $username ),
-                                __METHOD__
-                );
 
-                if ( is_object( $userRes ) ) {
-                                $goodUserId = $userRes->user_id;
+                if ( isset( $this->mUserCache[$username] ) ) {
+                        $goodUserId = $this->mUserCache[$username];
                 } else {
-                                $goodUserId = 0;
-                }
+                        $userId = $dbr->selectField(
+                                        'user',
+                                        'user_id',
+                                        array( 'user_name' => $username ),
+                                        __METHOD__
+                        );
 
-                return $goodUserId;
+
+                        if ( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) {
+                                $goodUserId = $userId;
+                        } else {
+                                $goodUserId = 0;
+                        }
+
+                        $this->mUserCache[$username] = $goodUserId;
+
+                        return $goodUserId;
+                }
         }
 
-        protected function fixRevEntry( $row ) {
+	protected function fixRevEntry( $row ) {
                 $dbr = wfGetDB( DB_SLAVE );
                 $dbw = wfGetDB( DB_MASTER );
 
@@ -125,6 +131,7 @@ class FixUserIdRevision extends Maintenance {
                 } else {
                         $userId = 0;
                 }
+
 
                 $updateParams = array(
                         'rev_user' => $userId,
