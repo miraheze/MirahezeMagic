@@ -21,7 +21,7 @@
 * @version 1.0
 */
 
-require_once( __DIR__ . "/Maintenance.php" );
+require_once( "/srv/mediawiki/w/maintenance/Maintenance.php" );
 
 class FixUserIdLogging extends Maintenance {
         public $mUserCache;
