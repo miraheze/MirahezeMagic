@@ -89,6 +89,8 @@ class FixUserIdRevision extends Maintenance {
                 if ( isset( $this->mUserCache[$username] ) ) {
                         $goodUserId = $this->mUserCache[$username];
                 } else {
+			$dbr = wfGetDB( DB_SLAVE );
+
                         $userId = $dbr->selectField(
                                         'user',
                                         'user_id',
@@ -104,9 +106,9 @@ class FixUserIdRevision extends Maintenance {
                         }
 
                         $this->mUserCache[$username] = $goodUserId;
+		}
 
                         return $goodUserId;
-                }
         }
 
 	protected function fixRevEntry( $row ) {
