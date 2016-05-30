@@ -100,20 +100,25 @@ class FindInactiveWikis extends Maintenance {
 
 		if ( isset( $res->rc_timestamp ) && $res->rc_timestamp < date( "YmdHis", strtotime( "-60 days" ) ) ) {
 			if ( $this->hasOption( 'close' ) ) {
-				$this->closeWiki ( $wiki );
+				$this->closeWiki( $wiki );
 				$this->output( "Wiki {$wiki} was eligible for closing and it was.\n" );
 			} else {
 				$this->output( "It looks like {$wiki} should be closed. Timestamp of last recent changes entry: {$res->rc_timestamp}\n" );
 			}
 		} elseif ( isset( $res->rc_timestamp ) && $res->rc_timestamp < date( "YmdHis", strtotime( "-45 days" ) ) ) {
 			if ( $this->hasOption( 'warn' ) ) {
-				$this->warnWiki ( $wiki );
+				$this->warnWiki( $wiki );
 				$this->output( "Wiki {$wiki} was eligible for a warning notice and one was given.\n" );
 			} else {
 				$this->output( "It looks like {$wiki} should get a warning notice. Timestamp of last recent changes entry: {$res->rc_timestamp}\n" );
 			}
 		} else {
-			$this->output( "No recent changes entries have been found for {$wiki}.\n" );
+			if ( $this->hasOption( 'warn' ) ) {
+				$this->warnWiki( $wiki );
+				$this->output( "No recent changes entries have been found for {$wiki}. Therefore marking as inactive.\n" );
+			} else {
+				$this->output( "No recent changes have been found for {$wiki}.\n" );
+			}
 		}
 
 		return true;
@@ -123,23 +128,32 @@ class FindInactiveWikis extends Maintenance {
 		$dbr = wfGetDB( DB_SLAVE );
 		$dbr->selectDB( $wiki );
 
+		// Handle MediaWiki:Sitenotice
 		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
 		$article = WikiPage::factory( $title );
+		$content = $article->getContent( Revision::RAW );
+		$text = ContentHandler::getContentText( $content );
 
-		$article->doEditContent(
-			new WikitextContent(
-				wfMessage( 'miraheze-closemessage' )->plain() 
-			), // Text
-			'Inactivity close', // Edit summary
-			EDIT_NEW,
-			false,
-			User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
-		);
+		// Get miraheze-closemessage
+		$wmtext = wfMessage( 'miraheze-closemessage' )->plain();
 
-		$dbw = wfGetDB( DB_SLAVE );
-		$dbw->selectDB( 'metawiki' ); // force this
+		// Only close the wiki if it's not already marked as closed
+		if ( $text != $wmtext ) {
+			$article->doEditContent(
+				new WikitextContent(
+					wfMessage( 'miraheze-closemessage' )->plain() 
+				), // Text
+				'Inactivity close', // Edit summary
+				EDIT_NEW,
+				false,
+				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
+			);
 
-		$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addIdentifierQuotes( $wiki ) . ';');
+			$dbw = wfGetDB( DB_SLAVE );
+			$dbw->selectDB( 'metawiki' ); // force this
+
+			$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addIdentifierQuotes( $wiki ) . ';');
+		}
 
 		return true;
 	}
@@ -148,19 +162,27 @@ class FindInactiveWikis extends Maintenance {
 		$dbr = wfGetDB( DB_SLAVE );
 		$dbr->selectDB( $wiki );
 
+		// Handle MediaWiki:Sitenotice
 		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
 		$article = WikiPage::factory( $title );
+		$content = $article->getContent( Revision::RAW );
+		$text = ContentHandler::getContentText( $content );
 
-		$article->doEditContent(
-			new WikitextContent(
-				wfMessage( 'miraheze-warnmessage' )->plain() 
-			), // Text
-			'Inactivity warning', // Edit summary
-			EDIT_NEW,
-			false,
-			User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
-		);
+		// Get content of 'miraheze-warnmessage'
+		$wmtext = wfMessage( 'miraheze-warnmessage' )->plain();
 
+		// Only write the inactvity warning if the wiki hasn't been warned yet
+		if ( $text != $wmtext ) {
+			$article->doEditContent(
+				new WikitextContent(
+					wfMessage( 'miraheze-warnmessage' )->plain() 
+				), // Text
+				'Inactivity warning', // Edit summary
+				EDIT_NEW,
+				false,
+				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
+			);
+		}
 		return true;
 	}
 }
