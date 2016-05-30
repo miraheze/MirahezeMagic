@@ -152,7 +152,7 @@ class FindInactiveWikis extends Maintenance {
 			$dbw = wfGetDB( DB_SLAVE );
 			$dbw->selectDB( 'metawiki' ); // force this
 
-			$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addIdentifierQuotes( $wiki ) . ';');
+			$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';');
 		}
 
 		return true;
