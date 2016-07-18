@@ -144,7 +144,7 @@ class FindInactiveWikis extends Maintenance {
 					wfMessage( 'miraheze-closemessage' )->plain() 
 				), // Text
 				'Inactivity close', // Edit summary
-				EDIT_NEW,
+				0,
 				false,
 				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
 			);
@@ -178,7 +178,7 @@ class FindInactiveWikis extends Maintenance {
 					wfMessage( 'miraheze-warnmessage' )->plain() 
 				), // Text
 				'Inactivity warning', // Edit summary
-				EDIT_NEW,
+				0,
 				false,
 				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
 			);
