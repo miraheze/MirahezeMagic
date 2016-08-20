@@ -128,27 +128,6 @@ class FindInactiveWikis extends Maintenance {
 		$dbr = wfGetDB( DB_SLAVE );
 		$dbr->selectDB( $wiki );
 
-		// Handle MediaWiki:Sitenotice
-		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
-		$article = WikiPage::factory( $title );
-		$content = $article->getContent( Revision::RAW );
-		$text = ContentHandler::getContentText( $content );
-
-		// Get miraheze-closemessage
-		$wmtext = wfMessage( 'miraheze-closemessage' )->plain();
-
-		// Only close the wiki if it's not already marked as closed
-		if ( $text != $wmtext ) {
-			$article->doEditContent(
-				new WikitextContent(
-					wfMessage( 'miraheze-closemessage' )->plain() 
-				), // Text
-				'Inactivity close', // Edit summary
-				0,
-				false,
-				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
-			);
-
 			$dbw = wfGetDB( DB_SLAVE );
 			$dbw->selectDB( 'metawiki' ); // force this
 
