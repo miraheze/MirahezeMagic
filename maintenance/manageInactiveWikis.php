@@ -45,38 +45,38 @@ class FindInactiveWikis extends Maintenance {
 		);
 
 		foreach ( $res as $row ) {
-		$dbname = $row->wiki_dbname;
-
-		if ( in_array( $dbname, $wgFindInactiveWikisWhitelist ) ) {
-			continue; // Wiki is in whitelist, do not check.
-		}
-
-		// Apparently I need to force this here too, so I'll do that.
-		$dbr->selectDB( 'metawiki' );
-
-		$res = $dbr->selectRow(
-			'logging',
-			'log_timestamp',
-			array(
-				'log_action' => 'createwiki',
-				'log_params' => serialize( array( '4::wiki' => $dbname ) )
-			),
-			__METHOD__,
-			array( // Sometimes a wiki might have been created multiple times.
-				'ORDER BY' => 'log_timestamp DESC'
-			)
-		);
-
-		if ( !isset( $res ) || !isset( $res->log_timestamp ) ) {
-			$this->output( "ERROR: couldn't determine when {$dbname} was created!\n" );
-			continue;
-		}
-
-		if ( $res && $res->log_timestamp < date( "YmdHis", strtotime( "-45 days" ) ) ) {
-			$this->checkLastActivity( $dbname );
+			$dbname = $row->wiki_dbname;
+	
+			if ( in_array( $dbname, $wgFindInactiveWikisWhitelist ) ) {
+				continue; // Wiki is in whitelist, do not check.
+			}
+	
+			// Apparently I need to force this here too, so I'll do that.
+			$dbr->selectDB( 'metawiki' );
+	
+			$res = $dbr->selectRow(
+				'logging',
+				'log_timestamp',
+				array(
+					'log_action' => 'createwiki',
+					'log_params' => serialize( array( '4::wiki' => $dbname ) )
+				),
+				__METHOD__,
+				array( // Sometimes a wiki might have been created multiple times.
+					'ORDER BY' => 'log_timestamp DESC'
+				)
+			);
+	
+			if ( !isset( $res ) || !isset( $res->log_timestamp ) ) {
+				$this->output( "ERROR: couldn't determine when {$dbname} was created!\n" );
+				continue;
+			}
+	
+			if ( $res && $res->log_timestamp < date( "YmdHis", strtotime( "-45 days" ) ) ) {
+				$this->checkLastActivity( $dbname );
+			}
 		}
 	}
-}
 
 	public function checkLastActivity( $wiki ) {
 		$dbr = wfGetDB( DB_SLAVE );
@@ -123,19 +123,16 @@ class FindInactiveWikis extends Maintenance {
 		return true;
 	}
 
-	public function closeWiki( $wiki) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$dbr->selectDB( $wiki );
+	public function closeWiki( $wiki ) {
+		$dbw = wfGetDB( DB_SLAVE );
+		$dbw->selectDB( 'metawiki' ); // force this
 
-			$dbw = wfGetDB( DB_SLAVE );
-			$dbw->selectDB( 'metawiki' ); // force this
-
-			$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';');
+		$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';' );
 
 		return true;
 	}
 
-	public function warnWiki( $wiki) {
+	public function warnWiki( $wiki ) {
 		$dbr = wfGetDB( DB_SLAVE );
 		$dbr->selectDB( $wiki );
 
