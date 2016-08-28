@@ -34,7 +34,6 @@ class FindInactiveWikis extends Maintenance {
 
 	public function execute() {
 		global $wgFindInactiveWikisWhitelist;
-		
 		$dbr = wfGetDB( DB_SLAVE );
 		$dbr->selectDB( 'metawiki' ); // force this
 
