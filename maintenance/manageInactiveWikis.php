@@ -129,6 +129,25 @@ class FindInactiveWikis extends Maintenance {
 
 		$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';' );
 
+		$dbw->selectDB( $wiki );
+		
+		// Empty MediaWiki:Sitenotice
+		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
+		$article = WikiPage::factory( $title );
+		$content = $article->getContent( Revision::RAW );
+		$text = ContentHandler::getContentText( $content );
+
+		if ( $text != '' ) {
+			$article->doEditContent(
+				new WikitextContent(
+					''
+				), // Text
+				'Remove inactivity notice', // Edit summary
+				0,
+				false,
+				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
+			);
+		}
 		return true;
 	}
 
