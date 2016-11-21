@@ -31,7 +31,7 @@ class RemoteWiki {
 
 		$db->selectDB( $dbName );
 
-		if ( $row->wiki_dbname !== false ) {
+		if ( $row !== false ) {
 			return new self( $row->wiki_dbname, $row->wiki_sitename, $row->wiki_language, $row->wiki_private, $row->wiki_closed, $row->wiki_settings );
 		} else {
 			return null;
