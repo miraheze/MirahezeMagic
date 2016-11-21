@@ -14,7 +14,8 @@
         },
         "AutoloadClasses": {
                 "MirahezeIRCRCFeedFormatter": "MirahezeIRCRCFeedFormatter.php",
-                "MirahezeMagicHooks": "MirahezeMagic.hooks.php"
+                "MirahezeMagicHooks": "MirahezeMagic.hooks.php",
+                "RemoteWiki": "RemoteWiki.php"
         },
         "Hooks": {
                 "MessageCache::get": [
