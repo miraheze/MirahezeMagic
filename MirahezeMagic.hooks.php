@@ -11,6 +11,7 @@ class MirahezeMagicHooks {
 		global $wgLanguageCode;
 		static $keys = array(
 			'centralauth-groupname',
+			'privacypage',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
