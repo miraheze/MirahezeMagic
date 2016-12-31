@@ -12,6 +12,7 @@ class MirahezeMagicHooks {
 		static $keys = array(
 			'centralauth-groupname',
 			'privacypage',
+			'prefs-help-realname',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
