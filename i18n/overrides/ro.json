@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"John Lewis"
+		]
+	},
+	"miraheze-centralauth-groupname": "Miraheze",
+	"miraheze-privacypage": "m:Privacy Policy",
+	"miraheze-prefs-help-realname":"Numele real este op?ional. Daca este furnizat, ar putea fi folosit pentru a va atribui munca. Prin utilizarea unui wiki Miraheze aceptati <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Termeni de utilizare]</span> si aceptati <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Politica de confidentialitate]</span>"
+}
