@@ -6,4 +6,5 @@
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-privacypage": "m:Privacy Policy"
+	"prefs-help-realname": "Real name is optional. If you choose to provide it, this will be used for giving you attribution for your work. Also, by using a wiki hosted by Miraheze, you agree to the <a href="https://meta.miraheze.org/wiki/Terms_of_Use">Terms of Use</a> and accept the <a href="https://meta.miraheze.org/wiki/Privacy_Policy">Privacy Policy</a>"
 }
