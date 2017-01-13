@@ -6,6 +6,7 @@
 	},
 	"centralauth-groupname": "Miraheze",
 	"mirahezemagic-description": "MediaWiki messages, scripts and hooks specific for Miraheze",
+	"miraheze-categories": "Categories",
 	"miraheze-donate": "Donate",
 	"miraheze-helpcenter": "About Miraheze",
 	"miraheze-requestfeatures": "Request features on a wiki",
