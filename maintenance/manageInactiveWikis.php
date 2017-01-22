@@ -82,10 +82,17 @@ class FindInactiveWikis extends Maintenance {
 		$dbr = wfGetDB( DB_SLAVE );
 		$dbr->selectDB( $wiki );
 
+		// Exclude our sitenotice from edits so that we don't get 60 days after 45
+		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
+
 		$res = $dbr->selectRow(
 			'recentchanges',
 			'rc_timestamp',
-			array(),
+			array(
+				"(rc_namespace <> " . $title->getNamespace .
+				" AND rc_title <> " . $dbr->addQuotes( $title->getDBkey ) .
+				" AND rc_comment <> 'Inactivity warning')"
+			),
 			__METHOD__,
 			array(
 				'ORDER BY' => 'rc_timestamp DESC'
