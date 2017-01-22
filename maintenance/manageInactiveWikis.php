@@ -89,9 +89,9 @@ class FindInactiveWikis extends Maintenance {
 			'recentchanges',
 			'rc_timestamp',
 			array(
-				"(rc_namespace <> " . $title->getNamespace .
-				" AND rc_title <> " . $dbr->addQuotes( $title->getDBkey ) .
-				" AND rc_comment <> 'Inactivity warning')"
+				"NOT (rc_namespace = " . $title->getNamespace .
+				" AND rc_title = " . $dbr->addQuotes( $title->getDBkey ) .
+				" AND rc_comment = 'Inactivity warning')"
 			),
 			__METHOD__,
 			array(
