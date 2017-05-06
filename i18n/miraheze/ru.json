@@ -1,0 +1,35 @@
+{
+	"@metadata": {
+		"authors": [
+			"AlvaroMolina"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"miraheze-categories": "Категории",
+  "grouppage-donator": "m:Finance",
+	"group-steward": "Стюарды",
+	"group-steward-member": "{{GENDER:$1|системный администратор}}",
+	"grouppage-steward": "m:Stewards",
+	"group-sysadmin": "Системные администраторы",
+	"group-sysadmin-member": "{{GENDER:$1|стюард}}",
+	"grouppage-sysadmin": "m:System administrators",
+	"group-checkuser": "Проверяющие участников",
+	"group-checkuser-member": "{{GENDER:$1|проверяющий участников|проверяющая участников}}",
+	"grouppage-checkuser": "m:CheckUser",
+	"group-oversight": "Ревизоры",
+	"group-oversight-member": "ревизор",
+	"grouppage-oversight": "m:Oversight",
+	"group-rollbacker": "Откатывающие",
+	"group-rollbacker-member": "{{GENDER:$1|откатывающий|откатывающая}}",
+	"grouppage-rollbacker": "m:Meta:Rollbacker",
+	"group-autopatrolled": "Автопатрулируемые",
+	"group-autopatrolled-member": "{{GENDER:$1|автопатрулируемый|автопатрулируемая}}",
+	"grouppage-autopatrolled": "m:Meta:Autopatrolled",
+	"group-confirmed": "Подтверждённые участники",
+	"group-confirmed-member": "{{GENDER:$1|подтверждённый участник|подтверждённая участница}}",
+	"grouppage-wikicreator": "m:Wiki creators",
+  "restriction-delete": "удалять",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"tooltip-n-sitesupport": ""
+}
