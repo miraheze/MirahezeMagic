@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"John Lewis",
-			"Revi"
+			"Revi",
+			"AlvaroMolina",
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -30,6 +31,8 @@
 	"grouppage-autopatrolled": "m:Meta:Autopatrolled",
 	"group-confirmed": "인증된 사용자",
 	"group-confirmed-member": "인증된 사용자",
+	"group-global-ipblock-exempt": "통합 IP 차단 면제자",
+ 	"group-global-ipblock-exempt-member": "{{GENDER:$1|통합 IP 차단 면제자}}",
 	"protect-level-user": "로그인 사용자에게만 허용",
 	"restriction-delete": "삭제",
 	"restriction-level-user": "로그인한 사용자에게만 허용",
