@@ -105,6 +105,7 @@ class FindInactiveWikis extends Maintenance {
 		if ( isset( $res->rc_timestamp ) && $res->rc_timestamp < date( "YmdHis", strtotime( "-60 days" ) ) ) {
 			if ( $this->hasOption( 'close' ) ) {
 				$this->closeWiki( $wiki );
+				$this->emailBureaucrats( $wiki );
 				$this->output( "Wiki {$wiki} was eligible for closing and it was.\n" );
 			} else {
 				$this->output( "It looks like {$wiki} should be closed. Timestamp of last recent changes entry: {$res->rc_timestamp}\n" );
@@ -182,6 +183,28 @@ class FindInactiveWikis extends Maintenance {
 			);
 		}
 		return true;
+	}
+
+	public function emailBureaucrats( $wiki ) {
+		global $wgPasswordSender;
+		$dbr = wfGetDB( DB_MASTER );
+		$bureaucrats = $dbr->select(
+			array( 'user', 'user_groups' ),
+			array( 'user_email', 'user_name' ),
+			array( 'ug_group' => 'bureaucrat' ),
+			__METHOD__,
+			array(),
+			array( 'user_groups' => arrya( 'INNER JOIN', array( 'user_id=ug_user' ) ) )
+		);
+
+		foreach ( $bureaucrats as $users ) {
+			$emails[] = new MailAddress( $users->user_email, $users->user_name );
+		}
+
+		$from = new MailAddress( $wgPasswordSender, 'Miraheze' );
+		$subject = wfMessage( 'miraheze-close-email-subject', $wiki )->inContentLanguage()->text();
+		$body = wfMessage('miraheze-close-email-body' )->inContentLanguage()->text();
+		return UserMailer::send( $emails, $from, $subject, $body );
 	}
 }
 
