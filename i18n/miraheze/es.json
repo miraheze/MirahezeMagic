@@ -44,7 +44,7 @@
  	"group-cvt-member": "{{GENDER:$1|CVT}}",
  	"grouppage-cvt": "m:Counter Vandalism Team",
  	"group-global-ipblock-exempt": "Exenciones de bloqueos IP globales",
- 	"group-global-ipblock-exempt-member": "{{GENDER:$1|exento de bloqueo IP global}}",
+ 	"group-global-ipblock-exempt-member": "{{GENDER:$1|exento de bloqueo IP global|exenta de bloqueo IP global}}",
 	"protect-level-user": "Permitir solo los usuarios registrados",
 	"restriction-delete": "Borrar",
 	"restriction-level-user": "Permitir solo los usuarios registrados",
