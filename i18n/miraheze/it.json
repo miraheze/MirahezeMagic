@@ -33,6 +33,8 @@
 	"grouppage-autopatrolled": "m:Meta:Autopatrolled",
 	"group-confirmed": "Utenti confermati",
 	"group-confirmed-member": "{{GENDER:$1|utente confermato|utente confermata|utente confermato/a}}",
+ 	"group-global-ipblock-exempt": "Esenti dal blocco IP globale",
+ 	"group-global-ipblock-exempt-member": "{{GENDER:$1|esente dal blocco IP globale}}",
 	"protect-level-user": "Consenti solo gli utenti registrati",
 	"restriction-delete": "Elimina",
 	"restriction-level-user": "Consenti solo gli utenti registrati",

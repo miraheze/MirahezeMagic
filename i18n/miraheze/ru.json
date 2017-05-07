@@ -28,7 +28,9 @@
 	"group-confirmed": "Подтверждённые участники",
 	"group-confirmed-member": "{{GENDER:$1|подтверждённый участник|подтверждённая участница}}",
 	"grouppage-wikicreator": "m:Wiki creators",
-  "restriction-delete": "удалять",
+	"group-global-ipblock-exempt": "Глобальные исключения из IP-блокировок",
+ 	"group-global-ipblock-exempt-member": "{{GENDER:$1|глобальное исключение из IP-блокировок}}",
+        "restriction-delete": "удалять",
 	"sitesupport": "",
 	"sitesupport-url": "",
 	"tooltip-n-sitesupport": ""

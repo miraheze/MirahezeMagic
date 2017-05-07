@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Southparkfan"
+			"Southparkfan",
+			"AlvaroMolina"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -29,6 +30,8 @@
 	"grouppage-autopatrolled": "m:Meta:Autopatrolled",
 	"group-confirmed": "Bevestigde gebruikers",
 	"group-confirmed-member": "bevestigde gebruiker",
+	"group-global-ipblock-exempt": "uitgezonderden van globale IP-adresblokkades",
+ 	"group-global-ipblock-exempt-member": "{{GENDER:$1|uitgezonderde van globale IP-adresblokkades}}",
 	"protect-level-user": "Alleen ingelogde gebruikers toestaan",
 	"restriction-delete": "Verwijderen",
 	"restriction-level-user": "Alleen ingelogde gebruikers toestaan",
