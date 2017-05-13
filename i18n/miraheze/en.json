@@ -43,6 +43,7 @@
 	"grouppage-cvt": "m:Counter Vandalism Team",
 	"group-global-ipblock-exempt": "Global IP block exemptions",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
+	"group-member": "Members",
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
