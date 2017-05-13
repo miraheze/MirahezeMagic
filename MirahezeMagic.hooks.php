@@ -13,6 +13,8 @@ class MirahezeMagicHooks {
 			'centralauth-groupname',
 			'privacypage',
 			'prefs-help-realname',
+			'shoutwiki-loginform-tos',
+			'shoutwiki-must-accept-tos',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
