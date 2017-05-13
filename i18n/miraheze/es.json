@@ -59,7 +59,6 @@
 	"right-managewiki": "Administrar wikis",
 	"right-managewiki-restricted": "Administrar wikis restringidas",
 	"right-user": "Editar páginas protegidas como «Solo usuarios registrados»",
-	"right-centralauth-autoaccount": "Acceder automáticamente con la cuenta global",
 	"sitematrix": "Lista de wikis de Miraheze",
 	"sitematrix-summary": "Esta página especial lista todas wikis de Miraheze.",
 	"sitematrix-desc": "Muestra una [[Special:SiteMatrix|lista de wikis de Miraheze]]",
