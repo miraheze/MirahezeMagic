@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"AlvaroMolina"
+		]
+	},
+	"centralauth-groupname": "Miraheze",
+	"miraheze-categories": "個分類",
+	"group-donator": "捐贈",
+	"group-donator-member": "{{GENDER:$1|捐贈者}}",
+	"grouppage-donator": "m:Finance",
+	"protect-level-user": "只允許註冊用戶",
+	"restriction-delete": "刪除",
+	"restriction-level-user": "只允許註冊用戶",
+	"right-user": "編輯保護頁面為“只允許註冊用戶”",
+	"sitematrix": "Miraheze的維基名單",
+	"sitematrix-summary": "這個特殊頁面中列出了所有Miraheze維基。",
+	"sitematrix-desc": "顯示 [[Special:SiteMatrix|Miraheze的維基名單]]",
+	"sitematrix-others": "其他維基Miraheze",
+	"sitesupport": "",
+	"sitesupport-url": "",
+	"specialpages-group-wikimanage": "管理維基",
+	"termsofservice": "使用條款",
+	"termsofservicepage": "m:Terms of Use",
+	"tooltip-n-sitesupport": ""
+}
