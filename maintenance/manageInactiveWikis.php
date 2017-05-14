@@ -194,7 +194,7 @@ class FindInactiveWikis extends Maintenance {
 			array( 'ug_group' => 'bureaucrat' ),
 			__METHOD__,
 			array(),
-			array( 'user_groups' => arrya( 'INNER JOIN', array( 'user_id=ug_user' ) ) )
+			array( 'user_groups' => array( 'INNER JOIN', array( 'user_id=ug_user' ) ) )
 		);
 
 		foreach ( $bureaucrats as $users ) {
