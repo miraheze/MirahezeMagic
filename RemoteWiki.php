@@ -24,7 +24,7 @@ class RemoteWiki {
 		// We want to switch back after we queried cw_wikis
 		$dbName = $wgDBname;
 
-		$db = wfGetLB( 'metawiki' )->getConnectionRef( $dbType, array(), 'metawiki' );
+		$db = wfGetDB( $dbType, array(), 'metawiki' );
 		$db->selectDB( 'metawiki' ); // cw_wikis DB
 
 		$row = $db->selectRow( 'cw_wikis', self::selectFields(), $conds, $fname );
@@ -43,7 +43,7 @@ class RemoteWiki {
 
 		$dbName = $wgDBname;
 
-		$dbw = wfGetLB( 'metawiki' )->getConnectionRef( DB_MASTER, array(), 'metawiki' );
+		$dbw = wfGetDB( DB_MASTER, array(), 'metawiki' );
 		$dbw->selectDB( 'metawiki' );
 
 		$res = $dbw->selectField(
