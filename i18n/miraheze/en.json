@@ -23,6 +23,8 @@
 	"grouppage-steward": "m:Stewards",
 	"group-sysadmin": "System administrators",
 	"group-sysadmin-member": "{{GENDER:$1|system administrator}}",
+	"group-checkuser": "CheckUsers",
+	"group-checkuser-member": "{{GENDER:$1|checkuser}}",
 	"grouppage-sysadmin": "m:System administrators",
 	"group-oversight": "Oversighters",
 	"group-oversight-member": "oversight",
