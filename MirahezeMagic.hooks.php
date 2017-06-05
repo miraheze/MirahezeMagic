@@ -11,6 +11,7 @@ class MirahezeMagicHooks {
 		global $wgLanguageCode;
 		static $keys = array(
 			'centralauth-groupname',
+			'dberr-again',
 			'privacypage',
 			'prefs-help-realname',
 			'shoutwiki-loginform-tos',
