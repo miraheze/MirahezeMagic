@@ -4,7 +4,7 @@
 			"John Lewis"
 		]
 	},
-	"dberr-again": "Try waiting a few minutes and reloading. For more information on this error please contact the system administrators either by connecting to #miraheze on freenode.net or emailing staff[at]miraheze[dot]org.",
+	"miraheze-dberr-again": "Try waiting a few minutes and reloading. For more information on this error please check out our twitter page (Twitter.com/Miraheze) or contact the system administrators by connecting to #miraheze on irc.freenode.net",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-privacypage": "m:Privacy Policy",
 	"miraheze-prefs-help-realname": "Real name is optional. If you choose to provide it, this will be used for giving you attribution for your work. Also, by using a wiki hosted by Miraheze, you agree to the <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Terms of Use]</span> and accept the <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Privacy Policy]</span>",
