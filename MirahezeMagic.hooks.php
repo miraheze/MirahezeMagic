@@ -16,6 +16,7 @@ class MirahezeMagicHooks {
 			'prefs-help-realname',
 			'shoutwiki-loginform-tos',
 			'shoutwiki-must-accept-tos',
+			'oathauth-step1',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
