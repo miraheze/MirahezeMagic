@@ -49,10 +49,6 @@
  	"group-global-ipblock-exempt-member": "{{GENDER:$1|exento de bloqueo IP global|exenta de bloqueo IP global}}",
 	"group-member": "Miembros",
 	"group-member-member": "{{GENDER:$1|miembro|miembra}}",
-	"group-translator": "Traductores",
-	"group-translator-member": "{{GENDER:$1|traductor|traductora}}",
-	"group-translationadmin": "Administradores de traducción",
-	"group-translationadmin-member": "{{GENDER:$1|administrador de traducción|administradora de traducción}}
 	"protect-level-user": "Solo permitir usuarios registrados",
 	"restriction-delete": "Borrar",
 	"restriction-level-user": "Solo permitir usuarios registrados",
