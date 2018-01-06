@@ -18,6 +18,7 @@
 	"miraheze-closemessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">El [https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Staff de Miraheze'''] ha notado que este wiki ([[Special:RecentChanges|'''no tiene ediciones''']] o [[Special:Logs|'''acciones registradas''']]) en los últimos 60 días. Esta wiki es ahora libre para adopción. Para adoptar esta wiki, por favor vaya a [https://meta.miraheze.org/wiki/Requests_for_adoption Solicitudes de Adopción] y se tendrá en cuenta en su solicitud. En caso de que este wiki no sea adoptada dentro de los 60 días, se eliminará de forma permanente. </span></div>",
 	"group-abuse": "Equipo antiabusos",
 	"group-abuse-member": "{{GENDER:$1|miembro del equipo antiabusos|miembra del equipo antiabusos}}",
+	"grouppage-abuse": "m:Meta:Abuse",
 	"group-donator": "Donadores",
 	"group-donator-member": "{{GENDER:$1|donador|donadora}}",
 	"grouppage-donator": "m:Finance",
