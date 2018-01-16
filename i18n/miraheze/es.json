@@ -45,7 +45,7 @@
 	"group-translator": "Traductores",
 	"group-translator-member": "{{GENDER:$1|traductor|traductora}}",
 	"group-translationadmin": "Administradores de traducción",
-	"group-translationadmin-member": "{{GENDER:$1|administrador de traducción|administradora de traducción}}
+	"group-translationadmin-member": "{{GENDER:$1|administrador de traducción|administradora de traducción}}",
 	"group-confirmed": "Confirmados",
 	"group-confirmed-member": "{{GENDER:$1|confirmado|confirmada}}",
 	"grouppage-wikicreator": "m:Wiki creators",
