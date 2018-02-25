@@ -8,7 +8,7 @@ class RemoteWiki {
 		$this->language = $language;
 		$this->private = $private == 1 ? true : false;
 		$this->closed = $closed == 1 ? true : false;
-		$this->inactive = $inactive == 1 ? true : false';
+		$this->inactive = $inactive == 1 ? true : false;
 		$this->settings = $settings;
 		$this->closureDate = $closedDate;
 		$this->creationDate = $this->determineCreationDate();
@@ -22,7 +22,7 @@ class RemoteWiki {
 	}
 
 	protected static function newFromConds(
-		$conds,
+		$conds
 	) {
 		$row = $this->db->selectRow( 'cw_wikis', self::selectFields(), $conds, $fname );
 
