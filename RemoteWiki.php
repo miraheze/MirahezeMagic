@@ -13,8 +13,6 @@ class RemoteWiki {
 		$this->closureDate = $closedDate;
 		$this->creationDate = $this->determineCreationDate();
 		$this->inactiveDate = $inactiveDate;
-
-		$this->db = wfGetDB( DB_MASTER, [], 'metawiki' );
 	}
 
 	public static function newFromName( $dbname ) {
@@ -24,7 +22,9 @@ class RemoteWiki {
 	protected static function newFromConds(
 		$conds
 	) {
-		$row = $this->db->selectRow( 'cw_wikis', self::selectFields(), $conds, $fname );
+		$this->db = wfGetDB( DB_MASTER, [], 'metawiki' );
+
+		$row = $this->db->selectRow( 'cw_wikis', self::selectFields(), $conds, __METHOD__ );
 
 		if ( $row !== false ) {
 			return new self( 
