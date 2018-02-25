@@ -1,13 +1,20 @@
 <?php
 class RemoteWiki {
-	private function __construct( $dbname, $sitename, $language, $private, $closed, $settings ) {
+	protected $db;
+
+	private function __construct( $dbname, $sitename, $language, $private, $closed, $closedDate, $inactive, $inactiveDate, $settings ) {
 		$this->dbname = $dbname;
 		$this->sitename = $sitename;
 		$this->language = $language;
 		$this->private = $private == 1 ? true : false;
 		$this->closed = $closed == 1 ? true : false;
+		$this->inactive = $inactive == 1 ? true : false';
 		$this->settings = $settings;
+		$this->closureDate = $closedDate;
 		$this->creationDate = $this->determineCreationDate();
+		$this->inactiveDate = $inactiveDate;
+
+		$this->db = wfGetDB( DB_MASTER, [], 'metawiki' );
 	}
 
 	public static function newFromName( $dbname ) {
@@ -16,52 +23,41 @@ class RemoteWiki {
 
 	protected static function newFromConds(
 		$conds,
-		$fname = __METHOD__,
-		$dbType = DB_MASTER
 	) {
-		global $wgDBname;
-
-		// We want to switch back after we queried cw_wikis
-		$dbName = $wgDBname;
-
-		$db = wfGetDB( $dbType, array(), 'metawiki' );
-		$db->selectDB( 'metawiki' ); // cw_wikis DB
-
-		$row = $db->selectRow( 'cw_wikis', self::selectFields(), $conds, $fname );
-
-		$db->selectDB( $dbName );
+		$row = $this->db->selectRow( 'cw_wikis', self::selectFields(), $conds, $fname );
 
 		if ( $row !== false ) {
-			return new self( $row->wiki_dbname, $row->wiki_sitename, $row->wiki_language, $row->wiki_private, $row->wiki_closed, $row->wiki_settings );
+			return new self( 
+				$row->wiki_dbname, 
+				$row->wiki_sitename, 
+				$row->wiki_language, 
+				$row->wiki_private, 
+				$row->wiki_closed, 
+				$row->wiki_closed_timestamp, 
+				$row->wiki_inactive,
+				$row->wiki_inactive_timestamp,
+				$row->wiki_settings 
+			);
 		} else {
 			return null;
 		}
 	}
 
 	private function determineCreationDate() {
-		global $wgDBname;
-
-		$dbName = $wgDBname;
-
-		$dbw = wfGetDB( DB_MASTER, array(), 'metawiki' );
-		$dbw->selectDB( 'metawiki' );
-
-		$res = $dbw->selectField(
+		$res = $this->db->selectField(
 			'logging',
 			'log_timestamp',
-			array(
+			[
 				'log_action' => 'createwiki',
-				'log_params' => serialize( array( '4::wiki' => $this->dbname ) )
-			),
+				'log_params' => serialize( [ '4::wiki' => $this->dbname ] )
+			],
 			__METHOD__,
-			array( // Sometimes a wiki might have been created multiple times.
+			[ // Sometimes a wiki might have been created multiple times.
 				'ORDER BY' => 'log_timestamp DESC'
-			)
+			]
 		);
 
-		$dbw->selectDB( $dbName );
-
-		return is_string( $res ) ? $res : null;
+		return is_string( $res ) ? $res : false;
 	}
 
 	public static function selectFields() {
@@ -71,6 +67,9 @@ class RemoteWiki {
 			'wiki_language',
 			'wiki_private',
 			'wiki_closed',
+			'wiki_closed_timestamp',
+			'wiki_inactive',
+			'wiki_inactive_timestamp',
 			'wiki_settings'
 		);
 	}
@@ -78,6 +77,14 @@ class RemoteWiki {
 	public function getCreationDate() {
 		return $this->creationDate;
 	}
+
+	public function getClosureDate() {
+		return $this->closureDate;
+	}
+
+	public function getInactiveDate() {
+		return $this->inactiveDate;
+	}	
 
 	public function getDBname() {
 		return $this->dbname;
@@ -89,6 +96,10 @@ class RemoteWiki {
 
 	public function getLanguage() {
 		return $this->language;
+	}
+
+	public function isInactive() {
+		return $this->inactive;
 	}
 
 	public function isPrivate() {
