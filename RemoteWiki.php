@@ -23,7 +23,8 @@ class RemoteWiki {
 	protected static function newFromConds(
 		$conds
 	) {
-		$row = $this->db->selectRow( 'cw_wikis', self::selectFields(), $conds, __METHOD__ );
+		$db = wfGetDB( DB_MASTER, [], 'metawiki' );
+		$row = $db->selectRow( 'cw_wikis', self::selectFields(), $conds, __METHOD__ );
 
 		if ( $row !== false ) {
 			return new self( 
