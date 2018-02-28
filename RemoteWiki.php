@@ -3,6 +3,7 @@ class RemoteWiki {
 	protected $db;
 
 	private function __construct( $dbname, $sitename, $language, $private, $closed, $closedDate, $inactive, $inactiveDate, $settings ) {
+		$this->db = wfGetDB( DB_MASTER, [], 'metawiki' );
 		$this->dbname = $dbname;
 		$this->sitename = $sitename;
 		$this->language = $language;
@@ -22,8 +23,6 @@ class RemoteWiki {
 	protected static function newFromConds(
 		$conds
 	) {
-		$this->db = wfGetDB( DB_MASTER, [], 'metawiki' );
-
 		$row = $this->db->selectRow( 'cw_wikis', self::selectFields(), $conds, __METHOD__ );
 
 		if ( $row !== false ) {
