@@ -19,7 +19,7 @@
 * @ingroup Maintenance
 * @author Southparkfan
 * @author John Lewis
-* @version 1.1
+* @version 1.2
 */
 
 require_once( "/srv/mediawiki/w/maintenance/Maintenance.php" );
@@ -133,10 +133,10 @@ class FindInactiveWikis extends Maintenance {
 		$dbw = wfGetDB( DB_SLAVE );
 		$dbw->selectDB( 'metawiki' ); // force this
 
-		$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';' );
+		$dbw->query( 'UPDATE cw_wikis SET wiki_closed=1,wiki_inactive=0 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';' );
 
 		$dbw->selectDB( $wiki );
-		
+
 		// Empty MediaWiki:Sitenotice
 		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
 		$article = WikiPage::factory( $title );
@@ -158,30 +158,11 @@ class FindInactiveWikis extends Maintenance {
 	}
 
 	public function warnWiki( $wiki ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$dbr->selectDB( $wiki );
+		$dbw = wfGetDB( DB_SLAVE );
+		$dbw->selectDB( 'metawiki' );
 
-		// Handle MediaWiki:Sitenotice
-		$title = Title::newFromText( 'MediaWiki:Sitenotice' );
-		$article = WikiPage::factory( $title );
-		$content = $article->getContent( Revision::RAW );
-		$text = ContentHandler::getContentText( $content );
+		$dbw->query( 'UPDATE cw_wikis SET wiki_inactive=1 WHERE wiki_dbname=' . $dbw->addQuotes( $wiki ) . ';' );
 
-		// Get content of 'miraheze-warnmessage'
-		$wmtext = wfMessage( 'miraheze-warnmessage' )->plain();
-
-		// Only write the inactvity warning if the wiki hasn't been warned yet
-		if ( $text != $wmtext ) {
-			$article->doEditContent(
-				new WikitextContent(
-					wfMessage( 'miraheze-warnmessage' )->plain() 
-				), // Text
-				'Inactivity warning', // Edit summary
-				0,
-				false,
-				User::newFromName( 'MediaWiki default' ) // We don't want to have incorrect user_id - user_name entries
-			);
-		}
 		return true;
 	}
 
