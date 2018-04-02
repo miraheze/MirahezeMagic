@@ -1,6 +1,6 @@
 <?php
 class RemoteWiki {
-	private function __construct( $dbname, $sitename, $language, $private, $closed, $closedDate, $inactive, $inactiveDate, $settings ) {
+	private function __construct( $dbname, $sitename, $language, $private, $closed, $closedDate, $inactive, $inactiveDate, $settings, $category ) {
 		$this->dbname = $dbname;
 		$this->sitename = $sitename;
 		$this->language = $language;
@@ -11,6 +11,7 @@ class RemoteWiki {
 		$this->closureDate = $closedDate;
 		$this->creationDate = $this->determineCreationDate();
 		$this->inactiveDate = $inactiveDate;
+		$this->category = $category;
 	}
 
 	public static function newFromName( $dbname ) {
@@ -32,7 +33,8 @@ class RemoteWiki {
 				$row->wiki_closed_timestamp, 
 				$row->wiki_inactive,
 				$row->wiki_inactive_timestamp,
-				$row->wiki_settings 
+				$row->wiki_settings,
+				$row->wiki_category
 			);
 		} else {
 			return null;
@@ -66,7 +68,8 @@ class RemoteWiki {
 			'wiki_closed_timestamp',
 			'wiki_inactive',
 			'wiki_inactive_timestamp',
-			'wiki_settings'
+			'wiki_settings',
+			'wiki_category'
 		);
 	}
 
@@ -80,7 +83,7 @@ class RemoteWiki {
 
 	public function getInactiveDate() {
 		return $this->inactiveDate;
-	}	
+	}
 
 	public function getDBname() {
 		return $this->dbname;
@@ -104,5 +107,9 @@ class RemoteWiki {
 
 	public function isClosed() {
 		return $this->closed;
+	}
+
+	public function getCategory() {
+		return $this->category;
 	}
 }
