@@ -1,6 +1,6 @@
 <?php
 class RemoteWiki {
-	private function __construct( $dbname, $sitename, $language, $private, $closed, $closedDate, $inactive, $inactiveDate, $settings, $category ) {
+	private function __construct( $dbname, $sitename, $language, $private, $closed, $closedDate, $inactive, $inactiveDate, $settings, $category, $extensions ) {
 		$this->dbname = $dbname;
 		$this->sitename = $sitename;
 		$this->language = $language;
@@ -12,6 +12,7 @@ class RemoteWiki {
 		$this->creationDate = $this->determineCreationDate();
 		$this->inactiveDate = $inactiveDate;
 		$this->category = $category;
+		$this->extensions = $extensions;
 	}
 
 	public static function newFromName( $dbname ) {
@@ -34,7 +35,8 @@ class RemoteWiki {
 				$row->wiki_inactive,
 				$row->wiki_inactive_timestamp,
 				$row->wiki_settings,
-				$row->wiki_category
+				$row->wiki_category,
+				$row->wiki_extensions
 			);
 		} else {
 			return null;
@@ -69,7 +71,8 @@ class RemoteWiki {
 			'wiki_inactive',
 			'wiki_inactive_timestamp',
 			'wiki_settings',
-			'wiki_category'
+			'wiki_category',
+			'wiki_extensions'
 		);
 	}
 
@@ -111,5 +114,15 @@ class RemoteWiki {
 
 	public function getCategory() {
 		return $this->category;
+	}
+
+	public function getExtensions() {
+		return $this->extensions;
+	}
+
+	public function hasExtension( $extension ) {
+		$extensionarray = explode( ",", $this->extensions );
+
+		return in_array( $extension, $extensionsarray );
 	}
 }
