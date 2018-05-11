@@ -121,7 +121,7 @@ class RemoteWiki {
 	}
 
 	public function hasExtension( $extension ) {
-		$extensionarray = explode( ",", $this->extensions );
+		$extensionsarray = explode( ",", $this->extensions );
 
 		return in_array( $extension, $extensionsarray );
 	}
