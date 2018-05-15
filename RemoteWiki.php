@@ -125,4 +125,14 @@ class RemoteWiki {
 
 		return in_array( $extension, $extensionsarray );
 	}
+
+	public function getSettings() {
+		return json_decode( $this->settings, true );
+	}
+
+	public function getSettingsValue( $setting ) {
+		$settingsarray = $this->getSettings();
+
+		return $settingsarray[$setting];
+	}
 }
