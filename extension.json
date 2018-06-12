@@ -29,5 +29,6 @@
                 "MakeGlobalVariablesScript": [
                         "MirahezeMagicHooks::onMakeGlobalVariablesScript"
                 ]
-	}
+	},
+	"manifest_version": 1
 }
