@@ -12,12 +12,14 @@ require_once "$IP/maintenance/Maintenance.php";
 class SetZoneAccess extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->addOption( 'backend', 'Name of the file backend', true, true );
+		$this->addOption( 'backend', 'Name of the file backend' );
 		$this->addOption( 'private', 'Make all containers private' );
 	}
 
 	public function execute() {
-		$backend = FileBackendGroup::singleton()->get( $this->getOption( 'backend' ) );
+		$swift_backend = $this->hasOption( 'backend' ) ?
+			$this->getOption( 'backend' ) : 'miraheze-swift';
+		$backend = FileBackendGroup::singleton()->get( $swift_backend );
 
         // container will be <wikiID>-mw
 		$dir = $backend->getContainerStoragePath( 'mw' );
