@@ -43,6 +43,9 @@ class SetZoneAccess extends Maintenance {
 		}
 		$this->output( "done.\n" );
 		if ( !$status->isOK() ) {
+			$wiki = $this->hasOption( 'wiki' );
+			$this->output( "Swift container failed to be created for '$wiki'\n" );
+
 			print_r( $status->getErrors() );
 		}
 	}
