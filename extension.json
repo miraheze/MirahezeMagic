@@ -17,6 +17,9 @@
                 "MirahezeMagicHooks": "includes/MirahezeMagicHooks.php"
         },
         "Hooks": {
+		"CreateWikiCreation": [
+			"MirahezeMagicHooks::onCreateWikiCreation"
+		],
                 "MessageCache::get": [
                         "MirahezeMagicHooks::onMessageCacheGet"
                 ],

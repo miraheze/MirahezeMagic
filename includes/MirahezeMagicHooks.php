@@ -1,6 +1,21 @@
 <?php
 class MirahezeMagicHooks {
 	/**
+	* Add Swift specific actions to CreateWiki
+	*/
+	public static function onCreateWikiCreation( $DBname ) {
+		global $IP;
+
+		$create_image_container = exec( "/usr/bin/php " .
+			"$IP/extensions/MirahezeMagic/maintenance/setZoneAccess.php --wiki " . wfEsccapeShellArg( $DBname ) );
+
+		if( strpos( $create_image_container, 'Swift container failed to be created for' ) ) {
+			wfDebugLog( 'CreateWiki', 'Fail to create container for wiki ' . wfEscapeShellArg( $DBname ) );
+			return wfMessage( 'createwiki-error-swiftcontainernot', wfEscapeShellArg( $DBname ) )->inContentLanuage()->text();
+		}
+	}
+
+	/**
 	* From WikimediaMessages. Allows us to add new messages,
 	* and override ones.
 	*
