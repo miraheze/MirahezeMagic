@@ -6,7 +6,6 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
-	"createwiki-error-swiftcontainernot": "Failed to create swift container for wiki $wiki",
 	"mirahezemagic-description": "MediaWiki messages, scripts and hooks specific for Miraheze",
 	"miraheze-categories": "Categories",
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) Closed",
