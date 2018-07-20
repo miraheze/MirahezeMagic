@@ -1,13 +1,5 @@
 <?php
 class MirahezeMagicHooks {
-	/**
-	* Add Swift specific actions to CreateWiki
-	*/
-	public static function onCreateWikiCreation( $DBname ) {
-		global $IP;
-
-		// code goes here
-	}
 
 	/**
 	* From WikimediaMessages. Allows us to add new messages,
