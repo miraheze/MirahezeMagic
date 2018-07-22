@@ -35,12 +35,12 @@ class addWikiToServices extends Maintenance {
 			$extensions = $row->wiki_extensions;
 			$settings = $row->wiki_settings;
 
-      if ( $closed !== "1" || $inactive !== "1" ) {
-        $allWikis[] = "$DBname: $custom_domain ? : $miraheze_domain";
-      }
+			if ( $closed !== "1" || $inactive !== "1" ) {
+				$allWikis[] = "$DBname: $custom_domain ? : $miraheze_domain";
+			}
 		}
 
-    file_put_contents( "$wgServicesRepo/all.dblist", implode( "\n", $allWikis ), LOCK_EX );
+		file_put_contents( "$wgServicesRepo/all.dblist", implode( "\n", $allWikis ), LOCK_EX );
 	}
 }
 
