@@ -20,9 +20,6 @@
                 "MessageCache::get": [
                         "MirahezeMagicHooks::onMessageCacheGet"
                 ],
-                "SkinAfterBottomScripts": [
-                        "MirahezeMagicHooks::piwikScript"
-                ],
                 "TitleReadWhitelist": [
                         "MirahezeMagicHooks::onTitleReadWhitelist"
                 ],
