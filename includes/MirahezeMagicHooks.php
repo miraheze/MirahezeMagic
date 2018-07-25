@@ -1,5 +1,16 @@
 <?php
 class MirahezeMagicHooks {
+	public static function onCreateWikiCreation( $DBname ) {
+		$backend = FileBackendGroup::singleton()->get(  'local' );
+		$fname = $backend->getRootStoragePath() . '/avatars/';
+		$extensions = [ 's', 'm', 'ml', 'l' ];
+		foreach ( $extensions as $size ) {
+			$backend->quickStore( [
+				'src' => __DIR__ . '/srv/mediawiki/w/extensions/SocialProfile/avatars/default_' . $size . '.gif',
+				'dst' => $fname . 'default_' . $size . '.gif',
+			] );
+		}
+	}
 
 	/**
 	* From WikimediaMessages. Allows us to add new messages,
