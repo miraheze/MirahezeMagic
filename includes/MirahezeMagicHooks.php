@@ -6,7 +6,7 @@ class MirahezeMagicHooks {
 		$extensions = [ 's', 'm', 'ml', 'l' ];
 		foreach ( $extensions as $size ) {
 			$backend->quickStore( [
-				'src' => __DIR__ . '/srv/mediawiki/w/extensions/SocialProfile/avatars/default_' . $size . '.gif',
+				'src' => '/srv/mediawiki/w/extensions/SocialProfile/avatars/default_' . $size . '.gif',
 				'dst' => $fname . 'default_' . $size . '.gif',
 			] );
 		}
