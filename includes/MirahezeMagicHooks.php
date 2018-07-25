@@ -1,14 +1,13 @@
 <?php
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
-		$backend = FileBackendGroup::singleton()->get(  'local' );
-		$extensions = [ 's', 'm', 'ml', 'l' ];
-		foreach ( $extensions as $size ) {
-			$backend->quickStore( [
-				'src' => '/srv/mediawiki/w/extensions/SocialProfile/avatars/default_' . $size . '.gif',
-				'dst' => '/mnt/mediawiki-static/' . $DBname . '/avatars/default_' . $size . '.gif',
-			] );
-		}
+		exec('/bin/mkdir -p ' . '/mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/avatars');
+
+		exec('/bin/mkdir -p ' . '/mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/awards');
+
+		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/avatars/ /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/avatars/');
+
+		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/awards/');
 	}
 
 	/**
