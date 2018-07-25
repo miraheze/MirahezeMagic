@@ -2,7 +2,6 @@
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
 		$backend = FileBackendGroup::singleton()->get(  'local' );
-		$fname = $backend->getRootStoragePath() . '/avatars/';
 		$extensions = [ 's', 'm', 'ml', 'l' ];
 		foreach ( $extensions as $size ) {
 			$backend->quickStore( [
