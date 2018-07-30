@@ -31,7 +31,7 @@
                 ],
 		"CreateWikiCreation": [
 			"MirahezeMagicHooks::onAddServices"
-		],
+		]
 	},
 	"manifest_version": 1
 }
