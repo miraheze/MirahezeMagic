@@ -27,9 +27,10 @@ class addWikiToServices extends Maintenance {
 
 		foreach ( $res as $row ) {
 			$DBname = $row->wiki_dbname;
-			$custom_domain = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
+			$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
+			$custom_domain = $remote ? $remote : true;
 
-			$allWikis[] = "$DBname: $custom_domain ? $custom_domain : true";
+			$allWikis[] = "$DBname: $custom_domain";
 		}
 
 		file_put_contents( "$wgServicesRepo/all.dblist", implode( "\n", $allWikis ), LOCK_EX );
