@@ -27,17 +27,9 @@ class addWikiToServices extends Maintenance {
 
 		foreach ( $res as $row ) {
 			$DBname = $row->wiki_dbname;
-			$siteName = $row->wiki_sitename;
-			$language = $row->wiki_language;
-			$private = $row->wiki_private;
-			$closed = $row->wiki_closed;
-			$inactive = $row->wiki_inactive;
-			$extensions = $row->wiki_extensions;
-			$settings = $row->wiki_settings;
+			$custom_domain = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
 
-			if ( $closed !== "1" || $inactive !== "1" ) {
-				$allWikis[] = "$DBname: $custom_domain ? : $miraheze_domain";
-			}
+			$allWikis[] = "$DBname: $custom_domain ? : true";
 		}
 
 		file_put_contents( "$wgServicesRepo/all.dblist", implode( "\n", $allWikis ), LOCK_EX );
