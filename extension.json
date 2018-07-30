@@ -29,9 +29,9 @@
                 "MakeGlobalVariablesScript": [
                         "MirahezeMagicHooks::onMakeGlobalVariablesScript"
                 ],
-		"CreateWikiCreation": [
-			"MirahezeMagicHooks::onAddServices"
-		]
+                "CreateWikiCreation": [
+                        "MirahezeMagicHooks::onAddServices"
+                ]
 	},
 	"manifest_version": 1
 }
