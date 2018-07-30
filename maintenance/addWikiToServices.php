@@ -28,7 +28,7 @@ class addWikiToServices extends Maintenance {
 		foreach ( $res as $row ) {
 			$DBname = $row->wiki_dbname;
 			$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
-			$custom_domain = $remote ? $remote : true;
+			$custom_domain = $remote ? str_replace('https://', '', $remote) : true;
 
 			$allWikis[] = "$DBname: $custom_domain";
 		}
