@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 class addWikiToServices extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-	}
+	}all.dblist
 
 	public function execute() {
 		global $wgServicesRepo;
@@ -33,7 +33,7 @@ class addWikiToServices extends Maintenance {
 			$allWikis[] = "$DBname: $custom_domain";
 		}
 
-		file_put_contents( "$wgServicesRepo/all.dblist", implode( "\n", $allWikis ), LOCK_EX );
+		file_put_contents( "$wgServicesRepo/services.yaml", implode( "\n", $allWikis ), LOCK_EX );
 	}
 }
 
