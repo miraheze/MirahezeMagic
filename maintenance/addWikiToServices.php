@@ -26,11 +26,16 @@ class addWikiToServices extends Maintenance {
 		$allWikis = array();
 
 		foreach ( $res as $row ) {
-			$DBname = $row->wiki_dbname;
-			$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
-			$custom_domain = $remote ? str_replace('https://', '', $remote) : true;
+			global $wgMirahezeServicesExtensions;
+			foreach ( $wgMirahezeServicesExtensions as $ext ) {
+				if ( ExtensionRegistry::getInstance()->isLoaded( $ext ) ) {
+					$DBname = $row->wiki_dbname;
+					$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
+					$custom_domain = $remote ? str_replace('https://', '', $remote) : true;
 
-			$allWikis[] = "$DBname: $custom_domain";
+					$allWikis[] = "$DBname: $custom_domain";
+				}
+			}
 		}
 
 		file_put_contents( "$wgServicesRepo/services.yaml", implode( "\n", $allWikis ), LOCK_EX );
