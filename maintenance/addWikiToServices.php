@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 class addWikiToServices extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-	}all.dblist
+	}
 
 	public function execute() {
 		global $wgServicesRepo;
