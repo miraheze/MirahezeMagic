@@ -82,5 +82,11 @@ class MirahezeMagicHooks {
 			$vars['wgPoweredByHHVM'] = true;
 		}
 	}
+
+	public static function onAddServices( $db ) {
+		exec( "/usr/bin/php /srv/mediawiki/w/extensions/MirahezeMagic/maintenance/addWikiToServices.php --wiki=metawiki" );
+
+		exec( "/usr/local/bin/pushServices.sh" );
+	}
 }
 
