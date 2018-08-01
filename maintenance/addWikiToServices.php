@@ -27,15 +27,14 @@ class addWikiToServices extends Maintenance {
 
 		if ( file_exists("$wgServicesRepo/services.yaml") ) {
 			foreach ( $res as $row ) {
-				foreach ( $row->wiki_extensions as $ext ) {
-					if ( ( $ext == 'visualeditor' || $ext == 'flow' ) &&
-					    ExtensionRegistry::getInstance()->isLoaded( $ext ) ) {
-						$DBname = $row->wiki_dbname;
-						$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
-						$custom_domain = $remote ? str_replace('https://', '', $remote) : 'true';
+				$DBname = $row->wiki_dbname;
+				$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
+				$flow = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wmgUseFlow' );
+				$visualEditor = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wmgUseVisualEditor' );
+				if ( $visualEditor || $flow ) {
+					$custom_domain = $remote ? str_replace('https://', '', $remote) : 'true';
 
-						$allWikis[] = "$DBname: $custom_domain";
-					}
+					$allWikis[] = "$DBname: $custom_domain";
 				}
 			}
 
