@@ -34,18 +34,18 @@ class addWikiToServices extends Maintenance {
 		}
 	}
 
-    /**
-     * Similar to CreateWiki RemoteWiki function, just this reads from a file.
-     */
+	/**
+	 * Similar to CreateWiki RemoteWiki function, just this reads from a file.
+	 */
 	private function hasExtension( $ext, $listExt ) {
 		$extensionsarray = explode( ",", $listExt );
 
 		return in_array( $ext, $extensionsarray );
 	}
 
-    /**
-     * Similar to CreateWiki RemoteWiki function, just this reads from a file.
-     */
+	/**
+	 * Similar to CreateWiki RemoteWiki function, just this reads from a file.
+	 */
 	private function getSettingsValue( $setting, $settingsArray ) {
 		$settingsarray = json_decode( $settingsArray, true );
 		if ( isset( $settingsarray[$setting] ) ) {
