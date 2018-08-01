@@ -24,8 +24,9 @@ class addWikiToServices extends Maintenance {
 					$flow = $this->hasExtension( 'flow', $wiki[3] );
 
 					if ( $visualeditor || $flow ) {
+						$dbNameStripped = substr( $DBname, 0, -4 )
 						$servicesvalue = $domain ? str_replace('https://', '', "'" . $domain . "'") : 'true';
-						$allWikis[] = "$DBname: $servicesvalue";
+						$allWikis[] = "$dbNameStripped: $servicesvalue";
 					}
 				}
 				
