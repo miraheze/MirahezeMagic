@@ -17,17 +17,15 @@ class addWikiToServices extends Maintenance {
 			foreach ( $wikis as $wiki ) {
 				$wiki = explode( '|', $wiki);
 					$DBname = $wiki[0];
-					$remote = RemoteWiki::newFromName( $wiki[0] )->getSettingsValue( 'wgServer' );
-					$flow = RemoteWiki::newFromName( $wiki[0] )->hasExtension( 'flow' );
-				$visualEditor = RemoteWiki::newFromName( $wiki[0] )->hasExtension( 'visualeditor' );
+					$remote = $this->getSettingsValue( 'wgServer', $wiki[4] );
 				if ( !is_null( $wiki[3] ) ) {
-					$visualEditor = $this->hasExt( 'visualeditor', $wiki[3] );
+					$visualEditor = $this->hasExtension( 'visualeditor', $wiki[3] );
 					$flow = $this->hasExt( 'flow', $wiki[3] );
 					if ( $visualEditor || $flow ) {
 						$custom_domain = $remote ? str_replace('https://', '', "'" . $remote . "'") : 'true';
 
-							$allWikis[] = "$DBname: $custom_domain";
-						}
+						$allWikis[] = "$DBname: $custom_domain";
+					}
 				}
 				
 			}
@@ -36,10 +34,25 @@ class addWikiToServices extends Maintenance {
 		}
 	}
 
-	public function hasExt( $ext, $listExt ) {
+    /**
+     * Similar to CreateWiki RemoteWiki function, just this reads from a file.
+     */
+	private function hasExtension( $ext, $listExt ) {
 		$extensionsarray = explode( ",", $listExt );
 
 		return in_array( $ext, $extensionsarray );
+	}
+
+    /**
+     * Similar to CreateWiki RemoteWiki function, just this reads from a file.
+     */
+	private function getSettingsValue( $setting, $settingsArray ) {
+		$settingsarray = json_decode( $settingsArray, true );
+		if ( isset( $settingsarray[$setting] ) ) {
+			return $settingsarray[$setting];
+		}
+
+		return null;
 	}
 }
 
