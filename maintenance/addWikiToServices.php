@@ -16,7 +16,7 @@ class addWikiToServices extends Maintenance {
 			$wikis = file( '/srv/mediawiki/dblist/all.dblist' );
 			foreach ( $wikis as $wiki ) {
 				$wiki = explode( '|', $wiki);
-				$DBname = $wiki[0];
+				$DBname = substr( $wiki[0], 0, -4 );
 				$domain = $this->getSettingsValue( 'wgServer', $wiki[4] );
 
 				if ( !is_null( $wiki[3] ) ) {
