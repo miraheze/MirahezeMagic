@@ -6,10 +6,6 @@ class MirahezeMagicHooks {
 		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/avatars /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/avatars');
 
 		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/awards');
-
-		exec( "/usr/bin/php /srv/mediawiki/w/extensions/MirahezeMagic/maintenance/addWikiToServices.php --wiki=metawiki" );
-
-		exec( "/bin/bash /usr/local/bin/pushServices.sh" );
 	}
 
 	/**
