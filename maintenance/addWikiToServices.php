@@ -16,15 +16,16 @@ class addWikiToServices extends Maintenance {
 			$wikis = file( '/srv/mediawiki/dblist/all.dblist' );
 			foreach ( $wikis as $wiki ) {
 				$wiki = explode( '|', $wiki);
-					$DBname = $wiki[0];
-					$remote = $this->getSettingsValue( 'wgServer', $wiki[4] );
-				if ( !is_null( $wiki[3] ) ) {
-					$visualEditor = $this->hasExtension( 'visualeditor', $wiki[3] );
-					$flow = $this->hasExtension( 'flow', $wiki[3] );
-					if ( $visualEditor || $flow ) {
-						$custom_domain = $remote ? str_replace('https://', '', "'" . $remote . "'") : 'true';
+				$DBname = $wiki[0];
+				$domain = $this->getSettingsValue( 'wgServer', $wiki[4] );
 
-						$allWikis[] = "$DBname: $custom_domain";
+				if ( !is_null( $wiki[3] ) ) {
+					$visualeditor = $this->hasExtension( 'visualeditor', $wiki[3] );
+					$flow = $this->hasExtension( 'flow', $wiki[3] );
+
+					if ( $visualeditor || $flow ) {
+						$servicesvalue = $domain ? str_replace('https://', '', "'" . $domain . "'") : 'true';
+						$allWikis[] = "$DBname: $servicesvalue";
 					}
 				}
 				
@@ -46,8 +47,9 @@ class addWikiToServices extends Maintenance {
 	/**
 	 * Similar to CreateWiki RemoteWiki function, just this reads from a file.
 	 */
-	private function getSettingsValue( $setting, $settingsArray ) {
-		$settingsarray = json_decode( $settingsArray, true );
+	private function getSettingsValue( $setting, $settingsjson ) {
+		$settingsarray = json_decode( $settingsjson, true );
+
 		if ( isset( $settingsarray[$setting] ) ) {
 			return $settingsarray[$setting];
 		}
