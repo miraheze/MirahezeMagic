@@ -20,7 +20,7 @@ class addWikiToServices extends Maintenance {
 					$remote = $this->getSettingsValue( 'wgServer', $wiki[4] );
 				if ( !is_null( $wiki[3] ) ) {
 					$visualEditor = $this->hasExtension( 'visualeditor', $wiki[3] );
-					$flow = $this->hasExt( 'flow', $wiki[3] );
+					$flow = $this->hasExtension( 'flow', $wiki[3] );
 					if ( $visualEditor || $flow ) {
 						$custom_domain = $remote ? str_replace('https://', '', "'" . $remote . "'") : 'true';
 
