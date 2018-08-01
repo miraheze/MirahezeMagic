@@ -38,6 +38,7 @@ class addWikiToServices extends Maintenance {
 							$allWikis[] = "$DBname: $custom_domain";
 						}
 					}
+				}
 			}
 
 			file_put_contents( "$wgServicesRepo/services.yaml", implode( "\n", $allWikis ), LOCK_EX );
