@@ -29,8 +29,8 @@ class addWikiToServices extends Maintenance {
 			foreach ( $res as $row ) {
 				$DBname = $row->wiki_dbname;
 				$remote = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wgServer' );
-				$flow = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wmgUseFlow' );
-				$visualEditor = RemoteWiki::newFromName( $DBname )->getSettingsValue( 'wmgUseVisualEditor' );
+				$flow = RemoteWiki::newFromName( $DBname )->hasExtension( 'flow' );
+				$visualEditor = RemoteWiki::newFromName( $DBname )->hasExtension( 'visualeditor' );
 				if ( $visualEditor || $flow ) {
 					$custom_domain = $remote ? str_replace('https://', '', "'" . $remote . "'") : 'true';
 
