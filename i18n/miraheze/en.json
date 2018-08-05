@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"John Lewis",
-			"AlvaroMolina"
+			"AlvaroMolina",
+			"MacFan4000"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -60,6 +61,7 @@
 	"right-managewiki": "Manage wikis",
 	"right-managewiki-restricted": "Manage restricted wikis",
 	"right-user": "Edit pages protected as 'Allow only logged in users'",
+	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix": "List of Miraheze wikis",
 	"sitematrix-summary": "This special page lists all Miraheze wikis.",
 	"sitematrix-desc": "Displays a [[Special:SiteMatrix|list of Miraheze wikis]]",
