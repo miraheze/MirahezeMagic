@@ -10,10 +10,10 @@
                 ],
                 "MirahezeOverrideMessagesMagic": [
                         "i18n/overrides"
-                ]
+                ],
 		"WikimediaLocalizedProjectNames": [
 			"i18n/wikimediaprojectnames"
-		],
+		]
         },
         "AutoloadClasses": {
                 "MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
