@@ -11,8 +11,8 @@
                 "MirahezeOverrideMessagesMagic": [
                         "i18n/overrides"
                 ],
-		"WikimediaLocalizedProjectNames": [
-			"i18n/wikimediaprojectnames"
+		"MirahezeLocalizedProjectNames": [
+			"i18n/mirahezeprojectnames"
 		]
         },
         "AutoloadClasses": {
