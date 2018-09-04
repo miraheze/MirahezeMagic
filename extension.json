@@ -11,9 +11,9 @@
                 "MirahezeOverrideMessagesMagic": [
                         "i18n/overrides"
                 ],
-		"MirahezeLocalizedProjectNames": [
-			"i18n/mirahezeprojectnames"
-		]
+                "MirahezeLocalizedProjectNames": [
+                        "i18n/mirahezeprojectnames"
+                ]
         },
         "AutoloadClasses": {
                 "MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
