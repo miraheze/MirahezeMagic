@@ -77,10 +77,6 @@ class MirahezeMagicHooks {
 	* @param array &$vars Current list of vars
 	* @param OutputPage $out OutputPage object
 	*/
-	public static function onMakeGlobalVariablesScript( &$vars, OutputPage $out ) {
-		if ( defined( 'HHVM_VERSION' ) ) {
-			$vars['wgPoweredByHHVM'] = true;
-		}
-	}
+	public static function onMakeGlobalVariablesScript( &$vars, OutputPage $out ) { }
 }
 
