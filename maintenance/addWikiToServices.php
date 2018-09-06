@@ -22,8 +22,9 @@ class addWikiToServices extends Maintenance {
 				if ( !is_null( $wiki[3] ) ) {
 					$visualeditor = $this->hasExtension( 'visualeditor', $wiki[3] );
 					$flow = $this->hasExtension( 'flow', $wiki[3] );
+					$electron = $this->hasExtension( 'electronpdfservice', $wiki[3] );
 
-					if ( $visualeditor || $flow ) {
+					if ( $visualeditor || $flow || $electron ) {
 						$servicesvalue = $domain ? str_replace('https://', '', "'" . $domain . "'") : 'true';
 						$allWikis[] = "$DBname: $servicesvalue";
 					}
