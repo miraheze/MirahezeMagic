@@ -32,7 +32,7 @@
 	"grouppage-oversight": "m:Oversight",
 	"group-wikicreator": "Wiki Creators",
 	"group-wikicreator-member": "{{GENDER:$1|wiki creator}}",
-	"grouppage-wikicreator": "m:Wiki managers",
+	"grouppage-wikicreator": "m:Wiki creators",
 	"group-wikimanager": "Wiki Managers",
 	"group-wikimanager-member": "{{GENDER:$1|wiki manager}}",
 	"grouppage-wikimanager": "m:Wiki managers",
