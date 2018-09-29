@@ -9,11 +9,11 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		exec("/bin/rm -rf /srv/mediawiki-static/$wiki");
+		exec("/bin/rm -rf /mnt/mediawiki-static/$wiki");
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
-		exec("/bin/mv /srv/mediawiki-static/$old /srv/mediawiki-static/$new");
+		exec("/bin/mv /mnt/mediawiki-static/$old /mnt/mediawiki-static/$new");
 	}
 
 	/**
