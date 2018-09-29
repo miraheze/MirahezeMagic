@@ -23,6 +23,12 @@
                 "CreateWikiCreation": [
                         "MirahezeMagicHooks::onCreateWikiCreation"
                 ],
+                "CreateWikiDeletion": [
+                        "MirahezeMagicHooks::onCreateWikiDeletion"
+                ],
+                "CreateWikiRename": [
+                        "MirahezeMagicHooks::onCreateWikiRename"
+                ],
                 "MessageCache::get": [
                         "MirahezeMagicHooks::onMessageCacheGet"
                 ],

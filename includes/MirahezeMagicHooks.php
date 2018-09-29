@@ -8,6 +8,14 @@ class MirahezeMagicHooks {
 		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/awards');
 	}
 
+	public static function onCreateWikiDeletion( $dbw, $wiki ) {
+		exec("/bin/rm -rf /mnt/mediawiki-static/$wiki");
+	}
+
+	public static function onCreateWikiRename( $dbw, $old, $new ) {
+		exec("/bin/mv /mnt/mediawiki-static/$old /mnt/mediawiki-static/$new");
+	}
+
 	/**
 	* From WikimediaMessages. Allows us to add new messages,
 	* and override ones.
