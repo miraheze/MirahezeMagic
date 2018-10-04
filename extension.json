@@ -1,6 +1,14 @@
 {
         "name": "MirahezeMagic",
-        "author": ["John Lewis", "Labster", "MacFan4000", "NDKilla", "Reception123", "Revi", "Paladox", "Southparkfan"],
+        "author": [
+		"John Lewis",
+		"Labster", 
+		"MacFan4000",
+		"Reception123",
+		"Revi",
+		"Paladox",
+		"Southparkfan"
+	],
         "url": "//github.com/Miraheze/MirahezeMagic",
         "descriptionmsg": "mirahezemagic-description",
         "type": "other",
