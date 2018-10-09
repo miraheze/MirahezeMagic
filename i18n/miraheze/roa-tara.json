@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"miraheze-donate": "Ddone",
+	"miraheze-requestwiki": "Cirche 'nu uicchi",
+	"group-abuse-member": "{{GENDER:$1|squadre de l'abbuse}}",
+	"group-sysadmin-member": "{{GENDER:$1|amministratore de sisteme}}",
+	"group-oversight-member": "sorvegliate",
+	"group-cvt": "CVT",
+	"group-translationadmin": "Amministrature de le traduziune",
+	"group-translationadmin-member": "amministratore de le traduziune",
+	"protect-level-user": "Consende sole a le utinde reggistrate",
+	"restriction-delete": "Scangìlle",
+	"restriction-level-user": "Permette sole a le utinde reggistrate",
+	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"sitematrix": "Elenghe de le uicchi Miraheze",
+	"sitematrix-desc": "Face 'ndrucà 'n'[[Special:SiteMatrix|elenghe de le Uicchi de Miraheze]]",
+	"sitematrix-others": "Otre uicchi de Miraheze",
+	"settings-media": "Media"
+}

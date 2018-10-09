@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"Saederup92"
+		]
+	},
+	"miraheze-categories": "Kategorier",
+	"miraheze-donate": "DOner",
+	"group-donator": "Donatorer",
+	"group-steward": "Forvaltere",
+	"group-steward-member": "{{GENDER:$1|forvalter}}",
+	"group-sysadmin": "Systemadministratorer",
+	"group-sysadmin-member": "{{GENDER:$1|systemadministrator}}",
+	"group-oversight-member": "oversigt",
+	"group-rollbacker": "Tilbagerullere",
+	"group-rollbacker-member": "{{GENDER:$1|tilbageruller}}",
+	"group-autopatrolled": "Autopatruljerede",
+	"group-autopatrolled-member": "{{GENDER:$1|autopatruljeret}}",
+	"group-confirmed": "Bekræftede brugere",
+	"group-confirmed-member": "{{GENDER:$1|bekræftet bruger}}",
+	"group-translator": "Oversættere",
+	"group-translator-member": "oversætter",
+	"group-translationadmin": "Oversættelsesadministratorer",
+	"group-translationadmin-member": "oversættelsesadministrator",
+	"group-member": "Medlemmer",
+	"restriction-delete": "Slet",
+	"restriction-level-user": "Tillad kun brugere der er logget ind",
+	"termsofservice": "Vilkår for anvendelse",
+	"settings-media": "Medier"
+}

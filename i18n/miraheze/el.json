@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nikosgranturismogt"
+		]
+	},
+	"miraheze-donate": "Δωρεά",
+	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
+	"group-oversight-member": "επιτηρητής",
+	"group-confirmed": "Eπιβεβαιωμένοι χρήστες",
+	"group-translator-member": "Μεταφραστής",
+	"group-translationadmin": "Διαχειριστές μετάφρασης",
+	"group-translationadmin-member": "Διαχειριστής μετάφρασης",
+	"protect-level-user": "Να επιτρέπονται μόνο συνδεδεμένοι χρήστες",
+	"restriction-delete": "Διαγραφή",
+	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"specialpages-group-wikimanage": "Διαχείριση βίκι",
+	"termsofservice": "Όροι χρήσης",
+	"settings-media": "Πολυμέσο"
+}

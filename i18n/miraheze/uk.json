@@ -1,0 +1,41 @@
+{
+	"@metadata": {
+		"authors": [
+			"Viiictorrr",
+			"Vlad5250"
+		]
+	},
+	"miraheze-categories": "Категорії",
+	"miraheze-donate": "Пожертвувати",
+	"miraheze-helpcenter": "Про Miraheze",
+	"group-steward": "Стюарди",
+	"group-steward-member": "{{GENDER:$1|стюард}}",
+	"group-sysadmin": "Системні адміністратори",
+	"group-sysadmin-member": "{{GENDER:$1|системний адміністратор|системна адміністраторка}}",
+	"group-oversight": "Ревізори",
+	"group-oversight-member": "ревізор",
+	"group-wikicreator": "Творці Wiki",
+	"group-rollbacker": "Відкочувачі",
+	"group-rollbacker-member": "{{GENDER:$1|відкочувач|відкочувачка}}",
+	"group-autopatrolled": "Автопатрульні",
+	"group-autopatrolled-member": "{{GENDER:$1|автопатрульний|автопатрульна}}",
+	"group-confirmed": "Підтверджені користувачі",
+	"group-confirmed-member": "{{GENDER:$1|підтверджений користувач|підтверджена користувачка}}",
+	"group-proxybot": "Проксі-бот",
+	"group-proxybot-member": "проксі-бот",
+	"group-translator": "Перекладачі",
+	"group-translator-member": "перекладач",
+	"group-translationadmin": "Адміністратори перекладу",
+	"group-translationadmin-member": "адміністратор перекладу",
+	"group-global-ipblock-exempt": "Глобальні виключення з блокування IP",
+	"protect-level-user": "Дозволити лише користувачам, які увійшли у систему",
+	"restriction-delete": "Вилучити",
+	"restriction-level-user": "Дозволити лише користувачам, які увійшли у систему",
+	"right-user": "редагування сторінок з рівнем захисту «Дозволити лише користувачам, які увійшли у систему»",
+	"sitematrix": "Список вікі Miraheze",
+	"sitematrix-desc": "Показує [[Special:SiteMatrix|список проектів Miraheze]]",
+	"sitematrix-others": "Інші вікі Miraheze",
+	"specialpages-group-wikimanage": "Керування вікі",
+	"termsofservice": "Умови використання",
+	"settings-media": "Медіа"
+}

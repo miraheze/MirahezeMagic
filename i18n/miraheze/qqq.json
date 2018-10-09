@@ -3,7 +3,8 @@
 		"authors": [
 			"John Lewis",
 			"AlvaroMolina",
-			"MacFan4000"
+			"MacFan4000",
+			"Robby"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -11,7 +12,7 @@
 	"miraheze-categories": "Categories",
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) Closed",
 	"miraheze-close-email-body": "Hello,\n\nUnfortunately, due to your wiki not having edits in the last 60 days, it has been closed due to the Dormancy policy. If you would still like to edit your wiki please go to Special:ManageWiki and uncheck the \"closed\" box to reopen it.\n\nPlease note that if you do not reopen your wiki it is possible that another user will adopt your wiki. If you do not reopen your wiki or no one adopts your wiki in 6 months starting from now, it could be eligible for deletion.",
-	"miraheze-donate": "Donate",
+	"miraheze-donate": "Donate\n{{Identical|Donate}}",
 	"miraheze-helpcenter": "About Miraheze",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
@@ -58,7 +59,7 @@
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
 	"group-member": "Members",
 	"protect-level-user": "Allow only logged in users",
-	"restriction-delete": "Delete",
+	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",
 	"right-user": "Edit pages protected as 'Allow only logged in users'",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
@@ -66,11 +67,8 @@
 	"sitematrix-summary": "This special page lists all Miraheze wikis.",
 	"sitematrix-desc": "Displays a [[Special:SiteMatrix|list of Miraheze wikis]]",
 	"sitematrix-others": "Other Miraheze wikis",
-	"sitesupport": "",
-	"sitesupport-url": "",
 	"specialpages-group-wikimanage": "Wiki Management",
 	"termsofservice": "Terms of Use",
 	"termsofservicepage": "m:Terms of Use",
-	"tooltip-n-sitesupport": "",
 	"settings-media": "Media"
 }

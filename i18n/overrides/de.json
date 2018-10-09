@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Metalhead64"
+		]
+	},
+	"miraheze-dberr-again": "Versuche, einige Minuten zu warten und danach die Seite erneut zu laden. Für weitere Informationen zu diesem Fehler gehe auf unsere Twitter-Seite (twitter.com/Miraheze) oder kontaktiere die Systemadministratoren, indem du dich mit #miraheze auf irc.freenode.net verbindest.",
+	"miraheze-oathauth-step1": "'''WICHTIG! Stelle bitte sicher, dass du [[M:OATHAuth|OATHAuth]] liest, bevor du dies aktivierst!'''<br/>Schritt 1: Ein Programm zur Zwei-Faktor-Authentifizierung herunterladen",
+	"miraheze-prefs-help-realname": "Der bürgerliche Name ist optional. Falls du diesen angibst, wird dieser für die Zuordnung zu deinem Werk verwendet. Durch die Verwendung eines durch Miraheze gehosteten Wikis stimmst du auch den <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Nutzungsbedingungen]</span> zu und akzeptierst die <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Datenschutzrichtlinie]</span>.",
+	"miraheze-shoutwiki-loginform-tos": "Ich habe die [https://meta.miraheze.org/wiki/Terms_of_Use Nutzungsbedingungen] sowie die [https://meta.miraheze.org/wiki/Privacy_Policy Datenschutzrichtlinie] gelesen, verstanden und stimme diesen zu.",
+	"miraheze-shoutwiki-must-accept-tos": "Du musst die Nutzungsbedingungen akzeptieren, bevor du ein Benutzerkonto erstellen kannst!"
+}
