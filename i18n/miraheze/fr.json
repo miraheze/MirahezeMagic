@@ -11,7 +11,7 @@
 	"mirahezemagic-description": "Messages Mediawiki, scripts et hooks specifiques pour Miraheze",
 	"miraheze-categories": "Catégories",
 	"miraheze-close-email-subject": "Wiki Miraheeze ($1) Fermé",
-	"miraheze-close-email-body": "Bonjour, \n\nMalheureusement, en raison de votre wiki n'ayant pas de modifications dans les 60 derniers jours, votre wiki a été fermé à cause du \"Dormancy policy\". Si vous voulez continuer a modifier et utiliser votre wiki, vous pouvez aller au Special:ManageWiki sur votre wiki, et décocher l'option \"fermé\" pour rouvrir votre wiki. \n\nVeuillez prendre note que si vous ne rouvrez pas votre wiki c'est possible qu'un autre utilisateur l'adopte. Si vous ne rouvrez pas votre wiki et personne ne l'adopte dans 6 mois, votre wiki sera eligible à la suppresion.",
+	"miraheze-close-email-body": "Bonjour, \n\nMalheureusement, en raison de votre wiki qui n'a pas reçu de modifications durant ces 60 derniers jours, il  a été fermé à cause de la politique de dormance. Si vous voulez continuer à modifier votre wiki, vous pouvez aller au Special:ManageWiki et décocher l'option \"fermé\" pour le réouvrir.\n \nVeuillez noter que si vous ne rouvrez pas votre wiki il est possible qu'un autre utilisateur l'adopte. Si vous ne rouvrez pas votre wiki et que personne ne l'adopte dans les 6 mois à partir d'aujourd'hui, votre wiki sera éligible à la suppression.",
 	"miraheze-donate": "Faire un don",
 	"miraheze-helpcenter": "A propos de Miraheze",
 	"miraheze-requestfeatures": "Demander une fonctionalité sur un wiki",

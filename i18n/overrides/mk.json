@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"miraheze-oathauth-step1": "'''ВАЖНО! Прочитајте го [[M:OATHAuth|OATHAuth]] пред да ја вклучите оваа можност!'''<br/>Чекор 1: Преземете програма за двочинителска заверка",
+	"miraheze-shoutwiki-loginform-tos": "Ги прочитав разбрав [https://meta.miraheze.org/wiki/Terms_of_Use Условите на употреба] и [https://meta.miraheze.org/wiki/Privacy_Policy Правилата за заштите на личните податоци], и се согласувам со нив.",
+	"miraheze-shoutwiki-must-accept-tos": "Ќе мора да ги прифатите Условите на употреба за да можете да направите сметка!"
+}

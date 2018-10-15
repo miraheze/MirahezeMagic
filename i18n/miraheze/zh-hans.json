@@ -1,21 +1,47 @@
 {
 	"@metadata": {
 		"authors": [
-			"AlvaroMolina"
+			"AlvaroMolina",
+			"A Chinese Wikipedian"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
 	"miraheze-categories": "分类",
+	"miraheze-close-email-body": "您好，\n\n不幸的是，由于过去的60天阁下的维基没有编辑，它已经因休眠政策关闭。如果您仍然想编辑您的wiki，请转到Special:ManageWiki并取消选中“关闭”框来重新打开它。\n\n请注意，如果您不重新打开您的wiki，有可能另一个用户将采用您的wiki。如果您不重新打开你的wiki或者没有人从现在开始在6个月内使用您的wiki，它可能有资格删除。",
+	"miraheze-donate": "捐助",
+	"miraheze-helpcenter": "关于米拉希泽",
+	"miraheze-requestfeatures": "维基上的要求特性",
+	"miraheze-requestwiki": "Wiki要求",
+	"group-abuse": "滥用条款",
 	"group-donator": "捐赠",
 	"group-donator-member": "{{GENDER:$1|捐赠者}}",
+	"group-steward": "监管员",
+	"group-sysadmin": "系统管理员",
+	"group-oversight": "监督员",
+	"group-oversight-member": "监督",
+	"group-wikicreator": "维基的创新者们",
+	"group-wikimanager": "维基经理",
+	"group-rollbacker": "回退员",
+	"group-autopatrolled": "自动巡查者",
+	"group-confirmed": "确认用户",
+	"group-proxybot": "代理机器人",
+	"group-proxybot-member": "代理机器人",
+	"group-translator": "译者",
+	"group-translator-member": "译者",
+	"group-translationadmin": "翻译管理员",
+	"group-translationadmin-member": "翻译管理员",
+	"group-global-ipblock-exempt": "全域IP封禁豁免",
+	"group-member": "成员们",
 	"protect-level-user": "只允许注册用户",
 	"restriction-delete": "删除",
 	"restriction-level-user": "只允许注册用户",
 	"right-user": "编辑保护页面为“只有注册用户”",
+	"shared-repo-name-shared-commons": "米拉希泽公馆",
 	"sitematrix": "Miraheze的维基名单",
 	"sitematrix-summary": "这个特殊页面中列出了所有Miraheze维基。",
 	"sitematrix-desc": "显示 [[Special:SiteMatrix|Miraheze的维基名单]]",
 	"sitematrix-others": "其他维基Miraheze",
 	"specialpages-group-wikimanage": "维基管理",
-	"termsofservice": "使用条款"
+	"termsofservice": "使用条款",
+	"settings-media": "媒体文件"
 }
