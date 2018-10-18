@@ -1,0 +1,30 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"miraheze-categories": "বিষয়শ্রেণী",
+	"miraheze-donate": "দান করুন",
+	"miraheze-helpcenter": "মিরাহেজ সম্পর্কে",
+	"group-steward": "স্টুয়ার্ড",
+	"group-steward-member": "{{GENDER:$1|স্টুয়ার্ড}}",
+	"group-sysadmin": "সিস্টেম প্রশাসক",
+	"group-sysadmin-member": "{{GENDER:$1|সিস্টেম প্রশাসক}}",
+	"group-oversight": "গোপন পর্যবেক্ষক",
+	"group-oversight-member": "গোপন পর্যবেক্ষক",
+	"group-rollbacker": "রোলব্যাকার",
+	"group-rollbacker-member": "{{GENDER:$1|রোলব্যাকার}}",
+	"group-autopatrolled": "স্বয়ংক্রিয় পরীক্ষক",
+	"group-autopatrolled-member": "{{GENDER:$1|স্বয়ংক্রিয় পরীক্ষক}}",
+	"group-confirmed": "নিশ্চিতকৃত ব্যবহারকারী",
+	"group-confirmed-member": "{{GENDER:$1|নিশ্চিতকৃত ব্যবহারকারী}}",
+	"group-translator-member": "অনুবাদক",
+	"group-translationadmin": "অনুবাদ প্রশাসক",
+	"group-translationadmin-member": "অনুবাদ প্রশাসক",
+	"group-global-ipblock-exempt": "বৈশ্বিক আইপি নিষেধাজ্ঞা রহিতকরণ",
+	"group-member": "সদস্য",
+	"restriction-delete": "অপসারণ",
+	"termsofservice": "ব্যবহারের শর্তাবলী",
+	"settings-media": "মিডিয়া"
+}
