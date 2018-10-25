@@ -10,6 +10,7 @@
 	"centralauth-groupname": "Miraheze",
 	"mirahezemagic-description": "Miraheze에 특화된 미디어위키 메시지, 스크립트, 훅",
 	"miraheze-categories": "분류",
+	"miraheze-close-email-subject": "Miraheze 위키 ($1) 닫힘",
 	"miraheze-donate": "기부",
 	"miraheze-helpcenter": "Miraheze 정보",
 	"miraheze-requestfeatures": "위키 기능 요청",
