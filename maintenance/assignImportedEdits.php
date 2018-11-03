@@ -29,15 +29,22 @@ require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 class AssignImportedEdits extends Maintenance {
 	private $wikiRevision = null;
 
+	private $importPrefix = 'imported>';
+
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Re assigns imported edits for users";
 		$this->addOption( 'user', 'Username you want edits to be assigned to. (optional), Defaults to all usernamwes with import> prefix.', false, true );
 		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
+		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to imported>', false, false );
 	}
 
 	public function execute() {
 		$this->wikiRevision = wfGetDB( DB_MASTER );
+
+		if ( $this->getOption( 'import-prefix' ) ) {
+			$this->importPrefix = $this->getOption( 'import-prefix' );
+		}
 
 		$res = $this->wikiRevision->select(
 			'revision',
@@ -55,11 +62,11 @@ class AssignImportedEdits extends Maintenance {
 			$user = $this->getOption( 'user' );
 			if ( $user ) {
 				$nameIsValid = User::newFromName( $user )->getId() !== 0;
-				$name = 'imported>' . $user;
+				$name = $this->importPrefix . $user;
 				$this->assignEdit( $name, $nameIsValid, $row->rev_user_text === $name );
 			} else {
 				$user = $row->rev_user_text;
-				$nameIsValid = User::newFromName( str_replace( 'imported>', '', $user ) );
+				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
 				$this->assignEdit( $user, $nameIsValid, $user );
 			}
 		}
@@ -67,7 +74,7 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdit( $user, $nameIsValid, $name ) {
 		if ( $nameIsValid && $name ) {
-			$assignUserEdit = str_replace( 'imported>', '', $user );
+			$assignUserEdit = str_replace( $this->importPrefix , '', $user );
 			$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
 			if ( $this->getOption( 'no-run' ) ) {
 				return;
