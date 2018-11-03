@@ -61,36 +61,43 @@ class AssignImportedEdits extends Maintenance {
 		foreach ( $res as $row ) {
 			$user = $this->getOption( 'user' );
 			if ( $user ) {
-				$nameIsValid = User::newFromName( $user )->getId() !== 0;
+				$nameIsValid = User::newFromName( $user )->getId();
 				$name = $this->importPrefix . $user;
-				$this->assignEdit( $name, $nameIsValid, $row->rev_user_text === $name );
+				if ( strpos( $row->rev_user_text, $this->importPrefix ) === 0 ) {
+					if ( $nameIsValid !== 0 && $row->rev_user_text === $name ) {
+						$this->assignEdit( $name );
+					}
+				}
 			} else {
 				$user = $row->rev_user_text;
 				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
-				$this->assignEdit( $user, $nameIsValid, $user );
+				if ( strpos( $user, $this->importPrefix ) === 0 ) {
+					if ( $nameIsValid && $user ) {
+						$this->assignEdit( $user );
+					}
+				}
 			}
 		}
 	}
 
-	private function assignEdit( $user, $nameIsValid, $name ) {
-		if ( $nameIsValid && $name ) {
-			$assignUserEdit = str_replace( $this->importPrefix , '', $user );
-			$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
-			if ( $this->getOption( 'no-run' ) ) {
-				return;
-			}
+	private function assignEdit( $user ) {
+		$assignUserEdit = str_replace( $this->importPrefix , '', $user );
+		$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
 
-			$this->wikiRevision->update(
-				'revision',
-				[
-					'rev_user_text' => $assignUserEdit,
-				],
-				[
-					'rev_user_text' => $user,
-				],
-				__METHOD__
-			);
+		if ( $this->getOption( 'no-run' ) ) {
+			return;
 		}
+
+		$this->wikiRevision->update(
+			'revision',
+			[
+				'rev_user_text' => $assignUserEdit,
+			],
+			[
+				'rev_user_text' => $user,
+			],
+			__METHOD__
+		);
 	}
 }
 
