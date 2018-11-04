@@ -1,11 +1,11 @@
 <?php
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
-		exec('/bin/mkdir -p ' . '/mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ));
+		exec('/bin/mkdir -p ' . '/mnt/mediawiki-static/' . $DBname);
 
-		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/avatars /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/avatars');
+		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/avatars /mnt/mediawiki-static/' . $DBname . '/avatars');
 
-		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . wfEscapeShellArg( $DBname ) . '/awards');
+		exec('/bin/cp -r ' . '/srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . $DBname . '/awards');
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
