@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
-			"Vlad5250"
+			"Vlad5250",
+			"Link2xt"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -30,6 +31,7 @@
 	"group-translationadmin-member": "администратор перевода",
 	"group-global-ipblock-exempt": "Глобальные исключения из IP-блокировок",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|глобальное исключение из IP-блокировок}}",
+	"group-member": "Участники",
 	"protect-level-user": "Разрешено только зарегистрированным участникам",
 	"restriction-delete": "Удаление",
 	"restriction-level-user": "Разрешено только зарегистрированным участникам",

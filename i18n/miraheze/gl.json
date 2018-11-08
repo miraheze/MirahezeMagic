@@ -1,0 +1,26 @@
+{
+	"@metadata": {
+		"authors": [
+			"Elisardojm"
+		]
+	},
+	"miraheze-donate": "Doar",
+	"miraheze-helpcenter": "Sobre Miraheze",
+	"miraheze-requestwiki": "Solicitar unha wiki",
+	"group-abuse": "Equipo antiabusos",
+	"group-donator": "Doadores",
+	"group-donator-member": "{{GENDER:$1|doador|doadora}}",
+	"group-sysadmin": "Administradores do sistema",
+	"group-sysadmin-member": "{{GENDER:$1|administrador|administradora}} do sistema",
+	"group-oversight": "Supervisores",
+	"group-wikicreator": "Creadores de Wikis",
+	"group-wikimanager": "Administradores da Wiki",
+	"group-cvt": "CVT",
+	"group-cvt-member": "{{GENDER:$1|CVT}}",
+	"group-translator": "Tradutores",
+	"group-translator-member": "tradutor",
+	"restriction-delete": "Borrar",
+	"sitematrix": "Lista de wikis de Miraheze",
+	"settings-media": "Multimedia",
+	"extensions-skins": "Tema"
+}
