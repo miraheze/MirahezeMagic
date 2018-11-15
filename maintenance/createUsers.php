@@ -60,10 +60,16 @@ class CreateUsers extends Maintenance {
 		  $user = $row->rev_user_text;
 		  if ( !User::isIP( $user ) ) {
 			$name = str_replace( $this->importPrefix, '', $user );
-			if ( strpos( $user, $this->importPrefix ) === 0 ) {
-			  if ( $name ) {
-				$this->createUser( $name );
-			  }
+			if ( $this->importPrefix === '' ) {
+				if ( $name ) {
+					$this->createUser( $name );
+				}
+			} else {
+				if ( strpos( $user, $this->importPrefix ) === 0 ) {
+				  if ( $name ) {
+					$this->createUser( $name );
+				  }
+				}
 			}
 		  }
 		}
