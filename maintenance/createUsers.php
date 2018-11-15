@@ -59,7 +59,7 @@ class CreateUsers extends Maintenance {
 		foreach ( $res as $row ) {
 		  $user = $row->rev_user_text;
 		  if ( !User::isIP( $user ) {
-			$name = str_replace( $this->importPrefix, '', $user ) );
+			$name = str_replace( $this->importPrefix, '', $user );
 			if ( strpos( $user, $this->importPrefix ) === 0 ) {
 			  if ( $name ) {
 				$this->createUser( $name );
