@@ -73,14 +73,14 @@ class CreateUsers extends Maintenance {
 		global $wgDBname;
 
 		if ( User::createNew( $name ) !== null ) {
-		  $this->output( "Creating local {$user} on wiki {$wgDBname}\n");
+		  $this->output( "Created local {$user} on wiki {$wgDBname}\n");
 		}
 
 		$ca = new CentralAuthUser( $name, 0 );
 		$ca->promoteToGlobal( $wgDBname );
 
 		if ( $status->isGood() ) {
-		  $this->output( "Creating global {$user}\n");
+		  $this->output( "Created global {$user}\n");
 		}
 
 		if ( $this->getOption( 'no-run' ) ) {
