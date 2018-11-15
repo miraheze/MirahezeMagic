@@ -72,7 +72,8 @@ class CreateUsers extends Maintenance {
 	private function createUser( $name ) {
 		global $wgDBname;
 
-		if ( User::createNew( $name ) !== null ) {
+		$user = User::createNew( $name );
+		if ( $user !== null ) {
 		  $this->output( "Created local {$user} on wiki {$wgDBname}\n");
 		}
 
