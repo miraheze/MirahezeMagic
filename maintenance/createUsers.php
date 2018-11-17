@@ -57,21 +57,21 @@ class CreateUsers extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-		  $user = $row->rev_user_text;
-		  if ( !User::isIP( $user ) ) {
-			$name = str_replace( $this->importPrefix, '', $user );
-			if ( $this->importPrefix === '' ) {
-				if ( $name ) {
-					$this->createUser( $name );
-				}
-			} else {
-				if ( strpos( $user, $this->importPrefix ) === 0 ) {
-				  if ( $name ) {
-					$this->createUser( $name );
-				  }
+			$user = $row->rev_user_text;
+			if ( !User::isIP( $user ) ) {
+				$name = str_replace( $this->importPrefix, '', $user );
+				if ( $this->importPrefix === '' ) {
+					if ( $name ) {
+						$this->createUser( $name );
+					}
+				} else {
+					if ( strpos( $user, $this->importPrefix ) === 0 ) {
+						if ( $name ) {
+							$this->createUser( $name );
+						}
+					}
 				}
 			}
-		  }
 		}
 	}
 
@@ -83,10 +83,10 @@ class CreateUsers extends Maintenance {
 		  $this->output( "Created local {$user} on wiki {$wgDBname}\n");
 		}
 
-		$ca = new CentralAuthUser( $name, 0 );
-		$ca->promoteToGlobal( $wgDBname );
+		$cau = new CentralAuthUser( $name, 0 );
+		$create = $cau->promoteToGlobal( $wgDBname );
 
-		if ( $status->isGood() ) {
+		if ( $create->isGood() ) {
 		  $this->output( "Created global {$user}\n");
 		}
 
