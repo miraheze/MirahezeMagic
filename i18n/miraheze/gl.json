@@ -40,6 +40,11 @@
 	"restriction-delete": "Borrar",
 	"shared-repo-name-shared-commons": "Commons de Miraheze",
 	"sitematrix": "Lista de wikis de Miraheze",
+	"sitematrix-summary": "Esta páxina especial lista tódalas wikis de Miraheze.",
+	"sitematrix-desc": "Amosa unha [[Special:SiteMatrix|lista de wikis de Miraheze]]",
+	"sitematrix-others": "Outras wikis de Miraheze",
+	"specialpages-group-wikimanage": "Xestión de wikis",
+	"termsofservice": "Termos de uso",
 	"settings-media": "Multimedia",
 	"extensions-skins": "Tema"
 }

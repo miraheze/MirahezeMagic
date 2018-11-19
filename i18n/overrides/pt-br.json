@@ -5,6 +5,7 @@
 		]
 	},
 	"miraheze-dberr-again": "Tente esperar alguns minutos e recarregar. Para mais informações sobre esse erro, confira nossa página no Twitter (Twitter.com/Miraheze) ou entre em contato com os administradores do sistema conectando-se a #miraheze em irc.freenode.net",
+	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-oathauth-step1": "'''IMPORTANTE! Por favor, certifique-se de ler [[M:OATHAuth|OATHAuth]]antes de habilitar isso!'''<br/>Etapa 1: baixar um programa de autenticação de dois fatores",
 	"miraheze-prefs-help-realname": "Nome real é opcional. Se você optar por fornecê-lo, isso será usado para atribuir a você o seu trabalho. Além disso, usando um wiki hospedado pelo Miraheze, você concorda com o <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use/pt-br Terms of Use]</span> e aceitar o <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy/pt-br Política de Privacidade]</span>",
 	"miraheze-shoutwiki-loginform-tos": "Eu li, compreendi e concordo com o [https://meta.miraheze.org/wiki/Terms_of_Use/pt-br Termos de uso] e [https://meta.miraheze.org/wiki/Privacy_Policy/pt-br Política de Privacidade]",
