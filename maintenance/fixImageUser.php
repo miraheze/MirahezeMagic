@@ -44,14 +44,16 @@ class FixImageUser extends Maintenance {
 
 		$from = $this->initialiseUser( $this->getArg( 0 ) );
 		$to = $this->initialiseUser( $this->getArg( 1 ) );
+		
+		$imageName = urlencode( $this->getOption( 'image-name' ) );
 
 		$pageId = $this->wikiDB->select(
 			'page',
 			'page_id', 
 			[
-				'page_title' => urlencode( $this->getOption( 'image-name' ) )
+				'page_title' => $imageName,
 			],
-			__METHOD__,
+			__METHOD__
 		);
 
 		if ( !$pageId || !is_object( $pageId ) ) {
@@ -80,7 +82,7 @@ class FixImageUser extends Maintenance {
 				],
 				[
 					'img_actor' => $from->getActorId(),
-					'img_name' => urlencode( $this->getOption( 'image-name' ) )
+					'img_name' => $imageName,
 				],
 				__METHOD__
 			);
