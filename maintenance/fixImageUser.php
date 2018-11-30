@@ -42,7 +42,7 @@ class FixImageUser extends Maintenance {
 		$from = $this->initialiseUser( $this->getArg( 0 ) );
 		$to = $this->initialiseUser( $this->getArg( 1 ) );
 		
-		$imageName = urlencode( $this->getOption( 'image-name' ) );
+		$imageName = $this->getOption( 'image-name' );
 
 		$pageId = $wikiDB->select(
 			'page',
