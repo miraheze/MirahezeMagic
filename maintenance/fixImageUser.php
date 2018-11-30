@@ -42,7 +42,7 @@ class FixImageUser extends Maintenance {
 		$from = $this->initialiseUser( $this->getArg( 0 ) );
 		$to = $this->initialiseUser( $this->getArg( 1 ) );
 		
-		$imageName = $this->getOption( 'image-name' );
+		$imageName = urldecode( $this->getOption( 'image-name' ) );
 
 		$pageId = $wikiDB->select(
 			'page',
@@ -63,7 +63,7 @@ class FixImageUser extends Maintenance {
 			if ( $wgActorTableSchemaMigrationStage > MIGRATION_OLD ) {
 				$wikiDB->update(
 					'revision_actor_temp',
-					[ 'revactor_actor' => $to->getActorId( $this->wikiDB ) ],
+					[ 'revactor_actor' => $to->getActorId( $wikiDB ) ],
 					[
 						'revactor_actor' => $from->getActorId(),
 						'revactor_page' => $page_id,
@@ -75,7 +75,7 @@ class FixImageUser extends Maintenance {
 			$wikiDB->update(
 				'image',
 				[
-					'img_actor' => $to->getActorId( $this->wikiDB ),
+					'img_actor' => $to->getActorId( $wikiDB ),
 				],
 				[
 					'img_actor' => $from->getActorId(),
