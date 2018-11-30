@@ -84,7 +84,7 @@ class FixImageUser extends Maintenance {
 				__METHOD__
 			);
 			
-			$this->output("Reassigned image user from {$from} to {$to} on page id {$page_id}");
+			$this->output("Reassigned image user from {$from} to {$to} on page id {$page_id}\n");
 		}
 	}
 
