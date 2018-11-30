@@ -39,8 +39,8 @@ class FixImageUser extends Maintenance {
 
 		$wikiDB = wfGetDB( DB_MASTER );
 
-		$from = $this->initialiseUser( $this->getArg( 0 ) );
-		$to = $this->initialiseUser( $this->getArg( 1 ) );
+		$from = $this->initialiseUser( urldecode( $this->getArg( 0 ) ) );
+		$to = $this->initialiseUser( urldecode ( $this->getArg( 1 ) ) );
 		
 		$imageName = urldecode( $this->getOption( 'image-name' ) );
 
