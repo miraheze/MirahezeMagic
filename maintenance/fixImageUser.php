@@ -25,29 +25,26 @@
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
 class FixImageUser extends Maintenance {
-	private $wikiDB = null;
-
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Fix image ownership of file";
-		$this->addOption( 'id', 'The id that should be searched for (typically 0)', true, true );
 		$this->addOption( 'image-name', 'Name of the image you want to reassign image user.', true, true );
 		$this->addArg( 'from', 'Old user to take edits from (can be ip too)' );
 		$this->addArg( 'to', 'New user to give edits to' );
 	}
 
-    // TODO: Add support for MediaWiki 1.32
+	// TODO: Add support for MediaWiki 1.32
 	public function execute() {
 		global $wgActorTableSchemaMigrationStage;
 
-		$this->wikiDB = wfGetDB( DB_MASTER );
+		$wikiDB = wfGetDB( DB_MASTER );
 
 		$from = $this->initialiseUser( $this->getArg( 0 ) );
 		$to = $this->initialiseUser( $this->getArg( 1 ) );
 		
 		$imageName = urlencode( $this->getOption( 'image-name' ) );
 
-		$pageId = $this->wikiDB->select(
+		$pageId = $wikiDB->select(
 			'page',
 			'page_id', 
 			[
@@ -64,7 +61,7 @@ class FixImageUser extends Maintenance {
 			$page_id = $id->page_id;
 
 			if ( $wgActorTableSchemaMigrationStage > MIGRATION_OLD ) {
-				$this->wikiDB->update(
+				$wikiDB->update(
 					'revision_actor_temp',
 					[ 'revactor_actor' => $to->getActorId( $this->wikiDB ) ],
 					[
@@ -75,7 +72,7 @@ class FixImageUser extends Maintenance {
 				);
 			}
 
-			$this->wikiDB->update(
+			$wikiDB->update(
 				'image',
 				[
 					'img_actor' => $to->getActorId( $this->wikiDB ),
