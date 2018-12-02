@@ -35,7 +35,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 		
 		$this->output( "Generating sitemap for wiki {$wgDBname}" );
 
-		exec( "/usr/bin/nice -n -19 /usr/bin/php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath="/mnt/mediawiki-static/sitemaps/{$wgServer}\" --identifier=\"{$wgDBname}\" --urlpath=\"https://{$wgServer}/\" --server=\"https://{$wgServer}\" --compress=yes --wiki=\"{$wgDBname}\"" );
+		exec( "/usr/bin/nice -n -19 /usr/bin/php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath=/mnt/mediawiki-static/sitemaps/{$wgServer} --identifier={$wgDBname} --urlpath=https://{$wgServer}/ --server=https://{$wgServer} --compress=yes --wiki={$wgDBname}" );
 	}
 }
 
