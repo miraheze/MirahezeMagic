@@ -37,7 +37,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 		$stripHttpPrefix = str_replace( 'https://', '', $wgServer );
 
-		exec( "php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath=\"/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}\" --identifier={$wgDBname} --urlpath=\"{$wgServer}/\" --server=\"{$wgServer}\" --compress=yes --wiki={$wgDBname}" );
+		exec( "php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath='/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}' --identifier={$wgDBname} --urlpath='{$wgServer}/' --server='{$wgServer}' --compress=yes --wiki={$wgDBname}" );
 
 		exec( "/bin/cp /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap-index-metawiki.xml /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap.xml" );
 	}
