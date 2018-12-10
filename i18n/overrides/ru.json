@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250"
+		]
+	},
+	"miraheze-oathauth-step1": "'''ВАЖНО! Прочитайте [[M:OATHAuth|OATHAuth]], прежде чем включить эту возможность!'''<br/>Шаг 1: Загрузите программу двухфакторной аутентификации",
+	"miraheze-shoutwiki-loginform-tos": "Я прочитал, понял [https://meta.miraheze.org/wiki/Terms_of_Use Условия использования] и [https://meta.miraheze.org/wiki/Privacy_Policy Политику конфиденциальности], и соглашаюсь.",
+	"miraheze-shoutwiki-must-accept-tos": "Вы должны принять Условия использования, чтобы создать учётную запись!"
+}

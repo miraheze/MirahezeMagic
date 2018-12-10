@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
-			"A Chinese Wikipedian"
+			"A Chinese Wikipedian",
+			"Angrydog001"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -13,17 +14,27 @@
 	"miraheze-requestfeatures": "维基上的要求特性",
 	"miraheze-requestwiki": "Wiki要求",
 	"group-abuse": "滥用条款",
+	"group-abuse-member": "{{GENDER:$1|滥用过滤器维护组}}",
 	"group-donator": "捐赠",
 	"group-donator-member": "{{GENDER:$1|捐赠者}}",
 	"group-steward": "监管员",
+	"group-steward-member": "{{GENDER:$1|监管员}}",
 	"group-sysadmin": "系统管理员",
+	"group-sysadmin-member": "{{GENDER:$1|系统管理员}}",
 	"group-oversight": "监督员",
 	"group-oversight-member": "监督",
 	"group-wikicreator": "维基的创新者们",
+	"group-wikicreator-member": "{{GENDER:$1|wiki创始人}}",
 	"group-wikimanager": "维基经理",
+	"group-wikimanager-member": "{{GENDER:$1|wiki经理}}",
 	"group-rollbacker": "回退员",
+	"group-rollbacker-member": "{{GENDER:$1|回退员}}",
 	"group-autopatrolled": "自动巡查者",
+	"group-autopatrolled-member": "{{GENDER:$1|自动巡查者}}",
 	"group-confirmed": "确认用户",
+	"group-confirmed-member": "{{GENDER:$1|确认用户}}",
+	"group-cvt": "CVT",
+	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "代理机器人",
 	"group-proxybot-member": "代理机器人",
 	"group-translator": "译者",
@@ -31,6 +42,7 @@
 	"group-translationadmin": "翻译管理员",
 	"group-translationadmin-member": "翻译管理员",
 	"group-global-ipblock-exempt": "全域IP封禁豁免",
+	"group-global-ipblock-exempt-member": "{{GENDER:$1|全域IP封禁豁免者}}",
 	"group-member": "成员们",
 	"protect-level-user": "只允许注册用户",
 	"restriction-delete": "删除",
@@ -43,5 +55,6 @@
 	"sitematrix-others": "其他维基Miraheze",
 	"specialpages-group-wikimanage": "维基管理",
 	"termsofservice": "使用条款",
-	"settings-media": "媒体文件"
+	"settings-media": "媒体文件",
+	"extensions-skins": "皮肤"
 }
