@@ -3,17 +3,20 @@
 		"authors": [
 			"AlvaroMolina",
 			"Vlad5250",
-			"Link2xt"
+			"Link2xt",
+			"Nk88"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
 	"mirahezemagic-description": "Сообщения, скрипты и hook'и MediaWiki, специфические для Miraheze",
 	"miraheze-categories": "Категории",
 	"miraheze-close-email-subject": "Вики на Miraheze ($1) закрыта",
+	"miraheze-close-email-body": "Здравствуйте. К сожалению, из-за того, что ваша вики не редактировалась в течение последних 60 дней, она была закрыта из-за политики Dormancy. Если вы все еще хотите отредактировать свою вики, перейдите в Special: ManageWiki и снимите флажок «закрыто», чтобы снова открыть его. Обратите внимание, что если вы не откроете свою вики, возможно, что другой пользователь примет вашу вики. Если вы не откроете свою вики, или никто не примет вашу вики в течение 6 месяцев, начиная с этого момента, она может быть удалена.",
 	"miraheze-donate": "Пожертвовать",
 	"miraheze-helpcenter": "О Miraheze",
 	"miraheze-requestfeatures": "Запрос возможностей на вики",
 	"miraheze-requestwiki": "Запрос вики",
+	"group-abuse": "Злоупотребление командой.",
 	"group-steward": "Стюарды",
 	"group-steward-member": "{{GENDER:$1|стюард}}",
 	"group-sysadmin": "Системные администраторы",
@@ -22,6 +25,7 @@
 	"group-oversight-member": "ревизор",
 	"group-wikicreator": "Викисоздатели",
 	"group-wikicreator-member": "{{GENDER:$1|викисоздатель}}",
+	"group-wikimanager": "Вики менеджеры",
 	"group-rollbacker": "Откатывающие",
 	"group-rollbacker-member": "{{GENDER:$1|откатывающий|откатывающая}}",
 	"group-autopatrolled": "Автопатрулируемые",

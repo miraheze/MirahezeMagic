@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vlad5250"
+			"Vlad5250",
+			"Nk88"
 		]
 	},
+	"miraheze-dberr-again": "Попробуйте подождать несколько минут и перезагрузить. Для получения дополнительной информации об этой ошибке, пожалуйста, посетите нашу страницу в Twitter (Twitter.com/Miraheze) или свяжитесь с системными администраторами, подключившись к #miraheze на irc.freenode.net.",
 	"miraheze-oathauth-step1": "'''ВАЖНО! Прочитайте [[M:OATHAuth|OATHAuth]], прежде чем включить эту возможность!'''<br/>Шаг 1: Загрузите программу двухфакторной аутентификации",
 	"miraheze-shoutwiki-loginform-tos": "Я прочитал, понял [https://meta.miraheze.org/wiki/Terms_of_Use Условия использования] и [https://meta.miraheze.org/wiki/Privacy_Policy Политику конфиденциальности], и соглашаюсь.",
 	"miraheze-shoutwiki-must-accept-tos": "Вы должны принять Условия использования, чтобы создать учётную запись!"
