@@ -2,7 +2,7 @@
         "name": "MirahezeMagic",
         "author": [
 		"John Lewis",
-		"Labster", 
+		"Labster",
 		"MacFan4000",
 		"Reception123",
 		"Revi",
@@ -45,7 +45,10 @@
                 ],
                 "MakeGlobalVariablesScript": [
                         "MirahezeMagicHooks::onMakeGlobalVariablesScript"
-                ]
+                ],
+		"UploadComplete": [
+			"GlobalNewFilesHooks::onUploadUpload"
+		]
 	},
 	"manifest_version": 2
 }
