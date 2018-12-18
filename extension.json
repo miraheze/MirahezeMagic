@@ -48,7 +48,7 @@
                         "MirahezeMagicHooks::onMakeGlobalVariablesScript"
                 ],
 		"UploadComplete": [
-			"GlobalNewFilesHooks::onUploadUpload"
+			"GlobalNewFilesHooks::onUploadComplete"
 		]
 	},
 	"manifest_version": 2
