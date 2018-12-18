@@ -24,6 +24,7 @@
                 ]
         },
         "AutoloadClasses": {
+		"GlobalNewFilesHooks": "includes/GlobalNewFiles/GlobalNewFilesHooks.php",
                 "MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
                 "MirahezeMagicHooks": "includes/MirahezeMagicHooks.php"
         },
