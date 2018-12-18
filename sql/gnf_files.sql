@@ -1,4 +1,4 @@
-CREATE TABLE /*_*/gfn_files (
+CREATE TABLE /*_*/gnf_files (
   `files_dbname` VARCHAR(64) NOT NULL,
   `files_url` LONGTEXT NOT NULL,
   `files_page` LONGTEXT NOT NULL,
