@@ -2,7 +2,7 @@
 
 class GlobalNewFilesHooks {
 	public static function onUploadComplete( &$uploadBase ) {
-		global $wgCreateWikiDatabase, $wmgPrivateWiki;
+		global $wgCreateWikiDatabase, $wgDBname, $wmgPrivateWiki;
 
 		$uploadedFile = $uploadBase->getLocalFile();
 
