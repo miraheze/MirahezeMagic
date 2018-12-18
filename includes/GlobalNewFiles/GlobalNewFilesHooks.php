@@ -1,3 +1,5 @@
+<?php
+
 class GlobalNewFilesHooks {
 	public static function onUploadComplete( &$uploadBase ) {
 		global $wgCreateWikiDatabase, $wmgPrivateWiki;
