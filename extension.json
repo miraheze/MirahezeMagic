@@ -1,6 +1,6 @@
 {
-        "name": "MirahezeMagic",
-        "author": [
+	"name": "MirahezeMagic",
+	"author": [
 		"John Lewis",
 		"Labster",
 		"MacFan4000",
@@ -9,44 +9,52 @@
 		"Paladox",
 		"Southparkfan"
 	],
-        "url": "//github.com/Miraheze/MirahezeMagic",
-        "descriptionmsg": "mirahezemagic-description",
-        "type": "other",
-        "MessagesDirs": {
-                "MirahezeMagic": [
-                        "i18n/miraheze"
-                ],
-                "MirahezeOverrideMessagesMagic": [
-                        "i18n/overrides"
-                ],
-                "MirahezeLocalizedProjectNames": [
-                        "i18n/mirahezeprojectnames"
-                ]
-        },
-        "AutoloadClasses": {
+	"url": "//github.com/Miraheze/MirahezeMagic",
+	"descriptionmsg": "mirahezemagic-description",
+	"type": "other",
+	"MessagesDirs": {
+		"MirahezeMagic": [
+			"i18n/miraheze"
+		],
+		"MirahezeOverrideMessagesMagic": [
+			"i18n/overrides"
+		],
+		"MirahezeLocalizedProjectNames": [
+			"i18n/mirahezeprojectnames"
+		]
+	},
+	"AvailableRights": [
+		"viewglobalprivatefiles"
+	],
+	"AutoloadClasses": {
 		"GlobalNewFilesHooks": "includes/GlobalNewFiles/GlobalNewFilesHooks.php",
-                "MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
-                "MirahezeMagicHooks": "includes/MirahezeMagicHooks.php"
-        },
-        "Hooks": {
-                "CreateWikiCreation": [
-                        "MirahezeMagicHooks::onCreateWikiCreation"
-                ],
-                "CreateWikiDeletion": [
-                        "MirahezeMagicHooks::onCreateWikiDeletion"
-                ],
-                "CreateWikiRename": [
-                        "MirahezeMagicHooks::onCreateWikiRename"
-                ],
-                "MessageCache::get": [
-                        "MirahezeMagicHooks::onMessageCacheGet"
-                ],
-                "TitleReadWhitelist": [
-                        "MirahezeMagicHooks::onTitleReadWhitelist"
-                ],
-                "MakeGlobalVariablesScript": [
-                        "MirahezeMagicHooks::onMakeGlobalVariablesScript"
-                ],
+		"GlobalNewFilesPager": "includes/GlobalNewFiles/GlobalNewFilesPager.php",
+		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
+		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
+		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php"
+	},
+	"SpecialPages": {
+		"GlobalNewFiles": "SpecialGlobalNewFiles"
+	},
+	"Hooks": {
+		"CreateWikiCreation": [
+			"MirahezeMagicHooks::onCreateWikiCreation"
+		],
+		"CreateWikiDeletion": [
+			"MirahezeMagicHooks::onCreateWikiDeletion"
+		],
+		"CreateWikiRename": [
+			"MirahezeMagicHooks::onCreateWikiRename"
+		],
+		"MessageCache::get": [
+			"MirahezeMagicHooks::onMessageCacheGet"
+		],
+		"TitleReadWhitelist": [
+			"MirahezeMagicHooks::onTitleReadWhitelist"
+		],
+		"MakeGlobalVariablesScript": [
+			"MirahezeMagicHooks::onMakeGlobalVariablesScript"
+		],
 		"UploadComplete": [
 			"GlobalNewFilesHooks::onUploadComplete"
 		]

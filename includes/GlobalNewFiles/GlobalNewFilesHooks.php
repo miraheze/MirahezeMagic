@@ -13,7 +13,7 @@ class GlobalNewFilesHooks {
 			[
 				'files_dbname' => $wgDBname,
 				'files_url' => $uploadedFile->getViewURL(),
-				'files_page' => $uploadedFile->getDescriptionUrl(),
+				'files_page' => $wgServer . $uploadedFile->getDescriptionUrl(),
 				'files_name' => $uploadedFile->getName(),
 				'files_user' => $uploadedFile->getUser(),
 				'files_private' => (int)$wmgPrivateWiki,
