@@ -37,7 +37,7 @@ class GlobalNewFilesPager extends TablePager {
 	function formatValue( $name, $value ) {
 		$row = $this->mCurrentRow;
 
-		$wiki = $row->wiki_dbname;
+		$wiki = $row->files_dbname;
 
 		switch ( $name ) {
 			case 'files_dbname':
