@@ -32,6 +32,7 @@
 	"group-translationadmin": "Amministrature de le traduziune",
 	"group-translationadmin-member": "amministratore de le traduziune",
 	"group-global-ipblock-exempt": "Esclusiune de blocche globbale de IP",
+	"group-global-ipblock-exempt-member": "{{GENDER:$1|Esezione de le blocca globbale de l'IP}}",
 	"group-member": "Membre",
 	"protect-level-user": "Consende sole a le utinde reggistrate",
 	"restriction-delete": "Scangìlle",
