@@ -23,7 +23,12 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
+		global $wgCreateWikiDatabase;
+
 		exec("/bin/mv /mnt/mediawiki-static/$old /mnt/mediawiki-static/$new");
+
+		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+		$dbw->query( "UPDATE gnf_files SET files_dbname= $new WHERE files_dbname = $old; " );
 	}
 
 	/**
