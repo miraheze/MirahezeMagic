@@ -21,4 +21,26 @@ class GlobalNewFilesHooks {
 			]
 		);
 	}
+
+	/**
+	 * Hook to FileDeleteComplete
+	 * @param File $file
+	 * @param File $oldimage
+	 * @param Article $article
+	 * @param User $user
+	 * @param string $reason
+	 */
+	public static function onFileDeleteComplete( $file, $oldimage, $article, $user, $reason ) {
+		global $wgCreateWikiDatabase, $wgDBname;
+
+		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+
+		$dbw->delete(
+			'gnf_files',
+			[
+				'files_dbname' => $wgDBname,
+				'files_name' => $file->getTitle()->getDBkey(),
+			]
+		);
+	}
 }

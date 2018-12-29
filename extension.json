@@ -46,6 +46,9 @@
 		"CreateWikiRename": [
 			"MirahezeMagicHooks::onCreateWikiRename"
 		],
+		"FileDeleteComplete": [
+			"GlobalNewFilesHooks::onFileDeleteComplete"
+		],
 		"MessageCache::get": [
 			"MirahezeMagicHooks::onMessageCacheGet"
 		],
