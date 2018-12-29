@@ -32,7 +32,7 @@ class MirahezeMagicHooks {
 			'gnf_files',
 			[
 				'files_dbname' => $new,
-			]
+			],
 			[
 				'files_dbname' => $old,
 			],
