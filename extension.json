@@ -46,6 +46,9 @@
 		"CreateWikiRename": [
 			"MirahezeMagicHooks::onCreateWikiRename"
 		],
+		"LoadExtensionSchemaUpdates": [
+			"GlobalNewFilesHooks::onLoadExtensionSchemaUpdates"
+		],
 		"FileDeleteComplete": [
 			"GlobalNewFilesHooks::onFileDeleteComplete"
 		],
