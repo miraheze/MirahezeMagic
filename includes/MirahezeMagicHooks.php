@@ -9,11 +9,8 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		global $wgCreateWikiDatabase;
-
 		exec("/bin/rm -rf /mnt/mediawiki-static/$wiki");
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
 		$dbw->delete(
 			'gnf_files',
 			[
@@ -23,11 +20,9 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
-		global $wgCreateWikiDatabase;
 
 		exec("/bin/mv /mnt/mediawiki-static/$old /mnt/mediawiki-static/$new");
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
 		$dbw->update(
 			'gnf_files',
 			[
