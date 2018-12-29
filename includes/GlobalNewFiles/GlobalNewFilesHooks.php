@@ -43,4 +43,21 @@ class GlobalNewFilesHooks {
 			]
 		);
 	}
+	
+	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
+		if ( $wgCreateWikiDatabase === $wgDBname ) {
+			$updater->addExtensionTable( 
+				'gnf_files',
+				__DIR__ . '/../../sql/gnf_files.sql' 
+			);
+
+			$updater->modifyField( 
+				'gnf_files', 
+				'files_timestamp', 
+				__DIR__ . '/../../sql/patch-gnf_files-binary.sql' 
+			);
+		}
+		
+		return true;
+	}
 }
