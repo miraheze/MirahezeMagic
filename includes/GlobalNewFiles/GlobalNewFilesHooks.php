@@ -45,6 +45,7 @@ class GlobalNewFilesHooks {
 	}
 	
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
+		global $wgCreateWikiDatabase, $wgDBname;
 		if ( $wgCreateWikiDatabase === $wgDBname ) {
 			$updater->addExtensionTable( 
 				'gnf_files',
