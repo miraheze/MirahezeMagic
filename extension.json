@@ -63,6 +63,9 @@
 		],
 		"UploadComplete": [
 			"GlobalNewFilesHooks::onUploadComplete"
+		],
+		"HtmlPageLinkRendererEnd": [
+			"MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
 		]
 	},
 	"manifest_version": 2

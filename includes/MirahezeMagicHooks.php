@@ -107,5 +107,37 @@ class MirahezeMagicHooks {
 	* @param OutputPage $out OutputPage object
 	*/
 	public static function onMakeGlobalVariablesScript( &$vars, OutputPage $out ) { }
+
+	/**
+	 * Enables global interwiki for [[mh:wiki:Page]]
+	 */
+	public static function onHtmlPageLinkRendererEnd( $linkRenderer, $target, $isKnown, &$text, &$attribs, &$ret ) {
+		$target = (string)$target;
+		$target = explode( ':', $target );
+
+		if ( !count( $target ) > 2 ) {
+			return true; // Not enough parameters for interwiki
+		}
+
+		$prefix = strtolower( $target[0] );
+
+		if ( $prefix != 'mh' ) {
+			return true; // Not interesting
+		}
+
+		$wiki = strtolower( $target[1] );
+		$text = array_slice( $target, 2 );
+		$text = join( ':', $text );
+
+		$linkURL = "https://$wiki.miraheze.org/wiki/$text";
+
+		$attribs = array(
+			'href' => $linkURL,
+			'class' => 'extiw',
+			'title' => $wiki
+		);
+
+		return true;
+	}
 }
 
