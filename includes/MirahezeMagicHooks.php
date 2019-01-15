@@ -113,6 +113,14 @@ class MirahezeMagicHooks {
 	 */
 	public static function onHtmlPageLinkRendererEnd( $linkRenderer, $target, $isKnown, &$text, &$attribs, &$ret ) {
 		$target = (string)$target;
+		$useText = true;
+
+		$ltarget = strtolower( $target );
+		$ltext = strtolower( HtmlArmor::getHtml( $text ) );
+		if ( $ltarget == $ltext ) {
+			$useText = false; // Allow link piping, but don't modify $text yet
+		}
+
 		$target = explode( ':', $target );
 
 		if ( !count( $target ) > 2 ) {
@@ -126,10 +134,16 @@ class MirahezeMagicHooks {
 		}
 
 		$wiki = strtolower( $target[1] );
-		$text = array_slice( $target, 2 );
-		$text = join( ':', $text );
+		$target = array_slice( $target, 2 );
+		$target = join( ':', $target );
 
-		$linkURL = "https://$wiki.miraheze.org/wiki/$text";
+		if ( !$useText ) {
+			$text = $target;
+		}
+
+		$target = urlencode( $target );
+
+		$linkURL = "https://$wiki.miraheze.org/wiki/$target";
 
 		$attribs = array(
 			'href' => $linkURL,
