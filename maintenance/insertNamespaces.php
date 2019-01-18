@@ -16,7 +16,7 @@ class InsertNamespaces extends Maintenance {
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
 
-		$row = $dbw->select(
+		$res = $dbw->select(
 			'mw_namespaces',
 			[
 				'*',
@@ -27,46 +27,25 @@ class InsertNamespaces extends Maintenance {
 			__METHOD__
 		);
 
-
-
-		$this->insertNamespace( $dbw, $row);
+		$this->insertNamespace( $dbw, $res );
 	}
 	
-	public function insertNamespace( $dbw, $row ) {
+	public function insertNamespace( $dbw, $res ) {
 		global $wgDBname;
 
-		$resObj = $dbw->select(
-			'mw_namespaces',
-			[
-				'*',
-			],
-			[
-				'ns_dbname' => $wgDBname,
-				'ns_namespace_id' => $row->ns_namespace_id,
-				'ns_namespace_name' => $row->ns_namespace_name,
-				'ns_searchable' => $row->ns_searchable,
-				'ns_subpages' => $row->ns_subpages,
-				'ns_content' => $row->ns_content,
-				'ns_protection' => $row->ns_protection,
-				'ns_aliases' => $row->ns_aliases,
-				'ns_core' => $row->ns_core,
-			],
-			__METHOD__
-		);
-
-		if ( !$resObj || !is_object( $resObj ) ) {
+		foreach ( $res as $row ) {
 			$dbw->insert(
 				'mw_namespaces',
 				[
 					'ns_dbname' => $wgDBname,
-					'ns_namespace_id' => $row->ns_namespace_id,
-					'ns_namespace_name' => $row->ns_namespace_name,
-					'ns_searchable' => $row->ns_searchable,
-					'ns_subpages' => $row->ns_subpages,
-					'ns_content' => $row->ns_content,
-					'ns_protection' => $row->ns_protection,
-					'ns_aliases' => $row->ns_aliases,
-					'ns_core' => $row->ns_core,
+					'ns_namespace_id' => $res->ns_namespace_id,
+					'ns_namespace_name' => $res->ns_namespace_name,
+					'ns_searchable' => $res->ns_searchable,
+					'ns_subpages' => $res->ns_subpages,
+					'ns_content' => $res->ns_content,
+					'ns_protection' => $res->ns_protection,
+					'ns_aliases' => $res->ns_aliases,
+					'ns_core' => $res->ns_core,
 				],
 				__METHOD__
 			);
