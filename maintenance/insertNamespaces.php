@@ -12,6 +12,8 @@ class InsertNamespaces extends Maintenance {
 	}
 
 	function execute() {
+		global $wgCreateWikiDatabase;
+
 		if ( ManageWiki::checkSetup( 'namespaces' ) ) {
 			$this->fatalError( 'Disable ManageWiki Namespaces on this wiki.' );
 		}
@@ -35,8 +37,7 @@ class InsertNamespaces extends Maintenance {
 	}
 	
 	public function insertNamespace( $dbw, $res ) {
-		global $wgDBname, $wgNamespacesToBeSearchedDefault, $wgNamespacesWithSubpages,
-			$wgContentNamespaces, $wgNamespaceProtection;
+		global $wgDBname;
 
 		$resObj = $dbw->select(
 			'mw_namespaces',
