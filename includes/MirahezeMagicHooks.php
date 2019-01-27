@@ -117,13 +117,14 @@ class MirahezeMagicHooks {
 
 		$ltarget = strtolower( $target );
 		$ltext = strtolower( HtmlArmor::getHtml( $text ) );
+
 		if ( $ltarget == $ltext ) {
 			$useText = false; // Allow link piping, but don't modify $text yet
 		}
 
 		$target = explode( ':', $target );
 
-		if ( !count( $target ) > 2 ) {
+		if ( count( $target ) < 2 ) {
 			return true; // Not enough parameters for interwiki
 		}
 
@@ -140,9 +141,12 @@ class MirahezeMagicHooks {
 		if ( !$useText ) {
 			$text = $target;
 		}
+		if ( $text == '' ) {
+			$text = $wiki;
+		}
 
+		$target = str_replace( ' ', '_', $target );
 		$target = urlencode( $target );
-
 		$linkURL = "https://$wiki.miraheze.org/wiki/$target";
 
 		$attribs = array(
