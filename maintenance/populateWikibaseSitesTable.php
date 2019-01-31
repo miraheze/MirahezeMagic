@@ -39,6 +39,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$groups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 		$validGroups = $this->getOption( 'valid-groups', $groups );
+		$site = $this->getSiteFromSiteData( $siteData );
 
 		try {
 			
@@ -49,10 +50,12 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			if ( !is_array( $sites ) || !array_key_exists( 'wikidiscover', $sites ) ) {
 				throw new InvalidArgumentException( 'Cannot decode wiki discovery data.' );
 			}
+			
+			$site = $this->getSiteFromSiteData( $sites );
 
 			$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
-			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
+			$sitesBuilder->buildStore( $site, $siteGroup, $wikiId );
 
 		} catch ( MWException $e ) {
 			$this->output( $e->getMessage() );
@@ -79,6 +82,22 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		return $json;
 	}
 
+	/**
+	 * @param array $siteData
+	 *
+	 * @return Site
+	 */
+	private function getSiteFromSiteData( array $siteData ) {
+		$site = new MediaWikiSite();
+		$site->setGlobalId( $siteData['dbname'] );
+		$siteGroup = $siteData['languagecode'];
+		$site->setGroup( $siteGroup );
+		$url = $siteData['url'];
+		$url = preg_replace( '@^https?:@', '', $url );
+		$site->setFilePath( $url . $this->scriptPath );
+		$site->setPagePath( $url . $this->articlePath );
+		return $site;
+	}
 }
 
 $maintClass = PopulateWikibaseSitesTable::class;
