@@ -28,7 +28,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				. ' local interwiki identifiers in the site identifiers table.  If not set and --wiki'
 				. ' is set, the script will try to determine which site group the wiki is part of'
 				. ' and populate interwiki ids for sites in that group.', false, true );
-		$this->addOption( 'valid-groups', 'A array of valid site link groups.', true );
+		$this->addOption( 'valid-groups', 'A array of valid site link groups.', false, true );
 	}
 
 	public function execute() {
