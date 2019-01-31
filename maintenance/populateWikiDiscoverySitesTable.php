@@ -34,7 +34,7 @@ class PopulateWikiDiscoverySitesTable extends Maintenance {
 				. ' local interwiki identifiers in the site identifiers table.  If not set and --wiki'
 				. ' is set, the script will try to determine which site group the wiki is part of'
 				. ' and populate interwiki ids for sites in that group.', false, true );
-    $this->addOption( 'valid-groups', 'A array of valid site link groups.');
+		$this->addOption( 'valid-groups', 'A array of valid site link groups.');
 	}
 
 	public function execute() {
@@ -44,12 +44,12 @@ class PopulateWikiDiscoverySitesTable extends Maintenance {
 
 		$validGroups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
-    $url = $this->getOption( 'valid-groups', $validGroups );
+		$url = $this->getOption( 'valid-groups', $validGroups );
 
 		try {
 			$json = $this->getWikiDiscoveryData( $url );
 
-      $sites = json_decode( $json, true );
+			$sites = json_decode( $json, true );
 
 			$store = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new use Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
