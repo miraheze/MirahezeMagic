@@ -138,12 +138,17 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	private function getSiteFromSiteData( array $siteData ) {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( $siteData['dbname'] );
+
 		$siteGroup = $siteData['languagecode'];
 		$site->setGroup( $siteGroup );
+
 		$url = $siteData['url'];
 		$url = preg_replace( '@^https?:@', '', $url );
+
 		$site->setFilePath( $url . $this->getOption( 'script-path', '/w/$1' ) );
+
 		$site->setPagePath( $url . $this->getOption( 'article-path', '/wiki/$1' ) );
+
 		return $site;
 	}
 }
