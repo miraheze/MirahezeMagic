@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
-	require_once __DIR__ . '/srv/mediawiki/w/extensions/wikibase/lib/includes/Sites/SitesBuilder.php';
+	require_once '/srv/mediawiki/w/extensions/wikibase/lib/includes/Sites/SitesBuilder.php';
 }
 
 /**
