@@ -6,10 +6,6 @@ if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
 	require_once __DIR__ . '/srv/mediawiki/w/extensions/wikibase/lib/includes/Sites/SitesBuilder.php';
 }
 
-if ( !class_exists(  Wikibase\Lib\Sites\SiteMatrixParser::class ) ) {
-	require_once __DIR__ . '/srv/mediawiki/w/extensions/wikibase/lib/includes/Sites/SiteMatrixParser.php';
-}
-
 /**
  * Maintenance script for populating the Sites table from another wiki that runs the
  * WikiDiscovery extension.
