@@ -15,7 +15,7 @@ if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Paladox
  */
-class PopulateWikiDiscoverySitesTable extends Maintenance {
+class PopulateWikibaseSitesTable extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
@@ -36,9 +36,9 @@ class PopulateWikiDiscoverySitesTable extends Maintenance {
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
 
-		$validGroups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+		$groups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
-		$url = $this->getOption( 'valid-groups', $validGroups );
+		$validGroups = $this->getOption( 'valid-groups', $groups );
 
 		try {
 			
@@ -81,5 +81,5 @@ class PopulateWikiDiscoverySitesTable extends Maintenance {
 
 }
 
-$maintClass = PopulateWikiDiscoverySitesTable::class;
+$maintClass = PopulateWikibaseSitesTable::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
