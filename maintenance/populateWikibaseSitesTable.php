@@ -44,10 +44,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 		$validGroups = $this->getOption( 'valid-groups', $groups );
 
-		$site = $this->getSiteFromSiteData( $siteData );
-
 		try {
-			
 			$json = $this->getWikiDiscoveryData( $url );
 
 			$sites = $this->sitesFromJson( $json );
@@ -101,6 +98,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$sites = [];
 
 		foreach ( $groups as $groupData ) {
+			if ( !array_key_exists( 'languagecode', $groupData ) ) {
+				continue;
+			}
+
 			$sites = array_merge(
 				$sites,
 				$this->getSitesFromLangGroup( $groupData )
@@ -121,10 +122,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	private function getSitesFromLangGroup( array $langGroup ) {
 		$sites = [];
 
-		if ( !array_key_exists( 'languagecode', $langGroup ) ) {
-			continue;
-		}
-		$site = $this->getSiteFromSiteData( $langGroup['languagecode'] );
+		$site = $this->getSiteFromSiteData( $langGroup );
 		$site->setLanguageCode( $langGroup['languagecode'] );
 		$siteId = $site->getGlobalId();
 		$sites[$siteId] = $site;
