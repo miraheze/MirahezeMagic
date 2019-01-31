@@ -24,6 +24,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
 				. "Default is https://meta.miraheze.org/w/api.php", false, true );
+		$this->addOption( 'script-path', 'Script path to use for wikis in the site matrix. '
+				. ' (e.g. "/w/$1")', false, true );
+		$this->addOption( 'article-path', 'Article path for wikis in the site matrix. '
+				. ' (e.g. "/wiki/$1")', false, true );
 		$this->addOption( 'site-group', 'Site group that this wiki is a member of.  Used to populate '
 				. ' local interwiki identifiers in the site identifiers table.  If not set and --wiki'
 				. ' is set, the script will try to determine which site group the wiki is part of'
@@ -39,23 +43,18 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$groups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 		$validGroups = $this->getOption( 'valid-groups', $groups );
+
 		$site = $this->getSiteFromSiteData( $siteData );
 
 		try {
 			
 			$json = $this->getWikiDiscoveryData( $url );
 
-			$sites = json_decode( $json, true );
-			
-			if ( !is_array( $sites ) || !array_key_exists( 'wikidiscover', $sites ) ) {
-				throw new InvalidArgumentException( 'Cannot decode wiki discovery data.' );
-			}
-			
-			$site = $this->getSiteFromSiteData( $sites );
+			$sites = $this->sitesFromJson( $json );
 
 			$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
-			$sitesBuilder->buildStore( $site, $siteGroup, $wikiId );
+			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
 		} catch ( MWException $e ) {
 			$this->output( $e->getMessage() );
@@ -83,6 +82,57 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	}
 
 	/**
+	 * @param string $json
+	 *
+	 * @throws InvalidArgumentException
+	 * @return Site[]
+	 */
+	public function sitesFromJson( $json ) {
+		$specials = null;
+
+		$data = json_decode( $json, true );
+
+		if ( !is_array( $data ) || !array_key_exists( 'wikidiscover', $data ) ) {
+			throw new InvalidArgumentException( 'Cannot decode site matrix data.' );
+		}
+
+		$groups = $data['wikidiscover'];
+
+		$sites = [];
+
+		foreach ( $groups as $groupData ) {
+			$sites = array_merge(
+				$sites,
+				$this->getSitesFromLangGroup( $groupData )
+			);
+		}
+
+		return $sites;
+	}
+
+	/**
+	 * Gets an array of Site objects for all sites of the same language
+	 * subdomain grouping used in the site matrix.
+	 *
+	 * @param array $langGroup
+	 *
+	 * @return Site[]
+	 */
+	private function getSitesFromLangGroup( array $langGroup ) {
+		$sites = [];
+
+		if ( !array_key_exists( 'languagecode', $langGroup ) ) {
+			continue;
+		}
+		$site = $this->getSiteFromSiteData( $langGroup['languagecode'] );
+		$site->setLanguageCode( $langGroup['languagecode'] );
+		$siteId = $site->getGlobalId();
+		$sites[$siteId] = $site;
+
+		return $sites;
+	}
+
+	/**
 	 * @param array $siteData
 	 *
 	 * @return Site
@@ -94,8 +144,8 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$site->setGroup( $siteGroup );
 		$url = $siteData['url'];
 		$url = preg_replace( '@^https?:@', '', $url );
-		$site->setFilePath( $url . $this->scriptPath );
-		$site->setPagePath( $url . $this->articlePath );
+		$site->setFilePath( $url . $this->getOption( 'script-path', '/w/$1' ) );
+		$site->setPagePath( $url . $this->getOption( 'article-path', '/wiki/$1' ) );
 		return $site;
 	}
 }
