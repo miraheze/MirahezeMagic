@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
-require_once $basePath . '/maintenance/Maintenance.php';
-
 if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
 	require_once __DIR__ . '/srv/mediawiki/w/extensions/wikibase/lib/includes/Sites/SitesBuilder.php';
 }
@@ -34,7 +32,7 @@ class PopulateWikiDiscoverySitesTable extends Maintenance {
 				. ' local interwiki identifiers in the site identifiers table.  If not set and --wiki'
 				. ' is set, the script will try to determine which site group the wiki is part of'
 				. ' and populate interwiki ids for sites in that group.', false, true );
-		$this->addOption( 'valid-groups', 'A array of valid site link groups.');
+		$this->addOption( 'valid-groups', 'A array of valid site link groups.', true );
 	}
 
 	public function execute() {
@@ -47,9 +45,14 @@ class PopulateWikiDiscoverySitesTable extends Maintenance {
 		$url = $this->getOption( 'valid-groups', $validGroups );
 
 		try {
+			
 			$json = $this->getWikiDiscoveryData( $url );
 
 			$sites = json_decode( $json, true );
+			
+			if ( !is_array( $sites ) || !array_key_exists( 'wikidiscover', $sites ) ) {
+				throw new InvalidArgumentException( 'Cannot decode wiki discovery data.' );
+			}
 
 			$store = MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new use Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
