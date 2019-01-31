@@ -51,7 +51,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			}
 
 			$store = MediaWikiServices::getInstance()->getSiteStore();
-			$sitesBuilder = new use Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
+			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
 		} catch ( MWException $e ) {
