@@ -50,7 +50,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				throw new InvalidArgumentException( 'Cannot decode wiki discovery data.' );
 			}
 
-			$store = MediaWikiServices::getInstance()->getSiteStore();
+			$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
 			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
