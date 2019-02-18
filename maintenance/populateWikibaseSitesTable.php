@@ -40,7 +40,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
 
-		$groups = [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+		$groups = [ 'miraheze', 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
 			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
 		$validGroups = $this->getOption( 'valid-groups', $groups );
 
