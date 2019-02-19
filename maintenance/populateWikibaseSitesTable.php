@@ -123,7 +123,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$sites = [];
 
 		$site = $this->getSiteFromSiteData( $langGroup );
-		$site->setLanguageCode( $langGroup['languagecode'] );
+		$site->setLanguageCode( rand() . $langGroup['languagecode'] );
 		$siteId = $site->getGlobalId();
 		$sites[$siteId] = $site;
 
