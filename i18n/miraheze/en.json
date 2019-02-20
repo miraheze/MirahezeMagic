@@ -61,7 +61,7 @@
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
-	"right-user": "Edit pages protected as 'Allow only logged in users'",
+	"right-user": "Edit pages protected as \"{{int:protect-level-user}}\"",
 	"right-viewglobalprivatefiles": "View global files filtered from private wikis",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix": "List of Miraheze wikis",
