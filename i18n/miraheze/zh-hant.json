@@ -50,7 +50,7 @@
 	"protect-level-user": "只允許註冊用戶",
 	"restriction-delete": "刪除",
 	"restriction-level-user": "只允許註冊用戶",
-	"right-user": "編輯保護頁面為“只允許註冊用戶”",
+	"right-user": "編輯頁面保護為「{{int:protect-level-user}}」",
 	"right-viewglobalprivatefiles": "從私有 wiki 檢視全域篩選的檔案",
 	"shared-repo-name-shared-commons": "Miraheze 共享資源",
 	"sitematrix": "Miraheze的維基名單",

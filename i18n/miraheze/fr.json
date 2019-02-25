@@ -52,7 +52,7 @@
 	"protect-level-user": "Autoriser les utilisateurs enregistrés seulement",
 	"restriction-delete": "Effacer",
 	"restriction-level-user": "Autoriser les utilisateurs connectés seulement",
-	"right-user": "Modifier les pages protégées comme 'Autoriser seulement les utilisateurs connectés'",
+	"right-user": "Modifier les pages protégées en tant que « {{int:protect-level-user}} »",
 	"right-viewglobalprivatefiles": "Afficher les fichiers globaux filtrés des wikis privés",
 	"shared-repo-name-shared-commons": "Communs de Miraheze",
 	"sitematrix": "List des wikis de Miraheze",

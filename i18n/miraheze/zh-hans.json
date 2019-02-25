@@ -3,14 +3,15 @@
 		"authors": [
 			"AlvaroMolina",
 			"A Chinese Wikipedian",
-			"Angrydog001"
+			"Angrydog001",
+			"LNDDYL"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
 	"miraheze-categories": "分类",
 	"miraheze-close-email-body": "您好，\n\n不幸的是，由于过去的60天阁下的维基没有编辑，它已经因休眠政策关闭。如果您仍然想编辑您的wiki，请转到Special:ManageWiki并取消选中“关闭”框来重新打开它。\n\n请注意，如果您不重新打开您的wiki，有可能另一个用户将采用您的wiki。如果您不重新打开你的wiki或者没有人从现在开始在6个月内使用您的wiki，它可能有资格删除。",
 	"miraheze-donate": "捐助",
-	"miraheze-helpcenter": "关于米拉希泽",
+	"miraheze-helpcenter": "关于 Miraheze",
 	"miraheze-requestfeatures": "维基上的要求特性",
 	"miraheze-requestwiki": "Wiki要求",
 	"group-abuse": "滥用条款",

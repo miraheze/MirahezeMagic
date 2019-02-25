@@ -37,7 +37,7 @@
 	"protect-level-user": "Consenti solo gli utenti registrati",
 	"restriction-delete": "Elimina",
 	"restriction-level-user": "Consenti solo gli utenti registrati",
-	"right-user": "Modifica pagine protette con 'Consenti solo gli utenti registrati'",
+	"right-user": "Modifica pagine protette con \"{{int:protect-level-user}}\"",
 	"sitematrix": "Lista dei wiki di Miraheze",
 	"sitematrix-summary": "Questa pagina speciale elenca tutti i wiki di Miraheze.",
 	"sitematrix-desc": "Visualizza a [[Special:SiteMatrix|lista dei wiki di Miraheze]]",

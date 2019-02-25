@@ -47,7 +47,7 @@
 	"protect-level-user": "Дозволи само пријављене кориснке",
 	"restriction-delete": "Избриши",
 	"restriction-level-user": "Дозволи само пријављене кориснке",
-	"right-user": "Уређивање страница заштићених као „Дозволи само пријављеним корисницима”",
+	"right-user": "Уређивање страница заштићених као „{{int:protect-level-user}}”",
 	"right-viewglobalprivatefiles": "преглед глобалних датотека филтрираних са приватних викија",
 	"shared-repo-name-shared-commons": "Miraheze Остава",
 	"sitematrix": "Листа Miraheze викија",

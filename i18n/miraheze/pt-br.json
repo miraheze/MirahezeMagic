@@ -50,7 +50,7 @@
 	"protect-level-user": "Permitir apenas usuários registrados",
 	"restriction-delete": "Apagar",
 	"restriction-level-user": "Permitir apenas usuários registrados",
-	"right-user": "Editar páginas protegidas como 'Permitir apenas usuários registrados'",
+	"right-user": "Editar páginas protegidas como \"{{int:protect-level-user}}\"",
 	"right-viewglobalprivatefiles": "Visualizar arquivos globais filtrados de wikis particulares",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix": "Lista de wikis de Miraheze",

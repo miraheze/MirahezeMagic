@@ -51,7 +51,7 @@
 	"protect-level-user": "Nur angemeldeten Benutzern erlauben",
 	"restriction-delete": "Löschen",
 	"restriction-level-user": "Nur angemeldeten Benutzern erlauben",
-	"right-user": "Seiten bearbeiten, die als „Nur angemeldeten Benutzern erlauben“ geschützt sind.",
+	"right-user": "Seiten bearbeiten, die als „{{int:protect-level-user}}“ geschützt sind.",
 	"right-viewglobalprivatefiles": "Gefilterte globale Dateien von privaten Wikis ansehen",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix": "Liste der Miraheze-Wikis",

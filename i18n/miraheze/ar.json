@@ -51,7 +51,7 @@
 	"protect-level-user": "اسمح فقط للمستخدمين مسجلي الدخول",
 	"restriction-delete": "حذف",
 	"restriction-level-user": "اسمح فقط للمستخدمين مسجلي الدخول",
-	"right-user": "تحرير الصفحات المحمية كـ\"السماح للمستخدمين المسجلين فقط\"",
+	"right-user": "تحرير الصفحات المحمية كـ\"{{int:protect-level-user}}\"",
 	"right-viewglobalprivatefiles": "عرض الملفات العالمية التي تمت تصفيتها من مواقع الويكي الخاصة",
 	"shared-repo-name-shared-commons": "ميراهيز كومنز",
 	"sitematrix": "قائمة ويكيات ميراهيز",
