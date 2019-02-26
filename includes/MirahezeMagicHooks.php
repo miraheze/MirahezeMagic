@@ -6,7 +6,7 @@ class MirahezeMagicHooks {
 		exec('/bin/cp -r /srv/mediawiki/w/extensions/SocialProfile/avatars /mnt/mediawiki-static/' . $DBname . '/avatars');
 
 		exec('/bin/cp -r /srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . $DBname . '/awards');
-		
+
 		exec('/usr/bin/php /srv/mediawiki/w/maintenance/migrateActors.php --wiki="' . $DBname . '" --force');
 	}
 
@@ -82,32 +82,6 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
-
-	/**
-	* Allows to use Special:Central(Auto)Login on private wikis..
-	*
-	* @param Title $title Title object
-	* @param User $user User object
-	* @param bool &$whitelisted Is the page whitelisted?
-	*/
-	public function onTitleReadWhitelist( $title, $user, &$whitelisted ) {
-		global $wgContLang;
-
-		$regexLine = "/^" . preg_quote( $wgContLang->getNsText( NS_SPECIAL ), '/' ) . ":Central(Auto)?Login/i";
-
-		if ( preg_match( $regexLine, $title->getPrefixedDBKey() ) === 1 ) {
-			$whitelisted = true;
-		}
-	}
-
-	/**
-	* Helper for adding the Piwik code to the footer.
-	*
-	* @param array &$vars Current list of vars
-	* @param OutputPage $out OutputPage object
-	*/
-	public static function onMakeGlobalVariablesScript( &$vars, OutputPage $out ) { }
-
 	/**
 	 * Enables global interwiki for [[mh:wiki:Page]]
 	 */
@@ -157,5 +131,28 @@ class MirahezeMagicHooks {
 
 		return true;
 	}
-}
 
+	public static function onTitleReadWhitelist( Title $title, User $user, &$whitelisted ) {
+		if ( $title->equals( Title::newMainPage() ) ) {
+			$whitelisted = true;
+			return;
+		}
+
+		$specialsArray = [
+			'CentralAutoLogin',
+			'CentralLogin',
+			'ConfirmEmail',
+			'CreateAccount',
+			'Interwiki',
+			'Notifications',
+			'ResetPassword'
+		];
+
+		foreach ( $specialsArray as $page ) {
+			if ( $title->equals( SpecialPage::getTitleFor( $page ) ) ) {
+				$whitelisted = true;
+				return;
+			}
+		}
+	}
+}
