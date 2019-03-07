@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hedda"
+			"Hedda",
+			"Fitoschido"
 		]
 	},
 	"mirahezemagic-description": "Miraheze için özel MediaWiki mesajları, komut dosyaları vs.",
@@ -47,7 +48,7 @@
 	"protect-level-user": "Sadece giriş yapmış kullanıcılara izin ver",
 	"restriction-delete": "Sil",
 	"restriction-level-user": "Sadece giriş yapmış kullanıcılara izin ver",
-	"right-user": "'Sadece giriş yapmış kullanıcılara izin ver' olarak korunan sayfaları düzenle",
+	"right-user": "'{{int:protect-level-user}}' olarak korunan sayfaları düzenle",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix": "Miraheze vikileri listesi",
 	"sitematrix-summary": "Bu özel sayfa tüm Miraheze vikilerini listeler.",

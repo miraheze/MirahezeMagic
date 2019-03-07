@@ -3,7 +3,8 @@
 		"authors": [
 			"AlvaroMolina",
 			"Chrumps",
-			"Railfail536"
+			"Railfail536",
+			"Fitoschido"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -50,7 +51,7 @@
 	"protect-level-user": "Pozostawić tylko zarejestrowanych użytkowników",
 	"restriction-delete": "Usunąć",
 	"restriction-level-user": "Pozostawić tylko zarejestrowanych użytkowników",
-	"right-user": "Edycja stron zabezpieczonych na poziomie „Pozostawić tylko zarejestrowanych użytkowników”",
+	"right-user": "Edycja stron zabezpieczonych na poziomie „{{int:protect-level-user}}”",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix": "Wiki lista Miraheze",
 	"sitematrix-summary": "Ta strona specjalna zawiera listę wszystkich wiki Miraheze.",

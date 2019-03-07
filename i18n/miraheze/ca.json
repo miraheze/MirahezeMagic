@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"AlvaroMolina"
+			"AlvaroMolina",
+			"Fitoschido"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -30,7 +31,7 @@
 	"protect-level-user": "Només permetre usuaris registrats",
 	"restriction-delete": "Esborrar",
 	"restriction-level-user": "Només permetre usuaris registrats",
-	"right-user": "Edita pàgines protegides com «Només permetre usuaris registrats»",
+	"right-user": "Edita pàgines protegides com a «{{int:protect-level-user}}»",
 	"sitematrix": "Llista de wikis de Miraheze",
 	"sitematrix-summary": "Aquesta pàgina especial mostra totes wikis de Miraheze.",
 	"sitematrix-desc": "Mostra una [[Special:SiteMatrix|llista de wikis de Miraheze]]",

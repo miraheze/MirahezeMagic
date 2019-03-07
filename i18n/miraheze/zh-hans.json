@@ -4,7 +4,8 @@
 			"AlvaroMolina",
 			"A Chinese Wikipedian",
 			"Angrydog001",
-			"LNDDYL"
+			"LNDDYL",
+			"Fitoschido"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -48,7 +49,7 @@
 	"protect-level-user": "只允许注册用户",
 	"restriction-delete": "删除",
 	"restriction-level-user": "只允许注册用户",
-	"right-user": "编辑保护页面为“只有注册用户”",
+	"right-user": "编辑保护页面为“{{int:protect-level-user}}”",
 	"shared-repo-name-shared-commons": "米拉希泽公馆",
 	"sitematrix": "Miraheze的维基名单",
 	"sitematrix-summary": "这个特殊页面中列出了所有Miraheze维基。",

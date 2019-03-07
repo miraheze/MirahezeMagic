@@ -3,7 +3,8 @@
 		"authors": [
 			"Southparkfan",
 			"AlvaroMolina",
-			"Mainframe98"
+			"Mainframe98",
+			"Elroy"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -59,6 +60,7 @@
 	"sitematrix-others": "Andere Miraheze wiki's",
 	"specialpages-group-wikimanage": "Wikibeheer",
 	"termsofservice": "Gebruiksvoorwaarden",
+	"settings-anti-spam": "Voorkoming van ongewenst materiaal",
 	"settings-media": "Media",
 	"extensions-skins": "Vormgeving"
 }

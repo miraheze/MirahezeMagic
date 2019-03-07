@@ -3,7 +3,9 @@
 		"authors": [
 			"Wynter",
 			"AlvaroMolina",
-			"Racha"
+			"Racha",
+			"Fitoschido",
+			"La Mantis"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -46,11 +48,12 @@
 	"protect-level-user": "Solo permitir usuarios registrados",
 	"restriction-delete": "Borrar",
 	"restriction-level-user": "Solo permitir usuarios registrados",
-	"right-user": "Editar páginas protegidas como «Solo permitir usuarios registrados»",
+	"right-user": "Editar páginas protegidas como «{{int:protect-level-user}}»",
 	"sitematrix": "Lista de wikis de Miraheze",
 	"sitematrix-summary": "Esta página especial lista todas las wikis de Miraheze.",
 	"sitematrix-desc": "Muestra una [[Special:SiteMatrix|lista de wikis de Miraheze]]",
 	"sitematrix-others": "Otras wikis de Miraheze",
 	"specialpages-group-wikimanage": "Administración de wikis",
-	"termsofservice": "Términos de Uso"
+	"termsofservice": "Términos de Uso",
+	"settings-anti-spam": "Anti Spam"
 }

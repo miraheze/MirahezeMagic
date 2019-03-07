@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Fitoschido"
 		]
 	},
 	"miraheze-categories": "Kategorier",
@@ -37,7 +38,7 @@
 	"protect-level-user": "Endast inloggade användare",
 	"restriction-delete": "Radera",
 	"restriction-level-user": "Tillåt endast inloggade användare",
-	"right-user": "Redigera sidor skyddade som \"Tillåt endast inloggade användare\"",
+	"right-user": "Redigera sidor skyddade som \"{{int:protect-level-user}}\"",
 	"right-viewglobalprivatefiles": "Visa globala filer som filtreras från privata wikis",
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"sitematrix-summary": "Denna specialsida listar alla Miraheze-wikier.",
@@ -45,6 +46,7 @@
 	"sitematrix-others": "Andra Miraheze-wikis",
 	"specialpages-group-wikimanage": "Wikihantering",
 	"termsofservice": "Användarvillkor",
+	"settings-anti-spam": "Antispam",
 	"settings-media": "Media",
 	"extensions-skins": "Utseende"
 }

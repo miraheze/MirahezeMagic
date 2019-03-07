@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"Fitoschido"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -50,7 +51,7 @@
 	"protect-level-user": "Permitir apenas utilizadores com sessão iniciada",
 	"restriction-delete": "Eliminar",
 	"restriction-level-user": "Permitir apenas utilizadores com sessão iniciada",
-	"right-user": "Editar páginas protegidas como 'Permitir apenas utilizadores com sessão iniciada'",
+	"right-user": "Editar páginas protegidas como \"{{int:protect-level-user}}\"",
 	"right-viewglobalprivatefiles": "Ver ficheiros globais filtrados de wikis privadas",
 	"shared-repo-name-shared-commons": "Commons do Miraheze",
 	"sitematrix": "Lista de wikis do Miraheze",
