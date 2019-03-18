@@ -1,0 +1,27 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki"
+		]
+	},
+	"miraheze-categories": "カテゴリ",
+	"miraheze-helpcenter": "Miraheze について",
+	"group-steward": "スチュワード",
+	"group-steward-member": "{{GENDER:$1|スチュワード}}",
+	"group-sysadmin": "システム管理者",
+	"group-sysadmin-member": "{{GENDER:$1|システム管理者}}",
+	"group-wikicreator": "ウィキ作成者",
+	"group-wikicreator-member": "{{GENDER:$1|ウィキ作成者}}",
+	"group-rollbacker": "巻き戻し者",
+	"group-rollbacker-member": "{{GENDER:$1|巻き戻し者}}",
+	"group-autopatrolled": "自動巡回者",
+	"group-autopatrolled-member": "{{GENDER:$1|自動巡回者}}",
+	"group-confirmed": "承認された利用者",
+	"group-confirmed-member": "{{GENDER:$1|承認された利用者}}",
+	"group-translator": "翻訳者",
+	"group-translator-member": "翻訳者",
+	"group-translationadmin": "翻訳管理者",
+	"group-translationadmin-member": "翻訳管理者",
+	"restriction-delete": "削除",
+	"termsofservice": "利用規約"
+}
