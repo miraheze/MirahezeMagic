@@ -4,6 +4,7 @@
 			"Bjankuloski06"
 		]
 	},
+	"miraheze-dberr-again": "Пробајте да почекате неколку минути пред да превчитате. Повеќе информации за оваа грешка ќе најдете на нашата страница на Твитер (Twitter.com/Miraheze). Можете и да се обратите кај системските администратори на #miraheze на irc.freenode.net",
 	"miraheze-oathauth-step1": "'''ВАЖНО! Прочитајте го [[M:OATHAuth|OATHAuth]] пред да ја вклучите оваа можност!'''<br/>Чекор 1: Преземете програма за двочинителска заверка",
 	"miraheze-shoutwiki-loginform-tos": "Ги прочитав разбрав [https://meta.miraheze.org/wiki/Terms_of_Use Условите на употреба] и [https://meta.miraheze.org/wiki/Privacy_Policy Правилата за заштите на личните податоци], и се согласувам со нив.",
 	"miraheze-shoutwiki-must-accept-tos": "Ќе мора да ги прифатите Условите на употреба за да можете да направите сметка!"
