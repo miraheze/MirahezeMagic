@@ -63,6 +63,9 @@
 		],
 		"HtmlPageLinkRendererEnd": [
 			"MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
+		],
+		"InitializeArticleMaybeRedirect": [
+			"MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
 		]
 	},
 	"manifest_version": 2
