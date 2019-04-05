@@ -132,6 +132,27 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
+	/**
+	 * Hard redirects all pages like Mh:Wiki:Page as global interwiki.
+	 */
+	public static function onInitializeArticleMaybeRedirect( $title, $request, &$ignoreRedirect, &$target, $article ) {
+		$title = explode( ':', $title );
+		$prefix = strtolower( $title[0] );
+
+		if ( count( $title ) < 3 || $prefix !== 'mh' ) {
+			return true;
+		}
+
+		$wiki = strtolower( $title[1] );
+		$page = join( ':', array_slice( $title, 2 ) );
+		$page = str_replace( ' ', '_', $page );
+		$page = urlencode( $page );
+
+		$target = "https://$wiki.miraheze.org/wiki/$page";
+
+		return true;
+	}
+
 	public static function onTitleReadWhitelist( Title $title, User $user, &$whitelisted ) {
 		if ( $title->equals( Title::newMainPage() ) ) {
 			$whitelisted = true;
