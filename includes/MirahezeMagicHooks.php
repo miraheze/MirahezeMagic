@@ -87,6 +87,7 @@ class MirahezeMagicHooks {
 	 */
 	public static function onHtmlPageLinkRendererEnd( $linkRenderer, $target, $isKnown, &$text, &$attribs, &$ret ) {
 		$target = (string)$target;
+		$tooltip = $target;
 		$useText = true;
 
 		$ltarget = strtolower( $target );
@@ -126,7 +127,7 @@ class MirahezeMagicHooks {
 		$attribs = array(
 			'href' => $linkURL,
 			'class' => 'extiw',
-			'title' => $wiki
+			'title' => $tooltip
 		);
 
 		return true;
