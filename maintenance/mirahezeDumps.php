@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 class mirahezeDumps extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		
+
 		$this->addOption( 'file-name', 'The name of the file to dump to.', false, false );
 		$this->addOption( 'use-gz', 'Use gzip to compress file', false, false );
 	}
