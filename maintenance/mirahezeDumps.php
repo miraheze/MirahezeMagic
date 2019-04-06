@@ -6,19 +6,19 @@ class mirahezeDumps extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addOption( 'file-name', 'The name of the file to dump to.', false, false );
-		$this->addOption( 'use-gz', 'Use gzip to compress file', false, false );
+		$this->addOption( 'file-name', 'The name of the file to dump to.', false, true );
 	}
 
-	public function execute() {
+        public function execute() {
+		global $wgDBname;
+
 		$fileName = wfEscapeShellArg( $this->getOption( 'file-name' ) );
 
 		exec(
-			"/usr/bin/php /srv/mediawiki/w/maintenance/dumpBackup.php " . $this->getOption( 'wiki' ) .
-			" --full > ${fileName}.gz"
+			"/usr/bin/php /srv/mediawiki/w/maintenance/dumpBackup.php --wiki ${wgDBname} --full > " . $fileName . ".gz"
 		);
 
-		exec( "gzip -c ${$fileName}.gz > ${fileName}" );
+		exec( "gzip -c ${fileName}.gz > ${fileName}" );
 	}
 }
 
