@@ -11,13 +11,11 @@ class mirahezeDumps extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgServicesRepo;
-
 		$fileName = wfEscapeShellArg( $this->getOption( 'file-name' ) );
 
 		exec(
-			"/usr/bin/php /srv/mediawiki/w/maintenance/dumpBackup.php" . $this->getOption( 'wiki' ),
-			"--full > ${fileName}"
+			"/usr/bin/php /srv/mediawiki/w/maintenance/dumpBackup.php " . $this->getOption( 'wiki' ) .
+			" --full > ${fileName}.gz"
 		);
 
 		exec( "gzip -c ${$fileName}.gz > ${fileName}" );
