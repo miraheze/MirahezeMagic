@@ -7,7 +7,8 @@
 			"Nk88",
 			"Fitoschido",
 			"Romanko Mikhail",
-			"Diralik"
+			"Diralik",
+			"Kareyac"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -58,5 +59,6 @@
 	"termsofservice": "Условия использования",
 	"settings-anti-spam": "Анти-спам",
 	"settings-media": "Медиа",
+	"settings-notifications": "Уведомления",
 	"extensions-skins": "Тема оформления"
 }
