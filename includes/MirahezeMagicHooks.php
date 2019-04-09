@@ -12,13 +12,13 @@ class MirahezeMagicHooks {
 			'-r',
 			'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
 			"/mnt/mediawiki-static/$DBname/avatars"
-		);
+		)->execute();
 		Shell::command(
 			'/bin/cp',
 			'-r',
 			'/srv/mediawiki/w/extensions/SocialProfile/awards', 
 			"/mnt/mediawiki-static/$DBname/awards"
-		);
+		)->execute();
 		
 		// actor table migration
 		Shell::command(
@@ -27,7 +27,7 @@ class MirahezeMagicHooks {
 			'--wiki',
 			$DBname,
 			'--force'
-		);
+		)->execute();
 		
 		// Elasticsearch
 		Shell::command(
@@ -35,11 +35,11 @@ class MirahezeMagicHooks {
 			'/srv/mediawiki/w/extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php',
 			'--wiki',
 			$DBname
-		);
+		)->execute();
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" );
+		Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 
 		$dbw->delete(
 			'gnf_files',
@@ -51,7 +51,7 @@ class MirahezeMagicHooks {
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 
-		Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" );
+		Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 
 		$dbw->update(
 			'gnf_files',
