@@ -4,7 +4,7 @@ use MediaWiki\Shell\Shell;
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
 		// Create static directory for wiki
-		Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/$DBname" );
+		Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/$DBname" )->execute();
 
 		// Copy SocialProfile images
 		Shell::command(
