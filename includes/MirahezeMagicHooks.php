@@ -1,17 +1,45 @@
 <?php
+use MediaWiki\Shell\Shell;
+
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
-		exec('/bin/mkdir -p /mnt/mediawiki-static/' . $DBname);
+		// Create static directory for wiki
+		Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/$DBname" );
 
-		exec('/bin/cp -r /srv/mediawiki/w/extensions/SocialProfile/avatars /mnt/mediawiki-static/' . $DBname . '/avatars');
-
-		exec('/bin/cp -r /srv/mediawiki/w/extensions/SocialProfile/awards/ /mnt/mediawiki-static/' . $DBname . '/awards');
-
-		exec('/usr/bin/php /srv/mediawiki/w/maintenance/migrateActors.php --wiki="' . $DBname . '" --force');
+		// Copy SocialProfile images
+		Shell::command(
+			'/bin/cp',
+			'-r',
+			'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
+			"/mnt/mediawiki-static/$DBname/avatars"
+		);
+		Shell::command(
+			'/bin/cp',
+			'-r',
+			'/srv/mediawiki/w/extensions/SocialProfile/awards', 
+			"/mnt/mediawiki-static/$DBname/awards"
+		);
+		
+		// actor table migration
+		Shell::command(
+			'/usr/bin/php',
+			'/srv/mediawiki/w/maintenance/migrateActors.php',
+			'--wiki',
+			$DBname,
+			'--force'
+		);
+		
+		// Elasticsearch
+		Shell::command(
+			'/usr/bin/php',
+			'/srv/mediawiki/w/extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php',
+			'--wiki',
+			$DBname
+		);
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		exec("/bin/rm -rf /mnt/mediawiki-static/$wiki");
+		Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" );
 
 		$dbw->delete(
 			'gnf_files',
@@ -23,7 +51,7 @@ class MirahezeMagicHooks {
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 
-		exec("/bin/mv /mnt/mediawiki-static/$old /mnt/mediawiki-static/$new");
+		Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" );
 
 		$dbw->update(
 			'gnf_files',
