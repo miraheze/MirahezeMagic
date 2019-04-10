@@ -61,4 +61,31 @@ class GlobalNewFilesHooks {
 		
 		return true;
 	}
+
+	public static function onTitleMoveComplete( $title, $newTitle, $user, $oldid, $newid, $reason, $revision ) {
+		global $wgCreateWikiDatabase, $wgDBname, $wgServer;
+
+		if ( !$title-inNamespace( NS_FILE ) ) {
+			return true;
+		}
+
+		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+
+		$file = wfLocalFile( $newTitle );
+
+		$dbw->update(
+			'gnf_files',
+			[
+				'files_name' => $file->getName(),
+				'files_url' => $file->getViewURL(),
+				'files_page' => $wgServer . $file->getDescriptionUrl(),
+			],
+			[
+				'files_dbname' => $wgDBname,
+				'files_name' => $title->getDBKey(),
+			]
+		);
+
+		return true;
+	}
 }
