@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby"
+		]
+	},
+	"miraheze-categories": "Kategorien",
+	"miraheze-donate": "Maacht en Don",
+	"globalnewfiles": "Global nei Fichieren",
+	"group-donator": "Donateuren",
+	"group-cvt-member": "{{GENDER:$1|CVT}}",
+	"group-translator": "Iwwersetzer",
+	"group-translator-member": "Iwwersetzer",
+	"group-member": "Memberen",
+	"protect-level-user": "Nëmmen ageloggt Benotzer zouloossen",
+	"restriction-delete": "Läschen",
+	"restriction-level-user": "Nëmmen ageloggt Benotzer zouloossen",
+	"termsofservice": "Benotzungs-Bedingungen",
+	"settings-beta": "Beta",
+	"settings-edit": "Änneren",
+	"settings-notifications": "Notifikatiounen",
+	"extensions-skins": "Design"
+}

@@ -73,7 +73,7 @@
 	"termsofservicepage": "m:Terms of Use",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
-	"settings-edit": "Edit",
+	"settings-edit": "Edit\n{{Identical|Edit}}",
 	"settings-media": "Media",
 	"settings-notifications": "Notifications"
 }
