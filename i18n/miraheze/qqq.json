@@ -75,6 +75,10 @@
 	"settings-beta": "Beta",
 	"settings-edit": "Edit\n{{Identical|Edit}}",
 	"settings-links": "Links\n{{Identical|Link}}",
+	"settings-localisation": "Localisation",
 	"settings-media": "Media",
-	"settings-notifications": "Notifications"
+	"settings-notifications": "Notifications",
+	"settings-restricted": "Restricted",
+	"settings-styling": "Styling",
+	"extensions-skins": "Skin"
 }
