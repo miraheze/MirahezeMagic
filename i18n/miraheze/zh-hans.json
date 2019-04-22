@@ -5,7 +5,9 @@
 			"A Chinese Wikipedian",
 			"Angrydog001",
 			"LNDDYL",
-			"Fitoschido"
+			"Fitoschido",
+			"94rain",
+			"佛壁灯"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -57,6 +59,12 @@
 	"sitematrix-others": "其他维基Miraheze",
 	"specialpages-group-wikimanage": "维基管理",
 	"termsofservice": "使用条款",
+	"settings-chat": "聊天",
+	"settings-links": "链接",
+	"settings-localisation": "本地化",
+	"settings-maps": "地图",
 	"settings-media": "媒体文件",
+	"settings-restricted": "受限",
+	"settings-styling": "样式",
 	"extensions-skins": "皮肤"
 }

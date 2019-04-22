@@ -28,7 +28,12 @@
 	"restriction-delete": "অপসারণ",
 	"shared-repo-name-shared-commons": "মিরাহেজ কমন্স",
 	"termsofservice": "ব্যবহারের শর্তাবলী",
+	"settings-links": "সংযোগসমূহ",
+	"settings-localisation": "স্থানীয়করণ",
+	"settings-maps": "মানচিত্র",
 	"settings-media": "মিডিয়া",
 	"settings-notifications": "বিজ্ঞপ্তিসমূহ",
+	"settings-restricted": "সীমাবদ্ধ",
+	"settings-styling": "শৈলীকরণ",
 	"extensions-skins": "আবরণ"
 }

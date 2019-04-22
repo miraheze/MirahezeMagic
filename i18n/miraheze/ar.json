@@ -62,9 +62,14 @@
 	"termsofservice": "شروط الاستخدام",
 	"settings-anti-spam": "مكافحة السخام",
 	"settings-beta": "تجريبي",
+	"settings-chat": "دردشة",
 	"settings-edit": "تعديل",
 	"settings-links": "وصلات",
+	"settings-localisation": "ترجمة",
+	"settings-maps": "خرائط",
 	"settings-media": "الوسائط",
 	"settings-notifications": "الإشعارات",
+	"settings-restricted": "محدد",
+	"settings-styling": "تصميم",
 	"extensions-skins": "الواجهة"
 }

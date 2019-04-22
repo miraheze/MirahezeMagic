@@ -17,8 +17,13 @@
 	"restriction-level-user": "Nëmmen ageloggt Benotzer zouloossen",
 	"termsofservice": "Benotzungs-Bedingungen",
 	"settings-beta": "Beta",
+	"settings-chat": "Chat",
 	"settings-edit": "Änneren",
 	"settings-links": "Linken",
+	"settings-localisation": "Lokalisatioun",
+	"settings-maps": "Kaarten",
 	"settings-notifications": "Notifikatiounen",
+	"settings-restricted": "Limitéiert",
+	"settings-styling": "Stil",
 	"extensions-skins": "Design"
 }

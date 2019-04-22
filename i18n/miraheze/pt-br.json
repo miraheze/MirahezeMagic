@@ -61,9 +61,14 @@
 	"termsofservice": "Termos de uso",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
+	"settings-chat": "Bate-papo",
 	"settings-edit": "Editar",
 	"settings-links": "Links",
+	"settings-localisation": "Localização",
+	"settings-maps": "Mapas",
 	"settings-media": "Mídia",
 	"settings-notifications": "Notificações",
+	"settings-restricted": "Restrito",
+	"settings-styling": "Estilo",
 	"extensions-skins": "Aparência"
 }

@@ -47,7 +47,15 @@
 	"specialpages-group-wikimanage": "Wikihantering",
 	"termsofservice": "Användarvillkor",
 	"settings-anti-spam": "Antispam",
+	"settings-beta": "Beta",
+	"settings-chat": "Chatt",
+	"settings-edit": "Redigera",
+	"settings-links": "Länkar",
+	"settings-localisation": "Lokalisering",
+	"settings-maps": "Kartor",
 	"settings-media": "Media",
 	"settings-notifications": "Aviseringar",
+	"settings-restricted": "Begränsad",
+	"settings-styling": "Formatering",
 	"extensions-skins": "Utseende"
 }
