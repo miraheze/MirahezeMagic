@@ -55,9 +55,14 @@
 	"specialpages-group-wikimanage": "위키 관리",
 	"termsofservice": "이용 약관",
 	"settings-beta": "베타",
+	"settings-chat": "채팅",
 	"settings-edit": "편집",
 	"settings-links": "링크",
+	"settings-localisation": "지역화",
+	"settings-maps": "지도",
 	"settings-media": "미디어",
 	"settings-notifications": "알림",
+	"settings-restricted": "제한됨",
+	"settings-styling": "형식",
 	"extensions-skins": "스킨"
 }

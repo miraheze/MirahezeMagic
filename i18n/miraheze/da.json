@@ -29,6 +29,8 @@
 	"restriction-delete": "Slet",
 	"restriction-level-user": "Tillad kun brugere der er logget ind",
 	"termsofservice": "Vilkår for anvendelse",
+	"settings-beta": "Beta",
+	"settings-edit": "Redigér",
 	"settings-media": "Medier",
 	"extensions-skins": "Udseende"
 }
