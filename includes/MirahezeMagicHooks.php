@@ -43,7 +43,9 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
+		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
+			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
+		}
 
 		$dbw->delete(
 			'gnf_files',
