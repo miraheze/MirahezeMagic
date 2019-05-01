@@ -57,7 +57,9 @@ class MirahezeMagicHooks {
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 
-		Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
+		if ( file_exists( "/mnt/mediawiki-static/$old" ) ) {
+			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
+		}
 
 		$dbw->update(
 			'gnf_files',
