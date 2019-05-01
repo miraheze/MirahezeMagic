@@ -3,7 +3,7 @@ use MediaWiki\Shell\Shell;
 
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
-		if ( !isset( $DBname ) || empty( $DBname ) { return false; }
+		if ( !isset( $DBname ) || empty( $DBname ) ) { return false; }
 
 		// Create static directory for wiki
 		if ( !file_exists( "/mnt/mediawiki-static/$DBname" ) ) {
@@ -45,7 +45,7 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		if ( !isset( $wiki ) || empty( $wiki ) { return false; }
+		if ( !isset( $wiki ) || empty( $wiki ) ) { return false; }
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
