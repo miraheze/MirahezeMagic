@@ -4,21 +4,25 @@ use MediaWiki\Shell\Shell;
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
 		// Create static directory for wiki
-		Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/$DBname" )->execute();
+		if ( !file_exists( "/mnt/mediawiki-static/$DBname" ) ) {
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/$DBname" )->execute();
+		}
 
 		// Copy SocialProfile images
-		Shell::command(
-			'/bin/cp',
-			'-r',
-			'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
-			"/mnt/mediawiki-static/$DBname/avatars"
-		)->execute();
-		Shell::command(
-			'/bin/cp',
-			'-r',
-			'/srv/mediawiki/w/extensions/SocialProfile/awards', 
-			"/mnt/mediawiki-static/$DBname/awards"
-		)->execute();
+		if ( file_exists( "/mnt/mediawiki-static/$DBname" ) ) {
+			Shell::command(
+				'/bin/cp',
+				'-r',
+				'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
+				"/mnt/mediawiki-static/$DBname/avatars"
+			)->execute();
+			Shell::command(
+				'/bin/cp',
+				'-r',
+				'/srv/mediawiki/w/extensions/SocialProfile/awards', 
+				"/mnt/mediawiki-static/$DBname/awards"
+			)->execute();
+		}
 		
 		// actor table migration
 		Shell::command(
