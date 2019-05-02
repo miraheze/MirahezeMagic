@@ -61,7 +61,15 @@
 	"specialpages-group-wikimanage": "Administração de wikis",
 	"termsofservice": "Condições de utilização",
 	"settings-anti-spam": "Antispam",
+	"settings-beta": "Beta",
+	"settings-chat": "Conversação",
+	"settings-edit": "Editar",
+	"settings-links": "Hiperligações",
+	"settings-localisation": "Localização",
+	"settings-maps": "Mapas",
 	"settings-media": "Multimédia",
 	"settings-notifications": "Notificações",
+	"settings-restricted": "Restrito",
+	"settings-styling": "Estilo",
 	"extensions-skins": "Tema"
 }
