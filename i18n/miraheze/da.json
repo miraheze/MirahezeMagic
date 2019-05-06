@@ -30,7 +30,9 @@
 	"restriction-level-user": "Tillad kun brugere der er logget ind",
 	"termsofservice": "Vilkår for anvendelse",
 	"settings-beta": "Beta",
+	"settings-chat": "Chat",
 	"settings-edit": "Redigér",
+	"settings-maps": "Kort",
 	"settings-media": "Medier",
 	"extensions-skins": "Udseende"
 }
