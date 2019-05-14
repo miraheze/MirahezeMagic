@@ -46,6 +46,9 @@
 		"CreateWikiRename": [
 			"MirahezeMagicHooks::onCreateWikiRename"
 		],
+		"CreateWikiTables": [
+			"MirahezeMagicHooks::onCreateWikiTables"
+		],
 		"LoadExtensionSchemaUpdates": [
 			"GlobalNewFilesHooks::onLoadExtensionSchemaUpdates"
 		],

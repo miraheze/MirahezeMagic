@@ -23,7 +23,7 @@ class MirahezeMagicHooks {
 				"/mnt/mediawiki-static/$DBname/awards"
 			)->execute();
 		}
-		
+
 		// actor table migration
 		Shell::command(
 			'/usr/bin/php',
@@ -32,7 +32,7 @@ class MirahezeMagicHooks {
 			$DBname,
 			'--force'
 		)->execute();
-		
+
 		// Elasticsearch
 		Shell::command(
 			'/usr/bin/php',
@@ -46,31 +46,18 @@ class MirahezeMagicHooks {
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
-
-		$dbw->delete(
-			'gnf_files',
-			[
-				'files_dbname' => $wiki,
-			]
-		);
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
-
 		if ( file_exists( "/mnt/mediawiki-static/$old" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 		}
+	}
 
-		$dbw->update(
-			'gnf_files',
-			[
-				'files_dbname' => $new,
-			],
-			[
-				'files_dbname' => $old,
-			],
-			__METHOD__
-		);
+	public static function onCreateWikiTables( &$tables ) {
+		$tables['gnf_files'] = 'files_dbname';
+		$tables['localnames'] = 'ln_wiki';
+		$tables['localuser'] = 'lu_wiki';
 	}
 
 	/**
