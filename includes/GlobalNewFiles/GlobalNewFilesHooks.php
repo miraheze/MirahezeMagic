@@ -65,7 +65,7 @@ class GlobalNewFilesHooks {
 	public static function onTitleMoveComplete( $title, $newTitle, $user, $oldid, $newid, $reason, $revision ) {
 		global $wgCreateWikiDatabase, $wgDBname, $wgServer;
 
-		if ( !$title-inNamespace( NS_FILE ) ) {
+		if ( !$title->inNamespace( NS_FILE ) ) {
 			return true;
 		}
 
