@@ -27,7 +27,6 @@
 		"viewglobalprivatefiles"
 	],
 	"AutoloadClasses": {
-		"MirahezeMagic": "includes/MirahezeMagic.php",
 		"GlobalNewFilesHooks": "includes/GlobalNewFiles/GlobalNewFilesHooks.php",
 		"GlobalNewFilesPager": "includes/GlobalNewFiles/GlobalNewFilesPager.php",
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
