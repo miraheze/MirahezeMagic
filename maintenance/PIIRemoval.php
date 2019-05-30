@@ -53,7 +53,6 @@ class PIIRemoval extends Maintenance {
 
 			$db = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 			if ( $this->getOption( 'delete' ) ) {
-				$db = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 				if ( $this->getOption( 'email' ) && $centralUser->getEmail() ) {
 					$db->update(
 						'globaluser',
@@ -71,7 +70,7 @@ class PIIRemoval extends Maintenance {
 
 			foreach ( $centralUser->listAttached() as $wikiName ) {
 				if ( $this->getOption( 'delete' ) ) {
-					$db = $db->selectDomain( $wikiName )
+					$db = $db->selectDomain( $wikiName );
 					if ( $centralUser->getEmail() ) {
 						$db->update(
 							'user',
