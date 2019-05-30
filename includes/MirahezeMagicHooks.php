@@ -1,4 +1,6 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
 class MirahezeMagicHooks {
@@ -68,7 +70,7 @@ class MirahezeMagicHooks {
 	* @return bool
 	*/
 	public static function onMessageCacheGet( &$lcKey ) {
-		global $wgLanguageCode;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = array(
 			'centralauth-groupname',
 			'dberr-again',
@@ -96,7 +98,7 @@ class MirahezeMagicHooks {
 			//
 			// 2. Otherwise, use the prefixed key with normal fallback order
 			// (including MediaWiki pages if they exist).
-			$cache->getMsgFromNamespace( $ucKey, $wgLanguageCode ) === false
+			$cache->getMsgFromNamespace( $ucKey, $config->get( 'LanguageCode' ) ) === false
 			) {
 				$lcKey = $prefixedKey;
 			}

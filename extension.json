@@ -74,5 +74,8 @@
 			"MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
 		]
 	},
+	"ConfigRegistry": {
+		"mirahezemagic": "GlobalVarConfig::newInstance"
+	},
 	"manifest_version": 2
 }
