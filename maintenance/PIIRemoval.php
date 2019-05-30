@@ -69,7 +69,7 @@ class PIIRemoval extends Maintenance {
 			foreach ( $centralUser->listAttached() as $wikiName ) {
 				if ( $this->getOption( 'delete' ) ) {
 					$db = wfGetDB( DB_MASTER, [], $wikiName );
-					if ( $this->getOption( 'email' ) && $centralUser->getEmail() ) {
+					if ( $centralUser->getEmail() ) {
 						$db->update(
 							'user',
 							[
@@ -94,7 +94,7 @@ class PIIRemoval extends Maintenance {
 						],
 						[
 							'cuc_user_text' => $centralUser->getName()
-						]
+						],
 						__METHOD__
 					);
 
