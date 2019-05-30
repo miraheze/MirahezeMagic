@@ -9,12 +9,12 @@ class GlobalNewFilesPager extends TablePager {
 	}
 
 	static function getCreateWikiDatabase() {
-		global $wgCreateWikiDatabase;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$factory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		$lb = $factory->getMainLB( $wgCreateWikiDatabase );
+		$lb = $factory->getMainLB( $config->get( 'CreateWikiDatabase' ) );
 
-		return $lb->getConnectionRef( DB_REPLICA, 'gnf_files', $wgCreateWikiDatabase );
+		return $lb->getConnectionRef( DB_REPLICA, 'gnf_files', $config->get( 'CreateWikiDatabase' ) );
 	}
 
 	function getFieldNames() {
@@ -61,7 +61,7 @@ class GlobalNewFilesPager extends TablePager {
 	}
 
 	function getQueryInfo() {
-		global $wgUser;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$info = [
 			'tables' => [ 'gnf_files' ],
@@ -70,7 +70,7 @@ class GlobalNewFilesPager extends TablePager {
 			'joins_conds' => [],
 		];
 
-		if ( !$wgUser->isAllowed( 'viewglobalprivatefiles' ) ) {
+		if ( !$config->get( 'User' )->isAllowed( 'viewglobalprivatefiles' ) ) {
 			$info['conds']['files_private'] = 0;
 		}
 
