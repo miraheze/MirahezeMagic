@@ -5,10 +5,13 @@ use MediaWiki\MediaWikiServices;
 class GlobalNewFilesHooks {
 	public static function onUploadComplete( &$uploadBase ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$c =  new GlobalVarConfig( 'wmg' );
 
 		$uploadedFile = $uploadBase->getLocalFile();
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
+		
+		$c =  new GlobalVarConfig( 'wmg' );
 
 		$dbw->insert(
 			'gnf_files',
@@ -18,7 +21,7 @@ class GlobalNewFilesHooks {
 				'files_page' => $wgServer . $uploadedFile->getDescriptionUrl(),
 				'files_name' => $uploadedFile->getName(),
 				'files_user' => $uploadedFile->getUser(),
-				'files_private' => (int)$config->get( 'wmgPrivateWiki' ),
+				'files_private' => (int)$c->get( 'PrivateWiki' ),
 				'files_timestamp' => $dbw->timestamp()
 			]
 		);
