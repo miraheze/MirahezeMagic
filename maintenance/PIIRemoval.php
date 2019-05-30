@@ -29,7 +29,7 @@ class PIIRemoval extends Maintenance {
 		parent::__construct();
 		$this->mDescription = "Removes PII information from users (e.g email addresses, ip's and other identifying information). Username changes must be merged into GDPRAccount user.";
 		$this->addOption( 'delete', 'Deletes PII info (e.g emails, ip\'s, user agents)', false, false );
-		$this->addOption( 'username', 'Username to be used to find requested information.', false, true );
+		$this->addOption( 'username', 'Username to be used to find requested information.', true, true );
 	}
 
 	public function execute() {
