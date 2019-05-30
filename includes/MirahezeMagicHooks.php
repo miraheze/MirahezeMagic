@@ -1,4 +1,6 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
 class MirahezeMagicHooks {
