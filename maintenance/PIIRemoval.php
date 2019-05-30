@@ -73,7 +73,7 @@ class PIIRemoval extends Maintenance {
 						$db->update(
 							'user',
 							[
-								'user_email' => '',
+								'user_email' => ''
 							],
 							[
 								'user_email' => $centralUser->getEmail(),
@@ -104,7 +104,7 @@ class PIIRemoval extends Maintenance {
 							'rc_ip' => '0.0.0.0'
 						],
 						[
-							'rc_actor' => $user->getActorId( $db );
+							'rc_actor' => $user->getActorId( $db )
 						]
 						__METHOD__
 					);
