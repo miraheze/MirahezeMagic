@@ -18,7 +18,7 @@ class GlobalNewFilesHooks {
 			[
 				'files_dbname' => $config->get( 'DBname' ),
 				'files_url' => $uploadedFile->getViewURL(),
-				'files_page' => $wgServer . $uploadedFile->getDescriptionUrl(),
+				'files_page' => $config->get( 'Server' ) . $uploadedFile->getDescriptionUrl(),
 				'files_name' => $uploadedFile->getName(),
 				'files_user' => $uploadedFile->getUser(),
 				'files_private' => (int)$c->get( 'PrivateWiki' ),
