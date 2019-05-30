@@ -75,7 +75,8 @@
 		]
 	},
 	"ConfigRegistry": {
-		"mirahezemagic": "GlobalVarConfig::newInstance"
+		"mirahezemagic": "GlobalVarConfig::newInstance",
+		"custom-mirahezemagic": "MirahezeMagicHooks::onCustomPrefixConfigBuilder"
 	},
 	"manifest_version": 2
 }
