@@ -2,21 +2,21 @@
 
 class GlobalNewFilesHooks {
 	public static function onUploadComplete( &$uploadBase ) {
-		global $wgCreateWikiDatabase, $wgDBname, $wmgPrivateWiki, $wgServer;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$uploadedFile = $uploadBase->getLocalFile();
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
 
 		$dbw->insert(
 			'gnf_files',
 			[
-				'files_dbname' => $wgDBname,
+				'files_dbname' => $config->get( 'DBname' ),
 				'files_url' => $uploadedFile->getViewURL(),
 				'files_page' => $wgServer . $uploadedFile->getDescriptionUrl(),
 				'files_name' => $uploadedFile->getName(),
 				'files_user' => $uploadedFile->getUser(),
-				'files_private' => (int)$wmgPrivateWiki,
+				'files_private' => (int)$config->get( 'wmgPrivateWiki' ),
 				'files_timestamp' => $dbw->timestamp()
 			]
 		);
@@ -31,22 +31,23 @@ class GlobalNewFilesHooks {
 	 * @param string $reason
 	 */
 	public static function onFileDeleteComplete( $file, $oldimage, $article, $user, $reason ) {
-		global $wgCreateWikiDatabase, $wgDBname;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
 
 		$dbw->delete(
 			'gnf_files',
 			[
-				'files_dbname' => $wgDBname,
+				'files_dbname' => $config->get( 'DBname' ),
 				'files_name' => $file->getTitle()->getDBkey(),
 			]
 		);
 	}
 	
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
-		global $wgCreateWikiDatabase, $wgDBname;
-		if ( $wgCreateWikiDatabase === $wgDBname ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+
+		if ( $config->get( 'CreateWikiDatabase' ) === $config->get( 'DBname' ) ) {
 			$updater->addExtensionTable( 
 				'gnf_files',
 				__DIR__ . '/../../sql/gnf_files.sql' 
@@ -63,13 +64,13 @@ class GlobalNewFilesHooks {
 	}
 
 	public static function onTitleMoveComplete( $title, $newTitle, $user, $oldid, $newid, $reason, $revision ) {
-		global $wgCreateWikiDatabase, $wgDBname, $wgServer;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		if ( !$title->inNamespace( NS_FILE ) ) {
 			return true;
 		}
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
 
 		$file = wfLocalFile( $newTitle );
 
@@ -78,10 +79,10 @@ class GlobalNewFilesHooks {
 			[
 				'files_name' => $file->getName(),
 				'files_url' => $file->getViewURL(),
-				'files_page' => $wgServer . $file->getDescriptionUrl(),
+				'files_page' => $config->get( 'Server' ) . $file->getDescriptionUrl(),
 			],
 			[
-				'files_dbname' => $wgDBname,
+				'files_dbname' => $config->get( 'DBname' ),
 				'files_name' => $title->getDBKey(),
 			]
 		);
