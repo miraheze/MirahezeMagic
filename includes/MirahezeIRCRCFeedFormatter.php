@@ -27,12 +27,13 @@
  */
 
 class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
+
     /**
      * @see RCFeedFormatter::getLine
      */
     public function getLine( array $feed, RecentChange $rc, $actionComment ) {
-        global $wgUseRCPatrol, $wgUseNPPatrol, $wgLocalInterwikis,
-            $wgCanonicalServer, $wgScript, $wgDBname;
+        $config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+
         $attribs = $rc->getAttributes();
         if ( $attribs['rc_type'] == RC_LOG ) {
             // Don't use SpecialPage::getTitleFor, backwards compatibility with
@@ -47,13 +48,13 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
         if ( $attribs['rc_type'] == RC_LOG ) {
             $url = '';
         } else {
-            $url = $wgCanonicalServer . $wgScript;
+            $url = $config->get( 'CanonicalServer' ) . $config->get( 'Script' );
             if ( $attribs['rc_type'] == RC_NEW ) {
                 $query = '?oldid=' . $attribs['rc_this_oldid'];
             } else {
                 $query = '?diff=' . $attribs['rc_this_oldid'] . '&oldid=' . $attribs['rc_last_oldid'];
             }
-            if ( $wgUseRCPatrol || ( $attribs['rc_type'] == RC_NEW && $wgUseNPPatrol ) ) {
+            if ( $config->get( 'UseRCPatrol' ) || ( $attribs['rc_type'] == RC_NEW && $config->get( 'UseNPPatrol' ) ) ) {
                 $query .= '&rcid=' . $attribs['rc_id'];
             }
             // HACK: We need this hook for WMF's secure server setup
@@ -88,7 +89,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
             $comment = self::cleanupForIRC( $attribs['rc_comment'] );
             $flag = '';
             if ( !$attribs['rc_patrolled']
-                && ( $wgUseRCPatrol || $attribs['rc_type'] == RC_NEW && $wgUseNPPatrol )
+                && ( $config->get( 'UseRCPatrol' ) || $attribs['rc_type'] == RC_NEW && $config->get( 'UseNPPatrol' ) )
             ) {
                 $flag .= '!';
             }
@@ -96,9 +97,9 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
                 . ( $attribs['rc_minor'] ? "M" : "" ) . ( $attribs['rc_bot'] ? "B" : "" );
         }
 
-        if ( $feed['add_interwiki_prefix'] === true && $wgLocalInterwikis ) {
+        if ( $feed['add_interwiki_prefix'] === true && $config->get( 'LocalInterwikis' ) ) {
             // we use the first entry in $wgLocalInterwikis in recent changes feeds
-            $prefix = $wgLocalInterwikis[0];
+            $prefix = $config->get( 'LocalInterwikis' )[0];
         } elseif ( $feed['add_interwiki_prefix'] ) {
             $prefix = $feed['add_interwiki_prefix'];
         } else {
@@ -112,7 +113,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
         # see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
         # no colour (\003) switches back to the term default
-        $fullString = "$wgDBname \0035*\003 $titleString\0034 $flag\00310 " .
+        $fullString = "{$config->get( 'DBname' )} \0035*\003 $titleString\0034 $flag\00310 " .
             "\00302$url\003 \0035*\003 \00303$user\003 \0035*\003 $szdiff \00310$comment\003\n";
 
         return $fullString;
