@@ -105,7 +105,7 @@ class PIIRemoval extends Maintenance {
 						],
 						[
 							'rc_actor' => $user->getActorId( $db )
-						]
+						],
 						__METHOD__
 					);
 				}
