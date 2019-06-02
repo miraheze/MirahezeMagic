@@ -69,19 +69,18 @@ class PIIRemoval extends Maintenance {
 
 				foreach ( $centralUser->listAttached() as $wikiName ) {
 					$db->selectDomain( $wikiName );
-					if ( $centralUser->getEmail() ) {
-						$db->update(
-							'user',
-							[
-								'user_email' => ''
-							],
-							[
-								'user_email' => $centralUser->getEmail(),
-								'user_name' => $centralUser->getName()
-							],
-							__METHOD__
-						);
-					}
+
+					$db->update(
+						'user',
+						[
+							'user_email' => '',
+							'user_real_name' => '',
+						],
+						[
+							'user_name' => $centralUser->getName()
+						],
+						__METHOD__
+					);
 
 					$db->update(
 						'cu_changes',
