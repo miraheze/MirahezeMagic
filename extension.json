@@ -31,10 +31,12 @@
 		"GlobalNewFilesPager": "includes/GlobalNewFiles/GlobalNewFilesPager.php",
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php"
+		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php",
+		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
 	},
 	"SpecialPages": {
-		"GlobalNewFiles": "SpecialGlobalNewFiles"
+		"GlobalNewFiles": "SpecialGlobalNewFiles",
+		"MirahezeSurvey": "SpecialMirahezeSurvey"
 	},
 	"Hooks": {
 		"CreateWikiCreation": [
