@@ -200,7 +200,7 @@ class MirahezeMagicHooks {
 			$rootTitle = Title::makeTitle( $title->getNamespace(), $rootName );
 
 			foreach ( $specialsArray as $page ) {
-				if ( $title->equals( SpecialPage::getTitleFor( $page ) ) ) {
+				if ( $rootTitle->equals( SpecialPage::getTitleFor( $page ) ) ) {
 					$whitelisted = true;
 					return;
 				}
