@@ -195,10 +195,15 @@ class MirahezeMagicHooks {
 			'ResetPassword'
 		];
 
-		foreach ( $specialsArray as $page ) {
-			if ( $title->getRootTitle()->equals( SpecialPage::getTitleFor( $page ) ) ) {
-				$whitelisted = true;
-				return;
+		if ( $title->isSpecialPage() ) {
+			$rootName = strtok( $title->getText(), '/' );
+			$rootTitle = Title::makeTitle( $title->getNamespace(), $rootName );
+
+			foreach ( $specialsArray as $page ) {
+				if ( $title->equals( SpecialPage::getTitleFor( $page ) ) ) {
+					$whitelisted = true;
+					return;
+				}
 			}
 		}
 	}
