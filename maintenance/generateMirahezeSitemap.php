@@ -27,19 +27,25 @@ require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 class GenerateMirahezeSitemap extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Executes the generateSitemap.php script";
+		$this->mDescription = "Generates sitemap for all miraheze wikis (apart from private ones).";
 	}
 
 	public function execute() {
-		global $wgServer, $wgDBname;
-		
-		$this->output( "Generating sitemap for wiki {$wgDBname}\n" );
+		global $wgServer, $wgDBname, $wmgPrivateWiki;
 
 		$stripHttpPrefix = str_replace( 'https://', '', $wgServer );
 
-		exec( "php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath='/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}' --identifier={$wgDBname} --urlpath='/' --server='{$wgServer}' --compress=yes --wiki={$wgDBname}" );
+		if ( $wmgPrivateWiki ) {
+			$this->output( "Deleting sitemap for wiki {$wgDBname}\n" );
 
-		exec( "/bin/cp /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap-index-{$wgDBname}.xml /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap.xml" );
+			Shell::command( 'rm', '-rf', "/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}" )->execute();
+		} else {
+			$this->output( "Generating sitemap for wiki {$wgDBname}\n" );
+
+			exec( "php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath='/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}' --identifier={$wgDBname} --urlpath='/' --server='{$wgServer}' --compress=yes --wiki={$wgDBname}" );
+
+			exec( "/bin/cp /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap-index-{$wgDBname}.xml /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap.xml" );
+		}
 	}
 }
 
