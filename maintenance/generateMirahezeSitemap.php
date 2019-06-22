@@ -24,6 +24,8 @@
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
+use MediaWiki\Shell\Shell;
+
 class GenerateMirahezeSitemap extends Maintenance {
 	public function __construct() {
 		parent::__construct();
