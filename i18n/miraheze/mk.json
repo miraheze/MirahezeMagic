@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Bjankuloski06",
-			"Fitoschido"
+			"Fitoschido",
+			"Vlad5250"
 		]
 	},
 	"mirahezemagic-description": "Пораки, скрипти и пресретници за МедијаВики, наменски предвидени за Мирахезе",
@@ -12,6 +13,10 @@
 	"miraheze-helpcenter": "За Мирахезе",
 	"miraheze-requestfeatures": "Побарај можности на вики",
 	"miraheze-requestwiki": "Побарај вики",
+	"miraheze-survey-access-d": "Дневно",
+	"miraheze-survey-neutral": "Воздржан",
+	"miraheze-survey-no": "Не",
+	"miraheze-survey-yes": "Да",
 	"group-abuse": "Екипа за злоупотреби",
 	"group-abuse-member": "{{GENDER:$1|екипа за злоупотреби}}",
 	"group-donator": "Дарители",
@@ -47,6 +52,7 @@
 	"restriction-delete": "Избриши",
 	"restriction-level-user": "Допуштај само најавени корисници",
 	"right-user": "Уреди страници заштитени како „{{int:protect-level-user}}“",
+	"right-viewglobalprivatefiles": "Преглед на глобални податотеки филтрирани од приватни викија",
 	"shared-repo-name-shared-commons": "Ризница на Мирахезе",
 	"sitematrix": "Список на викија на Мирахезе",
 	"sitematrix-summary": "На оваа службена страница се наведени сите викија на Мирахезе.",
@@ -54,6 +60,14 @@
 	"sitematrix-others": "Други викија на Мирахезе",
 	"specialpages-group-wikimanage": "Викираководство",
 	"termsofservice": "Услови на употреба",
+	"settings-beta": "Бета",
+	"settings-chat": "Разговор",
+	"settings-edit": "Уреди",
+	"settings-links": "Врски",
+	"settings-maps": "Карти",
 	"settings-media": "Медиуми",
+	"settings-notifications": "Известувања",
+	"settings-restricted": "Ограничено",
+	"settings-styling": "Стил",
 	"extensions-skins": "Руво"
 }
