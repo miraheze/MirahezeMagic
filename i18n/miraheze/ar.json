@@ -83,6 +83,8 @@
 	"group-steward-member": "{{GENDER:$1|مضيف|مضيفة}}",
 	"group-sysadmin": "إداريو النظام",
 	"group-sysadmin-member": "{{GENDER:$1|إداري|إداري}} نظام",
+	"group-interwiki-admin": "إداري إنترويكي",
+	"group-interwiki-admin-member": "إداري إنترويكي",
 	"group-oversight": "منظورة",
 	"group-oversight-member": "مراقبة",
 	"group-wikicreator": "منشئو ويكيات",

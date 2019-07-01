@@ -43,6 +43,8 @@
 	"group-steward-member": "{{GENDER:$1|사무장}}",
 	"group-sysadmin": "시스템 관리자",
 	"group-sysadmin-member": "{{GENDER:$1|시스템 관리자}}",
+	"group-interwiki-admin": "인터위키 관리자",
+	"group-interwiki-admin-member": "인터위키 관리자",
 	"group-oversight": "기록보호자",
 	"group-oversight-member": "기록보호자",
 	"group-wikicreator": "위키 생성자",

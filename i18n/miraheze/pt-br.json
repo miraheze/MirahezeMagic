@@ -82,6 +82,8 @@
 	"group-steward-member": "steward",
 	"group-sysadmin": "Administradores de sistema",
 	"group-sysadmin-member": "administrador de sistema",
+	"group-interwiki-admin": "Administrador Interwiki",
+	"group-interwiki-admin-member": "administrador interwiki",
 	"group-oversight": "Supervisores",
 	"group-oversight-member": "supervisor",
 	"group-wikicreator": "Criadores de Wikis",
