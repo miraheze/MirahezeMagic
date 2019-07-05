@@ -4,7 +4,8 @@
 			"Reception123",
 			"AlvaroMolina",
 			"Gomoko",
-			"Wladek92"
+			"Wladek92",
+			"Derugon"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -84,7 +85,7 @@
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Administrateurs de système",
 	"group-sysadmin-member": "{{GENDER:$1|administrateur|administratrice}} de système",
-	"group-interwiki-admin": "Administrateur interwiki",
+	"group-interwiki-admin": "Administrateur Interwiki",
 	"group-interwiki-admin-member": "administrateur interwiki",
 	"group-oversight": "Masqueurs de modifications",
 	"group-oversight-member": "{{GENDER:$1|masqueur|masqueuse}} de modifications",
