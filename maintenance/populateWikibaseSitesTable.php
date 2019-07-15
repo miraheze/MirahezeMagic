@@ -102,6 +102,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				continue;
 			}
 
+			if ( strlen( $groupData['dbname'] ) > 32 ) {
+				continue;
+			}
+
 			$sites = array_merge(
 				$sites,
 				$this->getSitesFromLangGroup( $groupData )
