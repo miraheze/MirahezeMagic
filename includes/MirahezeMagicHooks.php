@@ -34,31 +34,6 @@ class MirahezeMagicHooks {
 			$DBname,
 			'--force'
 		)->execute();
-
-		// Elasticsearch
-		Shell::command(
-			'/usr/bin/php',
-			'/srv/mediawiki/w/extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php',
-			'--wiki',
-			$DBname
-		)->execute();
-
-		Shell::command(
-			'/usr/bin/php',
-			'/srv/mediawiki/w/extensions/CirrusSearch/maintenance/forceSearchIndex.php',
-			'--skipLinks',
-			'--indexOnSkip',
-			'--wiki',
-			$DBname
-		)->execute();
-
-		Shell::command(
-			'/usr/bin/php',
-			'/srv/mediawiki/w/extensions/CirrusSearch/maintenance/forceSearchIndex.php',
-			'--skipParse',
-			'--wiki',
-			$DBname
-		)->execute();
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
