@@ -14,10 +14,10 @@
 	"managewiki-setting-wgBlockAllowsUTEdit-help": "Allows the blocking user to grant talk page edit access for the blocked user",
 	"managewiki-setting-wgCookieSetOnAutoblock-name": "Cookie set on autoblock",
 	"managewiki-setting-wgCookieSetOnAutoblock-help": "Determines whether to set a cookie when a user is autoblocked. Doing so means that a blocked user, even after logging out and moving to a new IP address, will still be blocked.",
-	"managewiki-setting-wgCookieSetOnIpBlock-name": "wgCookieSetOnIpBlock"
-	"managewiki-setting-wgCookieSetOnIpBlock-help": "Determines whether to set a cookie when an IP user is blocked. Doing so means that a blocked user, even after moving to a new IP address, will still be blocked."
-	"managewiki-setting-wgEmailConfirmToEdit-name": "Email Confirm To Edit"
-	"managewiki-setting-wgEmailConfirmToEdit-help": "Require users to confirm email address before they can edit. This effectively disables IP editing."
-	"managewiki-setting-wgProtectSiteLimit-name": "Protect Site Limit"
-	"managewiki-setting-wgProtectSiteLimit-help" "Maximum time allowed for protection of the site."
+	"managewiki-setting-wgCookieSetOnIpBlock-name": "wgCookieSetOnIpBlock",
+	"managewiki-setting-wgCookieSetOnIpBlock-help": "Determines whether to set a cookie when an IP user is blocked. Doing so means that a blocked user, even after moving to a new IP address, will still be blocked.",
+	"managewiki-setting-wgEmailConfirmToEdit-name": "Email Confirm To Edit",
+	"managewiki-setting-wgEmailConfirmToEdit-help": "Require users to confirm email address before they can edit. This effectively disables IP editing.",
+	"managewiki-setting-wgProtectSiteLimit-name": "Protect Site Limit",
+	"managewiki-setting-wgProtectSiteLimit-help" "Maximum time allowed for protection of the site.",
   }
