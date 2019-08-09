@@ -51,7 +51,12 @@
 	"managewiki-setting-wmgWebChatChannel-name": "WebChat Channel",
 	"managewiki-setting-wmgWebChatChannel-help": "Channel to connect to.",
 	"managewiki-setting-wmgWebChatClient-name": "WebChat Client",
-	"managewiki-setting-wmgWebChatClient-help": "This sets the web client to use. If you are not using Freenode, select Other Server."
-
+	"managewiki-setting-wmgWebChatClient-help": "This sets the web client to use. If you are not using Freenode, select Other Server.",
+	"managewiki-setting-wmgWikiLicense-name": "Content License",
+	"managewiki-setting-wmgWikiLicense-help": "Each wiki on Miraheze is by default licensed under CC-BY-SA 4.0 although this can be changed to another supported license. If you would like to release the contributions on your wiki under another license, please let us know so that we can make it available to you. Be aware that changing the license on your wiki can have an impact on your community and should not be done lightly.",
+	"managewiki-setting-wgRCMaxAge-name": "RecentChanges max age",
+	"managewiki-setting-wgRCMaxAge-help": "Items in the recentchanges table are periodically purged; entries older than this many seconds will go.",
+	"managewiki-setting-wgActiveUserDays-name": "Active User Days",
+	"managewiki-setting-wgActiveUserDays-help": "The number of days within which a person must make edits to be considered an \"active\" user."
 	
   }
