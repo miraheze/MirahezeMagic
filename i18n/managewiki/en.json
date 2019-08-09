@@ -29,6 +29,19 @@
 	"managewiki-setting-wmgSimpleFlaggedRevsUI-name": "Simple FlaggedRevs UI",
 	"managewiki-setting-wmgSimpleFlaggedRevsUI-help": "When enabled, this will only distinguish \"checked\", \"quality\", and unreviewed.",
 	"managewiki-setting-wmgFlaggedRevsLowProfile-name": "FlaggedRevs Low Profile",
-	"managewiki-setting-wmgFlaggedRevsLowProfile-help": "For visitors, only show tags/icons for unreviewed/outdated pages when enabled."
+	"managewiki-setting-wmgFlaggedRevsLowProfile-help": "For visitors, only show tags/icons for unreviewed/outdated pages when enabled.",
+	"managewiki-setting-wgEchoUseCrossWikiBetaFeature-name": "Enable Echo Cross Wiki Beta Feature",
+	"managewiki-setting-wgEchoUseCrossWikiBetaFeature-help": "Feature flag for the cross-wiki notifications beta feature.",
+	"managewiki-setting-wgMediaViewerIsInBeta-name": "Enable Media Viewer Beta Mode",
+	"managewiki-setting-wgMediaViewerIsInBeta-help": "This makes Media Viewer a beta feature thus this will not be enabled for all users.",
+	"managewiki-setting-wgPopupsBetaFeature-name": "Enable Popups Beta Mode",
+	"managewiki-setting-wgPopupsBetaFeature-help": "This enables Popups as a beta feature, rather than showing it to all users.",
+	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-name": "Enable VisualEditor Diff Page Beta Feature",
+	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-help": "Enable the new visual mode as a beta feature on revision difference pages.", 
+	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Enable VisualEditor Wikitext Beta Feature",
+	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-help": "Enable the new wikitext mode inside the visual editor as a beta feature. It has many of the tools present in the visual editor, uses a similar design, and allows better switching between the two.",
+	"managewiki-setting-wgVisualEditorShowBetaWelcome-name": "Enable VisualEditor Show Beta Welcome",
+	"managewiki-setting-wgVisualEditorShowBetaWelcome-help": "Shows a beta welcome for users of VisualEditor."
+
 	
   }
