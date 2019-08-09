@@ -9,5 +9,9 @@
 	"managewiki-setting-wgAbuseFilterActions-name": "AbuseFilter Actions",
 	"managewiki-setting-wgAbuseFilterActions-help": "The possible actions that can be taken by abuse filters. When adding a new action, check if it is restricted in $wgAbuseFilterRestrictions and, if it is, don't forget to add the abusefilter-modify-restricted right to the appropriate user groups.",
 	"managewiki-setting-wgAutoBlockExpiry-name": "Autoblock Expiry",
-	"managewiki-setting-wgAutoBlockExpiry-help": "Number of seconds before autoblock entries expire. Minimum value allowed is 0 where as maximum is 10 years (315360000)."
+	"managewiki-setting-wgAutoBlockExpiry-help": "Number of seconds before autoblock entries expire. Minimum value allowed is 0 where as maximum is 10 years (315360000).",
+	"managewiki-setting-wgBlockAllowsUTEdit-name": "Allows blocking users to restrict talk page accesst",
+	"managewiki-setting-wgBlockAllowsUTEdit-help": "Allows the blocking user to grant talk page edit access for the blocked user"
+	"managewiki-setting-wgCookieSetOnAutoblock-name": "Cookie set on autoblock"
+	"managewiki-setting-wgCookieSetOnAutoblock-help:" "Determines whether to set a cookie when a user is autoblocked. Doing so means that a blocked user, even after logging out and moving to a new IP address, will still be blocked.",
   }
