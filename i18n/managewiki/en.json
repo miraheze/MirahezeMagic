@@ -25,9 +25,9 @@
 	"managewiki-setting-wmgFlaggedRevsProtection-name": "Flagged Revs Protection",
 	"managewiki-setting-wmgFlaggedRevsProtection-help": "This enables Flagged Revs Protection.",
 	"managewiki-setting-wmgFlaggedRevsAutoReview-name": "FlaggedRevs Auto Review",
-	"managewiki-setting-wmgFlaggedRevsAutoReview-help": 'Restriction levels for "autoreview"/"review" rights.',
+	"managewiki-setting-wmgFlaggedRevsAutoReview-help": "Restriction levels for \"autoreview\"/\"review\" rights.",
 	"managewiki-setting-wmgSimpleFlaggedRevsUI-name": "Simple FlaggedRevs UI",
-	"managewiki-setting-wmgSimpleFlaggedRevsUI-help": 'When enabled, this will only distinguish "checked", "quality", and unreviewed.',
+	"managewiki-setting-wmgSimpleFlaggedRevsUI-help": "When enabled, this will only distinguish \"checked\", \"quality\", and unreviewed.",
 	"managewiki-setting-wmgFlaggedRevsLowProfile-name": "FlaggedRevs Low Profile",
 	"managewiki-setting-wmgFlaggedRevsLowProfile-help": "For visitors, only show tags/icons for unreviewed/outdated pages when enabled."
 	
