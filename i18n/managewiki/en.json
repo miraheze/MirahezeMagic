@@ -41,7 +41,17 @@
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Enable VisualEditor Wikitext Beta Feature",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-help": "Enable the new wikitext mode inside the visual editor as a beta feature. It has many of the tools present in the visual editor, uses a similar design, and allows better switching between the two.",
 	"managewiki-setting-wgVisualEditorShowBetaWelcome-name": "Enable VisualEditor Show Beta Welcome",
-	"managewiki-setting-wgVisualEditorShowBetaWelcome-help": "Shows a beta welcome for users of VisualEditor."
+	"managewiki-setting-wgVisualEditorShowBetaWelcome-help": "Shows a beta welcome for users of VisualEditor.",
+	"managewiki-setting-wgChatLinkUsernames-name": "Chat Link to Usernames",
+	"managewiki-setting-wgChatLinkUsernames-help": "Link to user pages in the main chat window",
+	"managewiki-setting-wgChatMeCommand-name": "Chat Me Command",
+	"managewiki-setting-wgChatMeCommand-help": "Enable \"/me <text>\" command that prints a status-type message.",
+	"managewiki-setting-wmgWebChatServer-name": "WebChat Server",
+	"managewiki-setting-wmgWebChatServer-help": "IRC Server to connect to, not required when using the freenodeChat web client.",
+	"managewiki-setting-wmgWebChatChannel-name": "WebChat Channel",
+	"managewiki-setting-wmgWebChatChannel-help": "Channel to connect to.",
+	"managewiki-setting-wmgWebChatClient-name": "WebChat Client",
+	"managewiki-setting-wmgWebChatClient-help": "This sets the web client to use. If you are not using Freenode, select Other Server."
 
 	
   }
