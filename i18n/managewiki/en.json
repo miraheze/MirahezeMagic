@@ -67,5 +67,11 @@
 	"managewiki-setting-wgCommentsSortDescending-name": "Sort Comments by Descending",
 	"managewiki-setting-wgCommentsSortDescending-help": "This sorts comments by descending date, with the new comment box and most recent comments at the top when enabled.",
 	"managewiki-setting-wgEnableScaryTranscluding-name": "Enable Scary Transcluding",
-	"managewiki-setting-wgEnableScaryTranscluding-help": "Allow templates to be imported/transcluded from another wiki."
+	"managewiki-setting-wgEnableScaryTranscluding-help": "Allow templates to be imported/transcluded from another wiki.",
+	"managewiki-setting-wmgVisualEditorEnableDefault-name": "Make VisualEditor the default editor for all",
+	"managewiki-setting-wmgVisualEditorEnableDefault-help": "This will make VisualEditor the default edit for all.",
+	"managewiki-setting-wgVisualEditorEnableWikitext-name": "Enable VisualEditor Wikitext mode",
+	"managewiki-setting-wgVisualEditorEnableWikitext-help": "This option allow you to read Wikitext syntax on VisualEditor.",
+	"managewiki-setting-wgVisualEditorUseSingleEditTab-name": "VisualEditor Use Single Edit Tab",
+	"managewiki-setting-wgVisualEditorUseSingleEditTab-help": "Shows only the \"edit\" tab. Uses VisualEditor by default if \"Make VisualEditor the default editor for all\" is set, otherwise defaults to Wikitext."
   }
