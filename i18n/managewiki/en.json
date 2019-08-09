@@ -19,5 +19,16 @@
 	"managewiki-setting-wgEmailConfirmToEdit-name": "Email Confirm To Edit",
 	"managewiki-setting-wgEmailConfirmToEdit-help": "Require users to confirm email address before they can edit. This effectively disables IP editing.",
 	"managewiki-setting-wgProtectSiteLimit-name": "Protect Site Limit",
-	"managewiki-setting-wgProtectSiteLimit-help" "Maximum time allowed for protection of the site.",
+	"managewiki-setting-wgProtectSiteLimit-help": "Maximum time allowed for protection of the site.",
+	"managewiki-setting-wgProtectSiteDefaultTimeout-name": "ProtectSite Default Timeout",
+	"managewiki-setting-wgProtectSiteDefaultTimeout-help": "Default timeout, 1 hour by default.",
+	"managewiki-setting-wmgFlaggedRevsProtection-name": "Flagged Revs Protection",
+	"managewiki-setting-wmgFlaggedRevsProtection-help": "This enables Flagged Revs Protection.",
+	"managewiki-setting-wmgFlaggedRevsAutoReview-name": "FlaggedRevs Auto Review",
+	"managewiki-setting-wmgFlaggedRevsAutoReview-help": 'Restriction levels for "autoreview"/"review" rights.',
+	"managewiki-setting-wmgSimpleFlaggedRevsUI-name": "Simple FlaggedRevs UI",
+	"managewiki-setting-wmgSimpleFlaggedRevsUI-help": 'When enabled, this will only distinguish "checked", "quality", and unreviewed.',
+	"managewiki-setting-wmgFlaggedRevsLowProfile-name": "FlaggedRevs Low Profile",
+	"managewiki-setting-wmgFlaggedRevsLowProfile-help": "For visitors, only show tags/icons for unreviewed/outdated pages when enabled."
+	
   }
