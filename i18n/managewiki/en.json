@@ -107,6 +107,10 @@
 	"managewiki-setting-wgUserBoard-name": "User Board",
 	"managewiki-setting-wgUserBoard-help": "Displays UserBoard-related things on social profile pages.",
 	"managewiki-setting-wgUserProfileDisplay-name": "User Profile Display",
-	"managewiki-setting-wgUserProfileDisplay-help": "Enables default stuff to display on social profile pages by default"
+	"managewiki-setting-wgUserProfileDisplay-help": "Enables default stuff to display on social profile pages by default",
+	"managewiki-setting-'wgWikiForumLogsInRC-name": "Display WikiForum logs in RecentChanges",
+	"managewiki-setting-'wgWikiForumLogsInRC-help": "Toggles the display of WikiForum logs in Special:RecentChanges",
+
+	
 	
   }
