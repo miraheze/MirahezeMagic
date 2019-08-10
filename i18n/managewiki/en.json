@@ -99,7 +99,7 @@
 	"managewiki-setting-wgScribuntoUseCodeEditor-name": "Scribunto Use CodeEditor",
 	"managewiki-setting-wgScribuntoUseCodeEditor-help": "Set this to use it when editing Module pages.",
 	"managewiki-setting-wgMetaNamespace-name": "Meta Namespace",
-	"managewiki-setting-wgMetaNamespace-help": "Name used for the meta namespace. Note that the namespace must exist in ManageWiki/namespaces.",
+	"managewiki-setting-wgMetaNamespace-help": "Name used for the project namespace. Note that the namespace must exist in ManageWiki/namespaces.",
 	"managewiki-setting-wgMetaNamespaceTalk-name": "Meta Namespace Talk",
 	"managewiki-setting-wgMetaNamespaceTalk-help": "Name used for the project talk namespace. Note that the namespace must exist in ManageWiki/namespaces.",
 	"managewiki-setting-wgRandomGameDisplay-name": "Random Game Display",
