@@ -91,7 +91,11 @@
 	"managewiki-setting-wgEnableCanonicalServerLink-name": "Enable Canonical Server Link",
 	"managewiki-setting-wgEnableCanonicalServerLink-help": "Output a <link rel=\"canonical\"> tag on every page indicating the canonical server which should be used, i.e. $wgServer or $wgCanonicalServer.",
 	"managewiki-setting-wgPageCreationLog-name": "Page Creation Log",
-	"managewiki-setting-wgPageCreationLog-help": "Whether to maintain a log of new page creations, which can be viewed at Special:Log/create."
-	
-	
+	"managewiki-setting-wgPageCreationLog-help": "Whether to maintain a log of new page creations, which can be viewed at Special:Log/create.",
+	"managewiki-setting-wgMSCS_WarnNoCategories-name": "MsCatSelect warn no categories",
+	"managewiki-setting-wgMSCS_WarnNoCategories-help": "By default, if you try to save a page that has no categories assigned, MsCatSelect will ask for confirmation. If you wish to avoid this, unset this option.",
+	"managewiki-setting-wgCodeEditorEnableCore-name": "CodeEditor Enable Core",
+	"managewiki-setting-wgCodeEditorEnableCore-help": "To disable the editor on JavaScript and CSS pages in the MediaWiki, User and other core namespaces, unset this option.",
+	"managewiki-setting-wgScribuntoUseCodeEditor-name": "Scribunto Use CodeEditor",
+	"managewiki-setting-wgScribuntoUseCodeEditor-help": "Set this to use it when editing Module pages."
   }
