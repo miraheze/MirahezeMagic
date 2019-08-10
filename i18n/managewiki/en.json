@@ -81,5 +81,17 @@
 	"managewiki-setting-wmgAllowEntityImport-name": "Allow Entity Import (Wikibase)",
 	"managewiki-setting-wmgAllowEntityImport-help": "Allow importing entities via Special:Import and importDump.php.",
 	"managewiki-setting-wmgEnableEntitySearchUI-name": "Enable Entity Search UI (Wikibase)",
-	"managewiki-setting-wmgEnableEntitySearchUI-help": "To determine if entity search UI should be enabled or not."
+	"managewiki-setting-wmgEnableEntitySearchUI-help": "To determine if entity search UI should be enabled or not.",
+	"managewiki-setting-wgAllowDisplayTitle-name": "Allow Display Title",
+	"managewiki-setting-wgAllowDisplayTitle-help": "Allows use of {{DISPLAYTITLE}} magic word.",
+	"managewiki-setting-wgRestrictDisplayTitle-name": "Restrict Display Title",
+	"managewiki-setting-wgRestrictDisplayTitle-help": "Restrict {{DISPLAYTITLE}} to titles that normalize to the same canonical database key. Wikis with NoTitle extension installed have this config unset.",
+	"managewiki-setting-wgCapitalLinks-name": "Capital Links",
+	"managewiki-setting-wgCapitalLinks-help": "Unset this to avoid forcing the first letter of links to capitals.",
+	"managewiki-setting-wgEnableCanonicalServerLink-name": "Enable Canonical Server Link",
+	"managewiki-setting-wgEnableCanonicalServerLink-help": "Output a <link rel=\"canonical\"> tag on every page indicating the canonical server which should be used, i.e. $wgServer or $wgCanonicalServer.",
+	"managewiki-setting-wgPageCreationLog-name": "Page Creation Log",
+	"managewiki-setting-wgPageCreationLog-help": "Whether to maintain a log of new page creations, which can be viewed at Special:Log/create."
+	
+	
   }
