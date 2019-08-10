@@ -77,7 +77,7 @@
 	"managewiki-setting-wgAllowSlowParserFunctions-name": "Allow slow parser functions",
 	"managewiki-setting-wgAllowSlowParserFunctions-help": "Parser functions are \"magic words\" that return a value or function, such as time, site details or page names.",
 	"managewiki-setting-wgPFEnableStringFunctions-name": "Enable string function functionality",
-	"managewiki-setting-wgPFEnableStringFunctions-help": "This option adds support a couple of functions for basic string handling. Example: #pos function returns the position of a given search term within the string. You can learn more in MediaWiki\'s documentation page https://www.mediawiki.org/wiki/Module:String.",
+	"managewiki-setting-wgPFEnableStringFunctions-help": "This option adds support a couple of functions for basic string handling. Example: #pos function returns the position of a given search term within the string. You can learn more in MediaWiki's documentation page https://www.mediawiki.org/wiki/Module:String.",
 	"managewiki-setting-wmgAllowEntityImport-name": "Allow Entity Import (Wikibase)",
 	"managewiki-setting-wmgAllowEntityImport-help": "Allow importing entities via Special:Import and importDump.php.",
 	"managewiki-setting-wmgEnableEntitySearchUI-name": "Enable Entity Search UI (Wikibase)",
