@@ -117,6 +117,16 @@
 	"managewiki-setting-egApprovedRevsAutomaticApprovals-name": "Automatically approve new revisions",
 	"managewiki-setting-egApprovedRevsAutomaticApprovals-help": "Uncheck this box to require new revisions to be manually approved even if made by an administrator",
 	"managewiki-setting-wgExternalLinkTarget-name": "External Link Target",
-	"managewiki-setting-wgExternalLinkTarget-help": "Set a default target for external links."
+	"managewiki-setting-wgExternalLinkTarget-help": "Set a default target for external links.",
+	"managewiki-setting-wgRottenLinksCurlTimeout-name": "RottenLinks Timeout Threshold",
+	"managewiki-setting-wgRottenLinksCurlTimeout-help": "Number of seconds before a RottenLinks request returns no response. Min: 10. Max: 120.",
+	"managewiki-setting-wgLocaltimezone-name": "Timezone",
+	"managewiki-setting-wgLocaltimezone-help": "This will adapt your wikis time over clock to whatever timezone you choose for all users, however it can be changed through user\'s preferences.",
+	"managewiki-setting-wmgTranslateDocumentationLanguageCode-name": "Translate Documentation Language Code",
+	"managewiki-setting-wmgTranslateDocumentationLanguageCode-help": "Language code for message documentation.",
+	"managewiki-setting-wgULSAnonCanChangeLanguage-name": "Allow anonymous users to change language",
+	"managewiki-setting-wgULSAnonCanChangeLanguage-help": "Enabling allowing anonymous users to control the language they view the wiki in."
+	
+	
 	
   }
