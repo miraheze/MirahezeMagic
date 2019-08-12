@@ -108,9 +108,15 @@
 	"managewiki-setting-wgUserBoard-help": "Displays UserBoard-related things on social profile pages.",
 	"managewiki-setting-wgUserProfileDisplay-name": "User Profile Display",
 	"managewiki-setting-wgUserProfileDisplay-help": "Enables default stuff to display on social profile pages by default",
-	"managewiki-setting-'wgWikiForumLogsInRC-name": "Display WikiForum logs in RecentChanges",
-	"managewiki-setting-'wgWikiForumLogsInRC-help": "Toggles the display of WikiForum logs in Special:RecentChanges",
-
-	
+	"managewiki-setting-wgWikiForumLogsInRC-name": "Display WikiForum logs in RecentChanges",
+	"managewiki-setting-wgWikiForumLogsInRC-help": "Toggles the display of WikiForum logs in Special:RecentChanges",
+	"managewiki-setting-wgWikiForumAllowAnonymous-name": "WikiForum Allow Anonymous",
+	"managewiki-setting-wgWikiForumAllowAnonymous-help": "Allow Anonymous (users who are not logged in) to use WikiForum",
+	"managewiki-setting-wgRCWatchCategoryMembership-name": "Treat Category Membership as a RecentChange",
+	"managewiki-setting-wgRCWatchCategoryMembership-help": "Shows changes to category membership as an action in Special:RecentChanges",
+	"managewiki-setting-egApprovedRevsAutomaticApprovals-name": "Automatically approve new revisions",
+	"managewiki-setting-egApprovedRevsAutomaticApprovals-help": "Uncheck this box to require new revisions to be manually approved even if made by an administrator",
+	"managewiki-setting-wgExternalLinkTarget-name": "External Link Target",
+	"managewiki-setting-wgExternalLinkTarget-help": "Set a default target for external links."
 	
   }
