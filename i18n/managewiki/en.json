@@ -125,7 +125,7 @@
 	"managewiki-setting-wmgTranslateDocumentationLanguageCode-name": "Translate Documentation Language Code",
 	"managewiki-setting-wmgTranslateDocumentationLanguageCode-help": "Language code for message documentation.",
 	"managewiki-setting-wgULSAnonCanChangeLanguage-name": "Allow anonymous users to change language",
-	"managewiki-setting-wgULSAnonCanChangeLanguage-help": "Enabling allowing anonymous users to control the language they view the wiki in."
+	"managewiki-setting-wgULSAnonCanChangeLanguage-help": "Enabling allows anonymous users to control the language they view the wiki in."
 	
 	
 	
