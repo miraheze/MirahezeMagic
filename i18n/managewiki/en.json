@@ -121,7 +121,7 @@
 	"managewiki-setting-wgRottenLinksCurlTimeout-name": "RottenLinks Timeout Threshold",
 	"managewiki-setting-wgRottenLinksCurlTimeout-help": "Number of seconds before a RottenLinks request returns no response. Min: 10. Max: 120.",
 	"managewiki-setting-wgLocaltimezone-name": "Timezone",
-	"managewiki-setting-wgLocaltimezone-help": "This will adapt your wikis time over clock to whatever timezone you choose for all users, however it can be changed through user\'s preferences.",
+	"managewiki-setting-wgLocaltimezone-help": "This will adapt your wikis time over clock to whatever timezone you choose for all users, however it can be changed through user's preferences.",
 	"managewiki-setting-wmgTranslateDocumentationLanguageCode-name": "Translate Documentation Language Code",
 	"managewiki-setting-wmgTranslateDocumentationLanguageCode-help": "Language code for message documentation.",
 	"managewiki-setting-wgULSAnonCanChangeLanguage-name": "Allow anonymous users to change language",
