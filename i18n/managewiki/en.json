@@ -159,8 +159,5 @@
 	"managewiki-setting-wgMSU_showAutoCat-name": "MsUpload show auto cat",
 	"managewiki-setting-wgMSU_showAutoCat-help": "If set, files uploaded while editing a category page will be added to that category.",
 	"managewiki-setting-wgMSU_useDragDrop-name": "MsUpload use drag and drop",
-	"managewiki-setting-wgMSU_useDragDrop-help": "If set, the drag & drop area will be shown.",
-	
-	
-	
+	"managewiki-setting-wgMSU_useDragDrop-help": "If set, the drag & drop area will be shown."
   }
