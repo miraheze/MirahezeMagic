@@ -159,5 +159,19 @@
 	"managewiki-setting-wgMSU_showAutoCat-name": "MsUpload show auto cat",
 	"managewiki-setting-wgMSU_showAutoCat-help": "If set, files uploaded while editing a category page will be added to that category.",
 	"managewiki-setting-wgMSU_useDragDrop-name": "MsUpload use drag and drop",
-	"managewiki-setting-wgMSU_useDragDrop-help": "If set, the drag & drop area will be shown."
+	"managewiki-setting-wgMSU_useDragDrop-help": "If set, the drag & drop area will be shown.",
+	"managewiki-setting-wgCookieWarningMoreUrl-name": "CookieWarning More Url",
+	"managewiki-setting-wgCookieWarningMoreUrl-help": "Set the URL to your 'More Information' page.",
+	"managewiki-setting-wgEchoCrossWikiNotifications-name": "Echo Cross Wiki Notifications",
+	"managewiki-setting-wgEchoCrossWikiNotifications-help": "Whether to enable the cross-wiki notifications feature.",
+	"managewiki-setting-wgEchoMentionStatusNotifications-name": "Echo Mention Status Notifications",
+	"managewiki-setting-wgEchoMentionStatusNotifications-help": "Enable mention success/failure notifications.",
+	"managewiki-setting-wmgSiteNoticeOptOut-name": "Opt out of global Miraheze notices",
+	"managewiki-setting-wmgSiteNoticeOptOut-help": "Opts your wiki out of global Miraheze notices, only showing important notices.",
+	"managewiki-setting-wgModerationNotificationEnable-name": "Moderation Notification Enable",
+	"managewiki-setting-wgModerationNotificationEnable-help": "If set, notification email will be sent to \"Moderation Email\" each time an edit is queued for moderation.",
+	"managewiki-setting-wgModerationNotificationNewOnly-name": "Moderation Notification New Only",
+	"managewiki-setting-wgModerationNotificationNewOnly-help": "If set, only notify about new pages (but not about edits in existing pages).",
+	"managewiki-setting-wgDismissableSiteNoticeForAnons-name": "Dismissable Site Notice For Anons",
+	"managewiki-setting-wgDismissableSiteNoticeForAnons-help": "This allows to set whether or not it should be possible for anonymous visitors of the wiki to dismiss the site notice shown."
   }
