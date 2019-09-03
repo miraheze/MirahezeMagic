@@ -121,10 +121,16 @@
 	"sitematrix-others": "Inne wiki Miraheze",
 	"specialpages-group-wikimanage": "Administracja wiki",
 	"termsofservice": "Warunki korzystania",
+	"settings-anti-spam": "Ochrona przed spamem",
+	"settings-beta": "Funkcje eksperymentalne",
 	"settings-chat": "Czat",
+	"settings-edit": "Edycja",
 	"settings-links": "Linki",
+	"settings-localisation": "Lokalizacja",
 	"settings-maps": "Mapy",
+	"settings-media": "Multimedia",
 	"settings-notifications": "Powiadomienia",
+	"settings-restricted": "Zastrzeżone",
 	"settings-styling": "Wygląd",
 	"extensions-skins": "Skórka"
 }
