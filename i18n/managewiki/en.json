@@ -221,5 +221,7 @@
 	"managewiki-setting-wgAllowUserJs-name": "Allow User Js",
 	"managewiki-setting-wgAllowUserJs-help": "Allow user JavaScript pages. For example User:<user>/*.js.",
 	"managewiki-setting-wgDefaultTheme-name": "Default Theme",
-	"managewiki-setting-wgDefaultTheme-help": "Sets which theme is displayed by default when users visit your wiki."
+	"managewiki-setting-wgDefaultTheme-help": "Sets which theme is displayed by default when users visit your wiki.",
+	"managewiki-setting-wgManageWikiForceSidebarLinks-name": "Force ManageWiki side bar links",
+	"managewiki-setting-wgManageWikiForceSidebarLinks-help": "Force the display of ManageWiki links in the sidebar for all users. The link text will differ for nonprivileged users."
   }
