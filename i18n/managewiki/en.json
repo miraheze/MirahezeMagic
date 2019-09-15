@@ -160,6 +160,8 @@
 	"managewiki-setting-wgMSU_showAutoCat-help": "If set, files uploaded while editing a category page will be added to that category.",
 	"managewiki-setting-wgMSU_useDragDrop-name": "MsUpload use drag and drop",
 	"managewiki-setting-wgMSU_useDragDrop-help": "If set, the drag & drop area will be shown.",
+	"managewiki-setting-wgCommonsMetadataForceRecalculate-name": "Force Remote Image Description Parsing",
+	"managewiki-setting-wgCommonsMetadataForceRecalculate-help": "Set this to true to force CommonsMetadata to parse the description page of the image and extract the metadata when using images from other wikis.",
 	"managewiki-setting-wgCookieWarningMoreUrl-name": "CookieWarning More Url",
 	"managewiki-setting-wgCookieWarningMoreUrl-help": "Set the URL to your 'More Information' page.",
 	"managewiki-setting-wgEchoCrossWikiNotifications-name": "Echo Cross Wiki Notifications",
