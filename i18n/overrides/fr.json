@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Reception123",
-			"Wladek92"
+			"Wladek92",
+			"Verdy p"
 		]
 	},
 	"miraheze-dberr-again": "Essayez d'attendre quelques minutes avant de recharger. Pour plus d'informations sur cette erreur veuillez consulter notre page twitter (Twitter.com/Miraheze) ou contacter l'administrateur système en vous connectant sur le canal #miraheze de irc.freenode.net",
 	"miraheze-centralauth-groupname": "Miraheze",
-	"miraheze-oathauth-step1": "'''IMPORTANT! Veuillez vous assurer de lire [[M:OATHAuth|OATHAuth]] avant d'autoriser ceci!'''<br/>Etape 1: télécharger un programme d'authentification à deux facteurs",
+	"miraheze-oathauth-step1": "'''IMPORTANT ! Veuillez vous assurer de lire <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> avant d’autoriser ceci !'''<br /> Étape 1 : télécharger un programme d’authentification à deux facteurs.",
 	"miraheze-prefs-help-realname": "Le vrai nom est facultatif. Si vous voulez le donner, il sera utilisé pour vous attribuer vos contributions. Aussi, en utilisant un wiki hébergé par Miraheze, vous acceptez les <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Conditions d'utilisation]</span> ainsi que la <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Politique de confidentialité]</span>",
 	"miraheze-shoutwiki-loginform-tos": "J'ai lu, compris, et je suis d'accord avec les [https://meta.miraheze.org/wiki/Terms_of_Use Conditions d'utilisation] et la [https://meta.miraheze.org/wiki/Privacy_Policy protection des données privées]",
 	"miraheze-shoutwiki-must-accept-tos": "Vous devez accepter les conditions d'utilisation pour pouvoir créer un compte !"
