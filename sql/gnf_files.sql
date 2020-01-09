@@ -8,3 +8,4 @@ CREATE TABLE /*_*/gnf_files (
   `files_timestamp`binary(14) NOT NULL
 ) /*$wgDBTableOptions*/;
 
+CREATE INDEX /*i*/files_dbname ON /*_*/gnf_files (files_dbname);
