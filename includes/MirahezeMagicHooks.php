@@ -71,6 +71,8 @@ class MirahezeMagicHooks {
 			'shoutwiki-loginform-tos',
 			'shoutwiki-must-accept-tos',
 			'oathauth-step1',
+			'centralauth-merge-method-admin-desc',
+			'centralauth-merge-method-admin',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
