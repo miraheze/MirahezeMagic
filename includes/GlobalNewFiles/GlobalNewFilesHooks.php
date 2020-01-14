@@ -18,8 +18,8 @@ class GlobalNewFilesHooks {
 				'files_name' => $uploadedFile->getName(),
 				'files_page' => $config->get( 'Server' ) . $uploadedFile->getDescriptionUrl(),
 				'files_private' => (int)$c->get( 'PrivateWiki' ),
+				'files_timestamp' => $dbw->timestamp(),
 				'files_url' => $uploadedFile->getViewURL(),
-				'files_timestamp' => $uploadedFile->getTimestamp(),
 				'files_user' => $uploadedFile->getUser()
 			]
 		);
