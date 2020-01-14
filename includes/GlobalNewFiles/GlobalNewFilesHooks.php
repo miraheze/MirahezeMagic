@@ -14,13 +14,14 @@ class GlobalNewFilesHooks {
 		$dbw->insert(
 			'gnf_files',
 			[
+				'files_timestamp' => $uploadedFile->getTimestamp(),
 				'files_dbname' => $config->get( 'DBname' ),
-				'files_url' => $uploadedFile->getViewURL(),
-				'files_page' => $config->get( 'Server' ) . $uploadedFile->getDescriptionUrl(),
 				'files_name' => $uploadedFile->getName(),
-				'files_user' => $uploadedFile->getUser(),
+				'files_page' => $config->get( 'Server' ) . $uploadedFile->getDescriptionUrl(),
 				'files_private' => (int)$c->get( 'PrivateWiki' ),
-				'files_timestamp' => $dbw->timestamp()
+				'files_timestamp' => $dbw->timestamp(),
+				'files_url' => $uploadedFile->getViewURL(),
+				'files_user' => $uploadedFile->getUser()
 			]
 		);
 	}
