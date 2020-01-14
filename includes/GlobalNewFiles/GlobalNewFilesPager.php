@@ -5,6 +5,13 @@ use MediaWiki\MediaWikiServices;
 class GlobalNewFilesPager extends TablePager {
 	function __construct() {
 		$this->mDb = self::getCreateWikiDatabase();
+
+		if ( $this->getRequest()->getText( 'sort', 'files_date' ) == 'files_date' ) {
+			$this->mDefaultDirection = IndexPager::DIR_DESCENDING;
+		} else {
+			$this->mDefaultDirection = IndexPager::DIR_ASCENDING;
+		}
+
 		parent::__construct( $this->getContext() );
 	}
 
