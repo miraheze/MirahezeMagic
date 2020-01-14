@@ -89,7 +89,7 @@ class GlobalNewFilesPager extends TablePager {
 	}
 
 	function getDefaultSort() {
-		return 'files_timestamp DESC';
+		return 'files_timestamp';
 	}
 
 	function isFieldSortable( $name ) {
