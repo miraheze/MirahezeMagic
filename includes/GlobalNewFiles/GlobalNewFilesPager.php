@@ -42,7 +42,7 @@ class GlobalNewFilesPager extends TablePager {
 
 		switch ( $name ) {
 			case 'files_timestamp':
-				$formatted = $row->files_timestamp;
+				$formatted = htmlspecialchars( $this->getLanguage()->userTimeAndDate( $row->files_timestamp, $this->getUser() ) );
 				break;
 			case 'files_dbname':
 				$formatted = $row->files_dbname;
