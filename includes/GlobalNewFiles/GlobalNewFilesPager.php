@@ -21,10 +21,11 @@ class GlobalNewFilesPager extends TablePager {
 		static $headers = null;
 
 		$headers = [
-			'files_dbname' => 'createwiki-label-dbname',
-			'files_name' => 'listfiles_name',
-			'files_url' => 'listfiles_thumb',
-			'files_user' => 'listfiles_user',
+			'files_timestamp' => 'listfiles_date',
+			'files_dbname'    => 'createwiki-label-dbname',
+			'files_name'      => 'listfiles_name',
+			'files_url'       => 'listfiles_thumb',
+			'files_user'      => 'listfiles_user',
 		];
 
 		foreach ( $headers as &$msg ) {
@@ -40,6 +41,9 @@ class GlobalNewFilesPager extends TablePager {
 		$wiki = $row->files_dbname;
 
 		switch ( $name ) {
+			case 'files_timestamp':
+				$formatted = $row->files_timestamp;
+				break;
 			case 'files_dbname':
 				$formatted = $row->files_dbname;
 				break;
