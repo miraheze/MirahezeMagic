@@ -70,7 +70,7 @@ class GlobalNewFilesPager extends TablePager {
 		$info = [
 			'tables' => [ 'gnf_files' ],
 			'fields' => [ 'files_dbname', 'files_url', 'files_page', 'files_name', 'files_user', 'files_private', 'files_timestamp' ],
-			'conds' => [],
+			'conds' => [ 'ORDER BY files_timestamp' ],
 			'joins_conds' => [],
 		];
 
