@@ -10,8 +10,6 @@ class GlobalNewFilesHooks {
 		$uploadedFile = $uploadBase->getLocalFile();
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
-		
-		$c =  new GlobalVarConfig( 'wmg' );
 
 		$dbw->insert(
 			'gnf_files',
