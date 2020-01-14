@@ -70,7 +70,7 @@ class GlobalNewFilesPager extends TablePager {
 		$info = [
 			'tables' => [ 'gnf_files' ],
 			'fields' => [ 'files_dbname', 'files_url', 'files_page', 'files_name', 'files_user', 'files_private', 'files_timestamp' ],
-			'conds' => [ 'ORDER BY files_timestamp' ],
+			'conds' => [],
 			'joins_conds' => [],
 		];
 
@@ -82,7 +82,7 @@ class GlobalNewFilesPager extends TablePager {
 	}
 
 	function getDefaultSort() {
-		return 'files_timestamp';
+		return 'files_timestamp DESC';
 	}
 
 	function isFieldSortable( $name ) {
