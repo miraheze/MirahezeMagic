@@ -81,7 +81,8 @@ class GlobalNewFilesPager extends TablePager {
 			'joins_conds' => [],
 		];
 
-		if ( !$config->get( 'User' )->isAllowed( 'viewglobalprivatefiles' ) ) {
+		$mwService = MediaWikiServices::getInstance()->getPermissionManager();
+		if ( !$mwService->userHasRight( $config->get( 'User' ), 'viewglobalprivatefiles' ) ) {
 			$info['conds']['files_private'] = 0;
 		}
 
