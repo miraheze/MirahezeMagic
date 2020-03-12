@@ -5,7 +5,7 @@
 		]
 	},
 	"miraheze-dberr-again": "Birkaç dakika beklemeyi ve tekrar yüklemeyi deneyin. Bu hata hakkında daha fazla bilgi için lütfen twitter sayfamıza (Twitter.com/Miraheze) göz atın veya irc.freenode.net adresindeki #miraheze ağına bağlanarak sistem yöneticilerine başvurun.",
-	"miraheze-oathauth-step1": "'''ÖNEMLİ! Lütfen bunu etkinleştirmeden önce <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> okumaya dikkat edin!'''<br />Adım 1: İki tane faktör doğrulama programı indirin",
+	"miraheze-oathauth-step1": "ÖNEMLİ! Lütfen etkinleştirmeden önce OATHAuth sayfasını okuduğunuzdan emin olun! 1. Adım: İki faktörlü bir kimlik doğrulama programı indirin",
 	"miraheze-prefs-help-realname": "Gerçek isim isteğe bağlıdır. Bunu sağlamayı seçerseniz, bu size işinize atıfta bulunmak için kullanılacaktır. Ayrıca, Miraheze tarafından barındırılan bir wiki kullanarak, <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Kullanım Koşulları]</span> kabul edip <span =\"plainlinks\"> [https://meta.miraheze.org/wiki/Privacy_Policy Gizlilik Politikası] </span> sınıfını kabul edin.",
 	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use Kullanım Şartları] ve [https://meta.miraheze.org/wiki/Privacy_Policy Gizlilik Politikası]'nı okudum, anladım ve kabul ediyorum.",
 	"miraheze-shoutwiki-must-accept-tos": "Hesap açabilmek için Kullanım Koşullarını kabul etmelisin!",
