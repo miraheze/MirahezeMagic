@@ -13,5 +13,7 @@
 	"miraheze-shoutwiki-loginform-tos": "I have read, understood and agree to the [https://meta.miraheze.org/wiki/Terms_of_Use Terms of Use] and [https://meta.miraheze.org/wiki/Privacy_Policy Privacy Policy]",
 	"miraheze-shoutwiki-must-accept-tos": "You must accept the Terms of Use in order to be able to create an account!",
 	"miraheze-centralauth-merge-method-admin": "Manually Merged Account",
-	"miraheze-centralauth-merge-method-admin-desc": "This account was manually merged by a Sysadmin or Steward. This may have been due to a technical issue in a rename or merge process."
+	"miraheze-centralauth-merge-method-admin-desc": "This account was manually merged by a Sysadmin or Steward. This may have been due to a technical issue in a rename or merge process.",
+	"miraheze-restriction-protect": "protect",
+	"miraheze-restriction-delete": "delete"
 }
