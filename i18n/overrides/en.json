@@ -14,6 +14,6 @@
 	"miraheze-shoutwiki-must-accept-tos": "You must accept the Terms of Use in order to be able to create an account!",
 	"miraheze-centralauth-merge-method-admin": "Manually Merged Account",
 	"miraheze-centralauth-merge-method-admin-desc": "This account was manually merged by a Sysadmin or Steward. This may have been due to a technical issue in a rename or merge process.",
-	"miraheze-restriction-protect": "protect",
-	"miraheze-restriction-delete": "delete"
+	"miraheze-restriction-protect": "Protect",
+	"miraheze-restriction-delete": "Delete"
 }
