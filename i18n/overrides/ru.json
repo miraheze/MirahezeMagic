@@ -3,11 +3,12 @@
 		"authors": [
 			"Vlad5250",
 			"Nk88",
-			"Katunchik"
+			"Katunchik",
+			"Alexander Yukal"
 		]
 	},
 	"miraheze-dberr-again": "Попробуйте подождать несколько минут и перезагрузить. Для получения дополнительной информации об этой ошибке, пожалуйста, посетите нашу страницу в Twitter (Twitter.com/Miraheze) или свяжитесь с системными администраторами, подключившись к #miraheze на irc.freenode.net.",
-	"miraheze-oathauth-step1": "'''ВАЖНО! Прочтите <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span>, прежде чем включить эту возможность!'''<br/>Шаг 1: Загрузите программу двухфакторной аутентификации",
+	"miraheze-oathauth-step1": "ВАЖНО! Пожалуйста, не забудьте прочитать страницу OATHAuth, прежде чем включить это! Шаг 1: Загрузите программу двухфакторной аутентификации",
 	"miraheze-shoutwiki-loginform-tos": "Я прочитал, понял [https://meta.miraheze.org/wiki/Terms_of_Use Условия использования] и [https://meta.miraheze.org/wiki/Privacy_Policy Политику конфиденциальности], и соглашаюсь.",
 	"miraheze-shoutwiki-must-accept-tos": "Вы должны принять Условия использования, чтобы создать учётную запись!"
 }
