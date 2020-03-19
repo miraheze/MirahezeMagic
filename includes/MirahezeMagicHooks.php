@@ -73,6 +73,8 @@ class MirahezeMagicHooks {
 			'oathauth-step1',
 			'centralauth-merge-method-admin-desc',
 			'centralauth-merge-method-admin',
+			'restriction-protect',
+			'restriction-delete',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
