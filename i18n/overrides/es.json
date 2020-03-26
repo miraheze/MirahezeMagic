@@ -11,5 +11,7 @@
 	"miraheze-oathauth-step1": "'''IMPORTANTE: es necesario leer <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> antes de activar esta opción.'''<br/>Paso 1: descargar un programa de autenticación en dos fases",
 	"miraheze-prefs-help-realname": "El nombre real es opcional. Si tu eliges proveerlo, será usado para dar atribución a tu trabajo. Además, si usas un wiki alojado por Miraheze, estás de acuerdo con los <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Términos de Uso]</span> y aceptas la <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Política de Privacidad]</span>",
 	"miraheze-shoutwiki-loginform-tos": "Ya lo he leído, entiendo y acepto los [https://meta.miraheze.org/wiki/Terms_of_Use Términos de Uso] y la [https://meta.miraheze.org/wiki/Privacy_Policy Política de Privacidad]",
-	"miraheze-shoutwiki-must-accept-tos": "¡Debes aceptar los Términos de Uso para poder crear una cuenta!"
+	"miraheze-shoutwiki-must-accept-tos": "¡Debes aceptar los Términos de Uso para poder crear una cuenta!",
+	"miraheze-restriction-protect": "Proteger",
+	"miraheze-restriction-delete": "Eliminar"
 }

@@ -10,5 +10,7 @@
 	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use/tr Kullanım Şartları] ve [https://meta.miraheze.org/wiki/Privacy_Policy/tr Gizlilik Politikası]'nı okudum, anladım ve kabul ediyorum.",
 	"miraheze-shoutwiki-must-accept-tos": "Hesap açabilmek için Kullanım Koşullarını kabul etmelisin!",
 	"miraheze-centralauth-merge-method-admin": "Manüel Olarak Birleştirilmiş Hesap",
-	"miraheze-centralauth-merge-method-admin-desc": "Bu hesap bir Sistem Hizmetlisi veya Kahya tarafından manüel olarak birleştirildi. Bunun nedeni, yeniden adlandırma veya birleştirme işlemindeki teknik bir sorun olabilir."
+	"miraheze-centralauth-merge-method-admin-desc": "Bu hesap bir Sistem Hizmetlisi veya Kahya tarafından manüel olarak birleştirildi. Bunun nedeni, yeniden adlandırma veya birleştirme işlemindeki teknik bir sorun olabilir.",
+	"miraheze-restriction-protect": "Koru",
+	"miraheze-restriction-delete": "Sil"
 }

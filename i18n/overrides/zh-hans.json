@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"A Chinese Wikipedian",
-			"沈澄心"
+			"沈澄心",
+			"铁桶"
 		]
 	},
 	"miraheze-shoutwiki-loginform-tos": "我已阅读并同意\n [https://meta.miraheze.org/wiki/Terms_of_Use 使用协议] 以及 [https://meta.miraheze.org/wiki/Privacy_Policy 服务政策]",
 	"miraheze-shoutwiki-must-accept-tos": "您一定要先接受使用协议才可以创建新的账户。",
-	"miraheze-centralauth-merge-method-admin": "手动合并账号"
+	"miraheze-centralauth-merge-method-admin": "手动合并账号",
+	"miraheze-restriction-delete": "删除"
 }

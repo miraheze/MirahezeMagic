@@ -10,5 +10,7 @@
 	"miraheze-shoutwiki-loginform-tos": "我已讀過、了解以上內容，並同意[https://meta.miraheze.org/wiki/Terms_of_Use 使用條款]與[https://meta.miraheze.org/wiki/Privacy_Policy 隱私方針]",
 	"miraheze-shoutwiki-must-accept-tos": "您必須接受使用條款才能夠建立帳號！",
 	"miraheze-centralauth-merge-method-admin": "手動合併帳號",
-	"miraheze-centralauth-merge-method-admin-desc": "此帳號已被系統管理員或監管員給手動合併。這出自於在重新命名或合併的過程中出現一些技術上問題。"
+	"miraheze-centralauth-merge-method-admin-desc": "此帳號已被系統管理員或監管員給手動合併。這出自於在重新命名或合併的過程中出現一些技術上問題。",
+	"miraheze-restriction-protect": "保護",
+	"miraheze-restriction-delete": "刪除"
 }

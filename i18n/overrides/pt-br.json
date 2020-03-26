@@ -11,5 +11,7 @@
 	"miraheze-shoutwiki-loginform-tos": "Eu li, compreendi e concordo com o [https://meta.miraheze.org/wiki/Terms_of_Use/pt-br Termos de uso] e [https://meta.miraheze.org/wiki/Privacy_Policy/pt-br Política de Privacidade]",
 	"miraheze-shoutwiki-must-accept-tos": "Você deve aceitar os Termos de Uso para poder criar uma conta!",
 	"miraheze-centralauth-merge-method-admin": "Conta mesclada manualmente",
-	"miraheze-centralauth-merge-method-admin-desc": "Esta conta foi mesclada manualmente por um Sysadmin ou Steward. Isso pode ter ocorrido devido a um problema técnico em um processo de renomeação ou mesclagem."
+	"miraheze-centralauth-merge-method-admin-desc": "Esta conta foi mesclada manualmente por um Sysadmin ou Steward. Isso pode ter ocorrido devido a um problema técnico em um processo de renomeação ou mesclagem.",
+	"miraheze-restriction-protect": "Proteger",
+	"miraheze-restriction-delete": "Excluir"
 }
