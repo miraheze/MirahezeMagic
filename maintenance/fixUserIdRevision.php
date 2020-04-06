@@ -34,7 +34,7 @@ class FixUserIdRevision extends Maintenance {
         }
 
         public function execute() {
-                $dbr = wfGetDB( DB_SLAVE );
+                $dbr = wfGetDB( DB_REPLICA );
 
                 $start = (int)$dbr->selectField( 'revision', 'MIN(rev_id)', false, __METHOD__ );
                 $end = (int)$dbr->selectField( 'revision', 'MAX(rev_id)', false, __METHOD__ );
@@ -89,7 +89,7 @@ class FixUserIdRevision extends Maintenance {
                 if ( isset( $this->mUserCache[$username] ) ) {
                         $goodUserId = $this->mUserCache[$username];
                 } else {
-			$dbr = wfGetDB( DB_SLAVE );
+			$dbr = wfGetDB( DB_REPLICA );
 
                         $userId = $dbr->selectField(
                                         'user',
@@ -112,7 +112,7 @@ class FixUserIdRevision extends Maintenance {
         }
 
 	protected function fixRevEntry( $row ) {
-                $dbr = wfGetDB( DB_SLAVE );
+                $dbr = wfGetDB( DB_REPLICA );
                 $dbw = wfGetDB( DB_MASTER );
 
                 if ( isset( $this->mUserCache[$row->rev_user_text] ) ) {

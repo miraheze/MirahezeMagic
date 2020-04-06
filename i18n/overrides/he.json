@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ghsuvr"
+		]
+	},
+	"miraheze-centralauth-merge-method-admin": "חשבון ממוזג ידנית",
+	"miraheze-centralauth-merge-method-admin-desc": "חשבון זה מוזג ידנית על ידי מנהל מערכת או סדרן. ייתכן שזה נבע מבעיה טכנית בתהליך שינוי השם או המיזוג"
+}

@@ -1,11 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"Shirayuki"
+			"Shirayuki",
+			"Buntschann",
+			"Kkairri"
 		]
 	},
 	"miraheze-categories": "カテゴリ",
+	"miraheze-donate": "寄付",
 	"miraheze-helpcenter": "Miraheze について",
+	"miraheze-requestfeatures": "ウィキの機能を申請する",
+	"miraheze-requestwiki": "ウィキをリクエストする",
+	"mirahezesurvey": "Miraheze 2019年次調査",
+	"miraheze-survey-agree-strong": "強く同意",
+	"miraheze-survey-agree": "同意",
+	"miraheze-survey-disagree-strong": "強く不同意",
+	"miraheze-survey-disagree": "不同意",
+	"miraheze-survey-neutral": "中立",
+	"miraheze-survey-no": "いいえ",
+	"miraheze-survey-yes": "はい",
 	"group-steward": "スチュワード",
 	"group-steward-member": "{{GENDER:$1|スチュワード}}",
 	"group-sysadmin": "システム管理者",
@@ -23,5 +36,6 @@
 	"group-translationadmin": "翻訳管理者",
 	"group-translationadmin-member": "翻訳管理者",
 	"restriction-delete": "削除",
-	"termsofservice": "利用規約"
+	"termsofservice": "利用規約",
+	"settings-recentchanges": "最近の変更"
 }

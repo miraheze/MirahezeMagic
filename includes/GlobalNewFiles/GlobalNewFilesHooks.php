@@ -17,12 +17,12 @@ class GlobalNewFilesHooks {
 			'gnf_files',
 			[
 				'files_dbname' => $config->get( 'DBname' ),
-				'files_url' => $uploadedFile->getViewURL(),
-				'files_page' => $config->get( 'Server' ) . $uploadedFile->getDescriptionUrl(),
 				'files_name' => $uploadedFile->getName(),
-				'files_user' => $uploadedFile->getUser(),
+				'files_page' => $config->get( 'Server' ) . $uploadedFile->getDescriptionUrl(),
 				'files_private' => (int)$c->get( 'Private' ),
-				'files_timestamp' => $dbw->timestamp()
+				'files_timestamp' => $dbw->timestamp(),
+				'files_url' => $uploadedFile->getViewURL(),
+				'files_user' => $uploadedFile->getUser()
 			]
 		);
 	}
@@ -48,23 +48,23 @@ class GlobalNewFilesHooks {
 			]
 		);
 	}
-	
+
 	public static function onLoadExtensionSchemaUpdates( DatabaseUpdater $updater ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		if ( $config->get( 'CreateWikiDatabase' ) === $config->get( 'DBname' ) ) {
-			$updater->addExtensionTable( 
+			$updater->addExtensionTable(
 				'gnf_files',
-				__DIR__ . '/../../sql/gnf_files.sql' 
+				__DIR__ . '/../../sql/gnf_files.sql'
 			);
 
-			$updater->modifyField( 
-				'gnf_files', 
-				'files_timestamp', 
+			$updater->modifyField(
+				'gnf_files',
+				'files_timestamp',
 				__DIR__ . '/../../sql/patch-gnf_files-binary.sql' 
 			);
 		}
-		
+
 		return true;
 	}
 

@@ -5,6 +5,13 @@ use MediaWiki\MediaWikiServices;
 class GlobalNewFilesPager extends TablePager {
 	function __construct() {
 		$this->mDb = self::getCreateWikiDatabase();
+
+		if ( $this->getRequest()->getText( 'sort', 'files_date' ) == 'files_date' ) {
+			$this->mDefaultDirection = IndexPager::DIR_DESCENDING;
+		} else {
+			$this->mDefaultDirection = IndexPager::DIR_ASCENDING;
+		}
+
 		parent::__construct( $this->getContext() );
 	}
 
@@ -21,10 +28,11 @@ class GlobalNewFilesPager extends TablePager {
 		static $headers = null;
 
 		$headers = [
-			'files_dbname' => 'createwiki-label-dbname',
-			'files_name' => 'listfiles_name',
-			'files_url' => 'listfiles_thumb',
-			'files_user' => 'listfiles_user',
+			'files_timestamp' => 'listfiles_date',
+			'files_dbname'    => 'createwiki-label-dbname',
+			'files_name'      => 'listfiles_name',
+			'files_url'       => 'listfiles_thumb',
+			'files_user'      => 'listfiles_user',
 		];
 
 		foreach ( $headers as &$msg ) {
@@ -40,6 +48,9 @@ class GlobalNewFilesPager extends TablePager {
 		$wiki = $row->files_dbname;
 
 		switch ( $name ) {
+			case 'files_timestamp':
+				$formatted = htmlspecialchars( $this->getLanguage()->userTimeAndDate( $row->files_timestamp, $this->getUser() ) );
+				break;
 			case 'files_dbname':
 				$formatted = $row->files_dbname;
 				break;
@@ -70,7 +81,8 @@ class GlobalNewFilesPager extends TablePager {
 			'joins_conds' => [],
 		];
 
-		if ( !$config->get( 'User' )->isAllowed( 'viewglobalprivatefiles' ) ) {
+		$mwService = MediaWikiServices::getInstance()->getPermissionManager();
+		if ( !$mwService->userHasRight( $config->get( 'User' ), 'viewglobalprivatefiles' ) ) {
 			$info['conds']['files_private'] = 0;
 		}
 

@@ -3,7 +3,8 @@
 		"authors": [
 			"Meno25",
 			"ديفيد",
-			"شريف"
+			"شريف",
+			"محمد أحمد عبد الفتاح"
 		]
 	},
 	"centralauth-groupname": "ميراهيز",
@@ -129,6 +130,7 @@
 	"settings-maps": "خرائط",
 	"settings-media": "الوسائط",
 	"settings-notifications": "الإشعارات",
+	"settings-recentchanges": "أحدث التغييرات",
 	"settings-restricted": "محدد",
 	"settings-styling": "تصميم",
 	"extensions-skins": "الواجهة"

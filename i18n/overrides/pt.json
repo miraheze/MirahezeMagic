@@ -5,7 +5,7 @@
 		]
 	},
 	"miraheze-dberr-again": "Tente aguardar alguns minutos e recarregar. Para mais informação sobre este erro, visite a nossa página no Twitter (Twitter.com/Miraheze) ou contacte os administradores do sistema ligando-se a #miraheze no irc.freenode.net",
-	"miraheze-oathauth-step1": "'''IMPORTANTE! Certifique-se de que leu [[M:OATHAuth|OATHAuth]] antes de ativar esta funcionalidade!'''<br/>1.º passo: descarregar um programa de autenticação de dois fatores",
+	"miraheze-oathauth-step1": "'''IMPORTANTE! Certifique-se de que leu <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> antes de ativar esta funcionalidade!'''<br/>1.º passo: descarregar um programa de autenticação de dois fatores",
 	"miraheze-prefs-help-realname": "O nome verdadeiro é opcional. Se optar por fornecê-lo, ele será usado para atribuir as suas contribuições. Adicionalmente, ao usar uma wiki alojada pelo Miraheze está a concordar com as <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use condições de utilização]</span> e a aceitar as <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy normas de privacidade]</span>",
 	"miraheze-shoutwiki-loginform-tos": "Li, compreendi e concordo com as [https://meta.miraheze.org/wiki/Terms_of_Use condições de utilização] e com as [https://meta.miraheze.org/wiki/Privacy_Policy/pt-br normas de privacidade]",
 	"miraheze-shoutwiki-must-accept-tos": "Para poder criar uma conta tem de aceitar as condições de utilização!"

@@ -1,12 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Railfail536"
+			"Railfail536",
+			"Rail"
 		]
 	},
 	"miraheze-dberr-again": "Spróbuj poczekać kilka minut a następnie przeładuj stronę. Aby uzyskać więcej informacji o tym błędzie sprawdź naszą stronę na Twitterze (twitter.com/Miraheze) lub skontaktuj się z administratorami systemu na kanale #miraheze w sieci irc.freenode.net",
-	"miraheze-oathauth-step1": "'''UWAGA! Upewnij się że {{GENDER:|przeczytałeś|przeczytałaś}} artykuł ''[[M:OATHAuth|OATHAuth]]'' przed włączeniem tej funkcji!'''<br />Krok 1: Pobierz program do weryfikacji dwuetapowej",
+	"miraheze-oathauth-step1": "'''UWAGA! Upewnij się że {{GENDER:|przeczytałeś|przeczytałaś}} artykuł <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> przed włączeniem tej funkcji!'''<br />Krok 1: Pobierz program do weryfikacji dwuetapowej",
 	"miraheze-prefs-help-realname": "Imię i nazwisko jest opcjonalne. Jeśli zdecydujesz się je podać, zostaną użyte, by udokumentować twoje autorstwo. Ponadto korzystając z wiki hostowanej przez Miraheze akceptujesz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania]</span> oraz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]</span>",
 	"miraheze-shoutwiki-loginform-tos": "Przeczytałem, zrozumiałem oraz akceptuję [https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania] i [https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]",
-	"miraheze-shoutwiki-must-accept-tos": "Musisz zaakceptować Zasady użytkowania aby móc założyć konto!"
+	"miraheze-shoutwiki-must-accept-tos": "Musisz zaakceptować Zasady użytkowania aby móc założyć konto!",
+	"miraheze-restriction-protect": "Zabezpiecz",
+	"miraheze-restriction-delete": "Usuń"
 }

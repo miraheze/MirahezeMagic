@@ -34,14 +34,6 @@ class MirahezeMagicHooks {
 			$DBname,
 			'--force'
 		)->execute();
-
-		// Elasticsearch
-		Shell::command(
-			'/usr/bin/php',
-			'/srv/mediawiki/w/extensions/CirrusSearch/maintenance/updateSearchIndexConfig.php',
-			'--wiki',
-			$DBname
-		)->execute();
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
@@ -79,6 +71,10 @@ class MirahezeMagicHooks {
 			'shoutwiki-loginform-tos',
 			'shoutwiki-must-accept-tos',
 			'oathauth-step1',
+			'centralauth-merge-method-admin-desc',
+			'centralauth-merge-method-admin',
+			'restriction-protect',
+			'restriction-delete',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
