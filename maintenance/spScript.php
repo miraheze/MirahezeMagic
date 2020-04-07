@@ -9,7 +9,7 @@ class spScript extends Maintenance {
 
 	public function execute() {
 		global $wgCreateWikiDatabase, $wgDBname;
-		
+
 		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
 
 		$res = $dbw->select(
@@ -19,7 +19,7 @@ class spScript extends Maintenance {
 				'wiki_settings',
 			],
 			[
-				'wiki_dbame' => $wgDBname
+				'wiki_dbname' => $wgDBname
 			]
 		);
 
