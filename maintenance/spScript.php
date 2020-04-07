@@ -8,7 +8,7 @@ class spScript extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgDBname;
+		global $wgCreateWikiDatabase, $wgDBname;
 		
 		$up = $this->getSettingsValue( 'wgUserProfileDisplay', $wgDBname );
 		
