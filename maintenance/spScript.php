@@ -20,7 +20,7 @@ class spScript extends Maintenance {
 			],
 			[
 				'wiki_dbame' => $wgDBname
-			],
+			]
 		);
 
 		foreach ( $res as $row ) {
