@@ -10,8 +10,8 @@
 	"miraheze-dberr-again": "몇 분 기다렸다가 다시 로드해보십시오. 이 오류에 관한 더 자세한 정보의 경우 저희 트위터 문서(Twitter.com/Miraheze)를 참고하거나 irc.freenode.net의 #miraheze에 연결하여 시스템 관리자에게 문의하십시오",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-oathauth-step1": "중요! 이것을 활성화하기 전에 OATHAuth 페이지를 읽어 주십시오!   1단계: 2요소 인증 프로그램을 다운로드합니다",
-	"miraheze-prefs-help-realname": "실명은 선택 사항입니다. 실명을 입력하면 당신의 기여에 대한 저작자 표시에 쓰이게 될 수 있습니다. 더불어, Miraheze에 호스팅된 위키를 사용함으로써 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 이용 약관]</span>과 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy 개인정보처리방침]</span>에 동의하는 것입니다.",
-	"miraheze-shoutwiki-loginform-tos": "저는 [https://meta.miraheze.org/wiki/Terms_of_Use 이용 약관]과 [https://meta.miraheze.org/wiki/Privacy_Policy 개인정보처리방침]을 읽었고 이해하며 동의합니다",
+	"miraheze-prefs-help-realname": "실명은 선택 사항입니다. 실명을 입력하면 당신의 기여에 대한 저작자 표시에 쓰이게 될 수 있습니다. 더불어, Miraheze에 호스팅된 위키를 사용함으로써 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 이용 약관]</span>과 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy 개인정보보호정책]</span>에 동의하는 것입니다.",
+	"miraheze-shoutwiki-loginform-tos": "저는 [https://meta.miraheze.org/wiki/Terms_of_Use 이용 약관]과 [https://meta.miraheze.org/wiki/Privacy_Policy 개인정보보호정책]을 읽었고 이해하며 동의합니다",
 	"miraheze-shoutwiki-must-accept-tos": "계정을 만들려면 이용 약관을 수락해야 합니다!",
 	"miraheze-restriction-protect": "보호",
 	"miraheze-restriction-delete": "삭제"
