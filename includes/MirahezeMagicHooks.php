@@ -212,7 +212,7 @@ class MirahezeMagicHooks {
 		global $wmgRedisSettings;
 
 		$redis = new Redis();
-		$explode = explode( ':' $wmgRedisSettings['jobrunner']['server'] );
+		$explode = explode( ':', $wmgRedisSettings['jobrunner']['server'] );
 		$redis->connect( $explode[0], $explode[1] );
 		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
 		$redis->delete( $redis->keys( $key ) );
