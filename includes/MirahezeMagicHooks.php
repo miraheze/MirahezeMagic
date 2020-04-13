@@ -40,12 +40,16 @@ class MirahezeMagicHooks {
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
+
+		static::removeRedisKey( "*${DBname}*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 		if ( file_exists( "/mnt/mediawiki-static/$old" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 		}
+
+		static::removeRedisKey( "*{$old}*" );
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
@@ -202,5 +206,15 @@ class MirahezeMagicHooks {
 				}
 			}
 		}
+	}
+	
+	public static function removeRedisKey( string $key ) {
+		global $wmgRedisSettings;
+
+		$redis = new Redis();
+		$redisServer = explode( ':', $wmgRedisSettings['jobrunner']['server'] );
+		$redis->connect( $redisServer[0], $redisServer[1] );
+		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
+		$redis->delete( $redis->keys( $key ) );
 	}
 }
