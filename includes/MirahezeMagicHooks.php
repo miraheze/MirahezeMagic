@@ -43,19 +43,7 @@ class MirahezeMagicHooks {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
 
-		Shell::command(
-			'/usr/bin/redis-cli',
-			'-a',
-			$wmgRedisPassword,
-			'--scan',
-			"--pattern users:*{$DBname}*",
-			'|',
-			'xargs',
-			'/usr/bin/redis-cli',
-			'-a',
-			$wmgRedisPassword,
-			'del'
-		)->execute();
+		$this->removeRedisKey( "*{$DBname}*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
@@ -65,19 +53,7 @@ class MirahezeMagicHooks {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 		}
 
-		Shell::command(
-			'/usr/bin/redis-cli',
-			'-a',
-			$wmgRedisPassword,
-			'--scan',
-			"--pattern users:*{$old}*",
-			'|',
-			'xargs',
-			'/usr/bin/redis-cli',
-			'-a',
-			$wmgRedisPassword,
-			'del'
-		)->execute();
+		$this->removeRedisKey( "*{$old}*" );
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
@@ -234,5 +210,15 @@ class MirahezeMagicHooks {
 				}
 			}
 		}
+	}
+	
+	public function removeRedisKey( string $key ) {
+		global $wmgRedisPassword;
+
+		$redis = new Redis();
+		// JobRunner redis, update when changing
+		$redis->connect( '51.89.160.135', 6379 );
+		$redis->auth( $wmgRedisPassword );
+		$redis->delete( $redis->keys( $key ) );
 	}
 }
