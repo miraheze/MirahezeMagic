@@ -209,12 +209,12 @@ class MirahezeMagicHooks {
 	}
 	
 	public static function removeRedisKey( string $key ) {
-		global $wmgRedisJobrunnerIp, $wmgRedisJobrunnerPort, $wmgRedisPassword;
+		global $wmgRedisSettings;
 
 		$redis = new Redis();
-		// JobRunner redis, update when changing
-		$redis->connect( $wmgRedisJobrunnerIp, $wmgRedisJobrunnerPort );
-		$redis->auth( $wmgRedisPassword );
+		$explode = explode( ':' $wmgRedisSettings['jobrunner']['server'] );
+		$redis->connect( $explode[0], $explode[1] );
+		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
 		$redis->delete( $redis->keys( $key ) );
 	}
 }
