@@ -40,12 +40,40 @@ class MirahezeMagicHooks {
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
+
+		Shell::command(
+			'/usr/bin/redis-cli',
+			'-a',
+			$wmgRedisPassword,
+			'--scan',
+			"--pattern users:*{$DBname}*",
+			'|',
+			'xargs',
+			'/usr/bin/redis-cli',
+			'-a',
+			$wmgRedisPassword,
+			'del'
+		)->execute();
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 		if ( file_exists( "/mnt/mediawiki-static/$old" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 		}
+
+		Shell::command(
+			'/usr/bin/redis-cli',
+			'-a',
+			$wmgRedisPassword,
+			'--scan',
+			"--pattern users:*{$old}*",
+			'|',
+			'xargs',
+			'/usr/bin/redis-cli',
+			'-a',
+			$wmgRedisPassword,
+			'del'
+		)->execute();
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
