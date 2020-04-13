@@ -41,7 +41,7 @@ class MirahezeMagicHooks {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
 
-		$this->removeRedisKey( "*{$DBname}*" );
+		self::removeRedisKey( "*${DBname}*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
@@ -49,7 +49,7 @@ class MirahezeMagicHooks {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 		}
 
-		$this->removeRedisKey( "*{$old}*" );
+		self::removeRedisKey( "*{$old}*" );
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
@@ -208,12 +208,12 @@ class MirahezeMagicHooks {
 		}
 	}
 	
-	public function removeRedisKey( string $key ) {
-		global $wmgRedisPassword;
+	public static function removeRedisKey( string $key ) {
+		global $wmgRedisJobrunnerIp, $wmgRedisJobrunnerPort, $wmgRedisPassword;
 
 		$redis = new Redis();
 		// JobRunner redis, update when changing
-		$redis->connect( '51.89.160.135', 6379 );
+		$redis->connect( $wmgRedisJobrunnerIp, $wmgRedisJobrunnerPort );
 		$redis->auth( $wmgRedisPassword );
 		$redis->delete( $redis->keys( $key ) );
 	}
