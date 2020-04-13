@@ -37,6 +37,8 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
+		global $wmgRedisPassword;
+
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
@@ -57,6 +59,8 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
+		global $wmgRedisPassword;
+
 		if ( file_exists( "/mnt/mediawiki-static/$old" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
 		}
