@@ -8,7 +8,7 @@ class addWikiToServices extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgCreateWikiCacheDirectory, $wgServicesRepo;
+		global $wgCreateWikiDatabase, $wgServicesRepo;
 
 		$allWikis = [];
 
@@ -32,6 +32,8 @@ class addWikiToServices extends Maintenance {
 
 			foreach ( $res as $row ) {
 				$DBname = $row->wiki_dbname;
+				$domain = $row->wiki_url;
+
 				$mwSettings = $dbw->selectRow(
 					'mw_settings',
 					'*',
@@ -39,8 +41,6 @@ class addWikiToServices extends Maintenance {
 						's_dbname' => $DBname
 					]
 				);
-
-				$domain = $row->wiki_url;
 
 				if ( !is_null( $mwSettings->s_extensions ) ) {
 					$visualeditor = $this->hasExtension( 'visualeditor', $mwSettings->s_extensions );
@@ -61,7 +61,7 @@ class addWikiToServices extends Maintenance {
 	}
 
 	private function hasExtension( $extension, $extensionjson ) {
-		$extensionsarray = json_decode( $extensionjson, true )
+		$extensionsarray = json_decode( $extensionjson, true );
 		return in_array( $extension, (array)$extensionsarray );
 	}
 
