@@ -43,11 +43,13 @@ class addWikiToServices extends Maintenance {
 				);
 
 				if ( !is_null( $mwSettings->s_extensions ) ) {
-					$visualeditor = $this->hasExtension( 'visualeditor', $mwSettings->s_extensions );
-					$flow = $this->hasExtension( 'flow', $mwSettings->s_extensions );
+					$extensionsArray = json_decode( $mwSettings->s_extensions, true );
+
+					$visualeditor = $this->hasExtension( 'visualeditor', $extensionsArray );
+					$flow = $this->hasExtension( 'flow', $extensionsArray );
 					// Collection installs Electron inaddition now.
-					$electron = $this->hasExtension( 'collection', $mwSettings->s_extensions );
-					$citoid = $this->hasExtension( 'citoid', $mwSettings->s_extensions );
+					$electron = $this->hasExtension( 'collection', $extensionsArray );
+					$citoid = $this->hasExtension( 'citoid', $extensionsArray );
 
 					if ( $visualeditor || $flow || $electron || $citoid ) {
 						$servicesvalue = !is_null( $domain ) ? str_replace('https://', '', "'" . $domain . "'") : 'true';
@@ -60,8 +62,7 @@ class addWikiToServices extends Maintenance {
 		}
 	}
 
-	private function hasExtension( $extension, $extensionjson ) {
-		$extensionsarray = json_decode( $extensionjson, true );
+	private function hasExtension( $extension, $extensionsarray ) {
 		return in_array( $extension, (array)$extensionsarray );
 	}
 
