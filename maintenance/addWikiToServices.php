@@ -8,48 +8,64 @@ class addWikiToServices extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgServicesRepo;
+		global $wgCreateWikiDatabase, $wgServicesRepo;
 
-		$allWikis = array();
+		$allWikis = [];
 
-		if ( file_exists("$wgServicesRepo/services.yaml") ) {
-			$wikis = file( '/srv/mediawiki/dblist/all.dblist' );
-			foreach ( $wikis as $wiki ) {
-				$wiki = explode( '|', $wiki);
-				$DBname = substr( $wiki[0], 0, -4 );
-				$domain = $this->getSettingsValue( 'wgServer', $wiki[4] );
+		// If folder does not exist, do not run the update
+		if ( file_exists( $wgServicesRepo ) ) {
+			$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
 
-				if ( !is_null( $wiki[3] ) ) {
-					$visualeditor = $this->hasExtension( 'visualeditor', $wiki[3] );
-					$flow = $this->hasExtension( 'flow', $wiki[3] );
+			$res = $dbw->select(
+				'cw_wikis',
+				[
+					'wiki_dbname',
+					'wiki_url',
+				],
+				[],
+				__METHOD__
+			);
+
+			if ( !$res || !is_object( $res ) ) {
+				throw new MWException( '$res was not set to a valid array.' );
+			}
+
+			foreach ( $res as $row ) {
+				$DBname = $row->wiki_dbname;
+				$domain = $row->wiki_url;
+
+				$mwSettings = $dbw->selectRow(
+					'mw_settings',
+					'*',
+					[
+						's_dbname' => $DBname
+					]
+				);
+
+				if ( !is_null( $mwSettings->s_extensions ) ) {
+					$extensionsArray = json_decode( $mwSettings->s_extensions, true );
+
+					$visualeditor = $this->hasExtension( 'visualeditor', $extensionsArray );
+					$flow = $this->hasExtension( 'flow', $extensionsArray );
 					// Collection installs Electron inaddition now.
-					$electron = $this->hasExtension( 'collection', $wiki[3] );
-					$citoid = $this->hasExtension( 'citoid', $wiki[3] );
+					$electron = $this->hasExtension( 'collection', $extensionsArray );
+					$citoid = $this->hasExtension( 'citoid', $extensionsArray );
 
 					if ( $visualeditor || $flow || $electron || $citoid ) {
-						$servicesvalue = $domain ? str_replace('https://', '', "'" . $domain . "'") : 'true';
+						$servicesvalue = !is_null( $domain ) ? str_replace('https://', '', "'" . $domain . "'") : 'true';
 						$allWikis[] = "$DBname: $servicesvalue";
 					}
 				}
-				
 			}
 
 			file_put_contents( "$wgServicesRepo/services.yaml", implode( "\n", $allWikis ), LOCK_EX );
 		}
 	}
 
-	/**
-	 * Similar to CreateWiki RemoteWiki function, just this reads from a file.
-	 */
-	private function hasExtension( $ext, $listExt ) {
-		$extensionsarray = explode( ",", $listExt );
-
-		return in_array( $ext, $extensionsarray );
+	private function hasExtension( $extension, $extensionsarray ) {
+		return in_array( $extension, (array)$extensionsarray );
 	}
 
-	/**
-	 * Similar to CreateWiki RemoteWiki function, just this reads from a file.
-	 */
 	private function getSettingsValue( $setting, $settingsjson ) {
 		$settingsarray = json_decode( $settingsjson, true );
 
