@@ -208,6 +208,18 @@ class MirahezeMagicHooks {
 		}
 	}
 	
+	public static function onGlobalUserPageWikis( &$list ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
+		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
+			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
+			$list = $databasesArray['databases'];
+			return false;
+		}
+
+		return true;
+	}
+	
 	public static function removeRedisKey( string $key ) {
 		global $wmgRedisSettings;
 
