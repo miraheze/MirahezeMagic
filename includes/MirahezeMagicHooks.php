@@ -212,9 +212,11 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
 		$dbName = $config->get( 'DBname' );
-		if ( PHP_SAPI == 'cli' && file_exists( "{$cwCacheDir}/deleted.json" ) ) {
+		if ( PHP_SAPI == 'cli' && file_exists( "{$cwCacheDir}/deleted.json" ) &&  ) {
+			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
 			$deletedDatabases = json_decode( file_get_contents( "{$cwCacheDir}/deleted.json" ), true );
-			if ( in_array( $dbName, $deletedDatabases['databases'] ) ) {
+			if ( !empty( in_array( $dbName, $deletedDatabases['databases'] ) ) {
+				$list = $databasesArray['databases'];
 				return false;
 			}
 		}
