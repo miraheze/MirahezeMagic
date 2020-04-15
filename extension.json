@@ -73,6 +73,9 @@
 		],
 		"InitializeArticleMaybeRedirect": [
 			"MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
+		],
+		"GlobalUserPageWikis": [
+			"MirahezeMagicHooks::onGlobalUserPageWikis"
 		]
 	},
 	"ConfigRegistry": {
