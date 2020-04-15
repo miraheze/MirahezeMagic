@@ -211,7 +211,7 @@ class MirahezeMagicHooks {
 	public static function onGlobalUserPageWikis( &$list ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' )
-		if ( PHP_SAPI == 'cli' && file_exists( "{$cwCacheDir}/deleted.json" ) {
+		if ( PHP_SAPI == 'cli' && file_exists( "{$cwCacheDir}/deleted.json" ) ) {
 			return false;
 		}
 		
