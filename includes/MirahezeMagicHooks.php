@@ -223,10 +223,12 @@ class MirahezeMagicHooks {
 	public static function removeRedisKey( string $key ) {
 		global $wmgRedisSettings;
 
-		$redis = new Redis();
-		$redisServer = explode( ':', $wmgRedisSettings['jobrunner']['server'] );
-		$redis->connect( $redisServer[0], $redisServer[1] );
-		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
-		$redis->delete( $redis->keys( $key ) );
+		foreach ( $wmgRedisSettings as $key => $value ) {
+			$redis = new Redis();
+			$redisServer = explode( ':', $wmgRedisSettings[$key]['server'] );
+			$redis->connect( $redisServer[0], $redisServer[1] );
+			$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
+			$redis->delete( $redis->keys( $key ) );
+		}
 	}
 }
