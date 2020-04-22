@@ -15,7 +15,7 @@ class lowercaseGroups extends Maintenance {
 		$res = $dbw->select(
 			'mw_permissions',
 			[
-				'perm_dbanme',
+				'perm_dbname',
 				'perm_group',
 			],
 			[],
