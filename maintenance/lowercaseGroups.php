@@ -15,13 +15,13 @@ class lowercaseGroups extends Maintenance {
 		$dbw_wiki = wfGetDB( DB_MASTER );
 
 		$res = $dbw->select(
-		    'mw_permissions',
-		    [
-			'perm_dbanme',
-			'perm_group',
-		    ],
-		    [],
-		    __METHOD__
+			'mw_permissions',
+			[
+				'perm_dbanme',
+				'perm_group',
+			],
+			[],
+			__METHOD__
 		);
 
 		if ( !$res || !is_object( $res ) ) {
