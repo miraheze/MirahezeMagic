@@ -11,8 +11,6 @@ class lowercaseGroups extends Maintenance {
 		global $wgCreateWikiDatabase;
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
-		
-		$dbw_wiki = wfGetDB( DB_MASTER );
 
 		$res = $dbw->select(
 			'mw_permissions',
