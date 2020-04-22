@@ -27,7 +27,7 @@ class lowercaseGroups extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			if ( !isset( $row->perm_dbname ) || !isset( $row->perm_group ) ) {
+			if ( !isset( $row->perm_dbname ) && !$row->perm_dbname || !isset( $row->perm_group ) && !$row->perm_group ) {
 				continue;
 			}
 			$dbw->update( 'mw_permissions',
