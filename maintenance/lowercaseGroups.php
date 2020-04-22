@@ -27,7 +27,7 @@ class lowercaseGroups extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			if ( !$row->perm_dbanme || !$row->perm_group ) {
+			if ( !isset( $row->perm_dbname ) || !isset( $row->perm_group ) ) {
 				continue;
 			}
 			$dbw->update( 'mw_permissions',
@@ -35,13 +35,13 @@ class lowercaseGroups extends Maintenance {
 					'perm_group' => strtolower( $row->perm_group )
 				],
 				[
-					'perm_dbname' => $row->perm_dbanme,
+					'perm_dbname' => $row->perm_dbname,
 					'perm_group' => $row->perm_group
 				],
 				__METHOD__
 			);
 
-			$dbw_wiki = wfGetDB( DB_MASTER, [], $row->perm_dbanme );
+			$dbw_wiki = wfGetDB( DB_MASTER, [], $row->perm_dbname );
 			$dbw_wiki->update( 'user_groups',
 				[
 					'ug_group' => strtolower( $row->perm_group )
