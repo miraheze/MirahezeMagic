@@ -79,6 +79,7 @@ class MirahezeMagicHooks {
 			'centralauth-merge-method-admin',
 			'restriction-protect',
 			'restriction-delete',
+			'wikibase-sitelinks-miraheze',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
