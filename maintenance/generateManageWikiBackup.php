@@ -78,7 +78,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		}
 		
 		$file = $this->getOption( 'filename' );
-		file_put_contents( "${wgDataDumpDirectory}${file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
+		file_put_contents( "{$wgDataDumpDirectory}{$file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
 	}
 }
 
