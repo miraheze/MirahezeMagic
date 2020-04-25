@@ -9,7 +9,6 @@ require_once "$IP/maintenance/Maintenance.php";
 class GenerateManageWikiBackup extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->addArg( 'ext', 'Backups mw_* tables', true );
 		$this->addOption( 'filename', 'Filename to dump json to.', true, true );
 	}
 
