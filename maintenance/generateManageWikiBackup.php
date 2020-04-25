@@ -10,6 +10,7 @@ class GenerateManageWikiBackup extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addArg( 'ext', 'Backups mw_* tables', true );
+		$this->addOption( 'filename', 'Filename to dump json to.', true, true );
 	}
 
 	public function execute() {
@@ -77,7 +78,8 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 		
-		file_put_contents( "{$wgDataDumpDirectory}/managewiki_backups.json", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
+		$file = $this->getOption( 'filename' );
+		file_put_contents( "{$wgDataDumpDirectory}${$file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
 	}
 }
 
