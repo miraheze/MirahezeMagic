@@ -39,7 +39,7 @@ class GenerateManageWikiBackup extends Maintenance {
 			__METHOD__
 		);
 
-        if ( $settingsObjects != null ) {
+		if ( $settingsObjects != null ) {
 			$buildArray['extensions'] = json_decode( $settingsObjects->s_extensions );
 			$buildArray['settings'] = json_decode( $settingsObjects->s_settings );
 		}
