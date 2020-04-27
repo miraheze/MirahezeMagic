@@ -103,7 +103,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$sites = [];
 
 		foreach ( $groups as $groupData ) {
-			if ( !array_key_exists( 'languagecode', $groupData ) ) {
+			if ( isset( $groupData['private'] ) ) {
 				continue;
 			}
 
