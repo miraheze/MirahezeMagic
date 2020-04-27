@@ -41,8 +41,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
 
-		$groups = [ 'miraheze', 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
-			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ];
+		$groups = [ 'miraheze' ];
 		$validGroups = $this->getOption( 'valid-groups', $groups );
 
 		try {
@@ -69,7 +68,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	 */
 	protected function getWikiDiscoveryData( $url ) {
 		$url .= '?action=wikidiscover&format=json';
-		
+
 		$list = $this->getOption( 'wiki-list' );
 		if ( $list ) {
 			$url .= "&wdwikislist=$list";
@@ -133,7 +132,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$sites = [];
 
 		$site = $this->getSiteFromSiteData( $langGroup );
-		$site->setLanguageCode( rand() . $langGroup['languagecode'] );
+		$site->setLanguageCode( $langGroup['languagecode'] );
 		$siteId = $site->getGlobalId();
 		$sites[$siteId] = $site;
 
@@ -148,15 +147,9 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	private function getSiteFromSiteData( array $siteData ) {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( $siteData['dbname'] );
-
-		$siteGroup = $siteData['languagecode'];
-		$site->setGroup( $siteGroup );
-
+		$site->setGroup( 'miraheze' );
 		$url = $siteData['url'];
-		$url = preg_replace( '@^https?:@', '', $url );
-
 		$site->setFilePath( $url . $this->getOption( 'script-path', '/w/$1' ) );
-
 		$site->setPagePath( $url . $this->getOption( 'article-path', '/wiki/$1' ) );
 
 		return $site;
