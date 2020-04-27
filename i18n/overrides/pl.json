@@ -11,5 +11,6 @@
 	"miraheze-shoutwiki-loginform-tos": "Przeczytałem, zrozumiałem oraz akceptuję [https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania] i [https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]",
 	"miraheze-shoutwiki-must-accept-tos": "Musisz zaakceptować Zasady użytkowania aby móc założyć konto!",
 	"miraheze-restriction-protect": "Zabezpiecz",
-	"miraheze-restriction-delete": "Usuń"
+	"miraheze-restriction-delete": "Usuń",
+	"miraheze-wikibase-sitelinks-miraheze": "Wiki Miraheze"
 }

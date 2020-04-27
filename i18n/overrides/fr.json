@@ -19,5 +19,6 @@
 	"miraheze-centralauth-merge-method-admin": "Compte fusionné manuellement",
 	"miraheze-centralauth-merge-method-admin-desc": "Ce compte a été fusionné manuellement par un administrateur système ou un steward. Cela peut être dû à un problème technique lors d'un processus de renommage ou de fusion.",
 	"miraheze-restriction-protect": "Protéger",
-	"miraheze-restriction-delete": "Supprimer"
+	"miraheze-restriction-delete": "Supprimer",
+	"miraheze-wikibase-sitelinks-miraheze": "Wikis Miraheze"
 }

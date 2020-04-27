@@ -13,5 +13,6 @@
 	"miraheze-centralauth-merge-method-admin": "Обліковий запис, об'єднаний вручну",
 	"miraheze-centralauth-merge-method-admin-desc": "Цей обліковий запис було об'єднано вручну системним адміністратором чи стюардом. Це могло бути наслідком технічної проблеми, що виникла в процесі перейменування чи об'єднання.",
 	"miraheze-restriction-protect": "Захистити",
-	"miraheze-restriction-delete": "Вилучити"
+	"miraheze-restriction-delete": "Вилучити",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-вікі"
 }

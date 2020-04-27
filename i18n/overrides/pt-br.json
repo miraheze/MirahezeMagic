@@ -13,5 +13,6 @@
 	"miraheze-centralauth-merge-method-admin": "Conta mesclada manualmente",
 	"miraheze-centralauth-merge-method-admin-desc": "Esta conta foi mesclada manualmente por um Sysadmin ou Steward. Isso pode ter ocorrido devido a um problema técnico em um processo de renomeação ou mesclagem.",
 	"miraheze-restriction-protect": "Proteger",
-	"miraheze-restriction-delete": "Excluir"
+	"miraheze-restriction-delete": "Excluir",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis"
 }

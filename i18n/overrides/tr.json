@@ -12,5 +12,6 @@
 	"miraheze-centralauth-merge-method-admin": "Manüel Olarak Birleştirilmiş Hesap",
 	"miraheze-centralauth-merge-method-admin-desc": "Bu hesap bir Sistem Hizmetlisi veya Kahya tarafından manüel olarak birleştirildi. Bunun nedeni, yeniden adlandırma veya birleştirme işlemindeki teknik bir sorun olabilir.",
 	"miraheze-restriction-protect": "Koru",
-	"miraheze-restriction-delete": "Sil"
+	"miraheze-restriction-delete": "Sil",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Vikileri"
 }
