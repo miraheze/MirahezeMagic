@@ -5,8 +5,13 @@
 		]
 	},
 	"miraheze-dberr-again": "Pruève ad aspettà quacche minute e recareche. Pe cchiù 'mbormaziune sus a stu errore manne 'nu tuitt sus 'a pàgena nostre de Tuitter (Twitter.com/Miraheze) o condatte l'amministrature de sisteme ausanne le collegaminde a #miraheze sus a irc.freenode.net",
-	"miraheze-oathauth-step1": "'''<nowiki>'</nowiki>MBORTANDE! Pe piacere assecurate de leggere <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> apprime de abbilità quiste!'''<br/>Passe 1: Scareche 'nu programme de autendicazione a doje fatture",
+	"miraheze-oathauth-step1": "'MBORTANDE! Pe piacere assecurate de leggere 'a pàgene OATHAuth apprime de abbilità quiste!   Passe 1: Scareche 'nu programme de autendicazione a doje fatture",
 	"miraheze-prefs-help-realname": "'U nome reale jè facoltative. Ce è scacchiate de darle, quiste avène ausate pe dà l'attribbuzzione de quidde ca è fatte a te. Pure, ce ste ause 'na uicchi ospitate da Miraheze, tu a essere d'accorde cu le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Termine d'Ause]</span> e accettà le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Regole p'a Privacy]</span>",
 	"miraheze-shoutwiki-loginform-tos": "Agghie lette, capite e sò d'accorde a le [https://meta.miraheze.org/wiki/Terms_of_Use Termine d'Ause] e a le [https://meta.miraheze.org/wiki/Privacy_Policy Regole d'a Privacy]",
-	"miraheze-shoutwiki-must-accept-tos": "A accettà le termine de ause pe ccrejà 'nu cunde utende!"
+	"miraheze-shoutwiki-must-accept-tos": "A accettà le termine de ause pe ccrejà 'nu cunde utende!",
+	"miraheze-centralauth-merge-method-admin": "Cunde Scauagghiate a Màne",
+	"miraheze-centralauth-merge-method-admin-desc": "Stu cunde ha state scuagghiate a màne da 'nu Sysadmin o Steward. Quiste pò essere state fatte pe 'nu probbleme tecniche jndr'à 'u processe de renomenamende o scuagghiamende.",
+	"miraheze-restriction-protect": "Protegge",
+	"miraheze-restriction-delete": "Scangìlle",
+	"miraheze-wikibase-sitelinks-miraheze": "Uicchi Miraheze"
 }
