@@ -288,12 +288,15 @@ class RemovePII extends Maintenance {
 		}
 
 		foreach ( $extensionUpdates as $key => $value ) {
-			foreach ( $value as $name => $fields ) {
-				$dbw->update(
-					$key,
-					$fields['field'],
-					$fields['where']
-				);
+			if ( $dbw->tableExists( $key ) ) {
+				foreach ( $value as $name => $fields ) {
+					$dbw->update(
+						$key,
+						$fields['field'],
+						$fields['where'],
+						__METHOD__
+					);
+				}
 			}
 		}
 
