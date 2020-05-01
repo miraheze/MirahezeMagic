@@ -51,7 +51,7 @@ class RemovePII extends Maintenance {
 			'ajaxpoll_vote' => [
 				[
 					'fields' => [
-						'poll_ip' => '',
+						'poll_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'poll_actor' => $userActorId,
@@ -61,7 +61,7 @@ class RemovePII extends Maintenance {
 			'Comments' => [
 				[
 					'fields' => [
-						'Comment_IP' => '',
+						'Comment_IP' => '0.0.0.0',
 					],
 					'where' => [
 						'Comment_actor' => $userActorId,
@@ -71,7 +71,7 @@ class RemovePII extends Maintenance {
 			'flow_tree_revision' => [
 				[
 					'fields' => [
-						'tree_orig_user_ip' => '',
+						'tree_orig_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'tree_orig_user_id' => $userId,
@@ -81,7 +81,7 @@ class RemovePII extends Maintenance {
 			'flow_revision' => [
 				[
 					'fields' => [
-						'rev_user_ip' => '',
+						'rev_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'rev_user_id' => $userId,
@@ -89,7 +89,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'rev_mod_user_ip' => '',
+						'rev_mod_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'rev_mod_user_id' => $userId,
@@ -97,7 +97,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'rev_edit_user_ip' => '',
+						'rev_edit_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'rev_edit_user_id' => $userId,
@@ -109,7 +109,7 @@ class RemovePII extends Maintenance {
 					'fields' => [
 						'mod_header_xff' => '',
 						'mod_header_ua' => '',
-						'mod_ip' => '',
+						'mod_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'mod_user' => $userId,
@@ -119,7 +119,7 @@ class RemovePII extends Maintenance {
 			'Vote' => [
 				[
 					'fields' => [
-						'vote_ip' => '',
+						'vote_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'vote_actor' => $userActorId,
@@ -129,7 +129,7 @@ class RemovePII extends Maintenance {
 			'wikiforum_category' => [
 				[
 					'fields' => [
-						'wfc_added_user_ip' => '',
+						'wfc_added_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wfc_added_actor' => $userActorId,
@@ -137,7 +137,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wfc_edited_user_ip' => '',
+						'wfc_edited_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wfc_edited_actor' => $userActorId,
@@ -148,7 +148,7 @@ class RemovePII extends Maintenance {
 			'wikiforum_forums' => [
 				[
 					'fields' => [
-						'wff_last_post_user_ip' => '',
+						'wff_last_post_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wff_last_post_actor' => $userActorId,
@@ -156,7 +156,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wff_added_user_ip' => '',
+						'wff_added_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wff_added_actor' => $userActorId,
@@ -164,7 +164,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wff_edited_user_ip' => '',
+						'wff_edited_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wff_edited_actor' => $userActorId,
@@ -172,7 +172,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wff_deleted_user_ip' => '',
+						'wff_deleted_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wff_deleted_actor' => $userActorId,
@@ -182,7 +182,7 @@ class RemovePII extends Maintenance {
 			'wikiforum_threads' => [
 				[
 					'fields' => [
-						'wft_user_ip' => '',
+						'wft_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wft_actor' => $userActorId,
@@ -190,7 +190,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wft_deleted_user_ip' => '',
+						'wft_deleted_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wft_deleted_actor' => $userActorId,
@@ -198,7 +198,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wft_edit_user_ip' => '',
+						'wft_edit_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wft_edit_actor' => $userActorId,
@@ -206,7 +206,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wft_closed_user_ip' => '',
+						'wft_closed_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wft_closed_actor' => $userActorId,
@@ -214,7 +214,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wft_last_post_user_ip' => '',
+						'wft_last_post_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wft_last_post_actor' => $userActorId,
@@ -222,7 +222,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wft_last_post_user_ip' => '',
+						'wft_last_post_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wft_last_post_actor' => $userActorId,
@@ -230,7 +230,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wfr_user_ip' => '',
+						'wfr_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wfr_actor' => $userActorId,
@@ -238,7 +238,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wfr_deleted_user_ip' => '',
+						'wfr_deleted_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wfr_deleted_actor' => $userActorId,
@@ -246,7 +246,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'wfr_edit_user_ip' => '',
+						'wfr_edit_user_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'wfr_edit_actor' => $userActorId,
@@ -258,7 +258,7 @@ class RemovePII extends Maintenance {
 			'recentchanges' => [
 				[
 					'fields' => [
-						'rc_ip' => '',
+						'rc_ip' => '0.0.0.0',
 					],
 					'where' => [
 						'rc_actor' => $userActorId,
@@ -302,6 +302,9 @@ class RemovePII extends Maintenance {
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $user );
+		if ( !$centralUser ) {
+			return;
+		}
 		if ( $centralUser->getEmail() ) {
 			$dbw->update(
 				'globaluser',
@@ -315,6 +318,8 @@ class RemovePII extends Maintenance {
 				__METHOD__
 			);
 		}
+
+		$centralUser->adminLock();
 	}
 }
 
