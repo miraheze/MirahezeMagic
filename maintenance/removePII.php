@@ -47,212 +47,235 @@ class RemovePII extends Maintenance {
 
 		$extensionUpdates = [];
 
-		$extensionUpdates[] = [
+		$extensionUpdates = [
 			'ajaxpoll_vote' => [
-				'fields' => [
-					'poll_ip' => '',
-				],
-				'where' => [
-					'poll_actor' => $userActorId,
+				[
+					'fields' => [
+						'poll_ip' => '',
+					],
+					'where' => [
+						'poll_actor' => $userActorId,
+					]
 				]
 			],
 			'Comments' => [
-				'fields' => [
-					'Comment_IP' => '',
-				],
-				'where' => [
-					'Comment_actor' => $userActorId,
+				[
+					'fields' => [
+						'Comment_IP' => '',
+					],
+					'where' => [
+						'Comment_actor' => $userActorId,
+					]
 				]
 			],
 			'flow_tree_revision' => [
-				'fields' => [
-					'tree_orig_user_ip' => '',
-				],
-				'where' => [
-					'tree_orig_user_id' => $userId,
+				[
+					'fields' => [
+						'tree_orig_user_ip' => '',
+					],
+					'where' => [
+						'tree_orig_user_id' => $userId,
+					]
 				]
 			],
 			'flow_revision' => [
-				'fields' => [
-					'rev_user_ip' => '',
+				[
+					'fields' => [
+						'rev_user_ip' => '',
+					],
+					'where' => [
+						'rev_user_id' => $userId,
+					]
 				],
-				'where' => [
-					'rev_user_id' => $userId,
-				]
-			],
-			'flow_revision' => [
-				'fields' => [
-					'rev_mod_user_ip' => '',
+				[
+					'fields' => [
+						'rev_mod_user_ip' => '',
+					],
+					'where' => [
+						'rev_mod_user_id' => $userId,
+					]
 				],
-				'where' => [
-					'rev_mod_user_id' => $userId,
-				]
-			],
-			'flow_revision' => [
-				'fields' => [
-					'rev_edit_user_ip' => '',
-				],
-				'where' => [
-					'rev_edit_user_id' => $userId,
+				[
+					'fields' => [
+						'rev_edit_user_ip' => '',
+					],
+					'where' => [
+						'rev_edit_user_id' => $userId,
+					]
 				]
 			],
 			'moderation' => [
-				'fields' => [
-					'mod_header_xff' => '',
-					'mod_header_ua' => '',
-					'mod_ip' => '',
-				],
-				'where' => [
-					'mod_user' => $userId,
+				[
+					'fields' => [
+						'mod_header_xff' => '',
+						'mod_header_ua' => '',
+						'mod_ip' => '',
+					],
+					'where' => [
+						'mod_user' => $userId,
+					]
 				]
 			],
 			'Vote' => [
-				'fields' => [
-					'vote_ip' => '',
-				],
-				'where' => [
-					'vote_actor' => $userActorId,
+				[
+					'fields' => [
+						'vote_ip' => '',
+					],
+					'where' => [
+						'vote_actor' => $userActorId,
+					]
 				]
 			],
 			'wikiforum_category' => [
-				'fields' => [
-					'wfc_added_user_ip' => '',
+				[
+					'fields' => [
+						'wfc_added_user_ip' => '',
+					],
+					'where' => [
+						'wfc_added_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wfc_added_actor' => $userActorId,
-				]
-			],
-			'wikiforum_category' => [
-				'fields' => [
-					'wfc_edited_user_ip' => '',
+				[
+					'fields' => [
+						'wfc_edited_user_ip' => '',
+					],
+					'where' => [
+						'wfc_edited_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wfc_edited_actor' => $userActorId,
-				]
-			],
-			'wikiforum_forums' => [
-				'fields' => [
-					'wff_last_post_user_ip' => '',
-				],
-				'where' => [
-					'wff_last_post_actor' => $userActorId,
-				]
+
 			],
 			'wikiforum_forums' => [
-				'fields' => [
-					'wff_added_user_ip' => '',
+				[
+					'fields' => [
+						'wff_last_post_user_ip' => '',
+					],
+					'where' => [
+						'wff_last_post_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wff_added_actor' => $userActorId,
-				]
-			],
-			'wikiforum_forums' => [
-				'fields' => [
-					'wff_edited_user_ip' => '',
+				[
+					'fields' => [
+						'wff_added_user_ip' => '',
+					],
+					'where' => [
+						'wff_added_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wff_edited_actor' => $userActorId,
-				]
-			],
-			'wikiforum_forums' => [
-				'fields' => [
-					'wff_deleted_user_ip' => '',
+				[
+					'fields' => [
+						'wff_edited_user_ip' => '',
+					],
+					'where' => [
+						'wff_edited_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wff_deleted_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wft_user_ip' => '',
+				[
+					'fields' => [
+						'wff_deleted_user_ip' => '',
+					],
+					'where' => [
+						'wff_deleted_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wft_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wft_deleted_user_ip' => '',
-				],
-				'where' => [
-					'wft_deleted_actor' => $userActorId,
-				]
 			],
 			'wikiforum_threads' => [
-				'fields' => [
-					'wft_edit_user_ip' => '',
+				[
+					'fields' => [
+						'wft_user_ip' => '',
+					],
+					'where' => [
+						'wft_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wft_edit_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wft_closed_user_ip' => '',
+				[
+					'fields' => [
+						'wft_deleted_user_ip' => '',
+					],
+					'where' => [
+						'wft_deleted_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wft_closed_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wft_last_post_user_ip' => '',
+				[
+					'fields' => [
+						'wft_edit_user_ip' => '',
+					],
+					'where' => [
+						'wft_edit_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wft_last_post_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wft_last_post_user_ip' => '',
+				[
+					'fields' => [
+						'wft_closed_user_ip' => '',
+					],
+					'where' => [
+						'wft_closed_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wft_last_post_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wfr_user_ip' => '',
+				[
+					'fields' => [
+						'wft_last_post_user_ip' => '',
+					],
+					'where' => [
+						'wft_last_post_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wfr_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wfr_deleted_user_ip' => '',
+				[
+					'fields' => [
+						'wft_last_post_user_ip' => '',
+					],
+					'where' => [
+						'wft_last_post_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wfr_deleted_actor' => $userActorId,
-				]
-			],
-			'wikiforum_threads' => [
-				'fields' => [
-					'wfr_edit_user_ip' => '',
+				[
+					'fields' => [
+						'wfr_user_ip' => '',
+					],
+					'where' => [
+						'wfr_actor' => $userActorId,
+					]
 				],
-				'where' => [
-					'wfr_edit_actor' => $userActorId,
+				[
+					'fields' => [
+						'wfr_deleted_user_ip' => '',
+					],
+					'where' => [
+						'wfr_deleted_actor' => $userActorId,
+					]
+				],
+				[
+					'fields' => [
+						'wfr_edit_user_ip' => '',
+					],
+					'where' => [
+						'wfr_edit_actor' => $userActorId,
+					]
 				]
 			],
 
 			// Core
 			'recentchanges' => [
-				'fields' => [
-					'rc_ip' => '',
-				],
-				'where' => [
-					'rc_actor' => $userActorId,
+				[
+					'fields' => [
+						'rc_ip' => '',
+					],
+					'where' => [
+						'rc_actor' => $userActorId,
+					]
 				]
 			],
 			'user' => [
-				'fields' => [
-					'user_email' => '',
-					'user_real_name' => '',
-				],
-				'where' => [
-					'user_name' => $user->getName(),
+				[
+					'fields' => [
+						'user_email' => '',
+						'user_real_name' => '',
+					],
+					'where' => [
+						'user_name' => $user->getName(),
+					]
 				]
-			],
+			]
 		];
 
 		if ( $dbw->tableExists( 'user_profile' ) ) {
@@ -265,13 +288,13 @@ class RemovePII extends Maintenance {
 		}
 
 		foreach ( $extensionUpdates as $key => $value ) {
-			$table = array_keys( $value )[0];
-			if ( !$table ) { continue; }
-			$dbw->update(
-				$table,
-				$value[$table]['field'],
-				$value[$table]['where']
-			);
+			foreach ( $value as $name => $fields ) {
+				$dbw->update(
+					$key,
+					$fields['field'],
+					$fields['where']
+				);
+			}
 		}
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
