@@ -270,7 +270,7 @@ class RemovePII extends Maintenance {
 			$dbw->update(
 				$table,
 				$value[$table]['field'],
-				$value[$table]['where'],
+				$value[$table]['where']
 			);
 		}
 
@@ -280,11 +280,11 @@ class RemovePII extends Maintenance {
 			$dbw->update(
 				'globaluser',
 				[
-					'gu_email' => '',
+					'gu_email' => ''
 				],
 				[
 					'gu_email' => $centralUser->getEmail(),
-					'gu_name' => $centralUser->getName(),
+					'gu_name' => $centralUser->getName()
 				],
 				__METHOD__
 			);
