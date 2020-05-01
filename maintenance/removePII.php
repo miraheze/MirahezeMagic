@@ -18,7 +18,7 @@
 *
 * @file
 * @ingroup Maintenance
-* @author Miraheze Site Reliability Engeneering team
+* @author Miraheze Site Reliability Engineering team
 * @version 2.0
 */
 
@@ -28,334 +28,251 @@ class RemovePII extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Removes PII information from users (e.g email addresses, ip address and other identifying information).";
-		$this->addOption( 'delete', 'Deletes PII info', false, false );
 		$this->addOption( 'username', 'Username to be used to find requested information.', true, true );
 	}
 
 	public function execute() {
 		global $wgCentralAuthDatabase;
 
-		if ( !(bool)$this->getOption( 'delete' ) ) {
-			return;
-		}
-
 		$user = User::newFromName( (string)$this->getOption( 'username' ) );
 		if ( !$user ) {
 			$this->output( 'User does not exist' );
 			return;
 		}
+		
+		$userActorId = $user->getActorId( $dbw );
+		$userId = $user->getId();
 
 		$dbw = wfGetDB( DB_MASTER );
 
-		if ( class_exists( 'AJAXPoll' ) ) {
-			$dbw->update(
-				'ajaxpoll_vote',
-				[
-					'poll_ip' => ''
-				],
-				[
-					'poll_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-		}
+		$extensionUpdates = [];
 
-		if ( class_exists( 'Comment' ) ) {
-			$dbw->update(
-				'Comments',
-				[
-					'Comment_IP' => ''
+		$extensionUpdates[] = [
+			'ajaxpoll_vote' => [
+				'fields' => [
+					'poll_ip' => '',
 				],
-				[
-					'Comment_actor' => $user->getActorId( $dbw )
+				'where' => [
+					'poll_actor' => $userActorId,
+				]
+			],
+			'Comments' => [
+				'fields' => [
+					'Comment_IP' => '',
 				],
-				__METHOD__
-			);
-		}
-
-		if ( class_exists( 'Flow' ) ) {
-			$dbw->update(
-				'flow_tree_revision',
-				[
-					'tree_orig_user_ip' => ''
+				'where' => [
+					'Comment_actor' => $userActorId,
+				]
+			],
+			'flow_tree_revision' => [
+				'fields' => [
+					'tree_orig_user_ip' => '',
 				],
-				[
-					'tree_orig_user_id' => $user->getId()
+				'where' => [
+					'tree_orig_user_id' => $userId,
+				]
+			],
+			'flow_revision' => [
+				'fields' => [
+					'rev_user_ip' => '',
 				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'flow_revision',
-				[
-					'rev_user_ip' => ''
+				'where' => [
+					'rev_user_id' => $userId,
+				]
+			],
+			'flow_revision' => [
+				'fields' => [
+					'rev_mod_user_ip' => '',
 				],
-				[
-					'rev_user_id' => $user->getId()
+				'where' => [
+					'rev_mod_user_id' => $userId,
+				]
+			],
+			'flow_revision' => [
+				'fields' => [
+					'rev_edit_user_ip' => '',
 				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'flow_revision',
-				[
-					'rev_mod_user_ip' => ''
-				],
-				[
-					'rev_mod_user_id' => $user->getId()
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'flow_revision',
-				[
-					'rev_edit_user_ip' => ''
-				],
-				[
-					'rev_edit_user_id' => $user->getId()
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'flow_revision',
-				[
-					'rev_edit_user_ip' => ''
-				],
-				[
-					'rev_edit_user_id' => $user->getId()
-				],
-				__METHOD__
-			);
-		}
-
-		if ( class_exists( 'ModerationAction' ) ) {
-			$dbw->update(
-				'moderation',
-				[
+				'where' => [
+					'rev_edit_user_id' => $userId,
+				]
+			],
+			'moderation' => [
+				'fields' => [
 					'mod_header_xff' => '',
 					'mod_header_ua' => '',
-					'mod_ip' => ''
+					'mod_ip' => '',
 				],
-				[
-					'mod_user' => $user->getId()
+				'where' => [
+					'mod_user' => $userId,
+				]
+			],
+			'Vote' => [
+				'fields' => [
+					'vote_ip' => '',
 				],
-				__METHOD__
-			);
-		}
+				'where' => [
+					'vote_actor' => $userActorId,
+				]
+			],
+			'wikiforum_category' => [
+				'fields' => [
+					'wfc_added_user_ip' => '',
+				],
+				'where' => [
+					'wfc_added_actor' => $userActorId,
+				]
+			],
+			'wikiforum_category' => [
+				'fields' => [
+					'wfc_edited_user_ip' => '',
+				],
+				'where' => [
+					'wfc_edited_actor' => $userActorId,
+				]
+			],
+			'wikiforum_forums' => [
+				'fields' => [
+					'wff_last_post_user_ip' => '',
+				],
+				'where' => [
+					'wff_last_post_actor' => $userActorId,
+				]
+			],
+			'wikiforum_forums' => [
+				'fields' => [
+					'wff_added_user_ip' => '',
+				],
+				'where' => [
+					'wff_added_actor' => $userActorId,
+				]
+			],
+			'wikiforum_forums' => [
+				'fields' => [
+					'wff_edited_user_ip' => '',
+				],
+				'where' => [
+					'wff_edited_actor' => $userActorId,
+				]
+			],
+			'wikiforum_forums' => [
+				'fields' => [
+					'wff_deleted_user_ip' => '',
+				],
+				'where' => [
+					'wff_deleted_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wft_user_ip' => '',
+				],
+				'where' => [
+					'wft_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wft_deleted_user_ip' => '',
+				],
+				'where' => [
+					'wft_deleted_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wft_edit_user_ip' => '',
+				],
+				'where' => [
+					'wft_edit_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wft_closed_user_ip' => '',
+				],
+				'where' => [
+					'wft_closed_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wft_last_post_user_ip' => '',
+				],
+				'where' => [
+					'wft_last_post_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wft_last_post_user_ip' => '',
+				],
+				'where' => [
+					'wft_last_post_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wfr_user_ip' => '',
+				],
+				'where' => [
+					'wfr_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wfr_deleted_user_ip' => '',
+				],
+				'where' => [
+					'wfr_deleted_actor' => $userActorId,
+				]
+			],
+			'wikiforum_threads' => [
+				'fields' => [
+					'wfr_edit_user_ip' => '',
+				],
+				'where' => [
+					'wfr_edit_actor' => $userActorId,
+				]
+			],
 
-		if ( class_exists( 'SocialProfileHooks' ) ) {
+			// Core
+			'recentchanges' => [
+				'fields' => [
+					'rc_ip' => '',
+				],
+				'where' => [
+					'rc_actor' => $userActorId,
+				]
+			],
+			'user' => [
+				'fields' => [
+					'user_email' => '',
+					'user_real_name' => '',
+				],
+				'where' => [
+					'user_name' => $user->getName(),
+				]
+			],
+		];
+
+		if ( $dbw->tableExists( 'user_profile' ) ) {
 			$dbw->delete(
 				'user_profile',
 				[
-					'up_actor' => $user->getActorId( $dbw )
+					'up_actor' => $userActorId
 				]
 			);
 		}
 
-		if ( class_exists( 'Vote' ) ) {
+		foreach ( $extensionUpdates as $key => $value ) {
+			$table = array_keys( $value )[0];
+			if ( !$table ) { continue; }
 			$dbw->update(
-				'Vote',
-				[
-					'vote_ip' => ''
-				],
-				[
-					'vote_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
+				$table,
+				$value[$table]['field'],
+				$value[$table]['where'],
 			);
 		}
-
-		if ( class_exists( 'WikiForum' ) ) {
-			$dbw->update(
-				'wikiforum_category',
-				[
-					'wfc_added_user_ip' => ''
-				],
-				[
-					'wfc_added_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_category',
-				[
-					'wfc_edited_user_ip' => ''
-				],
-				[
-					'wfc_edited_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_category',
-				[
-					'wfc_deleted_user_ip' => ''
-				],
-				[
-					'wfc_deleted_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_forums',
-				[
-					'wff_last_post_user_ip' => ''
-				],
-				[
-					'wff_last_post_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_forums',
-				[
-					'wff_added_user_ip' => ''
-				],
-				[
-					'wff_added_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_forums',
-				[
-					'wff_edited_user_ip' => ''
-				],
-				[
-					'wff_edited_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_forums',
-				[
-					'wff_deleted_user_ip' => ''
-				],
-				[
-					'wff_deleted_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_threads',
-				[
-					'wft_user_ip' => ''
-				],
-				[
-					'wft_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_threads',
-				[
-					'wft_deleted_user_ip' => ''
-				],
-				[
-					'wft_deleted_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_threads',
-				[
-					'wft_edit_user_ip' => ''
-				],
-				[
-					'wft_edit_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_threads',
-				[
-					'wft_closed_user_ip' => ''
-				],
-				[
-					'wft_closed_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_threads',
-				[
-					'wft_last_post_user_ip' => ''
-				],
-				[
-					'wft_last_post_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_replies',
-				[
-					'wfr_user_ip' => ''
-				],
-				[
-					'wfr_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_replies',
-				[
-					'wfr_deleted_user_ip' => ''
-				],
-				[
-					'wfr_deleted_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-
-			$dbw->update(
-				'wikiforum_replies',
-				[
-					'wfr_edit_user_ip' => ''
-				],
-				[
-					'wfr_edit_actor' => $user->getActorId( $dbw )
-				],
-				__METHOD__
-			);
-		}
-
-		$dbw->update(
-			'recentchanges',
-			[
-				'rc_ip' => ''
-			],
-			[
-				'rc_actor' => $user->getActorId( $dbw )
-			],
-			__METHOD__
-		);
-
-		$dbw->update(
-			'user',
-			[
-				'user_email' => '',
-				'user_real_name' => '',
-			],
-			[
-				'user_name' => $user->getName()
-			],
-			__METHOD__
-		);
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $user );
