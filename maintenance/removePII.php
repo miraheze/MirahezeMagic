@@ -45,7 +45,6 @@ class RemovePII extends Maintenance {
 		$oldName = (string)$this->getOption( 'oldname' );
 		$newName = (string)$this->getOption( 'newname' );
 		if ( !$oldName || !$newName ) {
-			$username = 'MirahezeGDPR_' . substr(sha1(random_bytes(10)), 0, 32);
 			$this->output( "You must supply both --oldname and --newname" );
 			return;
 		}
@@ -64,6 +63,7 @@ class RemovePII extends Maintenance {
 		$dbw = wfGetDB( DB_MASTER );
 
 		$userActorId = $newName->getActorId( $dbw );
+		$userName = $newName->getName();
 
 		$extensionUpdates = [
 			'ajaxpoll_vote' => [
@@ -83,6 +83,37 @@ class RemovePII extends Maintenance {
 					],
 					'where' => [
 						'Comment_actor' => $userActorId
+					]
+				]
+			],
+			'Comments' => [
+				[
+					'fields' => [
+						'Comment_IP' => '0.0.0.0',
+						'Comment_Username' => $userName
+					],
+					'where' => [
+						'Comment_Username' => $oldName
+					]
+				]
+			],
+			'Comments_block' => [
+				[
+					'fields' => [
+						'cb_user_name' => $userName
+					],
+					'where' => [
+						'cb_user_name' => $oldName
+					]
+				]
+			],
+			'Comments_Vote' => [
+				[
+					'fields' => [
+						'Comment_Vote_Username' => $userName
+					],
+					'where' => [
+						'Comment_Vote_Username' => $oldName
 					]
 				]
 			],
@@ -135,7 +166,10 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'mod_user_text' => $newName->getName()
+						'mod_header_xff' => '',
+						'mod_header_ua' => '',
+						'mod_ip' => '0.0.0.0',
+						'mod_user_text' => $userName
 					],
 					'where' => [
 						'mod_user_text' => $oldName
@@ -378,7 +412,7 @@ class RemovePII extends Maintenance {
 						'user_real_name' => ''
 					],
 					'where' => [
-						'user_name' => $user->getName()
+						'user_name' => $userName
 					]
 				]
 			],
@@ -406,7 +440,7 @@ class RemovePII extends Maintenance {
 			}
 		}
 		
-		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $newName->getName() );
+		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $userName );
 		$dbw->delete(
 			'logging',
 			[
