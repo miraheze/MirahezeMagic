@@ -328,7 +328,7 @@ class RemovePII extends Maintenance {
 			[
 				'log_action' => 'rename',
 				'log_title' => $oldName,
-				'log_type' => 'rename'
+				'log_type' => 'renameuser'
 			],
 		);
 
