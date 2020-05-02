@@ -139,7 +139,112 @@ class RemovePII extends Maintenance {
 					]
 				]
 			],
+			// WikiForum: Old Schema
 			'wikiforum_category' => [
+				[
+					'fields' => [
+						'wfc_added_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wfc_added_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wfc_edited_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wfc_edited_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wfc_deleted_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wfc_deleted_user' => $userId
+					]
+				]
+			],
+			'wikiforum_forums' => [
+				[
+					'fields' => [
+						'wff_last_post_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wff_last_post_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wff_added_user_ip' => '0.0.0.0',
+					],
+					'where' => [
+						'wff_added_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wff_edited_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wff_edited_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wff_deleted_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wff_deleted_user' => $userId
+					]
+				],
+			],
+			'wikiforum_threads' => [
+				[
+					'fields' => [
+						'wft_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wft_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wft_deleted_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wft_deleted_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wft_edit_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wft_edit_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wft_closed_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wft_closed_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'wft_last_post_user_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'wft_last_post_user' => $userId
+					]
+				],
+			],
+
+			// WikiForum: New Schema,not deployed yet due to some bugs
+			/*'wikiforum_category' => [
 				[
 					'fields' => [
 						'wfc_added_user_ip' => '0.0.0.0',
@@ -156,7 +261,14 @@ class RemovePII extends Maintenance {
 						'wfc_edited_actor' => $userActorId
 					]
 				],
-
+				[
+					'fields' => [
+						'wfc_deleted_user_ip' => '0.0.0.0',
+					],
+					'where' => [
+						'wfc_deleted_actor' => $userActorId
+					]
+				],
 			],
 			'wikiforum_forums' => [
 				[
@@ -232,40 +344,8 @@ class RemovePII extends Maintenance {
 					'where' => [
 						'wft_last_post_actor' => $userActorId
 					]
-				],
-				[
-					'fields' => [
-						'wft_last_post_user_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'wft_last_post_actor' => $userActorId
-					]
-				],
-				[
-					'fields' => [
-						'wfr_user_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'wfr_actor' => $userActorId
-					]
-				],
-				[
-					'fields' => [
-						'wfr_deleted_user_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'wfr_deleted_actor' => $userActorId
-					]
-				],
-				[
-					'fields' => [
-						'wfr_edit_user_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'wfr_edit_actor' => $userActorId
-					]
 				]
-			],
+			],*/
 
 			// Core
 			'recentchanges' => [
