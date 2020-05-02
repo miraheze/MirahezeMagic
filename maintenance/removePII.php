@@ -84,9 +84,7 @@ class RemovePII extends Maintenance {
 					'where' => [
 						'Comment_actor' => $userActorId
 					]
-				]
-			],
-			'Comments' => [
+				],
 				[
 					'fields' => [
 						'Comment_IP' => '0.0.0.0',
