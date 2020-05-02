@@ -39,7 +39,7 @@ class RemovePII extends Maintenance {
 		$oldName = (string)$this->getOption( 'oldname' );
 		$newName = User::newFromName( (string)$this->getOption( 'newname' ) );
 		if ( !$newName ) {
-			$this->output( 'User {$this->getOption( 'newname' )} does not exist!' );
+			$this->output( "User {$this->getOption( 'newname' )} does not exist!" );
 			return;
 		}
 
