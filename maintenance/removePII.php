@@ -326,7 +326,7 @@ class RemovePII extends Maintenance {
 		$dbw->delete(
 			'logging',
 			[
-				'log_action' => 'rename',
+				'log_action' => 'renameuser',
 				'log_title' => $oldName,
 				'log_type' => 'renameuser'
 			],
