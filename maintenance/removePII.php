@@ -28,79 +28,84 @@ class RemovePII extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Removes PII information from users (e.g email addresses, ip address and other identifying information).";
-		$this->addOption( 'username', 'Username to be used to find requested information.', true, true );
+		$this->addOption( 'oldname', 'Old name', true, true );
+		$this->addOption( 'newname', 'New name', true, true );
+
 	}
 
 	public function execute() {
 		global $wgCentralAuthDatabase;
 
-		$user = User::newFromName( (string)$this->getOption( 'username' ) );
-		if ( !$user ) {
-			$this->output( 'User does not exist' );
+		$oldName = (string)$this->getOption( 'oldname' );
+		$newName = User::newFromName( (string)$this->getOption( 'newname' ) );
+		if ( !$newName ) {
+			$this->output( 'User {$this->getOption( 'newname' )} does not exist!' );
 			return;
 		}
-		
-		$userActorId = $user->getActorId( $dbw );
-		$userId = $user->getId();
+
+		$userId = $newName->getId();
+		if ( !$userId->getId() ) {
+			$this->output( 'User id equals 0' );
+		}
 
 		$dbw = wfGetDB( DB_MASTER );
 
-		$extensionUpdates = [];
+		$userActorId = $newName->getActorId( $dbw );
 
 		$extensionUpdates = [
 			'ajaxpoll_vote' => [
 				[
 					'fields' => [
-						'poll_ip' => '0.0.0.0',
+						'poll_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'poll_actor' => $userActorId,
+						'poll_actor' => $userActorId
 					]
 				]
 			],
 			'Comments' => [
 				[
 					'fields' => [
-						'Comment_IP' => '0.0.0.0',
+						'Comment_IP' => '0.0.0.0'
 					],
 					'where' => [
-						'Comment_actor' => $userActorId,
+						'Comment_actor' => $userActorId
 					]
 				]
 			],
 			'flow_tree_revision' => [
 				[
 					'fields' => [
-						'tree_orig_user_ip' => '0.0.0.0',
+						'tree_orig_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'tree_orig_user_id' => $userId,
+						'tree_orig_user_id' => $userId
 					]
 				]
 			],
 			'flow_revision' => [
 				[
 					'fields' => [
-						'rev_user_ip' => '0.0.0.0',
+						'rev_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'rev_user_id' => $userId,
+						'rev_user_id' => $userId
 					]
 				],
 				[
 					'fields' => [
-						'rev_mod_user_ip' => '0.0.0.0',
+						'rev_mod_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'rev_mod_user_id' => $userId,
+						'rev_mod_user_id' => $userId
 					]
 				],
 				[
 					'fields' => [
-						'rev_edit_user_ip' => '0.0.0.0',
+						'rev_edit_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'rev_edit_user_id' => $userId,
+						'rev_edit_user_id' => $userId
 					]
 				]
 			],
@@ -109,10 +114,18 @@ class RemovePII extends Maintenance {
 					'fields' => [
 						'mod_header_xff' => '',
 						'mod_header_ua' => '',
-						'mod_ip' => '0.0.0.0',
+						'mod_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'mod_user' => $userId,
+						'mod_user' => $userId
+					]
+				],
+				[
+					'fields' => [
+						'mod_user_text' => $newName->getName()
+					],
+					'where' => [
+						'mod_user_text' => $oldName
 					]
 				]
 			],
@@ -122,7 +135,7 @@ class RemovePII extends Maintenance {
 						'vote_ip' => '0.0.0.0',
 					],
 					'where' => [
-						'vote_actor' => $userActorId,
+						'vote_actor' => $userActorId
 					]
 				]
 			],
@@ -132,7 +145,7 @@ class RemovePII extends Maintenance {
 						'wfc_added_user_ip' => '0.0.0.0',
 					],
 					'where' => [
-						'wfc_added_actor' => $userActorId,
+						'wfc_added_actor' => $userActorId
 					]
 				],
 				[
@@ -140,7 +153,7 @@ class RemovePII extends Maintenance {
 						'wfc_edited_user_ip' => '0.0.0.0',
 					],
 					'where' => [
-						'wfc_edited_actor' => $userActorId,
+						'wfc_edited_actor' => $userActorId
 					]
 				],
 
@@ -151,7 +164,7 @@ class RemovePII extends Maintenance {
 						'wff_last_post_user_ip' => '0.0.0.0',
 					],
 					'where' => [
-						'wff_last_post_actor' => $userActorId,
+						'wff_last_post_actor' => $userActorId
 					]
 				],
 				[
@@ -159,97 +172,97 @@ class RemovePII extends Maintenance {
 						'wff_added_user_ip' => '0.0.0.0',
 					],
 					'where' => [
-						'wff_added_actor' => $userActorId,
+						'wff_added_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wff_edited_user_ip' => '0.0.0.0',
+						'wff_edited_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wff_edited_actor' => $userActorId,
+						'wff_edited_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wff_deleted_user_ip' => '0.0.0.0',
+						'wff_deleted_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wff_deleted_actor' => $userActorId,
+						'wff_deleted_actor' => $userActorId
 					]
 				],
 			],
 			'wikiforum_threads' => [
 				[
 					'fields' => [
-						'wft_user_ip' => '0.0.0.0',
+						'wft_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wft_actor' => $userActorId,
+						'wft_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wft_deleted_user_ip' => '0.0.0.0',
+						'wft_deleted_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wft_deleted_actor' => $userActorId,
+						'wft_deleted_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wft_edit_user_ip' => '0.0.0.0',
+						'wft_edit_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wft_edit_actor' => $userActorId,
+						'wft_edit_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wft_closed_user_ip' => '0.0.0.0',
+						'wft_closed_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wft_closed_actor' => $userActorId,
+						'wft_closed_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wft_last_post_user_ip' => '0.0.0.0',
+						'wft_last_post_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wft_last_post_actor' => $userActorId,
+						'wft_last_post_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wft_last_post_user_ip' => '0.0.0.0',
+						'wft_last_post_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wft_last_post_actor' => $userActorId,
+						'wft_last_post_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wfr_user_ip' => '0.0.0.0',
+						'wfr_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wfr_actor' => $userActorId,
+						'wfr_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wfr_deleted_user_ip' => '0.0.0.0',
+						'wfr_deleted_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wfr_deleted_actor' => $userActorId,
+						'wfr_deleted_actor' => $userActorId
 					]
 				],
 				[
 					'fields' => [
-						'wfr_edit_user_ip' => '0.0.0.0',
+						'wfr_edit_user_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'wfr_edit_actor' => $userActorId,
+						'wfr_edit_actor' => $userActorId
 					]
 				]
 			],
@@ -258,10 +271,10 @@ class RemovePII extends Maintenance {
 			'recentchanges' => [
 				[
 					'fields' => [
-						'rc_ip' => '0.0.0.0',
+						'rc_ip' => '0.0.0.0'
 					],
 					'where' => [
-						'rc_actor' => $userActorId,
+						'rc_actor' => $userActorId
 					]
 				]
 			],
@@ -269,13 +282,13 @@ class RemovePII extends Maintenance {
 				[
 					'fields' => [
 						'user_email' => '',
-						'user_real_name' => '',
+						'user_real_name' => ''
 					],
 					'where' => [
-						'user_name' => $user->getName(),
+						'user_name' => $user->getName()
 					]
 				]
-			]
+			],
 		];
 
 		if ( $dbw->tableExists( 'user_profile' ) ) {
@@ -299,9 +312,29 @@ class RemovePII extends Maintenance {
 				}
 			}
 		}
+		
+		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $newName->getName() );
+		$dbw->delete(
+			'logging',
+			[
+				'log_action' => 'rename',
+				'log_title' => $logTitle,
+				'log_type' => 'gblrename'
+			],
+		);
+
+		$dbw->delete(
+			'logging',
+			[
+				'log_action' => 'rename',
+				'log_title' => $oldName,
+				'log_type' => 'rename'
+			],
+		);
+		}
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
-		$centralUser = CentralAuthUser::getInstance( $user );
+		$centralUser = CentralAuthUser::getInstance( $newUser );
 		if ( !$centralUser ) {
 			return;
 		}
