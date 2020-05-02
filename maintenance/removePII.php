@@ -320,7 +320,7 @@ class RemovePII extends Maintenance {
 				'log_action' => 'rename',
 				'log_title' => $logTitle,
 				'log_type' => 'gblrename'
-			],
+			]
 		);
 
 		$dbw->delete(
@@ -329,7 +329,7 @@ class RemovePII extends Maintenance {
 				'log_action' => 'renameuser',
 				'log_title' => $oldName,
 				'log_type' => 'renameuser'
-			],
+			]
 		);
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
