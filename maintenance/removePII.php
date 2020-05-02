@@ -28,16 +28,29 @@ class RemovePII extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Removes PII information from users (e.g email addresses, ip address and other identifying information).";
-		$this->addOption( 'oldname', 'Old name', true, true );
-		$this->addOption( 'newname', 'New name', true, true );
-
+		$this->addOption( 'oldname', 'Old name', false, true );
+		$this->addOption( 'newname', 'New name', false, true );
+		$this->addOption( 'only-generate-username', 'Generates random username', false, false );
 	}
 
 	public function execute() {
 		global $wgCentralAuthDatabase;
 
+		if ( $this->getOption( 'only-generate-username' ) ) {
+			$username = 'MirahezeGDPR_' . substr(sha1(random_bytes(10)), 0, 32);
+			$this->output( "New username: {$username}" );
+			return;
+		}
+
 		$oldName = (string)$this->getOption( 'oldname' );
-		$newName = User::newFromName( (string)$this->getOption( 'newname' ) );
+		$newName = (string)$this->getOption( 'newname' );
+		if ( !$oldName || !$newName ) {
+			$username = 'MirahezeGDPR_' . substr(sha1(random_bytes(10)), 0, 32);
+			$this->output( "You must supply both --oldname and --newname" );
+			return;
+		}
+
+		$newName = User::newFromName( $newName );
 		if ( !$newName ) {
 			$this->output( "User {$this->getOption( 'newname' )} does not exist!" );
 			return;
