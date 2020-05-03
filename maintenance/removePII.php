@@ -428,12 +428,16 @@ class RemovePII extends Maintenance {
 		foreach ( $extensionUpdates as $key => $value ) {
 			if ( $dbw->tableExists( $key ) ) {
 				foreach ( $value as $name => $fields ) {
-					$dbw->update(
-						$key,
-						$fields['fields'],
-						$fields['where'],
-						__METHOD__
-					);
+					try {
+						$dbw->update(
+							$key,
+							$fields['fields'],
+							$fields['where'],
+							__METHOD__
+						);
+					} catch( Exception $ex ) {
+						$this->output( "Table {$key} either does not exist or the update failed. " );
+					}
 				}
 			}
 		}
