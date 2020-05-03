@@ -462,7 +462,7 @@ class RemovePII extends Maintenance {
 		);
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
-		$centralUser = CentralAuthUser::getInstance( $newUser );
+		$centralUser = CentralAuthUser::getInstance( $newName );
 		if ( !$centralUser ) {
 			return;
 		}
