@@ -38,26 +38,26 @@ class RemovePII extends Maintenance {
 
 		if ( $this->getOption( 'only-generate-username' ) ) {
 			$username = 'MirahezeGDPR_' . substr(sha1(random_bytes(10)), 0, 32);
-			$this->output( "New username: {$username}" );
+			$this->output( "New username: {$username}\n" );
 			return;
 		}
 
 		$oldName = (string)$this->getOption( 'oldname' );
 		$newName = (string)$this->getOption( 'newname' );
 		if ( !$oldName || !$newName ) {
-			$this->output( "You must supply both --oldname and --newname" );
+			$this->output( "You must supply both --oldname and --newname\n" );
 			return;
 		}
 
 		$newName = User::newFromName( $newName );
 		if ( !$newName ) {
-			$this->output( "User {$this->getOption( 'newname' )} does not exist!" );
+			$this->output( "User {$this->getOption( 'newname' )} does not exist!\n" );
 			return;
 		}
 
 		$userId = $newName->getId();
 		if ( !$userId ) {
-			$this->output( 'User id equals 0' );
+			$this->output( 'User id equals 0\n' );
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
