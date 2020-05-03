@@ -42,6 +42,10 @@ class addWikiToServices extends Maintenance {
 					]
 				);
 
+				if ( !isset( $mwSettings->s_extensions ) ) {
+					continue;
+				}
+
 				if ( !is_null( $mwSettings->s_extensions ) ) {
 					$extensionsArray = json_decode( $mwSettings->s_extensions, true );
 
