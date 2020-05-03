@@ -49,22 +49,25 @@ class RemovePII extends Maintenance {
 			return;
 		}
 
+		$oldName = User::newFromName( $oldName );
 		$newName = User::newFromName( $newName );
+		$userOldName = $oldName->getName();
+		$userNewName = $newName->getName();
+
 		if ( !$newName ) {
-			$this->output( "User {$this->getOption( 'newname' )} does not exist!\n" );
+			$this->output( "User {$userNewName} is not a valid name\n" );
 			return;
 		}
 
 		$userId = $newName->getId();
 		if ( !$userId ) {
-			$this->output( 'User id equals 0\n' );
+			$this->output( "User {$userNewName} id equals 0\n" );
 			return;
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
 
 		$userActorId = $newName->getActorId( $dbw );
-		$userName = $newName->getName();
 
 		$extensionUpdates = [
 			'ajaxpoll_vote' => [
@@ -89,30 +92,30 @@ class RemovePII extends Maintenance {
 				[
 					'fields' => [
 						'Comment_IP' => '0.0.0.0',
-						'Comment_Username' => $userName
+						'Comment_Username' => $userNewName
 					],
 					'where' => [
-						'Comment_Username' => $oldName
+						'Comment_Username' => $userOldName
 					]
 				]
 			],
 			'Comments_block' => [
 				[
 					'fields' => [
-						'cb_user_name' => $userName
+						'cb_user_name' => $userNewName
 					],
 					'where' => [
-						'cb_user_name' => $oldName
+						'cb_user_name' => $userOldName
 					]
 				]
 			],
 			'Comments_Vote' => [
 				[
 					'fields' => [
-						'Comment_Vote_Username' => $userName
+						'Comment_Vote_Username' => $userNewName
 					],
 					'where' => [
-						'Comment_Vote_Username' => $oldName
+						'Comment_Vote_Username' => $userOldName
 					]
 				]
 			],
@@ -178,10 +181,10 @@ class RemovePII extends Maintenance {
 						'mod_header_xff' => '',
 						'mod_header_ua' => '',
 						'mod_ip' => '0.0.0.0',
-						'mod_user_text' => $userName
+						'mod_user_text' => $userNewName
 					],
 					'where' => [
-						'mod_user_text' => $oldName
+						'mod_user_text' => $userOldName
 					]
 				]
 			],
@@ -421,7 +424,7 @@ class RemovePII extends Maintenance {
 						'user_real_name' => ''
 					],
 					'where' => [
-						'user_name' => $userName
+						'user_name' => $userNewName
 					]
 				]
 			],
@@ -452,8 +455,8 @@ class RemovePII extends Maintenance {
 				}
 			}
 		}
-		
-		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $userName );
+
+		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $userNewName );
 		$dbw->delete(
 			'logging',
 			[
@@ -467,7 +470,7 @@ class RemovePII extends Maintenance {
 			'logging',
 			[
 				'log_action' => 'renameuser',
-				'log_title' => $oldName,
+				'log_title' => $oldName->getTitleKey(),
 				'log_type' => 'renameuser'
 			]
 		);
