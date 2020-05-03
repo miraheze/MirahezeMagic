@@ -513,6 +513,14 @@ class RemovePII extends Maintenance {
 		}
 
 		$centralUser->adminLock();
+		
+		try {
+			$title = Title::newFromText( $oldName->getTitleKey(), NS_USER );
+			$userPage = WikiPage::factory( $title );
+			$userPage->doDeleteArticleReal( 'Deleting page', $newName, true);
+		} catch ( Exception $ex ) {
+			$this->output( "User {$userOldName} does not have a user page\n" );
+		}
 	}
 }
 
