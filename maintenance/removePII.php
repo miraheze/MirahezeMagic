@@ -61,7 +61,7 @@ class RemovePII extends Maintenance {
 
 		$userId = $newName->getId();
 		if ( !$userId ) {
-			$this->output( 'User {$userNewName} id equals 0\n' );
+			$this->output( "User {$userNewName} id equals 0\n" );
 			return;
 		}
 
