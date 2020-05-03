@@ -475,6 +475,24 @@ class RemovePII extends Maintenance {
 			]
 		);
 
+		$dbw->delete(
+			'recentchanges',
+			[
+				'rc_log_action' => 'rename',
+				'rc_title' => $logTitle->getDBkey(),
+				'rc_log_type' => 'gblrename'
+			]
+		);
+
+		$dbw->delete(
+			'recentchanges',
+			[
+				'rc_log_action' => 'renameuser',
+				'rc_title' => $oldName->getTitleKey(),
+				'rc_log_type' => 'renameuser'
+			]
+		);
+
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $newName );
 		if ( !$centralUser ) {
