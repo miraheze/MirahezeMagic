@@ -19,7 +19,7 @@
 * @file
 * @ingroup Maintenance
 * @author Miraheze Site Reliability Engineering team
-* @version 2.0
+* @version 2.0.1
 */
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
@@ -496,9 +496,14 @@ class RemovePII extends Maintenance {
 		$error = '';
 		$title = Title::newFromText( $newName->getTitleKey(), NS_USER );
 		$userPage = WikiPage::factory( $title );
-		$status = $userPage->doDeleteArticleReal( 'Deleting page', $newName, true, null, $error, $newName );
+		if ( version_compare( MW_VERSION, '1.35', '<' ) ) {
+			$status = $userPage->doDeleteArticleReal( '', true, null, null, $error, $newName );
+		} else {
+			$status = $userPage->doDeleteArticleReal( '', $newName, true, null, $error, $newName );
+		}
 		if ( !$status->isOK() ) {
-			$this->output( "Failed to delete user {$userNewName} page, likley does not have a user page\n" );
+			$errorMessage = json_encode( $status->getErrorsArray() );
+			$this->output( "Failed to delete user {$userNewName} page, likley does not have a user page. Error: {$errorMessage}\n" );
 		}
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
