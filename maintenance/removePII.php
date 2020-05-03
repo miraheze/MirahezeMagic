@@ -447,7 +447,7 @@ class RemovePII extends Maintenance {
 			'logging',
 			[
 				'log_action' => 'rename',
-				'log_title' => $logTitle,
+				'log_title' => $logTitle->getDBkey(),
 				'log_type' => 'gblrename'
 			]
 		);
