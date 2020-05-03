@@ -493,6 +493,14 @@ class RemovePII extends Maintenance {
 			]
 		);
 
+		$error = '';
+		$title = Title::newFromText( $newName->getTitleKey(), NS_USER );
+		$userPage = WikiPage::factory( $title );
+		$status = $userPage->doDeleteArticleReal( 'Deleting page', $newName, true, null, $error, $newName );
+		if ( !$status->isOK() ) {
+			$this->output( "Failed to delete user {$userNewName} page, likley does not have a user page\n" );
+		}
+
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $newName );
 		if ( !$centralUser ) {
