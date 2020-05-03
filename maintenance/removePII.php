@@ -58,6 +58,7 @@ class RemovePII extends Maintenance {
 		$userId = $newName->getId();
 		if ( !$userId ) {
 			$this->output( 'User id equals 0\n' );
+			return;
 		}
 
 		$dbw = wfGetDB( DB_MASTER );
