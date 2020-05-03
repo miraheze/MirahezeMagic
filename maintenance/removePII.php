@@ -493,8 +493,6 @@ class RemovePII extends Maintenance {
 			]
 		);
 
-		$centralUser->adminLock();
-
 		$error = '';
 		$title = Title::newFromText( $newName->getTitleKey(), NS_USER );
 		$userPage = WikiPage::factory( $title );
