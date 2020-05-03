@@ -455,7 +455,7 @@ class RemovePII extends Maintenance {
 				}
 			}
 		}
-		
+
 		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $userNewName );
 		$dbw->delete(
 			'logging',
