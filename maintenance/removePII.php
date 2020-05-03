@@ -436,7 +436,7 @@ class RemovePII extends Maintenance {
 							__METHOD__
 						);
 					} catch( Exception $ex ) {
-						$this->output( "Table {$key} either does not exist or the update failed. " );
+						$this->output( "Table {$key} either does not exist or the update failed.\n" );
 					}
 				}
 			}
