@@ -479,6 +479,15 @@ class RemovePII extends Maintenance {
 			'recentchanges',
 			[
 				'rc_log_action' => 'renameuser',
+				'rc_title' => $logTitle->getDBkey(),
+				'rc_log_type' => 'gblrename'
+			]
+		);
+
+		$dbw->delete(
+			'recentchanges',
+			[
+				'rc_log_action' => 'renameuser',
 				'rc_title' => $oldName->getTitleKey(),
 				'rc_log_type' => 'renameuser'
 			]
