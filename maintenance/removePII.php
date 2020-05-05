@@ -132,7 +132,7 @@ class RemovePII extends Maintenance {
 			'flow_tree_revision' => [
 				[
 					'fields' => [
-						'tree_orig_user_ip' => '0.0.0.0'
+						'tree_orig_user_ip' => NULL
 					],
 					'where' => [
 						'tree_orig_user_id' => $userId
@@ -142,7 +142,7 @@ class RemovePII extends Maintenance {
 			'flow_revision' => [
 				[
 					'fields' => [
-						'rev_user_ip' => '0.0.0.0'
+						'rev_user_ip' => NULL
 					],
 					'where' => [
 						'rev_user_id' => $userId
@@ -150,7 +150,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'rev_mod_user_ip' => '0.0.0.0'
+						'rev_mod_user_ip' => NULL
 					],
 					'where' => [
 						'rev_mod_user_id' => $userId
@@ -158,7 +158,7 @@ class RemovePII extends Maintenance {
 				],
 				[
 					'fields' => [
-						'rev_edit_user_ip' => '0.0.0.0'
+						'rev_edit_user_ip' => NULL
 					],
 					'where' => [
 						'rev_edit_user_id' => $userId
