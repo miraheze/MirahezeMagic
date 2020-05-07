@@ -129,6 +129,16 @@ class RemovePII extends Maintenance {
 					]
 				]
 			],
+			'echo_event' => [
+				[
+					'fields' => [
+						'event_agent_ip' => NULL
+					],
+					'where' => [
+						'event_agent_id' => $userId
+					]
+				]
+			],
 			'flow_tree_revision' => [
 				[
 					'fields' => [
