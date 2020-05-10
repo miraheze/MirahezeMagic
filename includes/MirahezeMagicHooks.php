@@ -41,7 +41,7 @@ class MirahezeMagicHooks {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
 
-		static::removeRedisKey( "*${DBname}*" );
+		static::removeRedisKey( "*{$wiki}*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
