@@ -26,9 +26,12 @@
 	"AvailableRights": [
 		"viewglobalprivatefiles"
 	],
+	"JobClasses": {
+		"PopulateWikibaseSitesTables": "PopulateWikibaseSitesTables"
 	"AutoloadClasses": {
 		"GlobalNewFilesHooks": "includes/GlobalNewFiles/GlobalNewFilesHooks.php",
 		"GlobalNewFilesPager": "includes/GlobalNewFiles/GlobalNewFilesPager.php",
+		"PopulateWikibaseSitesTables": "maintenance/PopulateWikibaseSitesTables.php"
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
 		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php",
