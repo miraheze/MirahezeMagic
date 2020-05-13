@@ -28,6 +28,7 @@
 	],
 	"JobClasses": {
 		"PopulateWikibaseSitesTables": "PopulateWikibaseSitesTables"
+	},
 	"AutoloadClasses": {
 		"GlobalNewFilesHooks": "includes/GlobalNewFiles/GlobalNewFilesHooks.php",
 		"GlobalNewFilesPager": "includes/GlobalNewFiles/GlobalNewFilesPager.php",
