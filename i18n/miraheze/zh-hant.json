@@ -87,6 +87,8 @@
 	"group-interwiki-admin-member": "跨 wiki 管理員",
 	"group-oversight": "監督員",
 	"group-oversight-member": "監督員",
+	"group-checkuser": "檢查使用者",
+	"group-checkuser-member": "檢查使用者",
 	"group-wikicreator": "Wiki 建立者",
 	"group-wikicreator-member": "{{GENDER:$1|wiki 建立者}}",
 	"group-wikimanager": "Wiki 管理者",
