@@ -58,7 +58,7 @@ class GlobalNewFilesHooks {
 				__DIR__ . '/../../sql/gnf_files.sql'
 			);
 
-			$updater->modifyField(
+			$updater->modifyExtensionField(
 				'gnf_files',
 				'files_timestamp',
 				__DIR__ . '/../../sql/patch-gnf_files-binary.sql' 

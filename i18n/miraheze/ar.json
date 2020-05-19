@@ -88,6 +88,7 @@
 	"group-interwiki-admin-member": "إداري إنترويكي",
 	"group-oversight": "منظورة",
 	"group-oversight-member": "مراقبة",
+	"group-checkuser": "مدققو المستخدم",
 	"group-wikicreator": "منشئو ويكيات",
 	"group-wikicreator-member": "{{GENDER:$1|منشئ|منشئة}} ويكيات",
 	"group-wikimanager": "مديرو ويكي",

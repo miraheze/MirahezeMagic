@@ -90,6 +90,8 @@
 	"group-interwiki-admin-member": "administrador de interwiki",
 	"group-oversight": "Supresores",
 	"group-oversight-member": "{{GENDER:$1|supresor|supresora}}",
+	"group-checkuser": "Verificadores de usuarios",
+	"group-checkuser-member": "{{GENDER:$1|verificador de usuarios|verificadora de usuarios}}",
 	"group-wikicreator": "Creadores de Wikis",
 	"group-wikicreator-member": "{{GENDER:$1|creador de wikis|creadora de wikis}}",
 	"group-wikimanager": "Gestores de wiki",

@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Omotecho",
+			"そらたこ"
+		]
+	},
+	"miraheze-centralauth-groupname": "Miraheze",
+	"miraheze-prefs-help-realname": "本名は省略できます。 あなたがそれを提供することを選択した場合、あなたの著作物の帰属表示に使用されます。また、MirahezeがホストするWikiを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]</span>に同意し、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]</span>に同意したことになります",
+	"miraheze-shoutwiki-must-accept-tos": "アカウントを作成するには、利用規約に同意する必要があります！",
+	"miraheze-restriction-protect": "保護",
+	"miraheze-restriction-delete": "削除",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze ウィキ"
+}

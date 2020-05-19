@@ -91,6 +91,8 @@
 	"group-interwiki-admin-member": "administrateur interwiki",
 	"group-oversight": "Masqueurs de modifications",
 	"group-oversight-member": "{{GENDER:$1|masqueur|masqueuse}} de modifications",
+	"group-checkuser": "Checkusers",
+	"group-checkuser-member": "checkuser",
 	"group-wikicreator": "Créateurs de wikis",
 	"group-wikicreator-member": "{{GENDER:$1|créateur de wikis}}",
 	"group-wikimanager": "Gestionnaires de wiki",

@@ -3,6 +3,7 @@
 		"authors": [
 			"Buntschann",
 			"Kkairri",
+			"Omotecho",
 			"Shirayuki",
 			"そらたこ"
 		]
@@ -28,6 +29,9 @@
 	"group-interwiki-admin": "インターウィキ管理者",
 	"group-interwiki-admin-member": "インターウィキ管理者",
 	"group-oversight": "オーバーサイト",
+	"group-oversight-member": "オーバーサイト",
+	"group-checkuser": "利用者調査者",
+	"group-checkuser-member": "利用者調査者",
 	"group-wikicreator": "ウィキ作成者",
 	"group-wikicreator-member": "{{GENDER:$1|ウィキ作成者}}",
 	"group-rollbacker": "巻き戻し者",
@@ -41,7 +45,7 @@
 	"group-translationadmin": "翻訳管理者",
 	"group-translationadmin-member": "翻訳管理者",
 	"group-global-ipblock-exempt": "グローバルIPブロック適用除外者",
-	"group-global-ipblock-exempt-member": "グローバルIPブロック適用除外者",
+	"group-global-ipblock-exempt-member": "{{GENDER:$1|グローバルIPブロック適用除外者}}",
 	"restriction-delete": "削除",
 	"termsofservice": "利用規約",
 	"settings-recentchanges": "最近の変更"
