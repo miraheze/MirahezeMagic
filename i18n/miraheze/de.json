@@ -3,6 +3,7 @@
 		"authors": [
 			"Aira (Wisdomstudent)",
 			"AlvaroMolina",
+			"Killarnee",
 			"Metalhead64"
 		]
 	},
@@ -37,8 +38,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|Automatischer Kontrollierer|Automatische Kontrolliererin}}",
 	"group-confirmed": "Bestätigte Benutzer",
 	"group-confirmed-member": "{{GENDER:$1|Bestätigter Benutzer|Bestätigte Benutzerin}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
+	"group-globalsysop": "Globaler Administrator",
+	"group-globalsysop-member": "{{GENDER:$1|Globaler Administrator}}",
 	"group-proxybot": "Proxy-Bot",
 	"group-proxybot-member": "Proxy-Bot",
 	"group-translator": "Übersetzer",

@@ -27,8 +27,6 @@
 	"group-autopatrolled": "Auto condrollore",
 	"group-autopatrolled-member": "{{GENDER:$1|auto condrollore}}",
 	"group-confirmed-member": "{{GENDER:$1|utende confirmatarije}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-translator": "Tradutture",
 	"group-translator-member": "traduttore",
 	"group-translationadmin": "Amministrature de le traduziune",

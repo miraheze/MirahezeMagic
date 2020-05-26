@@ -37,8 +37,6 @@
 	"group-autopatrolled-member": "autopatrolled",
 	"group-confirmed": "Bevestigde gebruikers",
 	"group-confirmed-member": "bevestigde gebruiker",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "Proxybot",
 	"group-proxybot-member": "proxybot",
 	"group-translator": "Vertalers",

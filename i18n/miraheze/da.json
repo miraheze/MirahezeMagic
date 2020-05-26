@@ -32,7 +32,6 @@
 	"group-autopatrolled-member": "{{GENDER:$1|autopatruljeret}}",
 	"group-confirmed": "Bekræftede brugere",
 	"group-confirmed-member": "{{GENDER:$1|bekræftet bruger}}",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-translator": "Oversættere",
 	"group-translator-member": "oversætter",
 	"group-translationadmin": "Oversættelsesadministratorer",

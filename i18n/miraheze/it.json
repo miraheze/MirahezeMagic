@@ -38,6 +38,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|autoverificato|autoverificata|autoverificato/a}}",
 	"group-confirmed": "Utenti confermati",
 	"group-confirmed-member": "{{GENDER:$1|utente confermato|utente confermata|utente confermato/a}}",
+	"group-globalsysop": "Amministratore globale",
+	"group-globalsysop-member": "{{GENDER:$1|Amministratore globale|Amministratrice globale|Amministratore/trice globale}}",
 	"group-translator": "Traduttori",
 	"group-translator-member": "traduttore",
 	"group-translationadmin": "Amministratori delle traduzioni",

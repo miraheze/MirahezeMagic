@@ -102,8 +102,6 @@
 	"group-autopatrolled-member": "{{GENDER:$1|autoverificado|autoverificada}}",
 	"group-confirmed": "Confirmados",
 	"group-confirmed-member": "{{GENDER:$1|confirmado|confirmada}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "Proxy Bot",
 	"group-proxybot-member": "proxy bot",
 	"group-translator": "Traductores",

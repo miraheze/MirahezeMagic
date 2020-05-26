@@ -94,8 +94,6 @@
 	"group-autopatrolled-member": "{{GENDER:$1|autopatruljør}}",
 	"group-confirmed": "Bekreftede brukere",
 	"group-confirmed-member": "{{GENDER:$1|bekreftet bruker}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "Proxybot",
 	"group-proxybot-member": "proxybot",
 	"group-translator": "Oversettere",

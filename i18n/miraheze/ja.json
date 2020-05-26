@@ -40,6 +40,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|自動巡回者}}",
 	"group-confirmed": "承認された利用者",
 	"group-confirmed-member": "{{GENDER:$1|承認された利用者}}",
+	"group-globalsysop": "グローバル管理者",
+	"group-globalsysop-member": "{{GENDER:$1|グローバル管理者}}",
 	"group-translator": "翻訳者",
 	"group-translator-member": "翻訳者",
 	"group-translationadmin": "翻訳管理者",

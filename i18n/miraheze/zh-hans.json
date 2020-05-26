@@ -11,6 +11,7 @@
 			"Tiger",
 			"予弦",
 			"佛壁灯",
+			"列维劳德",
 			"神樂坂秀吉"
 		]
 	},
@@ -44,8 +45,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|自动巡查者}}",
 	"group-confirmed": "确认用户",
 	"group-confirmed-member": "{{GENDER:$1|确认用户}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
+	"group-globalsysop": "全域管理员",
+	"group-globalsysop-member": "{{GENDER:$1|全域管理员}}",
 	"group-proxybot": "代理机器人",
 	"group-proxybot-member": "代理机器人",
 	"group-translator": "译者",

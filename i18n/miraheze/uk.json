@@ -97,8 +97,6 @@
 	"group-autopatrolled-member": "{{GENDER:$1|автопатрульний|автопатрульна}}",
 	"group-confirmed": "Підтверджені користувачі",
 	"group-confirmed-member": "{{GENDER:$1|підтверджений користувач|підтверджена користувачка}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "Проксі-бот",
 	"group-proxybot-member": "проксі-бот",
 	"group-translator": "Перекладачі",

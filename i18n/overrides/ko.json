@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Codenstory",
 			"John Lewis",
 			"Revi",
 			"Ykhwong",
@@ -14,5 +15,6 @@
 	"miraheze-shoutwiki-loginform-tos": "저는 [https://meta.miraheze.org/wiki/Terms_of_Use 이용 약관]과 [https://meta.miraheze.org/wiki/Privacy_Policy 개인정보보호정책]을 읽었고 이해하며 동의합니다",
 	"miraheze-shoutwiki-must-accept-tos": "계정을 만들려면 이용 약관을 수락해야 합니다!",
 	"miraheze-restriction-protect": "보호",
-	"miraheze-restriction-delete": "삭제"
+	"miraheze-restriction-delete": "삭제",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze 위키"
 }

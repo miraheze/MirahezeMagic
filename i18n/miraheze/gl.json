@@ -28,8 +28,6 @@
 	"group-autopatrolled-member": "{{GENDER:$1|patrulleiro automático|patrulleira automática}}",
 	"group-confirmed": "Usuarios confirmados",
 	"group-confirmed-member": "{{GENDER:$1|usuario confirmado|usuaria confirmada}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "Robot proxy",
 	"group-proxybot-member": "robot  proxy",
 	"group-translator": "Tradutores",

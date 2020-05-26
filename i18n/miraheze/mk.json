@@ -39,8 +39,6 @@
 	"group-autopatrolled-member": "{{GENDER:$1|автопатролирани}}",
 	"group-confirmed": "Потврдени корисници",
 	"group-confirmed-member": "{{GENDER:$1|потврден корисник}}",
-	"group-cvt": "CVT",
-	"group-cvt-member": "{{GENDER:$1|CVT}}",
 	"group-proxybot": "Застапнички бот",
 	"group-proxybot-member": "застапнички бот",
 	"group-translator": "Преведувачи",
