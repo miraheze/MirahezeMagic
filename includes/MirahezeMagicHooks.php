@@ -25,15 +25,6 @@ class MirahezeMagicHooks {
 				"/mnt/mediawiki-static/$DBname/awards"
 			)->execute();
 		}
-
-		// actor table migration
-		Shell::command(
-			'/usr/bin/php',
-			'/srv/mediawiki/w/maintenance/migrateActors.php',
-			'--wiki',
-			$DBname,
-			'--force'
-		)->execute();
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
