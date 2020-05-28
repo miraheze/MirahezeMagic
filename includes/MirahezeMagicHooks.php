@@ -221,4 +221,8 @@ class MirahezeMagicHooks {
 		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
 		$redis->delete( $redis->keys( $key ) );
 	}
+	
+	public static function onMimeMagicInit( $magic ) {
+		$magic->addExtraTypes( 'text/plain txt off' );
+	}
 }

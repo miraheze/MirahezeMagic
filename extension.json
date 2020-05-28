@@ -76,6 +76,9 @@
 		],
 		"GlobalUserPageWikis": [
 			"MirahezeMagicHooks::onGlobalUserPageWikis"
+		],
+		"MimeMagicInit": [
+			"MirahezeMagicHooks::onMimeMagicInit"
 		]
 	},
 	"ConfigRegistry": {
