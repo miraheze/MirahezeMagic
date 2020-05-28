@@ -79,7 +79,7 @@
 		],
 		"MimeMagicInit": [
 			"MirahezeMagicHooks::onMimeMagicInit"
-		],
+		]
 	},
 	"ConfigRegistry": {
 		"mirahezemagic": "GlobalVarConfig::newInstance"
