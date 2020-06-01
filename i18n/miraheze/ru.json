@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
+			"Diman Russkov",
 			"Diralik",
 			"DmitTrix",
 			"Fitoschido",
@@ -39,6 +40,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|автопатрулируемый|автопатрулируемая}}",
 	"group-confirmed": "Подтверждённые участники",
 	"group-confirmed-member": "{{GENDER:$1|подтверждённый участник|подтверждённая участница}}",
+	"group-globalsysop": "Глобальный администратор",
+	"group-globalsysop-member": "{{GENDER:$1|Глобальный администратор}}",
 	"group-proxybot": "Прокси-бот",
 	"group-proxybot-member": "прокси-бот",
 	"group-translator": "Переводчики",

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"01miki10"
+		]
+	},
+	"miraheze-prefs-help-realname": "Oikean nimen ilmoittaminen on vapaaehtoista. Jos ilmoitettu, sitä voidaan käyttää tekijän mainitsemiseen. Lisäksi käyttämällä Mirahezen ylläpitämää wikiä hyväksyt <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use käyttöehdot]</span> ja <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy tietosuojakäytännön]</span>",
+	"miraheze-shoutwiki-loginform-tos": "Olen lukenut, ymmärtänyt ja hyväksyn [https://meta.miraheze.org/wiki/Terms_of_Use käyttöehdot] ja [https://meta.miraheze.org/wiki/Privacy_Policy tietosuojakäytännön]",
+	"miraheze-shoutwiki-must-accept-tos": "Sinun täytyy hyväksyä käyttöehdot voidaksesi luoda käyttäjän!",
+	"miraheze-restriction-protect": "Suojaa",
+	"miraheze-restriction-delete": "Poista",
+	"miraheze-wikibase-sitelinks-miraheze": "Mirahezen wikit"
+}
