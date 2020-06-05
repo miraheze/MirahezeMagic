@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
+use MediaWiki\Http\HttpRequestFactory;
+
 if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
 	require_once '/srv/mediawiki/w/extensions/Wikibase/lib/includes/Sites/SitesBuilder.php';
 }
@@ -74,7 +76,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$url .= "&wdwikislist=$list";
 		}
 
-		$json = Http::get( $url );
+		$json = HttpRequestFactory::get( $url );
 
 		if ( !$json ) {
 			throw new MWException( "Got no data from $url\n" );

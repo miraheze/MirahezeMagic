@@ -77,7 +77,7 @@ class GlobalNewFilesHooks {
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
 
-		$file = wfLocalFile( $newTitle );
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()->newFile( $newTitle );
 
 		$dbw->update(
 			'gnf_files',

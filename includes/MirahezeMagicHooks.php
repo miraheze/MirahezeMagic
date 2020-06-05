@@ -78,7 +78,7 @@ class MirahezeMagicHooks {
 			// MessageCache uses ucfirst if ord( key ) is < 128, which is true of all
 			// of the above.  Revisit if non-ASCII keys are used.
 			$ucKey = ucfirst( $lcKey );
-			$cache = MessageCache::singleton();
+			$cache = MediaWikiServices::getInstance()->getMessageCache();
 
 			if (
 			// Override order:
@@ -219,7 +219,7 @@ class MirahezeMagicHooks {
 		$redisServer = explode( ':', $wmgRedisSettings['jobrunner']['server'] );
 		$redis->connect( $redisServer[0], $redisServer[1] );
 		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
-		$redis->delete( $redis->keys( $key ) );
+		$redis->del( $redis->keys( $key ) );
 	}
 	
 	public static function onMimeMagicInit( $magic ) {

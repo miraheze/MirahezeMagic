@@ -644,7 +644,7 @@ class RemovePII extends Maintenance {
 			$status = $userPage->doDeleteArticleReal( '', $newName, true, null, $error, $newName );
 		}
 		if ( !$status->isOK() ) {
-			$errorMessage = json_encode( $status->getErrorsArray() );
+			$errorMessage = json_encode( $status->getErrorsByType( 'error' ) );
 			$this->output( "Failed to delete user {$userNewName} page, likley does not have a user page. Error: {$errorMessage}\n" );
 		}
 

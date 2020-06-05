@@ -10,12 +10,8 @@ class SpecialGlobalNewFiles extends SpecialPage {
 		$this->setHeaders();
 		$this->outputHeader();
 
-		$out = $this->getOutput();
-
 		$pager = new GlobalNewFilesPager();
-		$table = $pager->getBody();
-
-		$out->addHTML( $pager->getNavigationBar() . $table . $pager->getNavigationBar() );
+		$pager->getFullOutput();
 	}
 
 	protected function getGroupName() {

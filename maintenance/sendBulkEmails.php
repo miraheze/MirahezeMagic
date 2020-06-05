@@ -22,6 +22,9 @@
 
 require_once __DIR__ . '/WikimediaMaintenance.php';
 
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
+
 /**
  * Send a bulk email message to a list of wiki account holders using
  * User::sendMail.
@@ -369,8 +372,8 @@ class SendBulkEmails extends Maintenance {
 			}
 			$this->optoutUrl = $title->getFullURL(
 				'', false, PROTO_CANONICAL );
-			$rev = Revision::newFromTitle( $title );
-			$content = ContentHandler::getContentText( $rev->getContent() );
+			$rev = MediaWikiServices::getInstance()->getRevisionStore()->getRevisionByTitle( $title );
+			$content = ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) );
 			$inList = false;
 			foreach ( explode( "\n", $content ) as $line ) {
 				if ( !$inList ) {
