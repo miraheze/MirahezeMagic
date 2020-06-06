@@ -115,10 +115,8 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
         # see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
         # no colour (\003) switches back to the term default
-        $fullString = "{$config->get( 'DBname' )} \0035*\003 $titleString\0034 $flag\00310 " .
+        return "{$config->get( 'DBname' )} \0035*\003 $titleString\0034 $flag\00310 " .
             "\00302$url\003 \0035*\003 \00303$user\003 \0035*\003 $szdiff \00310$comment\003\n";
-
-        return $fullString;
     }
 
     /**
