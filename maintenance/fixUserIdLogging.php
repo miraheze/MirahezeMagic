@@ -23,6 +23,8 @@
 
 require_once( "/srv/mediawiki/w/maintenance/Maintenance.php" );
 
+use Wikimedia\AtEase\AtEase;
+
 class FixUserIdLogging extends Maintenance {
         public $mUserCache;
 
@@ -135,9 +137,9 @@ class FixUserIdLogging extends Maintenance {
                         $userId = 0;
                 }
 
-                \MediaWiki\suppressWarnings();
+                AtEase::suppressWarnings();
                 $logParams = unserialize( $row->log_params );
-                \MediaWiki\restoreWarnings();
+                AtEase::restoreWarnings();
 
                 if ( is_array( $logParams ) && isset( $logParams['4::userid'] ) ) {
                         $logParams['4::userid'] = $userId;
