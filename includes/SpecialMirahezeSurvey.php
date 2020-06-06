@@ -280,7 +280,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 		return true;
 	}
 
-	public function getDisplayFormat() {
+	protected function getDisplayFormat() {
 		return 'ooui';
 	}
 }
