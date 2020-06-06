@@ -11,9 +11,8 @@ class SpecialGlobalNewFiles extends SpecialPage {
 		$this->outputHeader();
 
 		$pager = new GlobalNewFilesPager();
-		$pager->getFullOutput();
 		
-		$this->getOutput()->addParserOutputContent( $pager );
+		$this->getOutput()->addParserOutputContent( $pager->getFullOutput() );
 	}
 
 	protected function getGroupName() {
