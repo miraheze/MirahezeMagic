@@ -187,7 +187,7 @@
 	"managewiki-setting-wgAccountCreationThrottle-name": "Account Creation Throttle",
 	"managewiki-setting-wgAccountCreationThrottle-help": "Number of accounts each IP address may create, 0 to disable.",
 	"managewiki-setting-wgSVGMetadataCutoff-name": "SVG Metadata Cutoff",
-	"managewiki-setting-wgSVGMetadataCutoff-help" "Don't read SVG metadata beyond this point.",
+	"managewiki-setting-wgSVGMetadataCutoff-help": "Don't read SVG metadata beyond this point.",
 	"managewiki-setting-wgMaxArticleSize-name": "Max Article Size",
 	"managewiki-setting-wgMaxArticleSize-help": "Maximum page size in kilobytes.",
 	"managewiki-setting-wgMaxImageArea-name": "Max Image Area",
