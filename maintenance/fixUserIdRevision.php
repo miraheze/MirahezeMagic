@@ -128,9 +128,7 @@ class FixUserIdRevision extends Maintenance {
                         $this->mUserCache[$row->rev_user_text] = $userId;
                 }
 
-                if ( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) {
-                        $userId = $userId;
-                } else {
+                if ( !( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) ) {
                         $userId = 0;
                 }
 
