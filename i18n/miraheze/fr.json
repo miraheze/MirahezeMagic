@@ -4,6 +4,7 @@
 			"AlvaroMolina",
 			"Derugon",
 			"Gomoko",
+			"Pamputt",
 			"Reception123",
 			"Thibaut120094",
 			"Urhixidur",
@@ -138,5 +139,6 @@
 	"settings-recentchanges": "Modifications récentes",
 	"settings-restricted": "Restreint",
 	"settings-styling": "Style",
+	"settings-wikibase": "Wikibase",
 	"extensions-skins": "Habillage"
 }
