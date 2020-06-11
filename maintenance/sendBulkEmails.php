@@ -23,7 +23,7 @@
 // Detect $IP
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
-	$IP = __DIR__ . '/../..';
+	$IP = __DIR__ . '/../../..';
 }
 
 // Require base maintenance class
