@@ -20,7 +20,13 @@
  * @ingroup Wikimedia
  */
 
-require_once __DIR__ . '/WikimediaMaintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../..';
+}
+
+// Require base maintenance class
+require_once "$IP/maintenance/Maintenance.php";
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
