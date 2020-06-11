@@ -20,7 +20,14 @@
  * @ingroup Wikimedia
  */
 
-require_once __DIR__ . '/WikimediaMaintenance.php';
+// Detect $IP
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../..';
+}
+
+// Require base maintenance class
+require_once "$IP/maintenance/Maintenance.php";
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
@@ -44,20 +51,20 @@ class SendBulkEmails extends Maintenance {
 	/**
 	 * @var string $DEFAULT_START Opt-out list start marker
 	 */
-	const DEFAULT_START = '<!-- BEGIN OPT-OUT LIST -->';
+	private const DEFAULT_START = '<!-- BEGIN OPT-OUT LIST -->';
 
 	/**
 	 * @var string $DEFAULT_END Opt-out list end marker
 	 */
-	const DEFAULT_END = '<!-- END OPT-OUT LIST -->';
+	private const DEFAULT_END = '<!-- END OPT-OUT LIST -->';
 
 	/**
 	 * @var int $DEFAULT_DELAY Email send delay (seconds)
 	 */
-	const DEFAULT_DELAY = 5;
+	private const DEFAULT_DELAY = 5;
 
 	/**
-	 * @var int $start Unix epoch time
+	 * @var float $start Unix epoch time
 	 */
 	private $start = 0;
 
@@ -144,8 +151,7 @@ class SendBulkEmails extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->start = microtime( true );
-		$this->mDescription =
-			'Send bulk email to a list of wiki account holders';
+		$this->addDescription( 'Send bulk email to a list of wiki account holders' );
 		$this->addOption( 'subject', 'Email subject (string)', true, true );
 		$this->addOption( 'body', 'Email body (file)', true, true );
 		$this->addOption( 'to',
@@ -230,7 +236,7 @@ class SendBulkEmails extends Maintenance {
 			$this->ok++;
 		} else {
 			$this->failed++;
-			$this->output( "ERROR - Send failed: {$status->getMessage()}\n" );
+			$this->output( "ERROR - Send failed: {$status->getMessage()->text()}\n" );
 		}
 		return true;
 	}
@@ -372,7 +378,9 @@ class SendBulkEmails extends Maintenance {
 			}
 			$this->optoutUrl = $title->getFullURL(
 				'', false, PROTO_CANONICAL );
-			$rev = MediaWikiServices::getInstance()->getRevisionStore()->getRevisionByTitle( $title );
+			$rev = MediaWikiServices::getInstance()
+				->getRevisionLookup()
+				->getRevisionByTitle( $title );
 			$content = ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) );
 			$inList = false;
 			foreach ( explode( "\n", $content ) as $line ) {
@@ -400,5 +408,5 @@ class SendBulkEmails extends Maintenance {
 	}
 }
 
-$maintClass = 'SendBulkEmails';
+$maintClass = SendBulkEmails::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
