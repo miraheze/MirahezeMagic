@@ -40,7 +40,7 @@ class MigrateLocalToGlobal extends Maintenance {
 		$dbBackground = CentralAuthUtils::getCentralReplicaDB();
 		$gnName = [];
 
-		$user = $this->getOption( 'username', false ) 
+		$user = $this->getOption( 'username', false );
 		if ( $user ) {
 			$gnName = [ 'gn_name' => $user ];
 		}
