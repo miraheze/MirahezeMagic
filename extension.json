@@ -35,7 +35,8 @@
 		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
 	},
 	"SpecialPages": {
-		"GlobalNewFiles": "SpecialGlobalNewFiles"
+		"GlobalNewFiles": "SpecialGlobalNewFiles",
+		"MirahezeSurvey": "SpecialMirahezeSurvey"
 	},
 	"Hooks": {
 		"CreateWikiCreation": [
