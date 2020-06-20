@@ -211,8 +211,8 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
 				'max' => 5,
-				'label-message' => 'miraheze-survey-q7-ci',
-				'default' => $dbRow['q7-ci'] ?? false,
+				'label-message' => 'miraheze-survey-q7-tasks',
+				'default' => $dbRow['q7-tasks'] ?? false,
 				'hide-if' => [ '!==', 'wpq1', 'account-manage' ]
 			],
 			'q8' => [
