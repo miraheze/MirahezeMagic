@@ -4,7 +4,8 @@
 			"Olghinabella",
 			"Piramidion",
 			"Viiictorrr",
-			"Vlad5250"
+			"Vlad5250",
+			"Ата"
 		]
 	},
 	"mirahezemagic-description": "Перехоплювачі, скрипти й повідомлення MediaWiki, призначені для використання в Miraheze",
@@ -87,6 +88,8 @@
 	"group-interwiki-admin-member": "адміністратор інтервікі",
 	"group-oversight": "Ревізори",
 	"group-oversight-member": "ревізор",
+	"group-checkuser": "Чек'юзери",
+	"group-checkuser-member": "чек'юзер",
 	"group-wikicreator": "Творці Wiki",
 	"group-wikicreator-member": "{{GENDER:$1|творець вікі}}",
 	"group-wikimanager": "Менеджери вікі",
@@ -97,6 +100,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|автопатрульний|автопатрульна}}",
 	"group-confirmed": "Підтверджені користувачі",
 	"group-confirmed-member": "{{GENDER:$1|підтверджений користувач|підтверджена користувачка}}",
+	"group-globalsysop": "Глобальний адміністратор",
+	"group-globalsysop-member": "{{GENDER:$1|Глобальний адміністратор|Глобальна адміністраторка}}",
 	"group-proxybot": "Проксі-бот",
 	"group-proxybot-member": "проксі-бот",
 	"group-translator": "Перекладачі",
@@ -130,5 +135,6 @@
 	"settings-recentchanges": "Нові редагування",
 	"settings-restricted": "Обмежено",
 	"settings-styling": "Стиль",
+	"settings-wikibase": "Вікібаза",
 	"extensions-skins": "Тема оформлення"
 }
