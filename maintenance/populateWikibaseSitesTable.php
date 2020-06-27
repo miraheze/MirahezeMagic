@@ -76,7 +76,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$url .= "&wdwikislist=$list";
 		}
 
-		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url );
+		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
 
 		if ( !$json ) {
 			throw new MWException( "Got no data from $url\n" );
