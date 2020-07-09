@@ -18,10 +18,10 @@ data = DATA['wikidiscover']
 ld = len(data)
 x = 0 # gets the api data
 print('done, generating map!')
-file = open('/mnt/mediawiki-static/sitemaps/', 'w+') #resets the file
+file = open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'w+') #resets the file
 file.write('')
 file.close()
-file = open('/mnt/mediawiki-static/sitemaps/', 'a+') # starts the appending
+file = open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'a+') # starts the appending
 file.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
 maps = []
 while x < ld:
