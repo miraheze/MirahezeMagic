@@ -53,7 +53,7 @@ while x < ld:
 l = 0
 while l < len(maps):
     file.write('\n\t<sitemap>')
-    url = '\n\t\t<loc>h{0}</loc>'.format(str(maps[l]))
+    url = '\n\t\t<loc>{0}</loc>'.format(str(maps[l]))
     file.write(url)
     date = datetime.now()
     dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
