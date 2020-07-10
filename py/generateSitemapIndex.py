@@ -48,17 +48,15 @@ while x < ld:
 l = 0
 with open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'w+') as xmlfile:
 	xmlfile.write('') #resets file to blank
-with open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'a+') as xmlfile: #makes xml
-	xmlfile.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
-	while l < len(maps):
-	    xmlfile.write('\n\t<sitemap>')
-	    url = '\n\t\t<loc>{0}</loc>'.format(str(maps[l]))
-	    xmlfile.write(url)
-	    date = datetime.now()
-	    dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
-	    loc = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
-	    xmlfile.write(loc)
-	    xmlfile.write('\n\t</sitemap>') # adds sitemap entry
-	    l = l + 1
-	xmlfile.write('\n</sitemapindex>') 
+with open('sitemap.xml', 'a+') as xmlfile:  # makes xml
+    xmlfile.write(
+        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    while l < len(maps):
+        date = datetime.now()
+        dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
+        loc = '\n\t\t<loc>{0}</loc>'.format(str(maps[l]))
+        lastmod = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
+        xmlfile.write('\n\t<sitemap>{0}{1}\n\t</sitemap>'.format(str(loc), str(lastmod)))
+        l = l + 1
+    xmlfile.write('\n</sitemapindex>')
 print('done')
