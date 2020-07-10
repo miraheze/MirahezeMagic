@@ -46,9 +46,7 @@ while x < ld:
             maps.append(info["loc"])
             z = z + 1
 l = 0
-with open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'w+') as xmlfile:
-	xmlfile.write('') #resets file to blank
-with open('sitemap.xml', 'a+') as xmlfile:  # makes xml
+with open('sitemap.xml', 'w+') as xmlfile:  # makes xml
     xmlfile.write(
         '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     while l < len(maps):
