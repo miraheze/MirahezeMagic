@@ -60,5 +60,5 @@ with open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'a+') as xmlfile: #makes
 	    xmlfile.write(loc)
 	    xmlfile.write('\n\t</sitemap>') # adds sitemap entry
 	    l = l + 1
-	file.write('\n</sitemapindex>') 
+	xmlfile.write('\n</sitemapindex>') 
 print('done')
