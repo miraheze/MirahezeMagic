@@ -18,11 +18,6 @@ data = DATA['wikidiscover']
 ld = len(data)
 x = 0 # gets the api data
 print('done, generating map!')
-file = open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'w+') #resets the file
-file.write('')
-file.close()
-file = open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'a+') # starts the appending
-file.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
 maps = []
 while x < ld:
     wikidata = data[x]
@@ -51,16 +46,19 @@ while x < ld:
             maps.append(info["loc"])
             z = z + 1
 l = 0
-while l < len(maps):
-    file.write('\n\t<sitemap>')
-    url = '\n\t\t<loc>{0}</loc>'.format(str(maps[l]))
-    file.write(url)
-    date = datetime.now()
-    dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
-    loc = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
-    file.write(loc)
-    file.write('\n\t</sitemap>') # adds sitemap entry
-    l = l + 1
-file.write('\n</sitemapindex>') 
-file.close() #done
+with open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'w+') as xmlfile:
+	xmlfile.write('') #resets file to blank
+with open('/mnt/mediawiki-static/sitemaps/sitemap.xml', 'a+') as xmlfile: #makes xml
+	xmlfile.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+	while l < len(maps):
+	    xmlfile.write('\n\t<sitemap>')
+	    url = '\n\t\t<loc>{0}</loc>'.format(str(maps[l]))
+	    xmlfile.write(url)
+	    date = datetime.now()
+	    dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
+	    loc = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
+	    xmlfile.write(loc)
+	    xmlfile.write('\n\t</sitemap>') # adds sitemap entry
+	    l = l + 1
+	file.write('\n</sitemapindex>') 
 print('done')
