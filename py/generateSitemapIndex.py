@@ -47,8 +47,7 @@ while x < ld:
             z = z + 1
 l = 0
 with open('sitemap.xml', 'w+') as xmlfile:  # makes xml
-    xmlfile.write(
-        '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    xmlfile.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     while l < len(maps):
         date = datetime.now()
         dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
