@@ -3,33 +3,34 @@ import requests
 import xmltodict
 import json
 import sys
-S = requests.Session()
+from urllib.parse import urlparse
+reqsession = requests.Session()
 print('getting wikilist')
 URL = "https://meta.miraheze.org/w/api.php"
 PARAMS = {
-	"action": "wikidiscover",
-	"format": "json",
-	"wdstate": "public",
-	"wdsiteprop": "dbname"
+    "action": "wikidiscover",
+    "format": "json",
+    "wdstate": "public",
+    "wdsiteprop": "dbname"
 }
-R = S.get(url=URL, params=PARAMS)
-DATA = R.json()
+apirequest = reqsession.get(url=URL, params=PARAMS)
+DATA = apirequest.json()
 data = DATA['wikidiscover']
-ld = len(data)
-x = 0 # gets the api data
+x = 0  # gets the api data
 print('done, generating map!')
 maps = []
-while x < ld:
+for x in range(len(data)):
     wikidata = data[x]
     wiki = wikidata['url']
-    wiki = wiki[8:]
-    x = x+1 # url parser
+    wiki = urlparse(wiki)
+    wiki = str(wiki.netloc)
+    x = x + 1  # url parser
     urlreq = 'https://static.miraheze.org/sitemaps/{0}/sitemap.xml'.format(str(wiki))
-    req = S.get(url=urlreq)
+    req = reqsession.get(url=urlreq)
     try:
         smap = xmltodict.parse(req.content)
         cont = 1
-    except :
+    except:
         print('Sitemap invalid, skipping....')
         cont = 0
     if cont == 1:
@@ -46,7 +47,7 @@ while x < ld:
             maps.append(info["loc"])
             z = z + 1
 l = 0
-with open('sitemap.xml', 'w+') as xmlfile:  # makes xml
+with open('/mnt/mediawiki-static/sitemap.xml', 'w') as xmlfile:  # makes xml
     xmlfile.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
     while l < len(maps):
         date = datetime.now()
