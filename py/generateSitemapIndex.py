@@ -57,3 +57,4 @@ with open('/mnt/mediawiki-static/sitemap.xml', 'w') as xmlfile:  # makes xml
         xmlfile.write('\n\t<sitemap>{0}{1}\n\t</sitemap>'.format(str(loc), str(lastmod)))
         l = l + 1
     xmlfile.write('\n</sitemapindex>')
+print("Done!")
