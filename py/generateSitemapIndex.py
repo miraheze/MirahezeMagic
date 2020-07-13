@@ -32,7 +32,7 @@ for wikidata in data:
         print('Sitemap invalid, skipping....')
         continue
     try:
-        smap = smap["sitemapindex"]
+        smap = smap["sitemapindex"]["sitemap"]
     except:
         continue
     for info in smap:
