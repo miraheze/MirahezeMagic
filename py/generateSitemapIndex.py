@@ -39,10 +39,10 @@ for wikidata in data:
             continue
         for info in smap:
             try:
-                maps.append(info["loc"])
+                info = smap[z]
             except KeyError:
                 continue
-
+            maps.append(info["loc"])
 lines = []
 lines.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
 for map in maps:
