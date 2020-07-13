@@ -53,8 +53,8 @@ for map in maps:
     dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
     loc = '\n\t\t<loc>{0}</loc>'.format(str(map))
     lastmod = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
-    lines.append('\t<sitemap>{0}{1}\n\t</sitemap>'.format(loc, lastmod))
+    lines.append('\n\t<sitemap>{0}{1}\n\t</sitemap>'.format(loc, lastmod))
 lines.append('</sitemapindex>')
 with open('/mnt/mediawiki-static/sitemap.xml', 'w') as xmlfile:  # makes xml
-    xmlfile.writelines(lines)
+    xmlfile.write(lines)
 print('done')
