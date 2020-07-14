@@ -28,18 +28,20 @@ for wikidata in data:
     req = reqsession.get(url=urlreq)
     try:
         smap = xmltodict.parse(req.content)
-    except:
-        print('Sitemap invalid, skipping....')
+    except Exception:
+        print('Sitemap invalid, skipping "{0}"....'.format(wiki))
         continue
     try:
+        maps.append(smap["sitemapindex"]["sitemap"]["loc"])  # Single items are not lists
+    except TypeError:
         smap = smap["sitemapindex"]["sitemap"]
-    except:
-        continue
-    for info in smap:
-        try:
-            maps.append(info["loc"])
-        except KeyError:
-            continue
+        for info in smap:
+            try:
+                maps.append(info["loc"])
+            except KeyError:
+                continue  # Somehow missing the data we need, ignore
+    except KeyError:
+        continue  # Sitemap data is not actually saved in this sitemap! Ignore
 
 lines = []
 lines.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
