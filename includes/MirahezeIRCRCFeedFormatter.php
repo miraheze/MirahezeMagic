@@ -1,7 +1,5 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
-
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +19,8 @@ use MediaWiki\MediaWikiServices;
  * @file
  * @authors VVasiliev, Legoktm, 'This, that and the other', EBernhardson, Siebrand, John Lewis, Southparkfan
  */
+
+use MediaWiki\MediaWikiServices;
 
 /**
  * Generates a colourful notification intended for humans on IRC.
@@ -88,7 +88,10 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			) );
 			$flag = $attribs['rc_log_action'];
 		} else {
-			$comment = self::cleanupForIRC( $attribs['rc_comment'] );
+			$store = MediaWikiServices::getInstance()->getCommentStore();
+			$comment = self::cleanupForIRC(
+				$store->getComment( 'rc_comment', $attribs )->text
+			);
 			$flag = '';
 			if ( !$attribs['rc_patrolled']
 				&& ( $config->get( 'UseRCPatrol' ) || $attribs['rc_type'] == RC_NEW && $config->get( 'UseNPPatrol' ) )
