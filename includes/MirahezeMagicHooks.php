@@ -205,7 +205,7 @@ class MirahezeMagicHooks {
 		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
 			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
-			$list = $databasesArray['databases'];
+			$list = array_keys( $databasesArray['combi'] );
 			return false;
 		}
 
