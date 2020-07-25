@@ -4,6 +4,7 @@ import xmltodict
 import json
 import sys
 from urllib.parse import urlparse
+
 reqsession = requests.Session()
 print('getting wikilist')
 URL = "https://meta.miraheze.org/w/api.php"
@@ -16,45 +17,44 @@ PARAMS = {
 apirequest = reqsession.get(url=URL, params=PARAMS)
 DATA = apirequest.json()
 data = DATA['wikidiscover']
-x = 0  # gets the api data
 print('done, generating map!')
 maps = []
-for x in range(len(data)):
-    wikidata = data[x]
+
+for wikidata in data:
     wiki = wikidata['url']
     wiki = urlparse(wiki)
     wiki = str(wiki.netloc)
-    x = x + 1  # url parser
-    urlreq = 'https://static.miraheze.org/sitemaps/{0}/sitemap.xml'.format(str(wiki))
+    urlreq = 'https://static.miraheze.org/sitemaps/{0}/sitemap.xml'.format(wiki)
     req = reqsession.get(url=urlreq)
     try:
         smap = xmltodict.parse(req.content)
-        cont = True
-    except:
-        print('Sitemap invalid, skipping....')
-        cont = False
-    if cont:
-        try:
-            smap = smap["sitemapindex"]["sitemap"]
-        except:
-            continue
-        z = 0
-        for y in smap:
+    except Exception:
+        print('Sitemap invalid, skipping "{0}"....'.format(wiki))
+        continue
+    try:
+        maps.append(smap["sitemapindex"]["sitemap"]["loc"])  # Single items are not lists
+    except TypeError:
+        smap = smap["sitemapindex"]["sitemap"]
+        for info in smap:
             try:
-                info = smap[z]
+                maps.append(info["loc"])
             except KeyError:
-                continue
-            maps.append(info["loc"])
-            z = z + 1
-l = 0
-with open('/mnt/mediawiki-static/sitemap.xml', 'w') as xmlfile:  # makes xml
-    xmlfile.write('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
-    while l < len(maps):
-        date = datetime.now()
-        dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
-        loc = '\n\t\t<loc>{0}</loc>'.format(str(maps[l]))
-        lastmod = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
-        xmlfile.write('\n\t<sitemap>{0}{1}\n\t</sitemap>'.format(str(loc), str(lastmod)))
-        l = l + 1
-    xmlfile.write('\n</sitemapindex>')
-print("Done!")
+                continue  # Somehow missing the data we need, ignore
+    except KeyError:
+        continue  # Sitemap data is not actually saved in this sitemap! Ignore
+
+lines = []
+lines.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+for map in maps:
+    date = datetime.now()
+    dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
+    loc = '\n\t\t<loc>{0}</loc>'.format(str(map))
+    lastmod = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
+    lines.append('\t<sitemap>{0}{1}\n\t</sitemap>'.format(loc, lastmod))
+
+lines.append('</sitemapindex>')
+
+xmlfile = open('/mnt/mediawiki-static/sitemap.xml', 'r+') # makes xml
+xmlfile.writelines(lines)
+
+print('done')
