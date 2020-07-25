@@ -54,7 +54,7 @@ for map in maps:
 
 lines.append('</sitemapindex>')
 
-xmlfile = open('/mnt/mediawiki-static/sitemap.xml', 'r+') # makes xml
+xmlfile = open('/mnt/mediawiki-static/sitemap.xml', 'w+') # makes xml
 xmlfile.writelines(lines)
 
 print('done')
