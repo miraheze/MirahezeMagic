@@ -5,7 +5,7 @@
 		]
 	},
 	"miraheze-dberr-again": "Prøv å vente noen minutter og så laste på nytt. Sjekk ut Twitter-siden vår eller kontakt systemadministratorene ved å koble til #miraheze på irc.freenode.net for å få mer informasjon om denne feilen.",
-	"miraheze-oathauth-step1": "'''VIKTIG! Sørg for at du leser <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> før du slår på dette!'''<br />Steg 1: Last ned et program for totrinns pålogging",
+	"miraheze-oathauth-step1": "'''VIKTIG! Sørg for at du leser OATHAuth-siden før du slår på dette!''' Steg 1: Last ned et program for totrinns pålogging",
 	"miraheze-prefs-help-realname": "Virkelig navn er valgfritt. Hvis du velger å oppgi det vil det brukes for å gi deg attribusjon for arbeidet ditt. Ved å bruke en wiki som betjenes av Miraheze samtykker du i span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use bruksvilkårene]</span> og godtar <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy personvernsreglene]</span>",
 	"miraheze-shoutwiki-loginform-tos": "Jeg har lest, forstått og samtykker i [https://meta.miraheze.org/wiki/Terms_of_Use bruksvilkårene] og [https://meta.miraheze.org/wiki/Privacy_Policy personvernsreglene]",
 	"miraheze-shoutwiki-must-accept-tos": "Du må godta bruksvilkårene for å kunne opprette en konto!",
