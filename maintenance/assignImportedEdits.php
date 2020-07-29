@@ -71,7 +71,7 @@ class AssignImportedEdits extends Maintenance {
 			} else {
 				$user = $row->rev_user_text;
 				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
-				if ( a( $user, chr($this->importPrefix) ) === 0 ) {
+				if ( strpos( $user, chr($this->importPrefix) ) === 0 ) {
 					if ( $nameIsValid && $user ) {
 						$this->assignEdit( $user );
 					}
