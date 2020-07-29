@@ -63,7 +63,7 @@ class AssignImportedEdits extends Maintenance {
 			if ( $user ) {
 				$nameIsValid = User::newFromName( $user )->getId();
 				$name = $this->importPrefix . $user;
-				if ( strpos( $row->rev_user_text, $this->importPrefix ) === 0 ) {
+				if ( strpos( $row->rev_user_text, chr($this->importPrefix) ) === 0 ) {
 					if ( $nameIsValid !== 0 && $row->rev_user_text === $name ) {
 						$this->assignEdit( $name );
 					}
@@ -71,7 +71,7 @@ class AssignImportedEdits extends Maintenance {
 			} else {
 				$user = $row->rev_user_text;
 				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
-				if ( strpos( $user, $this->importPrefix ) === 0 ) {
+				if ( a( $user, chr($this->importPrefix) ) === 0 ) {
 					if ( $nameIsValid && $user ) {
 						$this->assignEdit( $user );
 					}
