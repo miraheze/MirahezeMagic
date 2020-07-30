@@ -10,5 +10,8 @@
 	"miraheze-shoutwiki-loginform-tos": "Jeg har lest, forstått og samtykker i [https://meta.miraheze.org/wiki/Terms_of_Use bruksvilkårene] og [https://meta.miraheze.org/wiki/Privacy_Policy personvernsreglene]",
 	"miraheze-shoutwiki-must-accept-tos": "Du må godta bruksvilkårene for å kunne opprette en konto!",
 	"miraheze-centralauth-merge-method-admin": "Manuelt sammenslått konto",
-	"miraheze-centralauth-merge-method-admin-desc": "Denne kontoen ble manuelt sammenslått av en systemadministrator eller en forvalter. Dette kan ha vært på grunn av et teknisk problem i en navneendrings- eller sammenslåingsprosess."
+	"miraheze-centralauth-merge-method-admin-desc": "Denne kontoen ble manuelt sammenslått av en systemadministrator eller en forvalter. Dette kan ha vært på grunn av et teknisk problem i en navneendrings- eller sammenslåingsprosess.",
+	"miraheze-restriction-protect": "Beskytt",
+	"miraheze-restriction-delete": "Slett",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-wikier"
 }
