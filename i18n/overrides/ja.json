@@ -5,9 +5,13 @@
 			"そらたこ"
 		]
 	},
+	"miraheze-dberr-again": "数分待ってから再読み込みをお試しください。 このエラーの詳細については、Twitterページ（Twitter.com/Miraheze）を確認するか、irc.freenode.netで#mirahezeに接続してシステム管理者に連絡してください。",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-prefs-help-realname": "本名は省略できます。入力すると、あなたの著作物の帰属表示に使用されます。また、MirahezeがホストするWikiを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]</span>に同意し、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]</span>に同意したことになります",
+	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
 	"miraheze-shoutwiki-must-accept-tos": "アカウントを作成するには、利用規約に同意する必要があります！",
+	"miraheze-centralauth-merge-method-admin": "統合されたアカウント",
+	"miraheze-centralauth-merge-method-admin-desc": "このアカウントは、システム管理者またはスチュワードによって手動で統合されました。 これは、改名または統合の過程での技術的な問題が原因である可能性があります。",
 	"miraheze-restriction-protect": "保護",
 	"miraheze-restriction-delete": "削除",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze ウィキ"

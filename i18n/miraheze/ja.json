@@ -14,7 +14,7 @@
 	"miraheze-helpcenter": "Miraheze について",
 	"miraheze-requestfeatures": "ウィキの機能を申請する",
 	"miraheze-requestwiki": "ウィキをリクエストする",
-	"mirahezesurvey": "Miraheze 2019年次調査",
+	"mirahezesurvey": "Miraheze 2020年次調査",
 	"miraheze-survey-agree-strong": "強く同意",
 	"miraheze-survey-agree": "同意",
 	"miraheze-survey-disagree-strong": "強く不同意",
@@ -48,7 +48,13 @@
 	"group-translationadmin-member": "翻訳管理者",
 	"group-global-ipblock-exempt": "グローバルIPブロック適用除外者",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|グローバルIPブロック適用除外者}}",
+	"group-member": "メンバー",
+	"protect-level-user": "登録利用者にのみ許可",
 	"restriction-delete": "削除",
+	"restriction-level-user": "登録利用者にのみ許可",
+	"sitematrix": "Mirahezeのウィキの一覧",
+	"sitematrix-summary": "この特別ページはMirahezeのウィキの一覧です。",
 	"termsofservice": "利用規約",
-	"settings-recentchanges": "最近の変更"
+	"settings-recentchanges": "最近の変更",
+	"extensions-skins": "外装"
 }
