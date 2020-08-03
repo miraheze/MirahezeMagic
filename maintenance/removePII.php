@@ -651,7 +651,7 @@ class RemovePII extends Maintenance {
 		if ( version_compare( MW_VERSION, '1.35', '<' ) ) {
 			$status = $userPage->doDeleteArticleReal( '', true, null, null, $error, $user );
 		} else {
-			$status = $userPage->doDeleteArticleReal( '', $user, true, null, $error, $user );
+			$status = $userPage->doDeleteArticleReal( '', $user );
 		}
 
 		if ( !$status->isOK() ) {
