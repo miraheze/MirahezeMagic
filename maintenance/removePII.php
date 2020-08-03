@@ -636,16 +636,16 @@ class RemovePII extends Maintenance {
 		);
 
 		$error = '';
-		$title = Title::newFromText( $newName->getTitleKey(), NS_USER );
+		$title = Title::newFromText( $oldName->getTitleKey(), NS_USER );
 		$userPage = WikiPage::factory( $title );
 		if ( version_compare( MW_VERSION, '1.35', '<' ) ) {
-			$status = $userPage->doDeleteArticleReal( '', true, null, null, $error, $newName );
+			$status = $userPage->doDeleteArticleReal( '', true, null, null, $error, $oldName );
 		} else {
-			$status = $userPage->doDeleteArticleReal( '', $newName, true, null, $error, $newName );
+			$status = $userPage->doDeleteArticleReal( '', $oldName, true, null, $error, $oldName );
 		}
 		if ( !$status->isOK() ) {
 			$errorMessage = json_encode( $status->getErrorsByType( 'error' ) );
-			$this->output( "Failed to delete user {$userNewName} page, likley does not have a user page. Error: {$errorMessage}\n" );
+			$this->output( "Failed to delete user {$userOldName} page, likley does not have a user page. Error: {$errorMessage}\n" );
 		}
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
