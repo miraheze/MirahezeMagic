@@ -4,6 +4,10 @@
 			"Patsagorn Y."
 		]
 	},
+	"miraheze-dberr-again": "กรุณารอซักครู่และรีโหลดหน้าอีกครั้ง สำหรับข้อมูลเพิ่มเติมเกี่ยวกับช้อผิดพลาดนี้ กรุณาตรวจสอบที่หน้าทวิตเตอร์ของเรา (Twitter.com/Miraheze) หรือติดต่อผู้ดูแลระบบโครงข่ายของเราโดยเชื่อมต่อ #miraheze ที่ chat.freenode.net",
+	"miraheze-oathauth-step1": "สำคัญ! อ่านหน้า OATHAuth ก่อนเปิดใช้งาน\nขั้นตอนที่ 1: ดาวน์โหลดโปรแกรมยืนยันตัวตนสองขั้นตอน",
+	"miraheze-shoutwiki-loginform-tos": "ฉันได้อ่านและยอมรับใน[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]และ[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]",
+	"miraheze-shoutwiki-must-accept-tos": "คุณต้องยอมรับข้อกำหนดการใช้งานก่อนสร้างบัญชีผู้ใช้",
 	"miraheze-restriction-protect": "ป้องกัน",
 	"miraheze-restriction-delete": "ลบ",
 	"miraheze-wikibase-sitelinks-miraheze": "วิกิของ Miraheze"
