@@ -8,6 +8,8 @@
 	"miraheze-oathauth-step1": "สำคัญ! อ่านหน้า OATHAuth ก่อนเปิดใช้งาน\nขั้นตอนที่ 1: ดาวน์โหลดโปรแกรมยืนยันตัวตนสองขั้นตอน",
 	"miraheze-shoutwiki-loginform-tos": "ฉันได้อ่านและยอมรับใน[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]และ[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]",
 	"miraheze-shoutwiki-must-accept-tos": "คุณต้องยอมรับข้อกำหนดการใช้งานก่อนสร้างบัญชีผู้ใช้",
+	"miraheze-centralauth-merge-method-admin": "การรวมบัญชีด้วยมือ",
+	"miraheze-centralauth-merge-method-admin-desc": "บัญชีนี้ถูกรวมเข้าด้วยมือโดยผู้ดูแลระบบโครงข่ายหรือผู้ดูแลโครงการ อาจเนื่องจากปัญหาด้านเทคนิคระหว่างกระบวนการเปลี่ยนชื่อหรือการรวมบัญชี",
 	"miraheze-restriction-protect": "ป้องกัน",
 	"miraheze-restriction-delete": "ลบ",
 	"miraheze-wikibase-sitelinks-miraheze": "วิกิของ Miraheze"
