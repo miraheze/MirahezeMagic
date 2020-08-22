@@ -71,6 +71,7 @@ class MirahezeMagicHooks {
 			'restriction-protect',
 			'restriction-delete',
 			'wikibase-sitelinks-miraheze',
+			'centralauth-login-error-locked',
 		);
 
 		if ( in_array( $lcKey, $keys, true ) ) {
