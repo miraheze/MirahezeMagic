@@ -78,8 +78,6 @@
 	"globalnewfiles": "Novos ficheiros globais",
 	"group-abuse": "Equipa antiabusos",
 	"group-abuse-member": "{{GENDER:$1|equipa antiabusos}}",
-	"group-donator": "Doadores",
-	"group-donator-member": "{{GENDER:$1|doador|doadora}}",
 	"group-steward": "Stewards",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Administradores de sistema",

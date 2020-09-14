@@ -77,8 +77,6 @@
 	"globalnewfiles": "Globale nye filer",
 	"group-abuse": "Misbruksteam",
 	"group-abuse-member": "{{GENDER:$1|misbruksteam}}",
-	"group-donator": "Donorer",
-	"group-donator-member": "{{GENDER:$1|donor}}",
 	"group-steward": "Forvaltere",
 	"group-steward-member": "{{GENDER:$1|forvalter}}",
 	"group-sysadmin": "Systemadministratorer",

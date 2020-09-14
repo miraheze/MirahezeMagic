@@ -19,8 +19,6 @@
 	"globalnewfiles": "Nieuwe globale bestanden",
 	"group-abuse": "Anti-misbruikteam",
 	"group-abuse-member": "{{GENDER:$1|anti-misbruikteam}}",
-	"group-donator": "Donateurs",
-	"group-donator-member": "Donateur",
 	"group-steward": "Stewards",
 	"group-steward-member": "steward",
 	"group-sysadmin": "Systeembeheerders",

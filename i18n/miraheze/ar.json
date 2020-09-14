@@ -79,8 +79,6 @@
 	"globalnewfiles": "الملفات العالمية الجديدة",
 	"group-abuse": "فريق إساءة الاستخدام",
 	"group-abuse-member": "{{GENDER:$1|فريق إساءة الاستخدام}}",
-	"group-donator": "متبرعون",
-	"group-donator-member": "{{GENDER:$1|متبرع|متبرعة}}",
 	"group-steward": "مضيفون",
 	"group-steward-member": "{{GENDER:$1|مضيف|مضيفة}}",
 	"group-sysadmin": "إداريو النظام",

@@ -12,8 +12,6 @@
 	"miraheze-requestfeatures": "Begär funktioner på en wiki",
 	"miraheze-requestwiki": "Begär en wiki",
 	"globalnewfiles": "Globala nya filer",
-	"group-donator": "Donationer",
-	"group-donator-member": "{{GENDER:$1|donatorer}}",
 	"group-steward": "Stewarder",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Systemadministratörer",

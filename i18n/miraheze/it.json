@@ -23,8 +23,6 @@
 	"miraheze-survey-q1-account-edit": "Ho un'utenza registrata e modifico wiki.",
 	"miraheze-survey-q7-ci": "Ho un'impressione positiva della comunità di Miraheze",
 	"miraheze-survey-q8-e": "ManageWiki è facile di usare",
-	"group-donator": "Donatori",
-	"group-donator-member": "{{GENDER:$1|donatore}}",
 	"group-steward": "Stewards",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Amministratori di sistema",

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"BadDog",
+			"Kizule",
 			"Zoranzoki21"
 		]
 	},
@@ -15,8 +16,6 @@
 	"globalnewfiles": "Глобалне нове датотеке",
 	"group-abuse": "Тим против злоупотребе",
 	"group-abuse-member": "{{GENDER:$1|тим против злоупотребе}}",
-	"group-donator": "Донатори",
-	"group-donator-member": "{{GENDER:$1|донатор|донаторка}}",
 	"group-steward": "Стјуарди",
 	"group-steward-member": "{{GENDER:$1|стјуард}}",
 	"group-sysadmin": "Администратори система",

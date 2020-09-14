@@ -10,8 +10,6 @@
 	"miraheze-helpcenter": "Sobre Miraheze",
 	"miraheze-requestwiki": "Solicitar unha wiki",
 	"group-abuse": "Equipo antiabusos",
-	"group-donator": "Doadores",
-	"group-donator-member": "{{GENDER:$1|doador|doadora}}",
 	"group-steward": "Stewards",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Administradores do sistema",

@@ -82,8 +82,6 @@
 	"globalnewfiles": "Globalne nowe pliki",
 	"group-abuse": "Zespół nadużyć",
 	"group-abuse-member": "{{GENDER:$1|zespół nadużyć}}",
-	"group-donator": "Darczyńcy",
-	"group-donator-member": "dawca",
 	"group-steward": "Stewards",
 	"group-steward-member": "steward",
 	"group-sysadmin": "Administratorzy systemu",

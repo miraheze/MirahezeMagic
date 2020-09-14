@@ -14,8 +14,6 @@
 	"miraheze-survey-neutral": "Neutrale",
 	"group-abuse": "Squadre de l'abbuse",
 	"group-abuse-member": "{{GENDER:$1|squadre de l'abbuse}}",
-	"group-donator": "Donature",
-	"group-donator-member": "{{GENDER:$1|donatore}}",
 	"group-steward": "Steward",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Amministrature d'u sisteme",

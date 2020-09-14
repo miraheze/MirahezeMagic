@@ -13,8 +13,6 @@
 	"miraheze-requestfeatures": "Sol·licitar característiques per a la seva wiki",
 	"miraheze-requestwiki": "Sol·licitar una wiki",
 	"miraheze-survey-yes": "Sí",
-	"group-donator": "Donadors",
-	"group-donator-member": "{{GENDER:$1|donador|donadora}}",
 	"group-steward": "Stewards",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-sysadmin": "Administradors del sistema",

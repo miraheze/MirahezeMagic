@@ -20,8 +20,6 @@
 	"globalnewfiles": "Globale neue Dateien",
 	"group-abuse": "Missbrauchs-Team",
 	"group-abuse-member": "{{GENDER:$1|Missbrauchs-Team}}",
-	"group-donator": "Spender",
-	"group-donator-member": "{{GENDER:$1|Spender}}",
 	"group-steward": "Stewards",
 	"group-steward-member": "{{GENDER:$1|Steward}}",
 	"group-sysadmin": "System-Administratoren",

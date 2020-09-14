@@ -78,8 +78,6 @@
 	"globalnewfiles": "ไฟล์ใหม่ทุกโครงการ",
 	"group-abuse": "ทีมจัดการการละเมิด",
 	"group-abuse-member": "{{GENDER:$1|ทีมจัดการการละเมิด}}",
-	"group-donator": "ผู้บริจาค",
-	"group-donator-member": "{{GENDER:$1|ผู้บริจาค}}",
 	"group-steward": "ผู้ดูแลโครงการ",
 	"group-steward-member": "{{GENDER:$1|ผู้ดูแลโครงการ}}",
 	"group-sysadmin": "ผู้ดูแลระบบโครงข่าย",

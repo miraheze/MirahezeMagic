@@ -80,8 +80,6 @@
 	"globalnewfiles": "全域新檔案",
 	"group-abuse": "防濫用團隊",
 	"group-abuse-member": "{{GENDER:$1|防濫用團隊}}",
-	"group-donator": "捐贈",
-	"group-donator-member": "{{GENDER:$1|捐贈者}}",
 	"group-steward": "監管員",
 	"group-steward-member": "{{GENDER:$1|監管員}}",
 	"group-sysadmin": "系統管理員",

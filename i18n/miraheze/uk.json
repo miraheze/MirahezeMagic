@@ -78,8 +78,6 @@
 	"globalnewfiles": "Глобальні нові файли",
 	"group-abuse": "Команда з питань зловживань",
 	"group-abuse-member": "{{GENDER:$1|команда з питань зловживань}}",
-	"group-donator": "Жертводавці",
-	"group-donator-member": "{{GENDER:$1|жертводавець}}",
 	"group-steward": "Стюарди",
 	"group-steward-member": "{{GENDER:$1|стюард}}",
 	"group-sysadmin": "Системні адміністратори",

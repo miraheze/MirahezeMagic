@@ -21,8 +21,6 @@
 	"miraheze-survey-yes": "Да",
 	"group-abuse": "Екипа за злоупотреби",
 	"group-abuse-member": "{{GENDER:$1|екипа за злоупотреби}}",
-	"group-donator": "Дарители",
-	"group-donator-member": "{{GENDER:$1|дарител}}",
 	"group-steward": "Надзорници",
 	"group-steward-member": "{{GENDER:$1|надзорник}}",
 	"group-sysadmin": "Системски администратори",

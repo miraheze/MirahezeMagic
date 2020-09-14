@@ -79,8 +79,6 @@
 	"globalnewfiles": "Küresel Yeni Dosyalar",
 	"group-abuse": "Kötüye kullanım ekibi",
 	"group-abuse-member": "{{GENDER:$1|kötüye kullanım ekibi}}",
-	"group-donator": "Bağışçılar",
-	"group-donator-member": "{{GENDER:$1|bağışçı}}",
 	"group-steward": "Kâhyalar",
 	"group-steward-member": "{{GENDER:$1|kâhya}}",
 	"group-sysadmin": "Sistem yöneticileri",

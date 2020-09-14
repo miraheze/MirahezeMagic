@@ -28,8 +28,6 @@
 	"miraheze-survey-q15-1": "您似乎还未向我们确认您的电子邮件地址。您在下方提供的地址将在我们联系您后被删除。",
 	"group-abuse": "滥用条款",
 	"group-abuse-member": "{{GENDER:$1|滥用过滤器维护组}}",
-	"group-donator": "捐赠",
-	"group-donator-member": "{{GENDER:$1|捐赠者}}",
 	"group-steward": "监管员",
 	"group-steward-member": "{{GENDER:$1|监管员}}",
 	"group-sysadmin": "系统管理员",
