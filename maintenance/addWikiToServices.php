@@ -56,7 +56,7 @@ class addWikiToServices extends Maintenance {
 					$electron = $this->hasExtension( 'collection', $extensionsArray );
 					$citoid = $this->hasExtension( 'citoid', $extensionsArray );
 
-					if ( $visualeditor || $flow || $electron || $citoid ) {
+					if ( $visualeditor || $flow || $electron || $citoid || $linter ) {
 						$servicesvalue = !is_null( $domain ) ? str_replace('https://', '', "'" . $domain . "'") : 'true';
 						// Remove wiki from the end of the name.
 						$DBname = substr( $DBname, 0, -4 );
