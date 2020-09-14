@@ -51,6 +51,7 @@ class addWikiToServices extends Maintenance {
 
 					$visualeditor = $this->hasExtension( 'visualeditor', $extensionsArray );
 					$flow = $this->hasExtension( 'flow', $extensionsArray );
+					$linter = $this->hasExtension( 'linter', $extensionsArray );
 					// Collection installs Electron inaddition now.
 					$electron = $this->hasExtension( 'collection', $extensionsArray );
 					$citoid = $this->hasExtension( 'citoid', $extensionsArray );
