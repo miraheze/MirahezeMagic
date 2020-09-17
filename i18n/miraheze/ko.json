@@ -66,7 +66,7 @@
 	"group-translator-member": "번역자",
 	"group-translationadmin": "번역 관리자",
 	"group-translationadmin-member": "번역 관리자",
-	"group-global-ipblock-exempt": "통합 IP 차단 면제자",
+	"group-global-ipblock-exempt": "전역 IP 차단 면제",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|통합 IP 차단 면제자}}",
 	"group-member": "회원",
 	"protect-level-user": "로그인 사용자에게만 허용",

@@ -3,7 +3,8 @@
 		"authors": [
 			"BaRaN6161 TURK",
 			"Fitoschido",
-			"Hedda"
+			"Hedda",
+			"MuratTheTurkish"
 		]
 	},
 	"mirahezemagic-description": "Miraheze için özel MediaWiki mesajları, komut dosyaları vs.",
@@ -11,7 +12,7 @@
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",
 	"miraheze-close-email-body": "Merhaba,\n\nMaalesef, son 60 gün içinde herhangi bir düzenleme yapılmaması nedeniyle vikiniz Dormansi politikası nedeniyle kapatıldı. Eğer hâlâ vikinizi düzenlemek istiyorsanız lütfen Special:ManageWiki'ye gidin ve tekrar açmak için \"kapatıldı\" kutusunun işaretini kaldırın.\n\nVikinizi tekrar açmamanız durumunda başka bir kullanıcının vikinizi benimsemesi olasıdır. Vikinizi tekrar açmazsanız veya hiç kimse 6 ay içinde vikinizi sahiplenmezse vikiniz silinebilir.",
 	"miraheze-donate": "Bağış yap",
-	"miraheze-helpcenter": "Miraheze Hakkında",
+	"miraheze-helpcenter": "Miraheze Yardım Merkezi",
 	"miraheze-requestfeatures": "Bir viki için özellikle talep et",
 	"miraheze-requestwiki": "Viki talep et",
 	"mirahezesurvey": "Miraheze Yıllık Anket 2020",
@@ -95,11 +96,11 @@
 	"group-wikimanager-member": "{{GENDER:$1|viki yöneticisi}}",
 	"group-rollbacker": "Geri döndürücüler",
 	"group-rollbacker-member": "{{GENDER:$1|geri döndürücü}}",
-	"group-autopatrolled": "Oto-devriyeler",
+	"group-autopatrolled": "Oto-devriyeli kullanıcılar",
 	"group-autopatrolled-member": "{{GENDER:$1|oto-devriye}}",
 	"group-confirmed": "Onaylı kullanıcılar",
 	"group-confirmed-member": "{{GENDER:$1|onaylı kullanıcı}}",
-	"group-globalsysop": "Küresel Hizmetli",
+	"group-globalsysop": "Küresel Hizmetlileri",
 	"group-globalsysop-member": "{{GENDER:$1|Küresel Hizmetli}}",
 	"group-proxybot": "Proxy Bot",
 	"group-proxybot-member": "proxy botu",
@@ -107,7 +108,7 @@
 	"group-translator-member": "çevirmen",
 	"group-translationadmin": "Çeviri hizmetlileri",
 	"group-translationadmin-member": "çeviri hizmetlisi",
-	"group-global-ipblock-exempt": "Küresel IP engel muafiyetleri",
+	"group-global-ipblock-exempt": "Küresel IP engel muafiyeti",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|küresel IP engelleme muafı}}",
 	"group-member": "Üyeler",
 	"protect-level-user": "Yalnızca oturum açılmış kullanıcılara izin ver",
