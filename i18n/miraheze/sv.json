@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Fitoschido",
+			"Sabelöga",
 			"Tölvuforritari",
 			"WikiPhoenix"
 		]
 	},
 	"miraheze-categories": "Kategorier",
 	"miraheze-donate": "Donera",
-	"miraheze-helpcenter": "Om Miraheze",
+	"miraheze-helpcenter": "Miraheze hjälpcenter",
 	"miraheze-requestfeatures": "Begär funktioner på en wiki",
 	"miraheze-requestwiki": "Begär en wiki",
 	"globalnewfiles": "Globala nya filer",
@@ -23,7 +24,7 @@
 	"group-wikimanager-member": "{{GENDER:$1|wikihanterare}}",
 	"group-rollbacker": "Tillbakarullare",
 	"group-rollbacker-member": "{{GENDER:$1|tillbakarullare}}",
-	"group-autopatrolled": "Autopatrullerare",
+	"group-autopatrolled": "Automatiskt patrullerad användare",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatrullerad}}",
 	"group-confirmed": "Bekräftade användare",
 	"group-confirmed-member": "{{GENDER:$1|bekräftad användare}}",
@@ -48,6 +49,7 @@
 	"settings-anti-spam": "Antispam",
 	"settings-beta": "Beta",
 	"settings-chat": "Chatt",
+	"settings-cosmos": "Utseendet Cosmos",
 	"settings-edit": "Redigera",
 	"settings-links": "Länkar",
 	"settings-localisation": "Lokalisering",
