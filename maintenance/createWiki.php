@@ -11,7 +11,7 @@ class createWiki extends Maintenance {
 
 	public function execute() {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'createwiki' );
-		$dbw = wfGetDB( DB_MASTER, [], $this->config->get( 'CreateWikiDatabase' ) );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
 
 		$dbw->insert(
 			'cw_wikis',
@@ -25,7 +25,7 @@ class createWiki extends Maintenance {
 				'wiki_category' => 'uncategorised'
 			]
 		);
-		
+
 		$this->recacheWikiJson( 'ldapwikiwiki' );
 	}
 
