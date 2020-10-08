@@ -26,7 +26,7 @@ class migrateWikiForum extends Maintenance {
 		exec( "php /srv/mediawiki/w/maintenance/sql.php --wiki $wgDBname /srv/mediawiki/w/extensions/WikiForum/sql/patches/actor/add-wfr_deleted_actor-to-wikiforum_replies.sql" );
 		exec( "php /srv/mediawiki/w/maintenance/sql.php --wiki $wgDBname /srv/mediawiki/w/extensions/WikiForum/sql/patches/actor/add-wfr_edit_actor-to-wikiforum_replies.sql" );
 
-		exec( "php /srv/mediawiki/w/maintenance/sql.php --wiki $wgDBname /srv/mediawiki/w/extensions/WikiForum/maintenance/migrateOldWikiForumUserColumnsToActor.php" );
+		exec( "php /srv/mediawiki/w/extensions/WikiForum/maintenance/migrateOldWikiForumUserColumnsToActor.php --wiki $wgDBname" );
 	}
 }
 
