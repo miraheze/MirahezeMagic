@@ -3,6 +3,7 @@
 		"authors": [
 			"Aira (Wisdomstudent)",
 			"AlvaroMolina",
+			"Count Count",
 			"Killarnee",
 			"Metalhead64"
 		]
@@ -36,7 +37,7 @@
 	"group-autopatrolled-member": "{{GENDER:$1|Automatischer Kontrollierer|Automatische Kontrolliererin}}",
 	"group-confirmed": "Bestätigte Benutzer",
 	"group-confirmed-member": "{{GENDER:$1|Bestätigter Benutzer|Bestätigte Benutzerin}}",
-	"group-globalsysop": "Globaler Administrator",
+	"group-globalsysop": "Globale Administratoren",
 	"group-globalsysop-member": "{{GENDER:$1|Globaler Administrator}}",
 	"group-proxybot": "Proxy-Bot",
 	"group-proxybot-member": "Proxy-Bot",
