@@ -11,6 +11,8 @@ class massUpgradeSql extends Maintenance {
 	}
 
 	public function execute() {
+		global $wgDBname;
+
 		if ( $this->hasArg( 0 ) ) {
 			$file = fopen( $this->getArg( 0 ), 'r' );
 		} else {
