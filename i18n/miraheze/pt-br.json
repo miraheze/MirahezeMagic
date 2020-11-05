@@ -100,7 +100,7 @@
 	"group-autopatrolled-member": "autopatrulhador",
 	"group-confirmed": "Usuários confirmados",
 	"group-confirmed-member": "usuário(a) confirmado(a)",
-	"group-globalsysop": "Administradores Globais",
+	"group-globalsysop": "Administradores globais",
 	"group-globalsysop-member": "{{GENDER:$1|administrador|administradora|administrador(a)}} global",
 	"group-proxybot": "Proxy do robô",
 	"group-proxybot-member": "proxy do robô",
