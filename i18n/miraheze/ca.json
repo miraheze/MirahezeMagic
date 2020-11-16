@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
-			"Fitoschido"
+			"Fitoschido",
+			"Medol"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -40,5 +41,6 @@
 	"settings-edit": "Edita",
 	"settings-links": "Enllaços",
 	"settings-notifications": "Notificacions",
+	"settings-preferences": "Preferències",
 	"settings-recentchanges": "Canvis recents"
 }
