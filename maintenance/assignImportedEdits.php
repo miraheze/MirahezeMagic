@@ -62,7 +62,7 @@ class AssignImportedEdits extends Maintenance {
 			$userClass = new User;
 			$userID = $row->revactor_actor;
 			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) )->getName() : null;
-			$actorName = $userClass->newFromActorId( $row->revactor_actor )->getName() );
+			$actorName = $userClass->newFromActorId( $row->revactor_actor )->getName();
 			if ( $user ) {
 				$nameIsValid = User::newFromName( $user )->getId();
 				$name = $this->importPrefix . $user;
@@ -74,7 +74,7 @@ class AssignImportedEdits extends Maintenance {
 			} else {
 				$userClass = new User;
 				$userID = $row->revactor_actor;
-				$user = $userClass->newFromActorId( $row->revactor_actor )->getName() );
+				$user = $userClass->newFromActorId( $row->revactor_actor )->getName();
 				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
 				if ( strpos( $user, $this->importPrefix ) === 0 ) {
 					if ( $nameIsValid && $user ) {
@@ -87,7 +87,7 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdit( $user ) {
 		$userClass = new User;
-		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user ) )->getActorId() );
+		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user ) )->getActorId();
 		$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
 
 		if ( $this->getOption( 'no-run' ) ) {
