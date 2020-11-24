@@ -49,7 +49,7 @@ class AssignImportedEdits extends Maintenance {
 		$res = $this->wikiRevision->select(
 			'revision_actor_temp',
 			'revactor_actor',
-			array(),
+			[],
 			__METHOD__,
 			[ 'GROUP BY' => 'revactor_actor' ]
 		);
