@@ -61,7 +61,7 @@ class AssignImportedEdits extends Maintenance {
 		foreach ( $res as $row ) {
 			$userClass = new User;
 			$userID = $row->revactor_actor;
-			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) )->getName() ) : null;
+			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) )->getName() : null;
 			$actorName = $userClass->newFromActorId( $row->revactor_actor )->getName() );
 			if ( $user ) {
 				$nameIsValid = User::newFromName( $user )->getId();
