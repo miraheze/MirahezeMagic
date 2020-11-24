@@ -80,7 +80,7 @@ class CreateUsers extends Maintenance {
 		global $wgDBname;
 		$user = new User;
 		$userActor = $user->createNew( $name );
-		if ( $userActor !== null ) {
+		if ( $userActor ) {
 		  $this->output( "Created local {$userActor->getName()} on wiki {$wgDBname}\n");
 		}
 
