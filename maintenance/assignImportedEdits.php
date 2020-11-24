@@ -85,7 +85,7 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdit( $user ) {
 		$assignUserEdit = User::newFromName( str_replace( $this->importPrefix , '', $user ) );
-		$this->output( "Assinging import edits from {$user} to {$assignUserEdit->getName()}\n");
+		$this->output( "Assigning import edits from {$user} to {$assignUserEdit->getName()}\n");
 
 		if ( $this->getOption( 'no-run' ) ) {
 			return;
