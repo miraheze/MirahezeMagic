@@ -47,11 +47,11 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		$res = $this->wikiRevision->select(
-			'revision',
-			'rev_user_text',
+			'revision_actor_temp',
+			'revactor_actor',
 			array(),
 			__METHOD__,
-			[ 'GROUP BY' => 'rev_user_text' ]
+			[ 'GROUP BY' => 'revactor_actor' ]
 		);
 
 		if ( !$res || !is_object( $res ) ) {
@@ -59,17 +59,22 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			$user = $this->getOption( 'user' );
+			$userClass = new User;
+			$userID = $row->revactor_actor;
+			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) )->getName() ) : null;
+			$actorName = $userClass->newFromActorId( $row->revactor_actor )->getName() );
 			if ( $user ) {
 				$nameIsValid = User::newFromName( $user )->getId();
 				$name = $this->importPrefix . $user;
-				if ( strpos( $row->rev_user_text, $this->importPrefix ) === 0 ) {
-					if ( $nameIsValid !== 0 && $row->rev_user_text === $name ) {
+				if ( strpos( $actorName, $this->importPrefix ) === 0 ) {
+					if ( $nameIsValid !== 0 && $actorName === $name ) {
 						$this->assignEdit( $name );
 					}
 				}
 			} else {
-				$user = $row->rev_user_text;
+				$userClass = new User;
+				$userID = $row->revactor_actor;
+				$user = $userClass->newFromActorId( $row->revactor_actor )->getName() );
 				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
 				if ( strpos( $user, $this->importPrefix ) === 0 ) {
 					if ( $nameIsValid && $user ) {
@@ -81,7 +86,8 @@ class AssignImportedEdits extends Maintenance {
 	}
 
 	private function assignEdit( $user ) {
-		$assignUserEdit = str_replace( $this->importPrefix , '', $user );
+		$userClass = new User;
+		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user ) )->getActorId() );
 		$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
 
 		if ( $this->getOption( 'no-run' ) ) {
@@ -89,12 +95,12 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		$this->wikiRevision->update(
-			'revision',
+			'revision_actor_temp',
 			[
-				'rev_user_text' => $assignUserEdit,
+				'revactor_actor' => $assignUserEdit,
 			],
 			[
-				'rev_user_text' => $user,
+				'revactor_actor' => $userID,
 			],
 			__METHOD__
 		);
