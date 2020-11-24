@@ -87,8 +87,8 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdit( $user ) {
 		$userClass = new User;
-		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user ) )->getActorId();
-		$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
+		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user ) );
+		$this->output( "Assinging import edits from {$user} to {$assignUserEdit->getName()}\n");
 
 		if ( $this->getOption( 'no-run' ) ) {
 			return;
@@ -97,7 +97,7 @@ class AssignImportedEdits extends Maintenance {
 		$this->wikiRevision->update(
 			'revision_actor_temp',
 			[
-				'revactor_actor' => $assignUserEdit,
+				'revactor_actor' => $assignUserEdit->getActorId(),
 			],
 			[
 				'revactor_actor' => $userID,
