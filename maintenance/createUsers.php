@@ -45,11 +45,11 @@ class CreateUsers extends Maintenance {
 		}
 
 		$res = $this->wikiRevision->select(
-			'revision',
-			'rev_user_text',
-			array(),
+			'revision_actor_temp',
+			'revactor_actor',
+			[],
 			__METHOD__,
-			[ 'GROUP BY' => 'rev_user_text' ]
+			[ 'GROUP BY' => 'revactor_actor' ]
 		);
 
 		if ( !$res || !is_object( $res ) ) {
@@ -57,9 +57,10 @@ class CreateUsers extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			$user = $row->rev_user_text;
-			if ( !User::isIP( $user ) ) {
-				$name = str_replace( $this->importPrefix, '', $user );
+			$user = new User;
+			$userActor = $user->newFromActorId( $row->revactor_actor );
+			if ( !$user->isIP( $userActor ) ) {
+				$name = str_replace( $this->importPrefix, '', $userActor->getName() );
 				if ( $this->importPrefix === '' ) {
 					if ( $name ) {
 						$this->createUser( $name );
@@ -77,17 +78,17 @@ class CreateUsers extends Maintenance {
 
 	private function createUser( $name ) {
 		global $wgDBname;
-
-		$user = User::createNew( $name );
-		if ( $user !== null ) {
-		  $this->output( "Created local {$user} on wiki {$wgDBname}\n");
+		$user = new User;
+		$userActor = $user->createNew( $name );
+		if ( $userActor !== null ) {
+		  $this->output( "Created local {$userActor->getName()} on wiki {$wgDBname}\n");
 		}
 
 		$cau = new CentralAuthUser( $name, 0 );
 		$create = $cau->promoteToGlobal( $wgDBname );
 
 		if ( $create->isGood() ) {
-		  $this->output( "Created global {$user}\n");
+		  $this->output( "Created global {$userActor->getName()}\n");
 		}
 
 		if ( $this->getOption( 'no-run' ) ) {
