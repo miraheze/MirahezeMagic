@@ -92,11 +92,6 @@ class AssignImportedEdits extends Maintenance {
 		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user->getName() ) );
 		$this->output( "Assigning import edits from " . (strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null) . "{$user->getName()} to {$assignUserEdit->getName()}\n");
 
-		if ( $this->getOption( 'no-run' ) ) {
-			$this->assignEdits( $user, $assignUserEdit );
-			return;
-		}
-
 		$this->assignEdits( $user, $assignUserEdit );
 	}
 
