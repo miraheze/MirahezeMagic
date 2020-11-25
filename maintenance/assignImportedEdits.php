@@ -93,26 +93,16 @@ class AssignImportedEdits extends Maintenance {
 		$this->output( "Assigning import edits from " . (strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null) . "{$user->getName()} to {$assignUserEdit->getName()}\n");
 
 		if ( $this->getOption( 'no-run' ) ) {
-			$this->assignEdits( $assignUserEdit );
+			$this->assignEdits( $user, $assignUserEdit );
 			return;
 		}
 
-		$this->wikiRevision->update(
-			'revision_actor_temp',
-			[
-				'revactor_actor' => $assignUserEdit->getActorId(),
-			],
-			[
-				'revactor_actor' => $user->getActorId(),
-			],
-			__METHOD__
-		);
-		
-		$this->assignEdits( $assignUserEdit );
+		$this->assignEdits( $user, $assignUserEdit );
 	}
 
-	private function assignEdits( &$user ) {
+	private function assignEdits( &$user, &$importUser ) {
 		$dbw = $this->getDB( DB_MASTER );
+		$this->beginTransaction( $dbw, __METHOD__ );
 
 		# Count things
 		$this->output( "Checking current edits..." );
@@ -167,29 +157,31 @@ class AssignImportedEdits extends Maintenance {
 
 		if ( !$this->getOption( 'no-run' ) ) {
 			if ( $total ) {
-				# Reassign edits
-				$this->output( "\nReassigning current edits..." );
+				# Assign edits
+				$this->output( "\nAssigning current edits..." );
 				$dbw->update(
 					'revision_actor_temp',
-					[ 'revactor_actor' => $user->getActorId( $dbw ) ],
+					[ 'revactor_actor' => $importUser->getActorId( $dbw ) ],
 					[ 'revactor_actor' => $user->getActorId() ],
 					__METHOD__
 				);
-				$this->output( "done.\nReassigning deleted edits..." );
+				$this->output( "done.\nAssigning deleted edits..." );
 				$dbw->update( 'archive',
-					[ 'ar_actor' => $user->getActorId( $dbw ) ],
+					[ 'ar_actor' => $importUser->getActorId( $dbw ) ],
 					[ $arQueryInfo['conds'] ], __METHOD__ );
 				$this->output( "done.\n" );
 				# Update recent changes if required
 				if ( !$this->getOption( 'norc' ) ) {
 					$this->output( "Updating recent changes..." );
 					$dbw->update( 'recentchanges',
-						[ 'rc_actor' => $user->getActorId( $dbw ) ],
+						[ 'rc_actor' => $importUser->getActorId( $dbw ) ],
 						[ $rcQueryInfo['conds'] ], __METHOD__ );
 					$this->output( "done.\n" );
 				}
 			}
 		}
+
+		$this->commitTransaction( $dbw, __METHOD__ );
 
 		return (int)$total;
 	}
