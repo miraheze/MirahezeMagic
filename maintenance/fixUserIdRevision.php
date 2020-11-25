@@ -36,8 +36,8 @@ class FixUserIdRevision extends Maintenance {
         public function execute() {
                 $dbr = wfGetDB( DB_REPLICA );
 
-                $start = (int)$dbr->selectField( 'revision', 'MIN(rev_id)', false, __METHOD__ );
-                $end = (int)$dbr->selectField( 'revision', 'MAX(rev_id)', false, __METHOD__ );
+                $start = (int)$dbr->selectField( 'revision_actor_temp', 'MIN(revactor_rev)', false, __METHOD__ );
+                $end = (int)$dbr->selectField( 'revision_actor_temp', 'MAX(revactor_rev)', false, __METHOD__ );
 
                 $wrongRevs = 0;
 
@@ -46,17 +46,18 @@ class FixUserIdRevision extends Maintenance {
                 do {
                         $lastCheckedRevIdNextBatch = $lastCheckedRevId + $this->mBatchSize;
                         $revRes = $dbr->select(
-                                'revision',
-                                array( 'rev_id', 'rev_user_text', 'rev_user' ),
-                                "rev_id BETWEEN $lastCheckedRevId and $lastCheckedRevIdNextBatch",
+                                'revision_actor_temp',
+                                [ 'revactor_rev', 'revactor_actor' ],
+                                "revactor_rev BETWEEN $lastCheckedRevId and $lastCheckedRevIdNextBatch",
                                 __METHOD__
                         );
 
                         foreach ( $revRes as $revRow ) {
-                                $goodUserId = $this->getGoodUserId( $revRow->rev_user_text );
+				$revActor = User::newFromActorId( $revRow->revactor_actor );
+                                $goodUserId = $this->getGoodUserId( $revActor->getName() );
 
-                                // Ignore rev_user 0 for maintenance scripts and such
-                                if ( $revRow->rev_user != $goodUserId ) {
+                                // Ignore revactor_actor 0 for maintenance scripts and such
+                                if ( $revRow->revactor_actor != $goodUserId ) {
                                         // PANIC EVERYWHERE DON'T DIE ON US
                                         $wrongRevs++;
 
@@ -79,7 +80,7 @@ class FixUserIdRevision extends Maintenance {
         }
 
         public function getGoodUserId( $username ) {
-                $whitelist = array( 'Maintenance script', 'MediaWiki default' );
+                $whitelist = [ 'Maintenance script', 'MediaWiki default' ];
 
                 if ( in_array( $username, $whitelist ) ) {
                         return 0;
@@ -94,7 +95,7 @@ class FixUserIdRevision extends Maintenance {
                         $userId = $dbr->selectField(
                                         'user',
                                         'user_id',
-                                        array( 'user_name' => $username ),
+                                        [ 'user_name' => $username ],
                                         __METHOD__
                         );
 
@@ -114,18 +115,19 @@ class FixUserIdRevision extends Maintenance {
 	protected function fixRevEntry( $row ) {
                 $dbr = wfGetDB( DB_REPLICA );
                 $dbw = wfGetDB( DB_MASTER );
+		$revActor = User::newFromActorId( $row->revactor_actor );
 
-                if ( isset( $this->mUserCache[$row->rev_user_text] ) ) {
-                        $userId = $this->mUserCache[$row->rev_user_text];
+                if ( isset( $this->mUserCache[$revActor->getName()] ) ) {
+                        $userId = $this->mUserCache[$revActor->getName()];
                 } else {
                         $userId = $dbr->selectField(
                                 'user',
                                 'user_id',
-                                array( 'user_name' => $row->rev_user_text ),
+                                [ 'user_name' => $revActor->getName() ],
                                 __METHOD__
                         );
 
-                        $this->mUserCache[$row->rev_user_text] = $userId;
+                        $this->mUserCache[$revActor->getName()] = $userId;
                 }
 
                 if ( !( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) ) {
@@ -133,17 +135,17 @@ class FixUserIdRevision extends Maintenance {
                 }
 
 
-                $updateParams = array(
-                        'rev_user' => $userId,
-                );
+                $updateParams = [
+                        'revactor_actor' => $userId,
+                ];
 
-                $dbw->update( 'revision',
+                $dbw->update( 'revision_actor_temp',
                         $updateParams,
-                        array( 'rev_id' => $row->rev_id ),
+                        [ 'revactor_rev' => $row->revactor_rev ],
                         __METHOD__
                 );
 
-                $this->output( "Done! Updated rev_id {$row->rev_id} to have the rev_user id {$userId} (for '{$row->rev_user_text}') instead of {$row->rev_user}.\n" );
+                $this->output( "Done! Updated revactor_rev {$row->revactor_rev} to have the revactor_actor id {$userId} (for '{$revActor->getName()}') instead of {$row->revactor_actor}.\n" );
         }
 }
 

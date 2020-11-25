@@ -21,7 +21,8 @@
 * @author Southparkfan
 * @author John Lewis
 * @author Paladox
-* @version 1.0
+* @author Universal Omega
+* @version 2.0
 */
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
@@ -33,10 +34,11 @@ class AssignImportedEdits extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Re assigns imported edits for users";
+		$this->mDescription = "Assigns imported edits for users";
 		$this->addOption( 'user', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import> prefix.', false, true );
 		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
 		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to imported>', false, false );
+		$this->addOption( 'norc', 'Don\'t update the recent changes table', false, false );
 	}
 
 	public function execute() {
@@ -47,11 +49,11 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		$res = $this->wikiRevision->select(
-			'revision',
-			'rev_user_text',
-			array(),
+			'revision_actor_temp',
+			'revactor_actor',
+			[],
 			__METHOD__,
-			[ 'GROUP BY' => 'rev_user_text' ]
+			[ 'GROUP BY' => 'revactor_actor' ]
 		);
 
 		if ( !$res || !is_object( $res ) ) {
@@ -59,20 +61,25 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			$user = $this->getOption( 'user' );
+			$userClass = new User;
+			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) ) : null;
+			$actorName = $userClass->newFromActorId( $row->revactor_actor );
+
 			if ( $user ) {
-				$nameIsValid = User::newFromName( $user )->getId();
-				$name = $this->importPrefix . $user;
-				if ( strpos( $row->rev_user_text, $this->importPrefix ) === 0 ) {
-					if ( $nameIsValid !== 0 && $row->rev_user_text === $name ) {
-						$this->assignEdit( $name );
+				$nameIsValid = $userClass->newFromName( $user )->getId();
+				$name = $this->importPrefix . $user->getName();
+				$username = $userClass->newFromName( $this->importPrefix .  $user->getName() );
+
+				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
+					if ( $nameIsValid !== 0 && $actorName->getName() === $name ) {
+						$this->assignEdit( $actorName );
 					}
 				}
 			} else {
-				$user = $row->rev_user_text;
-				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $user ) );
+				$user = User::newFromActorId( $row->revactor_actor );
+				$nameIsValid = $userClass->newFromName( str_replace( $this->importPrefix, '', $user->getName() ) );
 				if ( strpos( $user, $this->importPrefix ) === 0 ) {
-					if ( $nameIsValid && $user ) {
+					if ( $nameIsValid->getId() !== 0 && $user ) {
 						$this->assignEdit( $user );
 					}
 				}
@@ -81,23 +88,97 @@ class AssignImportedEdits extends Maintenance {
 	}
 
 	private function assignEdit( $user ) {
-		$assignUserEdit = str_replace( $this->importPrefix , '', $user );
-		$this->output( "Assinging import edits from {$user} to {$assignUserEdit}\n");
+		$userClass = new User;
+		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user->getName() ) );
+		$this->output( "Assigning import edits from " . (strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null) . "{$user->getName()} to {$assignUserEdit->getName()}\n");
 
-		if ( $this->getOption( 'no-run' ) ) {
-			return;
+		$this->assignEdits( $user, $assignUserEdit );
+	}
+
+	private function assignEdits( &$user, &$importUser ) {
+		$dbw = $this->getDB( DB_MASTER );
+		$this->beginTransaction( $dbw, __METHOD__ );
+
+		# Count things
+		$this->output( "Checking current edits..." );
+		$revQueryInfo = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
+		$res = $dbw->select(
+			[ 'revision' ] + $revQueryInfo['tables'],
+			'COUNT(*) AS count',
+			$revQueryInfo['conds'],
+			__METHOD__,
+			[],
+			$revQueryInfo['joins']
+		);
+		$row = $dbw->fetchObject( $res );
+		$cur = $row->count;
+		$this->output( "found {$cur}.\n" );
+
+		$this->output( "Checking deleted edits..." );
+		$arQueryInfo = ActorMigration::newMigration()->getWhere( $dbw, 'ar_user', $user, false );
+		$res = $dbw->select(
+			[ 'archive' ] + $arQueryInfo['tables'],
+			'COUNT(*) AS count',
+			$arQueryInfo['conds'],
+			__METHOD__,
+			[],
+			$arQueryInfo['joins']
+		);
+		$row = $dbw->fetchObject( $res );
+		$del = $row->count;
+		$this->output( "found {$del}.\n" );
+
+		# Don't count recent changes if we're not supposed to
+		if ( !$this->getOption( 'norc' ) ) {
+			$this->output( "Checking recent changes..." );
+			$rcQueryInfo = ActorMigration::newMigration()->getWhere( $dbw, 'rc_user', $user, false );
+			$res = $dbw->select(
+				[ 'recentchanges' ] + $rcQueryInfo['tables'],
+				'COUNT(*) AS count',
+				$rcQueryInfo['conds'],
+				__METHOD__,
+				[],
+				$rcQueryInfo['joins']
+			);
+			$row = $dbw->fetchObject( $res );
+			$rec = $row->count;
+			$this->output( "found {$rec}.\n" );
+		} else {
+			$rec = 0;
 		}
 
-		$this->wikiRevision->update(
-			'revision',
-			[
-				'rev_user_text' => $assignUserEdit,
-			],
-			[
-				'rev_user_text' => $user,
-			],
-			__METHOD__
-		);
+		$total = $cur + $del + $rec;
+		$this->output( "\nTotal entries to change: {$total}\n" );
+
+		if ( !$this->getOption( 'no-run' ) ) {
+			if ( $total ) {
+				# Assign edits
+				$this->output( "\nAssigning current edits..." );
+				$dbw->update(
+					'revision_actor_temp',
+					[ 'revactor_actor' => $importUser->getActorId( $dbw ) ],
+					[ 'revactor_actor' => $user->getActorId() ],
+					__METHOD__
+				);
+				$this->output( "done.\nAssigning deleted edits..." );
+				$dbw->update( 'archive',
+					[ 'ar_actor' => $importUser->getActorId( $dbw ) ],
+					[ $arQueryInfo['conds'] ], __METHOD__ );
+				$this->output( "done.\n" );
+				# Update recent changes if required
+				if ( !$this->getOption( 'norc' ) ) {
+					$this->output( "Updating recent changes..." );
+					$dbw->update( 'recentchanges',
+						[ 'rc_actor' => $importUser->getActorId( $dbw ) ],
+						[ $rcQueryInfo['conds'] ], __METHOD__ );
+					$this->output( "done.\n" );
+				}
+			}
+		}
+
+		$this->commitTransaction( $dbw, __METHOD__ );
+
+		return (int)$total;
 	}
 }
 
