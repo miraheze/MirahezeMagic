@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
+			"DannyS712",
 			"Dark Dragoon",
 			"Fitoschido",
 			"La Mantis",
@@ -130,6 +131,7 @@
 	"settings-maps": "Mapas",
 	"settings-media": "Multimedia",
 	"settings-notifications": "Notificaciones",
+	"settings-preferences": "Preferencias",
 	"settings-recentchanges": "Cambios recientes",
 	"settings-restricted": "Restringido",
 	"settings-styling": "Estilo",
