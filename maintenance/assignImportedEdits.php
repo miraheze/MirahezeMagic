@@ -64,7 +64,8 @@ class AssignImportedEdits extends Maintenance {
 			$userClass = new User;
 			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) ) : null;
 			$actorName = $userClass->newFromActorId( $row->revactor_actor );
-
+			$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $actorName->getName() ) );
+			
 			if ( $user ) {
 				$nameIsValid = $userClass->newFromName( $user )->getId();
 				$name = $this->importPrefix . $user->getName();
@@ -72,30 +73,25 @@ class AssignImportedEdits extends Maintenance {
 
 				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
 					if ( $nameIsValid !== 0 && $actorName->getName() === $name ) {
-						$this->assignEdit( $actorName );
+						$this->assignEdits( $actorName, $assignUserEdit );
 					}
 				}
 			} else {
-				$user = User::newFromActorId( $row->revactor_actor );
-				$nameIsValid = $userClass->newFromName( str_replace( $this->importPrefix, '', $user->getName() ) );
-				if ( strpos( $user, $this->importPrefix ) === 0 ) {
-					if ( $nameIsValid->getId() !== 0 && $user ) {
-						$this->assignEdit( $user );
+				$nameIsValid = $userClass->newFromName( str_replace( $this->importPrefix, '', $actorName->getName() ) );
+				if ( strpos( $actorName, $this->importPrefix ) === 0 ) {
+					if ( $nameIsValid->getId() !== 0 && $actorName ) {
+						$this->assignEdits( $actorName, $assignUserEdit );
 					}
 				}
 			}
 		}
 	}
 
-	private function assignEdit( $user ) {
-		$userClass = new User;
-		$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $user->getName() ) );
-		$this->output( "Assigning import edits from " . (strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null) . "{$user->getName()} to {$assignUserEdit->getName()}\n");
-
-		$this->assignEdits( $user, $assignUserEdit );
-	}
-
 	private function assignEdits( &$user, &$importUser ) {
+		$this->output( 
+			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$assignUserEdit->getName()}\n" 
+		);
+		
 		$dbw = $this->getDB( DB_MASTER );
 		$this->beginTransaction( $dbw, __METHOD__ );
 
