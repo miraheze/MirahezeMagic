@@ -89,7 +89,7 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdits( &$user, &$importUser ) {
 		$this->output( 
-			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$assignUserEdit->getName()}\n" 
+			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
 		);
 		
 		$dbw = $this->getDB( DB_MASTER );
