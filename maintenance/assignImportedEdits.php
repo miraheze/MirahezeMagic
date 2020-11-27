@@ -45,7 +45,7 @@ class AssignImportedEdits extends Maintenance {
 		$this->wikiRevision = wfGetDB( DB_MASTER );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
-			$this->importPrefix = $this->getOption( 'import-prefix' );
+			$this->importPrefix = $this->getOption( 'import-prefix' ) . '>';
 		}
 
 		$res = $this->wikiRevision->select(
@@ -89,7 +89,7 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdits( &$user, &$importUser ) {
 		$this->output( 
-			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
+			"Assigning imported edits from " . ( strpos( $user->getName(), $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
 		);
 		
 		$dbw = $this->getDB( DB_MASTER );
