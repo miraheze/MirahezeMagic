@@ -37,7 +37,7 @@ class AssignImportedEdits extends Maintenance {
 		$this->mDescription = "Assigns imported edits for users";
 		$this->addOption( 'user', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import> prefix.', false, true );
 		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
-		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to imported>', false, false );
+		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to \'imported\'.', false, false );
 		$this->addOption( 'norc', 'Don\'t update the recent changes table', false, false );
 	}
 
