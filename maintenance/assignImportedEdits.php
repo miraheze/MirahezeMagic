@@ -37,7 +37,7 @@ class AssignImportedEdits extends Maintenance {
 		$this->mDescription = "Assigns imported edits for users";
 		$this->addOption( 'user', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import> prefix.', false, true );
 		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
-		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to imported>', false, false );
+		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to \'imported\'.', false, false );
 		$this->addOption( 'norc', 'Don\'t update the recent changes table', false, false );
 	}
 
@@ -45,7 +45,7 @@ class AssignImportedEdits extends Maintenance {
 		$this->wikiRevision = wfGetDB( DB_MASTER );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
-			$this->importPrefix = $this->getOption( 'import-prefix' );
+			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
 		}
 
 		$res = $this->wikiRevision->select(
@@ -78,7 +78,7 @@ class AssignImportedEdits extends Maintenance {
 				}
 			} else {
 				$nameIsValid = $userClass->newFromName( str_replace( $this->importPrefix, '', $actorName->getName() ) );
-				if ( strpos( $actorName, $this->importPrefix ) === 0 ) {
+				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
 					if ( $nameIsValid->getId() !== 0 && $actorName ) {
 						$this->assignEdits( $actorName, $assignUserEdit );
 					}
