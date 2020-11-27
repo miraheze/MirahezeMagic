@@ -45,7 +45,7 @@ class AssignImportedEdits extends Maintenance {
 		$this->wikiRevision = wfGetDB( DB_MASTER );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
-			$this->importPrefix = $this->getOption( 'import-prefix' ) . '>';
+			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
 		}
 
 		$res = $this->wikiRevision->select(
