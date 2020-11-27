@@ -78,7 +78,7 @@ class AssignImportedEdits extends Maintenance {
 				}
 			} else {
 				$nameIsValid = $userClass->newFromName( str_replace( $this->importPrefix, '', $actorName->getName() ) );
-				if ( strpos( $actorName, $this->importPrefix ) === 0 ) {
+				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
 					if ( $nameIsValid->getId() !== 0 && $actorName ) {
 						$this->assignEdits( $actorName, $assignUserEdit );
 					}
@@ -89,7 +89,7 @@ class AssignImportedEdits extends Maintenance {
 
 	private function assignEdits( &$user, &$importUser ) {
 		$this->output( 
-			"Assigning imported edits from " . ( strpos( $user->getName(), $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
+			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
 		);
 		
 		$dbw = $this->getDB( DB_MASTER );
