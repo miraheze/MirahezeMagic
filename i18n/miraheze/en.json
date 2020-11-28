@@ -3,7 +3,8 @@
 		"authors": [
 			"John Lewis",
 			"AlvaroMolina",
-			"MacFan4000"
+			"MacFan4000",
+			"Universal Omega"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -156,5 +157,5 @@
 	"settings-restricted": "Restricted",
 	"settings-styling": "Styling",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Skin"
+	"extensions-skins": "Skins"
 }
