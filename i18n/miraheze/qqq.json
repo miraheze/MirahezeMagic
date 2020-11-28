@@ -6,7 +6,8 @@
 			"MacFan4000",
 			"Patsagorn Y.",
 			"Piramidion",
-			"Robby"
+			"Robby",
+			"Universal Omega"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -79,5 +80,5 @@
 	"settings-notifications": "Notifications",
 	"settings-restricted": "Restricted",
 	"settings-styling": "Styling",
-	"extensions-skins": "Skin"
+	"extensions-skins": "Skins"
 }
