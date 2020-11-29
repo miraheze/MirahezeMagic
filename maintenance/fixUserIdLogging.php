@@ -18,7 +18,6 @@
 * @file
 * @ingroup MirahezeMagic
 * @author Southparkfan
-* @author Universal  Omega
 * @version 1.0
 */
 
