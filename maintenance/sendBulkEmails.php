@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,14 +21,7 @@
  * @ingroup Wikimedia
  */
 
-// Detect $IP
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-// Require base maintenance class
-require_once "$IP/maintenance/Maintenance.php";
+require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
@@ -47,6 +41,7 @@ use MediaWiki\Revision\SlotRecord;
  *
  * @copyright © 2017 Wikimedia Foundation and contributors.
  */
+
 class SendBulkEmails extends Maintenance {
 	/**
 	 * @var string $DEFAULT_START Opt-out list start marker
