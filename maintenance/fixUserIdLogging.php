@@ -49,16 +49,17 @@ class FixUserIdLogging extends Maintenance {
                         $lastCheckedLogIdNextBatch = $lastCheckedLogId + $this->mBatchSize;
                         $logRes = $dbr->select(
                                 'logging',
-                                [ 'log_id', 'log_params', 'log_user_text', 'log_user' ],
+                                [ 'log_id', 'log_params', 'log_actor' ],
                                 "log_id BETWEEN $lastCheckedLogId and $lastCheckedLogIdNextBatch",
                                 __METHOD__
                         );
 
                         foreach ( $logRes as $logRow ) {
-                                $goodUserId = $this->getGoodUserId( $logRow->log_user_text );
+				$username = User::newFromActorId( $logRow->log_actor );
+                                $goodUserId = $this->getGoodUserId( $username->getName() );
 
-                                // Ignore log_user 0 for maintenance scripts and such
-                                if ( $logRow->log_user != $goodUserId ) {
+                                // Ignore log_actor 0 for maintenance scripts and such
+                                if ( $logRow->log_actor != $goodUserId ) {
                                         // PANIC EVERYWHERE DON'T DIE ON US
                                         $wrongLogs++;
 
@@ -115,20 +116,22 @@ class FixUserIdLogging extends Maintenance {
 	}
 
         protected function fixLogEntry( $row ) {
+		$username = User::newFromActorId( $logRow->log_actor );
+		
                 $dbr = wfGetDB( DB_REPLICA );
                 $dbw = wfGetDB( DB_MASTER );
-
-                if ( isset( $this->mUserCache[$row->log_user_text] ) ) {
-                        $userId = $this->mUserCache[$row->log_user_text];
+		
+                if ( isset( $this->mUserCache[$username->getName()] ) ) {
+                        $userId = $this->mUserCache[$username->getName()];
                 } else {
                         $userId = $dbr->selectField(
                                 'user',
                                 'user_id',
-                                [ 'user_name' => $row->log_user_text ],
+                                [ 'user_name' => $username->getName() ],
                                 __METHOD__
                         );
 
-                        $this->mUserCache[$row->log_user_text] = $userId;
+                        $this->mUserCache[$username->getName()] = $userId;
                 }
 
                 if ( !( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) ) {
@@ -145,7 +148,7 @@ class FixUserIdLogging extends Maintenance {
 
 
 		$updateParams = [
-			'log_user' => $userId,
+			'log_actor' => $userId,
 		];
 
 		if ( isset( $logParams['4::userid'] ) ) { 
@@ -159,7 +162,7 @@ class FixUserIdLogging extends Maintenance {
 			__METHOD__
 		);
 
-                $this->output( "Done! Updated log_id {$row->log_id} to have the log_user id {$userId} (for '{$row->log_user_text}') instead of {$row->log_user}.\n" );
+                $this->output( "Done! Updated log_id {$row->log_id} to have the log_actor id {$userId} (for '{$username->getName()}') instead of {$row->log_actor}.\n" );
         }
 }
 
