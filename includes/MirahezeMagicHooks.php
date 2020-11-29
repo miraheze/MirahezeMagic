@@ -58,7 +58,7 @@ class MirahezeMagicHooks {
 	*/
 	public static function onMessageCacheGet( &$lcKey ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		static $keys = array(
+		static $keys = [
 			'centralauth-groupname',
 			'dberr-again',
 			'privacypage',
@@ -72,7 +72,7 @@ class MirahezeMagicHooks {
 			'restriction-delete',
 			'wikibase-sitelinks-miraheze',
 			'centralauth-login-error-locked',
-		);
+		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
 			$prefixedKey = "miraheze-$lcKey";
@@ -142,11 +142,11 @@ class MirahezeMagicHooks {
 		$target = urlencode( $target );
 		$linkURL = "https://$wiki.miraheze.org/wiki/$target";
 
-		$attribs = array(
+		$attribs = [
 			'href' => $linkURL,
 			'class' => 'extiw',
 			'title' => $tooltip
-		);
+		];
 
 		return true;
 	}
