@@ -49,7 +49,7 @@ class FixUserIdLogging extends Maintenance {
                         $lastCheckedLogIdNextBatch = $lastCheckedLogId + $this->mBatchSize;
                         $logRes = $dbr->select(
                                 'logging',
-                                array( 'log_id', 'log_params', 'log_user_text', 'log_user' ),
+                                [ 'log_id', 'log_params', 'log_user_text', 'log_user' ],
                                 "log_id BETWEEN $lastCheckedLogId and $lastCheckedLogIdNextBatch",
                                 __METHOD__
                         );
@@ -81,7 +81,7 @@ class FixUserIdLogging extends Maintenance {
         }
 
         public function getGoodUserId( $username ) {
-                $whitelist = array( 'Maintenance script', 'MediaWiki default' );
+                $whitelist = [ 'Maintenance script', 'MediaWiki default' ];
 
                 if ( in_array( $username, $whitelist ) ) {
                         return 0;
@@ -96,7 +96,7 @@ class FixUserIdLogging extends Maintenance {
 	                $userId = $dbr->selectField(
         	                        'user',
                 	               	'user_id',
-                        	        array( 'user_name' => $username ),
+                        	        [ 'user_name' => $username ],
                                 	__METHOD__
 	                );
 
@@ -124,7 +124,7 @@ class FixUserIdLogging extends Maintenance {
                         $userId = $dbr->selectField(
                                 'user',
                                 'user_id',
-                                array( 'user_name' => $row->log_user_text ),
+                                [ 'user_name' => $row->log_user_text ],
                                 __METHOD__
                         );
 
@@ -144,9 +144,9 @@ class FixUserIdLogging extends Maintenance {
                 }
 
 
-		$updateParams = array(
+		$updateParams = [
 			'log_user' => $userId,
-		);
+		];
 
 		if ( isset( $logParams['4::userid'] ) ) { 
 			$logParams = serialize( $logParams );
@@ -155,7 +155,7 @@ class FixUserIdLogging extends Maintenance {
 
 		$dbw->update( 'logging',
 			$updateParams,
-			array( 'log_id' => $row->log_id ),
+			[ 'log_id' => $row->log_id ],
 			__METHOD__
 		);
 
