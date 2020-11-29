@@ -18,6 +18,7 @@
 * @file
 * @ingroup MirahezeMagic
 * @author Southparkfan
+* @author Universal  Omega
 * @version 1.0
 */
 
@@ -117,10 +118,10 @@ class FixUserIdLogging extends Maintenance {
 
         protected function fixLogEntry( $row ) {
 		$username = User::newFromActorId( $logRow->log_actor );
-		
+
                 $dbr = wfGetDB( DB_REPLICA );
                 $dbw = wfGetDB( DB_MASTER );
-		
+
                 if ( isset( $this->mUserCache[$username->getName()] ) ) {
                         $userId = $this->mUserCache[$username->getName()];
                 } else {
