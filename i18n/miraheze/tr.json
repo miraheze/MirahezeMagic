@@ -12,6 +12,7 @@
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",
 	"miraheze-close-email-body": "Merhaba,\n\nMaalesef, son 60 gün içinde herhangi bir düzenleme yapılmaması nedeniyle vikiniz Dormansi politikası nedeniyle kapatıldı. Eğer hâlâ vikinizi düzenlemek istiyorsanız lütfen Special:ManageWiki sayfasına gidin ve tekrar açmak için \"kapatıldı\" kutusunun işaretini kaldırın.\n\nVikinizi tekrar açmamanız durumunda başka bir kullanıcının vikinizi benimsemesi olasıdır. Vikinizi tekrar açmazsanız veya hiç kimse 6 ay içinde vikinizi sahiplenmezse vikiniz silinebilir.",
 	"miraheze-donate": "Bağış yap",
+	"miraheze-faq": "SSS",
 	"miraheze-helpcenter": "Miraheze Yardım Merkezi",
 	"miraheze-requestfeatures": "Bir viki için özellikle talep et",
 	"miraheze-requestwiki": "Viki talep et",
@@ -138,5 +139,5 @@
 	"settings-restricted": "Kısıtlı",
 	"settings-styling": "Stil",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Görünüm"
+	"extensions-skins": "Görünümler"
 }

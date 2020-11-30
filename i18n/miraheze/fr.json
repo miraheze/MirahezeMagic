@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"Derugon",
+			"Florian COLLIN",
 			"Gomoko",
 			"Pamputt",
 			"Reception123",
@@ -17,6 +18,7 @@
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) fermé",
 	"miraheze-close-email-body": "Bonjour, \n\nMalheureusement, parce que votre wiki n’a pas subi de modifications durant ces 60 derniers jours, il a été fermé à cause de la politique de dormance. Si vous voulez continuer à modifier votre wiki, vous pouvez aller au Special:ManageWiki et décocher l’option « fermé » pour le réouvrir.\n \nVeuillez noter que si vous ne rouvrez pas votre wiki il est possible qu’un autre utilisateur l’adopte. Si vous ne rouvrez pas votre wiki et que personne ne l’adopte dans les 6 mois à partir d’aujourd’hui, votre wiki sera éligible à la suppression.",
 	"miraheze-donate": "Faire un don",
+	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centre d’aide de Miraheze",
 	"miraheze-requestfeatures": "Demander une fonctionnalité sur un wiki",
 	"miraheze-requestwiki": "Demander un wiki",
@@ -143,5 +145,5 @@
 	"settings-restricted": "Restreint",
 	"settings-styling": "Style",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Habillage"
+	"extensions-skins": "Habillages"
 }
