@@ -5,6 +5,7 @@
 			"Kkairri",
 			"Omotecho",
 			"Shirayuki",
+			"おはぐろ蜻蛉",
 			"そらたこ"
 		]
 	},
@@ -28,8 +29,8 @@
 	"group-sysadmin-member": "{{GENDER:$1|システム管理者}}",
 	"group-interwiki-admin": "インターウィキ管理者",
 	"group-interwiki-admin-member": "インターウィキ管理者",
-	"group-oversight": "オーバーサイト",
-	"group-oversight-member": "オーバーサイト",
+	"group-oversight": "秘匿者",
+	"group-oversight-member": "秘匿者",
 	"group-checkuser": "利用者調査者",
 	"group-checkuser-member": "利用者調査者",
 	"group-wikicreator": "ウィキ作成者",
