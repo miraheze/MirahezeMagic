@@ -636,23 +636,23 @@ class RemovePII extends Maintenance {
 		);
 
 		$user = User::newSystemUser( 'MediaWiki default', [ 'steal' => true ] );
+
 		if ( !$user ) {
 			$this->fatalError( "Invalid username" );
 		}
+
+		$userGroupManager = MediaWikiServices::getInstance()->getUserGroupManager();
+
 		global $wgUser;
 		$wgUser = $user;
 
 		// Hide deletions from RecentChanges
-		$user->addGroup( 'bot' );
+		$userGroupManager->addUserToGroup( $user, 'bot', null, true );
 
 		$error = '';
 		$title = Title::newFromText( $oldName->getTitleKey(), NS_USER );
 		$userPage = WikiPage::factory( $title );
-		if ( version_compare( MW_VERSION, '1.35', '<' ) ) {
-			$status = $userPage->doDeleteArticleReal( '', true, null, null, $error, $user );
-		} else {
-			$status = $userPage->doDeleteArticleReal( '', $user );
-		}
+		$status = $userPage->doDeleteArticleReal( '', $user );
 
 		if ( !$status->isOK() ) {
 			$errorMessage = json_encode( $status->getErrorsByType( 'error' ) );
