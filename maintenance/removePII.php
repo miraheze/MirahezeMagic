@@ -647,7 +647,7 @@ class RemovePII extends Maintenance {
 		$wgUser = $user;
 
 		// Hide deletions from RecentChanges
-		$UserGroupManager->addUserToGroup( $user, 'bot' );
+		$userGroupManager->addUserToGroup( $user, 'bot' );
 
 		$error = '';
 		$title = Title::newFromText( $oldName->getTitleKey(), NS_USER );
