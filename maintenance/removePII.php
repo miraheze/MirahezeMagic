@@ -637,11 +637,11 @@ class RemovePII extends Maintenance {
 
 		$user = User::newSystemUser( 'MediaWiki default', [ 'steal' => true ] );
 
-		$userGroupManager = MediaWikiServices::getInstance()->getUserGroupManager();
-
 		if ( !$user ) {
 			$this->fatalError( "Invalid username" );
 		}
+
+		$userGroupManager = MediaWikiServices::getInstance()->getUserGroupManager();
 
 		global $wgUser;
 		$wgUser = $user;
