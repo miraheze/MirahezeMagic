@@ -80,6 +80,9 @@
 		],
 		"MimeMagicInit": [
 			"MirahezeMagicHooks::onMimeMagicInit"
+		],
+		"SkinAddFooterLinks": [
+			"MirahezeMagicHooks::onSkinAddFooterLinks"
 		]
 	},
 	"ConfigRegistry": {
