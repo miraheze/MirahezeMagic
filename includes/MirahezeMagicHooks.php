@@ -226,4 +226,12 @@ class MirahezeMagicHooks {
 	public static function onMimeMagicInit( $magic ) {
 		$magic->addExtraTypes( 'text/plain txt off' );
 	}
+
+	public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerItems ) {
+		if ( $key === 'places' ) {
+			$footerItems['termsofservice'] = $skin->footerLink( 'termsofservice', 'termsofservicepage' );
+
+			$footerItems['donate'] = $skin->footerLink( 'miraheze-donate', 'miraheze-donatepage' );
+		}
+	}
 }
