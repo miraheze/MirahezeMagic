@@ -4,6 +4,7 @@
 			"AlvaroMolina",
 			"Codenstory",
 			"John Lewis",
+			"MuratTheTurkish",
 			"Revi",
 			"Ykhwong"
 		]
@@ -13,6 +14,7 @@
 	"miraheze-categories": "분류",
 	"miraheze-close-email-subject": "Miraheze 위키 ($1) 닫힘",
 	"miraheze-donate": "기부",
+	"miraheze-donatepage": "m:Donate/ko",
 	"miraheze-helpcenter": "Miraheze 정보",
 	"miraheze-requestfeatures": "위키 기능 요청",
 	"miraheze-requestwiki": "위키 요청",
@@ -80,8 +82,6 @@
 	"specialpages-group-wikimanage": "위키 관리",
 	"termsofservice": "이용 약관",
 	"settings-beta": "베타",
-	"settings-chat": "채팅",
-	"settings-cosmos": "코스모스 스킨",
 	"settings-edit": "편집",
 	"settings-links": "링크",
 	"settings-localisation": "지역화",

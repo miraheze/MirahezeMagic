@@ -3,6 +3,7 @@
 		"authors": [
 			"Buntschann",
 			"Kkairri",
+			"MuratTheTurkish",
 			"Omotecho",
 			"Shirayuki",
 			"おはぐろ蜻蛉",
@@ -12,6 +13,7 @@
 	"centralauth-groupname": "Miraheze",
 	"miraheze-categories": "カテゴリ",
 	"miraheze-donate": "寄付",
+	"miraheze-donatepage": "m:Donate/ja",
 	"miraheze-helpcenter": "Miraheze について",
 	"miraheze-requestfeatures": "ウィキの機能を申請する",
 	"miraheze-requestwiki": "ウィキをリクエストする",

@@ -6,7 +6,8 @@
 			"Ameisenigel",
 			"Count Count",
 			"Killarnee",
-			"Metalhead64"
+			"Metalhead64",
+			"MuratTheTurkish"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -15,6 +16,7 @@
 	"miraheze-close-email-subject": "Miraheze-Wiki ($1) geschlossen",
 	"miraheze-close-email-body": "Hallo!\n\nDa dein Wiki in den letzten 60 Tagen keine Bearbeitungen aufgewiesen hat, wurde es aufgrund der Ruhezustands-Richtlinie leider geschlossen. Falls du dein Wiki bearbeiten möchtest, gehe bitte auf „Spezial:ManageWiki“ und deaktiviere das Häkchen bei „geschlossen“, um es wieder zu eröffnen.\n\nBitte beachte: Falls du dein Wiki nicht wiedereröffnest, ist es möglich, dass ein anderer Benutzer dein Wiki adoptiert. Falls du dein Wiki heute in 6 Monaten nicht wiedereröffnest oder niemand dein Wiki adoptiert, könnte es gelöscht werden.",
 	"miraheze-donate": "Spenden",
+	"miraheze-donatepage": "m:Donate/de",
 	"miraheze-helpcenter": "Miraheze-Hilfezentrum",
 	"miraheze-requestfeatures": "Funktionen auf einem Wiki anfordern",
 	"miraheze-requestwiki": "Ein Wiki beantragen",
@@ -63,7 +65,6 @@
 	"termsofservice": "Nutzungsbedingungen",
 	"settings-anti-spam": "Anti-Spam",
 	"settings-beta": "Beta",
-	"settings-chat": "Chat",
 	"settings-edit": "Bearbeiten",
 	"settings-links": "Links",
 	"settings-localisation": "Lokalisierung",

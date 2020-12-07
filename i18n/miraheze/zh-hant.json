@@ -3,7 +3,8 @@
 		"authors": [
 			"AlvaroMolina",
 			"Kly",
-			"LNDDYL"
+			"LNDDYL",
+			"MuratTheTurkish"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -11,7 +12,8 @@
 	"miraheze-categories": "分類",
 	"miraheze-close-email-subject": "Miraheze Wiki（$1）已關閉",
 	"miraheze-close-email-body": "您好：\n\n很遺憾地，出於您的 wiki 在過去 60 天裡未有任何編輯操作，基於休眠方針已將其關閉。若您仍想要編輯您的 wiki 頁面，請前往 Special:ManageWiki 來取消勾選「已關閉」方框來重新開啟。\n\n請注意如果您並沒有重新開啟您的 wiki，這有可能是其他使用者接手了您的 wiki。若您不想要重新開啟您的 wiki，或是從現在起 6 個月內沒有其他人接手您的 wiki，這會構成符合刪除的條件。",
-	"miraheze-donate": "捐助",
+	"miraheze-donate": "為 Miraheze 捐款",
+	"miraheze-donatepage": "m:Donate/zh",
 	"miraheze-faq": "常見問題",
 	"miraheze-helpcenter": "Miraheze 協助中心",
 	"miraheze-requestfeatures": "請求在 wiki 上的功能",
@@ -126,8 +128,6 @@
 	"termsofservice": "使用條款",
 	"settings-anti-spam": "反垃圾訊息",
 	"settings-beta": "測試",
-	"settings-chat": "聊天",
-	"settings-cosmos": "Cosmos 外觀",
 	"settings-edit": "編輯",
 	"settings-links": "連結",
 	"settings-localisation": "在地化",

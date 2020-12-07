@@ -3,6 +3,7 @@
 		"authors": [
 			"Olghinabella",
 			"Piramidion",
+			"Renamerr",
 			"Viiictorrr",
 			"Vlad5250",
 			"Ата"
@@ -49,7 +50,7 @@
 	"miraheze-survey-q5b": "Скільки вікі ви редагуєте?",
 	"miraheze-survey-q6": "Інтерфейс користувача, який я використовую на Miraheze, розроблено якісно, і він не має негативного впливу на мій досвід у Miraheze.",
 	"miraheze-survey-q6-1": "Чи хотіли б ви дати розгорнуту відповідь на питання вище?",
-	"miraheze-survey-q7": "Наскільки ви згодні/незгодні з поданими твердженнями?",
+	"miraheze-survey-q7": "Оцініть наступні твердження за шкалою 1-5, де 1 категорично не погоджуєтеся, а 5 категорично погоджуєтеся.",
 	"miraheze-survey-q7-ci": "У мене позитивне враження від спільноти Miraheze",
 	"miraheze-survey-q7-oe": "Мій досвід із Miraheze є цілком задовільним",
 	"miraheze-survey-q7-si": "У мене позитивне враження від працівників Miraheze",
@@ -123,7 +124,6 @@
 	"termsofservice": "Умови використання",
 	"settings-anti-spam": "Антиспам",
 	"settings-beta": "Бета",
-	"settings-chat": "Чат",
 	"settings-edit": "Редагування",
 	"settings-links": "Посилання",
 	"settings-localisation": "Локалізація",
@@ -134,5 +134,5 @@
 	"settings-restricted": "Обмежено",
 	"settings-styling": "Стиль",
 	"settings-wikibase": "Вікібаза",
-	"extensions-skins": "Тема оформлення"
+	"extensions-skins": "Теми оформлення"
 }

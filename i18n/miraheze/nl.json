@@ -4,6 +4,7 @@
 			"AlvaroMolina",
 			"Elroy",
 			"Mainframe98",
+			"MuratTheTurkish",
 			"Southparkfan"
 		]
 	},
@@ -13,6 +14,7 @@
 	"miraheze-close-email-subject": "Miraheze-wiki ($1) gesloten",
 	"miraheze-close-email-body": "Hallo,\n\nOmdat er geen bewerkingen op je wiki zijn uitgevoerd gedurende 60 dagen, is deze gesloten in overeenstemming met ons inactiviteitsbeleid. Als je deze wiki wil bewerken kun je deze weer heropenen via de pagina \"Special:ManageWiki\".\n\nWees je ervan bewust dat een andere gebruiker vanaf nu jouw wiki kan adopteren. Als je wiki niet wordt heropend of geadopteerd in de komende 6 maanden komt je wiki in aanmerking voor verwijdering.",
 	"miraheze-donate": "Doneren",
+	"miraheze-donatepage": "m:Donate/nl",
 	"miraheze-helpcenter": "Over Miraheze",
 	"miraheze-requestfeatures": "Wiki-aanpassing aanvragen",
 	"miraheze-requestwiki": "Een wiki aanvragen",

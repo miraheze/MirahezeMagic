@@ -3,12 +3,15 @@
 		"authors": [
 			"AlvaroMolina",
 			"Beta16",
-			"JackLantern"
+			"Costabile",
+			"JackLantern",
+			"MuratTheTurkish"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
 	"miraheze-categories": "Categorie",
-	"miraheze-donate": "Donare",
+	"miraheze-donate": "Dona a Miraheze",
+	"miraheze-donatepage": "m:Donate/it",
 	"miraheze-helpcenter": "Centro aiuto Miraheze",
 	"miraheze-requestfeatures": "Richiedi le caratteristiche di un wiki",
 	"miraheze-requestwiki": "Richiedi un wiki",
@@ -57,10 +60,14 @@
 	"specialpages-group-wikimanage": "Gestione wiki",
 	"termsofservice": "Condizioni d'uso",
 	"settings-beta": "Beta",
+	"settings-categories": "Categorie",
+	"settings-discussion": "Discussione",
 	"settings-edit": "Modifica",
 	"settings-links": "Collegamenti",
 	"settings-notifications": "Notifiche",
+	"settings-parserfunctions": "Funzioni parser",
 	"settings-preferences": "Preferenze",
 	"settings-recentchanges": "Ultime modifiche",
+	"settings-socialtools": "Strumenti sociali",
 	"extensions-skins": "Temi"
 }

@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"Eduardo Addad de Oliveira",
+			"MuratTheTurkish",
 			"Tks4Fish"
 		]
 	},
@@ -12,6 +13,7 @@
 	"miraheze-close-email-subject": "Wiki de Mirahezee ($1) Fechada",
 	"miraheze-close-email-body": "Olá,\n\nInfelizmente, devido ao sua wiki não ter edições nos últimos 60 dias, ele foi fechado devido à política de dormência. Se você ainda quiser editar o seu wiki, vá para Special:ManageWiki e desmarque a caixa \"fechado\" para reabri-lo.\n\nPor favor, note que se você não reabrir seu wiki, é possível que outro usuário adote seu wiki. Se você não reabrir seu wiki ou ninguém adotar sua wiki em 6 meses a partir de agora, ele poderá ser excluído.",
 	"miraheze-donate": "Doar",
+	"miraheze-donatepage": "m:Donate/pt-br",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",
 	"miraheze-requestfeatures": "Solicitar recursos em um wiki",
@@ -126,17 +128,20 @@
 	"termsofservice": "Termos de uso",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
-	"settings-chat": "Bate-papo",
-	"settings-cosmos": "Cosmos skin",
+	"settings-categories": "Categorias",
+	"settings-discussion": "Discussão",
 	"settings-edit": "Editar",
 	"settings-links": "Links",
 	"settings-localisation": "Localização",
 	"settings-maps": "Mapas",
 	"settings-media": "Mídia",
 	"settings-notifications": "Notificações",
+	"settings-parserfunctions": "Funções do analisador",
 	"settings-preferences": "Preferências",
 	"settings-recentchanges": "Mudanças recentes",
 	"settings-restricted": "Restrito",
+	"settings-seo": "SEO",
+	"settings-socialtools": "Ferramentas sociais",
 	"settings-styling": "Estilo",
 	"settings-wikibase": "Wikibase",
 	"extensions-skins": "Temas"
