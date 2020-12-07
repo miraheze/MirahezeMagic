@@ -48,12 +48,11 @@ class addWikiToServices extends Maintenance {
 
 				if ( !is_null( $mwSettings->s_extensions ) ) {
 					$extensionsArray = json_decode( $mwSettings->s_extensions, true );
-					$linter = $this->hasExtension( 'linter', $extensionsArray );
 					// Collection installs Electron inaddition now.
 					$electron = $this->hasExtension( 'collection', $extensionsArray );
 					$citoid = $this->hasExtension( 'citoid', $extensionsArray );
 
-					if ( $electron || $citoid || $linter ) {
+					if ( $electron || $citoid ) {
 						$servicesvalue = !empty( $domain ) ? str_replace('https://', '', "'" . $domain . "'") : 'true';
 						// Remove wiki from the end of the name.
 						$DBname = substr( $DBname, 0, -4 );
