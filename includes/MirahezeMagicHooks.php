@@ -28,6 +28,14 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
+		global $wgEchoSharedTrackingDB;
+
+		$dbw = wfGetDB( DB_MASTER, [], $wgEchoSharedTrackingDB );
+		
+		if ( $dbw->selectRowCount( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] ) > 0 ) {
+			$dbw->delete( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] );
+		}
+
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
