@@ -234,4 +234,14 @@ class MirahezeMagicHooks {
 			$footerItems['donate'] = $skin->footerLink( 'miraheze-donate', 'miraheze-donatepage' );
 		}
 	}
+	
+	public static function onSkinBuildSidebar( $skin, &$bar ) {
+		if ( isset( $bar['managewiki-sidebar-header'] ) ) {
+			$bar['managewiki-sidebar-header'][] = [
+				'text' => wfMessage( "datadump-link" )->text(),
+				'id' => "datadumplink",
+				'href' => htmlspecialchars( SpecialPage::getTitleFor( 'DataDump' )->getFullURL() )
+			];
+		}
+	}
 }
