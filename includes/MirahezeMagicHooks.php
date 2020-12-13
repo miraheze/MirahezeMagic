@@ -238,8 +238,8 @@ class MirahezeMagicHooks {
 	public static function onSkinBuildSidebar( $skin, &$bar ) {
 		if ( isset( $bar['managewiki-sidebar-header'] ) ) {
 			$bar['managewiki-sidebar-header'][] = [
-				'text' => wfMessage( "datadump-link" )->text(),
-				'id' => "datadumplink",
+				'text' => wfMessage( 'managewiki-link-datadump' )->text(),
+				'id' => 'datadumplink',
 				'href' => htmlspecialchars( SpecialPage::getTitleFor( 'DataDump' )->getFullURL() )
 			];
 		}
