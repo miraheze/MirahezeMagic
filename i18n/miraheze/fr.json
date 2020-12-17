@@ -14,6 +14,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-link": "Gérer/Télécharger le dump de ce wiki",
 	"mirahezemagic-description": "Messages Mediawiki, scripts et hooks specifiques pour Miraheze",
 	"miraheze-categories": "Catégories",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) fermé",
