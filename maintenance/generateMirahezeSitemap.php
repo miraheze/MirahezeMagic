@@ -41,12 +41,20 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
 		}
 
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
 		$wiki = new RemoteWiki( $dbName );
 		$isPrivate = $wiki->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
 
-			Shell::command( 'rm', '-rf', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
+			Shell::command(
+				'rm',
+				'-rf',
+				"/mnt/mediawiki-static/{$dbName}/sitemaps"
+			)
+				->limits( $limits )
+				->execute();
 		} else {
 			$this->output( "Generating sitemap for wiki {$dbName}\n" );
 
@@ -64,13 +72,17 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'--wiki',
 				$dbName
 				
-			)->execute();
+			)
+				->limits( $limits )
+				->execute();
 
 			Shell::command(
 				'/usr/bin/mv',
 				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap-index-{$dbName}.xml",
 				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap.xml"
-			)->execute();
+			)
+				->limits( $limits )
+				->execute();
 		}
 	}
 }
