@@ -21,9 +21,7 @@ print('done, generating map!')
 maps = []
 
 for wikidata in data:
-    wiki = wikidata['url']
-    wiki = urlparse(wiki)
-    wiki = str(wiki.netloc)
+    wiki = wikidata['dbname']
     urlreq = 'https://static.miraheze.org/{0}/sitemaps/sitemap.xml'.format(wiki)
     req = reqsession.get(url=urlreq)
     try:
