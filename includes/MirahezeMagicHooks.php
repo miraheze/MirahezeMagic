@@ -6,41 +6,49 @@ use MediaWiki\Shell\Shell;
 class MirahezeMagicHooks {
 	public static function onCreateWikiCreation( $DBname ) {
 		// Create static directory for wiki
-		if ( !file_exists( "/mnt/mediawiki-static/$DBname" ) ) {
-			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/$DBname" )->execute();
+		if ( !file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$DBname}" )->execute();
 		}
 
 		// Copy SocialProfile images
-		if ( file_exists( "/mnt/mediawiki-static/$DBname" ) ) {
+		if ( file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
 			Shell::command(
 				'/bin/cp',
 				'-r',
 				'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
-				"/mnt/mediawiki-static/$DBname/avatars"
+				"/mnt/mediawiki-static/{$DBname}/avatars"
 			)->execute();
+
 			Shell::command(
 				'/bin/cp',
 				'-r',
 				'/srv/mediawiki/w/extensions/SocialProfile/awards', 
-				"/mnt/mediawiki-static/$DBname/awards"
+				"/mnt/mediawiki-static/{$DBname}/awards"
 			)->execute();
 		}
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
-			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
+		if ( file_exists( "/mnt/mediawiki-static/{$wiki}" ) ) {
+			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$wiki}" )->execute();
 		}
 
 		static::removeRedisKey( "*{$wiki}*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
-		if ( file_exists( "/mnt/mediawiki-static/$old" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/$old", "/mnt/mediawiki-static/$new" )->execute();
+		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
+			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
 		}
 
 		static::removeRedisKey( "*{$old}*" );
+	}
+
+	public static function onCreateWikiStatePrivate( $dbname ) {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
+			-limits( $limits )
+			->execute();
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
