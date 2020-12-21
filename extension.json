@@ -50,6 +50,9 @@
 		"CreateWikiRename": [
 			"MirahezeMagicHooks::onCreateWikiRename"
 		],
+		"CreateWikiStatePrivate": [
+			"MirahezeMagicHooks::onCreateWikiStatePrivate"
+		],
 		"CreateWikiTables": [
 			"MirahezeMagicHooks::onCreateWikiTables"
 		],
