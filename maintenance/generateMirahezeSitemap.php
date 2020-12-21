@@ -58,6 +58,16 @@ class GenerateMirahezeSitemap extends Maintenance {
 		} else {
 			$this->output( "Generating sitemap for wiki {$dbName}\n" );
 
+			// Remove old dump
+			Shell::command(
+				'rm',
+				'-rf',
+				"/mnt/mediawiki-static/{$dbName}/sitemaps/**"
+			)
+				->limits( $limits )
+				->execute();
+
+			// Generate new dump
 			Shell::command(
 				'/usr/bin/php',
 				'/srv/mediawiki/w/maintenance/generateSitemap.php',
@@ -71,7 +81,6 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'yes',
 				'--wiki',
 				$dbName
-				
 			)
 				->limits( $limits )
 				->execute();
