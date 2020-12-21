@@ -33,12 +33,12 @@
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
 		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php",
 		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
-		"SpecialRobotRedirect": "includes/SpecialRobotRedirect.php"
+		"SpecialRedirectSitemap": "includes/SpecialRedirectSitemap.php"
 	},
 	"SpecialPages": {
 		"GlobalNewFiles": "SpecialGlobalNewFiles",
 		"MirahezeSurvey": "SpecialMirahezeSurvey",
-		"RobotRedirect": "SpecialRobotRedirect"
+		"RedirectSitemap": "SpecialRedirectSitemap"
 	},
 	"Hooks": {
 		"CreateWikiCreation": [
