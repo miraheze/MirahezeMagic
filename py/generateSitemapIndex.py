@@ -21,10 +21,8 @@ print('done, generating map!')
 maps = []
 
 for wikidata in data:
-    wiki = wikidata['url']
-    wiki = urlparse(wiki)
-    wiki = str(wiki.netloc)
-    urlreq = 'https://static.miraheze.org/sitemaps/{0}/sitemap.xml'.format(wiki)
+    wiki = wikidata['dbname']
+    urlreq = 'https://static.miraheze.org/{0}/sitemaps/sitemap.xml'.format(wiki)
     req = reqsession.get(url=urlreq)
     try:
         smap = xmltodict.parse(req.content)
