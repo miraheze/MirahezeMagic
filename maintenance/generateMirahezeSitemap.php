@@ -74,7 +74,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'--fspath', 
 				"/mnt/mediawiki-static/{$dbName}/sitemaps",
 				'--urlpath',
-				"/{$dbName}sitemaps/",
+				"/{$dbName}/sitemaps/",
 				'--server',
 				'https://static.miraheze.org',
 				'--compress',
