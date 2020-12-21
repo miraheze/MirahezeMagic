@@ -24,6 +24,7 @@
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
 class GenerateMirahezeSitemap extends Maintenance {
@@ -33,20 +34,42 @@ class GenerateMirahezeSitemap extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgServer, $wgDBname, $wmgPrivateWiki;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$dbName = $config->get( 'DBname' );
 
-		$stripHttpPrefix = str_replace( 'https://', '', $wgServer );
+		if ( !file_exists( "/mnt/mediawiki-static/{$dbName}/sitemaps/" ) ) {
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
+		}
 
-		if ( $wmgPrivateWiki ) {
-			$this->output( "Deleting sitemap for wiki {$wgDBname}\n" );
+		$isPrivate = new RemoteWiki( $dbName )->isPrivate();
+		if ( $isPrivate ) {
+			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
 
-			Shell::command( 'rm', '-rf', "/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}" )->execute();
+			Shell::command( 'rm', '-rf', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
 		} else {
-			$this->output( "Generating sitemap for wiki {$wgDBname}\n" );
+			$this->output( "Generating sitemap for wiki {$dbName}\n" );
 
-			exec( "php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath='/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}' --identifier={$wgDBname} --urlpath='/' --server='{$wgServer}' --compress=yes --wiki={$wgDBname}" );
+			Shell::command(
+				'/usr/bin/php',
+				'/srv/mediawiki/w/maintenance/generateSitemap.php',
+				'--fspath', 
+				"/mnt/mediawiki-static/{$dbName}/sitemaps",
+				'--urlpath',
+				'/',
+				'--server',
+				$config->get( 'Server' ),
+				'--compress',
+				'yes',
+				'--wiki',
+				$dbName
+				
+			)->execute();
 
-			exec( "/bin/cp /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap-index-{$wgDBname}.xml /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap.xml" );
+			Shell::command(
+				'/usr/bin/mv',
+				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap-index-{$dbName}.xml",
+				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap.xml"
+			)->execute();
 		}
 	}
 }
