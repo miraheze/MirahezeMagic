@@ -41,7 +41,8 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
 		}
 
-		$isPrivate = new RemoteWiki( $dbName )->isPrivate();
+		$wiki = new RemoteWiki( $dbName );
+		$isPrivate = $wiki->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
 
