@@ -36,7 +36,8 @@
 	},
 	"SpecialPages": {
 		"GlobalNewFiles": "SpecialGlobalNewFiles",
-		"MirahezeSurvey": "SpecialMirahezeSurvey"
+		"MirahezeSurvey": "SpecialMirahezeSurvey",
+		"RobotRedirect": "SpecialRobotRedirect"
 	},
 	"Hooks": {
 		"CreateWikiCreation": [
