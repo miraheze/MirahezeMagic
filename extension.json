@@ -32,7 +32,8 @@
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
 		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
+		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
+		"SpecialRobotRedirect": "includes/SpecialRobotRedirect.php"
 	},
 	"SpecialPages": {
 		"GlobalNewFiles": "SpecialGlobalNewFiles",
