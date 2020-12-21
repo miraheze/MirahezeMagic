@@ -21,6 +21,9 @@ print('done, generating map!')
 maps = []
 
 for wikidata in data:
+    if wikidata['private'] == '':
+        continue
+
     wiki = wikidata['dbname']
     urlreq = 'https://static.miraheze.org/{0}/sitemaps/sitemap.xml'.format(wiki)
     req = reqsession.get(url=urlreq)
