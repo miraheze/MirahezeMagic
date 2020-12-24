@@ -47,7 +47,7 @@ class MirahezeMagicHooks {
 	public static function onCreateWikiStatePrivate( $dbname ) {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
-			-limits( $limits )
+			->limits( $limits )
 			->execute();
 	}
 
