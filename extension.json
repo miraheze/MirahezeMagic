@@ -87,9 +87,6 @@
 		],
 		"SkinAddFooterLinks": [
 			"MirahezeMagicHooks::onSkinAddFooterLinks"
-		],
-		"SkinBuildSidebar": [
-			"MirahezeMagicHooks::onSkinBuildSidebar"
 		]
 	},
 	"ConfigRegistry": {
