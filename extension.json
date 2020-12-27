@@ -37,7 +37,6 @@
 	"SpecialPages": {
 		"GlobalNewFiles": "SpecialGlobalNewFiles",
 		"MirahezeSurvey": "SpecialMirahezeSurvey",
-		"RedirectSitemap": "SpecialRedirectSitemap"
 	},
 	"Hooks": {
 		"CreateWikiCreation": [
