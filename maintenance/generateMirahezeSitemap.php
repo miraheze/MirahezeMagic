@@ -24,6 +24,7 @@
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
 class GenerateMirahezeSitemap extends Maintenance {
@@ -33,20 +34,64 @@ class GenerateMirahezeSitemap extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgServer, $wgDBname, $wmgPrivateWiki;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$dbName = $config->get( 'DBname' );
 
-		$stripHttpPrefix = str_replace( 'https://', '', $wgServer );
+		if ( !file_exists( "/mnt/mediawiki-static/{$dbName}/sitemaps/" ) ) {
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
+		}
 
-		if ( $wmgPrivateWiki ) {
-			$this->output( "Deleting sitemap for wiki {$wgDBname}\n" );
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
-			Shell::command( 'rm', '-rf', "/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}" )->execute();
+		$wiki = new RemoteWiki( $dbName );
+		$isPrivate = $wiki->isPrivate();
+		if ( $isPrivate ) {
+			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
+
+			Shell::command(
+				'rm',
+				'-rf',
+				"/mnt/mediawiki-static/{$dbName}/sitemaps"
+			)
+				->limits( $limits )
+				->execute();
 		} else {
-			$this->output( "Generating sitemap for wiki {$wgDBname}\n" );
+			$this->output( "Generating sitemap for wiki {$dbName}\n" );
 
-			exec( "php /srv/mediawiki/w/maintenance/generateSitemap.php --fspath='/mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}' --identifier={$wgDBname} --urlpath='/' --server='{$wgServer}' --compress=yes --wiki={$wgDBname}" );
+			// Remove old dump
+			Shell::command(
+				'rm',
+				'-rf',
+				"/mnt/mediawiki-static/{$dbName}/sitemaps/**"
+			)
+				->limits( $limits )
+				->execute();
 
-			exec( "/bin/cp /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap-index-{$wgDBname}.xml /mnt/mediawiki-static/sitemaps/{$stripHttpPrefix}/sitemap.xml" );
+			// Generate new dump
+			Shell::command(
+				'/usr/bin/php',
+				'/srv/mediawiki/w/maintenance/generateSitemap.php',
+				'--fspath', 
+				"/mnt/mediawiki-static/{$dbName}/sitemaps",
+				'--urlpath',
+				"/{$dbName}/sitemaps/",
+				'--server',
+				'https://static.miraheze.org',
+				'--compress',
+				'yes',
+				'--wiki',
+				$dbName
+			)
+				->limits( $limits )
+				->execute();
+
+			Shell::command(
+				'/usr/bin/mv',
+				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap-index-{$dbName}.xml",
+				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap.xml"
+			)
+				->limits( $limits )
+				->execute();
 		}
 	}
 }

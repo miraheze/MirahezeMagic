@@ -4,6 +4,7 @@
 			"AlvaroMolina",
 			"Chrumps",
 			"Fitoschido",
+			"Kareyac",
 			"Rail",
 			"Railfail536"
 		]
@@ -13,7 +14,8 @@
 	"miraheze-categories": "Kategorie",
 	"miraheze-close-email-subject": "Wiki na Miraheze ($1) została zamknięta",
 	"miraheze-close-email-body": "Witaj,\n\nZe względu na nieaktywność twojej wiki w przeciągu ostatnich 60 dni, zostałam ona zamknięta w związku z postanowieniami „Dormancy policy”. Jeżeli wciąż chcesz edytować swoją wiki, przejdź na stronę Specjalna:ManageWiki oraz odznacz pole „zamknięta” aby ją ponownie otworzyć.\n\nZauważ, że jeżeli nie otworzysz swojej wiki ponownie, będzie ona możliwa do zaadoptowania przez innych użytkowników. Jeżeli jej nie otworzysz, lub nikt inny jej nie adoptuje w przeciągu następnych 6 miesięcy, wiki może zostać zakwalifikowana do usunięcia.",
-	"miraheze-donate": "Darować",
+	"miraheze-donate": "Przekaż datek Miraheze",
+	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centrum wsparcia Miraheze",
 	"miraheze-requestfeatures": "Zapytanie dysponuje na wiki",
 	"miraheze-requestwiki": "Prośba wiki",
@@ -127,15 +129,20 @@
 	"termsofservice": "Warunki korzystania",
 	"settings-anti-spam": "Ochrona przed spamem",
 	"settings-beta": "Funkcje eksperymentalne",
+	"settings-categories": "Kategorie",
+	"settings-discussion": "Dyskusja",
 	"settings-edit": "Edycja",
 	"settings-links": "Linki",
 	"settings-localisation": "Lokalizacja",
 	"settings-maps": "Mapy",
 	"settings-media": "Multimedia",
 	"settings-notifications": "Powiadomienia",
+	"settings-parserfunctions": "Funkcje parsera",
 	"settings-preferences": "Preferencje",
 	"settings-recentchanges": "Ostatnie zmiany",
 	"settings-restricted": "Zastrzeżone",
+	"settings-seo": "Optymalizacja dla wyszukiwarek",
+	"settings-socialtools": "Specjalne narzędzia",
 	"settings-styling": "Wygląd",
 	"extensions-skins": "Skórka"
 }

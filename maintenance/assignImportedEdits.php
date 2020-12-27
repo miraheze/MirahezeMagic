@@ -1,5 +1,4 @@
 <?php
-
 /**
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -69,7 +68,6 @@ class AssignImportedEdits extends Maintenance {
 			if ( $user ) {
 				$nameIsValid = $userClass->newFromName( $user )->getId();
 				$name = $this->importPrefix . $user->getName();
-				$username = $userClass->newFromName( $this->importPrefix .  $user->getName() );
 
 				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
 					if ( $nameIsValid !== 0 && $actorName->getName() === $name ) {

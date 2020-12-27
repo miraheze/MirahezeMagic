@@ -48,6 +48,9 @@
 		"CreateWikiRename": [
 			"MirahezeMagicHooks::onCreateWikiRename"
 		],
+		"CreateWikiStatePrivate": [
+			"MirahezeMagicHooks::onCreateWikiStatePrivate"
+		],
 		"CreateWikiTables": [
 			"MirahezeMagicHooks::onCreateWikiTables"
 		],
@@ -83,6 +86,9 @@
 		],
 		"SkinAddFooterLinks": [
 			"MirahezeMagicHooks::onSkinAddFooterLinks"
+		],
+		"SkinBuildSidebar": [
+			"MirahezeMagicHooks::onSkinBuildSidebar"
 		]
 	},
 	"ConfigRegistry": {

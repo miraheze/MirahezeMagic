@@ -5,7 +5,6 @@
                         "RhinosF1"
 		]
 	},
-
 	"managewiki-setting-wgAbuseFilterActions-name": "AbuseFilter Actions",
 	"managewiki-setting-wgAbuseFilterActions-help": "The possible actions that can be taken by abuse filters. When adding a new action, check if it is restricted in $wgAbuseFilterRestrictions and, if it is, don't forget to add the abusefilter-modify-restricted right to the appropriate user groups.",
 	"managewiki-setting-wgAutoBlockExpiry-name": "Autoblock Expiry",

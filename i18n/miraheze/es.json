@@ -6,6 +6,7 @@
 			"Dark Dragoon",
 			"Fitoschido",
 			"La Mantis",
+			"MarcoAurelio",
 			"MuratTheTurkish",
 			"Racha",
 			"Wynter"
@@ -16,7 +17,7 @@
 	"miraheze-categories": "Categorías",
 	"miraheze-close-email-subject": "Wiki de Miraheze ($1) Cerrada",
 	"miraheze-close-email-body": "Hola,\n\nDesafortunadamente, debido a que su wiki no ha tenido ediciones en los últimos 60 días, se ha cerrado debido a la política de inactividad. Si todavía desea editar su wiki, vaya a Special:ManageWiki y desmarque la opción \"cerrada\" para volver a abrirla.\n\nTenga en cuenta que si no vuelves a abrir tu wiki, es posible que otro usuario adopte tu wiki. Si no vuelves a abrir tu wiki o nadie adopta tu wiki en al menos 6 meses a partir de ahora, podría ser elegible para eliminación.",
-	"miraheze-donate": "Donar",
+	"miraheze-donate": "Donar a Miraheze",
 	"miraheze-donatepage": "m:Donate/es",
 	"miraheze-helpcenter": "Centro de ayuda de Miraheze",
 	"miraheze-requestfeatures": "Solicitar características para su wiki",
@@ -126,15 +127,19 @@
 	"termsofservice": "Términos de Uso",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
+	"settings-categories": "Categorías",
 	"settings-edit": "Editar",
 	"settings-links": "Enlaces",
 	"settings-localisation": "Localización",
 	"settings-maps": "Mapas",
 	"settings-media": "Multimedia",
 	"settings-notifications": "Notificaciones",
+	"settings-parserfunctions": "Funciones del analizador sintáctico",
 	"settings-preferences": "Preferencias",
 	"settings-recentchanges": "Cambios recientes",
 	"settings-restricted": "Restringido",
+	"settings-seo": "Optimización para buscadores",
+	"settings-socialtools": "Herramientas sociales",
 	"settings-styling": "Estilo",
-	"extensions-skins": "Apariencia"
+	"extensions-skins": "Apariencias"
 }

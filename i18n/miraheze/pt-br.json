@@ -8,11 +8,12 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-link": "Gerenciar/baixar o despejo dessa wiki",
 	"mirahezemagic-description": "Mensagens, scripts e ganchos do MediaWiki específicos para o Miraheze",
 	"miraheze-categories": "Categorias",
 	"miraheze-close-email-subject": "Wiki de Mirahezee ($1) Fechada",
 	"miraheze-close-email-body": "Olá,\n\nInfelizmente, devido ao sua wiki não ter edições nos últimos 60 dias, ele foi fechado devido à política de dormência. Se você ainda quiser editar o seu wiki, vá para Special:ManageWiki e desmarque a caixa \"fechado\" para reabri-lo.\n\nPor favor, note que se você não reabrir seu wiki, é possível que outro usuário adote seu wiki. Se você não reabrir seu wiki ou ninguém adotar sua wiki em 6 meses a partir de agora, ele poderá ser excluído.",
-	"miraheze-donate": "Doar",
+	"miraheze-donate": "Doar para Miraheze",
 	"miraheze-donatepage": "m:Donate/pt-br",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",

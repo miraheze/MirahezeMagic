@@ -7,6 +7,7 @@
 			"MuratTheTurkish"
 		]
 	},
+	"datadump-link": "Bu viki dökümünü yönetin/indirin",
 	"mirahezemagic-description": "Miraheze'ye özel MediaWiki mesajları, betikleri ve kancalar",
 	"miraheze-categories": "Kategoriler",
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",
@@ -78,7 +79,7 @@
 	"miraheze-survey-q14": "Şimdi Miraheze hakkında yorum yapmak için bir şans.",
 	"miraheze-survey-q15": "Yanıtlarınızı görüşmek üzere Miraheze ile iletişime geçmekten memnun olur musunuz?",
 	"miraheze-survey-q15-1": "Bizimle onaylanmış bir e-posta adresiniz yok gibi görünüyor. Aşağıda verdiğiniz e-posta adresi sizinle iletişim kurulduktan sonra silinecektir.",
-	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze Ekibi'''], bu vikide son 45 gün içinde [[Special:RecentChanges|'''herhangi bir düzenleme''']] ya da  [[Special:Logs|'''log''']] oluşturmadığını fark etti. Bu vikiyi '''kapamayı''' önlemek istiyorsanız lütfen burada etkinlik belirtileri göstermeye başlayın. Eğer 15 gün içinde bu vikinin kullanıldığına dair bir değişiklik yapılmazsa bu viki [https://meta.miraheze.org/wiki/Dormancy_Policy '''Dormancy Politikası'''] gereği kapatılacaktır. Bu viki, başka bir kullanıcının yönetimine geçmeye uygun olacaktır. Şu andan itibaren 135 gün içinde başkası tarafından alınmaz ve hâlâ inaktifse bu viki, '''silinmeye''' uygun hâle gelecektir. Lütfen Miraheze' [https://meta.miraheze.org/wiki/Dormancy_Policy Dormancy Politika]'sını benimsediğinizden emin olun. Eğer viki aktifse [[MediaWiki:Sitenotice]] sayfasına giderek bu uyarıyı kendiniz kaldırabilirsiniz. Başka sorularınız veya endişeleriniz varsa lütfen [https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Bize Ulaşın'''] kısmından iletişime geçmekte tereddüt etmeyin.</span></div>",
+	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze Personeli'''], bu vikinin son 45 gün içinde [[Special:RecentChanges|'''düzenleme yapmadığı''']] veya [[Special:Logs|'''günlükler \n''']] yapmadığını fark etti. Bu vikinin '''kapalı''' olmasını engellemek istiyorsanız, lütfen burada etkinlik işaretleri göstermeye başlayın. Bu vikinin önümüzdeki 15 gün içinde kullanılacağına dair herhangi bir işaret yoksa, bu viki [https://meta.miraheze.org/wiki/Dormancy_Policy/tr '''Dormansi Politikası'''] uyarınca kapatılabilir. Bu viki, daha sonra başka bir kullanıcı tarafından benimsenmeye uygun olacaktır. Şu andan itibaren 135 gün sonra kabul edilmediyse ve hala etkin değilse, bu viki '''silme''' için uygun olacaktır. Lütfen Miraheze'nin [https://meta.miraheze.org/wiki/Dormancy_Policy/tr Dormansi Politikası] hakkında bilgi sahibi olduğunuzdan emin olun. Bu vikide etkinlik varsa, [[MediaWiki:Sitenotice]] sayfasına gidip bu bildirimi kendiniz kaldırabilirsiniz. Başka sorularınız veya endişeleriniz varsa, lütfen [https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Bize Ulaşmaktan'''] tereddüt etmeyin.</span></div>",
 	"globalnewfiles": "Küresel Yeni Dosyalar",
 	"group-abuse": "Kötüye kullanım ekibi",
 	"group-abuse-member": "{{GENDER:$1|kötüye kullanım ekibi}}",
@@ -143,5 +144,6 @@
 	"settings-socialtools": "Sosyal Araçları",
 	"settings-styling": "Stil",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Görünümler"
+	"extensions-skins": "Görünümler",
+	"redirectsitemap": "Site haritasına yönlendir"
 }

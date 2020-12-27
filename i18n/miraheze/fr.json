@@ -14,6 +14,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-link": "Gérer/Télécharger le dump de ce wiki",
 	"mirahezemagic-description": "Messages Mediawiki, scripts et hooks specifiques pour Miraheze",
 	"miraheze-categories": "Catégories",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) fermé",
@@ -150,5 +151,6 @@
 	"settings-socialtools": "Outils sociaux",
 	"settings-styling": "Style",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Habillages"
+	"extensions-skins": "Habillages",
+	"redirectsitemap": "Rediriger vers la carte du site"
 }
