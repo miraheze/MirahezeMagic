@@ -10,11 +10,12 @@
 			"Reception123",
 			"Thibaut120094",
 			"Urhixidur",
+			"Verdy p",
 			"Wladek92"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
-	"datadump-link": "Gérer/Télécharger le dump de ce wiki",
+	"datadump-link": "Gérer ou télécharger le vidage de ce wiki",
 	"mirahezemagic-description": "Messages Mediawiki, scripts et hooks specifiques pour Miraheze",
 	"miraheze-categories": "Catégories",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) fermé",
@@ -147,10 +148,9 @@
 	"settings-preferences": "Préférences",
 	"settings-recentchanges": "Modifications récentes",
 	"settings-restricted": "Restreint",
-	"settings-seo": "SEO",
+	"settings-seo": "Optimisation pour moteurs de recherche",
 	"settings-socialtools": "Outils sociaux",
 	"settings-styling": "Style",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Habillages",
-	"redirectsitemap": "Rediriger vers la carte du site"
+	"extensions-skins": "Habillages"
 }
