@@ -136,7 +136,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			],
 			'skin' => [
 				'type' => 'hidden',
-				'default' => $this->getUser()->getOption( 'skin' )
+				'default' => MediaWikiServices::getInstance()->getUserOptionsLookup()->getOption( $this->getUser(), 'skin', 'vector' )
 			],
 			'q6' => [
 				'type' => 'radio',
