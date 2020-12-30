@@ -29,13 +29,11 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
-		global $wgEchoSharedTrackingDB;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgEchoSharedTrackingDB );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
 		
-		if ( $dbw->selectRowCount( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] ) > 0 ) {
-			$dbw->delete( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] );
-		}
+		$dbw->delete( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] );
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
@@ -45,13 +43,11 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
-		global $wgEchoSharedTrackingDB;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgEchoSharedTrackingDB );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
 		
-		if ( $dbw->selectRowCount( 'echo_unread_wikis', '*', [ 'euw_wiki' => $old ] ) > 0 ) {
-			$dbw->update( 'echo_unread_wikis', '*', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
-		}
+		$dbw->update( 'echo_unread_wikis', '*', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 		
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
