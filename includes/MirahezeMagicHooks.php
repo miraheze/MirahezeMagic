@@ -45,6 +45,14 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
+		global $wgEchoSharedTrackingDB;
+
+		$dbw = wfGetDB( DB_MASTER, [], $wgEchoSharedTrackingDB );
+		
+		if ( $dbw->selectRowCount( 'echo_unread_wikis', '*', [ 'euw_wiki' => $old ] ) > 0 ) {
+			$dbw->update( 'echo_unread_wikis', '*', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
+		}
+		
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
 		}
