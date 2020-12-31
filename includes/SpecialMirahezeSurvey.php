@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class SpecialMirahezeSurvey extends FormSpecialPage {
 	private $dbw;
 	private $row;
