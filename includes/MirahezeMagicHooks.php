@@ -47,7 +47,7 @@ class MirahezeMagicHooks {
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
 		
-		$dbw->update( 'echo_unread_wikis', '*', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
+		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 		
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
