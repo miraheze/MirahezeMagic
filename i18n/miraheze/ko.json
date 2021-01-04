@@ -10,7 +10,6 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
-	"datadump-link": "위키 덤프 관리/다운로드",
 	"mirahezemagic-description": "Miraheze에 특화된 미디어위키 메시지, 스크립트, 훅",
 	"miraheze-categories": "분류",
 	"miraheze-close-email-subject": "Miraheze 위키 ($1) 닫힘",
