@@ -24,6 +24,9 @@
 			"i18n/mirahezeprojectnames"
 		]
 	},
+	"ExtensionMessagesFiles": {
+		"MirahezeMagicAliases": "MirahezeMagic.i18n.alias.php"
+	},
 	"AvailableRights": [
 		"viewglobalprivatefiles"
 	],
