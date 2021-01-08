@@ -25,7 +25,7 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"MirahezeMagicAliases": "MirahezeMagic.i18n.alias.php"
+		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
 	},
 	"AvailableRights": [
 		"viewglobalprivatefiles"
