@@ -33,14 +33,32 @@ class MigrateCollation extends Maintenance {
 
 	public function execute() {
 		$dbw = wfGetDB( DB_MASTER );
-		
 		$getTables = $dbw->listTables();
-		
+
 		foreach ( $getTables as $table ) {
+			global $wgDBname;
+
+			if ( !$table ) {
+				continue;
+			}
+
+			$this->output( "Database: $wgDBname\n" );
+			$dbw->query( "ALTER DATABASE $wgDBname CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci" );
+
 			$this->output( "Table: {$table}\n" );
-			$res = $dbw->query( "SHOW COLUMNS FROM $table" );
+			$dbw->query( "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" );
+
+			$res = $dbw->query( "SHOW FULL COLUMNS FROM $table" );
 			$row = $dbw->fetchObject( $res );
-			$this->output( "Column: {$row->Field}. Collation: {$row->Collation}.\n" );
+
+			$field = $row->Field;
+			if ( !$row || !$field ) {
+				continue;
+			}
+
+			if ( isset( $row->Collation ) && $row->Collation ) {
+				$dbw->query( "UPDATE $table SET $field = CONVERT(BINARY CONVERT($field USING latin1) USING utf8);" );
+			}
 		}
 	}
 }
