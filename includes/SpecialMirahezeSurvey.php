@@ -393,7 +393,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			]
 		);
 
-		$this->getOutput()->addHTML( '<div class="successbox">' . $this->msg( 'miraheze-survey-done' )->plain() . '</div>' );
+		$this->getOutput()->addHTML( '<div class="successbox">' . $this->msg( 'miraheze-survey-done' )->escaped() . '</div>' );
 
 		return true;
 	}
