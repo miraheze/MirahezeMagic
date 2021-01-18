@@ -33,6 +33,10 @@ class MigrateCollation extends Maintenance {
 
 	public function execute() {
 		$dbw = wfGetDB( DB_MASTER );
+
+		$this->output( "Database: $wgDBname\n" );
+		$dbw->query( "ALTER DATABASE $wgDBname CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci" );
+
 		$getTables = $dbw->listTables();
 
 		foreach ( $getTables as $table ) {
@@ -41,9 +45,6 @@ class MigrateCollation extends Maintenance {
 			if ( !$table ) {
 				continue;
 			}
-
-			$this->output( "Database: $wgDBname\n" );
-			$dbw->query( "ALTER DATABASE $wgDBname CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci" );
 
 			$this->output( "Table: {$table}\n" );
 			$dbw->query( "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" );
