@@ -37,9 +37,10 @@ class MigrateCollation extends Maintenance {
 		$getTables = $dbw->listTables();
 		
 		foreach ( $getTables as $table ) {
+			$this->output( "Table: {$table}\n" );
 			$res = $dbw->query( "SHOW COLUMNS FROM $table" );
 			$row = $dbw->fetchObject( $res );
-			$this->output( "Table: {$table}. Collation: {$row->Collation}\n"
+			$this->output( "Column: {$row->Field}. Collation: {$row->Collation}.\n" );
 		}
 	}
 }
