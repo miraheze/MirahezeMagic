@@ -8,7 +8,7 @@
 	"miraheze-categories": "Kategorier",
 	"miraheze-close-email-subject": "Miraheze-wiki ($1) lukket",
 	"miraheze-close-email-body": "hei,\n\nPå grunn av at wikien din ikke har hatt noen redigeringen på 60 dager ble den dessverre stengt på grunn av inaktivitetsreglene. Om du fortsatt ønsker å redigere wikien, gå til Special:ManageWiki og fjern markeringen av boksen «lukket» for å åpne den igjen.\n\nMerk: Hvis du ikke åpner wikien din igjen vil det være mulig for en annen bruker å adoptere wikien. Hvis du ikke åpner wikien igjen eller ingen adopterer den på 6 måneder fra nå vil den kunne slettes.",
-	"miraheze-donate": "Doner",
+	"miraheze-donate": "Doner til Miraheze",
 	"miraheze-faq": "OSS",
 	"miraheze-helpcenter": "Mirahezes hjelpesenter",
 	"miraheze-requestfeatures": "Be om funksjoner på en wiki",
