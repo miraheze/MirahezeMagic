@@ -38,8 +38,6 @@ class MigrateCollation extends Maintenance {
 		$getTables = $dbw->listTables();
 
 		foreach ( $getTables as $table ) {
-			global $wgDBname;
-
 			if ( !$table ) {
 				continue;
 			}
