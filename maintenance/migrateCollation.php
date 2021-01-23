@@ -55,9 +55,13 @@ class MigrateCollation extends Maintenance {
 				continue;
 			}
 
-			if ( isset( $row->Collation ) && preg_match( '/^latin1(.*)/', $row->Collation ) ) {
+			if ( isset( $row->Collation ) && $row->Collation ) {
 				$this->output( "Field: $field\n" );
-				$dbw->query( "UPDATE $table SET $field = CONVERT(BINARY CONVERT($field USING latin1) USING utf8);" );
+				try {
+					$dbw->query( "UPDATE $table SET $field = CONVERT(BINARY CONVERT($field USING latin1) USING utf8);" );
+				} catch ( \Exception $ex ) {
+					$this->output( "You have already run this script on field $field. You can only run this once.\n" );
+				}
 			}
 		}
 	}
