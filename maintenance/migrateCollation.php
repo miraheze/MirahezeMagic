@@ -22,16 +22,14 @@
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
 class MigrateCollation extends Maintenance {
-	private $wikiRevision = null;
-
-	private $importPrefix = 'imported>';
-
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Convert table to collation";
 	}
 
 	public function execute() {
+		global $wgDBname;
+
 		$dbw = wfGetDB( DB_MASTER );
 
 		$this->output( "Database: $wgDBname\n" );
