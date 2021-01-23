@@ -52,10 +52,11 @@ class MigrateCollation extends Maintenance {
 			}
 
 			foreach ( $res as $obj ) {
-				if ( !$obj || !$obj->Field ) {
+				$field = $obj->Field;
+				if ( !$obj || !$field ) {
 					continue;
 				}
-				$field = $obj->Field;
+
 				if ( isset( $obj->Collation ) && $obj->Collation ) {
 					$this->output( "Field: $field\n" );
 					try {
