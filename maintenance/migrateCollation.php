@@ -57,7 +57,7 @@ class MigrateCollation extends Maintenance {
 				continue;
 			}
 
-			if ( isset( $row->Collation ) && $row->Collation ) {
+			if ( isset( $row->Collation ) && preg_match( '/^latin1*/', $row->Collation ) ) {
 				$this->output( "Field: $field\n" );
 				$dbw->query( "UPDATE $table SET $field = CONVERT(BINARY CONVERT($field USING latin1) USING utf8);" );
 			}
