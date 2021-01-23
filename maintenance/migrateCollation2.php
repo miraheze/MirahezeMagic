@@ -21,7 +21,7 @@
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
-class MigrateCollation2 extends Maintenance {
+class MigrateCollation extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Convert table to collation";
@@ -44,24 +44,29 @@ class MigrateCollation2 extends Maintenance {
 			$dbw->query( "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci" );
 
 			$res = $dbw->query( "SHOW FULL COLUMNS FROM $table" );
-			$row = $dbw->fetchObject( $res );
 
-			$field = $row->Field;
-			if ( !$row || !$field ) {
+			if ( !$res || !is_object( $res ) ) {
 				continue;
 			}
 
-			if ( isset( $row->Collation ) && $row->Collation ) {
-				$this->output( "Field: $field\n" );
-				try {
-					$dbw->query( "UPDATE $table SET $field = CONVERT(BINARY CONVERT($field USING latin1) USING utf8);" );
-				} catch ( \Exception $ex ) {
-					$this->output( "You have already run this script on field $field. You can only run this once.\n" );
+			foreach ( $res as $obj ) {
+				$field = $obj->Field;
+				if ( !$obj || !$field ) {
+					continue;
+				}
+
+				if ( isset( $obj->Collation ) && $obj->Collation ) {
+					$this->output( "Field: $field\n" );
+					try {
+						$dbw->query( "UPDATE $table SET $field = CONVERT(BINARY CONVERT($field USING latin1) USING utf8);" );
+					} catch ( \Exception $ex ) {
+						$this->output( "You have already run this script on field $field. You can only run this once.\n" );
+					}
 				}
 			}
 		}
 	}
 }
 
-$maintClass = 'MigrateCollation2';
+$maintClass = 'MigrateCollation';
 require_once RUN_MAINTENANCE_IF_MAIN;
