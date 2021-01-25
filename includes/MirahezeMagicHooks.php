@@ -15,14 +15,14 @@ class MirahezeMagicHooks {
 			Shell::command(
 				'/bin/cp',
 				'-r',
-				'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
+				'/srv/mediawiki/w/extensions/SocialProfile/avatars',
 				"/mnt/mediawiki-static/{$DBname}/avatars"
 			)->execute();
 
 			Shell::command(
 				'/bin/cp',
 				'-r',
-				'/srv/mediawiki/w/extensions/SocialProfile/awards', 
+				'/srv/mediawiki/w/extensions/SocialProfile/awards',
 				"/mnt/mediawiki-static/{$DBname}/awards"
 			)->execute();
 		}
