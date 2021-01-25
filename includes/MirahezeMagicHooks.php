@@ -261,7 +261,7 @@ class MirahezeMagicHooks {
 		if ( $config->get( 'DBname' ) === 'staffwiki' && $user->isLoggedIn() ) {
 			$centralAuthUser = CentralAuthUser::getInstance( $user );
 			if ( $centralAuthUser &&
-			    $centralUser->exists() &&
+			    $centralAuthUser->exists() &&
 			    !in_array( $centralAuthUser->getId(), $config->get( 'MirahezeStaffAccessIds' ) )
 			) {
 				$aRights = array_unique( $aRights );
