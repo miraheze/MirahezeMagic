@@ -256,7 +256,10 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onUserGetRightsRemove( User $user, array &$aRights ) {
-		if ( $user->isLoggedIn() && class_exists( 'CentralAuthUser' ) ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		// Remove read from stewards on staff wiki.
+		if ( $config->get( 'DBname' ) === 'staffwiki' && $user->isLoggedIn() &&
+		    class_exists( 'CentralAuthUser' ) ) {
 			$centralAuthUser = CentralAuthUser::getInstance( $user );
 			if ( $centralUser->exists() && $centralUser->isAttached() &&
 			    isset( $centralAuthUser->getGlobalGroups()['steward'] ) ) {
