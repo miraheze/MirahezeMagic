@@ -259,7 +259,6 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		// Remove read from stewards on staff wiki.
 		if ( $config->get( 'DBname' ) === 'staffwiki' && $user->isLoggedIn() ) {
-			// foreach( $config->get( 'MirahezeStaffAccessIds' ) as $id ) {
 			$centralAuthUser = CentralAuthUser::getInstance( $user );
 			if ( $centralAuthUser &&
 			    $centralUser->exists() &&
