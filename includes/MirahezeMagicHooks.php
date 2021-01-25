@@ -263,7 +263,7 @@ class MirahezeMagicHooks {
 			if ( $centralUser->exists() && $centralUser->isAttached() &&
 			    isset( $centralAuthUser->getGlobalGroups()['steward'] ) ) {
 				$aRights = array_unique( $aRights );
-				$aRights = $aRights[array_search( 'read', $aRights )];
+				unset( $aRights[array_search( 'read', $aRights )] );
 			}
 		}
 	}
