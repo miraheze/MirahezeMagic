@@ -32,7 +32,7 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
-		
+
 		$dbw->delete( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] );
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
@@ -46,9 +46,9 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
-		
+
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
-		
+
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
 		}
@@ -220,7 +220,7 @@ class MirahezeMagicHooks {
 			}
 		}
 	}
-	
+
 	public static function onGlobalUserPageWikis( &$list ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
@@ -232,7 +232,7 @@ class MirahezeMagicHooks {
 
 		return true;
 	}
-	
+
 	public static function removeRedisKey( string $key ) {
 		global $wmgRedisSettings;
 
@@ -242,7 +242,7 @@ class MirahezeMagicHooks {
 		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
 		$redis->del( $redis->keys( $key ) );
 	}
-	
+
 	public static function onMimeMagicInit( $magic ) {
 		$magic->addExtraTypes( 'text/plain txt off' );
 	}
