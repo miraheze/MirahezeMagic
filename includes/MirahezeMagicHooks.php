@@ -15,14 +15,14 @@ class MirahezeMagicHooks {
 			Shell::command(
 				'/bin/cp',
 				'-r',
-				'/srv/mediawiki/w/extensions/SocialProfile/avatars', 
+				'/srv/mediawiki/w/extensions/SocialProfile/avatars',
 				"/mnt/mediawiki-static/{$DBname}/avatars"
 			)->execute();
 
 			Shell::command(
 				'/bin/cp',
 				'-r',
-				'/srv/mediawiki/w/extensions/SocialProfile/awards', 
+				'/srv/mediawiki/w/extensions/SocialProfile/awards',
 				"/mnt/mediawiki-static/{$DBname}/awards"
 			)->execute();
 		}
@@ -32,7 +32,7 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
-		
+
 		$dbw->delete( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] );
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
@@ -46,9 +46,9 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
-		
+
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
-		
+
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
 		}
@@ -220,7 +220,7 @@ class MirahezeMagicHooks {
 			}
 		}
 	}
-	
+
 	public static function onGlobalUserPageWikis( &$list ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
@@ -232,7 +232,7 @@ class MirahezeMagicHooks {
 
 		return true;
 	}
-	
+
 	public static function removeRedisKey( string $key ) {
 		global $wmgRedisSettings;
 
@@ -242,7 +242,7 @@ class MirahezeMagicHooks {
 		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
 		$redis->del( $redis->keys( $key ) );
 	}
-	
+
 	public static function onMimeMagicInit( $magic ) {
 		$magic->addExtraTypes( 'text/plain txt off' );
 	}
@@ -252,6 +252,21 @@ class MirahezeMagicHooks {
 			$footerItems['termsofservice'] = $skin->footerLink( 'termsofservice', 'termsofservicepage' );
 
 			$footerItems['donate'] = $skin->footerLink( 'miraheze-donate', 'miraheze-donatepage' );
+		}
+	}
+
+	public static function onUserGetRightsRemove( User $user, array &$aRights ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		// Remove read from stewards on staff wiki.
+		if ( $config->get( 'DBname' ) === 'staffwiki' && $user->isLoggedIn() ) {
+			$centralAuthUser = CentralAuthUser::getInstance( $user );
+			if ( $centralAuthUser &&
+			    $centralAuthUser->exists() &&
+			    !in_array( $centralAuthUser->getId(), $config->get( 'MirahezeStaffAccessIds' ) )
+			) {
+				$aRights = array_unique( $aRights );
+				unset( $aRights[array_search( 'read', $aRights )] );
+			}
 		}
 	}
 }

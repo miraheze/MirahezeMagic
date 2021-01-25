@@ -90,6 +90,9 @@
 		],
 		"SkinAddFooterLinks": [
 			"MirahezeMagicHooks::onSkinAddFooterLinks"
+		],
+		"UserGetRightsRemove": [
+			"MirahezeMagicHooks::onUserGetRightsRemove"
 		]
 	},
 	"ConfigRegistry": {
