@@ -263,12 +263,22 @@ class MirahezeMagicHooks {
 				$centralAuthUser = CentralAuthUser::getInstance( $user );
 				if ( isset( $centralAuthUser->getGlobalGroups()['steward'] ) ) {
 					unset( $config->get( 'GroupPermissions' )['*']['read'] );
-					unset( $aRights['read'] );
+					foreach ( $aRights as $i => $right ) {
+						if ( $right == 'read' ) {
+							unset( $rights[$i] );
+							break;
+						}
+					}
 				}
 			}
 		} else if ( $user->isAnon() ) {
 			unset( $config->get( 'GroupPermissions' )['*']['read'] );
-			unset( $aRights['read'] );
+			foreach ( $aRights as $i => $right ) {
+				if ( $right == 'read' ) {
+					unset( $rights[$i] );
+					break;
+				}
+			}
 		}
 	}
 }
