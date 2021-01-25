@@ -255,30 +255,19 @@ class MirahezeMagicHooks {
 		}
 	}
 
-	public static function onUserGetRights ( User $user, array &$aRights ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
-		if ( $user->isLoggedIn() ) {
-			if ( class_exists( 'CentralAuthUser' ) ) {
-				$centralAuthUser = CentralAuthUser::getInstance( $user );
-				if ( isset( $centralAuthUser->getGlobalGroups()['steward'] ) ) {
-					unset( $config->get( 'GroupPermissions' )['*']['read'] );
-					foreach ( $aRights as $i => $right ) {
-						if ( $right == 'read' ) {
-							unset( $rights[$i] );
-							break;
-						}
+	public static function onUserGetRightsRemove( User $user, array &$aRights ) {
+		if ( $user->isLoggedIn() && class_exists( 'CentralAuthUser' ) ) {
+			$centralAuthUser = CentralAuthUser::getInstance( $user );
+			if ( $centralUser->exists() && $centralUser->isAttached() &&
+			    isset( $centralAuthUser->getGlobalGroups()['steward'] ) ) {
+				foreach ( $aRights as $i => $right ) {
+					if ( $right == 'read' ) {
+						unset( $rights[$i] );
 					}
 				}
 			}
-		} else if ( $user->isAnon() ) {
-			unset( $config->get( 'GroupPermissions' )['*']['read'] );
-			foreach ( $aRights as $i => $right ) {
-				if ( $right == 'read' ) {
-					unset( $rights[$i] );
-					break;
-				}
-			}
 		}
+
+		return true;
 	}
 }
