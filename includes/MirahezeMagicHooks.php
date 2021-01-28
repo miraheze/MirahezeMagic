@@ -51,7 +51,7 @@ class MirahezeMagicHooks {
 
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
-		} else if ( "/mnt/mediawiki-static/private/{$old}" ) {
+		} else if ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )->execute();
 		}
 
@@ -61,7 +61,7 @@ class MirahezeMagicHooks {
 	public static function onCreateWikiStatePrivate( $dbname ) {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		
-		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) {
+		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
 				->limits( $limits )
 				->execute();
