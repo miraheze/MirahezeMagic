@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Just Sayori",
 			"Patsagorn Y."
 		]
 	},
@@ -94,7 +95,7 @@
 	"group-wikimanager-member": "{{GENDER:$1|ผู้จัดการวิกิ}}",
 	"group-rollbacker": "ผู้ย้อนรวดเดียว",
 	"group-rollbacker-member": "{{GENDER:$1|ผู้ย้อนรวดเดียว}}",
-	"group-autopatrolled": "ผู้ตรวจสอบอัตโนมัติ",
+	"group-autopatrolled": "ผู้ได้รับยกเว้นการตรวจตรา",
 	"group-autopatrolled-member": "{{GENDER:$1|ผู้ใช้ตรวจสอบอัตโนมัติ}}",
 	"group-confirmed": "ผู้ใช้ยืนยันแล้ว",
 	"group-confirmed-member": "{{GENDER:$1|ผู้ใช้ยืนยันแล้ว}}",
