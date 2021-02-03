@@ -44,7 +44,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command(
 				'/bin/mkdir',
 				'-p',
-				"/mnt/mediawiki-static/{$dbName}/sitemaps"
+				$filePath
 			)
 				->limits( $limits )
 				->execute();
@@ -58,7 +58,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command(
 				'rm',
 				'-rf',
-				"{$filePath}/{$dbName}/sitemaps"
+				$filePath
 			)
 				->limits( $limits )
 				->execute();
@@ -69,7 +69,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command(
 				'rm',
 				'-rf',
-				"{$filePath}/{$dbName}/sitemaps/**"
+				"{$filePath}/**"
 			)
 				->limits( $limits )
 				->execute();
