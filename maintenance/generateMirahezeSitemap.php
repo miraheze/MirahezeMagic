@@ -37,17 +37,11 @@ class GenerateMirahezeSitemap extends Maintenance {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$dbName = $config->get( 'DBname' );
 
-		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-
 		if ( !file_exists( "/mnt/mediawiki-static/{$dbName}/sitemaps/" ) ) {
-			Shell::command(
-				'/bin/mkdir',
-				'-p',
-				"/mnt/mediawiki-static/{$dbName}/sitemaps"
-			)
-				->limits( $limits )
-				->execute();
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$dbName}/sitemaps" )->execute();
 		}
+
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		$wiki = new RemoteWiki( $dbName );
 		$isPrivate = $wiki->isPrivate();
@@ -82,7 +76,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'--urlpath',
 				"/{$dbName}/sitemaps/",
 				'--server',
-				$config->get( 'Server' ),
+				'https://static.miraheze.org',
 				'--compress',
 				'yes',
 				'--wiki',
