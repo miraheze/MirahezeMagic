@@ -36,6 +36,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 	public function execute() {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$dbName = $config->get( 'DBname' );
+		$filePath = $config->get( 'UploadDirectory' ) . '/sitemaps';
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
@@ -57,7 +58,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command(
 				'rm',
 				'-rf',
-				"/mnt/mediawiki-static/{$dbName}/sitemaps"
+				"{$filePath}/{$dbName}/sitemaps"
 			)
 				->limits( $limits )
 				->execute();
@@ -68,7 +69,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			Shell::command(
 				'rm',
 				'-rf',
-				"/mnt/mediawiki-static/{$dbName}/sitemaps/**"
+				"{$filePath}/{$dbName}/sitemaps/**"
 			)
 				->limits( $limits )
 				->execute();
@@ -78,7 +79,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'/usr/bin/php',
 				'/srv/mediawiki/w/maintenance/generateSitemap.php',
 				'--fspath', 
-				"/mnt/mediawiki-static/{$dbName}/sitemaps",
+				$filePath,
 				'--urlpath',
 				"/sitemaps/{$dbName}/sitemaps/",
 				'--server',
@@ -93,8 +94,8 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 			Shell::command(
 				'/usr/bin/mv',
-				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap-index-{$dbName}.xml",
-				"/mnt/mediawiki-static/{$dbName}/sitemaps/sitemap.xml"
+				"{$filePath}/sitemap-index-{$dbName}.xml",
+				"{$filePath}/sitemap.xml"
 			)
 				->limits( $limits )
 				->execute();
