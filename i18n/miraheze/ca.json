@@ -3,13 +3,15 @@
 		"authors": [
 			"AlvaroMolina",
 			"Fitoschido",
-			"Medol"
+			"Medol",
+			"MuratTheTurkish"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
 	"mirahezemagic-description": "Missatges del sistema, scripts i ganxos específics per Miraheze",
 	"miraheze-categories": "Categories",
 	"miraheze-donate": "Donar",
+	"miraheze-donatepage": "m:Donate/ca",
 	"miraheze-helpcenter": "Sobre Miraheze",
 	"miraheze-requestfeatures": "Sol·licitar característiques per a la seva wiki",
 	"miraheze-requestwiki": "Sol·licitar una wiki",

@@ -1,10 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"Nikosgranturismogt"
+			"Michail Angelos Georgoulas",
+			"NikosLikomitros",
+			"Nikosgranturismogt",
+			"Norhorn",
+			"Protnet"
 		]
 	},
 	"miraheze-donate": "Δωρεά",
+	"miraheze-faq": "Συχνές ερωτήσεις",
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
 	"group-oversight-member": "επιτηρητής",
 	"group-confirmed": "Eπιβεβαιωμένοι χρήστες",
@@ -16,6 +21,8 @@
 	"shared-repo-name-shared-commons": "Miraheze Commons",
 	"specialpages-group-wikimanage": "Διαχείριση βίκι",
 	"termsofservice": "Όροι χρήσης",
+	"settings-links": "Σύνδεσμοι",
 	"settings-media": "Πολυμέσο",
-	"extensions-skins": "Θέμα εμφάνισης"
+	"settings-permissions": "Άδειες",
+	"extensions-skins": "Θέματα εμφάνισης"
 }
