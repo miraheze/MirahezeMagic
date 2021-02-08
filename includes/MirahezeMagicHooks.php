@@ -210,6 +210,7 @@ class MirahezeMagicHooks {
 			'CreateAccount',
 			'Interwiki',
 			'Notifications',
+			'OAuth',
 			'ResetPassword'
 		];
 
