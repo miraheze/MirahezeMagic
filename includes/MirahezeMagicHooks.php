@@ -208,8 +208,8 @@ class MirahezeMagicHooks {
 			'CentralLogin',
 			'ConfirmEmail',
 			'CreateAccount',
-			'Interwiki',
 			'Notifications',
+			'OAuth',
 			'ResetPassword'
 		];
 
