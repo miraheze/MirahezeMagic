@@ -38,8 +38,6 @@ class MirahezeMagicHooks {
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
 		}
-
-		static::removeRedisKey( "*{$wiki}*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
@@ -54,8 +52,6 @@ class MirahezeMagicHooks {
 		} else if ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )->execute();
 		}
-
-		static::removeRedisKey( "*{$old}*" );
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
@@ -236,16 +232,6 @@ class MirahezeMagicHooks {
 		}
 
 		return true;
-	}
-
-	public static function removeRedisKey( string $key ) {
-		global $wmgRedisSettings;
-
-		$redis = new Redis();
-		$redisServer = explode( ':', $wmgRedisSettings['jobrunner']['server'] );
-		$redis->connect( $redisServer[0], $redisServer[1] );
-		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
-		$redis->del( $redis->keys( $key ) );
 	}
 
 	public static function onMimeMagicInit( $magic ) {
