@@ -148,10 +148,10 @@ class MirahezeMagicHooks {
 
 		if( $target[0] == '0' && $target[1] = 'mh' ) {
 			$target[0] = $target[1];
-			$targetSlice = 3;
 
 			if ( isset( $target[2] ) ) {
 				$targetWiki = 2;
+				$targetSlice = 3;
 			}
 		}
 
