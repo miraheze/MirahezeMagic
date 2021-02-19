@@ -146,14 +146,20 @@ class MirahezeMagicHooks {
 			return true; // Not enough parameters for interwiki
 		}
 
+		if( $target[0] == '0' && $target[1] = 'mh' ) {
+			$target[0] = $target[1];
+			$targetWiki = 2;
+			$targetSlice = 3;
+		}
+
 		$prefix = strtolower( $target[0] );
 
 		if ( $prefix != 'mh' ) {
 			return true; // Not interesting
 		}
 
-		$wiki = strtolower( $target[1] );
-		$target = array_slice( $target, 2 );
+		$wiki = strtolower( $target[$targetWiki ?? 1] );
+		$target = array_slice( $target, $targetSlice ?? 2 );
 		$target = join( ':', $target );
 
 		if ( !$useText ) {
