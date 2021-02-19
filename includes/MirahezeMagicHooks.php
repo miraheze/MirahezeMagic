@@ -146,10 +146,13 @@ class MirahezeMagicHooks {
 			return true; // Not enough parameters for interwiki
 		}
 
-		if( $target[0] == '0' && $target[1] = 'mh' && isset( $target[2] ) ) {
+		if( $target[0] == '0' && $target[1] = 'mh' ) {
 			$target[0] = $target[1];
-			$targetWiki = 2;
 			$targetSlice = 3;
+
+			if ( isset( $target[2] ) ) {
+				$targetWiki = 2;
+			}
 		}
 
 		$prefix = strtolower( $target[0] );
