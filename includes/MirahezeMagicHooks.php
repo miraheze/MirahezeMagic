@@ -152,7 +152,6 @@ class MirahezeMagicHooks {
 			$targetSlice = 3;
 		}
 
-
 		$prefix = strtolower( $target[0] );
 
 		if ( $prefix != 'mh' ) {
