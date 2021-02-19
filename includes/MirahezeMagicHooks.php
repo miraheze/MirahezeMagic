@@ -158,7 +158,7 @@ class MirahezeMagicHooks {
 			return true; // Not interesting
 		}
 
-		$wiki = strtolower( $target[$targetWiki ?? 1]  );
+		$wiki = strtolower( $target[$targetWiki ?? 1] );
 		$target = array_slice( $target, $targetSlice ?? 2 );
 		$target = join( ':', $target );
 
