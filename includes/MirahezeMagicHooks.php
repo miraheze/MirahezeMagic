@@ -146,7 +146,7 @@ class MirahezeMagicHooks {
 			return true; // Not enough parameters for interwiki
 		}
 
-		if( $target[0] == '0' && $target[1] = 'mh' ) {
+		if( $target[0] == '0' && $target[1] == 'mh' ) {
 			$target[0] = $target[1];
 
 			if ( isset( $target[2] ) ) {
