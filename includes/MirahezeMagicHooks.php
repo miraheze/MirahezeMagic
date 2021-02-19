@@ -148,7 +148,7 @@ class MirahezeMagicHooks {
 
 		if( $target[0] == '0' && $target[1] = 'mh' ) {
 			$target[0] = $target[1];
-			$targetWiki = 2;
+			$targetWiki = $target[2];
 			$targetSlice = 3;
 		}
 
@@ -158,7 +158,7 @@ class MirahezeMagicHooks {
 			return true; // Not interesting
 		}
 
-		$wiki = strtolower( $target[$targetWiki ?? 1] );
+		$wiki = strtolower( $targetWiki ?? $target[1] );
 		$target = array_slice( $target, $targetSlice ?? 2 );
 		$target = join( ':', $target );
 
