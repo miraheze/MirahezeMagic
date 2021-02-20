@@ -69,7 +69,6 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
-		$tables['gnf_files'] = 'files_dbname';
 		$tables['localnames'] = 'ln_wiki';
 		$tables['localuser'] = 'lu_wiki';
 	}
