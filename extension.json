@@ -27,19 +27,12 @@
 	"ExtensionMessagesFiles": {
 		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
 	},
-	"AvailableRights": [
-		"viewglobalprivatefiles"
-	],
 	"AutoloadClasses": {
-		"GlobalNewFilesHooks": "includes/GlobalNewFiles/GlobalNewFilesHooks.php",
-		"GlobalNewFilesPager": "includes/GlobalNewFiles/GlobalNewFilesPager.php",
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialGlobalNewFiles": "includes/GlobalNewFiles/SpecialGlobalNewFiles.php",
 		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
 	},
 	"SpecialPages": {
-		"GlobalNewFiles": "SpecialGlobalNewFiles",
 		"MirahezeSurvey": "SpecialMirahezeSurvey"
 	},
 	"Hooks": {
@@ -58,23 +51,11 @@
 		"CreateWikiTables": [
 			"MirahezeMagicHooks::onCreateWikiTables"
 		],
-		"LoadExtensionSchemaUpdates": [
-			"GlobalNewFilesHooks::onLoadExtensionSchemaUpdates"
-		],
-		"FileDeleteComplete": [
-			"GlobalNewFilesHooks::onFileDeleteComplete"
-		],
 		"MessageCache::get": [
 			"MirahezeMagicHooks::onMessageCacheGet"
 		],
 		"TitleReadWhitelist": [
 			"MirahezeMagicHooks::onTitleReadWhitelist"
-		],
-		"TitleMoveComplete": [
-			"GlobalNewFilesHooks::onTitleMoveComplete"
-		],
-		"UploadComplete": [
-			"GlobalNewFilesHooks::onUploadComplete"
 		],
 		"HtmlPageLinkRendererEnd": [
 			"MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
