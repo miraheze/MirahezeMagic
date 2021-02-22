@@ -20,7 +20,6 @@
 	"miraheze-survey-neutral": "Neutral",
 	"miraheze-survey-no": "Nej",
 	"miraheze-survey-yes": "Ja",
-	"globalnewfiles": "Globale nye filer",
 	"group-steward": "Forvaltere",
 	"group-steward-member": "{{GENDER:$1|forvalter}}",
 	"group-sysadmin": "Systemadministratorer",
