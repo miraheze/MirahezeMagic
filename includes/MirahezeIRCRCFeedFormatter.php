@@ -32,11 +32,20 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
 	/**
 	 * @see RCFeedFormatter::getLine
+	 * @param array $feed
+	 * @param RecentChange $rc
+	 * @param string|null $actionComment
+	 * @return string|null
 	 */
 	public function getLine( array $feed, RecentChange $rc, $actionComment ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$attribs = $rc->getAttributes();
+		if ( $attribs['rc_type'] == RC_CATEGORIZE ) {
+			// Don't send RC_CATEGORIZE events to IRC feed ([[mediazilla:T127360]])
+			return null;
+		}
+
 		if ( $attribs['rc_type'] == RC_LOG ) {
 			// Don't use SpecialPage::getTitleFor, backwards compatibility with
 			// IRC API which expects "Log".
@@ -59,8 +68,8 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			if ( $config->get( 'UseRCPatrol' ) || ( $attribs['rc_type'] == RC_NEW && $config->get( 'UseNPPatrol' ) ) ) {
 				$query .= '&rcid=' . $attribs['rc_id'];
 			}
-			// HACK: We need this hook for WMF's secure server setup
-			Hooks::run( 'IRCLineURL', [ &$url, &$query, $rc ] );
+
+			Hooks::runner()->onIRCLineURL( $url, $query, $rc );
 			$url .= $query;
 		}
 
