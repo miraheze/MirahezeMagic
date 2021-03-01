@@ -68,16 +68,6 @@ class addWikiToServices extends Maintenance {
 	private function hasExtension( $extension, $extensionsarray ) {
 		return in_array( $extension, (array)$extensionsarray );
 	}
-
-	private function getSettingsValue( $setting, $settingsjson ) {
-		$settingsarray = json_decode( $settingsjson, true );
-
-		if ( isset( $settingsarray[$setting] ) ) {
-			return $settingsarray[$setting];
-		}
-
-		return null;
-	}
 }
 
 $maintClass = 'addWikiToServices';
