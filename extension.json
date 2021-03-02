@@ -12,6 +12,7 @@
 	],
 	"url": "//github.com/Miraheze/MirahezeMagic",
 	"descriptionmsg": "mirahezemagic-description",
+	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"MessagesDirs": {
 		"MirahezeMagic": [
