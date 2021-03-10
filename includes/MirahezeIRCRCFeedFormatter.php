@@ -17,7 +17,6 @@
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @authors VVasiliev, Legoktm, 'This, that and the other', EBernhardson, Siebrand, John Lewis, Southparkfan
  */
 
 use MediaWiki\MediaWikiServices;
