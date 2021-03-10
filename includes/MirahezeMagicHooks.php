@@ -33,7 +33,7 @@ class MirahezeMagicHooks {
 
 		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
 
-		$dbw->delete( 'echo_unread_wikis', '*', [ 'euw_wiki' => $wiki ] );
+		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
