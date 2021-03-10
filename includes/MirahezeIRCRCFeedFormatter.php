@@ -41,7 +41,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
 		$attribs = $rc->getAttributes();
 		if ( $attribs['rc_type'] == RC_CATEGORIZE ) {
-			// Don't send RC_CATEGORIZE events to IRC feed ([[mediazilla:T127360]])
+			// Don't send RC_CATEGORIZE events to IRC feed (T127360)
 			return null;
 		}
 
