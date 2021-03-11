@@ -70,6 +70,9 @@
 		"MimeMagicInit": [
 			"MirahezeMagicHooks::onMimeMagicInit"
 		],
+		"SiteNoticeAfter": [
+			"MirahezeMagicHooks::onSiteNoticeAfter"
+		],
 		"SkinAddFooterLinks": [
 			"MirahezeMagicHooks::onSkinAddFooterLinks"
 		],
