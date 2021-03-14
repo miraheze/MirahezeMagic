@@ -41,7 +41,6 @@ class MirahezeMagicHooks {
 
 		static::removeRedisKey( "*{$wiki}*" );
 		static::removeMemcachedKey( ".*{$wiki}.*" );
-
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
