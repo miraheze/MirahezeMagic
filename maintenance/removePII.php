@@ -71,7 +71,32 @@ class RemovePII extends Maintenance {
 
 		$userActorId = $newName->getActorId( $dbw );
 
-		$extensionUpdates = [
+		$tableUpdates = [
+
+			// Core
+			'recentchanges' => [
+				[
+					'fields' => [
+						'rc_ip' => '0.0.0.0'
+					],
+					'where' => [
+						'rc_actor' => $userActorId
+					]
+				]
+			],
+			'user' => [
+				[
+					'fields' => [
+						'user_email' => '',
+						'user_real_name' => ''
+					],
+					'where' => [
+						'user_name' => $userNewName
+					]
+				]
+			],
+
+			// Extensions
 			'ajaxpoll_vote' => [
 				[
 					'fields' => [
@@ -273,29 +298,6 @@ class RemovePII extends Maintenance {
 					]
 				]
 			],
-
-			// Core
-			'recentchanges' => [
-				[
-					'fields' => [
-						'rc_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'rc_actor' => $userActorId
-					]
-				]
-			],
-			'user' => [
-				[
-					'fields' => [
-						'user_email' => '',
-						'user_real_name' => ''
-					],
-					'where' => [
-						'user_name' => $userNewName
-					]
-				]
-			],
 		];
 
 		if ( $dbw->tableExists( 'user_profile' ) ) {
@@ -307,7 +309,7 @@ class RemovePII extends Maintenance {
 			);
 		}
 
-		foreach ( $extensionUpdates as $key => $value ) {
+		foreach ( $tableUpdates as $key => $value ) {
 			if ( $dbw->tableExists( $key ) ) {
 				foreach ( $value as $name => $fields ) {
 					try {
@@ -387,9 +389,11 @@ class RemovePII extends Maintenance {
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $newName );
+
 		if ( !$centralUser ) {
 			return;
 		}
+
 		if ( $centralUser->getEmail() ) {
 			$dbw->update(
 				'globaluser',
