@@ -121,16 +121,6 @@ class RemovePII extends Maintenance {
 					]
 				]
 			],
-			'cw_requests' => [
-				[
-					'fields' => [
-						'cw_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'cw_user' => $userId
-					]
-				]
-			],
 			'echo_event' => [
 				[
 					'fields' => [
