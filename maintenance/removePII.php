@@ -91,35 +91,6 @@ class RemovePII extends Maintenance {
 						'Comment_actor' => $userActorId
 					]
 				],
-				[
-					'fields' => [
-						'Comment_IP' => '0.0.0.0',
-						'Comment_Username' => $userNewName
-					],
-					'where' => [
-						'Comment_Username' => $userOldName
-					]
-				]
-			],
-			'Comments_block' => [
-				[
-					'fields' => [
-						'cb_user_name' => $userNewName
-					],
-					'where' => [
-						'cb_user_name' => $userOldName
-					]
-				]
-			],
-			'Comments_Vote' => [
-				[
-					'fields' => [
-						'Comment_Vote_Username' => $userNewName
-					],
-					'where' => [
-						'Comment_Vote_Username' => $userOldName
-					]
-				]
 			],
 			'echo_event' => [
 				[
