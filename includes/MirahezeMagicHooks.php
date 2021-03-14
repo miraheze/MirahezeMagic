@@ -40,6 +40,7 @@ class MirahezeMagicHooks {
 		}
 
 		static::removeRedisKey( "*{$wiki}*" );
+		static::removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
@@ -56,6 +57,7 @@ class MirahezeMagicHooks {
 		}
 
 		static::removeRedisKey( "*{$old}*" );
+		static::removeMemcachedKey( ".*{$old}.*" );
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
@@ -241,14 +243,50 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
+	/** Removes redis keys for jobrunner **/
 	public static function removeRedisKey( string $key ) {
-		global $wmgRedisSettings;
+		global $wmgCacheSettings;
 
-		$redis = new Redis();
-		$redisServer = explode( ':', $wmgRedisSettings['jobrunner']['server'] );
-		$redis->connect( $redisServer[0], $redisServer[1] );
-		$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
-		$redis->del( $redis->keys( $key ) );
+		$redisServer = explode( ':', $wmgCacheSettings['jobrunner']['server'] );
+
+		try {
+			$redis = new Redis();
+			$redis->connect( $redisServer[0], $redisServer[1] );
+			$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
+			$redis->del( $redis->keys( $key ) );
+		} catch ( Exception $ex ) {
+			// empty
+		}
+	}
+
+	/** Remove memcached keys **/
+	public static function removeMemcachedKey( string $key ) {
+		global $wmgCacheSettings;
+
+		$memcacheServer = explode( ':', $wmgCacheSettings['memcached']['server'] );
+
+		try {
+			$memcached = new \Memcached();
+			$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
+
+			// Fetch all keys
+			$keys = $cache->getAllKeys();
+			$cache->getDelayed($keys);
+
+			$store = $cache->fetchAll();
+
+			$keys = $cache->getAllKeys();
+			foreach( $keys as $item ) {
+				// Decide which keys to delete
+				if ( preg_match( "/{$key}/", $item ) ) {
+					$cache->delete($item);
+				} else {
+					continue;
+				}
+			}
+		} catch ( Exception $ex ) {
+			// empty
+		}
 	}
 
 	public static function onMimeMagicInit( $magic ) {
