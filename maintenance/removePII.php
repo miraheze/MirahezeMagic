@@ -543,7 +543,7 @@ class RemovePII extends Maintenance {
 
 		if ( !$status->isOK() ) {
 			$errorMessage = json_encode( $status->getErrorsByType( 'error' ) );
-			$this->output( "Failed to delete user {$userOldName} page, likley does not have a user page. Error: {$errorMessage}\n" );
+			$this->output( "Failed to delete user {$userOldName} page, likely does not have a user page. Error: {$errorMessage}\n" );
 		}
 
 		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
