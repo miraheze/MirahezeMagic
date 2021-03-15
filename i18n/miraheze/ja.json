@@ -55,6 +55,7 @@
 	"protect-level-user": "登録利用者にのみ許可",
 	"restriction-delete": "削除",
 	"restriction-level-user": "登録利用者にのみ許可",
+	"right-user": "「{{int:protect-level-user}}」の保護が設定されたページを編集",
 	"sitematrix": "Mirahezeのウィキの一覧",
 	"sitematrix-summary": "この特別ページはMirahezeのウィキの一覧です。",
 	"termsofservice": "利用規約",
