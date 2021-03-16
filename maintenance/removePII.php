@@ -206,6 +206,16 @@ class RemovePII extends Maintenance {
 					]
 				]
 			],
+			'report_reports' => [
+				[
+					'fields' => [
+						'report_user_text' => $userNewName
+					],
+					'where' => [
+						'report_user_text' => $userOldName
+					]
+				]
+			],
 			'Vote' => [
 				[
 					'fields' => [
