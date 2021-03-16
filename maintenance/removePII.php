@@ -270,6 +270,24 @@ class RemovePII extends Maintenance {
 					]
 				],
 			],
+			'wikiforum_replies' => [
+				[
+					'fields' => [
+						'wfr_user_ip' => '0.0.0.0',
+					],
+					'where' => [
+						'wfr_actor' => $userActorId
+					]
+				],
+				[
+					'fields' => [
+						'wfr_edit_user_ip' => '0.0.0.0',
+					],
+					'where' => [
+						'wfr_edit_actor' => $userActorId
+					]
+				],
+			],
 			'wikiforum_threads' => [
 				[
 					'fields' => [
