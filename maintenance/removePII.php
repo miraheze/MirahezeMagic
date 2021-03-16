@@ -243,14 +243,6 @@ class RemovePII extends Maintenance {
 						'wfc_edited_actor' => $userActorId
 					]
 				],
-				[
-					'fields' => [
-						'wfc_deleted_user_ip' => '0.0.0.0',
-					],
-					'where' => [
-						'wfc_deleted_actor' => $userActorId
-					]
-				],
 			],
 			'wikiforum_forums' => [
 				[
@@ -277,14 +269,6 @@ class RemovePII extends Maintenance {
 						'wff_edited_actor' => $userActorId
 					]
 				],
-				[
-					'fields' => [
-						'wff_deleted_user_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'wff_deleted_actor' => $userActorId
-					]
-				],
 			],
 			'wikiforum_threads' => [
 				[
@@ -293,14 +277,6 @@ class RemovePII extends Maintenance {
 					],
 					'where' => [
 						'wft_actor' => $userActorId
-					]
-				],
-				[
-					'fields' => [
-						'wft_deleted_user_ip' => '0.0.0.0'
-					],
-					'where' => [
-						'wft_deleted_actor' => $userActorId
 					]
 				],
 				[
