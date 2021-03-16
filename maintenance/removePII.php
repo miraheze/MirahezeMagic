@@ -97,6 +97,26 @@ class RemovePII extends Maintenance {
 			],
 
 			// Extensions
+			'abuse_filter' => [
+				[
+					'fields' => [
+						'af_user_text' => $userNewName
+					],
+					'where' => [
+						'af_user_text' => $userOldName
+					]
+				]
+			],
+			'abuse_filter_log' => [
+				[
+					'fields' => [
+						'afl_user_text' => $userNewName
+					],
+					'where' => [
+						'afl_user_text' => $userOldName
+					]
+				]
+			],
 			'ajaxpoll_vote' => [
 				[
 					'fields' => [
