@@ -37,6 +37,9 @@
 		"MirahezeSurvey": "SpecialMirahezeSurvey"
 	},
 	"Hooks": {
+		"AbuseFilterShouldFilterAction": [
+			"MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
+		],
 		"CreateWikiCreation": [
 			"MirahezeMagicHooks::onCreateWikiCreation"
 		],
