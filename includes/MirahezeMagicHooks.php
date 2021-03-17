@@ -263,7 +263,7 @@ class MirahezeMagicHooks {
 	public static function removeMemcachedKey( string $key ) {
 		global $wmgCacheSettings;
 
-		$memcacheServer = explode( ':', $wmgCacheSettings['memcached']['server'] );
+		$memcacheServer = explode( ':', $wmgCacheSettings['memcached']['server'][0] );
 
 		try {
 			$memcached = new \Memcached();
