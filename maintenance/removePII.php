@@ -369,12 +369,21 @@ class RemovePII extends Maintenance {
 		}
 
 		$logTitle = Title::newFromText( 'Special:CentralAuth' )->getSubpage( $userNewName );
+		$centralUser = CentralAuthUser::getInstance( $newName );
+
+		if ( $centralUser ) {
+			$userRegistration = $centralUser->getRegistration();
+		} else {
+			$userRegistration = $newName->getRegistration();
+		}
+
 		$dbw->delete(
 			'logging',
 			[
 				'log_action' => 'rename',
 				'log_title' => $logTitle->getDBkey(),
-				'log_type' => 'gblrename'
+				'log_type' => 'gblrename',
+				"log_timestamp >= {$dbw->timestamp( $userRegistration )}"
 			]
 		);
 
@@ -383,7 +392,8 @@ class RemovePII extends Maintenance {
 			[
 				'log_action' => 'renameuser',
 				'log_title' => $oldName->getTitleKey(),
-				'log_type' => 'renameuser'
+				'log_type' => 'renameuser',
+				"log_timestamp >= {$dbw->timestamp( $userRegistration )}"
 			]
 		);
 
@@ -392,7 +402,8 @@ class RemovePII extends Maintenance {
 			[
 				'rc_log_action' => 'rename',
 				'rc_title' => $logTitle->getDBkey(),
-				'rc_log_type' => 'gblrename'
+				'rc_log_type' => 'gblrename',
+				"rc_timestamp >= {$dbw->timestamp( $userRegistration )}"
 			]
 		);
 
@@ -401,7 +412,8 @@ class RemovePII extends Maintenance {
 			[
 				'rc_log_action' => 'renameuser',
 				'rc_title' => $oldName->getTitleKey(),
-				'rc_log_type' => 'renameuser'
+				'rc_log_type' => 'renameuser',
+				"rc_timestamp >= {$dbw->timestamp( $userRegistration )}"
 			]
 		);
 
