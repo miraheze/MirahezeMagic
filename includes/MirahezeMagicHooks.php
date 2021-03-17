@@ -4,6 +4,29 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
 class MirahezeMagicHooks {
+	/**
+	 * Avoid filtering automatic account creation
+	 *
+	 * @param AbuseFilterVariableHolder $vars
+	 * @param Title $title
+	 * @param User $user
+	 * @param array &$skipReasons
+	 * @return bool
+	 */
+	public static function onAbuseFilterShouldFilterAction(
+		AbuseFilterVariableHolder $vars,
+		Title $title,
+		User $user,
+		array &$skipReasons
+	) {
+		$action = $vars->getVar( 'action' )->toString();
+		if ( $action === 'autocreateaccount' ) {
+			$skipReasons[] = "Blocking automatic account creation is not allowed";
+			return false;
+		}
+		return true;
+	}
+
 	public static function onCreateWikiCreation( $DBname ) {
 		// Create static directory for wiki
 		if ( !file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
