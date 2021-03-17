@@ -19,7 +19,7 @@ class MirahezeMagicHooks {
 		User $user,
 		array &$skipReasons
 	) {
-		$action = $vars->getComputedVariable( 'action' )->toString();
+		$action = $vars->getVar( 'action' )->toString();
 		if ( $action === 'autocreateaccount' ) {
 			$skipReasons[] = "Blocking automatic account creation is not allowed";
 			return false;
