@@ -293,16 +293,16 @@ class MirahezeMagicHooks {
 			$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
 
 			// Fetch all keys
-			$keys = $cache->getAllKeys();
-			$cache->getDelayed($keys);
+			$keys = $memcached->getAllKeys();
+			$memcached->getDelayed($keys);
 
-			$store = $cache->fetchAll();
+			$store = $memcached->fetchAll();
 
-			$keys = $cache->getAllKeys();
+			$keys = $memcached->getAllKeys();
 			foreach( $keys as $item ) {
 				// Decide which keys to delete
 				if ( preg_match( "/{$key}/", $item ) ) {
-					$cache->delete($item);
+					$memcached->delete( $item );
 				} else {
 					continue;
 				}
