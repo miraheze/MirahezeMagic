@@ -294,11 +294,11 @@ class MirahezeMagicHooks {
 
 			// Fetch all keys
 			$keys = $memcached->getAllKeys();
+			if ( is_array( $keys ) ) {
 			$memcached->getDelayed($keys);
 
 			$store = $memcached->fetchAll();
 
-			$keys = $memcached->getAllKeys();
 			foreach( $keys as $item ) {
 				// Decide which keys to delete
 				if ( preg_match( "/{$key}/", $item ) ) {
@@ -307,6 +307,7 @@ class MirahezeMagicHooks {
 					continue;
 				}
 			}
+		}
 		} catch ( Exception $ex ) {
 			// empty
 		}
