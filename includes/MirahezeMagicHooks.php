@@ -289,27 +289,17 @@ class MirahezeMagicHooks {
 		$memcacheServer = explode( ':', $wmgCacheSettings['memcached']['server'][0] );
 
 		try {
+			// We use this one to delete
 			$memcached = new \Memcached();
 			$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
+			
+			// We use this one to fetch
+			$search = new \Qmegas\MemcacheSearch();
+			$search->addServer( $memcacheServer[0], $memcacheServer[1] );
 
-			// Fetch all keys
-			$keys = $memcached->getAllKeys();
-			if ( !is_array( $keys ) ) {
-				return;
-			}
-
-			$memcached->getDelayed($keys);
-
-			$store = $memcached->fetchAll();
-
-			$keys = $memcached->getAllKeys();
-			foreach( $keys as $item ) {
-				// Decide which keys to delete
-				if ( preg_match( "/{$key}/", $item ) ) {
-					$memcached->delete( $item );
-				} else {
-					continue;
-				}
+			$find = new \Qmegas\Finder\RegExp( $key );
+			foreach ( $search->search( $find ) as $item ) {
+				$memcached->delete( $item );
 			}
 		} catch ( Exception $ex ) {
 			// empty
