@@ -63,7 +63,7 @@ class MirahezeMagicHooks {
 		}
 
 		static::removeRedisKey( "*{$wiki}*" );
-		static::removeMemcachedKey( ".*{$wiki}.*" );
+		// static::removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
@@ -80,7 +80,7 @@ class MirahezeMagicHooks {
 		}
 
 		static::removeRedisKey( "*{$old}*" );
-		static::removeMemcachedKey( ".*{$old}.*" );
+		// static::removeMemcachedKey( ".*{$old}.*" );
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
