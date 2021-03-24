@@ -86,5 +86,6 @@
 	"ConfigRegistry": {
 		"mirahezemagic": "GlobalVarConfig::newInstance"
 	},
+	"load_composer_autoloader": true,
 	"manifest_version": 2
 }
