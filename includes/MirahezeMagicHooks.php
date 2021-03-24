@@ -297,7 +297,7 @@ class MirahezeMagicHooks {
 			$search = new \Qmegas\MemcacheSearch();
 			$search->addServer( $memcacheServer[0], $memcacheServer[1] );
 
-			$find = new \Qmegas\Finder\RegExp( $key );
+			$find = new \Qmegas\Finder\RegExp( "/{$key}/" );
 			foreach ( $search->search( $find ) as $item ) {
 				$memcached->delete( $item );
 			}
