@@ -275,7 +275,7 @@ class MirahezeMagicHooks {
 		try {
 			$redis = new Redis();
 			$redis->connect( $redisServer[0], $redisServer[1] );
-			$redis->auth( $wmgRedisSettings['jobrunner']['password'] );
+			$redis->auth( $wmgCacheSettings['jobrunner']['password'] );
 			$redis->del( $redis->keys( $key ) );
 		} catch ( Exception $ex ) {
 			// empty
