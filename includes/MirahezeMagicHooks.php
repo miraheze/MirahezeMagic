@@ -294,6 +294,10 @@ class MirahezeMagicHooks {
 
 			// Fetch all keys
 			$keys = $memcached->getAllKeys();
+			if ( !is_array( $keys ) ) {
+				return;
+			}
+
 			$memcached->getDelayed($keys);
 
 			$store = $memcached->fetchAll();
