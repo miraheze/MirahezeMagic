@@ -2,11 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Omotecho",
+			"Tamaki Wakita",
 			"そらたこ"
 		]
 	},
 	"miraheze-dberr-again": "数分待ってから再読み込みをお試しください。 このエラーの詳細については、Twitterページ（Twitter.com/Miraheze）を確認するか、irc.freenode.netで#mirahezeに接続してシステム管理者に連絡してください。",
 	"miraheze-centralauth-groupname": "Miraheze",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|You}} はログインすることができません {{GENDER:$1|your}} のアカウントはブロックされました。詳細か訴えるためには <code>cvt{{@}}miraheze.org</code> にお問い合わせください。",
 	"miraheze-prefs-help-realname": "本名は省略できます。入力すると、あなたの著作物の帰属表示に使用されます。また、MirahezeがホストするWikiを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]</span>に同意し、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]</span>に同意したことになります",
 	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
 	"miraheze-shoutwiki-must-accept-tos": "アカウントを作成するには、利用規約に同意する必要があります！",
