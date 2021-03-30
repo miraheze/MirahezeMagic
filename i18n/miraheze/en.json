@@ -124,7 +124,6 @@
 	"group-translator-member": "translator",
 	"group-translationadmin": "Translation administrators",
 	"group-translationadmin-member": "translation administrator",
-	"grouppage-translationadmin": "m:Meta:Translation administrators",
 	"group-global-ipblock-exempt": "Global IP block exemption",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
 	"grouppage-global-ipblock-exempt": "m:Global IP block exemption",
