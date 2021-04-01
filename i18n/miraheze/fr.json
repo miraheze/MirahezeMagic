@@ -16,6 +16,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"content-model-flow-board": "Tableau de bord de StructuredDiscussions",
 	"mirahezemagic-description": "Messages Mediawiki, scripts et crochets spécifiques pour Miraheze",
 	"miraheze-categories": "Catégories",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) fermé",

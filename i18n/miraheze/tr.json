@@ -5,9 +5,11 @@
 			"Fitoschido",
 			"Hedda",
 			"Joseph",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"SaldırganSincap"
 		]
 	},
+	"content-model-flow-board": "StructuredDiscussions panosu",
 	"mirahezemagic-description": "Miraheze'ye özel MediaWiki mesajları, betikleri ve kancalar",
 	"miraheze-categories": "Kategoriler",
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",
