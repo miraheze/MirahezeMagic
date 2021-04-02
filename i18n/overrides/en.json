@@ -18,5 +18,6 @@
 	"miraheze-centralauth-merge-method-admin-desc": "This account was manually merged by a Sysadmin or Steward. This may have been due to a technical issue in a rename or merge process.",
 	"miraheze-restriction-protect": "Protect",
 	"miraheze-restriction-delete": "Delete",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis",
+	"datadump-desc": "DataDump allows you to generate, delete or download a dump of this wiki.<br /><b> NOTE: We are aware that DataDump is not currently working, and we are working on a fix. In the meantime if you need a dump please request via <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Phabricator Phabricator]</span> and a sysadmin will do it for you shortly. We are sorry about this incovenience and hope to fix it as soon as possible."
 }
