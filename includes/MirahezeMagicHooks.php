@@ -121,7 +121,6 @@ class MirahezeMagicHooks {
 			'restriction-delete',
 			'wikibase-sitelinks-miraheze',
 			'centralauth-login-error-locked',
-			'datadump-desc',
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
