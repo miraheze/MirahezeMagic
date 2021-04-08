@@ -28,9 +28,14 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiCreation( $DBname ) {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
 		// Create static directory for wiki
 		if ( !file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
-			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$DBname}" )->execute();
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$DBname}" )
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
 		// Copy SocialProfile images
@@ -40,14 +45,20 @@ class MirahezeMagicHooks {
 				'-r',
 				'/srv/mediawiki/w/extensions/SocialProfile/avatars',
 				"/mnt/mediawiki-static/{$DBname}/avatars"
-			)->execute();
+			)
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 
 			Shell::command(
 				'/bin/cp',
 				'-r',
 				'/srv/mediawiki/w/extensions/SocialProfile/awards',
 				"/mnt/mediawiki-static/{$DBname}/awards"
-			)->execute();
+			)
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 	}
 
@@ -59,7 +70,10 @@ class MirahezeMagicHooks {
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
-			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
+			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
+				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
 		static::removeRedisKey( "*{$wiki}*" );
@@ -73,10 +87,18 @@ class MirahezeMagicHooks {
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
+			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		} else if ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )->execute();
+			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
 		static::removeRedisKey( "*{$old}*" );
@@ -89,6 +111,7 @@ class MirahezeMagicHooks {
 		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
 				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		}
 	}

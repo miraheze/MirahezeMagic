@@ -47,6 +47,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				$filePath
 			)
 				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		}
 
@@ -61,6 +62,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				$filePath
 			)
 				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		} else {
 			$this->output( "Generating sitemap for wiki {$dbName}\n" );
@@ -72,6 +74,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				"{$filePath}/**"
 			)
 				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 
 			// Generate new dump
@@ -89,6 +92,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'--wiki',
 				$dbName
 			)
+				->restrict( Shell::RESTRICT_NONE )
 				->limits( $limits )
 				->execute();
 
@@ -98,6 +102,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				"{$filePath}/sitemap.xml"
 			)
 				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		}
 	}
