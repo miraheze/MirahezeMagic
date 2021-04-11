@@ -163,5 +163,12 @@
 	"settings-socialtools": "Social Tools",
 	"settings-styling": "Styling",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Skins"
+	"extensions-skins": "Skins",
+	"extensions-api": "API",
+	"extensions-antispam": "Spam prevention",
+	"extensions-editors": "Editors",
+	"extensions-mediahandlers": "Media handlers",
+	"extensions-parserhooks": "Parser hooks",
+	"extensions-specialpages": "Special pages",
+	"extensions-variable": "Variables"
 }
