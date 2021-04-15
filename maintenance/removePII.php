@@ -67,7 +67,7 @@ class RemovePII extends Maintenance {
 			return;
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		$userActorId = $newName->getActorId( $dbw );
 
@@ -409,7 +409,7 @@ class RemovePII extends Maintenance {
 			$this->output( "Failed to delete user {$userOldName} page, likely does not have a user page. Error: {$errorMessage}\n" );
 		}
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
+		$dbw = wfGetDB( DB_PRIMARY, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $newName );
 
 		if ( !$centralUser ) {
