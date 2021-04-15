@@ -114,7 +114,7 @@ class FixUserIdRevision extends Maintenance {
 
 	protected function fixRevEntry( $row ) {
                 $dbr = wfGetDB( DB_REPLICA );
-                $dbw = wfGetDB( DB_MASTER );
+                $dbw = wfGetDB( DB_PRIMARY );
 		$revActor = User::newFromActorId( $row->revactor_actor );
 
                 if ( isset( $this->mUserCache[$revActor->getName()] ) ) {
