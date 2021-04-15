@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"01miki10",
+			"MITO",
 			"Pyscowicz"
 		]
 	},
@@ -86,5 +87,8 @@
 	"settings-restricted": "Rajoitettu",
 	"settings-styling": "Tyyli",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Ulkoasut"
+	"extensions-skins": "Ulkoasut",
+	"extensions-antispam": "Roskapostin ehkäiseminen",
+	"extensions-mediahandlers": "Median käsittelijät",
+	"extensions-specialpages": "Toimintosivut"
 }

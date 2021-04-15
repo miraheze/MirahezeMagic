@@ -157,5 +157,12 @@
 	"settings-socialtools": "Outils sociaux",
 	"settings-styling": "Style",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Habillages"
+	"extensions-skins": "Habillages",
+	"extensions-api": "API",
+	"extensions-antispam": "Prévention du pollupostage",
+	"extensions-editors": "Rédacteurs",
+	"extensions-mediahandlers": "Gestionnaires de médias",
+	"extensions-parserhooks": "Crochets de l’analyseur syntaxique",
+	"extensions-specialpages": "Pages spéciales",
+	"extensions-variable": "Variables"
 }

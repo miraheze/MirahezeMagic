@@ -119,5 +119,8 @@
 	"settings-socialtools": "Социальные инструменты",
 	"settings-styling": "Стиль",
 	"settings-wikibase": "Вики-база",
-	"extensions-skins": "Темы оформления"
+	"extensions-skins": "Темы оформления",
+	"extensions-editors": "Редакторы",
+	"extensions-specialpages": "Служебные страницы",
+	"extensions-variable": "Переменные"
 }

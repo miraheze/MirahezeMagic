@@ -5,9 +5,9 @@
 		]
 	},
 	"miraheze-dberr-again": "Pruève ad aspettà quacche minute e recareche. Pe cchiù 'mbormaziune sus a stu errore manne 'nu tuitt sus 'a pàgena nostre de Tuitter (http://twitter.com/Miraheze) o condatte l'amministrature de sisteme ausanne le collegaminde a #miraheze sus a irc.freenode.net.",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tu}} non ge puè reasè purcé 'u cunde {{GENDER:$1|tune}} jè bloccate globbalmende. Pe piacere condatte <code>cvt{{@}}miraheze.org</code> pe cchiù 'mbormaziune o pe fà appelle",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tu}} non ge puè reasè purcé 'u cunde {{GENDER:$1|tune}} jè bloccate globbalmende. Pe piacere condatte <code>cvt{{@}}miraheze.org</code> pe cchiù 'mbormaziune o pe fà appelle.",
 	"miraheze-oathauth-step1": "'MBORTANDE! Pe piacere assecurate de leggere 'a pàgene OATHAuth apprime de abbilità quiste!   Passe 1: Scareche 'nu programme de autendicazione a doje fatture",
-	"miraheze-prefs-help-realname": "'U nome reale jè facoltative. Ce è scacchiate de darle, quiste avène ausate pe dà l'attribbuzzione de quidde ca è fatte a te. Pure, ce ste ause 'na uicchi ospitate da Miraheze, tu a essere d'accorde cu le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Termine d'Ause]</span> e accettà le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Regole p'a Privacy]</span>",
+	"miraheze-prefs-help-realname": "'U nome reale jè facoltative. Ce è scacchiate de darle, quiste avène ausate pe dà l'attribbuzzione de quidde ca è fatte a te. Pure, ce ste ause 'na uicchi ospitate da Miraheze, tu a essere d'accorde cu le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Termine d'Ause]</span> e accettà le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Regole p'a Privacy]</span>.",
 	"miraheze-shoutwiki-loginform-tos": "Agghie lette, capite e sò d'accorde a le [https://meta.miraheze.org/wiki/Terms_of_Use Termine d'Ause] e a le [https://meta.miraheze.org/wiki/Privacy_Policy Regole d'a Privacy]",
 	"miraheze-shoutwiki-must-accept-tos": "A accettà le termine de ause pe ccrejà 'nu cunde utende!",
 	"miraheze-centralauth-merge-method-admin": "Cunde Scauagghiate a Màne",

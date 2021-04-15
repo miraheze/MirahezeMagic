@@ -71,5 +71,11 @@
 	"settings-preferences": "Preferenze",
 	"settings-recentchanges": "Ultime modifiche",
 	"settings-socialtools": "Strumenti sociali",
-	"extensions-skins": "Temi"
+	"extensions-skins": "Temi",
+	"extensions-api": "API",
+	"extensions-antispam": "Prevenzione dello spam",
+	"extensions-mediahandlers": "Gestori di contenuti multimediali",
+	"extensions-parserhooks": "Hook del parser",
+	"extensions-specialpages": "Pagine speciali",
+	"extensions-variable": "Variabili"
 }

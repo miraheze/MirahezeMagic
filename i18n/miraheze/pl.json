@@ -143,5 +143,11 @@
 	"settings-seo": "Optymalizacja dla wyszukiwarek",
 	"settings-socialtools": "Specjalne narzędzia",
 	"settings-styling": "Wygląd",
-	"extensions-skins": "Skórka"
+	"extensions-skins": "Skórka",
+	"extensions-antispam": "Ochrona przed spamem",
+	"extensions-editors": "Edytory",
+	"extensions-mediahandlers": "Wtyczki obsługi mediów",
+	"extensions-parserhooks": "Haki parsera",
+	"extensions-specialpages": "Strony specjalne",
+	"extensions-variable": "Zmienne"
 }
