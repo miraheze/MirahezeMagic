@@ -34,7 +34,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		global $wgDBname, $wgCreateWikiDatabase, $wgDataDumpDirectory, $wgManageWikiPermissionsAdditionalRights,
 			$wgManageWikiPermissionsAdditionalAddGroups, $wgManageWikiPermissionsAdditionalRemoveGroups;
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+		$dbw = wfGetDB( DB_PRIMARY, [], $wgCreateWikiDatabase );
 
 		$buildArray = [];
 
