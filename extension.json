@@ -81,7 +81,7 @@
 		],
 		"UserGetRightsRemove": [
 			"MirahezeMagicHooks::onUserGetRightsRemove"
-		]
+		],
 		"MediaWikiServices": [
 			"MirahezeMagicHooks::onMediaWikiServices"
 		]
