@@ -82,6 +82,9 @@
 		"UserGetRightsRemove": [
 			"MirahezeMagicHooks::onUserGetRightsRemove"
 		]
+		"MediaWikiServices": [
+			"MirahezeMagicHooks::onMediaWikiServices"
+		]
 	},
 	"ConfigRegistry": {
 		"mirahezemagic": "GlobalVarConfig::newInstance"
