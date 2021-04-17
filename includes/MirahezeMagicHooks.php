@@ -384,4 +384,10 @@ class MirahezeMagicHooks {
 			}
 		}
 	}
+	public static function onMediaWikiServices( MediaWikiServices $services ) {
+		$shellusername = posix_getpwuid(posix_geteuid())['name'];
+		if ( $shellusername == 'root' ) {
+			throw new FatalError( "Using MediaWikiServices as '{$shellusername}' is not allowed." )
+		}
+	}
 }
