@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Movses",
-			"Piramidion"
+			"Piramidion",
+			"Ата"
 		]
 	},
-	"miraheze-dberr-again": "Спробуйте почекати кілька хвилин і перезавантажити. Щоб дізнатись більше про цю помилку, будь ласка, перегляньте нашу сторінку на Twitter (Twitter.com/Miraheze), або зв'яжіться із системними адміністраторами через канал #miraheze на irc.freenode.net",
+	"miraheze-dberr-again": "Спробуйте почекати кілька хвилин і перезавантажити. Щоб дізнатись більше про цю помилку, будь ласка, перегляньте нашу сторінку на Twitter (https://twitter.com/Miraheze), або зв'яжіться із системними адміністраторами через канал #miraheze на irc.freenode.net.",
 	"miraheze-oathauth-step1": "ВАЖЛИВО! Будь ласка, прочитайте сторінку про OATHAuth, перш ніж увімкнете це! Крок 1: Завантажте програму двофакторної автентифікації",
-	"miraheze-prefs-help-realname": "Справжнє ім'я — необов'язкове. Якщо Ви вирішите його вказати, воно використовуватиметься для зазначення Вашого авторства в інформації про Ваші твори. Також, користуючись вікі із хостингом на Miraheze, Ви погоджуєтесь на наші <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Умови використання]</span> та приймаєте умови <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Політики конфіденційності]</span>",
+	"miraheze-prefs-help-realname": "Справжнє ім'я — необов'язкове. Якщо Ви вирішите його вказати, воно використовуватиметься для зазначення Вашого авторства в інформації про Ваші твори. Також, користуючись вікі із хостингом на Miraheze, Ви погоджуєтесь на наші <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Умови використання]</span> та приймаєте умови <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Політики конфіденційності]</span>.",
 	"miraheze-shoutwiki-loginform-tos": "Я прочитав(ла), зрозумів(ла) і погоджуюся з [https://meta.miraheze.org/wiki/Terms_of_Use Умовами використання] та [https://meta.miraheze.org/wiki/Privacy_Policy Політикою конфіденційності]",
 	"miraheze-shoutwiki-must-accept-tos": "Вам треба прийняти Умови використання, щоб отримати змогу створити обліковий запис!",
 	"miraheze-centralauth-merge-method-admin": "Обліковий запис, об'єднаний вручну",
