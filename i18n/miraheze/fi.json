@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"01miki10",
+			"3Johnny",
 			"MITO",
 			"Pyscowicz"
 		]
@@ -92,8 +93,8 @@
 	"group-confirmed-member": "{{GENDER:$1|hyväksytty käyttäjä}}",
 	"group-globalsysop": "Järjestelmänlaajuiset ylläpitäjät",
 	"group-globalsysop-member": "{{GENDER:$1|järjestelmänlaajuinen ylläpitäjä}}",
-	"group-proxybot": "Proxy Bot",
-	"group-proxybot-member": "proxy bot",
+	"group-proxybot": "Välipalvelinbotti",
+	"group-proxybot-member": "välipalvelinbotti",
 	"group-translator": "Kääntäjät",
 	"group-translator-member": "kääntäjä",
 	"group-translationadmin": "käännösylläpitäjät",
