@@ -2,6 +2,8 @@
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
+use MediaWiki\MediaWikiServices;
+
 class GenerateExtensionDatabaseList extends Maintenance {
 	public function __construct() {
 		parent::__construct();
