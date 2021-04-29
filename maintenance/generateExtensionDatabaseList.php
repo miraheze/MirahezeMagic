@@ -13,7 +13,7 @@ class generateExtensionDatabaseList extends Maintenance {
 	public function execute() {
 		$lists = [];
 
-		$extArray = explode( '|', $data );
+		$extArray = explode( '|', $this->getOption( 'extensions' ) );
 
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$dbr = wfGetDB( DB_REPLICA, [], $config->get( 'CreateWikiDatabase' ) );
