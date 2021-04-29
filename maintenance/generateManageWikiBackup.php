@@ -24,6 +24,8 @@
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
+use MediaWiki\MediaWikiServices;
+
 class GenerateManageWikiBackup extends Maintenance {
 	public function __construct() {
 		parent::__construct();
@@ -31,35 +33,44 @@ class GenerateManageWikiBackup extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgDBname, $wgCreateWikiDatabase, $wgDataDumpDirectory, $wgManageWikiPermissionsAdditionalRights,
-			$wgManageWikiPermissionsAdditionalAddGroups, $wgManageWikiPermissionsAdditionalRemoveGroups;
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+		$dbName = $config->get( 'DBname' );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' );
 
 		$buildArray = [];
 
 		$nsObjects = $dbw->select(
 			'mw_namespaces',
 			'*',
-			[ 'ns_dbname' => $wgDBname ]
+			[ 'ns_dbname' => $dbName ]
 		);
 
 		$permObjects = $dbw->select(
 			'mw_permissions',
 			'*',
-			[ 'perm_dbname' => $wgDBname ]
+			[ 'perm_dbname' => $dbName ]
 		);
 
 		$settingsObjects = $dbw->selectRow(
 			'mw_settings',
 			'*',
-			[ 's_dbname' => $wgDBname ],
+			[ 's_dbname' => $dbName ],
 			__METHOD__
 		);
 
 		if ( $settingsObjects != null ) {
 			$buildArray['extensions'] = json_decode( $settingsObjects->s_extensions );
-			$buildArray['settings'] = json_decode( $settingsObjects->s_settings );
+			
+			$settings = json_decode( $settingsObjects->s_settings );
+			
+			foreach ( $config->get( 'ManageWikiSettings' ) as $setting => $options ) {
+				if ( isset( $options['requires']['visibility']['permissions'] ) ) {
+					unset( $settings[$setting] );
+				}
+			}
+
+			$buildArray['settings'] = $settings;
 		}
 
 		foreach ( $nsObjects as $ns ) {
@@ -79,7 +90,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		foreach ( $permObjects as $perm ) {
 			$addPerms =[];
 
-			foreach ( ( $wgManageWikiPermissionsAdditionalRights[$perm->perm_group] ?? [] ) as $right => $bool ) {
+			foreach ( ( $config->get( 'ManageWikiPermissionsAdditionalRights' )[$perm->perm_group] ?? [] ) as $right => $bool ) {
 				if ( $bool ) {
 					$addPerms[] = $right;
 				}
@@ -87,16 +98,18 @@ class GenerateManageWikiBackup extends Maintenance {
 
 			$buildArray['permissions'][$perm->perm_group] = [
 				'permissions' => array_merge( json_decode( $perm->perm_permissions, true ), $addPerms ),
-				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $wgManageWikiPermissionsAdditionalAddGroups[$perm->perm_group] ?? [] ),
-				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $wgManageWikiPermissionsAdditionalRemoveGroups[$perm->perm_group] ?? [] ),
+				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $config->get( 'ManageWikiPermissionsAdditionalAddGroups' )[$perm->perm_group] ?? [] ),
+				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $config->( 'ManageWikiPermissionsAdditionalRemoveGroups' )[$perm->perm_group] ?? [] ),
 				'addself' => json_decode( $perm->perm_addgroupstoself, true ),
 				'removeself' => json_decode( $perm->perm_removegroupsfromself, true ),
 				'autopromote' => json_decode( $perm->perm_autopromote, true )
 			];
 		}
-		
+
 		$file = $this->getOption( 'filename' );
-		file_put_contents( "{$wgDataDumpDirectory}{$file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
+
+		$ddd = $config->get( 'DataDumpDirectory' );
+		file_put_contents( "{$ddd}{$file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
 	}
 }
 
