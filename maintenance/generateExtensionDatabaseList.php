@@ -8,7 +8,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = "Generates lists of all wikis with given extension(s)";
+		$this->mDescription = 'Generates lists of all wikis with given extension(s)';
 		$this->addOption( 'extensions', 'Extension(s) to generate list for. Multiple extensions should separated by pipe (|)', true, true );
 	}
 
