@@ -48,5 +48,7 @@
 	"settings-media": "Medier",
 	"settings-permissions": "Tilladelser",
 	"settings-recentchanges": "Seneste ændringer",
-	"extensions-skins": "Udseende"
+	"extensions-skins": "Udseende",
+	"extensions-api": "API",
+	"extensions-variable": "Variabler"
 }
