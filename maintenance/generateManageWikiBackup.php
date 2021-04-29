@@ -61,16 +61,14 @@ class GenerateManageWikiBackup extends Maintenance {
 
 		if ( $settingsObjects != null ) {
 			$buildArray['extensions'] = json_decode( $settingsObjects->s_extensions );
-			
-			$settings = json_decode( $settingsObjects->s_settings );
-			
+
+			$buildArray['settings'] = json_decode( $settingsObjects->s_settings, true );
+
 			foreach ( $config->get( 'ManageWikiSettings' ) as $setting => $options ) {
 				if ( isset( $options['requires']['visibility']['permissions'] ) ) {
-					unset( $settings[$setting] );
+					unset( $buildArray['settings'][$setting] );
 				}
 			}
-
-			$buildArray['settings'] = $settings;
 		}
 
 		foreach ( $nsObjects as $ns ) {
