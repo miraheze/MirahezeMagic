@@ -36,7 +36,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$dbName = $config->get( 'DBname' );
-		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' );
+		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'CreateWikiDatabase' ) );
 
 		$buildArray = [];
 
