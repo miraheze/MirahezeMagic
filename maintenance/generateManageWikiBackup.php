@@ -99,7 +99,7 @@ class GenerateManageWikiBackup extends Maintenance {
 			$buildArray['permissions'][$perm->perm_group] = [
 				'permissions' => array_merge( json_decode( $perm->perm_permissions, true ), $addPerms ),
 				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $config->get( 'ManageWikiPermissionsAdditionalAddGroups' )[$perm->perm_group] ?? [] ),
-				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $config->( 'ManageWikiPermissionsAdditionalRemoveGroups' )[$perm->perm_group] ?? [] ),
+				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $config->get( 'ManageWikiPermissionsAdditionalRemoveGroups' )[$perm->perm_group] ?? [] ),
 				'addself' => json_decode( $perm->perm_addgroupstoself, true ),
 				'removeself' => json_decode( $perm->perm_removegroupsfromself, true ),
 				'autopromote' => json_decode( $perm->perm_autopromote, true )
