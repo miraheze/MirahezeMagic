@@ -6,6 +6,7 @@
 			"MuratTheTurkish",
 			"ديفيد",
 			"شريف",
+			"علاء",
 			"محمد أحمد عبد الفتاح"
 		]
 	},
@@ -104,7 +105,7 @@
 	"group-translator": "مترجمون",
 	"group-translator-member": "مترجم",
 	"group-translationadmin": "إداريو الترجمة",
-	"group-translationadmin-member": "إداري الترجمة",
+	"group-translationadmin-member": "إداري ترجمة",
 	"group-global-ipblock-exempt": "مستثنون عالميون من منع الآيبي",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|مستثنى عالمي|مستثناة عالمية}} من منع الآيبي",
 	"group-member": "أعضاء",
