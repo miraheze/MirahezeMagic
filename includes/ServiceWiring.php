@@ -8,8 +8,7 @@ use MediaWiki\MediaWikiServices;
 return [
 	'MirahezeMagic.LogEmailManager' => static function ( MediaWikiServices $services ) : MirahezeMagicLogEmailManager {
 		return new MirahezeMagicLogEmailManager(
-			$services->getConfigFactory()->makeConfig( 'mirahezemagic' ),
-			$services->getPermissionManager()
+			$services->getConfigFactory()->makeConfig( 'mirahezemagic' )
 		);
 	},
 ];
