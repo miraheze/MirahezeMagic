@@ -1,25 +1,18 @@
 <?php
 
-use MediaWiki\Permissions\PermissionManager;
-
 class MirahezeMagicLogEmailManager {
 	/** @var Config */
 	private $config;
 
-	/** @var PermissionManager */
-	private $permissionManager;
-
 	/**
 	 * @param Config $config
-	 * @param PermissionManager $permissionManager
 	 */
-	public function __construct( Config $config, PermissionManager $permissionManager ) {
+	public function __construct( Config $config ) {
 		$this->config = $config;
-		$this->permissionManager = $permissionManager;
 	}
 
 	/**
-	 * @return array[] in format of [ 'right' => string, 'email' => string ]
+	 * @return array[] in format of [ 'group' => string, 'email' => string ]
 	 */
 	private function getLogConditions() : array {
 		return $this->config->get( 'MirahezeMagicLogEmailConditions' );
@@ -31,11 +24,15 @@ class MirahezeMagicLogEmailManager {
 	 * @return array
 	 */
 	public function findForUser( User $user ) : array {
-		$rights = $this->permissionManager->getUserPermissions( $user );
+		if ( $user->isAnon() ) {
+			return [];
+		}
+
+		$groups = CentralAuthUser::getInstance( $user )->getGlobalGroups();
 
 		$found = [];
 		foreach ( $this->getLogConditions() as $condition ) {
-			if ( in_array( $condition['right'], $rights ) ) {
+			if ( in_array( $condition['group'], $groups ) ) {
 				$found[] = $condition;
 			}
 		}
