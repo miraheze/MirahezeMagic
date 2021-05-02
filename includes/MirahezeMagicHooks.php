@@ -107,7 +107,7 @@ class MirahezeMagicHooks {
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-		
+
 		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
 				->limits( $limits )
@@ -382,6 +382,32 @@ class MirahezeMagicHooks {
 			} else {
 				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
 			}
+		}
+	}
+
+	public static function onRecentChange_save( RecentChange $recentChange ) {
+		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
+			return;
+		}
+
+		/** @var MirahezeMagicLogEmailManager $logEmailManager */
+		$logEmailManager = MediaWikiServices::getInstance()->get( 'MirahezeMagic.LogEmailManager' );
+		$conditions = $logEmailManager->findForUser( $recentChange->getPerformer() );
+
+		if ( empty( $conditions ) ) {
+			return;
+		}
+
+		$data = [
+			'user_name' => $recentChange->getPerformer()->getName(),
+			'wiki_id' => WikiMap::getCurrentWikiId(),
+			'log_type' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
+			'comment_text' => $recentChange->mAttribs['rc_comment_text'],
+		];
+
+		foreach ( $conditions as $condition ) {
+			// TODO: check for log entry types etc if wanted
+			$logEmailManager->sendEmail( $data, $condition['email'] );
 		}
 	}
 }
