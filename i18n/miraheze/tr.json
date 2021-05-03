@@ -119,6 +119,8 @@
 	"group-translator-member": "çevirmen",
 	"group-translationadmin": "Çeviri hizmetlileri",
 	"group-translationadmin-member": "çeviri hizmetlisi",
+	"group-trustandsafety": "Güven ve Emniyet",
+	"group-trustandsafety-member": "Güven ve Emniyet",
 	"group-global-ipblock-exempt": "Küresel IP engel muafiyeti",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|küresel IP engelleme muafı}}",
 	"group-member": "Üyeler",

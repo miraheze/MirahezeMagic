@@ -113,6 +113,8 @@
 	"group-translator-member": "prekladateľ/ka",
 	"group-translationadmin": "Správcovia prekladov",
 	"group-translationadmin-member": "správca prekladov",
+	"group-trustandsafety": "Dôvera a bezpečnosť",
+	"group-trustandsafety-member": "Dôvera a bezpečnosť",
 	"group-global-ipblock-exempt": "Globálna výnimka IP blokovania",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|výnimka z blokovania IP}}",
 	"group-member": "Členovia",
