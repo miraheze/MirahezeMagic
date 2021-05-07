@@ -116,6 +116,8 @@
 	"group-translator-member": "翻譯人員",
 	"group-translationadmin": "翻譯管理員",
 	"group-translationadmin-member": "翻譯管理員",
+	"group-trustandsafety": "信任與安全",
+	"group-trustandsafety-member": "信任與安全",
 	"group-global-ipblock-exempt": "全域 IP 封鎖例外",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|全域 IP 封鎖例外}}",
 	"group-member": "成員",
