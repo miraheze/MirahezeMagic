@@ -24,7 +24,7 @@ class MirahezeMagicLogEmailManager {
 	 * @return array
 	 */
 	public function findForUser( User $user ) : array {
-		if ( $user->isAnon() ) {
+		if ( !$user->isRegistered() ) {
 			return [];
 		}
 
