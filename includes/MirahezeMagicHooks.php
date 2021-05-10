@@ -261,7 +261,9 @@ class MirahezeMagicHooks {
 			'CreateAccount',
 			'Notifications',
 			'OAuth',
-			'ResetPassword'
+			'ResetPassword',
+			'Preferences',
+			'Watchlist'
 		];
 
 		if ( $title->isSpecialPage() ) {
