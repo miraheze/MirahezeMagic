@@ -5,7 +5,7 @@
 			"Patsagorn Y."
 		]
 	},
-	"miraheze-dberr-again": "กรุณารอซักครู่และรีโหลดหน้าอีกครั้ง สำหรับข้อมูลเพิ่มเติมเกี่ยวกับช้อผิดพลาดนี้ กรุณาตรวจสอบที่หน้าทวิตเตอร์ของเรา (Twitter.com/Miraheze) หรือติดต่อผู้ดูแลระบบโครงข่ายของเราโดยเชื่อมต่อ #miraheze ที่ chat.freenode.net",
+	"miraheze-dberr-again": "กรุณารอซักครู่และรีโหลดหน้าอีกครั้ง สำหรับข้อมูลเพิ่มเติมเกี่ยวกับช้อผิดพลาดนี้ กรุณาตรวจสอบที่หน้าทวิตเตอร์ของเรา (Twitter.com/Miraheze) หรือติดต่อผู้ดูแลระบบโครงข่ายของเราโดยเชื่อมต่อ #miraheze ที่ irc.libera.chat",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|คุณ}}ไม่สามารถเข้าสู่ระบบได้เนื่องจากบัญชี{{GENDER:$1|ของคุณ}}ถูกล็อก กรุณาติดต่อที่ <code>cvt[at]miraheze.org</code> สำหรับข้อมูลเพิ่มเติม",
 	"miraheze-oathauth-step1": "สำคัญ! อ่านหน้า OATHAuth ก่อนเปิดใช้งาน\nขั้นตอนที่ 1: ดาวน์โหลดโปรแกรมยืนยันตัวตนสองขั้นตอน",
 	"miraheze-prefs-help-realname": "คุณไม่จำเป็นต้องใช้ชื่อจริง หากคุณเลือกที่จะให้ จะเป็นการใช้สำหรับการแสดงที่มาในงานของคุณโดยใช้ชื่อนี้ของคุณ และการใช้งานวิกิใด ๆ ที่มิราเฮซเป็นแม่ข่าย ถือว่าคุณเห็นด้วยกับ<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]</span>และยอมรับใน<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]</span>",
