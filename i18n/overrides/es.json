@@ -7,7 +7,7 @@
 			"Wynter"
 		]
 	},
-	"miraheze-dberr-again": "Prueba esperar unos cuantos minutos y recarga. Para más información sobre este error por favor revisa nuestra página de Twitter (twitter.com/Miraheze) o contacta con los administradores de sistema conectándote a #miraheze en irc.freenode.net",
+	"miraheze-dberr-again": "Prueba esperar unos cuantos minutos y recarga. Para más información sobre este error por favor revisa nuestra página de Twitter (twitter.com/Miraheze) o contacta con los administradores de sistema conectándote a #miraheze en irc.libera.chat",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "No puedes loguearte porque tu cuenta está globalmente bloqueada. Por favor, contacta con <code>cvt{{@}}miraheze.org</code> para más información o para apelar.",
 	"miraheze-oathauth-step1": "IMPORTANTE: asegúrate de leer la página de OATHAuth antes de activar esta opción. Paso 1: descargar un programa de autenticación en dos fases.",

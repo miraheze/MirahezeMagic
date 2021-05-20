@@ -4,7 +4,7 @@
 			"Kly"
 		]
 	},
-	"miraheze-dberr-again": "請嘗試等待幾分鐘來重新載入。更多有關此錯誤的資訊，請查看我們在推特上的頁面（https://twitter.com/Miraheze），或是透過連結在 irc.freenode.net 上的 #miraheze 來聯絡系統管理員",
+	"miraheze-dberr-again": "請嘗試等待幾分鐘來重新載入。更多有關此錯誤的資訊，請查看我們在推特上的頁面（https://twitter.com/Miraheze），或是透過連結在 irc.libera.chat 上的 #miraheze 來聯絡系統管理員",
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被全域鎖定，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
 	"miraheze-oathauth-step1": "重要！在啟用此之前請確認已讀過 OATHAuth 頁面！步驟 1：下載雙重驗證程式",
 	"miraheze-prefs-help-realname": "真實姓名為選填。若您有意提供，這會用在您成品的姓名標示上。另外，依據使用由 Miraheze 所託管的 wiki，表示您同意<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 使用條款]</span>並接受<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy 隱私方針]</span>。",

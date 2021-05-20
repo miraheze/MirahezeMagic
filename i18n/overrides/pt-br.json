@@ -6,7 +6,7 @@
 			"Tks4Fish"
 		]
 	},
-	"miraheze-dberr-again": "Tente esperar alguns minutos e recarregar. Para mais informações sobre esse erro, confira nossa página no Twitter (Twitter.com/Miraheze) ou entre em contato com os administradores do sistema conectando-se a #miraheze em irc.freenode.net",
+	"miraheze-dberr-again": "Tente esperar alguns minutos e recarregar. Para mais informações sobre esse erro, confira nossa página no Twitter (Twitter.com/Miraheze) ou entre em contato com os administradores do sistema conectando-se a #miraheze em irc.libera.chat",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Você}} não pode entrar pois {{GENDER:$1|sua}} conta está travada globalmente. Por favor contate <code>cvt{{@}}miraheze.org</code> para mais informações ou para apelar",
 	"miraheze-oathauth-step1": "IMPORTANTE! Leia a página OATHAuth antes de ativar isso! Etapa 1: baixar um programa de autenticação de dois fatores",

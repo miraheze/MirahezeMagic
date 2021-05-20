@@ -7,7 +7,7 @@
 			"SaldırganSincap"
 		]
 	},
-	"miraheze-dberr-again": "Birkaç dakika beklemeyi ve tekrar yüklemeyi deneyin. Bu hata hakkında daha fazla bilgi için lütfen twitter sayfamıza (https://twitter.com/Miraheze) göz atın veya irc.freenode.net adresindeki #miraheze ağına bağlanarak sistem hizmetlileriyle iletişime geçin.",
+	"miraheze-dberr-again": "Birkaç dakika beklemeyi ve tekrar yüklemeyi deneyin. Bu hata hakkında daha fazla bilgi için lütfen twitter sayfamıza (https://twitter.com/Miraheze) göz atın veya irc.libera.chat adresindeki #miraheze ağına bağlanarak sistem hizmetlileriyle iletişime geçin.",
 	"miraheze-centralauth-login-error-locked": "Hesabınız küresel olarak kilitlendiği için oturum {{GENDER:$1|açamazsınız}}. Daha fazla bilgi almak veya itiraz etmek için lütfen <code>cvt[at]miraheze.org</code> ile iletişime geçin.",
 	"miraheze-oathauth-step1": "ÖNEMLİ! Lütfen etkinleştirmeden önce OATHAuth sayfasını okuduğunuzdan emin olun! 1. Adım: İki faktörlü bir kimlik doğrulama programı indirin",
 	"miraheze-prefs-help-realname": "Gerçek ad isteğe bağlıdır. Bunu sağlamayı seçerseniz, bu size işinize atıfta bulunmak için kullanılacaktır. Ayrıca, Miraheze tarafından barındırılan bir viki kullanarak, <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use/tr Kullanım Şartlarını]</span> katılırsınız ve <span =\"plainlinks\"> [https://meta.miraheze.org/wiki/Privacy_Policy/tr Gizlilik Politikasını]</span> kabul edersiniz.",

@@ -6,7 +6,7 @@
 			"ديفيد"
 		]
 	},
-	"miraheze-dberr-again": "حاول الانتظار بضع دقائق وإعادة التحميل، لمزيد من المعلومات حول هذا الخطأ; تُرجَى مراجعة صفحة تويتر الخاصة بنا (Twitter.com/Miraheze) أو الاتصال بإداريي النظام عن طريق الاتصال بـ#miraheze على irc.freenode.net",
+	"miraheze-dberr-again": "حاول الانتظار بضع دقائق وإعادة التحميل، لمزيد من المعلومات حول هذا الخطأ; تُرجَى مراجعة صفحة تويتر الخاصة بنا (Twitter.com/Miraheze) أو الاتصال بإداريي النظام عن طريق الاتصال بـ#miraheze على irc.libera.chat",
 	"miraheze-centralauth-groupname": "ميراهيز",
 	"miraheze-oathauth-step1": "'''مهم! يُرجَى التأكد من قراءة <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> قبل تمكين هذه الإضافة!'''<br/>الخطوة 1: تنزيل برنامج المصادقة الثنائية",
 	"miraheze-prefs-help-realname": "الاسم الحقيقي اختياري، إذا اخترت توفيره، فسيتم استخدامه لمنحك الإحالة إلى عملك، أيضا، باستخدام ويكي يستضيفه ميراهيز، فإنك توافق على <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use شروط الاستخدام]</span> وتقبل <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy سياسة الخصوصية]</span>",
