@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Anpfraum",
 			"Wolf"
 		]
 	},
+	"datadump-namespaceselect-label": "Danh vực",
 	"mirahezemagic-description": "Các thông điệp giao diện MediaWiki, scripts và các hooks dành cho Miraheze",
 	"miraheze-categories": "Thể loại",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) đã đóng",

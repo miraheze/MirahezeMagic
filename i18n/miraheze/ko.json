@@ -70,6 +70,8 @@
 	"group-translator-member": "번역자",
 	"group-translationadmin": "번역 관리자",
 	"group-translationadmin-member": "번역 관리자",
+	"group-trustandsafety": "신뢰 및 안전",
+	"group-trustandsafety-member": "신뢰 및 안전",
 	"group-global-ipblock-exempt": "전역 IP 차단 면제",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|통합 IP 차단 면제자}}",
 	"group-member": "회원",

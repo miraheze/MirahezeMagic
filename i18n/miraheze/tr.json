@@ -12,6 +12,7 @@
 	},
 	"centralauth-groupname": "Miraheze",
 	"content-model-flow-board": "YapılandırılmışTartışmalar panosu",
+	"datadump-namespaceselect-label": "Ad alanı",
 	"mirahezemagic-description": "Miraheze'ye özel MediaWiki mesajları, betikleri ve kancalar",
 	"miraheze-categories": "Kategoriler",
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",

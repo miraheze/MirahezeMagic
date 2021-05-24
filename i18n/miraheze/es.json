@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Agent",
 			"AlvaroMolina",
 			"DannyS712",
 			"Dark Dragoon",
@@ -14,6 +15,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "Espacio de nombres",
 	"mirahezemagic-description": "Mensajes de MediaWiki, scripts y ganchos específicos para Miraheze",
 	"miraheze-categories": "Categorías",
 	"miraheze-close-email-subject": "Wiki de Miraheze ($1) Cerrada",

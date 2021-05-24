@@ -19,6 +19,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "Пространство имён",
 	"mirahezemagic-description": "Сообщения, скрипты и hook'и MediaWiki, специфические для Miraheze",
 	"miraheze-categories": "Категории",
 	"miraheze-close-email-subject": "Вики на Miraheze ($1) закрыта",

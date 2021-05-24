@@ -9,6 +9,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "Espaço nominal",
 	"mirahezemagic-description": "Mensagens, scripts e ganchos do MediaWiki específicos para o Miraheze",
 	"miraheze-categories": "Categorias",
 	"miraheze-close-email-subject": "Wiki de Mirahezee ($1) Fechada",
