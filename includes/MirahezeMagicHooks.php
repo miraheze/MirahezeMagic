@@ -31,15 +31,25 @@ class MirahezeMagicHooks {
 		 * This check should be removed when Miraheze uses 1.36 in production.
 		 */
 		if ( version_compare( MW_VERSION, '1.35', '>' ) ) {
-			$vars = AbuseFilterServices::getVariablesManager();
-		}
+			$varManager = AbuseFilterServices::getVariablesManager();
 
-		$action = $vars->getVar( 'action' )->toString();
-		if ( $action === 'autocreateaccount' ) {
-			$skipReasons[] = "Blocking automatic account creation is not allowed";
-			return false;
-		}
-		return true;
+			$action = $varManager->getVar( $vars, 'action', 1 )->toString();
+			if ( $action === 'autocreateaccount' ) {
+				$skipReasons[] = 'Blocking automatic account creation is not allowed';
+
+				return false;
+			}
+
+			return true;
+		} else {
+			$action = $vars->getVar( 'action' )->toString();
+			if ( $action === 'autocreateaccount' ) {
+				$skipReasons[] = 'Blocking automatic account creation is not allowed';
+
+				return false;
+			}
+
+			return true;
 	}
 
 	public static function onCreateWikiCreation( $DBname ) {
