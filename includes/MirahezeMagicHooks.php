@@ -50,7 +50,7 @@ class MirahezeMagicHooks {
 			}
 		}
 
-			return true;
+		return true;
 	}
 
 	public static function onCreateWikiCreation( $DBname ) {
