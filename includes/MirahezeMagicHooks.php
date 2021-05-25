@@ -48,6 +48,7 @@ class MirahezeMagicHooks {
 
 				return false;
 			}
+		}
 
 			return true;
 	}
