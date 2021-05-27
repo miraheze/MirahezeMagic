@@ -6,10 +6,12 @@
 			"John Lewis",
 			"MuratTheTurkish",
 			"Revi",
-			"Ykhwong"
+			"Ykhwong",
+			"그냥기여자"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "이름공간",
 	"mirahezemagic-description": "Miraheze에 특화된 미디어위키 메시지, 스크립트, 훅",
 	"miraheze-categories": "분류",
 	"miraheze-close-email-subject": "Miraheze 위키 ($1) 닫힘",
