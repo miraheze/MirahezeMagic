@@ -9,6 +9,7 @@
 	},
 	"centralauth-groupname": "Miraheze",
 	"content-model-flow-board": "結構式討論面板",
+	"datadump-namespaceselect-label": "命名空間",
 	"mirahezemagic-description": "MediaWiki 訊息、手稿，以及用於 Miraheze 的特定掛勾",
 	"miraheze-categories": "分類",
 	"miraheze-close-email-subject": "Miraheze Wiki（$1）已關閉",
