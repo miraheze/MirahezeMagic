@@ -6,6 +6,7 @@
 		]
 	},
 	"content-model-flow-board": "Tabuľa štruktúrovanej diskusie",
+	"datadump-namespaceselect-label": "Menný priestor",
 	"mirahezemagic-description": "Správy MédiaWiki, skripty a háky špecifické pre Miraheze",
 	"miraheze-categories": "Kategórie",
 	"miraheze-close-email-subject": "Zatvorené Miraheze Wiki ($1)",
