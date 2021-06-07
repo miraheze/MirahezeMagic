@@ -30,7 +30,7 @@ class MirahezeMagicHooks {
 		 * use AbuseFilter's new VariablesManager service on 1.36 instead.
 		 * This check should be removed when Miraheze uses 1.36 in production.
 		 */
-		if ( version_compare( MW_VERSION, '1.35', '>' ) ) {
+		if ( version_compare( MW_VERSION, '1.36', '>=' ) ) {
 			$varManager = AbuseFilterServices::getVariablesManager();
 
 			$action = $varManager->getVar( $vars, 'action', 1 )->toString();
