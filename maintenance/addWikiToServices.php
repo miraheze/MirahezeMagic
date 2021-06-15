@@ -14,7 +14,7 @@ class addWikiToServices extends Maintenance {
 
 		// If folder does not exist, do not run the update
 		if ( file_exists( $wgServicesRepo ) ) {
-			$dbw = wfGetDB( DB_MASTER, [], $wgCreateWikiDatabase );
+			$dbw = wfGetDB( DB_PRIMARY, [], $wgCreateWikiDatabase );
 
 			$res = $dbw->select(
 				'cw_wikis',

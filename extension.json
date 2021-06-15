@@ -14,6 +14,9 @@
 	"descriptionmsg": "mirahezemagic-description",
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.36.0"
+	},
 	"MessagesDirs": {
 		"MirahezeMagic": [
 			"i18n/miraheze"

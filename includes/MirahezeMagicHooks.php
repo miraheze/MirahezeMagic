@@ -91,7 +91,7 @@ class MirahezeMagicHooks {
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
+		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
@@ -109,7 +109,7 @@ class MirahezeMagicHooks {
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
+		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 

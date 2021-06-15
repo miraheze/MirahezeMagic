@@ -8,7 +8,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 
 	public function __construct() {
 		parent::__construct( 'MirahezeSurvey' );
-		$this->dbw = wfGetDB( DB_MASTER, [], 'survey' );
+		$this->dbw = wfGetDB( DB_PRIMARY, [], 'survey' );
 	}
 
         public function execute( $par ) {

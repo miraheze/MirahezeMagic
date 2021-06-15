@@ -38,7 +38,7 @@ class CreateUsers extends Maintenance {
 	}
 
 	public function execute() {
-		$this->wikiRevision = wfGetDB( DB_MASTER );
+		$this->wikiRevision = wfGetDB( DB_PRIMARY );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
 			$this->importPrefix = $this->getOption( 'import-prefix' );
