@@ -20,6 +20,8 @@
 	"group-globalsysop-member": "{{GENDER:$1|Globalen Administrateur|Global Administratrice}}",
 	"group-translator": "Iwwersetzer",
 	"group-translator-member": "Iwwersetzer",
+	"group-trustandsafety": "Vertrauen a Sécherheet",
+	"group-trustandsafety-member": "Vertrauen a Sécherheet",
 	"group-member": "Memberen",
 	"protect-level-user": "Nëmmen ageloggt Benotzer zouloossen",
 	"restriction-delete": "Läschen",

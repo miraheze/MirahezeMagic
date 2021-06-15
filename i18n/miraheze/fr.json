@@ -6,8 +6,11 @@
 			"Florian COLLIN",
 			"Gomoko",
 			"HeartsDo",
+			"JenyxGym",
+			"MasterSinge",
 			"MuratTheTurkish",
 			"Pamputt",
+			"Raphoraph",
 			"Reception123",
 			"Thibaut120094",
 			"Urhixidur",
@@ -16,6 +19,8 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"content-model-flow-board": "Tableau de bord de StructuredDiscussions",
+	"datadump-namespaceselect-label": "Espace de nom",
 	"mirahezemagic-description": "Messages Mediawiki, scripts et crochets spécifiques pour Miraheze",
 	"miraheze-categories": "Catégories",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) fermé",
@@ -123,6 +128,8 @@
 	"group-translator-member": "traducteur",
 	"group-translationadmin": "Administrateurs de traduction",
 	"group-translationadmin-member": "administrateur de traduction",
+	"group-trustandsafety": "Confiance et Sécurité",
+	"group-trustandsafety-member": "Confiance et Sécurité",
 	"group-global-ipblock-exempt": "Exemption globale de blocage d’adresses IP",
 	"group-global-ipblock-exempt-member": "exempté{{GENDER:$1||e}} globalement de blocage d’adresse IP",
 	"group-member": "Membres",
@@ -156,5 +163,12 @@
 	"settings-socialtools": "Outils sociaux",
 	"settings-styling": "Style",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Habillages"
+	"extensions-skins": "Habillages",
+	"extensions-api": "API",
+	"extensions-antispam": "Prévention du pollupostage",
+	"extensions-editors": "Rédacteurs",
+	"extensions-mediahandlers": "Gestionnaires de médias",
+	"extensions-parserhooks": "Crochets de l’analyseur syntaxique",
+	"extensions-specialpages": "Pages spéciales",
+	"extensions-variable": "Variables"
 }

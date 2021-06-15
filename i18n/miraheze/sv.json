@@ -9,6 +9,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"content-model-flow-board": "StructuredDiscussions-forum",
 	"mirahezemagic-description": "MediaWiki-meddelanden, skript och hakar, specifika för Miraheze",
 	"miraheze-categories": "Kategorier",
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) Stängd",

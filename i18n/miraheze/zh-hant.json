@@ -8,6 +8,8 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"content-model-flow-board": "結構式討論面板",
+	"datadump-namespaceselect-label": "命名空間",
 	"mirahezemagic-description": "MediaWiki 訊息、手稿，以及用於 Miraheze 的特定掛勾",
 	"miraheze-categories": "分類",
 	"miraheze-close-email-subject": "Miraheze Wiki（$1）已關閉",
@@ -115,6 +117,8 @@
 	"group-translator-member": "翻譯人員",
 	"group-translationadmin": "翻譯管理員",
 	"group-translationadmin-member": "翻譯管理員",
+	"group-trustandsafety": "信任與安全",
+	"group-trustandsafety-member": "信任與安全",
 	"group-global-ipblock-exempt": "全域 IP 封鎖例外",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|全域 IP 封鎖例外}}",
 	"group-member": "成員",
@@ -148,5 +152,12 @@
 	"settings-socialtools": "社交工具",
 	"settings-styling": "樣式",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "外觀"
+	"extensions-skins": "外觀",
+	"extensions-api": "API",
+	"extensions-antispam": "垃圾訊息防止",
+	"extensions-editors": "編輯器",
+	"extensions-mediahandlers": "媒體處理器",
+	"extensions-parserhooks": "解析器掛勾",
+	"extensions-specialpages": "特殊頁面",
+	"extensions-variable": "變數"
 }

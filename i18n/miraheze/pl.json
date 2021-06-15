@@ -19,6 +19,7 @@
 	"miraheze-helpcenter": "Centrum wsparcia Miraheze",
 	"miraheze-requestfeatures": "Zapytanie dysponuje na wiki",
 	"miraheze-requestwiki": "Prośba wiki",
+	"miraheze-sidebar-donate": "Wesprzyj",
 	"mirahezesurvey": "Roczna ankieta Miraheze 2020",
 	"miraheze-survey-access-d": "Codziennie",
 	"miraheze-survey-access-ft": "To mój pierwszy raz",
@@ -143,5 +144,12 @@
 	"settings-seo": "Optymalizacja dla wyszukiwarek",
 	"settings-socialtools": "Specjalne narzędzia",
 	"settings-styling": "Wygląd",
-	"extensions-skins": "Skórka"
+	"extensions-skins": "Skórki",
+	"extensions-api": "API",
+	"extensions-antispam": "Ochrona przed spamem",
+	"extensions-editors": "Edytory",
+	"extensions-mediahandlers": "Wtyczki obsługi mediów",
+	"extensions-parserhooks": "Haki parsera",
+	"extensions-specialpages": "Strony specjalne",
+	"extensions-variable": "Zmienne"
 }

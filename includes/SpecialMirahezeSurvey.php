@@ -8,7 +8,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 
 	public function __construct() {
 		parent::__construct( 'MirahezeSurvey' );
-		$this->dbw = wfGetDB( DB_MASTER, [], 'survey' );
+		$this->dbw = wfGetDB( DB_PRIMARY, [], 'survey' );
 	}
 
         public function execute( $par ) {
@@ -393,7 +393,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			]
 		);
 
-		$this->getOutput()->addHTML( '<div class="successbox">' . $this->msg( 'miraheze-survey-done' )->escaped() . '</div>' );
+		$this->getOutput()->addHTML( Html::successBox( $this->msg( 'miraheze-survey-done' )->escaped() ) );
 
 		return true;
 	}

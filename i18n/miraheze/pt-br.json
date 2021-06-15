@@ -9,6 +9,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "Espaço nominal",
 	"mirahezemagic-description": "Mensagens, scripts e ganchos do MediaWiki específicos para o Miraheze",
 	"miraheze-categories": "Categorias",
 	"miraheze-close-email-subject": "Wiki de Mirahezee ($1) Fechada",
@@ -112,6 +113,8 @@
 	"group-translator-member": "tradutor",
 	"group-translationadmin": "Administradores de tradução",
 	"group-translationadmin-member": "administrador de tradução",
+	"group-trustandsafety": "Confiança e segurança",
+	"group-trustandsafety-member": "Confiança e segurança",
 	"group-global-ipblock-exempt": "Isenção de bloqueio de IP global",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|Isento|Isenta|Isento(a)}} de bloqueio de IP",
 	"group-member": "Membros",
@@ -145,5 +148,12 @@
 	"settings-socialtools": "Ferramentas sociais",
 	"settings-styling": "Estilo",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Temas"
+	"extensions-skins": "Temas",
+	"extensions-api": "API",
+	"extensions-antispam": "Prevenção contra spam",
+	"extensions-editors": "Editores",
+	"extensions-mediahandlers": "Executores de mídia",
+	"extensions-parserhooks": "Hooks do analisador (parser)",
+	"extensions-specialpages": "Páginas especiais",
+	"extensions-variable": "Variáveis"
 }

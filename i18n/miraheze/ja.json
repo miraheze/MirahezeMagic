@@ -11,6 +11,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "名前空間",
 	"miraheze-categories": "カテゴリ",
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) は閉鎖されました",
 	"miraheze-close-email-body": "こんにちは、\n\n誠に残念ながら、あなたのウィキは直近60日間に編集がなかったため、休眠の方針に従って閉鎖されています。もし、今でもウィキを編集したいとお考えであれば、Special:ManageWikiを開き、「閉鎖」のチェックボックスを解除して再開させてください。\n\nあなたがウィキを再開させない場合は、別の利用者によってあなたのウィキが引き継がれる可能性があることにご留意ください。また、あなたがウィキを再開させず、今から6カ月以内に別の利用者が引き継がない場合は、ウィキ削除の対象になります。",

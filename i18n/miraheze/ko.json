@@ -6,10 +6,12 @@
 			"John Lewis",
 			"MuratTheTurkish",
 			"Revi",
-			"Ykhwong"
+			"Ykhwong",
+			"그냥기여자"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "이름공간",
 	"mirahezemagic-description": "Miraheze에 특화된 미디어위키 메시지, 스크립트, 훅",
 	"miraheze-categories": "분류",
 	"miraheze-close-email-subject": "Miraheze 위키 ($1) 닫힘",
@@ -70,6 +72,8 @@
 	"group-translator-member": "번역자",
 	"group-translationadmin": "번역 관리자",
 	"group-translationadmin-member": "번역 관리자",
+	"group-trustandsafety": "신뢰 및 안전",
+	"group-trustandsafety-member": "신뢰 및 안전",
 	"group-global-ipblock-exempt": "전역 IP 차단 면제",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|통합 IP 차단 면제자}}",
 	"group-member": "회원",

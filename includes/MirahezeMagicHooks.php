@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
+use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
@@ -14,23 +16,32 @@ class MirahezeMagicHooks {
 	 * @return bool
 	 */
 	public static function onAbuseFilterShouldFilterAction(
-		AbuseFilterVariableHolder $vars,
+		VariableHolder $vars,
 		Title $title,
 		User $user,
 		array &$skipReasons
 	) {
-		$action = $vars->getVar( 'action' )->toString();
+		$varManager = AbuseFilterServices::getVariablesManager();
+
+		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
 		if ( $action === 'autocreateaccount' ) {
-			$skipReasons[] = "Blocking automatic account creation is not allowed";
+			$skipReasons[] = 'Blocking automatic account creation is not allowed';
+
 			return false;
 		}
+
 		return true;
 	}
 
 	public static function onCreateWikiCreation( $DBname ) {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
 		// Create static directory for wiki
 		if ( !file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
-			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$DBname}" )->execute();
+			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$DBname}" )
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
 		// Copy SocialProfile images
@@ -40,55 +51,73 @@ class MirahezeMagicHooks {
 				'-r',
 				'/srv/mediawiki/w/extensions/SocialProfile/avatars',
 				"/mnt/mediawiki-static/{$DBname}/avatars"
-			)->execute();
+			)
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 
 			Shell::command(
 				'/bin/cp',
 				'-r',
 				'/srv/mediawiki/w/extensions/SocialProfile/awards',
 				"/mnt/mediawiki-static/{$DBname}/awards"
-			)->execute();
+			)
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
+		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
-			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )->execute();
+			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
+				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
 		static::removeRedisKey( "*{$wiki}*" );
-		static::removeMemcachedKey( ".*{$wiki}.*" );
+		// static::removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_MASTER, [], $config->get( 'EchoSharedTrackingDB' ) );
+		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )->execute();
+			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		} else if ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )->execute();
+			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
+				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
 		static::removeRedisKey( "*{$old}*" );
-		static::removeMemcachedKey( ".*{$old}.*" );
+		// static::removeMemcachedKey( ".*{$old}.*" );
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-		
+
 		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
 				->limits( $limits )
+				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		}
 	}
@@ -238,7 +267,9 @@ class MirahezeMagicHooks {
 			'CreateAccount',
 			'Notifications',
 			'OAuth',
-			'ResetPassword'
+			'ResetPassword',
+			'Preferences',
+			'Watchlist'
 		];
 
 		if ( $title->isSpecialPage() ) {
@@ -349,6 +380,32 @@ class MirahezeMagicHooks {
 			} else {
 				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
 			}
+		}
+	}
+
+	public static function onRecentChange_save( RecentChange $recentChange ) {
+		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
+			return;
+		}
+
+		/** @var MirahezeMagicLogEmailManager $logEmailManager */
+		$logEmailManager = MediaWikiServices::getInstance()->get( 'MirahezeMagic.LogEmailManager' );
+		$conditions = $logEmailManager->findForUser( $recentChange->getPerformer() );
+
+		if ( empty( $conditions ) ) {
+			return;
+		}
+
+		$data = [
+			'user_name' => $recentChange->getPerformer()->getName(),
+			'wiki_id' => WikiMap::getCurrentWikiId(),
+			'log_type' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
+			'comment_text' => $recentChange->mAttribs['rc_comment_text'],
+		];
+
+		foreach ( $conditions as $condition ) {
+			// TODO: check for log entry types etc if wanted
+			$logEmailManager->sendEmail( $data, $condition['email'] );
 		}
 	}
 }

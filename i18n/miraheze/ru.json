@@ -11,6 +11,7 @@
 			"MuratTheTurkish",
 			"Nk88",
 			"Okras",
+			"Rivka Silinsky",
 			"Romanko Mikhail",
 			"Rubin16",
 			"Vlad5250",
@@ -18,6 +19,7 @@
 		]
 	},
 	"centralauth-groupname": "Miraheze",
+	"datadump-namespaceselect-label": "Пространство имён",
 	"mirahezemagic-description": "Сообщения, скрипты и hook'и MediaWiki, специфические для Miraheze",
 	"miraheze-categories": "Категории",
 	"miraheze-close-email-subject": "Вики на Miraheze ($1) закрыта",
@@ -86,6 +88,8 @@
 	"group-translator-member": "переводчик",
 	"group-translationadmin": "Администраторы перевода",
 	"group-translationadmin-member": "администратор перевода",
+	"group-trustandsafety": "Доверия и Безопасность",
+	"group-trustandsafety-member": "Доверия и Безопасность",
 	"group-global-ipblock-exempt": "Исключения из глобальных IP-блокировок",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|глобальное исключение из IP-блокировок}}",
 	"group-member": "Участники",
@@ -119,5 +123,8 @@
 	"settings-socialtools": "Социальные инструменты",
 	"settings-styling": "Стиль",
 	"settings-wikibase": "Вики-база",
-	"extensions-skins": "Темы оформления"
+	"extensions-skins": "Темы оформления",
+	"extensions-editors": "Редакторы",
+	"extensions-specialpages": "Служебные страницы",
+	"extensions-variable": "Переменные"
 }

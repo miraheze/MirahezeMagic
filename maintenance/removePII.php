@@ -67,12 +67,36 @@ class RemovePII extends Maintenance {
 			return;
 		}
 
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		$userActorId = $newName->getActorId( $dbw );
 
-		$tableUpdates = [
+		$tableDeletions = [
+			// Extensions
+			'cu_changes' => [
+				[
+					'where' => [
+						'cuc_user' => $userId
+					]
+				]
+			],
+			'cu_log' => [
+				[
+					'where' => [
+						'cul_user' => $userId
+					]
+				]
+			],
+			'user_profile' => [
+				[
+					'where' => [
+						'up_actor' => $userActorId
+					]
+				]
+			],
+		];
 
+		$tableUpdates = [
 			// Core
 			'recentchanges' => [
 				[
@@ -322,13 +346,19 @@ class RemovePII extends Maintenance {
 			],
 		];
 
-		if ( $dbw->tableExists( 'user_profile' ) ) {
-			$dbw->delete(
-				'user_profile',
-				[
-					'up_actor' => $userActorId
-				]
-			);
+		foreach ( $tableDeletions as $key => $value ) {
+			if ( $dbw->tableExists( $key ) ) {
+				foreach ( $value as $name => $fields ) {
+					try {
+						$dbw->delete(
+							$key,
+							$fields['where']
+						);
+					} catch( Exception $ex ) {
+						$this->output( "Table {$key} either does not exist or the deletion failed.\n" );
+					}
+				}
+			}
 		}
 
 		foreach ( $tableUpdates as $key => $value ) {
@@ -409,7 +439,7 @@ class RemovePII extends Maintenance {
 			$this->output( "Failed to delete user {$userOldName} page, likely does not have a user page. Error: {$errorMessage}\n" );
 		}
 
-		$dbw = wfGetDB( DB_MASTER, [], $wgCentralAuthDatabase );
+		$dbw = wfGetDB( DB_PRIMARY, [], $wgCentralAuthDatabase );
 		$centralUser = CentralAuthUser::getInstance( $newName );
 
 		if ( !$centralUser ) {

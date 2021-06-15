@@ -41,7 +41,7 @@ class AssignImportedEdits extends Maintenance {
 	}
 
 	public function execute() {
-		$this->wikiRevision = wfGetDB( DB_MASTER );
+		$this->wikiRevision = wfGetDB( DB_PRIMARY );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
 			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
@@ -90,7 +90,7 @@ class AssignImportedEdits extends Maintenance {
 			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
 		);
 		
-		$dbw = $this->getDB( DB_MASTER );
+		$dbw = $this->getDB( DB_PRIMARY );
 		$this->beginTransaction( $dbw, __METHOD__ );
 
 		# Count things

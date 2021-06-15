@@ -121,7 +121,7 @@ class FixUserIdLogging extends Maintenance {
 		$username = User::newFromActorId( $logRow->log_actor );
 
 		$dbr = wfGetDB( DB_REPLICA );
-		$dbw = wfGetDB( DB_MASTER );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		if ( isset( $this->mUserCache[$username->getName()] ) ) {
 			$userId = $this->mUserCache[$username->getName()];

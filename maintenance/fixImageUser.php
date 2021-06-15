@@ -37,7 +37,7 @@ class FixImageUser extends Maintenance {
 	public function execute() {
 		global $wgActorTableSchemaMigrationStage;
 
-		$wikiDB = wfGetDB( DB_MASTER );
+		$wikiDB = wfGetDB( DB_PRIMARY );
 
 		$from = $this->initialiseUser( urldecode( $this->getArg( 0 ) ) );
 		$to = $this->initialiseUser( urldecode ( $this->getArg( 1 ) ) );

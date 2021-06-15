@@ -5,9 +5,14 @@
 			"Fitoschido",
 			"Hedda",
 			"Joseph",
-			"MuratTheTurkish"
+			"MuratTheTurkish",
+			"SaldırganSincap",
+			"Sezgin İbiş"
 		]
 	},
+	"centralauth-groupname": "Miraheze",
+	"content-model-flow-board": "YapılandırılmışTartışmalar panosu",
+	"datadump-namespaceselect-label": "Ad alanı",
 	"mirahezemagic-description": "Miraheze'ye özel MediaWiki mesajları, betikleri ve kancalar",
 	"miraheze-categories": "Kategoriler",
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",
@@ -16,7 +21,7 @@
 	"miraheze-donatepage": "m:Donate/tr",
 	"miraheze-faq": "SSS",
 	"miraheze-helpcenter": "Miraheze Yardım Merkezi",
-	"miraheze-requestfeatures": "Bir viki için özellikle talep et",
+	"miraheze-requestfeatures": "Bir viki için özellik talep et",
 	"miraheze-requestwiki": "Viki talep et",
 	"miraheze-sidebar-donate": "Bağış yap",
 	"miraheze-sitenotice-closed": "Bu viki, son 60 günde hiç '''değişiklik yapılmadığı''' ya da '''günlük kaydı''' olmadığı için kapatıldı. Bu viki artık sahiplenilebilinir. Bu vikiyi sahiplenmek için [[m:Requests for adoption|Sahiplenme isteği]]ne gidin ve bir istekte bulunun. Eğer bu viki 6 ay içinde sahiplenilmezse silinebilir. Not: Eğer bu vikide bir bürokratsanız, [[Special:ManageWiki]] sayfasından \"kapatıldı\" kutucuğunun işaretini kaldırarak tekrar açabilirsiniz.",
@@ -115,6 +120,8 @@
 	"group-translator-member": "çevirmen",
 	"group-translationadmin": "Çeviri hizmetlileri",
 	"group-translationadmin-member": "çeviri hizmetlisi",
+	"group-trustandsafety": "Güven ve Emniyet",
+	"group-trustandsafety-member": "Güven ve Emniyet",
 	"group-global-ipblock-exempt": "Küresel IP engel muafiyeti",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|küresel IP engelleme muafı}}",
 	"group-member": "Üyeler",
@@ -148,5 +155,12 @@
 	"settings-socialtools": "Sosyal Araçları",
 	"settings-styling": "Stil",
 	"settings-wikibase": "Wikibase",
-	"extensions-skins": "Görünümler"
+	"extensions-skins": "Görünümler",
+	"extensions-api": "API",
+	"extensions-antispam": "Yığın mesaj (spam) önleme",
+	"extensions-editors": "Editörler",
+	"extensions-mediahandlers": "Ortam işleyiciler",
+	"extensions-parserhooks": "Derleyici çengelleri",
+	"extensions-specialpages": "Özel sayfalar",
+	"extensions-variable": "Değişkenler"
 }

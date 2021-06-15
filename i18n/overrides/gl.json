@@ -1,9 +1,0 @@
-{
-	"@metadata": {
-		"authors": [
-			"Elisardojm"
-		]
-	},
-	"miraheze-dberr-again": "Tente agardar algúns minutos e recargar. Para máis información sobre este erro, visite a nosa páxina en Twitter (Twitter.com/Miraheze) ou contacte cos administradores do sistema conectándose a #miraheze en irc.freenode.net",
-	"miraheze-oathauth-step1": "'''IMPORTANTE! Asegúrese de que leu [[M:OATHAuth|OATHAuth]] antes de activar esta funcionalidade!'''<br/>1.º paso: descargar un programa de autenticación de dous factores"
-}
