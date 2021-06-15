@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
+use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
@@ -13,41 +14,20 @@ class MirahezeMagicHooks {
 	 * @param User $user
 	 * @param array &$skipReasons
 	 * @return bool
-	 *
-	 * @note on 1.36 AbuseFilterVariableHolder is a deprecated class alias for
-	 * MediaWiki\Extension\AbuseFilter\Variables\VariableHolder, this is
-	 * incompatible with 1.35, and should be replaced when Miraheze uses
-	 * 1.36 in production.
 	 */
 	public static function onAbuseFilterShouldFilterAction(
-		AbuseFilterVariableHolder $vars,
+		VariableHolder $vars,
 		Title $title,
 		User $user,
 		array &$skipReasons
 	) {
-		/**
-		 * AbuseFilterVariableHolder::getVar was removed on 1.36,
-		 * use AbuseFilter's new VariablesManager service on 1.36 instead.
-		 * This check should be removed when Miraheze uses 1.36 in production.
-		 */
-		if ( version_compare( MW_VERSION, '1.36', '>=' ) ) {
-			$varManager = AbuseFilterServices::getVariablesManager();
+		$varManager = AbuseFilterServices::getVariablesManager();
 
-			$action = $varManager->getVar( $vars, 'action', 1 )->toString();
-			if ( $action === 'autocreateaccount' ) {
-				$skipReasons[] = 'Blocking automatic account creation is not allowed';
+		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
+		if ( $action === 'autocreateaccount' ) {
+			$skipReasons[] = 'Blocking automatic account creation is not allowed';
 
-				return false;
-			}
-
-			return true;
-		} else {
-			$action = $vars->getVar( 'action' )->toString();
-			if ( $action === 'autocreateaccount' ) {
-				$skipReasons[] = 'Blocking automatic account creation is not allowed';
-
-				return false;
-			}
+			return false;
 		}
 
 		return true;
