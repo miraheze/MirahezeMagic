@@ -8,14 +8,18 @@ class GenerateExtensionDatabaseList extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Generates lists of all wikis with given extension(s)';
-		$this->addOption( 'extensions', 'Extension(s) to generate list for. Multiple extensions should separated by pipe (|)', true, true );
+		$this->mDescription = 'Generates lists of all wikis with given extension(s) or skin(s)';
+
+		$desc = 'Extension or skin to generate database list for. ' .
+			'This option may be passed multiple times to generate multiple database lists at once.';
+
+		$this->addOption( 'extension', $desc, true, true, false, true );
 	}
 
 	public function execute() {
 		$lists = [];
 
-		$extArray = explode( '|', $this->getOption( 'extensions' ) );
+		$extArray = $this->getOption( 'extension' );
 
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$dbr = wfGetDB( DB_REPLICA, [], $config->get( 'CreateWikiDatabase' ) );
