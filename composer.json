@@ -1,0 +1,5 @@
+{
+    "require": {
+        "qmegas/memcache-search": "^0.1.2"
+    }
+}
