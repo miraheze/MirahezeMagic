@@ -127,6 +127,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q5a',
 				'default' => $dbRow['q5a'] ?? 0,
+				'min' => 0,
 				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
 			],
 			'q5b' => [
@@ -134,6 +135,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q5b',
 				'default' => $dbRow['q5b'] ?? 0,
+				'min' => 0,
 				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
 			],
 			'skin' => [
