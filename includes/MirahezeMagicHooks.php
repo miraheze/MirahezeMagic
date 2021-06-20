@@ -93,6 +93,14 @@ class MirahezeMagicHooks {
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
+		$manageWikiSettings = new ManageWikiSettings( $old );
+
+		foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+			if ( $setConfig['type'] === 'database' ) {
+				$manageWikiSettings->modify( [ $var => $new ] );
+			}
+		}
+
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
