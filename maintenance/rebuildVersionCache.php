@@ -47,7 +47,7 @@ class RebuildVersionCache extends Maintenance {
 		$gitInfo = new GitInfo( $IP, false );
 		$gitInfo->precomputeValues();
 
-		$cache = wfGetCache( CACHE_ANYTHING );
+		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
 		$coreId = $gitInfo->getHeadSHA1() ?: '';
 
 		$extensionCredits = $this->getConfig()->get( 'ExtensionCredits' );
