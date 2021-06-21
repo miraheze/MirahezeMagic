@@ -93,11 +93,16 @@ class MirahezeMagicHooks {
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
-		$manageWikiSettings = new ManageWikiSettings( $old );
+		foreach ( $config->get( 'LocalDatabases' ) as $db ) {
+			$manageWikiSettings = new ManageWikiSettings( $db );
 
-		foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
-			if ( $setConfig['type'] === 'database' ) {
-				$manageWikiSettings->modify( [ $var => $new ] );
+			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+				if (
+					$setConfig['type'] === 'database' &&
+					$manageWikiSettings->list( $var ) === $old
+				) {
+					$manageWikiSettings->modify( [ $var => $new ] );
+				}
 			}
 		}
 
