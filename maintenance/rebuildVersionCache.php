@@ -25,7 +25,7 @@
  * @ingroup Maintenance
  */
 
-require_once __DIR__ . '/Maintenance.php';
+require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
 /**
  * Maintenance script to rebuild the version cache.
