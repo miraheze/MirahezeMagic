@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Giannaras99",
 			"Michail Angelos Georgoulas",
 			"NikosLikomitros",
 			"Nikosgranturismogt",
@@ -11,6 +12,7 @@
 	"miraheze-donate": "Δωρεά",
 	"miraheze-faq": "Συχνές ερωτήσεις",
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
+	"mirahezesurvey": "Ετήσια έρευνα Miraheze 2021",
 	"group-oversight-member": "επιτηρητής",
 	"group-confirmed": "Eπιβεβαιωμένοι χρήστες",
 	"group-translator-member": "Μεταφραστής",
