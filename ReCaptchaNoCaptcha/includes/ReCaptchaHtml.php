@@ -57,7 +57,7 @@ class ReCaptchaHtml {
 	public function render() {
 		$output = Html::element( 'div', [
 			'class' => [
-				'g-recaptcha' => ( $this->version === 'v3' ),
+				'g-recaptcha' => ( $this->version !== 'v3' ),
 				'mw-confirmedit-captcha-fail' => (bool)$this->error,
 			],
 			'data-sitekey' => $this->siteKey,
