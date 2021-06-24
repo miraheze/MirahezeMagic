@@ -4,7 +4,7 @@
  * Creates a ReCaptcha v2 widget. Does not return any data; handling the data submitted by the
  * widget is callers' responsibility.
  */
-class HTMLReCaptchaField extends HTMLFormField {
+class HTMLReCaptchaNoCaptchaField extends HTMLFormField {
 	/** @var string Public key parameter to be passed to ReCaptcha. */
 	protected $key;
 
