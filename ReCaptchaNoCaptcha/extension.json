@@ -44,7 +44,10 @@
 	"ResourceModules": {
 		"ext.mirahezeMagic.reCaptchaNoCaptcha.visualEditor": {
 			"scripts": "ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.js",
-			"targets": [ "desktop", "mobile" ]
+			"targets": [
+				"desktop",
+				"mobile"
+			]
 		}
 	},
 	"Hooks": {
