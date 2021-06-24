@@ -2,13 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"A Chinese Wikipedian",
+			"GuoPC",
 			"列维劳德",
 			"沈澄心",
 			"铁桶"
 		]
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|您}}不能登录因为{{GENDER:$1|您的}}账号被全域锁定。请联系 <code>cvt{{@}}miraheze.org</code> 获取更多信息或申诉",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|您}}不能登录因为{{GENDER:$1|您的}}账号被全域锁定。请联系 <code>cvt[at]miraheze.org</code> 获取更多信息或申诉。",
 	"miraheze-shoutwiki-loginform-tos": "我已阅读并同意\n[https://meta.miraheze.org/wiki/Terms_of_Use 使用条款]和[https://meta.miraheze.org/wiki/Privacy_Policy 隐私政策]",
 	"miraheze-shoutwiki-must-accept-tos": "您一定要先接受使用条款才可以创建新的账户。",
 	"miraheze-centralauth-merge-method-admin": "手动合并账号",
