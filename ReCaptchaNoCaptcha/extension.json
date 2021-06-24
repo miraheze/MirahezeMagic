@@ -21,19 +21,29 @@
 		"ReCaptchaHtml": "includes/ReCaptchaHtml.php"
 	},
 	"config": {
-		"CaptchaClass": "ReCaptchaNoCaptcha",
-		"ReCaptchaSiteKey": "",
-		"ReCaptchaSecretKey": "",
-		"ReCaptchaSendRemoteIP": false,
-		"ReCaptchaVersion": "v2"
+		"CaptchaClass": {
+			"value": "ReCaptchaNoCaptcha"
+		},
+		"ReCaptchaSiteKey": {
+			"value": ""
+		},
+		"ReCaptchaSecretKey": {
+			"value": ""
+		},
+		"ReCaptchaSendRemoteIP": {
+			"value": false
+		},
+		"ReCaptchaVersion": {
+			"value": "v2"
+		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "resources",
-		"remoteExtPath": "ConfirmEdit/ReCaptchaNoCaptcha/resources"
+		"remoteExtPath": "MirahezeMagic/ReCaptchaNoCaptcha/resources"
 	},
 	"ResourceModules": {
-		"ext.confirmEdit.reCaptchaNoCaptcha.visualEditor": {
-			"scripts": "ve-confirmedit-reCaptchaNoCaptcha/ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.js",
+		"ext.mirahezeMagic.reCaptchaNoCaptcha.visualEditor": {
+			"scripts": "ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.js",
 			"targets": [ "desktop", "mobile" ]
 		}
 	},
@@ -41,8 +51,12 @@
 		"ResourceLoaderGetConfigVars": "ReCaptchaNoCaptchaHooks::onResourceLoaderGetConfigVars",
 		"MessagesPreLoad": "ReCaptchaNoCaptchaHooks::onMessagesPreLoad"
 	},
-	"VisualEditorPluginModules": [
-		"ext.confirmEdit.reCaptchaNoCaptcha.visualEditor"
-	],
-	"manifest_version": 1
+	"attributes": {
+		"VisualEditor": {
+			"PluginModules": [
+				"ext.mirahezeMagic.reCaptchaNoCaptcha.visualEditor"
+			]
+		}
+	},
+	"manifest_version": 2
 }
