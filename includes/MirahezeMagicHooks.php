@@ -150,6 +150,7 @@ class MirahezeMagicHooks {
 			'restriction-delete',
 			'wikibase-sitelinks-miraheze',
 			'centralauth-login-error-locked',
+			'snapwikiskin',
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
