@@ -14,5 +14,7 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Tento účet bol manuálne zlúčený správcom alebo dozorcom. To sa mohlo stať kvôli technickým problém pri procese premenovania alebo zlučovania.",
 	"miraheze-restriction-protect": "Chrániť",
 	"miraheze-restriction-delete": "Vymazať",
+	"miraheze-skinname-snapwikiskin": "Prásk!",
+	"miraheze-snapwikiskin": "Prásk!",
 	"miraheze-wikibase-sitelinks-miraheze": "Wiki na Miraheze"
 }

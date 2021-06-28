@@ -14,5 +14,6 @@
 	"miraheze-centralauth-merge-method-admin-desc": "此帳號已被系統管理員或監管員給手動合併。這出自於在重新命名或合併的過程中出現一些技術上問題。",
 	"miraheze-restriction-protect": "保護",
 	"miraheze-restriction-delete": "刪除",
+	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis"
 }

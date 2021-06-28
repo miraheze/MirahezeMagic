@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"AlvaroMolina",
 			"Beta16",
 			"Costabile",
@@ -18,6 +19,7 @@
 	"miraheze-requestwiki": "Richiedi un wiki",
 	"miraheze-sidebar-donate": "Dona",
 	"mirahezesurvey": "Sondaggio annuale Miraheze 2021",
+	"miraheze-survey-access-d": "Giornaliero",
 	"miraheze-survey-access-ft": "Questa è la mia prima volta",
 	"miraheze-survey-access-lm": "Meno di una volta al mese",
 	"miraheze-survey-access-m": "Una volta al mese",
