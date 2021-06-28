@@ -18,6 +18,7 @@
 	"miraheze-centralauth-merge-method-admin-desc": "This account was manually merged by a Sysadmin or Steward. This may have been due to a technical issue in a rename or merge process.",
 	"miraheze-restriction-protect": "Protect",
 	"miraheze-restriction-delete": "Delete",
+	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis"
 }
