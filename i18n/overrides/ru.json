@@ -19,5 +19,6 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Этот аккаунт был вручную объединён системным администратором или стюардом. Это могло произойти в результате технических проблем с переименованием или процесса объединения.",
 	"miraheze-restriction-protect": "Защитить",
 	"miraheze-restriction-delete": "Удалить",
+	"miraheze-skinname-snapwikiskin": "Щелчок!",
 	"miraheze-wikibase-sitelinks-miraheze": "Вики Miraheze"
 }

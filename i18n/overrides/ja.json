@@ -19,6 +19,7 @@
 	"miraheze-centralauth-merge-method-admin-desc": "このアカウントは、システム管理者またはスチュワードによって手動で統合されました。 これは、改名または統合の過程での技術的な問題が原因である可能性があります。",
 	"miraheze-restriction-protect": "保護",
 	"miraheze-restriction-delete": "削除",
+	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wiki"
 }

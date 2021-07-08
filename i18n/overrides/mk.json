@@ -14,5 +14,7 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Оваа сметка била рачно споена од системски администратор или надзорник. Ова може да било поради технички проблем со преименувањето или спојувањето.",
 	"miraheze-restriction-protect": "Заштити",
 	"miraheze-restriction-delete": "Избриши",
+	"miraheze-skinname-snapwikiskin": "Уфф!",
+	"miraheze-snapwikiskin": "Уфф!",
 	"miraheze-wikibase-sitelinks-miraheze": "Викија на Miraheze"
 }
