@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"BaRaN6161 TURK",
+			"Hedda",
 			"Joseph",
 			"MuratTheTurkish",
 			"SaldırganSincap"
@@ -17,5 +18,7 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Bu hesap bir Sistem Hizmetlisi veya Kahya tarafından manüel olarak birleştirildi. Bunun nedeni, yeniden adlandırma veya birleştirme işlemindeki teknik bir sorun olabilir.",
 	"miraheze-restriction-protect": "Koru",
 	"miraheze-restriction-delete": "Sil",
+	"miraheze-skinname-snapwikiskin": "Çek!",
+	"miraheze-snapwikiskin": "Çek!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Vikileri"
 }
