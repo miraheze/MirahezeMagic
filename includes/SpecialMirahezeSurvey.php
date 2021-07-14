@@ -3,55 +3,62 @@
 use MediaWiki\MediaWikiServices;
 
 class SpecialMirahezeSurvey extends FormSpecialPage {
+	/** @var Config */
+	private $config;
+
 	private $dbw;
+
 	private $row;
 
-	public function __construct() {
+	public function __construct( ConfigFactory $configFactory ) {
 		parent::__construct( 'MirahezeSurvey' );
-		$this->dbw = wfGetDB( DB_PRIMARY, [], 'survey' );
+
+		$this->config = $configFactory->makeConfig( 'MirahezeMagic' );
 	}
 
-        public function execute( $par ) {
-                $out = $this->getOutput();
-                $this->setParameter( $par );
-                $this->setHeaders();
+	public function execute( $par ) {
+		$this->setParameter( $par );
+		$this->setHeaders();
+
+		if ( !$this->config->get( 'MirahezeSurveyEnabled' ) ) {
+			return Html::errorBox( $this->msg( 'miraheze-survey-disabled' )->parse() );
+		}
+
+		$this->dbw = wfGetDB( DB_PRIMARY, [], 'survey' );
 
 		$this->row = $this->dbw->selectRow(
 			'survey',
-			'*',
-			[
+			'*', [
 				's_id' => md5( $this->getUser()->getName() )
 			]
 		);
 
 		if ( !$this->row ) {
 			$this->dbw->insert(
-				'survey',
-				[
+				'survey', [
 					's_id' => md5( $this->getUser()->getName() ),
 					's_state' => 'viewed'
 				]
 			);
 		}
 
-		$out->addWikiMsg( 'miraheze-survey-header' );
+		$this->getOutput()->addWikiMsg( 'miraheze-survey-header' );
 
-                $form = $this->getForm();
-                if ( $form->show() ) {
-                        $this->onSuccess();
-                }
-        }
+		$form = $this->getForm();
+		if ( $form->show() ) {
+			$this->onSuccess();
+		}
+	}
 
 	protected function getFormFields() {
-		global $wgCreateWikiCategories;
-
 		$this->getOutput()->addModules( 'ext.createwiki.oouiform' );
 		$this->getOutput()->addJsConfigVars( 'wgCreateWikiOOUIFormTabs', [] );
 
 		$dbRow = json_decode( $this->row->s_data ?? '[]', true );
 
-		$categoryOptions = $wgCreateWikiCategories;
-		unset( $categoryOptions[array_search( 'uncategorised', $categoryOptions )] );
+		$categoryOptions = $this->config->get( 'CreateWikiCategories' );
+
+		unset( $categoryOptions[ array_search( 'uncategorised', $categoryOptions ) ] );
 
 		$yesNoOptions = [
 			$this->msg( 'miraheze-survey-yes' )->text() => 1,
@@ -88,7 +95,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q2',
 				'default' => $dbRow['q2'] ?? false,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'anon-edit' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'anon-edit' ] ]
 			],
 			'q3a' => [
 				'type' => 'select',
@@ -96,7 +103,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q3a',
 				'options' => $accessOptions,
 				'default' => $dbRow['q3a'] ?? false,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
 			],
 			'q3b' => [
 				'type' => 'select',
@@ -104,7 +111,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q3b',
 				'options' => $accessOptions,
 				'default' => $dbRow['3b'] ?? false,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
 			],
 			'q4a' => [
 				'type' => 'select',
@@ -112,7 +119,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q4a',
 				'options' => $categoryOptions,
 				'default' => $dbRow['q4a'] ?? false,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
 			],
 			'q4b' => [
 				'type' => 'select',
@@ -120,7 +127,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q4b',
 				'options' => $categoryOptions,
 				'default' => $dbRow['q4b'] ?? false,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
 			],
 			'q5a' => [
 				'type' => 'int',
@@ -128,7 +135,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q5a',
 				'default' => $dbRow['q5a'] ?? 0,
 				'min' => 0,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
 			],
 			'q5b' => [
 				'type' => 'int',
@@ -136,7 +143,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q5b',
 				'default' => $dbRow['q5b'] ?? 0,
 				'min' => 0,
-				'hide-if' => [ 'NOR',  [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
+				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
 			],
 			'skin' => [
 				'type' => 'hidden',
@@ -185,7 +192,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q7-up',
 				'default' => $dbRow['q7-up'] ?? false
 			],
-			'q7-speed'  => [
+			'q7-speed' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -193,7 +200,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q7-speed',
 				'default' => $dbRow['q7-speed'] ?? false
 			],
-			'q7-oe'  => [
+			'q7-oe' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -210,7 +217,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'default' => $dbRow['q7-wc'] ?? false,
 				'hide-if' => [ '!==', 'wpq1', 'account-manage' ]
 			],
-			'q7-tasks'  => [
+			'q7-tasks' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -233,7 +240,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'default' => $this->msg( 'miraheze-survey-q7' )->text(),
 				'hide-if' => [ '!==', 'wpq8', '1' ]
 			],
-			'q8-e'  => [
+			'q8-e' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -242,7 +249,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'default' => $dbRow['q8-e'] ?? false,
 				'hide-if' => [ '!==', 'wpq8', '1' ]
 			],
-			'q8-f'  => [
+			'q8-f' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -251,7 +258,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'default' => $dbRow['q8-f'] ?? false,
 				'hide-if' => [ '!==', 'wpq8', '1' ]
 			],
-			'q8-c'  => [
+			'q8-c' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -260,7 +267,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'default' => $dbRow['q8-c'] ?? false,
 				'hide-if' => [ '!==', 'wpq8', '1' ]
 			],
-			'q8-u'  => [
+			'q8-u' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
 				'min' => 1,
@@ -378,6 +385,10 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 	}
 
 	public function onSubmit( array $formData ) {
+		if ( !$this->config->get( 'MirahezeSurveyEnabled' ) ) {
+			return;
+		}
+
 		$email = $formData['email'];
 		unset( $formData['email'] );
 
