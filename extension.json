@@ -38,7 +38,12 @@
 		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
 	},
 	"SpecialPages": {
-		"MirahezeSurvey": "SpecialMirahezeSurvey"
+		"MirahezeSurvey": {
+			"class": "SpecialMirahezeSurvey",
+			"services": [
+				"ConfigFactory"
+			]
+		}
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": [
@@ -92,6 +97,14 @@
 	},
 	"ConfigRegistry": {
 		"mirahezemagic": "GlobalVarConfig::newInstance"
+	},
+	"config": {
+		"MirahezeStaffAccessIds": {
+			"value": []
+		},
+		"MirahezeSurveyEnabled": {
+			"value": true
+		}
 	},
 	"ServiceWiringFiles": [
 		"includes/ServiceWiring.php"
