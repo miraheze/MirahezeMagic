@@ -17,11 +17,13 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 	}
 
 	public function execute( $par ) {
+		$out = $this->getOutput();
+
 		$this->setParameter( $par );
 		$this->setHeaders();
 
 		if ( !$this->config->get( 'MirahezeSurveyEnabled' ) ) {
-			return Html::errorBox( $this->msg( 'miraheze-survey-disabled' )->parse() );
+			return $out->addHTML( Html::errorBox( $this->msg( 'miraheze-survey-disabled' )->parse() ) );
 		}
 
 		$this->dbw = wfGetDB( DB_PRIMARY, [], 'survey' );
