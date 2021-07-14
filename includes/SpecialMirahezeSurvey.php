@@ -13,7 +13,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 	public function __construct( ConfigFactory $configFactory ) {
 		parent::__construct( 'MirahezeSurvey' );
 
-		$this->config = $configFactory->makeConfig( 'MirahezeMagic' );
+		$this->config = $configFactory->makeConfig( 'mirahezemagic' );
 	}
 
 	public function execute( $par ) {
