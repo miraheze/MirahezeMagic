@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16",
+			"Executive"
+		]
+	},
+	"miraheze-dberr-again": "Prova ad aspettare per alcuni minuti e ricarica. Per maggiori informazioni su questo errore prego contattarci sulla pagina Twitter (https://twitter.com/Miraheze) o contatta l’amministratore di sistema con #Miraheze su irc.libera.chat",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tu}} non posso loggare in perché {{GENDER:$1|tuo}} account è globalmente bloccato. Per favore <code>cvt[at]miraheze.org</code> per ulteriori informazioni o per appelarti.",
+	"miraheze-oathauth-step1": "IMPORTANTE! Prego accertarsi di leggere la pagina OATHAuth prima di attivare questo! Passo 1: Scaricare programma di autentificazione a due fattori",
+	"miraheze-prefs-help-realname": "Il nome reale è opzionale. Se scegli di fornirlo, questo sarà usato per darti attribuzione del tuo lavoro. Usando anche una Wiki ospitata da Miraheze, tu accetti i <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Termini d’uso]</span> e accetti le <span class=\"plainlinks\"> [https://meta.miraheze.org/wiki/Privacy_Policy Politiche Privacy]</span>.",
+	"miraheze-shoutwiki-loginform-tos": "Io ho letto, capito e accettato i\n[https://meta.miraheze.org/wiki/Terms_of_Use Termini d’uso] e la [https://meta.miraheze.org/wiki/Privacy_Policy Politica Privacy]",
+	"miraheze-shoutwiki-must-accept-tos": "Tu devi accettare i termini d’uso per essere capace di creare un account!",
+	"miraheze-centralauth-merge-method-admin": "Account unito manualmente",
+	"miraheze-centralauth-merge-method-admin-desc": "Questo account è stato unito manualmente da un admin di Sistema o Steward. Questo può accadere per una difficoltà tecnica a rinominare o nel processo di unificazione.",
+	"miraheze-restriction-protect": "Proteggi",
+	"miraheze-restriction-delete": "Cancella",
+	"miraheze-skinname-snapwikiskin": "Scatta!",
+	"miraheze-snapwikiskin": "Scatto!",
+	"miraheze-wikibase-sitelinks-miraheze": "Wikis di Miraheze"
+}
