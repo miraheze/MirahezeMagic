@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Olghinabella",
 			"Piramidion",
 			"Renamerr",
@@ -125,7 +126,7 @@
 	"settings-edit": "Редагування",
 	"settings-links": "Посилання",
 	"settings-localisation": "Локалізація",
-	"settings-maps": "Карти",
+	"settings-maps": "Мапи",
 	"settings-media": "Медіа",
 	"settings-notifications": "Сповіщення",
 	"settings-recentchanges": "Нові редагування",

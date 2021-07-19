@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"AlvaroMolina",
+			"Apzp79",
 			"Codenstory",
 			"John Lewis",
 			"MuratTheTurkish",
@@ -32,6 +33,7 @@
 	"miraheze-survey-access-w": "1주일에 한 번",
 	"miraheze-survey-agree-strong": "적극 동의",
 	"miraheze-survey-agree": "동의",
+	"miraheze-survey-disabled": "죄송합니다. 연간 설문조사는 종료됐습니다. 내년에 돌아와 주세요. 제안 사항이나 질문이 있다면, [[m:Help center|연락처]]로 문의해 주세요.",
 	"miraheze-survey-disagree-strong": "적극 동의하지 않음",
 	"miraheze-survey-disagree": "동의하지 않음",
 	"miraheze-survey-neutral": "중립",
