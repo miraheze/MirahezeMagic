@@ -4,6 +4,7 @@
 			"AlvaroMolina",
 			"Elroy",
 			"Mainframe98",
+			"McDutchie",
 			"MuratTheTurkish",
 			"Southparkfan"
 		]
@@ -13,9 +14,9 @@
 	"miraheze-categories": "Categorieën",
 	"miraheze-close-email-subject": "Miraheze-wiki ($1) gesloten",
 	"miraheze-close-email-body": "Hallo,\n\nOmdat er geen bewerkingen op je wiki zijn uitgevoerd gedurende 60 dagen, is deze gesloten in overeenstemming met ons inactiviteitsbeleid. Als je deze wiki wil bewerken kun je deze weer heropenen via de pagina \"Special:ManageWiki\".\n\nWees je ervan bewust dat een andere gebruiker vanaf nu jouw wiki kan adopteren. Als je wiki niet wordt heropend of geadopteerd in de komende 6 maanden komt je wiki in aanmerking voor verwijdering.",
-	"miraheze-donate": "Doneren",
+	"miraheze-donate": "Doneer aan Miraheze",
 	"miraheze-donatepage": "m:Donate/nl",
-	"miraheze-helpcenter": "Over Miraheze",
+	"miraheze-helpcenter": "Miraheze-helpcentrum",
 	"miraheze-requestfeatures": "Wiki-aanpassing aanvragen",
 	"miraheze-requestwiki": "Een wiki aanvragen",
 	"group-abuse": "Anti-misbruikteam",
@@ -32,7 +33,7 @@
 	"group-wikimanager-member": "{{GENDER:$1|wikibeheerder}}",
 	"group-rollbacker": "Terugdraaiers",
 	"group-rollbacker-member": "terugdraaier",
-	"group-autopatrolled": "Autopatrollers",
+	"group-autopatrolled": "Automatisch gecontroleerde gebruikers",
 	"group-autopatrolled-member": "autopatrolled",
 	"group-confirmed": "Bevestigde gebruikers",
 	"group-confirmed-member": "bevestigde gebruiker",
@@ -42,7 +43,7 @@
 	"group-translator-member": "vertaler",
 	"group-translationadmin": "Vertalingenbeheerders",
 	"group-translationadmin-member": "vertalingenbeheerder",
-	"group-global-ipblock-exempt": "uitgezonderden van globale IP-adresblokkades",
+	"group-global-ipblock-exempt": "Uitgezonderd van globale IP-adresblokkades",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|uitgezonderde van globale IP-adresblokkades}}",
 	"group-member": "Leden",
 	"protect-level-user": "Alleen ingelogde gebruikers toestaan",
@@ -60,5 +61,5 @@
 	"settings-links": "Koppelingen",
 	"settings-localisation": "Lokalisering",
 	"settings-media": "Media",
-	"extensions-skins": "Vormgeving"
+	"extensions-skins": "Vormgevingen"
 }

@@ -4,6 +4,8 @@
 			"Joetaras"
 		]
 	},
+	"content-model-flow-board": "Pannelle 'NgazzamindeStrutturate",
+	"datadump-namespaceselect-label": "Namespace",
 	"mirahezemagic-description": "Messàgge de MediaUicchi, script e gange specifeche pe Miraheze",
 	"miraheze-categories": "Categorije",
 	"miraheze-close-email-subject": "Uicchi Miraheze ($1) Achiuse",
@@ -13,7 +15,8 @@
 	"miraheze-helpcenter": "Cendre de aijute Miraheze",
 	"miraheze-requestfeatures": "Cirche le caratteristeche sua a 'na uicchi",
 	"miraheze-requestwiki": "Cirche 'nu uicchi",
-	"mirahezesurvey": "Sondagge annuale Miraheze 2020",
+	"miraheze-sidebar-donate": "Done",
+	"mirahezesurvey": "Sondagge annuale Miraheze 2021",
 	"miraheze-survey-access-d": "Sciurnaliere",
 	"miraheze-survey-access-ft": "Queste jè 'a prima vota meje",
 	"miraheze-survey-access-lm": "Mene de 'na vote a 'u mese",
@@ -22,6 +25,8 @@
 	"miraheze-survey-access-sm": "Cchiù (2+) vote a 'u mese",
 	"miraheze-survey-access-sw": "Cchiù (2+) vote a 'a sumane",
 	"miraheze-survey-access-w": "'Na vote a 'a sumane",
+	"miraheze-survey-agree-strong": "Combletamende d'accorde",
+	"miraheze-survey-agree": "D'accorde",
 	"miraheze-survey-neutral": "Neutrale",
 	"miraheze-survey-no": "None",
 	"miraheze-survey-yes": "Sìne",
