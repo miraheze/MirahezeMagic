@@ -50,7 +50,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			// IRC API which expects "Log".
 			$titleObj = Title::newFromText( 'Log/' . $attribs['rc_log_type'], NS_SPECIAL );
 		} else {
-			$titleObj =& $rc->getTitle();
+			$titleObj = $rc->getTitle();
 		}
 		$title = $titleObj->getPrefixedText();
 		$title = self::cleanupForIRC( $title );
