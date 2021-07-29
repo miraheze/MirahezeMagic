@@ -8,7 +8,7 @@
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被全域鎖定，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
 	"miraheze-oathauth-step1": "重要！在啟用此之前請確認已讀過 OATHAuth 頁面！步驟 1：下載雙重驗證程式",
 	"miraheze-prefs-help-realname": "真實姓名為選填。若您有意提供，這會用在您成品的姓名標示上。另外，依據使用由 Miraheze 所託管的 wiki，表示您同意<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 使用條款]</span>並接受<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy 隱私方針]</span>。",
-	"miraheze-shoutwiki-loginform-tos": "我已讀過、了解以上內容，並同意[https://meta.miraheze.org/wiki/Terms_of_Use 使用條款]與[https://meta.miraheze.org/wiki/Privacy_Policy 隱私方針]",
+	"miraheze-shoutwiki-loginform-tos": "我已讀過、了解以上內容，並同意[https://meta.miraheze.org/wiki/Terms_of_Use/zh-tw 使用條款]與[https://meta.miraheze.org/wiki/Privacy_Policy/zh-tw 隱私方針]",
 	"miraheze-shoutwiki-must-accept-tos": "您必須接受使用條款才能夠建立帳號！",
 	"miraheze-centralauth-merge-method-admin": "手動合併帳號",
 	"miraheze-centralauth-merge-method-admin-desc": "此帳號已被系統管理員或監管員給手動合併。這出自於在重新命名或合併的過程中出現一些技術上問題。",
