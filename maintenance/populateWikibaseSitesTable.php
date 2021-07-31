@@ -32,6 +32,10 @@ if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
 	require_once( __DIR__ . '/../../Wikibase/lib/includes/Sites/SitesBuilder.php' );
 }
 
+if ( !class_exists( Wikibase\Lib\Sites\SiteMatrixParser::class ) ) {
+	require_once __DIR__ . '/../../Wikibase/lib/includes/Sites/SiteMatrixParser.php';
+}
+
 /**
  * Maintenance script for populating the Sites table from another wiki that runs the
  * SiteMatrix or WikiDiscover extensions.
@@ -48,6 +52,9 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix or WikiDiscover extensions' );
 
+		$this->addOption( 'strip-protocols', "Strip http/https from URLs to make them protocol relative." );
+		$this->addOption( 'force-protocol', "Force a specific protocol for all URLs (like http/https).", false, true );
+		
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
 				. "Default is https://meta.miraheze.org/w/api.php", false, true );
 		$this->addOption( 'script-path', 'Script path to use for wikis in the site matrix. '
@@ -60,6 +67,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				. ' and populate interwiki ids for sites in that group.', false, true );
 		$this->addOption( 'valid-groups', 'A array of valid site link groups.', false, true );
 		$this->addOption( 'wiki-list', 'A array of wikis to look for.', false, true );
+
+		$this->addOption( 'no-expand-group', 'Do not expand site group codes in site matrix. '
+				. ' By default, "wiki" is expanded to "wikipedia".' );
+
 		$this->addOption( 'api-group', 'Either \'SiteMatrix\' or \'WikiDiscover\'', true, true, false, true );
 	}
 
@@ -81,14 +92,11 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 				$useFunction = $function[$apiGroup];
 
-				$json = $this->$useFunction( $url );
+				$sites = $this->$useFunction( $url );
 
-				$sites = $this->sitesFromJson( $json );
-
-				$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
+				$store = MediaWikiServices::getInstance()->getSiteStore();
 				$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
 				$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
-
 			} catch ( MWException $e ) {
 				$this->output( $e->getMessage() );
 			}
@@ -117,7 +125,9 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			throw new MWException( "Got no data from $url\n" );
 		}
 
-		return $json;
+		$sites = $this->sitesFromJson( $json );
+
+		return $sites;
 	}
 
 	/**
@@ -127,6 +137,23 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	 * @return string
 	 */
 	protected function getSiteMatrixData( $url ) {
+		$stripProtocols = (bool)$this->getOption( 'strip-protocols', false );
+		$forceProtocol = $this->getOption( 'force-protocol', null );
+		$scriptPath = $this->getOption( 'script-path', '/w/$1' );
+		$articlePath = $this->getOption( 'article-path', '/wiki/$1' );
+		$expandGroup = !$this->getOption( 'no-expand-group', false );
+
+		if ( $stripProtocols && is_string( $forceProtocol ) ) {
+			$this->fatalError( "You can't use both strip-protocols and force-protocol" );
+		}
+
+		$protocol = true;
+		if ( $stripProtocols ) {
+			$protocol = false;
+		} elseif ( is_string( $forceProtocol ) ) {
+			$protocol = $forceProtocol;
+		}
+
 		$url .= '?action=sitematrix&format=json';
 
 		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
@@ -135,7 +162,12 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			throw new MWException( "Got no data from $url\n" );
 		}
 
-		return $json;
+		$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath,
+				$protocol, $expandGroup );
+
+		$sites = $siteMatrixParser->sitesFromJson( $json );
+
+		return $sites;
 	}
 
 	/**
