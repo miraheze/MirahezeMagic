@@ -42,26 +42,51 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		global $IP;
+		$blankConfig = new GlobalVarConfig( '' );
 
-		$gitInfo = new GitInfo( $IP, false );
+		$gitInfo = new GitInfo( $blankConfig( 'IP' ), false );
 		$gitInfo->precomputeValues();
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
 		$coreId = $gitInfo->getHeadSHA1() ?: '';
 
-		$extensionCredits = $this->getConfig()->get( 'ExtensionCredits' );
+		$queue = array_fill_keys( array_merge(
+				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/*/extension*.json' ),
+				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/skin.json' )
+			),
+		true );
+
+		$processor = new ExtensionProcessor();
+
+		foreach ( $queue as $path => $mtime ) {
+			$json = file_get_contents( $path );
+			$info = json_decode( $json, true );
+			$version = $info['manifest_version'];
+
+			$processor->extractInfo( $path, $info, $version );
+		}
+
+		$data = $processor->getExtractedInfo();
+
+		$extensionCredits = array_merge( $data['credits'], array_values(
+				array_merge( ...array_values( $this->getConfig()->get( 'ExtensionCredits' ) ) )
+			)
+		);
+
 		foreach ( $extensionCredits as $type => $extensions ) {
 			foreach ( $extensions as $extension ) {
 				if ( isset( $extension['path'] ) ) {
 					$extensionPath = dirname( $extension['path'] );
 					$gitInfo = new GitInfo( $extensionPath, false );
+
 					if ( $this->hasOption( 'save-gitinfo' ) ) {
 						$gitInfo->precomputeValues();
 					}
+
 					$memcKey = $cache->makeKey(
 						'specialversion-ext-version-text', $extension['path'], $coreId
 					);
+
 					$cache->delete( $memcKey );
 				}
 			}
