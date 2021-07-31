@@ -20,7 +20,8 @@
  * @ingroup MirahezeMagic
  * @author John Lewis
  * @author Paladox
- * @version 1.0
+ * @author Universal Omega
+ * @version 2.0
  */
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
