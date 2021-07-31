@@ -33,7 +33,7 @@ if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
 
 /**
  * Maintenance script for populating the Sites table from another wiki that runs the
- * WikiDiscovery extension.
+ * SiteMatrix or WikiDiscover extensions.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -45,7 +45,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix extension' );
+		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix or WikiDiscover extensions' );
 
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
 				. "Default is https://meta.miraheze.org/w/api.php", false, true );
@@ -59,30 +59,41 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				. ' and populate interwiki ids for sites in that group.', false, true );
 		$this->addOption( 'valid-groups', 'A array of valid site link groups.', false, true );
 		$this->addOption( 'wiki-list', 'A array of wikis to look for.', false, true );
+		$this->addOption( 'api-group', 'Either \'SiteMatrix\' or \'WikiDiscover\'', true, true, false, true );
 	}
 
 	public function execute() {
-		$url = $this->getOption( 'load-from', 'https://meta.miraheze.org/w/api.php' );
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
 
-		$groups = [ 'miraheze' ];
-		$validGroups = $this->getOption( 'valid-groups', $groups );
+		$groups = [ 'wikidiscover' => [ 'miraheze' ], 'sitematrix' => [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
+			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ] ];
 
-		try {
-			$json = $this->getWikiDiscoveryData( $url );
+		$apiUrl = [ 'wikidiscover' => 'https://meta.miraheze.org/w/api.php', 'sitematrix' => 'https://meta.wikimedia.org/w/api.php' ];
+		$function = [ 'wikidiscover' => 'getWikiDiscoverData', 'sitematrix' => 'getSiteMatrixData' ];
 
-			$sites = $this->sitesFromJson( $json );
+		foreach ( $this->getOption( 'api-group' ) as $apiGroup ) {
+			$validGroups = $this->getOption( 'valid-groups', $groups[$apiGroup] );
 
-			$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
-			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
-			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
+			try {
+				$url = $this->getOption( 'load-from', $apiUrl[$apiGroup] );
 
-		} catch ( MWException $e ) {
-			$this->output( $e->getMessage() );
+				$useFunction = $function[$apiGroup];
+
+				$json = $this->$useFunction( $url );
+
+				$sites = $this->sitesFromJson( $json );
+
+				$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
+				$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
+				$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
+
+			} catch ( MWException $e ) {
+				$this->output( $e->getMessage() );
+			}
+
+			$this->output( "done.\n" );
 		}
-
-		$this->output( "done.\n" );
 	}
 
 	/**
@@ -91,7 +102,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	 * @throws MWException
 	 * @return string
 	 */
-	protected function getWikiDiscoveryData( $url ) {
+	protected function getWikiDiscoverData( $url ) {
 		$url .= '?action=wikidiscover&format=json';
 
 		$list = $this->getOption( 'wiki-list' );
@@ -100,6 +111,24 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		}
 
 		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
+
+		if ( !$json ) {
+			throw new MWException( "Got no data from $url\n" );
+		}
+
+		return $json;
+	}
+
+	/**
+	 * @param string $url
+	 *
+	 * @throws MWException
+	 * @return string
+	 */
+	protected function getSiteMatrixData( $url ) {
+		$url .= '?action=sitematrix&format=json';
+
+		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [], __METHOD__ );
 
 		if ( !$json ) {
 			throw new MWException( "Got no data from $url\n" );
