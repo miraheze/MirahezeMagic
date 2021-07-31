@@ -162,7 +162,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			throw new MWException( "Got no data from $url\n" );
 		}
 
-		$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath,
+		$siteMatrixParser = new Wikibase\Lib\Sites\SiteMatrixParser( $scriptPath, $articlePath,
 				$protocol, $expandGroup );
 
 		$sites = $siteMatrixParser->sitesFromJson( $json );
