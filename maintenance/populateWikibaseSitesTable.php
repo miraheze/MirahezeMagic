@@ -84,25 +84,28 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$apiUrl = [ 'wikidiscover' => 'https://meta.miraheze.org/w/api.php', 'sitematrix' => 'https://meta.wikimedia.org/w/api.php' ];
 		$function = [ 'wikidiscover' => 'getWikiDiscoverData', 'sitematrix' => 'getSiteMatrixData' ];
 
+		$validGroups = [];
+		$sites = [];
+
 		foreach ( $this->getOption( 'api-group' ) as $apiGroup ) {
-			$validGroups = $this->getOption( 'valid-groups', $groups[$apiGroup] );
+			$validGroups += $this->getOption( 'valid-groups', $groups[$apiGroup] );
 
 			try {
 				$url = $this->getOption( 'load-from', $apiUrl[$apiGroup] );
 
 				$useFunction = $function[$apiGroup];
 
-				$sites = $this->$useFunction( $url );
-
-				$store = MediaWikiServices::getInstance()->getSiteStore();
-				$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
-				$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
+				$sites += $this->$useFunction( $url );
 			} catch ( MWException $e ) {
 				$this->output( $e->getMessage() );
 			}
 
 			$this->output( "done.\n" );
 		}
+
+		$store = MediaWikiServices::getInstance()->getSiteStore();
+		$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
+		$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 	}
 
 	/**
