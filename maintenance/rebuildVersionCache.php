@@ -45,9 +45,11 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		$blankConfig = new GlobalVarConfig( '' );
+		global $IP;
+		
+		$IP = '/srv/mediawiki-staging/w';
 
-		$gitInfo = new GitInfo( $blankConfig->get( 'IP' ), false );
+		$gitInfo = new GitInfo( $IP, false );
 		$gitInfo->precomputeValues();
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
@@ -55,9 +57,9 @@ class RebuildVersionCache extends Maintenance {
 
 
 		$queue = array_fill_keys( array_merge(
-				glob( '/srv/mediawiki-staging/w/extensions/*/extension*.json' ),
-				glob( '/srv/mediawiki-staging/w/extensions/SocialProfile/*/extension.json' ),
-				glob( '/srv/mediawiki-staging/w/skins/*/skin.json' )
+				glob( $IP . '/extensions/*/extension*.json' ),
+				glob( $IP . '/extensions/SocialProfile/*/extension.json' ),
+				glob( $IP . '/skins/*/skin.json' )
 			),
 		true );
 
