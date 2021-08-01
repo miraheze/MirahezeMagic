@@ -55,9 +55,9 @@ class RebuildVersionCache extends Maintenance {
 
 
 		$queue = array_fill_keys( array_merge(
-				glob( '/srv/mediawiki-staging/extensions/*/extension*.json' ),
-				glob( '/srv/mediawiki-staging/extensions/SocialProfile/*/extension.json' ),
-				glob( '/srv/mediawiki-staging/skins/*/skin.json' )
+				glob( '/srv/mediawiki-staging/w/extensions/*/extension*.json' ),
+				glob( '/srv/mediawiki-staging/w/extensions/SocialProfile/*/extension.json' ),
+				glob( '/srv/mediawiki-staging/w/skins/*/skin.json' )
 			),
 		true );
 
