@@ -71,7 +71,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$this->addOption( 'no-expand-group', 'Do not expand site group codes in site matrix. '
 				. ' By default, "wiki" is expanded to "wikipedia".' );
 
-		$this->addOption( 'api-group', 'Either \'SiteMatrix\' or \'WikiDiscover\'', true, true, false, true );
+		$this->addOption( 'api-group', 'Either \'sitematrix\' or \'wikidiscover\'', true, true, false, true );
 	}
 
 	public function execute() {
