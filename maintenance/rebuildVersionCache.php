@@ -76,7 +76,7 @@ class RebuildVersionCache extends Maintenance {
 		);
 
 		foreach ( $extensionCredits as $extension => $extensionData ) {
-			if ( isset( $data['path'] ) ) {
+			if ( isset( $extensionData['path'] ) ) {
 				$extensionPath = dirname( $extensionData['path'] );
 				$gitInfo = new GitInfo( $extensionPath, false );
 
