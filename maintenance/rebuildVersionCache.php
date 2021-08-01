@@ -50,9 +50,11 @@ class RebuildVersionCache extends Maintenance {
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
 		$coreId = $gitInfo->getHeadSHA1() ?: '';
 
+
+		global $wgExtensionDirectory,$wgStyleDirectory,$wgExtensionCredits;
 		$queue = array_fill_keys( array_merge(
-				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/*/extension*.json' ),
-				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/skin.json' )
+				glob( $wgExtensionDirectory . '/*/extension*.json' ),
+				glob( $wgStyleDirectory . '/*/skin.json' )
 			),
 		true );
 
@@ -69,26 +71,24 @@ class RebuildVersionCache extends Maintenance {
 		$data = $processor->getExtractedInfo();
 
 		$extensionCredits = array_merge( $data['credits'], array_values(
-				array_merge( ...array_values( $this->getConfig()->get( 'ExtensionCredits' ) ) )
+				array_merge( ...array_values( $wgExtensionCredits ) )
 			)
 		);
 
-		foreach ( $extensionCredits as $type => $extensions ) {
-			foreach ( $extensions as $extension ) {
-				if ( isset( $extension['path'] ) ) {
-					$extensionPath = dirname( $extension['path'] );
-					$gitInfo = new GitInfo( $extensionPath, false );
+		foreach ( $extensionCredits as $extension => $extensionData ) {
+			if ( isset( $data['path'] ) ) {
+				$extensionPath = dirname( $extensionData['path'] );
+				$gitInfo = new GitInfo( $extensionPath, false );
 
-					if ( $this->hasOption( 'save-gitinfo' ) ) {
-						$gitInfo->precomputeValues();
-					}
-
-					$memcKey = $cache->makeKey(
-						'specialversion-ext-version-text', $extension['path'], $coreId
-					);
-
-					$cache->delete( $memcKey );
+				if ( $this->hasOption( 'save-gitinfo' ) ) {
+					$gitInfo->precomputeValues();
 				}
+
+				$memcKey = $cache->makeKey(
+					'specialversion-ext-version-text', $extensionData['path'], $coreId
+				);
+
+				$cache->delete( $memcKey );
 			}
 		}
 	}
