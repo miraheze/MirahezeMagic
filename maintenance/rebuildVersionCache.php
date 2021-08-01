@@ -44,7 +44,7 @@ class RebuildVersionCache extends Maintenance {
 	public function execute() {
 		$blankConfig = new GlobalVarConfig( '' );
 
-		$gitInfo = new GitInfo( $blankConfig( 'IP' ), false );
+		$gitInfo = new GitInfo( $blankConfig->get( 'IP' ), false );
 		$gitInfo->precomputeValues();
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
