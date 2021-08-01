@@ -54,8 +54,7 @@ class RebuildVersionCache extends Maintenance {
 		$queue = array_fill_keys( array_merge(
 				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/*/extension*.json' ),
 				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/SocialProfile/*/extension.json' ),
-				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/skin.json' ),
-				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/*/skin.json' )
+				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/skin.json' )
 			),
 		true );
 
