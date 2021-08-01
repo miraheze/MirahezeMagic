@@ -51,10 +51,11 @@ class RebuildVersionCache extends Maintenance {
 		$coreId = $gitInfo->getHeadSHA1() ?: '';
 
 
-		global $wgExtensionDirectory,$wgStyleDirectory,$wgExtensionCredits;
 		$queue = array_fill_keys( array_merge(
-				glob( $wgExtensionDirectory . '/*/extension*.json' ),
-				glob( $wgStyleDirectory . '/*/skin.json' )
+				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/*/extension*.json' ),
+				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/*/*/extension.json' ),
+				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/skin.json' ),
+				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/*/skin.json' )
 			),
 		true );
 
@@ -71,7 +72,7 @@ class RebuildVersionCache extends Maintenance {
 		$data = $processor->getExtractedInfo();
 
 		$extensionCredits = array_merge( $data['credits'], array_values(
-				array_merge( ...array_values( $wgExtensionCredits ) )
+				array_merge( ...array_values( $this->getConfig()->get( 'ExtensionCredits' ) ) )
 			)
 		);
 
