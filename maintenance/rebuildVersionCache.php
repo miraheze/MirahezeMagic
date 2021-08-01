@@ -80,6 +80,8 @@ class RebuildVersionCache extends Maintenance {
 			)
 		);
 
+		$IP = '/srv/mediawiki-staging/w';
+
 		foreach ( $extensionCredits as $extension => $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
 				$extensionPath = dirname( $extensionData['path'] );
