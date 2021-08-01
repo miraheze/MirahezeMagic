@@ -23,6 +23,9 @@
  *
  * @file
  * @ingroup Maintenance
+ *
+ * @author Universal Omega
+ * @version 1.0
  */
 
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
