@@ -84,7 +84,6 @@ class RebuildVersionCache extends Maintenance {
 			if ( isset( $extensionData['path'] ) ) {
 				$extensionPath = dirname( $extensionData['path'] );
 
-				$IP = '/srv/mediawiki-staging/w';
 				$gitInfo = new GitInfo( $extensionPath, false );
 
 				if ( $this->hasOption( 'save-gitinfo' ) ) {
