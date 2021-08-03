@@ -95,7 +95,7 @@ class RebuildVersionCache extends Maintenance {
 				}
 
 				$memcKey = $cache->makeKey(
-					'specialversion-ext-version-text', $extensionData['path'], $coreId
+					'specialversion-ext-version-text', str_replace( $IP, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
 				);
 
 				$cache->delete( $memcKey );
