@@ -46,9 +46,11 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		global $IP;
+		global $IP, $wgShellRestrictionMethod;
 
 		if ( $this->hasOption( 'use-staging' ) ) {
+			$wgShellRestrictionMethod = false;
+
 			$IP = '/srv/mediawiki-staging/w';
 		}
 
