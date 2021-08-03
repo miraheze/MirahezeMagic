@@ -42,12 +42,15 @@ class RebuildVersionCache extends Maintenance {
 		parent::__construct();
 		$this->addDescription( 'Rebuild the version cache' );
 		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
+		$this->addOption( 'use-staging', 'Use /srv/mediawiki-staging directory?' );
 	}
 
 	public function execute() {
 		global $IP;
-		
-		$IP = '/srv/mediawiki-staging/w';
+
+		if ( $this->hasOption( 'use-staging' ) ) {
+			$IP = '/srv/mediawiki-staging/w';
+		}
 
 		$gitInfo = new GitInfo( $IP, false );
 		$gitInfo->precomputeValues();
