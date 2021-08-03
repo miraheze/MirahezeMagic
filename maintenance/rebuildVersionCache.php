@@ -63,6 +63,7 @@ class RebuildVersionCache extends Maintenance {
 
 		$queue = array_fill_keys( array_merge(
 				glob( $IP . '/extensions/*/extension*.json' ),
+				glob( $IP . '/extensions/SocialProfile/*/extension.json' ),
 				glob( $IP . '/skins/*/skin.json' )
 			),
 		true );
