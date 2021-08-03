@@ -85,8 +85,8 @@ class RebuildVersionCache extends Maintenance {
 
 		foreach ( $extensionCredits as $extension => $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
-				$extensionPath = dirname( $extensionData['path'] );
-				$extensionPath = str_replace( '/srv/mediawiki/w', $IP, $extensionPath, 1 );
+				$extensionDirectory = dirname( $extensionData['path'] );
+				$extensionPath = str_replace( '/srv/mediawiki/w', $IP, $extensionDirectory, 1 );
 
 				$gitInfo = new GitInfo( $extensionPath, false );
 
