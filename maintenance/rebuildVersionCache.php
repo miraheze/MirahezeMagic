@@ -42,12 +42,19 @@ class RebuildVersionCache extends Maintenance {
 		parent::__construct();
 		$this->addDescription( 'Rebuild the version cache' );
 		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
+		$this->addOption( 'use-staging', 'Use /srv/mediawiki-staging directory?' );
 	}
 
 	public function execute() {
-		$blankConfig = new GlobalVarConfig( '' );
+		global $IP, $wgShellRestrictionMethod;
 
-		$gitInfo = new GitInfo( $blankConfig->get( 'IP' ), false );
+		if ( $this->hasOption( 'use-staging' ) ) {
+			$wgShellRestrictionMethod = false;
+
+			$IP = '/srv/mediawiki-staging/w';
+		}
+
+		$gitInfo = new GitInfo( $IP, false );
 		$gitInfo->precomputeValues();
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
@@ -55,9 +62,9 @@ class RebuildVersionCache extends Maintenance {
 
 
 		$queue = array_fill_keys( array_merge(
-				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/*/extension*.json' ),
-				glob( $this->getConfig()->get( 'ExtensionDirectory' ) . '/SocialProfile/*/extension.json' ),
-				glob( $this->getConfig()->get( 'StyleDirectory' ) . '/*/skin.json' )
+				glob( $IP . '/extensions/*/extension*.json' ),
+				glob( $IP . '/extensions/SocialProfile/*/extension.json' ),
+				glob( $IP . '/skins/*/skin.json' )
 			),
 		true );
 
@@ -80,7 +87,9 @@ class RebuildVersionCache extends Maintenance {
 
 		foreach ( $extensionCredits as $extension => $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
-				$extensionPath = dirname( $extensionData['path'] );
+				$extensionDirectory = dirname( $extensionData['path'] );
+				$extensionPath = str_replace( '/srv/mediawiki/w', $IP, $extensionDirectory );
+
 				$gitInfo = new GitInfo( $extensionPath, false );
 
 				if ( $this->hasOption( 'save-gitinfo' ) ) {
@@ -88,7 +97,7 @@ class RebuildVersionCache extends Maintenance {
 				}
 
 				$memcKey = $cache->makeKey(
-					'specialversion-ext-version-text', $extensionData['path'], $coreId
+					'specialversion-ext-version-text', str_replace( $IP, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
 				);
 
 				$cache->delete( $memcKey );
