@@ -85,6 +85,7 @@ class MirahezeMagicHooks {
 					$manageWikiSettings->list()[$var] === $wiki
 				) {
 					$manageWikiSettings->remove( $var );
+					$manageWikiSettings->commit();
 				}
 			}
 		}
@@ -117,6 +118,7 @@ class MirahezeMagicHooks {
 					$manageWikiSettings->list()[$var] === $old
 				) {
 					$manageWikiSettings->modify( [ $var => $new ] );
+					$manageWikiSettings->commit();
 				}
 			}
 		}
