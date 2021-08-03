@@ -75,6 +75,20 @@ class MirahezeMagicHooks {
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
+		foreach ( $config->get( 'LocalDatabases' ) as $db ) {
+			$manageWikiSettings = new ManageWikiSettings( $db );
+
+			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+				if (
+					$setConfig['type'] === 'database' &&
+					isset( $manageWikiSettings->list()[$var] ) &&
+					$manageWikiSettings->list()[$var] === $wiki
+				) {
+					$manageWikiSettings->remove( $var );
+				}
+			}
+		}
+
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
 				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
@@ -92,6 +106,20 @@ class MirahezeMagicHooks {
 		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
+
+		foreach ( $config->get( 'LocalDatabases' ) as $db ) {
+			$manageWikiSettings = new ManageWikiSettings( $db );
+
+			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+				if (
+					$setConfig['type'] === 'database' &&
+					isset( $manageWikiSettings->list()[$var] ) &&
+					$manageWikiSettings->list()[$var] === $old
+				) {
+					$manageWikiSettings->modify( [ $var => $new ] );
+				}
+			}
+		}
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
