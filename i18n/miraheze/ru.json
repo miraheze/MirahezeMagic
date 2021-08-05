@@ -125,7 +125,11 @@
 	"settings-styling": "Стиль",
 	"settings-wikibase": "Вики-база",
 	"extensions-skins": "Темы оформления",
+	"extensions-api": "API",
+	"extensions-antispam": "Антиспам",
 	"extensions-editors": "Редакторы",
+	"extensions-mediahandlers": "Обработчики медиа",
+	"extensions-parserhooks": "Перехватчики синтаксического анализатора",
 	"extensions-specialpages": "Служебные страницы",
 	"extensions-variable": "Переменные"
 }
