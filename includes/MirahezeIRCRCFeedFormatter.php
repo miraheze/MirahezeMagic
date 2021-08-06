@@ -60,7 +60,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			$attribs['rc_log_type'] === 'renameuser' &&
 			in_array( $attribs['rc_user_text'], $trustAndSafety )
 		) {
-			return null
+			return null;
 		}
 
 		if ( $attribs['rc_type'] == RC_LOG ) {
