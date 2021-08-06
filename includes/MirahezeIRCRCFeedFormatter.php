@@ -47,7 +47,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
 		/**
 		 * don't send renameuser log events to IRC for
-		 * Miraheze trust and safety accounts.
+		 * Miraheze Trust and Safety accounts.
 		 */
 
 		$trustAndSafety = [
