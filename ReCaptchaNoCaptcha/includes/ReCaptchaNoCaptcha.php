@@ -106,6 +106,8 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 		}
 
 		if ( $wgReCaptchaVersion === 'v3' ) {
+			$this->error = 'v3-failed';
+			$this->logCheckError( $this->error );
 			return (float)$response['score'] >= 0.5;
 		} elseif ( $wgReCaptchaVersion === 'v2' && isset( $response['score'] ) ) {
 			throw new ConfigException( 'ReCaptcha version 2 was configured, however, ' .
