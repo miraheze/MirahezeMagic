@@ -51,8 +51,9 @@
 		}
 	},
 	"Hooks": {
-		"ResourceLoaderGetConfigVars": "ReCaptchaNoCaptchaHooks::onResourceLoaderGetConfigVars",
-		"MessagesPreLoad": "ReCaptchaNoCaptchaHooks::onMessagesPreLoad"
+		"MessageCache::get": "ReCaptchaNoCaptchaHooks::onMessageCacheGet",
+		"MessagesPreLoad": "ReCaptchaNoCaptchaHooks::onMessagesPreLoad",
+		"ResourceLoaderGetConfigVars": "ReCaptchaNoCaptchaHooks::onResourceLoaderGetConfigVars"
 	},
 	"attributes": {
 		"VisualEditor": {
