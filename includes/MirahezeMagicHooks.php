@@ -167,7 +167,6 @@ class MirahezeMagicHooks {
 	public static function onMessageCacheGet( &$lcKey ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = [
-			'captcha-error',
 			'centralauth-groupname',
 			'dberr-again',
 			'privacypage',
