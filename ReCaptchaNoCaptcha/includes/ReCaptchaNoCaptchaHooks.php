@@ -56,7 +56,6 @@ class ReCaptchaNoCaptchaHooks {
 			$message = new RawMessage( '' );
 		}
 	}
-}
 
 	public static function onMessageCacheGet( &$lcKey ) {
 		$captcha = new ReCaptchaNoCaptcha();
@@ -64,3 +63,4 @@ class ReCaptchaNoCaptchaHooks {
 			$lcKey = 'renocaptcha-v3-failed';
 		}
 	}
+}
