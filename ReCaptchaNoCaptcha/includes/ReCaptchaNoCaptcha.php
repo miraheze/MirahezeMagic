@@ -150,10 +150,10 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 		$msg = wfMessage( $name );
 
 		if ( $this->error ) {
-			$msg = new RawMessage( '<div class="error">$1</div>', [ ( $msg->isDisabled() ? $msg : $action ) ] );
+			$msg = new RawMessage( '<div class="error">$1</div>', [ $msg ] );
 		}
 
-		return $msg;
+		return $msg->text();
 	}
 
 	/**
