@@ -57,3 +57,10 @@ class ReCaptchaNoCaptchaHooks {
 		}
 	}
 }
+
+	public static function onMessageCacheGet( &$lcKey ) {
+		$captcha = new ReCaptchaNoCaptcha();
+		if ( $lcKey === 'captcha-error' && $captcha->getError() === 'v3-failed' ) {
+			$lcKey = 'renocaptcha-v3-failed';
+		}
+	}
