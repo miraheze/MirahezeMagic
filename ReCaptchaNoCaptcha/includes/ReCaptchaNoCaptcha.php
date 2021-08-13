@@ -105,7 +105,7 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 			return false;
 		}
 
-		if ( isset( $response['score'] ) && (float)$response['score'] < 0.5 ) {
+		if ( isset( $response['score'] ) && (float)$response['score'] < 1.0 /*0.5*/ ) {
 			$this->error = 'v3-failed';
 			$this->logCheckError( $this->error );
 			return false;
