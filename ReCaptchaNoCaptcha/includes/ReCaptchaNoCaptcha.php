@@ -146,10 +146,13 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	 * @return Message
 	 */
 	public function getMessage( $action ) {
-		$msg = parent::getMessage( $action );
+		$name = static::$messagePrefix . $action;
+		$msg = wfMessage( $name );
+
 		if ( $this->error ) {
-			$msg = new RawMessage( '<div class="error">$1</div>', [ $msg ] );
+			$msg = new RawMessage( '<div class="error">$1</div>', [ ( $msg->isDisabled() ? $msg : $action ) ] );
 		}
+
 		return $msg;
 	}
 
