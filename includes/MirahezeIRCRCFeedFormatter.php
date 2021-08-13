@@ -45,6 +45,24 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			return null;
 		}
 
+		/**
+		 * don't send renameuser log events to IRC for
+		 * Miraheze Trust and Safety accounts.
+		 */
+
+		$trustAndSafety = [
+			'Doug (Miraheze)',
+			'Owen (Miraheze)'
+		];
+
+		if (
+			$attribs['rc_type'] == RC_LOG &&
+			$attribs['rc_log_type'] === 'renameuser' &&
+			in_array( $attribs['rc_user_text'], $trustAndSafety )
+		) {
+			return null;
+		}
+
 		if ( $attribs['rc_type'] == RC_LOG ) {
 			// Don't use SpecialPage::getTitleFor, backwards compatibility with
 			// IRC API which expects "Log".
