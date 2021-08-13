@@ -9,8 +9,6 @@ class ReCaptchaNoCaptchaHooks {
 	 */
 	private static $v3CaptchaMessages = [
 		'Renocaptcha-desc',
-		'Renocaptcha-addurl',
-		'Renocaptcha-badlogin',
 		'Renocaptcha-v3-failed'
 	];
 
