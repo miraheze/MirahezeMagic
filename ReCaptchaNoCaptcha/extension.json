@@ -35,6 +35,9 @@
 		},
 		"ReCaptchaVersion": {
 			"value": "v2"
+		},
+		"ReCaptchaMinimumScore": {
+			"value": "0.5"
 		}
 	},
 	"ResourceFileModulePaths": {
