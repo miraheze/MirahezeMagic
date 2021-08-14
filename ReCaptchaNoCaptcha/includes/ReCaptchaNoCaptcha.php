@@ -74,7 +74,7 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	 * @return bool
 	 */
 	protected function passCaptcha( $_, $word ) {
-		global $wgRequest, $wgReCaptchaSecretKey, $wgReCaptchaSendRemoteIP, $wgReCaptchaVersion;
+		global $wgRequest, $wgReCaptchaSecretKey, $wgReCaptchaSendRemoteIP, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
 
 		$url = 'https://www.google.com/recaptcha/api/siteverify';
 		// Build data to append to request
@@ -105,7 +105,7 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 			return false;
 		}
 
-		if ( isset( $response['score'] ) && (float)$response['score'] < 1.0 /*0.5*/ ) {
+		if ( isset( $response['score'] ) && (float)$response['score'] < $wgReCaptchaMinimumScore ) {
 			$this->error = 'v3-failed';
 			$this->logCheckError( $this->error );
 			return false;
