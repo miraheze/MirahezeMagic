@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"miraheze-dberr-again": "Probeer een paar minuten te wachten en opnieuw te laden. Ga voor meer informatie over deze fout naar onze twitterpagina (https://twitter.com/Miraheze) of neem contact op met de systeembeheerders door verbinding te maken met #miraheze op irc.libera.chat.",
+	"miraheze-centralauth-groupname": "Miraheze",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|U}} kunt niet inloggen omdat {{GENDER:$1|uw}} account globaal is geblokkeerd. Neem contact op met <code>cvt[at]miraheze.org</code> voor meer informatie of om in beroep te gaan.",
+	"miraheze-oathauth-step1": "BELANGRIJK! Zorg ervoor dat u de OATHAuth-pagina leest voordat u dit inschakelt! Stap 1: Download een tweestapsauthenticatieprogramma",
+	"miraheze-prefs-help-realname": "De echte naam is optioneel. Als u er een opgeeft, wordt deze gebruikt om u erkenning voor uw werk te geven. Door een wiki te gebruiken die wordt gehost door Miraheze, gaat u ook akkoord met de <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use gebruiksvoorwaarden]</span> en accepteert u het <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Privacybeleid]</span>."
+}
