@@ -1,9 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ghsuvr"
+			"Ghsuvr",
+			"לואיקה"
 		]
 	},
+	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-merge-method-admin": "חשבון ממוזג ידנית",
-	"miraheze-centralauth-merge-method-admin-desc": "חשבון זה מוזג ידנית על ידי מנהל מערכת או סדרן. ייתכן שזה נבע מבעיה טכנית בתהליך שינוי השם או המיזוג"
+	"miraheze-centralauth-merge-method-admin-desc": "חשבון זה מוזג ידנית על ידי מנהל מערכת או סדרן. ייתכן שזה נבע מבעיה טכנית בתהליך שינוי השם או המיזוג",
+	"miraheze-restriction-protect": "הגנה",
+	"miraheze-restriction-delete": "מחיקה",
+	"miraheze-skinname-snapwikiskin": "Snap!",
+	"miraheze-snapwikiskin": "Snap!",
+	"miraheze-wikibase-sitelinks-miraheze": "אתרי ויקי של Miraheze"
 }
