@@ -50,13 +50,13 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix or WikiDiscover extensions' );
+		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix or WikiDiscover extensions.' );
 
-		$this->addOption( 'strip-protocols', "Strip http/https from URLs to make them protocol relative." );
-		$this->addOption( 'force-protocol', "Force a specific protocol for all URLs (like http/https).", false, true );
+		$this->addOption( 'strip-protocols', 'Strip http/https from URLs to make them protocol relative.' );
+		$this->addOption( 'force-protocol', 'Force a specific protocol for all URLs (like http/https).', false, true );
 		
-		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
-				. "Default is https://meta.miraheze.org/w/api.php", false, true );
+		$this->addOption( 'load-from', 'Full URL to the API of the wiki to fetch the site info from. '
+				. 'Default is https://meta.miraheze.org/w/api.php', false, true );
 		$this->addOption( 'script-path', 'Script path to use for wikis in the site matrix. '
 				. ' (e.g. "/w/$1")', false, true );
 		$this->addOption( 'article-path', 'Article path for wikis in the site matrix. '
@@ -71,18 +71,38 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$this->addOption( 'no-expand-group', 'Do not expand site group codes in site matrix. '
 				. ' By default, "wiki" is expanded to "wikipedia".' );
 
-		$this->addOption( 'api-group', 'Either \'sitematrix\' or \'wikidiscover\'', true, true, false, true );
+		$this->addOption( 'api-group', 'Either \'sitematrix\' or \'wikidiscover\'.', true, true, false, true );
 	}
 
 	public function execute() {
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
 
-		$groups = [ 'wikidiscover' => [ 'miraheze' ], 'sitematrix' => [ 'wikipedia', 'wikivoyage', 'wikiquote', 'wiktionary',
-			'wikibooks', 'wikisource', 'wikiversity', 'wikinews' ] ];
+		$groups = [
+			'sitematrix' => [
+				'wikibooks',
+				'wikinews',
+				'wikipedia',
+				'wikiquote',
+				'wikisource',
+				'wikiversity',
+				'wikivoyage',
+				'wiktionary'
+			],
+			'wikidiscover' => [
+				'miraheze'
+			]
+		];
 
-		$apiUrl = [ 'wikidiscover' => 'https://meta.miraheze.org/w/api.php', 'sitematrix' => 'https://meta.wikimedia.org/w/api.php' ];
-		$function = [ 'wikidiscover' => 'getWikiDiscoverData', 'sitematrix' => 'getSiteMatrixData' ];
+		$apiUrl = [
+			'sitematrix' => 'https://meta.wikimedia.org/w/api.php',
+			'wikidiscover' => 'https://meta.miraheze.org/w/api.php'
+		];
+
+		$function = [
+			'sitematrix' => 'getSiteMatrixData',
+			'wikidiscover' => 'getWikiDiscoverData'
+		];
 
 		$validGroups = [];
 		$sites = [];
@@ -147,7 +167,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$expandGroup = !$this->getOption( 'no-expand-group', false );
 
 		if ( $stripProtocols && is_string( $forceProtocol ) ) {
-			$this->fatalError( "You can't use both strip-protocols and force-protocol" );
+			$this->fatalError( 'You can\'t use both strip-protocols and force-protocol' );
 		}
 
 		$protocol = true;
