@@ -2,7 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Reception123",
-                        "RhinosF1"
+			"RhinosF1"
 		]
 	},
 	"managewiki-setting-wgAbuseFilterActions-name": "AbuseFilter Actions",
@@ -225,4 +225,4 @@
 	"managewiki-setting-wgDefaultTheme-help": "Sets which theme is displayed by default when users visit your wiki.",
 	"managewiki-setting-wgManageWikiForceSidebarLinks-name": "Force ManageWiki side bar links",
 	"managewiki-setting-wgManageWikiForceSidebarLinks-help": "Force the display of ManageWiki links in the sidebar for all users. The link text will differ for nonprivileged users."
-  }
+}
