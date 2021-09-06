@@ -27,12 +27,14 @@
 require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
 
 use MediaWiki\MediaWikiServices;
+use Wikibase\Lib\Sites\SiteMatrixParser;
+use Wikibase\Lib\Sites\SitesBuilder;
 
-if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
+if ( !class_exists( SitesBuilder::class ) ) {
 	require_once( __DIR__ . '/../../Wikibase/lib/includes/Sites/SitesBuilder.php' );
 }
 
-if ( !class_exists( Wikibase\Lib\Sites\SiteMatrixParser::class ) ) {
+if ( !class_exists( SiteMatrixParser::class ) ) {
 	require_once __DIR__ . '/../../Wikibase/lib/includes/Sites/SiteMatrixParser.php';
 }
 
@@ -124,7 +126,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		}
 
 		$store = MediaWikiServices::getInstance()->getSiteStore();
-		$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
+		$sitesBuilder = new SitesBuilder( $store, $validGroups );
 		$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 	}
 
@@ -185,7 +187,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			throw new MWException( "Got no data from $url\n" );
 		}
 
-		$siteMatrixParser = new Wikibase\Lib\Sites\SiteMatrixParser( $scriptPath, $articlePath,
+		$siteMatrixParser = new SiteMatrixParser( $scriptPath, $articlePath,
 				$protocol, $expandGroup );
 
 		$sites = $siteMatrixParser->sitesFromJson( $json );
