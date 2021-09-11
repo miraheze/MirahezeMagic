@@ -9,8 +9,7 @@ class ReCaptchaNoCaptchaHooks {
 	 */
 	private static $v3CaptchaMessages = [
 		'Renocaptcha-desc',
-		'Renocaptcha-v3-failed',
-		'Wikiforum-captcha'
+		'Renocaptcha-v3-failed'
 	];
 
 	/**
@@ -53,7 +52,7 @@ class ReCaptchaNoCaptchaHooks {
 			return;
 		}
 
-		if ( strpos( $title, 'Renocaptcha' ) === 0 ) {
+		if ( ( strpos( $title, 'Renocaptcha' ) === 0 ) || $title === 'Wikiforum-captcha' ) {
 			$message = new RawMessage( '' );
 		}
 	}
