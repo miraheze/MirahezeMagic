@@ -9,7 +9,8 @@ class ReCaptchaNoCaptchaHooks {
 	 */
 	private static $v3CaptchaMessages = [
 		'Renocaptcha-desc',
-		'Renocaptcha-v3-failed'
+		'Renocaptcha-v3-failed',
+		'Wikiforum-captcha'
 	];
 
 	/**
@@ -60,7 +61,7 @@ class ReCaptchaNoCaptchaHooks {
 	public static function onMessageCacheGet( &$lcKey ) {
 		global $wgReCaptchaVersion;
 
-		if ( $lcKey === 'captcha-error' && $wgReCaptchaVersion === 'v3' ) {
+		if ( ( $lcKey === 'captcha-error' || $lcKey === 'wikiforum-error-captcha' ) && $wgReCaptchaVersion === 'v3' ) {
 			$lcKey = 'renocaptcha-v3-failed';
 		}
 	}
