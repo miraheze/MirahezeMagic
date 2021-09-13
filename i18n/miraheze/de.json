@@ -12,6 +12,7 @@
 			"MuratTheTurkish",
 			"Pittigrilli",
 			"Tkarcher",
+			"Void",
 			"Zabe"
 		]
 	},
@@ -22,7 +23,7 @@
 	"miraheze-close-email-subject": "Miraheze-Wiki ($1) geschlossen",
 	"miraheze-close-email-body": "Hallo!\n\nDa dein Wiki in den letzten 60 Tagen keine Bearbeitungen aufgewiesen hat, wurde es aufgrund der Ruhezustands-Richtlinie leider geschlossen. Falls du dein Wiki bearbeiten möchtest, gehe bitte auf „Spezial:ManageWiki“ und deaktiviere das Häkchen bei „geschlossen“, um es wieder zu eröffnen.\n\nBitte beachte: Falls du dein Wiki nicht wiedereröffnest, ist es möglich, dass ein anderer Benutzer dein Wiki adoptiert. Falls du dein Wiki heute in 6 Monaten nicht wiedereröffnest oder niemand dein Wiki adoptiert, könnte es gelöscht werden.",
 	"miraheze-donate": "Spende an Miraheze",
-	"miraheze-donatepage": "m:Spenden",
+	"miraheze-donatepage": "m:Donate/de",
 	"miraheze-faq": "Häufig gestellte Fragen",
 	"miraheze-helpcenter": "Miraheze-Hilfezentrum",
 	"miraheze-requestfeatures": "Funktionen auf einem Wiki anfordern",

@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yardom78"
+		]
+	},
+	"renocaptcha-desc": "Miraheze ReCaptcha modul pre ReCaptcha V3 podporu.",
+	"renocaptcha-edit": "Na ochranu wiki proti spamu automatických úprav Vás žiadame vyriešiť nasledovné CAPTCHA:",
+	"renocaptcha-addurl": "Vaša úprava obsahuje nové externé odkazy. Pre ochranu wiki proti automatizovanému spamu Vás zdvorilo žiadame vyriešiť nasledovné CAPTCHA:",
+	"renocaptcha-badlogin": "Pre ochranu wiki proti automatizovanému lámaniu hesiel Vás zdvorilo žiadame vyriešiť nasledovné CAPTCHA:",
+	"renocaptcha-createaccount": "Pre ochranu wiki proti automatizovanej tvorbe účtov Vás zdvorilo žiadame vyriešiť nasledovné CAPTCHA:",
+	"renocaptcha-createaccount-fail": "Vyzerá to, že ste nevyriešili CAPTCHA.",
+	"renocaptcha-v3-failed": "Overenie CAPTCHA zlyhalo kvôli internej chybe: Overenie ReCaptcha zlyhalo. Prosím kontaktujte sre@miraheze.org",
+	"renocaptcha-create": "Pre ochranu proti automatizovanej tvorbe stránok Vás zdvorilo žiadame vyriešiť nasledovné CAPTCHA:"
+}
