@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Anpfraum",
+			"Minh Nguyen",
 			"Wolf"
 		]
 	},
@@ -9,7 +10,7 @@
 	"mirahezemagic-description": "Các thông điệp giao diện MediaWiki, scripts và các hooks dành cho Miraheze",
 	"miraheze-categories": "Thể loại",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) đã đóng",
-	"miraheze-close-email-body": "Xin chào,\n\nRất tiếc, vì wiki của bạn không có bất cứ chỉnh sửa nào trong vòng 60 ngày trước, nó đã bị đóng theo Chính sách Không hoạt động. Nếu bạn vẫn cần wiki này hãy đến trang Đặc_biệt:ManageWiki và bỏ tích hộp \"Đã đóng\" để mở lại nó.\n\nLưu ý rằng nếu bạn không mở lại wiki của bạn, sẽ có ai đó nhận lý wiki của bạn. Nếu bạn không mở lại nó hoặc không ai nhận lấy wiki của bạn trong 6 tháng, nó có thể bị xoá.",
+	"miraheze-close-email-body": "Xin chào,\n\nRất tiếc, vì wiki của bạn không có bất cứ sửa đổi nào trong vòng 60 ngày trước, nó đã bị đóng theo Chính sách Không hoạt động. Nếu bạn vẫn cần wiki này hãy đến trang Đặc_biệt:ManageWiki và bỏ tích hộp \"Đã đóng\" để mở lại nó.\n\nLưu ý rằng nếu bạn không mở lại wiki của bạn, sẽ có ai đó nhận lý wiki của bạn. Nếu bạn không mở lại nó hoặc không ai nhận lấy wiki của bạn trong 6 tháng, nó có thể bị xóa.",
 	"miraheze-donate": "Ủng hộ",
 	"miraheze-helpcenter": "Về Miraheze",
 	"miraheze-requestfeatures": "Yêu cầu tính năng trên wiki",
@@ -31,13 +32,13 @@
 	"protect-level-user": "Chỉ cho phép người dùng đã đăng nhập",
 	"restriction-delete": "Xoá",
 	"restriction-level-user": "Chỉ cho phép người dùng đã đăng nhập",
-	"right-user": "Chỉnh sửa trang được bảo vệ {{int:protect-level-user}}",
+	"right-user": "Sửa đổi trang được khóa mức “{{int:protect-level-user}}”",
 	"sitematrix": "Danh sách wiki",
 	"sitematrix-summary": "Trang đặc biệt này liệt kê tất cả các wiki của Miraheze.",
 	"specialpages-group-wikimanage": "Quản lý wiki",
 	"settings-anti-spam": "Chống spam",
 	"settings-beta": "Beta",
-	"settings-edit": "Chỉnh Sửa",
+	"settings-edit": "Sửa đổi",
 	"settings-links": "Liên kết",
 	"settings-localisation": "Khu vực",
 	"settings-maps": "Bản đồ",
