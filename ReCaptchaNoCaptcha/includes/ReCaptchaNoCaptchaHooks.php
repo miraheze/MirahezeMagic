@@ -52,7 +52,7 @@ class ReCaptchaNoCaptchaHooks {
 			return;
 		}
 
-		if ( strpos( $title, 'Renocaptcha' ) === 0 ) {
+		if ( ( strpos( $title, 'Renocaptcha' ) === 0 ) || $title === 'Wikiforum-captcha' ) {
 			$message = new RawMessage( '' );
 		}
 	}
@@ -60,7 +60,7 @@ class ReCaptchaNoCaptchaHooks {
 	public static function onMessageCacheGet( &$lcKey ) {
 		global $wgReCaptchaVersion;
 
-		if ( $lcKey === 'captcha-error' && $wgReCaptchaVersion === 'v3' ) {
+		if ( ( $lcKey === 'captcha-error' || $lcKey === 'wikiforum-error-captcha' ) && $wgReCaptchaVersion === 'v3' ) {
 			$lcKey = 'renocaptcha-v3-failed';
 		}
 	}
