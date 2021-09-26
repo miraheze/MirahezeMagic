@@ -81,8 +81,7 @@ class MirahezeMagicHooks {
 			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					isset( $manageWikiSettings->list()[$var] ) &&
-					$manageWikiSettings->list()[$var] === $wiki
+					$manageWikiSettings->list( $var ) === $wiki
 				) {
 					$manageWikiSettings->remove( $var );
 					$manageWikiSettings->commit();
@@ -114,8 +113,7 @@ class MirahezeMagicHooks {
 			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					isset( $manageWikiSettings->list()[$var] ) &&
-					$manageWikiSettings->list()[$var] === $old
+					$manageWikiSettings->list( $var ) === $old
 				) {
 					$manageWikiSettings->modify( [ $var => $new ] );
 					$manageWikiSettings->commit();
