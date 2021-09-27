@@ -44,6 +44,13 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 				// eslint-disable-next-line no-jquery/no-global-selector
 				return $( '#g-recaptcha-response' ).val();
 			};
+
+			this.getReadyPromise()
+				.then( function () {
+					target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
+
+					target.emit( 'saveErrorCaptcha' );
+				} );
 		};
 
 		ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler );
