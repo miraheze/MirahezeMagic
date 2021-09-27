@@ -51,16 +51,6 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						window.grecaptcha.reset( self.widgetId );
 					} else {
 						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
-						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
-							sitekey: siteKey,
-							callback: function () {
-								target.saveDialog.executeAction( 'save' );
-							},
-							'expired-callback': function () {},
-							'error-callback': function () {}
-						} );
-
-						target.saveDialog.updateSize();
 					}
 
 					target.emit( 'saveErrorCaptcha' );
