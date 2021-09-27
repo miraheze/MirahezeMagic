@@ -33,7 +33,7 @@ class ReCaptchaHtml {
 	public function headItem() {
 		if ( $this->version === 'v3' ) {
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?render=$this->siteKey\"></script>" .
+				"<script src=\"https://www.google.com/recaptcha/api.js?render={$this->siteKey}&onload=onRecaptchaLoadCallback\"></script>" .
 				$this->v3Script();
 		} else {
 			// Insert reCAPTCHA script, in display language, if available.
@@ -100,12 +100,14 @@ HTML;
 	private function v3Script() {
 		$script = <<<HTML
 <script>
-grecaptcha.ready(function() {
-    grecaptcha.execute('$this->siteKey', {action: '$this->action'}).then(function(token) {
-       var reCaptchaField = document.getElementById('reCaptchaField');
-       reCaptchaField.value = token;
-    });
-});
+function onRecaptchaLoadCallback() {
+    grecaptcha.ready(function() {
+      grecaptcha.execute('$this->siteKey', {action: '$this->action'}).then(function(token) {
+         var reCaptchaField = document.getElementById('reCaptchaField');
+         reCaptchaField.value = token;
+      });
+  });
+}
 </script>
 HTML;
 
