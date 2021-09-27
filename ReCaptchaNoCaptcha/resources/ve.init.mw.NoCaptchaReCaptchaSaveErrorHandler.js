@@ -9,13 +9,14 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 
 		ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.static.getReadyPromise = function () {
 			var onLoadFn = 'onRecaptchaLoadCallback' + Date.now(),
-				deferred, config, scriptURL, params;
+				deferred, config, scriptURL, siteKey, params;
 
 			if ( !this.readyPromise ) {
 				deferred = $.Deferred();
 				config = mw.config.get( 'wgConfirmEditConfig' );
 				scriptURL = new mw.Uri( config.reCaptchaScriptURL );
-				params = { onload: onLoadFn, render: 'explicit' };
+				siteKey = config.reCaptchaSiteKey,
+				params = { onload: onLoadFn, render: siteKey };
 				scriptURL.query = $.extend( scriptURL.query, params );
 
 				this.readyPromise = deferred.promise();
