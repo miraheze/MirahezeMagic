@@ -48,8 +48,6 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 			this.getReadyPromise()
 				.then( function () {
 					target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
-
-					target.emit( 'saveErrorCaptcha' );
 				} );
 		};
 
