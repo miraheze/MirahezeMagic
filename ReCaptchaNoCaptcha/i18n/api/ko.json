@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"renocaptcha-apihelp-param-g-recaptcha-response": "ReCaptcha 위젯의 필드입니다."
+}

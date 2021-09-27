@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"renocaptcha-edit": "자동 편집 스팸으로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
+	"renocaptcha-addurl": "편집에 새로운 외부 링크가 포함되어 있습니다. 자동 스팸으로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
+	"renocaptcha-createaccount": "자동 계정 만들기로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:",
+	"renocaptcha-createaccount-fail": "CAPTCHA를 풀지 못하신 것 같습니다.",
+	"renocaptcha-v3-failed": "내부 오류로 인해 CAPTCHA 확인을 실패했습니다: ReCaptcha 확인을 실패했습니다. 오류인 경우 sre@miraheze.org에 문의해 주십시오.",
+	"renocaptcha-create": "자동 문서 만들기로부터 위키를 보호하기 위해, 다음 CAPTCHA를 풀어주세요:"
+}

@@ -12,6 +12,7 @@
 			"MuratTheTurkish",
 			"Pittigrilli",
 			"Tkarcher",
+			"Umlaut",
 			"Void",
 			"Zabe"
 		]
@@ -30,9 +31,17 @@
 	"miraheze-requestwiki": "Ein Wiki beantragen",
 	"miraheze-sidebar-donate": "Spenden",
 	"miraheze-survey-access-d": "Täglich",
+	"miraheze-survey-access-m": "Einmal pro Monat",
+	"miraheze-survey-access-sd": "Mehrmals (2+) pro Tag",
+	"miraheze-survey-access-sm": "Mehrmals (2+) pro Monat",
+	"miraheze-survey-access-sw": "Mehrmals (2+) pro Woche",
+	"miraheze-survey-access-w": "Einmal pro Woche",
 	"miraheze-survey-agree": "Zustimmen",
+	"miraheze-survey-neutral": "Neutral",
 	"miraheze-survey-no": "Nein",
 	"miraheze-survey-yes": "Ja",
+	"miraheze-survey-q5b": "Wie viele Wikis bearbeitest du?",
+	"miraheze-survey-q8-e": "ManageWiki ist leicht zu bedienen",
 	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">Das [https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze Team'''] hat festgestellt, dass in dieser Wiki in den letzten 45 Tagen [[Special:RecentChanges|'''keine Änderungen''']] oder [[Special:Logs|'''Protokollierungen''']] gemacht wurden. Wenn Sie verhindern möchten, dass diese Wiki '''geschlossen''' wird, nehmen Sie bitte das aktive Editieren selbiger wieder auf. Sollte es keine Anzeichen von Aktivität in den nächsten 15 Tagen geben, wird diese Wiki gemäss der [https://meta.miraheze.org/wiki/Dormancy_Policy '''Inaktivitäts-Richtlinien'''] geschlossen. Sie wird dann zur Übernahme durch einen anderen User nominiert. Wenn diese Wiki in den nächsten 135 Tagen weder übernommen wird noch Aktivität zeigt, wird sie nach ablauf der Frist '''engültig gelöscht!''' Bitte lesen Sie die [https://meta.miraheze.org/wiki/Dormancy_Policy Inaktivitäts-Richtlinien] von Miraheze. Falls Sie Fragen oder Einwände haben, [https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Kontaktieren Sie uns'''] bitte umgehend.</span></div>",
 	"group-abuse": "Missbrauchs-Team",
 	"group-abuse-member": "{{GENDER:$1|Missbrauchs-Team}}",
@@ -94,7 +103,12 @@
 	"settings-seo": "Suchmaschinenoptimierung (SEO)",
 	"settings-socialtools": "Gruppenarbeits-bezogene Werkzeuge",
 	"settings-styling": "Gestaltung",
+	"settings-wikibase": "Wikibase",
 	"extensions-skins": "Benutzeroberflächen",
+	"extensions-api": "API",
+	"extensions-antispam": "Spamschutz",
+	"extensions-editors": "Autoren",
+	"extensions-parserhooks": "Parsererweiterungen",
 	"extensions-specialpages": "Spezialseiten",
 	"extensions-variable": "Variablen"
 }
