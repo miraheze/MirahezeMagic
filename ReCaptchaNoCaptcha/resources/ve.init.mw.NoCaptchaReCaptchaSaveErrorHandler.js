@@ -45,11 +45,6 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 				return $( '#g-recaptcha-response' ).val();
 			};
 
-			target.saveFields.reCaptchaField = function () {
-				// eslint-disable-next-line no-jquery/no-global-selector
-				return $( '[name=g-recaptcha-response]' ).val();
-			};
-
 			this.getReadyPromise()
 				.then( function () {
 					if ( self.widgetId ) {
@@ -71,7 +66,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 							grecaptcha.execute( self.widgetId, {
 								action: 'save'
 							} ).then( function ( token ) {
-								var reCaptchaField = document.getElementById( 'reCaptchaField' );
+								var reCaptchaField = document.getElementById( 'g-recaptcha-response' );
 								reCaptchaField.value = token;
 							} );
 						} );
