@@ -72,7 +72,8 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.updateSize();
 					}
 
-					target.emit( 'saveErrorCaptcha' );
+					target.saveErrorUnknown( data );
+					target.emit( 'saveErrorUnknown' );
 				} );
 		};
 
