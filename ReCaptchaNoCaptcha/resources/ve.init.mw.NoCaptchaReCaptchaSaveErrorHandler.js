@@ -45,6 +45,22 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 				return $( '#g-recaptcha-response' ).val();
 			};
 
+			target.saveFields.reCaptchaField = function () {
+				// eslint-disable-next-line no-jquery/no-global-selector
+				return $( '[name=g-recaptcha-response]' ).val();
+			};
+
+			function onRecaptchaLoadCallback() {
+				grecaptcha.ready( function () {
+					grecaptcha.execute( '${siteKey}', {
+						action: 'save'
+					} ).then( function ( token ) {
+						var reCaptchaField = document.getElementById( 'reCaptchaField' );
+						reCaptchaField.value = token;
+					} );
+				} );
+			}
+
 			this.getReadyPromise()
 				.then( function () {
 					target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
