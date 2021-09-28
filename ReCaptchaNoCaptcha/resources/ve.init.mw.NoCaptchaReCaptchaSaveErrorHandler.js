@@ -16,7 +16,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 				config = mw.config.get( 'wgConfirmEditConfig' );
 				scriptURL = new mw.Uri( config.reCaptchaScriptURL );
 				siteKey = config.reCaptchaSiteKey,
-				params = { onload: onLoadFn, render: siteKey };
+				params = { onload: onLoadFn, render: 'explicit' };
 				scriptURL.query = $.extend( scriptURL.query, params );
 
 				this.readyPromise = deferred.promise();
