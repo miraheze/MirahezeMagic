@@ -50,21 +50,36 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 				return $( '[name=g-recaptcha-response]' ).val();
 			};
 
-			function onRecaptchaLoadCallback() {
-				grecaptcha.ready( function () {
-					grecaptcha.execute( '${siteKey}', {
-						action: 'save'
-					} ).then( function ( token ) {
-						var reCaptchaField = document.getElementById( 'reCaptchaField' );
-						reCaptchaField.value = token;
-					} );
-				} );
-			}
-
 			this.getReadyPromise()
 				.then( function () {
-					target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
-				} );
+					if ( self.widgetId ) {
+						window.grecaptcha.reset( self.widgetId );
+					} else {
+						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
+						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
+							'sitekey': siteKey,
+							'badge': 'inline',
+							'size': 'invisible',
+							'callback': function () {
+								target.saveDialog.executeAction( 'save' );
+							},
+							'expired-callback': function () {},
+							'error-callback': function () {}
+						} );
+
+						grecaptcha.ready( function () {
+							grecaptcha.execute( self.widgetId, {
+								action: 'save'
+							} ).then( function ( token ) {
+								var reCaptchaField = document.getElementById( 'reCaptchaField' );
+								reCaptchaField.value = token;
+							} );
+						} );
+
+						target.saveDialog.updateSize();
+					}
+
+					target.emit( 'saveErrorCaptcha' );
 		};
 
 		ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler );
