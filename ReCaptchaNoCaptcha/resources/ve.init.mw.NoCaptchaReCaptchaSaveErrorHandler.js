@@ -72,8 +72,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.updateSize();
 					}
 
-					target.saveErrorUnknown( data );
-					target.emit( 'saveErrorUnknown' );
+					target.showSaveError( 'renocaptcha-v3-failed' );
 				} );
 		};
 
