@@ -80,6 +80,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 					}
 
 					target.emit( 'saveErrorCaptcha' );
+				} );
 		};
 
 		ve.init.mw.saveErrorHandlerFactory.register( ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler );
