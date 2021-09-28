@@ -53,7 +53,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
 						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
 							'sitekey': siteKey,
-							'badge': 'bottomright',
+							'badge': 'inline',
 							'size': 'invisible',
 							'callback': function () {
 								target.saveDialog.executeAction( 'save' );
