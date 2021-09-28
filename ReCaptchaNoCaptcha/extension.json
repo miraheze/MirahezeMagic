@@ -50,6 +50,9 @@
 			"targets": [
 				"desktop",
 				"mobile"
+			],
+			"messages": [
+				"renocaptcha-v3-failed"
 			]
 		}
 	},
