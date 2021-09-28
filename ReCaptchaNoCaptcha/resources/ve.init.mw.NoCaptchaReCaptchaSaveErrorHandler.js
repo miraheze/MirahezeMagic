@@ -50,6 +50,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 					if ( self.widgetId ) {
 						window.grecaptcha.reset( self.widgetId );
 					} else {
+						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: true } );
 						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
 							'sitekey': siteKey,
 							'badge': 'inline',
