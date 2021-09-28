@@ -73,8 +73,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 					}
 
 					target.showSaveError(
-						target.extractErrorMessages( data ),
-						false
+						'renocaptcha-v3-failed',
 					);
 
 					target.emit( 'saveErrorCaptcha' );
