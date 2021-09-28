@@ -53,13 +53,11 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
 						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
 							'sitekey': siteKey,
-							'badge': 'inline',
+							'badge': 'bottomright',
 							'size': 'invisible',
 							'callback': function () {
 								target.saveDialog.executeAction( 'save' );
-							},
-							'expired-callback': function () {},
-							'error-callback': function () {}
+							}
 						} );
 
 						grecaptcha.ready( function () {
