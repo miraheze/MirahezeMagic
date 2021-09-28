@@ -30,6 +30,12 @@
 		"ReCaptchaSecretKey": {
 			"value": ""
 		},
+		"ReCaptchaVisualEditorSiteKey": {
+			"value": ""
+		},
+		"ReCaptchaVisualEditorSecretKey": {
+			"value": ""
+		},
 		"ReCaptchaSendRemoteIP": {
 			"value": false
 		},
