@@ -19,12 +19,11 @@ class ReCaptchaNoCaptchaHooks {
 	 * @return bool Always true
 	 */
 	public static function onResourceLoaderGetConfigVars( array &$vars ) {
-		global $wgReCaptchaSiteKey;
-		global $wgCaptchaClass;
+		global $wgReCaptchaSiteKey, $wgReCaptchaVisualEditorSiteKey, $wgCaptchaClass;
 
 		if ( $wgCaptchaClass === 'ReCaptchaNoCaptcha' ) {
 			$vars['wgConfirmEditConfig'] = [
-				'reCaptchaSiteKey' => $wgReCaptchaSiteKey,
+				'reCaptchaSiteKey' => $wgReCaptchaVisualEditorSiteKey ?: $wgReCaptchaSiteKey,
 				'reCaptchaScriptURL' => 'https://www.google.com/recaptcha/api.js'
 			];
 		}
