@@ -16,7 +16,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 				config = mw.config.get( 'wgConfirmEditConfig' );
 				scriptURL = new mw.Uri( config.reCaptchaScriptURL );
 				siteKey = config.reCaptchaSiteKey,
-				params = { onload: onLoadFn, render: siteKey };
+				params = { onload: onLoadFn, render: 'explicit' };
 				scriptURL.query = $.extend( scriptURL.query, params );
 
 				this.readyPromise = deferred.promise();
@@ -47,31 +47,28 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 
 			this.getReadyPromise()
 				.then( function () {
-					if ( self.widgetId ) {
-						window.grecaptcha.reset( self.widgetId );
-					} else {
-						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: true } );
-						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
-							'sitekey': siteKey,
-							'badge': 'inline',
-							'size': 'invisible',
-							'callback': function () {
-								target.saveDialog.executeAction( 'save' );
-							}
-						} );
+					target.saveDialog.clearMessage( 'api-save-error' );
+					target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
+					self.widgetId = window.grecaptcha.render( $container[ 0 ], {
+						'sitekey': siteKey,
+						'badge': 'inline',
+						'size': 'invisible',
+						'callback': function () {
+							target.saveDialog.executeAction( 'save' );
+						}
+					} );
 
-						grecaptcha.ready( function () {
-							grecaptcha.execute( self.widgetId, {
-								action: 'save'
-							} ).then( function ( token ) {
-								var reCaptchaField = document.getElementById( 'g-recaptcha-response' );
-								reCaptchaField.value = token;
-							} );
+					grecaptcha.ready( function () {
+						grecaptcha.execute( self.widgetId, {
+							action: 'save'
+						} ).then( function ( token ) {
+							var reCaptchaField = document.getElementById( 'g-recaptcha-response' );
+							reCaptchaField.value = token;
 						} );
+					} );
 
-						target.saveDialog.popPending();
-						target.saveDialog.updateSize();
-					}
+					target.saveDialog.popPending();
+					target.saveDialog.updateSize();
 
 					target.showSaveError(
 						mw.msg( 'renocaptcha-v3-failed' ),
