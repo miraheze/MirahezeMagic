@@ -74,7 +74,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.updateSize();
 					}
 					
-					if ( !handled && !self.widgetId ) {
+					if ( !handled && self.widgetId ) {
 						handled = target.showSaveError(
 							mw.msg( 'renocaptcha-v3-failed' ),
 						);
