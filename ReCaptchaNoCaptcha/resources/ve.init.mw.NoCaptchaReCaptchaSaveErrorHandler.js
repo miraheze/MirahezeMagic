@@ -72,12 +72,14 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.popPending();
 						target.saveDialog.updateSize();
 					}
-					
-					handled = target.showSaveError(
-						mw.msg( 'renocaptcha-v3-failed' ),
-					);
 
-					target.emit( 'saveErrorCaptcha' );
+					if ( self.widgetId ) {
+						target.showSaveError(
+							mw.msg( 'renocaptcha-v3-failed' ),
+						);
+
+						target.emit( 'saveErrorCaptcha' );
+					}
 				} );
 		};
 
