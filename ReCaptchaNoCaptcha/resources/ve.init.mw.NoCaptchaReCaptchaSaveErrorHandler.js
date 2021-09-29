@@ -34,8 +34,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 		};
 
 		ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.static.process = function ( data, target ) {
-			var handled,
-				self = this,
+			var self = this,
 				config = mw.config.get( 'wgConfirmEditConfig' ),
 				siteKey = config.reCaptchaSiteKey,
 				$container = $( '<div>' );
@@ -74,15 +73,11 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.updateSize();
 					}
 					
-					if ( !handled && self.widgetId ) {
-						handled = target.showSaveError(
-							mw.msg( 'renocaptcha-v3-failed' ),
-						);
+					handled = target.showSaveError(
+						mw.msg( 'renocaptcha-v3-failed' ),
+					);
 
-						target.emit( 'saveErrorCaptcha' );
-
-						handled = true;
-					}
+					target.emit( 'saveErrorCaptcha' );
 				} );
 		};
 
