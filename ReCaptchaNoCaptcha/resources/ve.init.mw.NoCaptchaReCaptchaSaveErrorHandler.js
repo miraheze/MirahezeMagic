@@ -76,6 +76,8 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.showSaveError(
 							mw.msg( 'renocaptcha-v3-failed' ),
 						);
+
+						target.saveDialog.popPending();
 					}
 
 					target.emit( 'saveErrorCaptcha' );
