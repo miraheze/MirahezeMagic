@@ -79,7 +79,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 							mw.msg( 'renocaptcha-v3-failed' ),
 						);
 
-						target.emit( 'saveErrorCaptcha' );
+						//target.emit( 'saveErrorCaptcha' );
 
 						handled = true;
 					}
