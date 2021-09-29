@@ -37,7 +37,7 @@
 			"value": "v2"
 		},
 		"ReCaptchaMinimumScore": {
-			"value": 1.0
+			"value": 0.5
 		}
 	},
 	"ResourceFileModulePaths": {
