@@ -48,6 +48,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 			this.getReadyPromise()
 				.then( function () {
 					if ( self.widgetId ) {
+						window.grecaptcha.reset( self.widgetId );
 					} else {
 						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
 						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
@@ -68,7 +69,6 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 							} );
 						} );
 
-						target.saveDialog.popPending();
 						target.saveDialog.updateSize();
 					}
 
