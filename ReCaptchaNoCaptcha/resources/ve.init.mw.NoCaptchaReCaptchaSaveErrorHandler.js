@@ -73,6 +73,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 					}
 
 					if ( self.widgetId ) {
+						target.saveDialog.popPending();
 						target.showSaveError(
 							mw.msg( 'renocaptcha-v3-failed' ),
 						);
