@@ -9,7 +9,7 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 
 		ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.static.getReadyPromise = function () {
 			var onLoadFn = 'onRecaptchaLoadCallback' + Date.now(),
-				deferred, config, scriptURL, siteKey, params;
+				deferred, config, scriptURL, params;
 
 			if ( !this.readyPromise ) {
 				deferred = $.Deferred();
@@ -34,7 +34,8 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 		};
 
 		ve.init.mw.NoCaptchaReCaptchaSaveErrorHandler.static.process = function ( data, target ) {
-			var self = this,
+			var handled,
+				self = this,
 				config = mw.config.get( 'wgConfirmEditConfig' ),
 				siteKey = config.reCaptchaSiteKey,
 				$container = $( '<div>' );
@@ -48,7 +49,6 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 			this.getReadyPromise()
 				.then( function () {
 					if ( self.widgetId ) {
-						target.saveDialog.clearMessage( 'api-save-error' );
 						window.grecaptcha.reset( self.widgetId );
 					} else {
 						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
@@ -74,14 +74,14 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 						target.saveDialog.updateSize();
 					}
 					
-					if ( self.error ) {
-						return;
-					} else {
-						self.error = target.showSaveError(
+					if ( !handled ) {
+						handled = target.showSaveError(
 							mw.msg( 'renocaptcha-v3-failed' ),
 						);
 
 						target.emit( 'saveErrorCaptcha' );
+
+						handled = true;
 					}
 				} );
 		};
