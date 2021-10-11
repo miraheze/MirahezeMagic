@@ -1,13 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"列维劳德"
 		]
 	},
 	"renocaptcha-desc": "用於 ReCaptcha V3 支援的 Miraheze ReCaptcha 模組。",
-	"renocaptcha-edit": "為保護 wiki 防止自動化垃圾內容編輯程式，我們希望您輸入下面的驗證碼：",
-	"renocaptcha-addurl": "您的編輯使用了新的外部連結。為了防止自動化垃圾內容編輯程式，我們要麻煩您輸入在下面方塊中顯示的單字。",
-	"renocaptcha-badlogin": "為保護 wiki 免遭自動化的密碼破解，我們希望您輸入下面的驗證碼：",
-	"renocaptcha-createaccount": "為保護 wiki 防止自動化帳號建立程式，我們希望您輸入下面的驗證碼：",
-	"renocaptcha-createaccount-fail": "看來您的驗證碼似乎不正確。"
+	"renocaptcha-edit": "為防止自動化垃圾內容編輯程式以保護 wiki，我們希望您輸入下面的驗證碼：",
+	"renocaptcha-addurl": "您的編輯使用了新的外部連結。為了防止自動化垃圾內容編輯程式，我們要麻煩您輸入下面的驗證碼。",
+	"renocaptcha-badlogin": "為禁止自動化的密碼破解以保護本 wiki，我們希望您輸入下面的驗證碼：",
+	"renocaptcha-createaccount": "為禁止自動化帳號建立程式以保護本 wiki，我們希望您輸入下面的驗證碼：",
+	"renocaptcha-createaccount-fail": "您的驗證碼似乎不正確。"
 }
