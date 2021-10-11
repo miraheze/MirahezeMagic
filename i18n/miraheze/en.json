@@ -7,7 +7,7 @@
 			"Universal Omega"
 		]
 	},
-	"abusefilter-warning-problematic words: "'''Warning:''' This action has been automatically identified as harmful chiefly because one or more of the words contained in the action has serious negative implications and should never be used as an insult to call someone. Additionally, when writing content for an encyclopedia, usage of the term(s) [[rfc:2119|should]] be appropriate and, where applicable, supported by reliable, independent sources. Unconstructive edits will be quickly reverted, and egregious or repeated unconstructive editing will result in your account or IP address being blocked. If you believe this action to be constructive, you may submit it again to confirm it. A brief description of the abuse rule which your action matched is: $1",
+	"abusefilter-warning-problematicwords: "'''Warning:''' This action has been automatically identified as harmful chiefly because one or more of the words contained in the action has serious negative implications and should never be used as an insult to call someone. Additionally, when writing content for an encyclopedia, usage of the term(s) [[rfc:2119|should]] be appropriate and, where applicable, supported by reliable, independent sources. Unconstructive edits will be quickly reverted, and egregious or repeated unconstructive editing will result in your account or IP address being blocked. If you believe this action to be constructive, you may submit it again to confirm it. A brief description of the abuse rule which your action matched is: $1",
 	"centralauth-groupname": "Miraheze",
 	"content-model-flow-board": "StructuredDiscussions board",
 	"datadump-namespaceselect-label": "Namespace",
