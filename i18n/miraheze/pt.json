@@ -103,8 +103,6 @@
 	"group-translator-member": "tradutor",
 	"group-translationadmin": "Administradores de traduções",
 	"group-translationadmin-member": "administrador de traduções",
-	"group-trustandsafety": "Confiança e segurança",
-	"group-trustandsafety-member": "Confiança e segurança",
 	"group-global-ipblock-exempt": "Isenções de bloqueios globais de IP",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|isento|isenta}} de bloqueios globais de IP",
 	"group-member": "Membros",
