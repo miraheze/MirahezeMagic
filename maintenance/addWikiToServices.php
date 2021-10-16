@@ -34,39 +34,14 @@ class addWikiToServices extends Maintenance {
 				$DBname = $row->wiki_dbname;
 				$domain = $row->wiki_url;
 
-				$mwSettings = $dbw->selectRow(
-					'mw_settings',
-					'*',
-					[
-						's_dbname' => $DBname
-					]
-				);
-
-				if ( !isset( $mwSettings->s_extensions ) ) {
-					continue;
-				}
-
-				if ( !is_null( $mwSettings->s_extensions ) ) {
-					$extensionsArray = json_decode( $mwSettings->s_extensions, true );
-					// Collection installs Electron inaddition now.
-					$electron = $this->hasExtension( 'collection', $extensionsArray );
-					$citoid = $this->hasExtension( 'citoid', $extensionsArray );
-
-					if ( $electron || $citoid ) {
-						$servicesvalue = !empty( $domain ) ? str_replace('https://', '', "'" . $domain . "'") : 'true';
-						// Remove wiki from the end of the name.
-						$DBname = substr( $DBname, 0, -4 );
-						$allWikis[] = "$DBname: $servicesvalue";
-					}
-				}
+				$servicesvalue = !empty( $domain ) ? str_replace('https://', '', "'" . $domain . "'") : 'true';
+				// Remove wiki from the end of the name.
+				$DBname = substr( $DBname, 0, -4 );
+				$allWikis[] = "$DBname: $servicesvalue";
 			}
 
 			file_put_contents( "$wgServicesRepo/services.yaml", implode( "\n", $allWikis ), LOCK_EX );
 		}
-	}
-
-	private function hasExtension( $extension, $extensionsarray ) {
-		return in_array( $extension, (array)$extensionsarray );
 	}
 }
 
