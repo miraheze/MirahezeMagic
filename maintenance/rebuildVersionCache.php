@@ -41,18 +41,15 @@ class RebuildVersionCache extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( 'Rebuild the version cache' );
-		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
-		$this->addOption( 'use-staging', 'Use /srv/mediawiki-staging directory?' );
+		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' )
 	}
 
 	public function execute() {
-		global $IP, $wgShellRestrictionMethod;
+		global $wgShellRestrictionMethod;
 
 		$wgShellRestrictionMethod = false;
 
-		if ( $this->hasOption( 'use-staging' ) ) {
-			$IP = '/srv/mediawiki-staging/w';
-		}
+		$dir = '/srv/mediawiki-staging/w';
 
 		$gitInfo = new GitInfo( $IP, false );
 		$gitInfo->precomputeValues();
@@ -62,8 +59,8 @@ class RebuildVersionCache extends Maintenance {
 
 
 		$queue = array_fill_keys( array_merge(
-				glob( $IP . '/extensions/*/extension*.json' ),
-				glob( $IP . '/skins/*/skin.json' )
+				glob( $dir . '/extensions/*/extension*.json' ),
+				glob( $dir . '/skins/*/skin.json' )
 			),
 		true );
 
@@ -96,7 +93,7 @@ class RebuildVersionCache extends Maintenance {
 				}
 
 				$memcKey = $cache->makeKey(
-					'specialversion-ext-version-text', str_replace( $IP, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
+					'specialversion-ext-version-text', str_replace( $dir, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
 				);
 
 				$cache->delete( $memcKey );
