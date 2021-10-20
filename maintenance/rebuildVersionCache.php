@@ -41,7 +41,7 @@ class RebuildVersionCache extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( 'Rebuild the version cache' );
-		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' )
+		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
 	}
 
 	public function execute() {
