@@ -10,7 +10,7 @@
 	"renocaptcha-badlogin": "W celu ochrony przed zautomatyzowanym łamaniem haseł prosimy wpisać poniższy tekst CAPTCHA:",
 	"renocaptcha-createaccount": "W celu ochrony przed zautomatyzowanym tworzeniem kont prosimy wpisać poniższy tekst CAPTCHA:",
 	"renocaptcha-createaccount-fail": "Wydaje się, że CAPTCHA nie został wpisany prawidłowo.",
-	"renocaptcha-v3-failed": "Weryfikacja CAPTCHA nie powiodła się z powodu błędu: walidacja ReCaptcha się nie powiodła. Napisz na sre@miraheze.org, jeśli doświadczasz problemów.",
+	"renocaptcha-v3-failed": "Weryfikacja reCAPTCHA nie powiodła się: wynik pobrany z serwera jest niższy od minimalnego wymaganego wyniku. Spróbuj ponownie później. Jeśli problem będzie się utrzymywał, skontaktuj się z nami na sre@miraheze.org.",
 	"renocaptcha-create": "W celu ochrony przed zautomatyzowanym tworzeniem stron prosimy wpisać poniższy tekst CAPTCHA:",
 	"renocaptcha-noscript": "Nie masz włączonego JavaScriptu, więc nie możemy automatycznie rozpoznać czy jesteś człowiekiem. Rozwiąż proszę CAPTCHĘ powyżej i wklej wynik w poniższe pole:",
 	"renocaptcha-help": "Rozwiąż proszę wyzwanie ReCaptcha NoCaptcha i zwróć wartość wyniki jako captchaWord."
