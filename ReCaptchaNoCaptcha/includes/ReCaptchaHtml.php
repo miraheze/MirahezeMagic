@@ -33,14 +33,14 @@ class ReCaptchaHtml {
 	public function headItem() {
 		if ( $this->version === 'v3' ) {
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?render=$this->siteKey\"></script>" .
+				"<script src=\"https://www.recaptcha.net/recaptcha/api.js?render=$this->siteKey\"></script>" .
 				$this->v3Script();
 		} else {
 			// Insert reCAPTCHA script, in display language, if available.
 			// Language falls back to the browser's display language.
 			// See https://developers.google.com/recaptcha/docs/faq
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?hl={$this->languageCode}\"" .
+				"<script src=\"https://www.recaptcha.net/recaptcha/api.js?hl={$this->languageCode}\"" .
 				"async defer></script>";
 		}
 
@@ -78,7 +78,7 @@ HTML;
     <div style="width: 302px; height: 422px; position: relative;">
       <div style="width: 302px; height: 422px; position: absolute;">
         <iframe src=
-        "https://www.google.com/recaptcha/api/fallback?k={$htmlUrlencoded}&hl={$this->languageCode}"
+        "https://www.recaptcha.net/recaptcha/api/fallback?k={$htmlUrlencoded}&hl={$this->languageCode}"
         frameborder="0" scrolling="no" style="width: 302px;height:422px; border-style: none;">
         </iframe>
       </div>
