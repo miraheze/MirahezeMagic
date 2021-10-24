@@ -44,7 +44,9 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 			$error = $info;
 		}
 
-		wfDebugLog( 'captcha', 'Unable to validate response: ' . $error );
+		wfDebugLog( 'captcha', 'Unable to validate response: ' . $error, 'all', [
+			'user' => RequestContext::getMain()->getUser(),
+		] );
 	}
 
 	/**
