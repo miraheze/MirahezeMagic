@@ -11,7 +11,7 @@
 			"Wladek92"
 		]
 	},
-	"miraheze-dberr-again": "Essayez d’attendre quelques minutes avant de recharger. Pour plus d’informations sur cette erreur, veuillez consulter notre page Twitter (https://twitter.com/Miraheze) ou contacter l’administrateur système en vous connectant sur le canal #miraheze sur irc.libera.chat.",
+	"miraheze-dberr-again": "Essayez d’attendre quelques minutes avant de recharger. Pour plus d’informations sur cette erreur, veuillez consulter notre page Twitter (https://twitter.com/Miraheze) ou contacter l’administrateur système en vous connectant sur le canal #miraheze-sre sur irc.libera.chat.",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|}}Vous ne pouvez pas vous connecter parce que {{GENDER:$1|}}votre compte est bloqué globalement. Veuillez contacter <code>cvt[à]miraheze.org</code> pour plus d’information ou pour faire appel.",
 	"miraheze-oathauth-step1": "IMPORTANT ! Veuillez vous assurer de lire la page OATHAuth avant d’activer ceci ! Étape 1 : télécharger un programme d’authentification à deux facteurs",

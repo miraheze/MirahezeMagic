@@ -5,7 +5,7 @@
 			"Railfail536"
 		]
 	},
-	"miraheze-dberr-again": "Spróbuj poczekać kilka minut a następnie przeładuj stronę. Aby uzyskać więcej informacji o tym błędzie sprawdź naszą stronę na Twitterze (twitter.com/Miraheze) lub skontaktuj się z administratorami systemu na kanale #miraheze w sieci irc.libera.chat",
+	"miraheze-dberr-again": "Spróbuj poczekać kilka minut, a następnie odśwież stronę. Aby uzyskać więcej informacji o tym błędzie, sprawdź naszą stronę na Twitterze (https://twitter.com/Miraheze) lub skontaktuj się z administratorami systemu na kanale #miraheze-sr w sieci irc.libera.chat.",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Nie możesz}} się zalogować, ponieważ {{GENDER:$1|twoje}} konto jest globalnie zablokowane. Skontaktuj się z nami na adres <code>cvt{{@}}miraheze.org</code>, aby uzyskać więcej informacji lub przedyskutować blokadę",
 	"miraheze-oathauth-step1": "UWAGA! Upewnij się że {{GENDER:|przeczytałeś|przeczytałaś}} stronę <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> przed włączeniem tej funkcji! Krok 1: Pobierz program do weryfikacji dwuetapowej",
 	"miraheze-prefs-help-realname": "Imię i nazwisko jest opcjonalne. Jeśli zdecydujesz się je podać, zostaną użyte, by udokumentować twoje autorstwo. Ponadto korzystając z wiki hostowanej przez Miraheze akceptujesz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania]</span> oraz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]</span>",
