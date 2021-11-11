@@ -9,7 +9,7 @@
 			"そらたこ"
 		]
 	},
-	"miraheze-dberr-again": "数分待ってから再読み込みしてみてください。このエラーに関する詳しい情報は、Twitter (https://twitter.com/Miraheze) をご覧になるか、irc.libera.chat の #miraheze に接続してシステム管理者にお問い合わせください。",
+	"miraheze-dberr-again": "数分待ってから再読み込みしてみてください。このエラーに関する詳しい情報は、Twitter (https://twitter.com/Miraheze) をご覧になるか、irc.libera.chat の #miraheze-sre に接続してシステム管理者にお問い合わせください。",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|あなた}}はログインすることができません {{GENDER:$1|あなた}}のアカウントはブロックされました。詳細か訴えるためには <code>cvt[at]miraheze.org</code> にお問い合わせください。",
 	"miraheze-oathauth-step1": "重要なお知らせ：この機能を有効にする前に、OATHAuthのページを必ずお読みください。\nステップ1：二要素認証プログラムをダウンロードする",

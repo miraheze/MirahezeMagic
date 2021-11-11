@@ -30,7 +30,7 @@
 	"mirahezemagic-description": "专用于Miraheze的MediaWiki消息、脚本和钩子",
 	"miraheze-categories": "分类",
 	"miraheze-close-email-subject": "Miraheze wiki（$1）已关闭",
-	"miraheze-close-email-body": "您好，\n\n由于您的wiki在过去的60天内没有编辑，wiki已因休眠政策关闭。如果您仍想编辑您的wiki，请前往Special:ManageWiki并取消选中“关闭”框以重新开启wiki。\n\n注意：如果您没有重新开启您的wiki，其他用户可能会领养您的wiki。如果您不重新开启您的wiki或现在开始的6个月内没有人使用您的wiki，您的wiki可能会被删除。",
+	"miraheze-close-email-body": "您好，\n\n由于您的wiki在过去的60天内没有编辑，wiki已因<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">休眠政策</a>关闭。如果您仍想编辑您的wiki，请前往Special:ManageWiki并取消选中“关闭”框以重新开启wiki。\n\n注意：如果您没有重新开启您的wiki，其他用户可能会领养您的wiki。如果您不重新开启您的wiki或现在开始的6个月内没有人使用您的wiki，您的wiki可能会被删除。",
 	"miraheze-donate": "捐赠给Miraheze",
 	"miraheze-donatepage": "m:Donate/zh",
 	"miraheze-faq": "常见问题",

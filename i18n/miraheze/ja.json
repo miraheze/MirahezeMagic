@@ -17,7 +17,7 @@
 	"mirahezemagic-description": "Miraheze固有のMediaWikiメッセージ・スクリプト・フック",
 	"miraheze-categories": "カテゴリ",
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) は閉鎖されました",
-	"miraheze-close-email-body": "こんにちは、\n\n誠に残念ながら、あなたのWikiは直近60日間に編集がなかったため、休眠の方針に従って閉鎖されています。もし、今でもWikiを編集したいとお考えであれば、Special:ManageWikiを開き、「閉鎖」のチェックボックスを解除して再開させてください。\n\nあなたがWikiを再開させない場合は、別の利用者によってあなたのWikiが引き継がれる可能性があることにご留意ください。また、あなたがWikiを再開させず、今から6カ月以内に別の利用者が引き継がない場合は、Wiki削除の対象になります。",
+	"miraheze-close-email-body": "こんにちは、\n\n残念ながら、あなたのウィキは過去60日間に編集が行われなかったため、<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">休眠方針</a>により閉鎖されました。もしまだ編集したいのであれば、Special:ManageWikiで「閉鎖」のチェックを外して、再度編集できるようにしてください。\n\nあなたがWikiを再開させない場合は、別の利用者によってあなたのWikiが引き継がれる可能性があることにご留意ください。また、あなたがWikiを再開させず、今から6カ月以内に別の利用者が引き継がない場合は、Wiki削除の対象になります。",
 	"miraheze-donate": "Mirahezeに寄付",
 	"miraheze-donatepage": "m:Donate/ja",
 	"miraheze-faq": "よくある質問と回答",

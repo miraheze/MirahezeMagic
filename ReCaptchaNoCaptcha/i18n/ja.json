@@ -1,17 +1,18 @@
 {
 	"@metadata": {
 		"authors": [
-			"RYOUMA1117"
+			"RYOUMA1117",
+			"しぃ"
 		]
 	},
-	"renocaptcha-desc": "ReCaptchaV3をサポートするためのMirahezeReCaptchaモジュール。",
+	"renocaptcha-desc": "reCAPTCHA V3に対応したMiraheze reCAPTCHAモジュールです。",
 	"renocaptcha-edit": "スパムからWikiを保護するために、\n次のCAPTCHAを解決するようお願いします。",
 	"renocaptcha-addurl": "あなたの編集には新しい外部リンクが含まれています。\nWikiを自動投稿スパムから保護するために、以下のCAPTCHAを解いてください。",
 	"renocaptcha-badlogin": "あなたのアカウントをハッカーから保護するために、\n下のチェックボックスをクリックしてください。",
 	"renocaptcha-createaccount": "Wikiをアカウント自動作成から保護するために、\n下のチェックボックスをクリックしてください。",
 	"renocaptcha-createaccount-fail": "CAPTCHAをまだ解決していないようです",
-	"renocaptcha-v3-failed": "内部エラーが原因でCAPTCHAの検証に失敗しました：ReCaptchaの検証に失敗しました。解決しない場合は、<a href=mailto:sre@miraheze.org>sre@miraheze.org</a>に連絡してください。",
+	"renocaptcha-v3-failed": "reCAPTCHAの認証に失敗しました：サーバーから取得したスコアが最低限必要なスコアを下回っています。後でもう一度お試しください。それでも問題が解決しない場合は、sre-mediawiki@miraheze.org までお問い合わせください。",
 	"renocaptcha-create": "Wikiを記事の自動作成から保護するために、下のチェックボックスをクリックしてください。",
 	"renocaptcha-noscript": "残念ながら、JavaScriptを無効にしているため、人間であるかどうかに関係なく、\n自動的に認識できません。上記のCAPTCHAを解決し、\n結果のテキストを次のテキスト領域にコピーしてください。",
-	"renocaptcha-help": "ReCaptcha NoCaptchaチャレンジを解決し、\n応答値をcaptchaWordとして返してください。"
+	"renocaptcha-help": "reCAPTCHAチャレンジを解いて、応答値をcaptchaWordとして返してください。"
 }
