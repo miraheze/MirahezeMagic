@@ -4,7 +4,7 @@
 			"McDutchie"
 		]
 	},
-	"miraheze-dberr-again": "Probeer een paar minuten te wachten en opnieuw te laden. Ga voor meer informatie over deze fout naar onze twitterpagina (https://twitter.com/Miraheze) of neem contact op met de systeembeheerders door verbinding te maken met #miraheze op irc.libera.chat.",
+	"miraheze-dberr-again": "Probeer een paar minuten te wachten en opnieuw te laden. Ga voor meer informatie over deze fout naar onze twitterpagina (https://twitter.com/Miraheze) of neem contact op met de systeembeheerders door verbinding te maken met #miraheze-sre op irc.libera.chat.",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|U}} kunt zich niet aanmelden omdat {{GENDER:$1|uw}} account globaal is geblokkeerd. Neem contact op met <code>cvt[at]miraheze.org</code> voor meer informatie of om in beroep te gaan.",
 	"miraheze-oathauth-step1": "BELANGRIJK! Zorg ervoor dat u de OATHAuth-pagina leest voordat u dit inschakelt! Stap 1: Download een tweestapsauthenticatieprogramma",
