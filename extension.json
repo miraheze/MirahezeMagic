@@ -99,6 +99,9 @@
 		"mirahezemagic": "GlobalVarConfig::newInstance"
 	},
 	"config": {
+		"MirahezeMagicLogEmailConditions": {
+			"value": []
+		},
 		"MirahezeStaffAccessIds": {
 			"value": []
 		},
