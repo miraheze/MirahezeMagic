@@ -430,14 +430,16 @@ class MirahezeMagicHooks {
 
 		/** @var MirahezeMagicLogEmailManager $logEmailManager */
 		$logEmailManager = MediaWikiServices::getInstance()->get( 'MirahezeMagic.LogEmailManager' );
-		$conditions = $logEmailManager->findForUser( $recentChange->getPerformer() );
+
+		$user = User::newFromIdentity( $recentChange->getPerformerIdentity() );
+		$conditions = $logEmailManager->findForUser( $user );
 
 		if ( empty( $conditions ) ) {
 			return;
 		}
 
 		$data = [
-			'user_name' => $recentChange->getPerformer()->getName(),
+			'user_name' => $user->getName(),
 			'wiki_id' => WikiMap::getCurrentWikiId(),
 			'log_type' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
 			'comment_text' => $recentChange->mAttribs['rc_comment_text'],
