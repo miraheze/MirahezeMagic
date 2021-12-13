@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"AlvaroMolina",
 			"Derugon",
 			"Florian COLLIN",
@@ -149,7 +150,7 @@
 	"settings-beta": "Bêta",
 	"settings-categories": "Catégories",
 	"settings-discussion": "Discussion",
-	"settings-editing": "Modifier",
+	"settings-editing": "Modification",
 	"settings-links": "Liens",
 	"settings-localisation": "Régionalisation",
 	"settings-maps": "Cartes",
