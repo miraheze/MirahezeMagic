@@ -285,10 +285,10 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onTitleReadWhitelist( Title $title, User $user, &$whitelisted ) {
-		if ( $title->equals( Title::newMainPage() ) ) {
+		/* if ( $title->equals( Title::newMainPage() ) ) {
 			$whitelisted = true;
 			return;
-		}
+		} */
 
 		$specialsArray = [
 			'CentralAutoLogin',
