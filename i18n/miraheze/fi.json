@@ -4,7 +4,8 @@
 			"01miki10",
 			"3Johnny",
 			"MITO",
-			"Pyscowicz"
+			"Pyscowicz",
+			"Veikk0.ma"
 		]
 	},
 	"content-model-flow-board": "Jäsennetyt keskustelut-taulu",
@@ -12,7 +13,7 @@
 	"mirahezemagic-description": "MediaWiki-viestejä, komentosarjoja ja haaroja, joita Miraheze käyttää",
 	"miraheze-categories": "Luokat",
 	"miraheze-close-email-subject": "Mirahezen wiki ($1) suljettu",
-	"miraheze-close-email-body": "Hei,\n\nkoska wikissäsi ei ole ollut muokkauksia edellisen 60 päivän aikana, se on valitettavasti suljettu epäaktiivisuuskäytännön vuoksi. Jos haluat edelleen muokata wikiäsi, mene sivulle Special:ManageWiki ja ota rasti pois \"suljettu\"-ruudusta avataksesi sen uudelleen.\n\nHuomioithan, että jos et avaa wikiäsi, on mahdollista, että toinen käyttäjä adoptoi sen. Jos et avaa wikiäsi tai kukaan ei adoptoi sitä 6 kuukauden kuluessa tästä hetkestä, se voidaan poistaa.",
+	"miraheze-close-email-body": "Hei,\n\nkoska wikissäsi ei ole ollut muokkauksia edellisen 60 päivän aikana, se on valitettavasti suljettu <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">epäaktiivisuuskäytännön</a> vuoksi. Jos haluat edelleen muokata wikiäsi, mene sivulle Special:ManageWiki ja ota rasti pois \"suljettu\"-ruudusta avataksesi sen uudelleen.\n\nHuomioithan, että jos et avaa wikiäsi, on mahdollista, että toinen käyttäjä adoptoi sen. Jos et avaa wikiäsi tai kukaan ei adoptoi sitä 6 kuukauden kuluessa tästä hetkestä, se voidaan poistaa.",
 	"miraheze-donate": "Lahjoita Mirahezelle",
 	"miraheze-donatepage": "m:Donate",
 	"miraheze-faq": "UKK",
@@ -33,9 +34,10 @@
 	"miraheze-survey-access-w": "Kerran viikossa",
 	"miraheze-survey-agree-strong": "Vahvasti samaa mieltä",
 	"miraheze-survey-agree": "Samaa mieltä",
+	"miraheze-survey-disabled": "Valitamme, mutta vuosittainen kyselymme on nyt suljettu. Tulethan takaisin ensi vuonna. Mikäli sinulla on ehdotuksia tai kysymyksiä, voit [[m:Help center|ottaa meihin yhteyttä]].",
 	"miraheze-survey-disagree-strong": "Vahvasti eri mieltä",
 	"miraheze-survey-disagree": "Eri mieltä",
-	"miraheze-survey-done": "Kiitos kun täytit kyselyn ja kerroit meille, kuinka käytät palvelua ja mitä ajattelet! Jos olet suostunut siihen, että Miraheze ottaa sinuun yhteyttä, otamme sinuun yhteyttä pian 15. heinäkuuta jälkeen. Jos et suostunut, näet analyysin kyselyn vastauksista 20. heinäkuuta osoitteessa meta.miraheze.org!",
+	"miraheze-survey-done": "Kiitos kun täytit kyselyn ja kerroit meille, kuinka käytät palvelua ja mitä ajattelet! Jos olet suostunut siihen, että Miraheze ottaa sinuun yhteyttä, otamme sinuun yhteyttä pian. Jos et suostunut, näet analyysin kyselyn vastauksista 22. heinäkuuta jälkeen osoitteessa meta.miraheze.org!",
 	"miraheze-survey-header": "Täytä alla oleva kysely, jotta Miraheze ymmärtää, miten käytät palvelua ja mitä mieltä olet siitä. Jos suostut Mirahezen ottamaan sinuun yhteyttä, sähköpostiosoitteesi tallennetaan aina 24. heinäkuuta asti, jolloin se poistetaan kyselymuistista. Jos et haluakaan, että sinuun otetaan yhteyttä, tai haluat vaihtaa sähköpostiosoitteen, ota yhteyttä osoitteeseen sre[at]miraheze.org mieluiten sähköpostista, jonka annoit kyselyn yhteydessä. Käyttäjänimeäsi ei tallenneta vastauksien kanssa, vaikka olisit kirjautuneena.",
 	"miraheze-survey-neutral": "Neutraali",
 	"miraheze-survey-no": "Ei",
@@ -76,6 +78,7 @@
 	"miraheze-survey-q11-s": "Mirahezessa toimii vain vapaaehtoisia",
 	"miraheze-survey-q11-v": "Voit vapaaehtoisena auttaa Mirahezeä joko teknisessä tai yhteisöllisessä roolissa",
 	"miraheze-survey-q11-c": "Miraheze ilmoittautui voittoa tavoittelemattomaksi järjestöksi marraskuussa 2019, ja sillä on hallitus",
+	"miraheze-survey-q11-ai": "Miraheze työskentelee automaattiseen wikien luomiseen tarkoitetun tekoälyn parissa",
 	"miraheze-survey-q14": "Nyt on tilaisuutesi kommentoida Mirahezea.",
 	"miraheze-survey-q15": "Olisitko tyytyväinen, että Miraheze ottaa sinuun yhteyttä keskustellakseen vastauksistasi?",
 	"group-abuse": "Väärinkäyttöryhmä",
