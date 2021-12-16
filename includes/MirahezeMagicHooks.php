@@ -298,7 +298,7 @@ class MirahezeMagicHooks {
 			'Notifications',
 			'OAuth',
 			'ResetPassword',
-			'Preferences',
+			// 'Preferences',
 			'Watchlist'
 		];
 
