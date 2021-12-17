@@ -171,6 +171,7 @@ class MirahezeMagicHooks {
 			'prefs-help-realname',
 			'shoutwiki-loginform-tos',
 			'shoutwiki-must-accept-tos',
+			'importtext'
 			'oathauth-step1',
 			'centralauth-merge-method-admin-desc',
 			'centralauth-merge-method-admin',
