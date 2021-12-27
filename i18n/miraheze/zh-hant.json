@@ -5,11 +5,12 @@
 			"Kly",
 			"LNDDYL",
 			"MuratTheTurkish",
-			"Winston Sung"
+			"Winston Sung",
+			"铁桶"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
-	"content-model-flow-board": "結構式討論板",
+	"content-model-flow-board": "結構化討論板",
 	"datadump-namespaceselect-label": "命名空間",
 	"mirahezemagic-description": "MediaWiki 訊息、腳本，以及用於 Miraheze 的特定掛勾",
 	"miraheze-categories": "分類",
