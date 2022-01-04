@@ -134,7 +134,7 @@
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
 	"grouppage-global-ipblock-exempt": "m:Global IP block exemption",
 	"group-member": "Members",
- 	"group-member-member": "member",
+ 	"group-member-member": "{{GENDER:$1|member}}",
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
