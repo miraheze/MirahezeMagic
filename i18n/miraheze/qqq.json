@@ -70,6 +70,7 @@
 	"group-global-ipblock-exempt": "Global IP block exemptions",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
 	"group-member": "Members\n\n{{Identical|Member}}",
+	"group-member-member": "member\n\n{{Identical|Member}}",
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",
