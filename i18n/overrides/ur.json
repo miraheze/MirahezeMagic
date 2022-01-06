@@ -5,6 +5,7 @@
 		]
 	},
 	"miraheze-centralauth-groupname": "میراہیزی",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|آپ}} داخل نہیں ہوسکتے کیونکہ{{GENDER:$1|آپ}} کا کھاتہ عالمی سطح پر مقفل ہے۔ براہ کرم مزید معلومات یا اپیل کرنے کے لیے <code>cvt[at]miraheze.org</code> سے رابطہ کریں۔",
 	"miraheze-shoutwiki-loginform-tos": "میں نے [https://meta.miraheze.org/wiki/Terms_of_Use استعمال کی شرائط] اور [https://meta.miraheze.org/wiki/Privacy_Policy رازداری پالیسی] کو پڑھا، سمجھا اور ان سے اتفاق کیا ہے۔",
 	"miraheze-shoutwiki-must-accept-tos": "ایک کھاتہ بنانے کے قابل ہونے کے لیے آپ کو استعمال کی شرائط کو قبول کرنا ہوگا!",
 	"miraheze-centralauth-merge-method-admin": "دستی طور پر ضم شدہ کھاتہ",

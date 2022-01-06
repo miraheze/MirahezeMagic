@@ -125,6 +125,7 @@
 	"group-global-ipblock-exempt": "全域 IP 封鎖例外",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|全域 IP 封鎖例外}}",
 	"group-member": "成員",
+	"group-member-member": "{{GENDER:$1|會員}}",
 	"protect-level-user": "只允許登入使用者",
 	"restriction-delete": "刪除",
 	"restriction-level-user": "只允許已登入使用者",

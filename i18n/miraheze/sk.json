@@ -120,6 +120,7 @@
 	"group-global-ipblock-exempt": "Globálna výnimka IP blokovania",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|výnimka z blokovania IP}}",
 	"group-member": "Členovia",
+	"group-member-member": "{{GENDER:$1|člen|členka}}",
 	"protect-level-user": "Povoliť iba prihlásených používateľov",
 	"restriction-delete": "Zmazať",
 	"restriction-level-user": "Povoliť iba prihlásených používateľov",

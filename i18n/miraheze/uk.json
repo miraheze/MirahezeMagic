@@ -126,6 +126,7 @@
 	"group-global-ipblock-exempt": "Глобальне виключення з блокування IP",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|виключення з глобальних блокувань IP}}",
 	"group-member": "Члени",
+	"group-member-member": "{{GENDER:$1|член}}",
 	"protect-level-user": "Дозволити лише користувачам, які увійшли у систему",
 	"restriction-delete": "Вилучити",
 	"restriction-level-user": "Дозволити лише користувачам, які увійшли у систему",

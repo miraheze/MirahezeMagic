@@ -125,6 +125,7 @@
 	"group-global-ipblock-exempt": "Esente dal blocco IP globale",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|esente dal blocco IP globale}}",
 	"group-member": "Membri",
+	"group-member-member": "{{GENDER:$1|membto}}",
 	"protect-level-user": "Consenti solo gli utenti registrati",
 	"restriction-delete": "Elimina",
 	"restriction-level-user": "Consenti solo gli utenti registrati",
