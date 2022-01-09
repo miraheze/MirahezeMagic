@@ -61,7 +61,7 @@
     	"grouppage-interface-admin": "m:User groups#Interface administrators",
 	"group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
 	"group-bot": "Bots",
-   	 grouppage-bot": "m:User groups#Bots",
+   	"grouppage-bot": "m:User groups#Bots",
 	"group-bot-member": "{{GENDER:$1|bot}}",
 	"group-rollbacker": "Rollbackers",
     	"grouppage-rollbacker": "m:User groups#Rollbackers",
