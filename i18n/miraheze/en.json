@@ -137,7 +137,6 @@
 	"group-member": "Members",
  	"group-member-member": "{{GENDER:$1|member}}",
 	"grouppage-member": "m:Special:MyLanguage/User groups#Members",
-	"grouppage-user": "m:Special:MyLanguage/User groups#Users",
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
