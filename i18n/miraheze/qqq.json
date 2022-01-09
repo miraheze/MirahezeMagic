@@ -24,7 +24,7 @@
 	"miraheze-helpcenter": "Link for the help center page.",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
-	"miraheze-sidebar-": "Sidebar header for donate.\n{{Identical|Donate}}",
+	"miraheze-sidebar-donate": "Sidebar header for donate.\n{{Identical|Donate}}",
 	"miraheze-sitenotice-closed": "Message to be displayed in site notice when a public wiki is marked as closed.",
 	"miraheze-sitenotice-closed-private": "Message to be displayed in site notice when a private wiki is marked as closed.",
 	"miraheze-sitenotice-inactive": "Message to be displayed in site notice when a public wiki is marked as inactive.",
