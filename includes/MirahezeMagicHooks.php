@@ -180,6 +180,22 @@ class MirahezeMagicHooks {
 			'centralauth-login-error-locked',
 			'snapwikiskin',
 			'skinname-snapwikiskin',
+			"miraheze-group-checkuser": "Checkusers",
+			"miraheze-group-checkuser-member": "checkuser",
+			"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
+			"miraheze-group-bureaucrat": "Bureaucrats",
+    			"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#Bureaucrats",
+			"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}",
+			"miraheze-group-sysop": "Administrators",
+    			"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#Administrators",
+			"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
+			"miraheze-group-interface-admin": "Interface administrators",
+    			"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#Interface administrators",
+			"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
+			"miraheze-group-bot": "Bots",
+    			"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#Bots",
+			"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
+			"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#Users",
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
