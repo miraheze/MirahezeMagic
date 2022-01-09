@@ -28,5 +28,6 @@
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
 	"miraheze-group-bot": "Bots",
     	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#Bots",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#Users"
 }
