@@ -27,7 +27,7 @@
 	"miraheze-grouppage-interface-admin": "m:User groups#Interface administrators",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
 	"miraheze-group-bot": "Bots",
-    	"miraheze-grouppage-bot": "m:User groups#Bots",
+	"miraheze-grouppage-bot": "m:User groups#Bots",
 	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
 	"miraheze-grouppage-user": "m:User groups#Users"
 }
