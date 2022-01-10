@@ -30,8 +30,11 @@
 		"ReCaptchaSecretKey": {
 			"value": ""
 		},
-		"ReCaptchaSendRemoteIP": {
-			"value": false
+		"ReCaptchaEnterpriseApiKey": {
+			"value": ""
+		},
+		"ReCaptchaEnterpriseProjectId": {
+			"value": ""
 		},
 		"ReCaptchaVersion": {
 			"value": "v2"
