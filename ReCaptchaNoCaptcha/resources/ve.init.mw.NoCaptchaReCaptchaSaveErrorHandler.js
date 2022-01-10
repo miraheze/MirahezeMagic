@@ -47,10 +47,10 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 			this.getReadyPromise()
 				.then( function () {
 					if ( self.widgetId ) {
-						window.grecaptcha.reset( self.widgetId );
+						window.grecaptcha.enterprise.reset( self.widgetId );
 					} else {
 						target.saveDialog.showMessage( 'api-save-error', $container, { wrap: false } );
-						self.widgetId = window.grecaptcha.render( $container[ 0 ], {
+						self.widgetId = window.grecaptcha.enterprise.render( $container[ 0 ], {
 							'sitekey': siteKey,
 							'badge': 'inline',
 							'size': 'invisible',
@@ -59,8 +59,8 @@ mw.loader.using( 'ext.visualEditor.targetLoader' ).then( function () {
 							}
 						} );
 
-						grecaptcha.ready( function () {
-							grecaptcha.execute( self.widgetId, {
+						grecaptcha.enterprise.ready( function () {
+							grecaptcha.enterprise.execute( self.widgetId, {
 								action: 'save'
 							} ).then( function ( token ) {
 								var reCaptchaField = document.getElementById( 'g-recaptcha-response' );
