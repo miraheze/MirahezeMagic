@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Auth\AuthenticationRequest;
+use MediaWiki\MediaWikiServices;
 
 class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	// used for renocaptcha-edit, renocaptcha-addurl, renocaptcha-badlogin, renocaptcha-createaccount,
@@ -64,31 +65,36 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	}
 
 	/**
-	 * Check, if the user solved the captcha.
-	 *
-	 * Based on reference implementation:
-	 * https://github.com/google/recaptcha#php
-	 *
 	 * @param mixed $_ Not used (ReCaptcha v2 puts index and solution in a single string)
-	 * @param string $word captcha solution
+	 * @param string $token captcha token
 	 * @return bool
 	 */
-	protected function passCaptcha( $_, $word ) {
-		global $wgRequest, $wgReCaptchaSecretKey, $wgReCaptchaSendRemoteIP, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
+	protected function passCaptcha( $_, $token ) {
+		global $wgReCaptchaSiteKey, $wgReCaptchaEnterpriseProjectId, $wgReCaptchaEnterpriseApiKey, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
 
-		$url = 'https://recaptchaenterprise.googleapis.com';
+		$webRequest = RequestContext::getMain()->getRequest();
+
+		$url = "https://recaptchaenterprise.googleapis.com/v1beta1/projects/{$wgReCaptchaEnterpriseProjectId}/assessments";
 		// Build data to append to request
 		$data = [
-			'secret' => $wgReCaptchaSecretKey,
-			'response' => $word,
+			'key' => $wgReCaptchaEnterpriseApiKey,
 		];
 
-		if ( $wgReCaptchaSendRemoteIP ) {
-			$data['remoteip'] = $wgRequest->getIP();
-		}
+		$options = [
+			'method' => 'POST',
+			'postData' => [
+				'event' => [
+					'token' => $token,
+					'siteKey' => $wgReCaptchaSiteKey,
+					'expectedAction' => $this->action,
+				],
+			],
+		];
 
 		$url = wfAppendQuery( $url, $data );
-		$request = MWHttpRequest::factory( $url, [ 'method' => 'GET' ] );
+		$request = MediaWikiServices::getInstance()->getHttpRequestFactory()
+			->create( $url, $options, __METHOD__ );
+
 		$status = $request->execute();
 		if ( !$status->isOK() ) {
 			$this->error = 'http';
