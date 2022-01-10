@@ -101,7 +101,7 @@
 	"grouppage-interwiki-admin": "m:Special:MyLanguage/Interwiki administrators",
 	"group-oversight": "Oversighters",
 	"group-oversight-member": "oversight",
-	"grouppage-oversight": "m:OSpecial:MyLanguage/versight",
+	"grouppage-oversight": "m:Special:MyLanguage/Oversight",
 	"group-wikicreator": "Wiki Creators",
 	"group-wikicreator-member": "{{GENDER:$1|wiki creator}}",
 	"grouppage-wikicreator": "m:Special:MyLanguage/Meta:Wiki creators",
