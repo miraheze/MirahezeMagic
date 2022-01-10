@@ -70,8 +70,6 @@
 	"group-interwiki-admin-member": "администратор интервики",
 	"group-oversight": "Ревизоры",
 	"group-oversight-member": "ревизор",
-	"group-checkuser": "Проверяющие участников",
-	"group-checkuser-member": "{{GENDER:$1|проверяющий участников|проверяющая участников}}",
 	"group-wikicreator": "Викисоздатели",
 	"group-wikicreator-member": "{{GENDER:$1|викисоздатель}}",
 	"group-wikimanager": "Вики менеджеры",

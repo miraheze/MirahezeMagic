@@ -101,8 +101,6 @@
 	"group-interwiki-admin-member": "адміністратор інтервікі",
 	"group-oversight": "Приховувачі",
 	"group-oversight-member": "приховувач",
-	"group-checkuser": "Чек'юзери",
-	"group-checkuser-member": "чек'юзер",
 	"group-wikicreator": "Творці вікі",
 	"group-wikicreator-member": "{{GENDER:$1|творець вікі}}",
 	"group-wikimanager": "Менеджери вікі",

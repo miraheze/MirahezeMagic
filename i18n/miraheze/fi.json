@@ -91,8 +91,6 @@
 	"group-interwiki-admin-member": "interwikin ylläpitäjä",
 	"group-oversight": "Häivyttäjät",
 	"group-oversight-member": "häivyttäjä",
-	"group-checkuser": "Osoitepaljastajat",
-	"group-checkuser-member": "osoitepaljastaja",
 	"group-wikicreator": "Wikien luojat",
 	"group-wikicreator-member": "{{GENDER:$1|wikien luoja}}",
 	"group-wikimanager": "Wikien hallinnoijat",

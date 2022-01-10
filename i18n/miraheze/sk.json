@@ -95,8 +95,6 @@
 	"group-interwiki-admin-member": "správca interwiki",
 	"group-oversight": "Dozorcovia",
 	"group-oversight-member": "dozorca",
-	"group-checkuser": "Kontrolný používatelia",
-	"group-checkuser-member": "kontrolný používateľ",
 	"group-wikicreator": "Tvorcovia wiki",
 	"group-wikicreator-member": "{{GENDER:$1|tvorca wiki|tvorkyňa wiki}}",
 	"group-wikimanager": "Wiki manažéri",

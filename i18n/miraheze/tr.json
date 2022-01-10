@@ -101,8 +101,6 @@
 	"group-interwiki-admin-member": "vikiarası hizmetlisi",
 	"group-oversight": "Gözetmenler",
 	"group-oversight-member": "gözetmen",
-	"group-checkuser": "Denetçiler",
-	"group-checkuser-member": "denetçi",
 	"group-wikicreator": "Viki Oluşturucuları",
 	"group-wikicreator-member": "{{GENDER:$1|viki oluşturucusu}}",
 	"group-wikimanager": "Viki Yöneticileri",

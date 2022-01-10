@@ -103,8 +103,6 @@
 	"group-interwiki-admin-member": "インターウィキ管理者",
 	"group-oversight": "秘匿者",
 	"group-oversight-member": "秘匿者",
-	"group-checkuser": "利用者調査者",
-	"group-checkuser-member": "利用者調査者",
 	"group-wikicreator": "Wiki作成者",
 	"group-wikicreator-member": "{{GENDER:$1|Wiki作成者}}",
 	"group-wikimanager": "Wiki管理者",

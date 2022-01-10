@@ -101,8 +101,6 @@
 	"group-interwiki-admin-member": "interwiki-beheerder",
 	"group-oversight": "Toezichthouders",
 	"group-oversight-member": "toezichthouder",
-	"group-checkuser": "Checkusers",
-	"group-checkuser-member": "checkuser",
 	"group-wikicreator": "Wiki-aanmakers",
 	"group-wikicreator-member": "{{GENDER:$1|wiki-aanmaker}}",
 	"group-wikimanager": "Wikibeheerders",

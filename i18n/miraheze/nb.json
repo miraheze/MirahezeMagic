@@ -85,8 +85,6 @@
 	"group-interwiki-admin-member": "interwikiadministrator",
 	"group-oversight": "Sensorer",
 	"group-oversight-member": "sensor",
-	"group-checkuser": "IP-kontrollører",
-	"group-checkuser-member": "IP-kontrollør",
 	"group-wikicreator": "Wikiopprettere",
 	"group-wikicreator-member": "{{GENDER:$1|wikioppretter}}",
 	"group-wikimanager": "Wikihåndterere",

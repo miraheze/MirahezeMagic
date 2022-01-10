@@ -110,8 +110,6 @@
 	"group-interwiki-admin-member": "administrateur interwiki",
 	"group-oversight": "Masqueurs de modifications",
 	"group-oversight-member": "masqueur de modifications",
-	"group-checkuser": "Vérificateurs d’utilisateurs",
-	"group-checkuser-member": "vérificateur d’utilisateurs",
 	"group-wikicreator": "Créateurs de wikis",
 	"group-wikicreator-member": "créat{{GENDER:$1|eur|rice}} de wikis",
 	"group-wikimanager": "Gestionnaires de wiki",

@@ -100,8 +100,6 @@
 	"group-interwiki-admin-member": "amministratore interwiki",
 	"group-oversight": "Oversighter",
 	"group-oversight-member": "{{GENDER:$1|oversight}}",
-	"group-checkuser": "Utenti di controllo",
-	"group-checkuser-member": "utente di controllo",
 	"group-wikicreator": "Creatori Wikis",
 	"group-wikicreator-member": "{{GENDER:$1|creatori wikis}}",
 	"group-wikimanager": "Gestori della Wiki",

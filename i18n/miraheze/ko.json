@@ -54,8 +54,6 @@
 	"group-interwiki-admin-member": "인터위키 관리자",
 	"group-oversight": "기록보호자",
 	"group-oversight-member": "기록보호자",
-	"group-checkuser": "검사관",
-	"group-checkuser-member": "검사관",
 	"group-wikicreator": "위키 생성자",
 	"group-wikicreator-member": "{{GENDER:$1|위키 생성자}}",
 	"group-wikimanager": "위키 관리자",

@@ -98,8 +98,6 @@
 	"group-interwiki-admin-member": "interwikiadministratör",
 	"group-oversight": "Censorer",
 	"group-oversight-member": "översikt",
-	"group-checkuser": "IP-kontrollörer",
-	"group-checkuser-member": "IP-kontrollör",
 	"group-wikicreator": "Wikiskapare",
 	"group-wikicreator-member": "{{GENDER:$1|wikiskapare}}",
 	"group-wikimanager": "Wikihanterare",

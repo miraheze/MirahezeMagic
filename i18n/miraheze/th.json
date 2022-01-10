@@ -93,8 +93,6 @@
 	"group-interwiki-admin-member": "ผู้ดูแลการลิงก์ข้ามวิกิ",
 	"group-oversight": "ผู้ควบคุมประวัติ",
 	"group-oversight-member": "ผู้ควบคุมประวัติ",
-	"group-checkuser": "ผู้ตรวจสอบผู้ใช้",
-	"group-checkuser-member": "ผู้ตรวจสอบผู้ใช้",
 	"group-wikicreator": "ผู้สร้างวิกิ",
 	"group-wikicreator-member": "{{GENDER:$1|ผู้สร้างวิกิ}}",
 	"group-wikimanager": "ผู้จัดการวิกิ",
