@@ -30,9 +30,6 @@
 		"ReCaptchaSecretKey": {
 			"value": ""
 		},
-		"ReCaptchaEnterpriseApiKey": {
-			"value": ""
-		},
 		"ReCaptchaEnterpriseProjectId": {
 			"value": ""
 		},
