@@ -13,5 +13,21 @@
 	"miraheze-shoutwiki-loginform-tos": "I have read, understood and agree to the [https://meta.miraheze.org/wiki/Terms_of_Use Terms of Use] and [https://meta.miraheze.org/wiki/Privacy_Policy Privacy Policy]",
 	"miraheze-shoutwiki-must-accept-tos": "You must accept the Terms of Use in order to be able to create an account!",
 	"miraheze-skinname-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional.",
-	"miraheze-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional."
+	"miraheze-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional.",
+	"miraheze-group-checkuser": "Checkusers",
+	"miraheze-group-checkuser-member": "checkuser",
+	"miraheze-grouppage-checkuser": "m:CheckUser",
+	"miraheze-group-bureaucrat": "Bureaucrats",
+	"miraheze-grouppage-bureaucrat": "m:User groups#{{int:Group-bureaucrat}}",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}",
+	"miraheze-group-sysop": "Administrators",
+	"miraheze-grouppage-sysop": "m:User groups#{{int:Group-sysop}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
+	"miraheze-group-interface-admin": "Interface administrators",
+	"miraheze-grouppage-interface-admin": "m:User groups#{{int:Group-interface-admin}}",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
+	"miraheze-group-bot": "Bots",
+	"miraheze-grouppage-bot": "m:User groups#{{int:Group-bot}}",
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
+	"miraheze-grouppage-user": "m:User groups#{{int:Group-user}}"
 }

@@ -181,6 +181,22 @@ class MirahezeMagicHooks {
 			'centralauth-login-error-locked',
 			'snapwikiskin',
 			'skinname-snapwikiskin',
+			'group-checkuser',
+			'group-checkuser-member',
+			'grouppage-checkuser',
+			'group-bureaucrat',
+			'grouppage-bureaucrat',
+			'group-bureaucrat-member',
+			'group-sysop',
+			'grouppage-sysop',
+			'group-sysop-member',
+			'group-interface-admin',
+			'grouppage-interface-admin',
+			'group-interface-admin-member',
+			'group-bot',
+			'grouppage-bot',
+			'group-bot-member',
+			'grouppage-user',
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
