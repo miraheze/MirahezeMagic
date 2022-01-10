@@ -23,7 +23,7 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis",
 	"miraheze-group-checkuser": "Checkusers",
 	"miraheze-group-checkuser-member": "checkuser",
-	"miraheze-grouppage-checkuser": "m:CheckUser",
+	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Bureaucrats",
 	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}",
