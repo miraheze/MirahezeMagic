@@ -31,7 +31,7 @@
 	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
 	"miraheze-group-interface-admin": "Interface administrators",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
+	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
 	"miraheze-group-bot": "Bots",
 	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
