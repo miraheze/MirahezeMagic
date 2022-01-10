@@ -107,7 +107,7 @@
 	"grouppage-wikicreator": "m:Special:MyLanguage/Meta:Wiki creators",
 	"group-wikimanager": "Wiki Managers",
 	"group-wikimanager-member": "{{GENDER:$1|wiki manager}}",
-	"grouppage-wikimanager": "m:WSpecial:MyLanguage/iki managers",
+	"grouppage-wikimanager": "m:Special:MyLanguage/Wiki managers",
 	"group-rollbacker": "Rollbackers",
 	"grouppage-rollbacker": "m:Special:MyLanguage/User groups#{{int:Group-rollbacker}}",
 	"group-rollbacker-member": "{{GENDER:$1|rollbacker}}",
