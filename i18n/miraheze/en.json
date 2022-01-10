@@ -95,7 +95,7 @@
 	"grouppage-steward": "m:Stewards",
 	"group-sysadmin": "System administrators",
 	"group-sysadmin-member": "{{GENDER:$1|system administrator}}",
-	"grouppage-sysadmin": "m:Tech:SRE Volunteers",
+	"grouppage-sysadmin": "m:Special:MyLanguage/Tech:SRE Volunteers",
 	"group-interwiki-admin": "Interwiki Administrator",
 	"group-interwiki-admin-member": "interwiki administrator",
 	"grouppage-interwiki-admin": "m:Interwiki administrators",
