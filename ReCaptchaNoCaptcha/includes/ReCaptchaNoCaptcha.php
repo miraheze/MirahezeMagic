@@ -82,9 +82,11 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 			'secret' => $wgReCaptchaSecretKey,
 			'response' => $word,
 		];
+
 		if ( $wgReCaptchaSendRemoteIP ) {
 			$data['remoteip'] = $wgRequest->getIP();
 		}
+
 		$url = wfAppendQuery( $url, $data );
 		$request = MWHttpRequest::factory( $url, [ 'method' => 'GET' ] );
 		$status = $request->execute();
@@ -93,12 +95,14 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 			$this->logCheckError( $status );
 			return false;
 		}
+
 		$response = FormatJson::decode( $request->getContent(), true );
 		if ( !$response ) {
 			$this->error = 'json';
 			$this->logCheckError( $this->error );
 			return false;
 		}
+
 		if ( isset( $response['error-codes'] ) ) {
 			$this->error = 'recaptcha-api';
 			$this->logCheckError( $response['error-codes'] );
@@ -106,16 +110,17 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 		}
 
 		if ( isset( $response['score'] ) && (float)$response['score'] < $wgReCaptchaMinimumScore ) {
-			$this->error = 'v3-failed';
+			$this->error = $response['name'] . ', ' . $response['reasons'];
+
 			$this->logCheckError( $this->error . ': ' . (float)$response['score'] );
 			return false;
 		} elseif ( $wgReCaptchaVersion === 'v2' && isset( $response['score'] ) ) {
 			throw new ConfigException( 'ReCaptcha version 2 was configured, however, ' .
 				'the siteverify response of the ReCaptcha service returned a score, which indicates, ' .
 				'that the sitekey and secretkey were created for v3. Please check your configuration.' );
-		} else {
-			return $response['success'];
 		}
+
+		return $response['success'];
 	}
 
 	/**
