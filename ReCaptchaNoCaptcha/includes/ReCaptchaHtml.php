@@ -33,14 +33,14 @@ class ReCaptchaHtml {
 	public function headItem() {
 		if ( $this->version === 'v3' ) {
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?render=$this->siteKey\"></script>" .
+				"<script src=\"https://www.google.com/recaptcha/enterprise.js?render=$this->siteKey\"></script>" .
 				$this->v3Script();
 		} else {
 			// Insert reCAPTCHA script, in display language, if available.
 			// Language falls back to the browser's display language.
 			// See https://developers.google.com/recaptcha/docs/faq
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?hl={$this->languageCode}\"" .
+				"<script src=\"https://www.google.com/recaptcha/enterprise.js?hl={$this->languageCode}\"" .
 				"async defer></script>";
 		}
 
@@ -100,8 +100,8 @@ HTML;
 	private function v3Script() {
 		$script = <<<HTML
 <script>
-grecaptcha.ready(function() {
-    grecaptcha.execute('$this->siteKey', {action: '$this->action'}).then(function(token) {
+grecaptcha.enterprise.ready(function() {
+    grecaptcha.enterprise.execute('$this->siteKey', {action: '$this->action'}).then(function(token) {
        var reCaptchaField = document.getElementById('reCaptchaField');
        reCaptchaField.value = token;
     });
