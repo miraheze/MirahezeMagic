@@ -25,16 +25,16 @@
 	"miraheze-group-checkuser-member": "checkuser",
 	"miraheze-grouppage-checkuser": "m:CheckUser",
 	"miraheze-group-bureaucrat": "Bureaucrats",
-	"miraheze-grouppage-bureaucrat": "m:User groups#{{int:Group-bureaucrat}}",
+	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}",
 	"miraheze-group-sysop": "Administrators",
-	"miraheze-grouppage-sysop": "m:User groups#{{int-Group-sysop}}",
+	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
 	"miraheze-group-interface-admin": "Interface administrators",
-	"miraheze-grouppage-interface-admin": "m:User groups#{{int:Group-interface-admin}}",
+	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
 	"miraheze-group-bot": "Bots",
-	"miraheze-grouppage-bot": "m:User groups#{{int:Group-bot}}",
+	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
 	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:User groups#{{int:Group-user}}"
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
 }
