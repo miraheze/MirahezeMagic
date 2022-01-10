@@ -70,14 +70,14 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	 * @return bool
 	 */
 	protected function passCaptcha( $_, $token ) {
-		global $wgReCaptchaSiteKey, $wgReCaptchaEnterpriseProjectId, $wgReCaptchaEnterpriseApiKey, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
+		global $wgReCaptchaSiteKey, $wgReCaptchaSecretKey, $wgReCaptchaEnterpriseProjectId, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
 
 		$webRequest = RequestContext::getMain()->getRequest();
 
 		$url = "https://recaptchaenterprise.googleapis.com/v1beta1/projects/{$wgReCaptchaEnterpriseProjectId}/assessments";
 		// Build data to append to request
 		$data = [
-			'key' => $wgReCaptchaEnterpriseApiKey,
+			'key' => $wgReCaptchaSecretKey,
 		];
 
 		$options = [
