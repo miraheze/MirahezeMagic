@@ -74,11 +74,7 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 
 		$webRequest = RequestContext::getMain()->getRequest();
 
-		$url = "https://recaptchaenterprise.googleapis.com/v1beta1/projects/{$wgReCaptchaEnterpriseProjectId}/assessments";
-		// Build data to append to request
-		$data = [
-			'key' => $wgReCaptchaSecretKey,
-		];
+		$url = "https://recaptchaenterprise.googleapis.com/v1beta1/projects/{$wgReCaptchaEnterpriseProjectId}/assessments?key={$wgReCaptchaSecretKey}";
 
 		$options = [
 			'method' => 'POST',
@@ -91,7 +87,6 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 			],
 		];
 
-		$url = wfAppendQuery( $url, $data );
 		$request = MediaWikiServices::getInstance()->getHttpRequestFactory()
 			->create( $url, $options, __METHOD__ );
 
