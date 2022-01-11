@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Auth\AuthenticationRequest;
+use MediaWiki\MediaWikiServices;
 
 class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	// used for renocaptcha-edit, renocaptcha-addurl, renocaptcha-badlogin, renocaptcha-createaccount,
@@ -64,41 +65,45 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	}
 
 	/**
-	 * Check, if the user solved the captcha.
-	 *
-	 * Based on reference implementation:
-	 * https://github.com/google/recaptcha#php
-	 *
 	 * @param mixed $_ Not used (ReCaptcha v2 puts index and solution in a single string)
-	 * @param string $word captcha solution
+	 * @param string $token captcha token
 	 * @return bool
 	 */
-	protected function passCaptcha( $_, $word ) {
-		global $wgRequest, $wgReCaptchaSecretKey, $wgReCaptchaSendRemoteIP, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
+	protected function passCaptcha( $_, $token ) {
+		global $wgReCaptchaSiteKey, $wgReCaptchaSecretKey, $wgReCaptchaEnterpriseProjectId, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
 
-		$url = 'https://recaptchaenterprise.googleapis.com';
-		// Build data to append to request
-		$data = [
-			'secret' => $wgReCaptchaSecretKey,
-			'response' => $word,
+		$webRequest = RequestContext::getMain()->getRequest();
+
+		$url = "https://recaptchaenterprise.googleapis.com/v1beta1/projects/{$wgReCaptchaEnterpriseProjectId}/assessments?key={$wgReCaptchaSecretKey}";
+
+		$options = [
+			'method' => 'POST',
+			'postData' => [
+				'event' => [
+					'token' => $token,
+					'siteKey' => $wgReCaptchaSiteKey,
+					'expectedAction' => $this->action,
+				],
+			],
 		];
-		if ( $wgReCaptchaSendRemoteIP ) {
-			$data['remoteip'] = $wgRequest->getIP();
-		}
-		$url = wfAppendQuery( $url, $data );
-		$request = MWHttpRequest::factory( $url, [ 'method' => 'GET' ] );
+
+		$request = MediaWikiServices::getInstance()->getHttpRequestFactory()
+			->create( $url, $options, __METHOD__ );
+
 		$status = $request->execute();
 		if ( !$status->isOK() ) {
 			$this->error = 'http';
 			$this->logCheckError( $status );
 			return false;
 		}
+
 		$response = FormatJson::decode( $request->getContent(), true );
 		if ( !$response ) {
 			$this->error = 'json';
 			$this->logCheckError( $this->error );
 			return false;
 		}
+
 		if ( isset( $response['error-codes'] ) ) {
 			$this->error = 'recaptcha-api';
 			$this->logCheckError( $response['error-codes'] );
@@ -106,16 +111,17 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 		}
 
 		if ( isset( $response['score'] ) && (float)$response['score'] < $wgReCaptchaMinimumScore ) {
-			$this->error = 'v3-failed';
+			$this->error = $response['name'] . ', ' . $response['reasons'];
+
 			$this->logCheckError( $this->error . ': ' . (float)$response['score'] );
 			return false;
 		} elseif ( $wgReCaptchaVersion === 'v2' && isset( $response['score'] ) ) {
 			throw new ConfigException( 'ReCaptcha version 2 was configured, however, ' .
 				'the siteverify response of the ReCaptcha service returned a score, which indicates, ' .
 				'that the sitekey and secretkey were created for v3. Please check your configuration.' );
-		} else {
-			return $response['success'];
 		}
+
+		return $response['success'];
 	}
 
 	/**
