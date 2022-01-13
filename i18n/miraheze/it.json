@@ -18,7 +18,7 @@
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) chiusa",
 	"miraheze-close-email-body": "Ciao,\nsfortunatamente, per il fatto che il tuo wiki non ha avuto modifiche negli ultimi 60 giorni, è stato chiuso per la nostra <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">politica di dormienza</a>. Se volessi comunque editare il tuo wiki vai in Special:MediaWiki e deseleziona la casella \"chiusa\" per riaprirlo.\n\nDa notare che se non lo riapri è possibile che un altro utente adotti il tuo wiki a partire da 6 mesi da adesso, e può anche essere candidabile per la cancellazione.",
 	"miraheze-donate": "Dona a Miraheze",
-	"miraheze-donatepage": "m:Donate/it",
+	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro aiuto Miraheze",
 	"miraheze-requestfeatures": "Richiedi le caratteristiche di un wiki",

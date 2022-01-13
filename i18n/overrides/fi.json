@@ -15,5 +15,15 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Tämä käyttäjä on yhdistetty manuaalisesti järjestelmän ylläpitäjän tai ylivalvojan toimesta. Tämä on voinut aiheutua teknisestä ongelmasta uudelleennimeämisen tai yhdistämisen aikana.",
 	"miraheze-restriction-protect": "Suojaa",
 	"miraheze-restriction-delete": "Poista",
-	"miraheze-wikibase-sitelinks-miraheze": "Mirahezen wikit"
+	"miraheze-wikibase-sitelinks-miraheze": "Mirahezen wikit",
+	"miraheze-group-checkuser": "Osoitepaljastajat",
+	"miraheze-group-checkuser-member": "osoitepaljastaja",
+	"miraheze-group-bureaucrat": "Byrokraatit",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|byrokraatti}}",
+	"miraheze-group-sysop": "Ylläpitäjät",
+	"miraheze-group-sysop-member": "{{GENDER:$1|ylläpitäjä}}",
+	"miraheze-group-interface-admin": "Käyttöliittymän ylläpitäjät",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|käyttöliittymän ylläpitäjä}}",
+	"miraheze-group-bot": "Botit",
+	"miraheze-group-bot-member": "{{GENDER:$1|botti}}"
 }

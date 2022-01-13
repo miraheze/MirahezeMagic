@@ -23,6 +23,7 @@
 	"group-trustandsafety": "Vertrauen a Sécherheet",
 	"group-trustandsafety-member": "Vertrauen a Sécherheet",
 	"group-member": "Memberen",
+	"group-member-member": "{{GENDER:$1|Member}}",
 	"protect-level-user": "Nëmmen ageloggt Benotzer zouloossen",
 	"restriction-delete": "Läschen",
 	"restriction-level-user": "Nëmmen ageloggt Benotzer zouloossen",

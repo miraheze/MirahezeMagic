@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"MathXplore",
 			"Omotecho",
 			"RYOUMA1117",
 			"RYU N",
@@ -22,5 +23,11 @@
 	"miraheze-restriction-delete": "削除",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wiki"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wiki",
+	"miraheze-group-checkuser": "利用者調査者",
+	"miraheze-group-checkuser-member": "利用者調査者",
+	"miraheze-group-bureaucrat": "ビューロクラット",
+	"miraheze-group-sysop": "管理者",
+	"miraheze-group-interface-admin": "インターフェース管理者",
+	"miraheze-group-bot": "ボット"
 }
