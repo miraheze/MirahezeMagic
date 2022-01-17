@@ -11,6 +11,8 @@
 	"miraheze-group-bureaucrat": "Bürokraten",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|Bürokrat|Bürokratin}}",
 	"miraheze-group-sysop": "Administrateuren",
+	"miraheze-group-sysop-member": "{{GENDER:$1|Administrateur|Administratrice}}",
 	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|Bot}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|Bot}}",
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
 }
