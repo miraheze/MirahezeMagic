@@ -22,5 +22,8 @@
 	"miraheze-skinname-snapwikiskin": "Çek!",
 	"miraheze-snapwikiskin": "Çek!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Vikileri",
-	"miraheze-group-bureaucrat": "Bürokratlar"
+	"miraheze-group-bureaucrat": "Bürokratlar",
+	"miraheze-group-sysop": "Yöneticiler",
+	"miraheze-group-interface-admin": "Arayüz yöneticileri",
+	"miraheze-group-bot": "Botlar"
 }
