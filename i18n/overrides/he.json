@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Ghsuvr",
+			"YaronSh",
 			"לואיקה"
 		]
 	},
@@ -12,5 +13,7 @@
 	"miraheze-restriction-delete": "מחיקה",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-wikibase-sitelinks-miraheze": "אתרי ויקי של Miraheze"
+	"miraheze-wikibase-sitelinks-miraheze": "אתרי ויקי של Miraheze",
+	"miraheze-group-sysop": "מנהלים",
+	"miraheze-group-bot": "בוטים"
 }
