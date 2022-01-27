@@ -80,9 +80,9 @@ class FixUserIdRevision extends Maintenance {
         }
 
         public function getGoodUserId( $username ) {
-                $whitelist = [ 'Maintenance script', 'MediaWiki default' ];
+                $allowed = [ 'Maintenance script', 'MediaWiki default' ];
 
-                if ( in_array( $username, $whitelist ) ) {
+                if ( in_array( $username, $allowed ) ) {
                         return 0;
                 }
 
