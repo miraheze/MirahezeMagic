@@ -126,7 +126,7 @@
 	"group-global-ipblock-exempt": "グローバルIPブロック適用除外者",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|グローバルIPブロック適用除外者}}",
 	"group-member": "メンバー",
-	"group-member-member": "{{GENDER:$1|利用者}}",
+	"group-member-member": "{{GENDER:$1|メンバー}}",
 	"protect-level-user": "登録利用者にのみ許可",
 	"restriction-delete": "削除",
 	"restriction-level-user": "登録利用者にのみ許可",
