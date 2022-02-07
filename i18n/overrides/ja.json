@@ -13,7 +13,7 @@
 	"miraheze-dberr-again": "数分待ってから再読み込みしてみてください。このエラーに関する詳しい情報は、Twitter (https://twitter.com/Miraheze) をご覧になるか、irc.libera.chat の #miraheze-sre に接続してシステム管理者にお問い合わせください。",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|あなた}}はログインすることができません {{GENDER:$1|あなた}}のアカウントはブロックされました。詳細か訴えるためには <code>cvt[at]miraheze.org</code> にお問い合わせください。",
-	"miraheze-importtext": "[[Special:Export|export utility]]を使用して、元のWikiからファイルをエクスポートしてください。<br />それをあなたのコンピュータに保存し、ここにアップロードしてください。\nファイルが大きい場合 (~ 5MB 以上) は、ブラウザからではできないので、[[phab:maniphest/task/edit/form/1|Phabricatorでリクエスト]]が必要であることに注意してください。",
+	"miraheze-importtext": "[[Special:Export|エクスポート機能]]を使用して、元のWikiからファイルをエクスポートします。まずご使用のコンピュータに保存してから、ここにアップロードしてください。<br />ファイルが大きい場合 (5MB 超) はブラウザ経由では不可能なので、[[M:Moving_a_wiki_to_Miraheze#Request_import|インポートの申請]]が必要である点に注意してください。",
 	"miraheze-oathauth-step1": "重要なお知らせ：この機能を有効にする前に、OATHAuthのページを必ずお読みください。\nステップ1：二要素認証プログラムをダウンロードする",
 	"miraheze-prefs-help-realname": "本名は省略できます。入力すると、あなたの著作物の帰属表示に使用されます。また、MirahezeがホストするWikiを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]</span>に同意し、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]</span>に同意したことになります",
 	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
