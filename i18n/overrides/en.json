@@ -27,5 +27,5 @@
 	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-interface-admin": "Interface administrators",
 	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
-	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}"
 }
