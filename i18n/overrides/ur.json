@@ -12,5 +12,21 @@
 	"miraheze-centralauth-merge-method-admin-desc": "اس کھاتے کو سسٹم منتظمین یا اسٹیوارڈ نے دستی طور پر ضم کیا تھا۔ یہ نام تبدیل کرنے یا انضمام کے عمل میں کسی تکنیکی مسئلے کی وجہ سے ہو سکتا ہے۔",
 	"miraheze-restriction-protect": "محفوظ",
 	"miraheze-restriction-delete": "حذف",
-	"miraheze-wikibase-sitelinks-miraheze": "میراہیزی ویکیاں"
+	"miraheze-wikibase-sitelinks-miraheze": "میراہیزی ویکیاں",
+	"miraheze-group-checkuser": "پڑتال کنندگان",
+	"miraheze-group-checkuser-member": "پڑتال کنندہ",
+	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
+	"miraheze-group-bureaucrat": "مامورین اداری",
+	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|مامور اداری}}",
+	"miraheze-group-sysop": "منتظمین",
+	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|منتظم}}",
+	"miraheze-group-interface-admin": "انٹرفیس منتظمین",
+	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|انٹرفیس منتظم}}",
+	"miraheze-group-bot": "روبہ جات",
+	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
+	"miraheze-group-bot-member": "{{GENDER:$1|خودکار صارف}}",
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
 }

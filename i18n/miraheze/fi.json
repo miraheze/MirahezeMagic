@@ -99,7 +99,7 @@
 	"group-wikicreator": "Wikien luojat",
 	"group-wikicreator-member": "{{GENDER:$1|wikien luoja}}",
 	"group-wikimanager": "Wikien hallinnoijat",
-	"group-wikimanager-member": "{{GENER:$1|wikien hallinnoija}}",
+	"group-wikimanager-member": "wikien hallinnoija{{GENDER:$1|}}",
 	"group-rollbacker": "Palauttajat",
 	"group-rollbacker-member": "{{GENDER:$1|palauttaja}}",
 	"group-autopatrolled": "automaattisesti tarkastetut käyttäjät",
