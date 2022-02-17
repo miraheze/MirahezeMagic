@@ -5,7 +5,7 @@
 		]
 	},
 	"miraheze-dberr-again": "Skúste počkať niekoľko minúť a načítajte znovu. Pre viac informácií o tejto chybe navštívte našu twitter stránku (https://twitter.com/Miraheze) alebo kontaktujte správcu systému #miraheze na irc.libera.chat.",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Váš}} účet nie je možné prihlásiť, pretože {{GENDER:$1|Váš}} účet je globálne uzamknutý. Prosím kontaktujte <code>cvt{{@}}miraheze.org</code> pre viac informácií, alebo pre žiadosť o odomknutie.",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Váš}} účet nie je možné prihlásiť, pretože {{GENDER:$1|Váš}} účet je globálne uzamknutý. Prosím kontaktujte <code>cvt[na]miraheze.org</code> pre viac informácií, alebo pre žiadosť o odomknutie.",
 	"miraheze-importtext": "Prosím exportujte súbor zo zdroja wiki použitím [[Special:Export|nástroje pre export]].\nUložte ho do Vášho počítača a nahrajte sem. <br /> Prosím berte na vedomie, že ak je súbor väčší než (~ >5MB) musíte požiadať o import tu -> [[M:Moving_a_wiki_to_Miraheze#Request_import]].",
 	"miraheze-oathauth-step1": "DÔLEŽITÉ! Prosím prečítajte si stránku OATHAuth pred tým než toto povolíte! Krok 1: Stiahnite si dvoj faktorový autentifikačný program",
 	"miraheze-prefs-help-realname": "Skutočné meno nie je povinné. Ak sa rozhodnete ho uviesť, bude uvádzané pri Vašej práci. Taktiež používaním Miraheze súhlasíte s<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Podmienkami používania]</span> a súhlasíte so <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Zásadami ochrany súkromia]</span>.",

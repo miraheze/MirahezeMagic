@@ -12,7 +12,7 @@
 	},
 	"miraheze-dberr-again": "Intenta esperar unos cuantos minutos y recargar la página. Para más información sobre este error, por favor visita nuestra página de Twitter (twitter.com/Miraheze) o contacte a los administradores de sistema en #miraheze-sre en irc.libera.chat",
 	"miraheze-centralauth-groupname": "Miraheze",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tú}} no puedes loguearte porque {{GENDER:$1|tu}} cuenta está bloqueada globalmente. Por favor contacta a <code>cvt{{@}}miraheze.org</code> para más información o para apelar.",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tú}} no puedes loguearte porque {{GENDER:$1|tu}} cuenta está bloqueada globalmente. Por favor contacta a <code>cvt[a]miraheze.org</code> para más información o para apelar.",
 	"miraheze-oathauth-step1": "IMPORTANTE: asegúrate de leer la página de OATHAuth antes de activar esta opción. Paso 1: descargar un programa de autenticación en dos fases.",
 	"miraheze-prefs-help-realname": "El nombre real es opcional. Si eliges proveerlo, será usado para dar atribución a tu trabajo. Además, si usas una wiki alojada por Miraheze, estás de acuerdo con los <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Términos de Uso]</span> y aceptas la <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Política de Privacidad]</span>.",
 	"miraheze-shoutwiki-loginform-tos": "He leído, entiendo y acepto los [https://meta.miraheze.org/wiki/Terms_of_Use Términos de Uso] y la [https://meta.miraheze.org/wiki/Privacy_Policy Política de privacidad]",
