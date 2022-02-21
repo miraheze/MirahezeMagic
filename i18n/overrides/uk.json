@@ -4,13 +4,14 @@
 			"DDPAT",
 			"Movses",
 			"Piramidion",
+			"Shybetsky",
 			"Ата"
 		]
 	},
 	"miraheze-dberr-again": "Спробуйте почекати кілька хвилин і перезавантажити. Щоб дізнатись більше про цю помилку, будь ласка, перегляньте нашу сторінку на Twitter (https://twitter.com/Miraheze), або зв'яжіться із системними адміністраторами через канал #miraheze-sre на irc.libera.chat.",
 	"miraheze-centralauth-groupname": "Мірахезе",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Ви}} не можете увійти, оскільки {{GENDER:$1|ваш}} обліковий запис глобально заблоковано. Будь ласка, зв'яжіться з <code>cvt[at]miraheze.org</code> для отримання додаткової інформації або звернення.",
-	"miraheze-importtext": "Експортуйте файл із вихідної вікі за допомогою [[Special:Export|утиліти експорту]].\nЗбережіть його на своєму комп’ютері та завантажте сюди.<br /> Зверніть увагу, що якщо файл великий (~ >5 МБ), вам потрібно буде [[phab:maniphest/task/edit/form/1|запитати це на Фабрикатрі]], оскільки це неможливо зробити через браузер.",
+	"miraheze-importtext": "Експортуйте файл із вихідної вікі за допомогою [[Special:Export|export utility]].\nЗбережіть його на своєму комп’ютері та завантажте сюди.<br /> Зауважте, що якщо файл великий (~ >5 МБ), вам потрібно буде [[M:Moving_a_wiki_to_Miraheze#Request_import]], оскільки це неможливо зробити через браузер.",
 	"miraheze-oathauth-step1": "ВАЖЛИВО! Будь ласка, прочитайте сторінку про OATHAuth, перш ніж увімкнете це! Крок 1: Завантажте програму двофакторної автентифікації",
 	"miraheze-prefs-help-realname": "Справжнє ім'я — необов'язкове. Якщо Ви вирішите його вказати, воно використовуватиметься для зазначення Вашого авторства в інформації про Ваші твори. Також, користуючись вікі із хостингом на Miraheze, Ви погоджуєтесь на наші <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Умови використання]</span> та приймаєте умови <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Політики конфіденційності]</span>.",
 	"miraheze-shoutwiki-loginform-tos": "Я прочитав(ла), зрозумів(ла) і погоджуюся з [https://meta.miraheze.org/wiki/Terms_of_Use Умовами використання] та [https://meta.miraheze.org/wiki/Privacy_Policy Політикою конфіденційності]",
@@ -21,5 +22,21 @@
 	"miraheze-restriction-delete": "Вилучити",
 	"miraheze-skinname-snapwikiskin": "Оснащення!",
 	"miraheze-snapwikiskin": "Оснащення!",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-вікі"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-вікі",
+	"miraheze-group-checkuser": "Чек'юзери",
+	"miraheze-group-checkuser-member": "чек'юзер",
+	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/Чек'юзер",
+	"miraheze-group-bureaucrat": "Бюрократи",
+	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/Групи користувачів#{{int:Group-bureaucrat}}",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|бюрократ|бюрократка}}",
+	"miraheze-group-sysop": "Адміністратори",
+	"miraheze-grouppage-sysop": "m:Special:MyLanguage/Групи користувачів#{{int:Group-sysop}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|адміністратор|адміністраторка}}",
+	"miraheze-group-interface-admin": "Адміністратори інтерфейсу",
+	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/Групи користувачів#{{int:Group-interface-admin}}",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|адміністратор інтерфейсу|адміністраторка інтерфейсу}}",
+	"miraheze-group-bot": "Боти",
+	"miraheze-grouppage-bot": "m:Special:MyLanguage/Групи користувачів#{{int:Group-bot}}",
+	"miraheze-group-bot-member": "{{GENDER:$1|бот}}",
+	"miraheze-grouppage-user": "m:Special:MyLanguage/Групи користувачів#{{int:Group-user}}"
 }

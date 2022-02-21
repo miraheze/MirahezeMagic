@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"MathXplore",
 			"Omotecho",
 			"RYOUMA1117",
 			"RYU N",
@@ -12,6 +13,7 @@
 	"miraheze-dberr-again": "数分待ってから再読み込みしてみてください。このエラーに関する詳しい情報は、Twitter (https://twitter.com/Miraheze) をご覧になるか、irc.libera.chat の #miraheze-sre に接続してシステム管理者にお問い合わせください。",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|あなた}}はログインすることができません {{GENDER:$1|あなた}}のアカウントはブロックされました。詳細か訴えるためには <code>cvt[at]miraheze.org</code> にお問い合わせください。",
+	"miraheze-importtext": "[[Special:Export|エクスポート機能]]を使用して、元のWikiからファイルをエクスポートします。まずご使用のコンピュータに保存してから、ここにアップロードしてください。<br />ファイルが大きい場合 (5MB 超) はブラウザ経由では不可能なので、[[M:Moving_a_wiki_to_Miraheze#Request_import|インポートの申請]]が必要である点に注意してください。",
 	"miraheze-oathauth-step1": "重要なお知らせ：この機能を有効にする前に、OATHAuthのページを必ずお読みください。\nステップ1：二要素認証プログラムをダウンロードする",
 	"miraheze-prefs-help-realname": "本名は省略できます。入力すると、あなたの著作物の帰属表示に使用されます。また、MirahezeがホストするWikiを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]</span>に同意し、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]</span>に同意したことになります",
 	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
@@ -22,5 +24,14 @@
 	"miraheze-restriction-delete": "削除",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wiki"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wiki",
+	"miraheze-group-checkuser": "利用者調査者",
+	"miraheze-group-checkuser-member": "利用者調査者",
+	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
+	"miraheze-group-bureaucrat": "ビューロクラット",
+	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|ビューロクラット}}",
+	"miraheze-group-sysop": "管理者",
+	"miraheze-group-interface-admin": "インターフェース管理者",
+	"miraheze-group-bot": "ボット"
 }

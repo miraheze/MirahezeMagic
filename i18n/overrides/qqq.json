@@ -1,10 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Ajeje Brazorf",
 			"Hamilton Abreu",
 			"John Lewis",
 			"McDutchie",
-			"RhinosF1"
+			"RhinosF1",
+			"Robby"
 		]
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
@@ -19,15 +21,15 @@
 	"miraheze-grouppage-checkuser": "m:CheckUser",
 	"miraheze-group-bureaucrat": "Bureaucrats",
 	"miraheze-grouppage-bureaucrat": "m:User groups#{{int:Group-bureaucrat}}",
-	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}",
-	"miraheze-group-sysop": "Administrators",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}\n\n{{Identical|Bureaucrat}}",
+	"miraheze-group-sysop": "Administrators\n{{Identical|Administrator}}",
 	"miraheze-grouppage-sysop": "m:User groups#{{int:Group-sysop}}",
-	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}\n\n{{Identical|Administrator}}",
 	"miraheze-group-interface-admin": "Interface administrators",
 	"miraheze-grouppage-interface-admin": "m:User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
-	"miraheze-group-bot": "Bots",
+	"miraheze-group-bot": "Bots\n\n{{Identical|Bot}}",
 	"miraheze-grouppage-bot": "m:User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}\n\n{{Identical|Bot}}",
 	"miraheze-grouppage-user": "m:User groups#{{int:Group-user}}"
 }

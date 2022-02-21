@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Robin van der Vliet"
 		]
 	},
 	"miraheze-dberr-again": "Probeer een paar minuten te wachten en opnieuw te laden. Ga voor meer informatie over deze fout naar onze twitterpagina (https://twitter.com/Miraheze) of neem contact op met de systeembeheerders door verbinding te maken met #miraheze-sre op irc.libera.chat.",
@@ -17,5 +18,11 @@
 	"miraheze-restriction-delete": "Verwijderen",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-wiki's"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-wiki's",
+	"miraheze-group-bureaucrat": "Bureaucraten",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucraat}}",
+	"miraheze-group-sysop": "Beheerders",
+	"miraheze-group-sysop-member": "{{GENDER:$1|beheerder}}",
+	"miraheze-group-bot": "Bots",
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
 }

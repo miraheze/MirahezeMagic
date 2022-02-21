@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Geraki",
 			"Giannaras99",
 			"Michail Angelos Georgoulas",
 			"NikosLikomitros",
@@ -14,7 +15,7 @@
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
 	"mirahezesurvey": "Ετήσια έρευνα Miraheze 2021",
 	"group-oversight-member": "επιτηρητής",
-	"group-confirmed": "Eπιβεβαιωμένοι χρήστες",
+	"group-confirmed": "Επιβεβαιωμένοι χρήστες",
 	"group-translator-member": "Μεταφραστής",
 	"group-translationadmin": "Διαχειριστές μετάφρασης",
 	"group-translationadmin-member": "Διαχειριστής μετάφρασης",

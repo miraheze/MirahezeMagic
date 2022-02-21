@@ -10,10 +10,12 @@
 			"Patsagorn Y.",
 			"Piramidion",
 			"Robby",
-			"Universal Omega"
+			"Universal Omega",
+			"Verdy p"
 		]
 	},
 	"centralauth-groupname": "The name of group name in CentralAuth.",
+	"content-model-flow-board": "<!---->",
 	"mirahezemagic-description": "The description of [[Special:Version]].",
 	"miraheze-categories": "Label for categories.\n{{Identical|Category}}",
 	"miraheze-close-email-subject": "A subject for the closed wiki on email.",
@@ -101,6 +103,7 @@
 	"settings-restricted": "Restricted",
 	"settings-seo": "SEO = Search Engine Optimization",
 	"settings-styling": "Styling",
+	"settings-wikibase": "{{Identical|Wikibase}}",
 	"extensions-skins": "Skins\n{{identical|Skin}}",
 	"extensions-api": "{{identical|API}}",
 	"extensions-antispam": "Spam prevention",

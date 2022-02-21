@@ -6,7 +6,7 @@
 		]
 	},
 	"miraheze-dberr-again": "Odota muutama minuutti ja lataa sivu uudelleen. Saadaksesi lisätietoja tästä virheestä katso Twitter-sivumme (https://twitter.com/Miraheze) tai ota yhteyttä järjestelmän ylläpitäjiin kanavalla #miraheze palvelimella irc.libera.chat.",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Et}} voi kirjautua sisään, koska {{GENDER:$1|käyttäjäsi}} on lukittu järjestelmänlaajuisesti. Ota yhteyttä osoitteeseen <code>cvt{{@}}miraheze.org</code> saadaksesi lisätietoja tai valittaaksesi",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Et}} voi kirjautua sisään, koska {{GENDER:$1|käyttäjäsi}} on lukittu järjestelmänlaajuisesti. Ota yhteyttä osoitteeseen <code>cvt[at]miraheze.org</code> saadaksesi lisätietoja tai valittaaksesi",
 	"miraheze-oathauth-step1": "TÄRKEÄÄ! Varmista, että luet OATHAuth-sivun ennen käyttöönottoa!  Vaihe 1: Lataa kaksivaiheisen tunnistautumisen sovellus",
 	"miraheze-prefs-help-realname": "Oikean nimen ilmoittaminen on vapaaehtoista. Jos ilmoitettu, sitä voidaan käyttää tekijän mainitsemiseen. Lisäksi käyttämällä Mirahezen ylläpitämää wikiä hyväksyt <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use käyttöehdot]</span> ja <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy tietosuojakäytännön]</span>.",
 	"miraheze-shoutwiki-loginform-tos": "Olen lukenut, ymmärtänyt ja hyväksyn [https://meta.miraheze.org/wiki/Terms_of_Use käyttöehdot] ja [https://meta.miraheze.org/wiki/Privacy_Policy tietosuojakäytännön]",
@@ -15,5 +15,15 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Tämä käyttäjä on yhdistetty manuaalisesti järjestelmän ylläpitäjän tai ylivalvojan toimesta. Tämä on voinut aiheutua teknisestä ongelmasta uudelleennimeämisen tai yhdistämisen aikana.",
 	"miraheze-restriction-protect": "Suojaa",
 	"miraheze-restriction-delete": "Poista",
-	"miraheze-wikibase-sitelinks-miraheze": "Mirahezen wikit"
+	"miraheze-wikibase-sitelinks-miraheze": "Mirahezen wikit",
+	"miraheze-group-checkuser": "Osoitepaljastajat",
+	"miraheze-group-checkuser-member": "osoitepaljastaja",
+	"miraheze-group-bureaucrat": "Byrokraatit",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|byrokraatti}}",
+	"miraheze-group-sysop": "Ylläpitäjät",
+	"miraheze-group-sysop-member": "{{GENDER:$1|ylläpitäjä}}",
+	"miraheze-group-interface-admin": "Käyttöliittymän ylläpitäjät",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|käyttöliittymän ylläpitäjä}}",
+	"miraheze-group-bot": "Botit",
+	"miraheze-group-bot-member": "{{GENDER:$1|botti}}"
 }

@@ -22,7 +22,8 @@
 			"列维劳德",
 			"坑触可",
 			"神樂坂秀吉",
-			"铁桶"
+			"铁桶",
+			"魔琴"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -98,7 +99,7 @@
 	"group-trustandsafety-member": "信任与安全",
 	"group-global-ipblock-exempt": "全域IP封禁豁免",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|全域IP封禁豁免者}}",
-	"group-member": "成员们",
+	"group-member": "成员",
 	"protect-level-user": "仅允许注册用户",
 	"restriction-delete": "删除",
 	"restriction-level-user": "只允许注册用户",

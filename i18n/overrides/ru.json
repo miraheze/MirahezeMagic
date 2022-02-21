@@ -20,5 +20,9 @@
 	"miraheze-restriction-protect": "Защитить",
 	"miraheze-restriction-delete": "Удалить",
 	"miraheze-skinname-snapwikiskin": "Щелчок!",
-	"miraheze-wikibase-sitelinks-miraheze": "Вики Miraheze"
+	"miraheze-wikibase-sitelinks-miraheze": "Вики Miraheze",
+	"miraheze-group-bureaucrat": "Бюрократы",
+	"miraheze-group-sysop": "Администраторы",
+	"miraheze-group-interface-admin": "Администраторы интерфейса",
+	"miraheze-group-bot": "Боты"
 }
