@@ -33,7 +33,7 @@ $wgCreateWikiCacheDirectory = "$IP/cache";
 
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
-function wfOnMediaWikiServices( $updater ) {
+function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->startAtomic( __METHOD__ );
 		$dbw->insert(
