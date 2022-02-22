@@ -34,7 +34,6 @@ $wgCreateWikiCacheDirectory = "$IP/cache";
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
-	try {
 		$dbw = wfGetDB( DB_PRIMARY );
 
 		$dbw->insert(
@@ -55,7 +54,6 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 				'wiki_url' => 'http://127.0.0.1:9412'
 			]
 		);
-	}
 }
 
 $wi->readCache();
