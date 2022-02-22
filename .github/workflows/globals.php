@@ -31,9 +31,9 @@ $wgCreateWikiGlobalWiki = 'wikidb';
 $wgCreateWikiDatabase = 'wikidb';
 $wgCreateWikiCacheDirectory = "$IP/cache";
 
-$wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
+$wgHooks['LoadExtensionSchemaUpdates'][] = 'wfOnMediaWikiServices';
 
-function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
+function wfOnMediaWikiServices( $updater ) {
 		$dbw = wfGetDB( DB_PRIMARY );
 		$dbw->startAtomic( __METHOD__ );
 		$dbw->insert(
