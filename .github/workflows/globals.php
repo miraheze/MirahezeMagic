@@ -37,7 +37,7 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 	$dbw = wfGetDB( DB_PRIMARY );
 
 	$dbw->begin( __METHOD__ );
-	$dbw->startAtomic( __METHOD__ );
+	// $dbw->startAtomic( __METHOD__ );
 
 	$dbw->insert(
 		'cw_wikis',
@@ -60,8 +60,9 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 		[ 'IGNORE' ]
 	);
 
-	$dbw->endAtomic( __METHOD__ );
+	// $dbw->endAtomic( __METHOD__ );
 	$dbw->commit( __METHOD__ );
+	$services->getDBLoadBalancerFactory()->waitForReplication();
 }
 
 $wi->readCache();
