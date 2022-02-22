@@ -54,7 +54,6 @@ function wfOnMediaWikiServices( $updater ) {
 				'wiki_url' => 'http://127.0.0.1:9412'
 			],
                         __METHOD__,
-                        [ 'IGNORE' ],
 		);
 		$dbw->endAtomic( __METHOD__ );
 }
