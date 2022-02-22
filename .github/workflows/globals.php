@@ -34,9 +34,8 @@ $wgCreateWikiCacheDirectory = "$IP/cache";
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
-	try {
 		$dbw = wfGetDB( DB_PRIMARY );
-
+		$dbw->startAtomic()
 		$dbw->insert(
 			'cw_wikis',
 			[
@@ -57,9 +56,7 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
                         __METHOD__,
                         [ 'IGNORE' ],
 		);
-	} catch ( Wikimedia\Rdbms\DBQueryError $e ) {
-		return;
-	}
+		$dbw->endAtomic()
 }
 
 $wi->readCache();
