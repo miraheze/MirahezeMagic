@@ -36,6 +36,8 @@ $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 	$dbw = wfGetDB( DB_PRIMARY );
 
+	$dbw->startAtomic( __METHOD__ );
+
 	$dbw->insert(
 		'cw_wikis',
 		[
@@ -56,6 +58,8 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 		__METHOD__,
 		[ 'IGNORE' ]
 	);
+
+	$dbw->endAtomic( __METHOD__ );
 }
 
 $wi->readCache();
