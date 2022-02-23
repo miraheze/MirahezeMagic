@@ -28,7 +28,7 @@ for wikidata in data:
         count = 0
         hits = hits + 1
     wiki = wikidata['dbname']
-    urlreq = 'https://static.miraheze.org/{0}/sitemaps/sitemap.xml'.format(wiki)
+    urlreq = f'https://static.miraheze.org/{wiki}/sitemaps/sitemap.xml'
     req = reqsession.get(url=urlreq)
     if req.status_code == 429:
         print(f'Rate Limited on {wiki} backing off for {1 + int(rls)} seconds')
@@ -60,12 +60,12 @@ for wikidata in data:
     sleep(0.5)  # sleep half a second after each one
 lines = []
 lines.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
-for map in maps:
+for sitemap in maps:
     date = datetime.now()
-    dt_string = date.strftime("%Y-%m-%dT%H:%M:%SZ")
-    loc = '\n\t\t<loc>{0}</loc>'.format(str(map))
-    lastmod = '\n\t\t<lastmod>{0}</lastmod>'.format(str(dt_string))
-    lines.append('\t<sitemap>{0}{1}\n\t</sitemap>'.format(loc, lastmod))
+    dt_string = date.strftime('%Y-%m-%dT%H:%M:%SZ')
+    loc = f'\n\t\t<loc>{sitemap}</loc>'
+    lastmod = f'\n\t\t<lastmod>{dt_string}</lastmod>'
+    lines.append(f'\t<sitemap>{loc}{lastmod}\n\t</sitemap>')
 
 lines.append('</sitemapindex>')
 
