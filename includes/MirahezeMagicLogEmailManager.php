@@ -30,7 +30,11 @@ class MirahezeMagicLogEmailManager {
 			return [];
 		}
 
-		$groups = CentralAuthUser::getInstance( $user )->getGlobalGroups();
+		if ( version_compare( MW_VERSION, '1.38', '<' ) ) {
+			$groups = \CentralAuthUser::getInstance( $user )->getGlobalGroups();
+		} else {
+			$groups = CentralAuthUser::getInstance( $user )->getGlobalGroups();
+		}
 
 		$found = [];
 		foreach ( $this->getLogConditions() as $condition ) {
@@ -60,5 +64,3 @@ class MirahezeMagicLogEmailManager {
 		} );
 	}
 }
-
-class_alias( CentralAuthUser::class, 'CentralAuthUser' );
