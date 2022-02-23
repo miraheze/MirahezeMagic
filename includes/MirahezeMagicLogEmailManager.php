@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+
 class MirahezeMagicLogEmailManager {
 	/** @var Config */
 	private $config;
@@ -58,3 +60,5 @@ class MirahezeMagicLogEmailManager {
 		} );
 	}
 }
+
+class_alias( CentralAuthUser::class, 'CentralAuthUser' );
