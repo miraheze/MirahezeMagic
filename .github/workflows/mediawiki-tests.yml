@@ -3,8 +3,13 @@ name: Quibble and Phan
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**.py'
+
   pull_request:
     branches: [ master ]
+    paths-ignore:
+      - '**.py'
 
 jobs:
   test:
