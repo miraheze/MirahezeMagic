@@ -2,6 +2,7 @@
 
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 
@@ -409,7 +410,12 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		// Remove read from stewards on staff wiki.
 		if ( $config->get( 'DBname' ) === 'staffwiki' && $user->isRegistered() ) {
-			$centralAuthUser = CentralAuthUser::getInstance( $user );
+			if ( version_compare( MW_VERSION, '1.38', '<' ) ) {
+				$centralAuthUser = \CentralAuthUser::getInstance( $user );
+			} else {
+				$centralAuthUser = CentralAuthUser::getInstance( $user );
+			}
+
 			if ( $centralAuthUser &&
 			    $centralAuthUser->exists() &&
 			    !in_array( $centralAuthUser->getId(), $config->get( 'MirahezeStaffAccessIds' ) )
