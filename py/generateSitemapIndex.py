@@ -69,7 +69,7 @@ for sitemap in maps:
 
 lines.append('</sitemapindex>')
 
-xmlfile = open('/mnt/mediawiki-static/sitemap.xml', 'w+')  # makes xml
-xmlfile.writelines(lines)
+with open('/mnt/mediawiki-static/sitemap.xml', 'w+')  as xmlfile:
+    xmlfile.writelines(lines)
 
 print('done')
