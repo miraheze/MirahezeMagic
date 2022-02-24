@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"DDPAT"
+			"DDPAT",
+			"Ice bulldog"
 		]
 	},
 	"renocaptcha-desc": "Модуль Miraheze reCAPTCHA для підтримки reCAPTCHA v3.",
