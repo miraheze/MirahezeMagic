@@ -1,0 +1,37 @@
+on:
+  push:
+    paths:
+      - '**.py'
+      - '.github/pythonchecks.txt'
+      - '.github/workflows/python.yml'
+
+  pull_request:
+    paths:
+      - '**.py'
+      - '.github/pythonchecks.txt'
+      - '.github/workflows/python.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.9', '3.10']
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Python ${{ matrix.python }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }} 
+      - name: Install packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgnutls28-dev
+          pip install -U pip
+          pip install -r .github/pythonchecks.txt
+      - name: Run tests
+        run: |
+          flake8 py --ignore=E501,W503,SFS301
+          mypy py --ignore-missing-imports
