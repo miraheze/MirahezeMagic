@@ -357,7 +357,7 @@ class MirahezeMagicHooks {
 			$redis->connect( $redisServer[0], $redisServer[1] );
 			$redis->auth( $wmgCacheSettings['jobrunner']['password'] );
 			$redis->del( $redis->keys( $key ) );
-		} catch ( Exception $ex ) {
+		} catch ( Throwable $ex ) {
 			// empty
 		}
 	}
@@ -391,7 +391,7 @@ class MirahezeMagicHooks {
 					continue;
 				}
 			}
-		} catch ( Exception $ex ) {
+		} catch ( Throwable $ex ) {
 			// empty
 		}
 	}
