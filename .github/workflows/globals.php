@@ -35,6 +35,8 @@ $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 	try {
+		global $IP;
+
 		$dbw = wfGetDB( DB_PRIMARY );
 
 		$dbw->insert(
