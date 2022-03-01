@@ -5,6 +5,8 @@ use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
+use Miraheze\CreateWiki\RemoteWiki;
+use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class MirahezeMagicHooks {
 	/**
