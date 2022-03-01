@@ -131,7 +131,7 @@ class MirahezeMagicHooks {
 				->limits( $limits )
 				->restrict( Shell::RESTRICT_NONE )
 				->execute();
-		} else if ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
+		} elseif ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
 				->limits( $limits )
 				->restrict( Shell::RESTRICT_NONE )
@@ -159,12 +159,12 @@ class MirahezeMagicHooks {
 	}
 
 	/**
-	* From WikimediaMessages. Allows us to add new messages,
-	* and override ones.
-	*
-	* @param string &$lcKey Key of message to lookup.
-	* @return bool
-	*/
+	 * From WikimediaMessages. Allows us to add new messages,
+	 * and override ones.
+	 *
+	 * @param string &$lcKey Key of message to lookup.
+	 * @return bool
+	 */
 	public static function onMessageCacheGet( &$lcKey ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = [
@@ -240,28 +240,31 @@ class MirahezeMagicHooks {
 		$ltext = strtolower( HtmlArmor::getHtml( $text ) );
 
 		if ( $ltarget == $ltext ) {
-			$useText = false; // Allow link piping, but don't modify $text yet
+			// Allow link piping, but don't modify $text yet
+			$useText = false;
 		}
 
 		$target = explode( ':', $target );
 
 		if ( count( $target ) < 2 ) {
-			return true; // Not enough parameters for interwiki
+			// Not enough parameters for interwiki
+			return true;
 		}
 
-		if( $target[0] == '0' ) {
+		if ( $target[0] == '0' ) {
 			array_shift( $target );
 		}
 
 		$prefix = strtolower( $target[0] );
 
 		if ( $prefix != 'mh' ) {
-			return true; // Not interesting
+			// Not interesting
+			return true;
 		}
 
 		$wiki = strtolower( $target[1] );
 		$target = array_slice( $target, 2 );
-		$target = join( ':', $target );
+		$target = implode( ':', $target );
 
 		if ( !$useText ) {
 			$text = $target;
@@ -295,7 +298,7 @@ class MirahezeMagicHooks {
 		}
 
 		$wiki = strtolower( $title[1] );
-		$page = join( ':', array_slice( $title, 2 ) );
+		$page = implode( ':', array_slice( $title, 2 ) );
 		$page = str_replace( ' ', '_', $page );
 		$page = urlencode( $page );
 
@@ -346,7 +349,7 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
-	/** Removes redis keys for jobrunner **/
+	/** Removes redis keys for jobrunner */
 	public static function removeRedisKey( string $key ) {
 		global $wmgCacheSettings;
 
@@ -362,7 +365,7 @@ class MirahezeMagicHooks {
 		}
 	}
 
-	/** Remove memcached keys **/
+	/** Remove memcached keys */
 	public static function removeMemcachedKey( string $key ) {
 		global $wmgCacheSettings;
 
@@ -378,12 +381,12 @@ class MirahezeMagicHooks {
 				return;
 			}
 
-			$memcached->getDelayed($keys);
+			$memcached->getDelayed( $keys );
 
 			$store = $memcached->fetchAll();
 
 			$keys = $memcached->getAllKeys();
-			foreach( $keys as $item ) {
+			foreach ( $keys as $item ) {
 				// Decide which keys to delete
 				if ( preg_match( "/{$key}/", $item ) ) {
 					$memcached->delete( $item );
@@ -419,8 +422,8 @@ class MirahezeMagicHooks {
 			}
 
 			if ( $centralAuthUser &&
-			    $centralAuthUser->exists() &&
-			    !in_array( $centralAuthUser->getId(), $config->get( 'MirahezeStaffAccessIds' ) )
+				$centralAuthUser->exists() &&
+				!in_array( $centralAuthUser->getId(), $config->get( 'MirahezeStaffAccessIds' ) )
 			) {
 				$aRights = array_unique( $aRights );
 				unset( $aRights[array_search( 'read', $aRights )] );
@@ -447,7 +450,12 @@ class MirahezeMagicHooks {
 		}
 	}
 
+	/**
+	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+	 */
 	public static function onRecentChange_save( RecentChange $recentChange ) {
+ 		// phpcs:enable
+
 		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
 			return;
 		}

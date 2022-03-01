@@ -1,6 +1,6 @@
 <?php
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
 
@@ -24,7 +24,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$dbr = wfGetDB( DB_REPLICA, [], $config->get( 'CreateWikiDatabase' ) );
 
-		foreach( $extArray as $ext ) {
+		foreach ( $extArray as $ext ) {
 			$mwSettings = $dbr->select(
 				'mw_settings',
 				's_dbname',
@@ -35,7 +35,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 			);
 
 			foreach ( $mwSettings as $wiki ) {
- 				$lists[$ext][$wiki->s_dbname] = [];
+				$lists[$ext][$wiki->s_dbname] = [];
 			}
 		}
 

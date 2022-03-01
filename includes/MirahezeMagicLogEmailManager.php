@@ -16,7 +16,7 @@ class MirahezeMagicLogEmailManager {
 	/**
 	 * @return array[] in format of [ 'group' => string, 'email' => string ]
 	 */
-	private function getLogConditions() : array {
+	private function getLogConditions(): array {
 		return $this->config->get( 'MirahezeMagicLogEmailConditions' );
 	}
 
@@ -25,7 +25,7 @@ class MirahezeMagicLogEmailManager {
 	 * @param User $user
 	 * @return array
 	 */
-	public function findForUser( User $user ) : array {
+	public function findForUser( User $user ): array {
 		if ( !$user->isRegistered() ) {
 			return [];
 		}

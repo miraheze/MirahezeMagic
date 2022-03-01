@@ -22,7 +22,7 @@
  * @version 1.0
  */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
 
@@ -86,7 +86,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		}
 
 		foreach ( $permObjects as $perm ) {
-			$addPerms =[];
+			$addPerms = [];
 
 			foreach ( ( $config->get( 'ManageWikiPermissionsAdditionalRights' )[$perm->perm_group] ?? [] ) as $right => $bool ) {
 				if ( $bool ) {

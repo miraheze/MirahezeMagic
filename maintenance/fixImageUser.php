@@ -1,28 +1,28 @@
 <?php
 
 /**
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along
-* with this program; if not, write to the Free Software Foundation, Inc.,
-* 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-* http://www.gnu.org/copyleft/gpl.html
-*
-* @file
-* @ingroup Maintenance
-* @author Paladox
-* @version 1.0
-*/
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @file
+ * @ingroup Maintenance
+ * @author Paladox
+ * @version 1.0
+ */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class FixImageUser extends Maintenance {
 	public function __construct() {
@@ -40,13 +40,13 @@ class FixImageUser extends Maintenance {
 		$wikiDB = wfGetDB( DB_PRIMARY );
 
 		$from = $this->initialiseUser( urldecode( $this->getArg( 0 ) ) );
-		$to = $this->initialiseUser( urldecode ( $this->getArg( 1 ) ) );
-		
+		$to = $this->initialiseUser( urldecode( $this->getArg( 1 ) ) );
+
 		$imageName = urldecode( $this->getOption( 'image-name' ) );
 
 		$pageId = $wikiDB->select(
 			'page',
-			'page_id', 
+			'page_id',
 			[
 				'page_title' => $imageName,
 			],
@@ -83,8 +83,8 @@ class FixImageUser extends Maintenance {
 				],
 				__METHOD__
 			);
-			
-			$this->output("Reassigned image user from {$from} to {$to} on page id {$page_id}\n");
+
+			$this->output( "Reassigned image user from {$from} to {$to} on page id {$page_id}\n" );
 		}
 	}
 

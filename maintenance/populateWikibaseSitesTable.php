@@ -23,12 +23,12 @@
  * @version 1.0
  */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
 
 if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
-	require_once( __DIR__ . '/../../Wikibase/lib/includes/Sites/SitesBuilder.php' );
+	require_once __DIR__ . '/../../Wikibase/lib/includes/Sites/SitesBuilder.php';
 }
 
 /**

@@ -1,30 +1,30 @@
 <?php
 /**
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along
-* with this program; if not, write to the Free Software Foundation, Inc.,
-* 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-* http://www.gnu.org/copyleft/gpl.html
-*
-* @file
-* @ingroup Maintenance
-* @author Southparkfan
-* @author John Lewis
-* @author Paladox
-* @author Universal Omega
-* @version 2.0
-*/
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @file
+ * @ingroup Maintenance
+ * @author Southparkfan
+ * @author John Lewis
+ * @author Paladox
+ * @author Universal Omega
+ * @version 2.0
+ */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class AssignImportedEdits extends Maintenance {
 	private $wikiRevision = null;
@@ -63,8 +63,8 @@ class AssignImportedEdits extends Maintenance {
 			$userClass = new User;
 			$user = $this->getOption( 'user' ) ? $userClass->newFromName( $this->getOption( 'user' ) ) : null;
 			$actorName = $userClass->newFromActorId( $row->revactor_actor );
-			$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix , '', $actorName->getName() ) );
-			
+			$assignUserEdit = $userClass->newFromName( str_replace( $this->importPrefix, '', $actorName->getName() ) );
+
 			if ( $user ) {
 				$nameIsValid = $userClass->newFromName( $user )->getId();
 				$name = $this->importPrefix . $user->getName();
@@ -86,10 +86,10 @@ class AssignImportedEdits extends Maintenance {
 	}
 
 	private function assignEdits( &$user, &$importUser ) {
-		$this->output( 
-			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n" 
+		$this->output(
+			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n"
 		);
-		
+
 		$dbw = $this->getDB( DB_PRIMARY );
 		$this->beginTransaction( $dbw, __METHOD__ );
 
