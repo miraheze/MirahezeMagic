@@ -240,13 +240,15 @@ class MirahezeMagicHooks {
 		$ltext = strtolower( HtmlArmor::getHtml( $text ) );
 
 		if ( $ltarget == $ltext ) {
-			$useText = false; // Allow link piping, but don't modify $text yet
+			// Allow link piping, but don't modify $text yet
+			$useText = false;
 		}
 
 		$target = explode( ':', $target );
 
 		if ( count( $target ) < 2 ) {
-			return true; // Not enough parameters for interwiki
+			// Not enough parameters for interwiki
+			return true;
 		}
 
 		if ( $target[0] == '0' ) {
@@ -256,7 +258,8 @@ class MirahezeMagicHooks {
 		$prefix = strtolower( $target[0] );
 
 		if ( $prefix != 'mh' ) {
-			return true; // Not interesting
+			// Not interesting
+			return true;
 		}
 
 		$wiki = strtolower( $target[1] );
@@ -447,7 +450,12 @@ class MirahezeMagicHooks {
 		}
 	}
 
+	/**
+	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+	 */
 	public static function onRecentChange_save( RecentChange $recentChange ) {
+ 		// phpcs:enable
+
 		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
 			return;
 		}
