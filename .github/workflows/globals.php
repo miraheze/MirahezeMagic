@@ -31,6 +31,11 @@ $wgCreateWikiGlobalWiki = 'wikidb';
 $wgCreateWikiDatabase = 'wikidb';
 $wgCreateWikiCacheDirectory = "$IP/cache";
 
+$wmgCacheSettings['jobrunner'] = [
+	'server' => '',
+	'password' => '',
+];
+
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
