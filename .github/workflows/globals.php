@@ -31,10 +31,17 @@ $wgCreateWikiGlobalWiki = 'wikidb';
 $wgCreateWikiDatabase = 'wikidb';
 $wgCreateWikiCacheDirectory = "$IP/cache";
 
+$wmgCacheSettings['jobrunner'] = [
+	'server' => '',
+	'password' => '',
+];
+
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 	try {
+		global $IP;
+
 		$dbw = wfGetDB( DB_PRIMARY );
 
 		$dbw->insert(
@@ -55,6 +62,8 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 				'wiki_url' => 'http://127.0.0.1:9412'
 			]
 		);
+
+		$dbw->sourceFile( "$IP/extensions/Echo/db_patches/echo_unread_wikis.sql" );
 	} catch ( Wikimedia\Rdbms\DBQueryError $e ) {
 		return;
 	}

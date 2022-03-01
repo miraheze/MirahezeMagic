@@ -5,6 +5,8 @@ use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
+use Miraheze\CreateWiki\RemoteWiki;
+use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class MirahezeMagicHooks {
 	/**
@@ -355,7 +357,7 @@ class MirahezeMagicHooks {
 			$redis->connect( $redisServer[0], $redisServer[1] );
 			$redis->auth( $wmgCacheSettings['jobrunner']['password'] );
 			$redis->del( $redis->keys( $key ) );
-		} catch ( Exception $ex ) {
+		} catch ( Throwable $ex ) {
 			// empty
 		}
 	}
@@ -389,7 +391,7 @@ class MirahezeMagicHooks {
 					continue;
 				}
 			}
-		} catch ( Exception $ex ) {
+		} catch ( Throwable $ex ) {
 			// empty
 		}
 	}
