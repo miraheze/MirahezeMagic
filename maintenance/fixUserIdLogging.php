@@ -28,6 +28,8 @@ require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 use Wikimedia\AtEase\AtEase;
 
 class FixUserIdLogging extends Maintenance {
+
+	/** @var array */
 	public $mUserCache;
 
 	public function __construct() {
