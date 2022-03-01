@@ -161,6 +161,8 @@ jobs:
             echo "DEPENDENCIES=$(python3 rd.py)" >> $GITHUB_ENV
           fi
 
+          sudo apt-get install php-redis
+
       - name: Cache docker image
         uses: actions/cache@v2
         with:
