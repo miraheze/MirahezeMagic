@@ -28,7 +28,7 @@
  * @version 1.0
  */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 /**
  * Maintenance script to rebuild the version cache.
@@ -55,7 +55,6 @@ class RebuildVersionCache extends Maintenance {
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
 		$coreId = $gitInfo->getHeadSHA1() ?: '';
-
 
 		$queue = array_fill_keys( array_merge(
 				glob( $IP . '/extensions/*/extension*.json' ),

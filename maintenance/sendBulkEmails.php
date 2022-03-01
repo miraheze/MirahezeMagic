@@ -21,7 +21,7 @@
  * @ingroup Wikimedia
  */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\SlotRecord;
@@ -59,77 +59,77 @@ class SendBulkEmails extends Maintenance {
 	private const DEFAULT_DELAY = 5;
 
 	/**
-	 * @var float $start Unix epoch time
+	 * @var float Unix epoch time
 	 */
 	private $start = 0;
 
 	/**
-	 * @var int $missing Count of users not found in database
+	 * @var int Count of users not found in database
 	 */
 	private $missing = 0;
 
 	/**
-	 * @var int $noreceive Count of users who can not receive email
+	 * @var int Count of users who can not receive email
 	 */
 	private $noreceive = 0;
 
 	/**
-	 * @var int $optedout Count of users listed on the opt-out page
+	 * @var int Count of users listed on the opt-out page
 	 */
 	private $optedout = 0;
 
 	/**
-	 * @var int $failed Count of User::sendMail() failures
+	 * @var int Count of User::sendMail() failures
 	 */
 	private $failed = 0;
 
 	/**
-	 * @var int $ok Count of User::sendMail() successes
+	 * @var int Count of User::sendMail() successes
 	 */
 	private $ok = 0;
 
 	/**
-	 * @var int $total Count of users processed
+	 * @var int Count of users processed
 	 */
 	private $total = 0;
 
 	/**
-	 * @var string $subject Email subject
+	 * @var string Email subject
 	 */
 	private $subject = '';
 
 	/**
-	 * @var string $body Email body
+	 * @var string Email body
 	 */
 	private $body = '';
 
 	/**
-	 * @var User|null $from Email From: user
+	 * @var User|null Email From: user
 	 */
 	private $from = null;
 
 	/**
-	 * @var MailAddress|null $replyto Email Reoly-To: address
+	 * @var MailAddress|null Email Reoly-To: address
 	 */
 	private $replyto = null;
 
 	/**
-	 * @var string $optoutStart Opt-out list start marker
+	 * @var string Opt-out list start marker
 	 */
 	private $optoutStart = self::DEFAULT_START;
 
 	/**
-	 * @var string $optoutEnd Opt-out list end marker
+	 * @var string Opt-out list end marker
 	 */
 	private $optoutEnd = self::DEFAULT_END;
 
 	/**
-	 * @var string[] $optout List of opt-out usernames
+	 * @var string[] List of opt-out usernames
 	 */
 	private $optout = [];
 
 	/**
-	 * @var string|null $optoutUrl Full URL to opt-out page
+	 * @var string|null Full URL to opt-out page
 	 */
 	private $optoutUrl = null;
 
@@ -139,7 +139,7 @@ class SendBulkEmails extends Maintenance {
 	private $delay = self::DEFAULT_DELAY;
 
 	/**
-	 * @var bool $dryRun Dry run (no email send) guard
+	 * @var bool Dry run (no email send) guard
 	 */
 	private $dryRun = false;
 
