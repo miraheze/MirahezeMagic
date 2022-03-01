@@ -97,7 +97,7 @@ class FixUserIdLogging extends Maintenance {
 
 			$userId = $dbr->selectField(
 					'user',
-						'user_id',
+					'user_id',
 					[ 'user_name' => $username ],
 					__METHOD__
 			);
