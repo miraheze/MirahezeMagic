@@ -22,7 +22,7 @@ jobs:
         with:
           submodules: true
       - name: Python ${{ matrix.python }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python }} 
       - name: Install packages
