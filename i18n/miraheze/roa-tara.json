@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Joetaras"
+			"Joetaras",
+			"SaldırganSincap"
 		]
 	},
 	"content-model-flow-board": "Pannelle 'NgazzamindeStrutturate",
@@ -10,7 +11,7 @@
 	"miraheze-categories": "Categorije",
 	"miraheze-close-email-subject": "Uicchi Miraheze ($1) Achiuse",
 	"miraheze-donate": "Ddone a Miraheze",
-	"miraheze-donatepage": "m:Donate/roa-tara",
+	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Cendre de aijute Miraheze",
 	"miraheze-requestfeatures": "Cirche le caratteristeche sua a 'na uicchi",

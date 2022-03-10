@@ -6,7 +6,8 @@
 			"John Lewis",
 			"McDutchie",
 			"RhinosF1",
-			"Robby"
+			"Robby",
+			"Verdy p"
 		]
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
@@ -19,10 +20,10 @@
 	"miraheze-group-checkuser": "Checkusers",
 	"miraheze-group-checkuser-member": "checkuser",
 	"miraheze-grouppage-checkuser": "m:CheckUser",
-	"miraheze-group-bureaucrat": "Bureaucrats",
+	"miraheze-group-bureaucrat": "{{Identical|Bureaucrat}}",
 	"miraheze-grouppage-bureaucrat": "m:User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}\n\n{{Identical|Bureaucrat}}",
-	"miraheze-group-sysop": "Administrators\n{{Identical|Administrator}}",
+	"miraheze-group-sysop": "{{Identical|Administrator}}",
 	"miraheze-grouppage-sysop": "m:User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}\n\n{{Identical|Administrator}}",
 	"miraheze-group-interface-admin": "Interface administrators",

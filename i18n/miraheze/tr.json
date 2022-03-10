@@ -17,7 +17,7 @@
 	"mirahezemagic-description": "Miraheze'ye özel MediaWiki mesajları, betikleri ve kancalar",
 	"miraheze-categories": "Kategoriler",
 	"miraheze-close-email-subject": "Miraheze Viki ($1) Kapatıldı",
-	"miraheze-close-email-body": "Merhaba,\n\nMaalesef, son 60 gün içinde herhangi bir düzenleme yapılmaması nedeniyle vikiniz Dormansi politikası nedeniyle kapatıldı. Eğer hâlâ vikinizi düzenlemek istiyorsanız lütfen Special:ManageWiki sayfasına gidin ve tekrar açmak için \"kapatıldı\" kutusunun işaretini kaldırın.\n\nVikinizi tekrar açmamanız durumunda başka bir kullanıcının vikinizi benimsemesi olasıdır. Vikinizi tekrar açmazsanız veya hiç kimse 6 ay içinde vikinizi sahiplenmezse vikiniz silinebilir.",
+	"miraheze-close-email-body": "Merhaba,\n\nMaalesef, son 60 gün içinde herhangi bir düzenleme yapılmaması nedeniyle vikiniz <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy/tr\">Dormansi Politikası</a> nedeniyle kapatıldı. Eğer hâlâ vikinizi düzenlemek istiyorsanız lütfen Special:ManageWiki sayfasına gidin ve tekrar açmak için \"kapatıldı\" kutusunun işaretini kaldırın.\n\nVikinizi tekrar açmamanız durumunda başka bir kullanıcının vikinizi benimsemesi olasıdır. Vikinizi tekrar açmazsanız veya hiç kimse 6 ay içinde vikinizi sahiplenmezse vikiniz silinebilir.",
 	"miraheze-donate": "Miraheze'ye bağış yap",
 	"miraheze-donatepage": "m:Donate/tr",
 	"miraheze-faq": "SSS",
