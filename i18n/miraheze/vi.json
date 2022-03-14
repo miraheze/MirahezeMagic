@@ -30,7 +30,7 @@
 	"miraheze-survey-no": "Không",
 	"miraheze-survey-yes": "Có",
 	"protect-level-user": "Chỉ cho phép người dùng đã đăng nhập",
-	"restriction-delete": "Xoá",
+	"restriction-delete": "Xóa",
 	"restriction-level-user": "Chỉ cho phép người dùng đã đăng nhập",
 	"right-user": "Sửa đổi trang được khóa mức “{{int:protect-level-user}}”",
 	"sitematrix": "Danh sách wiki",
