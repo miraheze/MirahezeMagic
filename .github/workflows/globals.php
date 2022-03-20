@@ -65,7 +65,9 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 			[ 'IGNORE' ]
 		);
 
-		$dbw->sourceFile( "$IP/extensions/Echo/db_patches/echo_unread_wikis.sql" );
+		if ( !$dbw->tableExists( 'echo_unread_wikis' ) ) {
+			$dbw->sourceFile( "$IP/extensions/Echo/db_patches/echo_unread_wikis.sql" );
+		}
 	} catch ( Wikimedia\Rdbms\DBQueryError $e ) {
 		return;
 	}
