@@ -11,7 +11,7 @@
 	"mirahezemagic-description": "Các thông điệp giao diện MediaWiki, scripts và các hooks dành cho Miraheze",
 	"miraheze-categories": "Thể loại",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) đã đóng",
-	"miraheze-close-email-body": "Xin chào,\n\nRất tiếc, vì wiki của bạn không có bất cứ sửa đổi nào trong vòng 60 ngày trước, nó đã bị đóng theo [https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy Chính sách Không hoạt động]. Nếu bạn vẫn cần wiki này hãy đến trang Đặc_biệt:ManageWiki và bỏ tích hộp \"Đã đóng\" để mở lại nó.\n\nLưu ý rằng nếu bạn không mở lại wiki của bạn, sẽ có ai đó nhận lý wiki của bạn. Nếu bạn không mở lại nó hoặc không ai nhận lấy wiki của bạn trong 6 tháng, nó có thể bị xóa.",
+	"miraheze-close-email-body": "Xin chào,\n\nRất tiếc, vì wiki của bạn không có bất cứ sửa đổi nào trong vòng 60 ngày trước, nó đã bị đóng theo <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy?uselang=vi\">Chính sách Không hoạt động</a>. Nếu bạn vẫn cần wiki này hãy đến trang Đặc_biệt:ManageWiki và bỏ tích hộp \"Đã đóng\" để mở lại nó.\n\nLưu ý rằng nếu bạn không mở lại wiki của bạn, sẽ có ai đó nhận lý wiki của bạn. Nếu bạn không mở lại nó hoặc không ai nhận lấy wiki của bạn trong 6 tháng, nó có thể bị xóa.",
 	"miraheze-donate": "Quyên góp tới Miraheze",
 	"miraheze-helpcenter": "Trung tâm hỗ trợ Miraheze",
 	"miraheze-requestfeatures": "Yêu cầu tính năng trên wiki",
