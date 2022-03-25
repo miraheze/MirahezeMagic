@@ -7,6 +7,7 @@
 			"Diralik",
 			"DmitTrix",
 			"Fitoschido",
+			"Ice bulldog",
 			"Kareyac",
 			"Link2xt",
 			"MuratTheTurkish",
@@ -15,6 +16,7 @@
 			"Rivka Silinsky",
 			"Romanko Mikhail",
 			"Rubin16",
+			"SaldırganSincap",
 			"Vlad5250",
 			"WerySkok"
 		]
@@ -26,7 +28,7 @@
 	"miraheze-close-email-subject": "Вики на Miraheze ($1) закрыта",
 	"miraheze-close-email-body": "Здравствуйте. К сожалению, из-за того, что ваша вики не редактировалась в течение последних 60 дней, она была закрыта из-за политики Dormancy. Если вы всё ещё хотите отредактировать свою вики, перейдите в Special: ManageWiki и снимите флажок «закрыто», чтобы снова открыть его. Обратите внимание, что если вы не откроете свою вики, возможно, что другой пользователь примет вашу вики. Если вы не откроете свою вики, или никто не примет вашу вики в течение 6 месяцев, начиная с этого момента, она может быть удалена.",
 	"miraheze-donate": "Пожертвовать Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate/ru",
+	"miraheze-donatepage": "m:Donate/ru",
 	"miraheze-faq": "ЧаВо",
 	"miraheze-helpcenter": "Центр помощи Miraheze",
 	"miraheze-requestfeatures": "Запрос возможностей на вики",
@@ -108,7 +110,7 @@
 	"settings-beta": "Бета",
 	"settings-categories": "Категории",
 	"settings-discussion": "Обсуждение",
-	"settings-editing": "Править",
+	"settings-editing": "Редактирование",
 	"settings-links": "Ссылки",
 	"settings-localisation": "Локализация",
 	"settings-maps": "Карты",

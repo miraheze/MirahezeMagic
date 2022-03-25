@@ -1,7 +1,8 @@
 <?php
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
+use Miraheze\CreateWiki\CreateWikiJson;
 
 class ResetWikiCaches extends Maintenance {
 	public function __construct() {

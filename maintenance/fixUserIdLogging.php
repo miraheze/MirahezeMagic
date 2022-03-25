@@ -23,11 +23,13 @@
  * @version 1.0
  */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use Wikimedia\AtEase\AtEase;
 
 class FixUserIdLogging extends Maintenance {
+
+	/** @var array */
 	public $mUserCache;
 
 	public function __construct() {
@@ -90,19 +92,17 @@ class FixUserIdLogging extends Maintenance {
 			return 0;
 		}
 
-
 		if ( isset( $this->mUserCache[$username] ) ) {
 			$goodUserId = $this->mUserCache[$username];
 		} else {
 			$dbr = wfGetDB( DB_REPLICA );
-	
+
 			$userId = $dbr->selectField(
 					'user',
-				       	'user_id',
+					'user_id',
 					[ 'user_name' => $username ],
 					__METHOD__
 			);
-
 
 			if ( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) {
 				$goodUserId = $userId;
@@ -112,9 +112,8 @@ class FixUserIdLogging extends Maintenance {
 
 			$this->mUserCache[$username] = $goodUserId;
 		}
-		
-			return $goodUserId;
 
+			return $goodUserId;
 	}
 
 	protected function fixLogEntry( $row ) {
@@ -148,12 +147,11 @@ class FixUserIdLogging extends Maintenance {
 			$logParams['4::userid'] = $userId;
 		}
 
-
 		$updateParams = [
 			'log_actor' => $userId,
 		];
 
-		if ( isset( $logParams['4::userid'] ) ) { 
+		if ( isset( $logParams['4::userid'] ) ) {
 			$logParams = serialize( $logParams );
 			$updateParams['log_params'] = $logParams;
 		}

@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+
 class MirahezeMagicLogEmailManager {
 	/** @var Config */
 	private $config;
@@ -14,7 +16,7 @@ class MirahezeMagicLogEmailManager {
 	/**
 	 * @return array[] in format of [ 'group' => string, 'email' => string ]
 	 */
-	private function getLogConditions() : array {
+	private function getLogConditions(): array {
 		return $this->config->get( 'MirahezeMagicLogEmailConditions' );
 	}
 
@@ -23,12 +25,16 @@ class MirahezeMagicLogEmailManager {
 	 * @param User $user
 	 * @return array
 	 */
-	public function findForUser( User $user ) : array {
+	public function findForUser( User $user ): array {
 		if ( !$user->isRegistered() ) {
 			return [];
 		}
 
-		$groups = CentralAuthUser::getInstance( $user )->getGlobalGroups();
+		if ( version_compare( MW_VERSION, '1.38', '<' ) ) {
+			$groups = \CentralAuthUser::getInstance( $user )->getGlobalGroups();
+		} else {
+			$groups = CentralAuthUser::getInstance( $user )->getGlobalGroups();
+		}
 
 		$found = [];
 		foreach ( $this->getLogConditions() as $condition ) {

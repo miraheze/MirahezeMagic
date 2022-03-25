@@ -40,7 +40,7 @@
 	"miraheze-requestfeatures": "为wiki申请功能",
 	"miraheze-requestwiki": "申请一个wiki",
 	"miraheze-sidebar-donate": "捐赠",
-	"miraheze-sitenotice-closed": "本wiki已被关闭，因为过去60天内'''没有任何编辑或者日志'''。本wiki可以收养。如需收养请前往[[m:Requests for adoption|Requests for adoption]]并提出申请。如果6个月内未被收养，就会被删除。注意：如果你是本wiki的站长，你可以在[[Special:ManageWiki]]将“已关闭”取消勾选以将其重开。",
+	"miraheze-sitenotice-closed": "本wiki已被关闭，因为过去60天内'''没有任何编辑或者日志'''。本wiki可以收养。如需收养请前往[[m:Requests for reopening wikis|Requests for reopening wikis]]并提出申请。如果6个月内未被收养，就会被删除。注意：如果你是本wiki的站长，你可以在[[Special:ManageWiki]]将“已关闭”取消勾选以将其重开。",
 	"miraheze-sitenotice-closed-private": "本wiki已被关闭，因为过去60天内'''没有任何编辑或者日志'''。本wiki是私有的，因此不能像公开的wiki那样被收养。本wiki如果6个月内未重开，就会被删除。注意：如果你是本wiki的站长，你可以在[[Special:ManageWiki]]将“已关闭”取消勾选以将其重开。如果你有其他问题或者顾虑，可以直接在[[m:Stewards' noticeboard|Stewards' noticeboard]]提问。",
 	"miraheze-sitenotice-inactive": "本wiki在过去45天内'''没有任何编辑或者日志'''，因此被标记为'''不活跃'''。如果你不想让wiki被关闭，请在这里表现活跃。如果接下来15天内，本wiki仍不活跃，wiki将会根据[[m:Dormancy Policy|休眠方针]]关闭，届时本wiki将可以被其他用户收养。如果未被收养，且135天内（从子安在开始算）不活跃，本wiki将会被'''删除'''。请确保你了解[[m:Dormancy Policy|休眠方针]]。如果你是站长，可以在[[Special:ManageWiki]]中取消勾选“不活跃”。如果你有其他问题或者顾虑，可以直接在[[m:Stewards' noticeboard|Stewards' noticeboard]]提问。",
 	"miraheze-sitenotice-inactive-private": "本wiki在过去45天内'''没有任何编辑或者日志'''，因此被标记为'''不活跃'''。如果你不想让wiki被关闭，请在这里表现活跃。如果接下来15天内，本wiki仍不活跃，wiki将会根据[[m:Dormancy Policy|休眠方针]]关闭。由于本wiki是私有的，因此本wiki不会接受其他用户的收养。如果135天内（从子安在开始算）不活跃，本wiki将会被'''删除'''。请确保你了解[[m:Dormancy Policy|休眠方针]]。如果你是站长，可以在[[Special:ManageWiki]]中取消勾选“不活跃”。如果你有其他问题或者顾虑，可以直接在[[m:Stewards' noticeboard|Stewards' noticeboard]]提问。",

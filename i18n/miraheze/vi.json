@@ -3,6 +3,7 @@
 		"authors": [
 			"Anpfraum",
 			"Minh Nguyen",
+			"NguyenHung",
 			"Wolf"
 		]
 	},
@@ -10,12 +11,12 @@
 	"mirahezemagic-description": "Các thông điệp giao diện MediaWiki, scripts và các hooks dành cho Miraheze",
 	"miraheze-categories": "Thể loại",
 	"miraheze-close-email-subject": "Wiki Miraheze ($1) đã đóng",
-	"miraheze-close-email-body": "Xin chào,\n\nRất tiếc, vì wiki của bạn không có bất cứ sửa đổi nào trong vòng 60 ngày trước, nó đã bị đóng theo Chính sách Không hoạt động. Nếu bạn vẫn cần wiki này hãy đến trang Đặc_biệt:ManageWiki và bỏ tích hộp \"Đã đóng\" để mở lại nó.\n\nLưu ý rằng nếu bạn không mở lại wiki của bạn, sẽ có ai đó nhận lý wiki của bạn. Nếu bạn không mở lại nó hoặc không ai nhận lấy wiki của bạn trong 6 tháng, nó có thể bị xóa.",
-	"miraheze-donate": "Ủng hộ",
-	"miraheze-helpcenter": "Về Miraheze",
+	"miraheze-close-email-body": "Xin chào,\n\nRất tiếc, vì wiki của bạn không có bất cứ sửa đổi nào trong vòng 60 ngày trước, nó đã bị đóng theo <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy?uselang=vi\">Chính sách Không hoạt động</a>. Nếu bạn vẫn cần wiki này hãy đến trang Đặc_biệt:ManageWiki và bỏ tích hộp \"Đã đóng\" để mở lại nó.\n\nLưu ý rằng nếu bạn không mở lại wiki của bạn, sẽ có ai đó nhận lý wiki của bạn. Nếu bạn không mở lại nó hoặc không ai nhận lấy wiki của bạn trong 6 tháng, nó có thể bị xóa.",
+	"miraheze-donate": "Quyên góp tới Miraheze",
+	"miraheze-helpcenter": "Trung tâm hỗ trợ Miraheze",
 	"miraheze-requestfeatures": "Yêu cầu tính năng trên wiki",
 	"miraheze-requestwiki": "Yêu cầu một wiki",
-	"mirahezesurvey": "Khảo sát Hàng năm Miraheze 2019",
+	"mirahezesurvey": "Khảo sát Hàng năm Miraheze 2021",
 	"miraheze-survey-access-d": "Mỗi ngày",
 	"miraheze-survey-access-ft": "Đây là lần đầu tiên",
 	"miraheze-survey-access-m": "1 lần/tháng",
@@ -26,11 +27,11 @@
 	"miraheze-survey-agree-strong": "Rất đồng ý",
 	"miraheze-survey-agree": "Đồng ý",
 	"miraheze-survey-disagree-strong": "Rất không đồng ý",
-	"miraheze-survey-done": "Cảm ơn bạn vì đã hoàn thành khảo sát và nói với chúng tôi cách bạn sử dụng dịch vụ và suy nghĩ của bạn! Nếu bạn đã cho Miraheze liên hệ bạn, chúng tôi sẽ liên hệ bạn sau ngày 17 tháng 7. Nếu bạn không, bạn có thể xem thống kê của cuộc khảo sát từ ngày 22 tháng 7 trên trang meta.miraheze.org!",
+	"miraheze-survey-done": "Cảm ơn bạn vì đã hoàn thành khảo sát và nói với chúng tôi cách bạn sử dụng dịch vụ và suy nghĩ của bạn! Nếu bạn đã cho Miraheze liên hệ bạn, chúng tôi sẽ liên hệ với bạn một thời gian ngắn. Nếu bạn không thể liên hệ, bạn có thể xem thống kê của cuộc khảo sát sau ngày 22 tháng 7 trên trang meta.miraheze.org!",
 	"miraheze-survey-no": "Không",
 	"miraheze-survey-yes": "Có",
 	"protect-level-user": "Chỉ cho phép người dùng đã đăng nhập",
-	"restriction-delete": "Xoá",
+	"restriction-delete": "Xóa",
 	"restriction-level-user": "Chỉ cho phép người dùng đã đăng nhập",
 	"right-user": "Sửa đổi trang được khóa mức “{{int:protect-level-user}}”",
 	"sitematrix": "Danh sách wiki",
@@ -42,5 +43,5 @@
 	"settings-links": "Liên kết",
 	"settings-localisation": "Khu vực",
 	"settings-maps": "Bản đồ",
-	"extensions-skins": "Skin giao diện"
+	"extensions-skins": "Giao diện"
 }

@@ -1,30 +1,30 @@
 <?php
 
 /**
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along
-* with this program; if not, write to the Free Software Foundation, Inc.,
-* 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-* http://www.gnu.org/copyleft/gpl.html
-*
-* @file
-* @ingroup Maintenance
-* @author Southparkfan
-* @author John Lewis
-* @author Paladox
-* @version 1.0
-*/
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @file
+ * @ingroup Maintenance
+ * @author Southparkfan
+ * @author John Lewis
+ * @author Paladox
+ * @version 1.0
+ */
 
-require_once( __DIR__ . '/../../../maintenance/Maintenance.php' );
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class CreateUsers extends Maintenance {
 	private $wikiRevision = null;
@@ -81,14 +81,14 @@ class CreateUsers extends Maintenance {
 		$user = new User;
 		$userActor = $user->createNew( $name );
 		if ( $userActor ) {
-		  $this->output( "Created local {$userActor->getName()} on wiki {$wgDBname}\n");
+		  $this->output( "Created local {$userActor->getName()} on wiki {$wgDBname}\n" );
 		}
 
 		$cau = new CentralAuthUser( $name, 0 );
 		$create = $cau->promoteToGlobal( $wgDBname );
 
 		if ( $create->isGood() ) {
-		  $this->output( "Created global {$userActor->getName()}\n");
+		  $this->output( "Created global {$userActor->getName()}\n" );
 		}
 
 		if ( $this->getOption( 'no-run' ) ) {
