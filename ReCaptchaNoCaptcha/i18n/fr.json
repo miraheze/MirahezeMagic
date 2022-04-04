@@ -7,7 +7,7 @@
 			"Verdy p"
 		]
 	},
-	"renocaptcha-desc": "Module Miraheze ReCAPTCHA pour le support de ReCAPTCHA V3.",
+	"renocaptcha-desc": "Module ReCAPTCHA de Miraheze pour la prise en charge de ReCAPTCHA V3.",
 	"renocaptcha-edit": "Pour protéger le wiki contre l’invasion polluante générée par des modifications automatisées, nous vous demandons de résoudre le CAPTCHA suivant :",
 	"renocaptcha-addurl": "Votre édition inclut de nouveaux liens externes. Pour protéger le wiki contre l’invasion polluante générée par des modifications automatisées, nous vous demandons de résoudre le CAPTCHA suivant :",
 	"renocaptcha-badlogin": "Pour protéger le wiki contre le craquage automatique des mots de passe, nous vous demandons de résoudre le CAPTCHA suivant :",
