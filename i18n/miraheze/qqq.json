@@ -48,7 +48,7 @@
 	"grouppage-oversight": "m:Oversight",
 	"group-requestwikiblocked": "RequestWiki blocked users",
 	"group-requestwikiblocked-member": "requestwiki blocked user",
-	"grouppage-requestwikiblocked": "m:Special:MyLanguage/Meta:RequestWiki blocked users",
+	"grouppage-requestwikiblocked": "m:Meta:RequestWiki blocked users",
 	"group-wikicreator": "Wiki Creators",
 	"group-wikicreator-member": "{{GENDER:$1|wiki creator}}",
 	"grouppage-wikicreator": "m:Meta:Wiki creators",
