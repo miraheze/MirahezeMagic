@@ -6,7 +6,7 @@
 	},
 	"miraheze-dberr-again": "請嘗試等待幾分鐘來重新載入。更多有關此錯誤的資訊，請查看我們在推特上的頁面（https://twitter.com/Miraheze），或是透過連結在 irc.libera.chat 上的 #miraheze-sre 來聯絡系統管理員",
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被全域鎖定，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
-	"miraheze-importtext": "請從來源 wiki 使用[[Special:Export|匯出工具]]來匯出檔案。之後保存在您的電腦裡並上傳於此。<br />請注意，若檔案內容較大（大於 5MB）會無法藉由瀏覽器完成，您會需要[[phab:maniphest/task/edit/form/1|在 Phabricator 上請求]]。",
+	"miraheze-importtext": "請從來源 wiki 使用[[Special:Export|匯出工具]]來匯出檔案。之後保存在您的電腦裡並上傳於此。<br />請注意，若檔案內容較大（大於 5MB）會無法藉由瀏覽器完成，您會需要[[M:Moving_a_wiki_to_Miraheze#Request_import|請求匯入]]。",
 	"miraheze-oathauth-step1": "重要！在啟用此之前請確認已讀過 OATHAuth 頁面！步驟 1：下載雙重驗證程式",
 	"miraheze-prefs-help-realname": "真實姓名為選填。若您有意提供，這會用在您成品的姓名標示上。另外，依據使用由 Miraheze 所託管的 wiki，表示您同意<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 使用條款]</span>並接受<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy 隱私方針]</span>。",
 	"miraheze-shoutwiki-loginform-tos": "我已讀過、了解以上內容，並同意[https://meta.miraheze.org/wiki/Terms_of_Use/zh-tw 使用條款]與[https://meta.miraheze.org/wiki/Privacy_Policy/zh-tw 隱私方針]",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Meghmollar2017",
 			"MuratTheTurkish",
 			"R4356th",
 			"Tahmid",
@@ -38,6 +39,8 @@
 	"group-interwiki-admin-member": "আন্তঃউইকি প্রশাসক",
 	"group-oversight": "গোপন পর্যবেক্ষক",
 	"group-oversight-member": "গোপন পর্যবেক্ষক",
+	"group-requestwikiblocked": "রিকুয়েস্টউইকির বাধাপ্রাপ্ত ব্যবহারকারীগণ",
+	"group-requestwikiblocked-member": "রিকুয়েস্টউইকির বাধাপ্রাপ্ত ব্যবহারকারী",
 	"group-wikicreator": "উইকি স্রষ্টা",
 	"group-rollbacker": "রোলব্যাকার",
 	"group-rollbacker-member": "{{GENDER:$1|রোলব্যাকার}}",
