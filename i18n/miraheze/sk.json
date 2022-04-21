@@ -96,6 +96,8 @@
 	"group-interwiki-admin-member": "správca interwiki",
 	"group-oversight": "Dozorcovia",
 	"group-oversight-member": "dozorca",
+	"group-requestwikiblocked": "Požiadavka wiki blokovaných používateľov",
+	"group-requestwikiblocked-member": "požiadavka wiki na blokovaných používateľov",
 	"group-wikicreator": "Tvorcovia wiki",
 	"group-wikicreator-member": "{{GENDER:$1|tvorca wiki|tvorkyňa wiki}}",
 	"group-wikimanager": "Wiki manažéri",
