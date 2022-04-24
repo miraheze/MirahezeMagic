@@ -6,6 +6,7 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Wikimedia\IPUtils;
 
 class MirahezeMagicHooks {
 	/**
@@ -350,17 +351,23 @@ class MirahezeMagicHooks {
 
 	/** Removes redis keys for jobrunner */
 	public static function removeRedisKey( string $key ) {
-		global $wmgCacheSettings;
+		global $wgJobTypeConf;
 
-		$redisServer = explode( ':', $wmgCacheSettings['jobrunner']['server'] );
+		if ( !isset( $wgJobTypeConf['default']['redisServer'] ) || !$wgJobTypeConf['default']['redisServer'] ) {
+			return;
+		}
 
-		try {
-			$redis = new Redis();
-			$redis->connect( $redisServer[0], $redisServer[1] );
-			$redis->auth( $wmgCacheSettings['jobrunner']['password'] );
-			$redis->del( $redis->keys( $key ) );
-		} catch ( Throwable $ex ) {
-			// empty
+		$hostAndPort = IPUtils::splitHostAndPort( $wgJobTypeConf['default']['redisServer'] );
+
+		if ( $hostAndPort ) {
+			try {
+				$redis = new Redis();
+				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
+				$redis->auth( $wgJobTypeConf['default']['redisConfig']['password'] );
+				$redis->del( $redis->keys( $key ) );
+			} catch ( Throwable $ex ) {
+				// empty
+			}
 		}
 	}
 
