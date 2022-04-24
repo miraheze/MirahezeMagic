@@ -363,7 +363,7 @@ class MirahezeMagicHooks {
 			try {
 				$redis = new Redis();
 				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
-				$redis->auth( $wmgCacheSettings['jobrunner']['password'] );
+				$redis->auth( $wgJobTypeConf['default']['redisConfig']['password'] );
 				$redis->del( $redis->keys( $key ) );
 			} catch ( Throwable $ex ) {
 				// empty
