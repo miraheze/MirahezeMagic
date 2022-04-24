@@ -353,7 +353,11 @@ class MirahezeMagicHooks {
 	public static function removeRedisKey( string $key ) {
 		global $wmgCacheSettings;
 
-		$hostAndPort = IPUtils::splitHostAndPort( $server );
+		if ( !isset( $wmgCacheSettings['jobrunner']['server'] ) ) {
+			return;
+		}
+
+		$hostAndPort = IPUtils::splitHostAndPort( $wmgCacheSettings['jobrunner']['server'] );
 
 		if ( $hostAndPort ) {
 			try {
