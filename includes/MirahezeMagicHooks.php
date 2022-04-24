@@ -351,13 +351,13 @@ class MirahezeMagicHooks {
 
 	/** Removes redis keys for jobrunner */
 	public static function removeRedisKey( string $key ) {
-		global $wgRedisServerIP;
+		global $wgJobTypeConf;
 
-		if ( !$wgRedisServerIP ) {
+		if ( !isset( $wgJobTypeConf['default']['redisServer'] ) || !$wgJobTypeConf['default']['redisServer'] ) {
 			return;
 		}
 
-		$hostAndPort = IPUtils::splitHostAndPort( $wgRedisServerIP );
+		$hostAndPort = IPUtils::splitHostAndPort( $wgJobTypeConf['default']['redisServer'] );
 
 		if ( $hostAndPort ) {
 			try {
