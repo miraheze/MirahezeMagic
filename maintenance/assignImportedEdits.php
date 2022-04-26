@@ -29,27 +29,62 @@ use MediaWiki\MediaWikiServices;
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class AssignImportedEdits extends Maintenance {
-	private $wikiRevision = null;
-
 	private $importPrefix = 'imported>';
 
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Assigns imported edits for users";
-		$this->addOption( 'user', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import> prefix.', false, true );
+		$this->addOption( 'to', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import> prefix.', false, true );
+		$this->addOption( 'from', 'Username you want edits to be assigned from. (optional), Username excluding prefix.', false, true );
 		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
 		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to \'imported\'.', false, false );
 		$this->addOption( 'norc', 'Don\'t update the recent changes table', false, false );
 	}
 
 	public function execute() {
-		$this->wikiRevision = wfGetDB( DB_PRIMARY );
+		$dbw = wfGetDB( DB_PRIMARY );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
 			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
 		}
 
-		$res = $this->wikiRevision->select(
+		if ( $this->getOption( 'from' ) ) {
+			$from = $this->importPrefix . $this->getOption( 'from' );
+			$row = $dbw->selectRow(
+				'actor',
+				'actor_id',
+				[
+					'actor_name' => $from,
+				],
+				__METHOD__
+			);
+
+			$fromUser = User::newFromActorId( $row->actor_id );
+
+			if ( !$fromUser ) {
+				$this->output( 'Invalid from user.' );
+				return;
+			}
+
+			$fromName = $fromUser->getName();
+
+			$toUser = User::newFromName(
+				$this->getOption( 'to' ) ?: str_replace(
+					$this->importPrefix, '', $fromName
+				)
+			);
+
+			if ( !$toUser ) {
+				$this->output( 'Invalid to user.' );
+				return;
+			}
+
+			$this->assignEdits( $fromUser, $toUser );
+
+			return;
+		}
+
+		$res = $dbw->select(
 			'revision_actor_temp',
 			'revactor_actor',
 			[],
@@ -62,31 +97,35 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			$user = $this->getOption( 'user' ) ? User::newFromName( $this->getOption( 'user' ) ) : null;
-			$actorName = User::newFromActorId( $row->revactor_actor );
-			$assignUserEdit = User::newFromName( str_replace( $this->importPrefix, '', $actorName->getName() ) );
+			$fromUser = User::newFromActorId( $row->revactor_actor );
 
-			if ( $user ) {
-				$nameIsValid = User::newFromName( $user )->getId();
-				$name = $this->importPrefix . $user->getName();
+			if ( !$fromUser ) {
+				$this->output( 'Invalid from user.' );
+				return;
+			}
 
-				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
-					if ( $nameIsValid !== 0 && $actorName->getName() === $name ) {
-						$this->assignEdits( $actorName, $assignUserEdit );
-					}
-				}
-			} else {
-				$nameIsValid = User::newFromName( str_replace( $this->importPrefix, '', $actorName->getName() ) );
-				if ( strpos( $actorName->getName(), $this->importPrefix ) === 0 ) {
-					if ( $nameIsValid->getId() !== 0 && $actorName ) {
-						$this->assignEdits( $actorName, $assignUserEdit );
-					}
+			$fromName = $fromUser->getName();
+
+			$toUser = User::newFromName(
+				$this->getOption( 'to' ) ?: str_replace(
+					$this->importPrefix, '', $fromName
+				)
+			);
+
+			if ( !$toUser ) {
+				$this->output( 'Invalid to user.' );
+				return;
+			}
+
+			if ( strpos( $fromName, $this->importPrefix ) === 0 ) {
+				if ( $toUser->getId() !== 0 ) {
+					$this->assignEdits( $fromUser, $toUser );
 				}
 			}
 		}
 	}
 
-	private function assignEdits( &$user, &$importUser ) {
+	private function assignEdits( $user, $importUser ) {
 		$this->output(
 			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n"
 		);
