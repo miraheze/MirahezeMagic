@@ -45,20 +45,22 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		global $IP, $wgShellRestrictionMethod;
+		global $IP, $wgBaseDirectory, $wgShellRestrictionMethod;
 
-		$IP = '/srv/mediawiki-staging/w';
+		$wgBaseDirectory = '/srv/mediawiki-staging/w';
+		$IP = $wgBaseDirectory;
+
 		$wgShellRestrictionMethod = false;
 
-		$gitInfo = new GitInfo( $IP, false );
+		$gitInfo = new GitInfo( $wgBaseDirectory, false );
 		$gitInfo->precomputeValues();
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
 		$coreId = $gitInfo->getHeadSHA1() ?: '';
 
 		$queue = array_fill_keys( array_merge(
-				glob( $IP . '/extensions/*/extension*.json' ),
-				glob( $IP . '/skins/*/skin.json' )
+				glob( $wgBaseDirectory . '/extensions/*/extension*.json' ),
+				glob( $wgBaseDirectory . '/skins/*/skin.json' )
 			),
 		true );
 
@@ -82,7 +84,7 @@ class RebuildVersionCache extends Maintenance {
 		foreach ( $extensionCredits as $extension => $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
 				$extensionDirectory = dirname( $extensionData['path'] );
-				$extensionPath = str_replace( '/srv/mediawiki/w', $IP, $extensionDirectory );
+				$extensionPath = str_replace( '/srv/mediawiki/w', $wgBaseDirectory, $extensionDirectory );
 
 				$gitInfo = new GitInfo( $extensionPath, false );
 
@@ -91,7 +93,7 @@ class RebuildVersionCache extends Maintenance {
 				}
 
 				$memcKey = $cache->makeKey(
-					'specialversion-ext-version-text', str_replace( $IP, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
+					'specialversion-ext-version-text', str_replace( $wgBaseDirectory, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
 				);
 
 				$cache->delete( $memcKey );
