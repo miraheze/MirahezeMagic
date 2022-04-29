@@ -30,6 +30,10 @@
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
+define( 'MW_STAGING_PATH', '/srv/mediawiki-staging/w' );
+
+use const MW_STAGING_PATH as MW_INSTALL_PATH;
+
 /**
  * Maintenance script to rebuild the version cache.
  *
@@ -48,15 +52,12 @@ class RebuildVersionCache extends Maintenance {
 		global $IP;
 
 		$config = new HashConfig();
-		$config->set( 'BaseDirectory', '/srv/mediawiki-staging/w' );
+		$config->set( 'BaseDirectory', MW_STAGING_PATH );
 		$config->set( 'ShellRestrictionMethod', false );
 
 		$baseDirectory = $config->get( 'BaseDirectory' );
 
-		define( 'MW_STAGING_PATH', $baseDirectory );
-		use const MW_STAGING_PATH as MW_INSTALL_PATH;
-
-		$IP = MW_INSTALL_PATH;
+		$IP = MW_STAGING_PATH;
 		$gitInfo = new GitInfo( $baseDirectory, false );
 		$gitInfo->precomputeValues();
 
