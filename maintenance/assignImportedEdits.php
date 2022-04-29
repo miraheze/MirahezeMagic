@@ -59,10 +59,15 @@ class AssignImportedEdits extends Maintenance {
 				__METHOD__
 			);
 
+			if ( !$row ) {
+				$this->output( 'Invalid \'from\' user.' );
+				return;
+			}
+
 			$fromUser = User::newFromActorId( $row->actor_id );
 
 			if ( !$fromUser ) {
-				$this->output( 'Invalid from user.' );
+				$this->output( 'Invalid \'from\' user.' );
 				return;
 			}
 
@@ -75,7 +80,7 @@ class AssignImportedEdits extends Maintenance {
 			);
 
 			if ( !$toUser ) {
-				$this->output( 'Invalid to user.' );
+				$this->output( 'Invalid \'to\' user.' );
 				return;
 			}
 
@@ -100,7 +105,7 @@ class AssignImportedEdits extends Maintenance {
 			$fromUser = User::newFromActorId( $row->revactor_actor );
 
 			if ( !$fromUser ) {
-				$this->output( 'Invalid from user.' );
+				$this->output( 'Invalid \'from\' user.' );
 				return;
 			}
 
@@ -113,7 +118,7 @@ class AssignImportedEdits extends Maintenance {
 			);
 
 			if ( !$toUser ) {
-				$this->output( 'Invalid to user.' );
+				$this->output( 'Invalid \'to\' user.' );
 				return;
 			}
 
