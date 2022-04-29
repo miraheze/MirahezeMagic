@@ -42,7 +42,7 @@ class AssignImportedEdits extends Maintenance {
 	}
 
 	public function execute() {
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbr = wfGetDB( DB_REPLICA );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
 			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
@@ -50,7 +50,7 @@ class AssignImportedEdits extends Maintenance {
 
 		if ( $this->getOption( 'from' ) ) {
 			$from = $this->importPrefix . $this->getOption( 'from' );
-			$row = $dbw->selectRow(
+			$row = $dbr->selectRow(
 				'actor',
 				'actor_id',
 				[
@@ -89,7 +89,7 @@ class AssignImportedEdits extends Maintenance {
 			return;
 		}
 
-		$res = $dbw->select(
+		$res = $dbr->select(
 			'revision_actor_temp',
 			'revactor_actor',
 			[],
