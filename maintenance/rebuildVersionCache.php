@@ -51,10 +51,11 @@ class RebuildVersionCache extends Maintenance {
 		$config->set( 'BaseDirectory', '/srv/mediawiki-staging/w' );
 		$config->set( 'ShellRestrictionMethod', false );
 
+
 		$baseDirectory = $config->get( 'BaseDirectory' );
+		define( 'MW_INSTALL_PATH', $baseDirectory );
 
-		$IP = $baseDirectory;
-
+		$IP = MW_INSTALL_PATH;
 		$gitInfo = new GitInfo( $baseDirectory, false );
 		$gitInfo->precomputeValues();
 
