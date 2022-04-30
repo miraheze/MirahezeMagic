@@ -28,7 +28,7 @@
  * @version 1.0
  */
 
-require_once '/srv/mediawiki/w/maintenance/Maintenance.php';
+require_once '/srv/mediawiki-staging/w/maintenance/Maintenance.php';
 
 /**
  * Maintenance script to rebuild the version cache.
