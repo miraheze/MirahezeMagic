@@ -25,10 +25,15 @@
  * @ingroup Maintenance
  *
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
-require_once '/srv/mediawiki-staging/w/maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
 
 /**
  * Maintenance script to rebuild the version cache.
