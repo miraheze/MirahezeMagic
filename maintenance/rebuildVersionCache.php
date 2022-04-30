@@ -50,15 +50,12 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		global $IP;
-
 		$config = new HashConfig();
 		$config->set( 'BaseDirectory', '/srv/mediawiki-staging/w' );
 		$config->set( 'ShellRestrictionMethod', false );
 
 		$baseDirectory = $config->get( 'BaseDirectory' );
 
-		$IP = $baseDirectory;
 		$gitInfo = new GitInfo( $baseDirectory, false );
 		$gitInfo->precomputeValues();
 
