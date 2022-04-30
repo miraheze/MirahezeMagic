@@ -50,13 +50,14 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		$config = new HashConfig();
-		$config->set( 'BaseDirectory', '/srv/mediawiki-staging/w' );
-		$config->set( 'ShellRestrictionMethod', false );
+		$blankConfig = new GlobalVarConfig( '' );
+		$hashConfig = new HashConfig();
 
-		$baseDirectory = $config->get( 'BaseDirectory' );
+		$hashConfig->set( 'ShellRestrictionMethod', false );
 
+		$baseDirectory = $blankConfig->get( 'IP' );
 		$gitInfo = new GitInfo( $baseDirectory, false );
+
 		$gitInfo->precomputeValues();
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
