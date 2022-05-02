@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Hedda",
+			"Khalvar",
 			"SaldırganSincap"
 		]
 	},
@@ -11,7 +12,7 @@
 	"renocaptcha-badlogin": "Viki'yi otomatik şifre kırmaya karşı korumak için sizden aşağıdaki CAPTCHA'yı çözmenizi rica ediyoruz:",
 	"renocaptcha-createaccount": "Viki'yi otomatik hesap oluşturmaya karşı korumak için sizden aşağıdaki CAPTCHA'yı çözmenizi rica ediyoruz:",
 	"renocaptcha-createaccount-fail": "CAPTCHA'yı çözmemişsiniz gibi görünüyor.",
-	"renocaptcha-v3-failed": "reCAPTCHA doğrulaması başarısız oldu: sunucudan alınan skor, gerekli minimum skordan düşük. Lütfen daha sonra tekrar deneyiniz. Sorun devam ederse, lütfen [https://forms.gle/7fM4TaRjLT7zJkUy5 bu formu] doldurun",
+	"renocaptcha-v3-failed": "reCAPTCHA doğrulaması başarısız oldu: sunucudan alınan skor, gerekli minimum skordan düşük. Lütfen birkaç dakika sonra tekrar deneyiniz. Sorun devam ederse, lütfen [https://forms.gle/7fM4TaRjLT7zJkUy5 bu formu] doldurun",
 	"renocaptcha-create": "Viki'yi otomatik sayfa oluşturmaya karşı korumak için sizden aşağıdaki CAPTCHA'yı çözmenizi rica ediyoruz:",
 	"renocaptcha-noscript": "Ne yazık ki JavaScript'i devre dışı bıraktınız, bu yüzden insan olup olmadığınızı otomatik olarak tanıyamıyoruz. Lütfen, yukarıdaki CAPTCHA'yı çözün ve ortaya çıkan metni aşağıdaki metin alanına kopyalayın:",
 	"renocaptcha-help": "Lütfen bir reCAPTCHA sorgulamasını çözün ve yanıt değerini captchaWord olarak döndürün."
