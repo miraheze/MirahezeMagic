@@ -5,6 +5,7 @@
 			"Can",
 			"Hedda",
 			"Joseph",
+			"LisafBia",
 			"MuratTheTurkish",
 			"SaldırganSincap"
 		]
@@ -15,15 +16,27 @@
 	"miraheze-prefs-help-realname": "Gerçek ad isteğe bağlıdır. Bunu sağlamayı seçerseniz, bu size işinize atıfta bulunmak için kullanılacaktır. Ayrıca, Miraheze tarafından barındırılan bir viki kullanarak, <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use/tr Kullanım Şartlarını]</span> katılırsınız ve <span =\"plainlinks\"> [https://meta.miraheze.org/wiki/Privacy_Policy/tr Gizlilik Politikasını]</span> kabul edersiniz.",
 	"miraheze-shoutwiki-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use/tr Kullanım Şartları] ve [https://meta.miraheze.org/wiki/Privacy_Policy/tr Gizlilik Politikasını] okudum, anladım ve kabul ediyorum.",
 	"miraheze-shoutwiki-must-accept-tos": "Hesap açabilmek için Kullanım Şartlarını kabul etmelisin!",
-	"miraheze-centralauth-merge-method-admin": "Manüel Olarak Birleştirilmiş Hesap",
+	"miraheze-centralauth-merge-method-admin": "Manuel Olarak Birleştirilmiş Hesap",
 	"miraheze-centralauth-merge-method-admin-desc": "Bu hesap bir Sistem Hizmetlisi veya Kahya tarafından manüel olarak birleştirildi. Bunun nedeni, yeniden adlandırma veya birleştirme işlemindeki teknik bir sorun olabilir.",
 	"miraheze-restriction-protect": "Koru",
 	"miraheze-restriction-delete": "Sil",
 	"miraheze-skinname-snapwikiskin": "Çek!",
 	"miraheze-snapwikiskin": "Çek!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Vikileri",
+	"miraheze-group-checkuser": "Denetçiler",
+	"miraheze-group-checkuser-member": "denetçi",
+	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Bürokratlar",
+	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bürokrat}}",
 	"miraheze-group-sysop": "Yöneticiler",
+	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|hizmetli}}",
 	"miraheze-group-interface-admin": "Arayüz yöneticileri",
-	"miraheze-group-bot": "Botlar"
+	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|arayüz yöneticisi}}",
+	"miraheze-group-bot": "Botlar",
+	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
 }

@@ -6,6 +6,7 @@
 			"Fitoschido",
 			"Hedda",
 			"Joseph",
+			"LisafBia",
 			"MuratTheTurkish",
 			"SaldırganSincap",
 			"Sezgin İbiş"
@@ -102,6 +103,8 @@
 	"group-interwiki-admin-member": "vikiarası hizmetlisi",
 	"group-oversight": "Gözetmenler",
 	"group-oversight-member": "gözetmen",
+	"group-requestwikiblocked": "RequestWiki'den engellenmiş kullanıcılar",
+	"group-requestwikiblocked-member": "requestwiki'den engellenmiş kullanıcı",
 	"group-wikicreator": "Viki Oluşturucuları",
 	"group-wikicreator-member": "{{GENDER:$1|viki oluşturucusu}}",
 	"group-wikimanager": "Viki Yöneticileri",
