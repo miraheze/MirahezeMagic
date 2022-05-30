@@ -10,7 +10,8 @@
 			"Yamagata Yusuke",
 			"おはぐろ蜻蛉",
 			"しぃ",
-			"そらたこ"
+			"そらたこ",
+			"ぺばる"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -152,8 +153,8 @@
 	"settings-parserfunctions": "パーサー関数",
 	"settings-permissions": "権限",
 	"settings-preferences": "設定",
-	"settings-recentchanges": "最近の変更",
-	"settings-restricted": "制限付き",
+	"settings-recentchanges": "最近の更新",
+	"settings-restricted": "制限",
 	"settings-seo": "検索エンジン最適化",
 	"settings-socialtools": "ソーシャルツール",
 	"settings-styling": "装飾",
