@@ -76,7 +76,7 @@ class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	protected function passCaptcha( $_, $word ) {
 		global $wgRequest, $wgReCaptchaSecretKey, $wgReCaptchaSendRemoteIP, $wgReCaptchaVersion, $wgReCaptchaMinimumScore;
 
-		$url = 'https://www.google.com/recaptcha/api/siteverify';
+		$url = 'https://www.recaptcha.net/recaptcha/api/siteverify';
 		// Build data to append to request
 		$data = [
 			'secret' => $wgReCaptchaSecretKey,

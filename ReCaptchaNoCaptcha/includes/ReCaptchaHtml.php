@@ -33,14 +33,14 @@ class ReCaptchaHtml {
 	public function headItem() {
 		if ( $this->version === 'v3' ) {
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?render=$this->siteKey\"></script>" .
+				"<script src=\"https://www.recaptcha.net/recaptcha/api.js?render=$this->siteKey\"></script>" .
 				$this->v3Script();
 		} else {
 			// Insert reCAPTCHA script, in display language, if available.
 			// Language falls back to the browser's display language.
 			// See https://developers.google.com/recaptcha/docs/faq
 			$script =
-				"<script src=\"https://www.google.com/recaptcha/api.js?hl={$this->languageCode}\"" .
+				"<script src=\"https://www.recaptcha.net/recaptcha/api.js?hl={$this->languageCode}\"" .
 				"async defer></script>";
 		}
 
