@@ -12,7 +12,7 @@ class MirahezeMagicHooks {
 	/**
 	 * Avoid filtering automatic account creation
 	 *
-	 * @param AbuseFilterVariableHolder $vars
+	 * @param VariableHolder $vars
 	 * @param Title $title
 	 * @param User $user
 	 * @param array &$skipReasons
