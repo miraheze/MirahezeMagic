@@ -53,7 +53,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 	}
 
 	protected function getFormFields() {
-		$this->getOutput()->addModules( 'ext.createwiki.oouiform' );
+		$this->getOutput()->addModules( [ 'ext.createwiki.oouiform' ] );
 		$this->getOutput()->addJsConfigVars( 'wgCreateWikiOOUIFormTabs', [] );
 
 		$dbRow = json_decode( $this->row->s_data ?? '[]', true );
