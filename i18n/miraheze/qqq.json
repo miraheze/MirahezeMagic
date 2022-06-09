@@ -16,6 +16,7 @@
 	},
 	"centralauth-groupname": "The name of group name in CentralAuth.",
 	"content-model-flow-board": "<!---->",
+	"datadump-namespaceselect-label": "{{Identical|Namespace}}",
 	"mirahezemagic-description": "The description of [[Special:Version]].",
 	"miraheze-categories": "Label for categories.\n{{Identical|Category}}",
 	"miraheze-close-email-subject": "A subject for the closed wiki on email.",
