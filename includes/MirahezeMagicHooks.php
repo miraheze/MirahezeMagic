@@ -169,11 +169,12 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = [
 			'centralauth-groupname',
+			'dberr-problems',
 			'dberr-again',
 			'privacypage',
 			'prefs-help-realname',
-			'shoutwiki-loginform-tos',
-			'shoutwiki-must-accept-tos',
+			'newsignuppage-loginform-tos',
+			'newsignuppage-must-accept-tos',
 			'importtext',
 			'oathauth-step1',
 			'centralauth-merge-method-admin-desc',
