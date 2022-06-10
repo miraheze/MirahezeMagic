@@ -85,7 +85,7 @@
 	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",
 	"right-user": "Edit pages protected as 'Allow only logged in users'",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "List of Miraheze wikis",
 	"sitematrix-summary": "This special page lists all Miraheze wikis.",
 	"sitematrix-desc": "Displays a [[Special:SiteMatrix|list of Miraheze wikis]]",
