@@ -6,5 +6,5 @@
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Je}} kunt je niet aanmelden omdat {{GENDER:$1|jouw}} account globaal is geblokkeerd. Neem contact op met <code>cvt[at]miraheze.org</code> voor meer informatie of om in beroep te gaan.",
 	"miraheze-prefs-help-realname": "Je hoeft geen echte naam op te geven. Als je er wel een opgeeft, wordt die gebruikt om je te vermelden als auteur van je werk. Door een wiki te gebruiken die wordt gehost door Miraheze, ga je ook akkoord met de <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use gebruiksvoorwaarden]</span> en accepteer je het <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy privacybeleid]</span>.",
-	"miraheze-shoutwiki-must-accept-tos": "Je moet akkoord gaan met de gebruikersvoorwaarden om een account aan te kunnen maken."
+	"miraheze-newsignuppage-must-accept-tos": "Je moet akkoord gaan met de gebruikersvoorwaarden om een account aan te kunnen maken."
 }

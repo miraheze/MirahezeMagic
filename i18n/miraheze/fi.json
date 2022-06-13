@@ -123,7 +123,7 @@
 	"restriction-delete": "Poista",
 	"restriction-level-user": "Salli vain kirjautuneet käyttäjät",
 	"right-user": "Muokata sivuja, jotka on suojattu tasolle ”{{int:protect-level-user}}”",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Luettelo Mirahezen wikeistä",
 	"sitematrix-summary": "Tämä toimintosivu näyttää luettelon kaikista Mirahezen wikeistä.",
 	"sitematrix-desc": "Näyttää [[Special:SiteMatrix|luettelon Mirahezen wikeistä]].",

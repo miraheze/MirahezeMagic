@@ -128,7 +128,7 @@
 	"restriction-delete": "Verwijderen",
 	"restriction-level-user": "Alleen ingelogde gebruikers toestaan",
 	"right-user": "Pagina's bewerken die beveiligd zijn als \"{{int:protect-level-user}}\"",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Lijst van Miraheze wiki's",
 	"sitematrix-summary": "Deze speciale pagina laat een lijst van alle Miraheze-wiki's zien.",
 	"sitematrix-desc": "Laat [[Special:SiteMatrix|een lijst van Miraheze-wiki's]] zien",

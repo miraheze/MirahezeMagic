@@ -133,7 +133,7 @@
 	"restriction-delete": "削除",
 	"restriction-level-user": "登録利用者にのみ許可",
 	"right-user": "「{{int:protect-level-user}}」の保護が設定されたページを編集",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "MirahezeのWikiの一覧",
 	"sitematrix-summary": "この特別ページはMirahezeのWikiの一覧です。",
 	"sitematrix-desc": "[[Special:SiteMatrix|Miraheze のWiki一覧]]を表示する",

@@ -110,7 +110,7 @@
 	"restriction-delete": "Slett",
 	"restriction-level-user": "Tillat kun innloggede brukere",
 	"right-user": "Redigere sider beskyttet som «{{int:protect-level-user}}»",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Liste over Miraheze-wikier",
 	"sitematrix-summary": "Denne spesialsiden lister opp alle Miraheze-wikier.",
 	"sitematrix-desc": "Viser en [[Special:SiteMatrix|liste over Miraheze-wikier]]",

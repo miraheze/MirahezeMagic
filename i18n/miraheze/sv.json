@@ -126,7 +126,7 @@
 	"restriction-delete": "Radera",
 	"restriction-level-user": "Tillåt endast inloggade användare",
 	"right-user": "Redigera sidor skyddade som \"{{int:protect-level-user}}\"",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Lista över Miraheze-wikier",
 	"sitematrix-summary": "Denna specialsida listar alla Miraheze-wikier.",
 	"sitematrix-desc": "Visar en [[Special:SiteMatrix|lista över Miraheze-wikier]]",

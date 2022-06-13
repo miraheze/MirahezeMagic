@@ -113,7 +113,7 @@
 	"restriction-delete": "حذف",
 	"restriction-level-user": "اسمح فقط للمستخدمين مسجلي الدخول",
 	"right-user": "تحرير الصفحات المحمية كـ\"{{int:protect-level-user}}\"",
-	"shared-repo-name-shared-commons": "ميراهيز كومنز",
+	"shared-repo-name-mirahezecommons": "ميراهيز كومنز",
 	"sitematrix": "قائمة ويكيات ميراهيز",
 	"sitematrix-summary": "هذه الصفحة الخاصة تعرض كل ويكيات ميراهيز.",
 	"sitematrix-desc": "تعرض [[Special:SiteMatrix|قائمة ويكيات ميراهيز]]",

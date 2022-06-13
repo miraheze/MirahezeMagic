@@ -131,7 +131,7 @@
 	"restriction-delete": "Вилучити",
 	"restriction-level-user": "Дозволити лише користувачам, які увійшли у систему",
 	"right-user": "редагування сторінок з рівнем захисту «{{int:protect-level-sysop}}»",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Список вікі Miraheze",
 	"sitematrix-summary": "Ця спеціальна сторінка перелічує всі вікі Miraheze.",
 	"sitematrix-desc": "Показує [[Special:SiteMatrix|список проєктів Miraheze]]",

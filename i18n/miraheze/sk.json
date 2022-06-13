@@ -126,7 +126,7 @@
 	"restriction-delete": "Zmazať",
 	"restriction-level-user": "Povoliť iba prihlásených používateľov",
 	"right-user": "Upravovať stránky zamknuté ako „{{int:protect-level-user}}“",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Zoznam wiki na Miraheze",
 	"sitematrix-summary": "Táto špeciálna stránka obsahuje zoznam všetkých wiki na  Miraheze.",
 	"sitematrix-desc": "Zobrazí [[Special:SiteMatrix|zoznam wiki na Miraheze]]",

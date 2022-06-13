@@ -118,7 +118,7 @@
 	"restriction-delete": "ลบ",
 	"restriction-level-user": "อนุญาตเฉพาะผู้ใช้เข้าสู่ระบบ",
 	"right-user": "แก้ไขหน้าที่ถูกป้องกันในระดับ \"{{int:protect-level-user}}\"",
-	"shared-repo-name-shared-commons": "Miraheze คอมมอนส์",
+	"shared-repo-name-mirahezecommons": "Miraheze คอมมอนส์",
 	"sitematrix": "รายการวิกิของ Miraheze",
 	"sitematrix-summary": "หน้าพิเศษนี้รายการวิกิของ Miraheze ทั้งหมด",
 	"sitematrix-desc": "แสดง[[Special:SiteMatrix|รายการวิกิของ Miraheze]]",

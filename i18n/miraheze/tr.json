@@ -133,7 +133,7 @@
 	"restriction-delete": "Sil",
 	"restriction-level-user": "Yalnızca oturum açılmış kullanıcılara izin ver",
 	"right-user": "\"{{int:protect-level-user}}\" olarak korunan sayfaları düzenle",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Miraheze vikileri listesi",
 	"sitematrix-summary": "Bu özel sayfa tüm Miraheze vikilerini listeler.",
 	"sitematrix-desc": "[[Special:SiteMatrix|Miraheze vikilerinin bir listesini]] görüntüler.",

@@ -60,7 +60,7 @@
 	"restriction-delete": "Scangìlle",
 	"restriction-level-user": "Permette sole a le utinde reggistrate",
 	"right-user": "Cange le pàggene prutette cumme a \"{{int:protect-level-user}}\"",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Elenghe de le uicchi Miraheze",
 	"sitematrix-summary": "Sta pàgena speciale elenghe tutte le uicchi Miraheze.",
 	"sitematrix-desc": "Face 'ndrucà 'n'[[Special:SiteMatrix|elenghe de le Uicchi de Miraheze]]",

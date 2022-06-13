@@ -5,15 +5,28 @@
 			"Patsagorn Y."
 		]
 	},
-	"miraheze-dberr-again": "กรุณารอซักครู่และรีโหลดหน้าอีกครั้ง สำหรับข้อมูลเพิ่มเติมเกี่ยวกับช้อผิดพลาดนี้ กรุณาตรวจสอบที่หน้าทวิตเตอร์ของเรา (https://twitter.com/Miraheze) หรือติดต่อผู้ดูแลระบบโครงข่ายของเราโดยเชื่อมต่อ #miraheze ที่ irc.libera.chat",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|คุณ}}ไม่สามารถเข้าสู่ระบบได้เนื่องจากบัญชี{{GENDER:$1|ของคุณ}}ถูกล็อก กรุณาติดต่อที่ <code>cvt[at]miraheze.org</code> สำหรับข้อมูลเพิ่มเติม",
+	"miraheze-dberr-problems": "วิกินี้ไม่พร้อมใช้งานชั่วคราว",
+	"miraheze-dberr-again": "โปรดลองใหม่อีกครั้งในอีกสักครู่หนึ่ง ข้อผิดพลาดเหล่านี้มักใช้เวลาแก้ไขไม่นาน หากคุณยังได้รับข้อความนี้ติดต่อกันเป็นเวลานาน โปรดตรวจสอบทวิตเตอร์ของเรา (https://twitter.com/Miraheze) หรือติดต่อวิศวกรผู้ดูแลระบบของมิราเฮซโดยไปที่ #miraheze-sre บน irc.libera.chat",
+	"miraheze-centralauth-groupname": "มิราเฮซ",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|คุณ}}ไม่สามารถเข้าสู่ระบบได้เนื่องจากบัญชี{{GENDER:$1|ของคุณ}}[[m:Special:MyLanguage/Global locks|ถูกล็อกข้ามโครงการ]] กรุณาติดต่อที่ <code>cvt[at]miraheze.org</code> สำหรับข้อมูลเพิ่มเติม",
 	"miraheze-oathauth-step1": "สำคัญ! อ่านหน้า OATHAuth ก่อนเปิดใช้งาน\nขั้นตอนที่ 1: ดาวน์โหลดโปรแกรมยืนยันตัวตนสองขั้นตอน",
 	"miraheze-prefs-help-realname": "คุณไม่จำเป็นต้องใช้ชื่อจริง หากคุณเลือกที่จะให้ จะเป็นการใช้สำหรับการแสดงที่มาในงานของคุณโดยใช้ชื่อนี้ของคุณ และการใช้งานวิกิใด ๆ ที่มิราเฮซเป็นแม่ข่าย ถือว่าคุณเห็นด้วยกับ<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]</span>และยอมรับใน<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]</span>",
-	"miraheze-shoutwiki-loginform-tos": "ฉันได้อ่านและยอมรับใน[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]และ[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]แล้ว",
-	"miraheze-shoutwiki-must-accept-tos": "คุณต้องยอมรับข้อกำหนดการใช้งานก่อนสร้างบัญชีผู้ใช้",
+	"miraheze-newsignuppage-loginform-tos": "ฉันได้อ่านและยอมรับใน[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]และ[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]แล้ว",
+	"miraheze-newsignuppage-must-accept-tos": "คุณต้องยอมรับข้อกำหนดการใช้งานก่อนสร้างบัญชีผู้ใช้",
 	"miraheze-centralauth-merge-method-admin": "การรวมบัญชีด้วยมือ",
 	"miraheze-centralauth-merge-method-admin-desc": "บัญชีนี้ถูกรวมเข้าด้วยมือโดยผู้ดูแลระบบโครงข่ายหรือผู้ดูแลโครงการ อาจเนื่องจากปัญหาด้านเทคนิคระหว่างกระบวนการเปลี่ยนชื่อหรือการรวมบัญชี",
 	"miraheze-restriction-protect": "ป้องกัน",
 	"miraheze-restriction-delete": "ลบ",
-	"miraheze-wikibase-sitelinks-miraheze": "วิกิของ Miraheze"
+	"miraheze-skinname-snapwikiskin": "สแนป!",
+	"miraheze-snapwikiskin": "สแนป!",
+	"miraheze-wikibase-sitelinks-miraheze": "วิกิของ Miraheze",
+	"miraheze-group-bureaucrat": "ผู้ดูแลสิทธิ์แต่งตั้ง",
+	"miraheze-group-sysop": "ผู้ดูแลระบบ",
+	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|ผู้ดูแลระบบ}}",
+	"miraheze-group-interface-admin": "ผู้ดูแลระบบอินเตอร์เฟซ",
+	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
+	"miraheze-group-bot": "บอต",
+	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
+	"miraheze-group-bot-member": "{{GENDER:$1|บอต}}"
 }

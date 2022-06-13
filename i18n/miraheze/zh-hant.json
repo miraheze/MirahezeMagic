@@ -130,7 +130,7 @@
 	"restriction-delete": "刪除",
 	"restriction-level-user": "只允許已登入使用者",
 	"right-user": "編輯頁面保護為「{{int:protect-level-user}}」",
-	"shared-repo-name-shared-commons": "Miraheze 共享資源",
+	"shared-repo-name-mirahezecommons": "Miraheze 共享資源",
 	"sitematrix": "Miraheze wiki 清單",
 	"sitematrix-summary": "這個特殊頁面中列出所有的 Miraheze wiki。",
 	"sitematrix-desc": "顯示 [[Special:SiteMatrix|Miraheze wiki 清單]]",

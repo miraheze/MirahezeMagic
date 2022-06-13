@@ -120,7 +120,7 @@
 	"restriction-delete": "Apagar",
 	"restriction-level-user": "Permitir apenas usuários registrados",
 	"right-user": "Editar páginas protegidas como \"{{int:protect-level-user}}\"",
-	"shared-repo-name-shared-commons": "Miraheze Commons",
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Lista de wikis de Miraheze",
 	"sitematrix-summary": "Esta página especial lista todos os wikis de Miraheze.",
 	"sitematrix-desc": "Exibe uma [[Special:SiteMatrix|lista de wikis de Miraheze]]",
