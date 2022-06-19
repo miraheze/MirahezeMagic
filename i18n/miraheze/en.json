@@ -144,6 +144,7 @@
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
 	"right-user": "Edit pages protected as \"{{int:protect-level-user}}\"",
+	"requestimportdump-text": "Welcome to ImportDump! To get started with your import, please fill out this form so we can review your request. Your wiki request will be reviewed by a system administrator, and it can be tracked at the page that will be given when submitting your request.\nIf your XML dump times out during upload, please create a task on [[Phabricator]].\nIf you wish to import images as well, please create a task on [[Phabricator]]",
 	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "List of Miraheze wikis",
 	"sitematrix-summary": "This special page lists all Miraheze wikis.",
