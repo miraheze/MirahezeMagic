@@ -7,9 +7,11 @@
 			"Fitoschido",
 			"Jackiezelaya",
 			"Jakeukalane",
+			"OriginReboot",
 			"Wynter"
 		]
 	},
+	"miraheze-dberr-problems": "Este wiki está temporalmente indisponible.",
 	"miraheze-dberr-again": "Intenta esperar unos cuantos minutos y recargar la página. Para más información sobre este error, por favor visita nuestra página de Twitter (twitter.com/Miraheze) o contacte a los administradores de sistema en #miraheze-sre en irc.libera.chat",
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tú}} no puedes loguearte porque {{GENDER:$1|tu}} cuenta está bloqueada globalmente. Por favor contacta a <code>cvt[a]miraheze.org</code> para más información o para apelar.",

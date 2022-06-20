@@ -141,6 +141,7 @@
 	"restriction-delete": "Supprimer",
 	"restriction-level-user": "Autoriser les utilisateurs enregistrés seulement",
 	"right-user": "Modifier les pages protégées en tant que « {{int:protect-level-user}} »",
+	"requestimportdump-text": "Bienvenue à l’import de données ! Pour bien démarrer avec votre import, veuillez remplir ce formulaire afin que nous puissions passer en revue votre demande. Votre demande de wiki sera examinée par un administrateur système et elle sera suivie sur la page qui sera donnée lors de la soumission de votre demande.\n\nSi votre téléchargement de données XML dépasse le délai imparti et est interrompu, veuillez créer une tâche sur [[Phabricator]].\n\nSi vous souhaitez également importer des images, vuillez créer une tâche sur [[Phabricator]].",
 	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Liste des wikis de Miraheze",
 	"sitematrix-summary": "Cette page présente tous les wikis de Miraheze.",
