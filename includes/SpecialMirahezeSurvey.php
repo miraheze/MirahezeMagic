@@ -186,6 +186,14 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q7-si',
 				'default' => $dbRow['q7-si'] ?? false
 			],
+			'q7-st' => [
+				'type' => 'int',
+				'cssclass' => 'createwiki-infuse',
+				'min' => 1,
+				'max' => 5,
+				'label-message' => 'miraheze-survey-q7-st',
+				'default' => $dbRow['q7-st'] ?? false
+			],
 			'q7-up' => [
 				'type' => 'int',
 				'cssclass' => 'createwiki-infuse',
@@ -226,6 +234,15 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'max' => 5,
 				'label-message' => 'miraheze-survey-q7-tasks',
 				'default' => $dbRow['q7-tasks'] ?? false,
+				'hide-if' => [ '!==', 'wpq1', 'account-manage' ]
+			],
+			'q7-reqhelp' => [
+				'type' => 'int',
+				'cssclass' => 'createwiki-infuse',
+				'min' => 1,
+				'max' => 5,
+				'label-message' => 'miraheze-survey-q7-reqhelp',
+				'default' => $dbRow['q7-reqhelp'] ?? false,
 				'hide-if' => [ '!==', 'wpq1', 'account-manage' ]
 			],
 			'q8' => [
@@ -296,6 +313,12 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q11-d',
 				'default' => $dbRow['q11-d'] ?? false
 			],
+			'q11-fd' => [
+				'type' => 'check',
+				'cssclass' => 'createwiki-infuse',
+				'label-message' => 'miraheze-survey-q11-fd',
+				'default' => $dbRow['q11-fd'] ?? false
+			],
 			'q11-s' => [
 				'type' => 'check',
 				'cssclass' => 'createwiki-infuse',
@@ -320,23 +343,17 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'label-message' => 'miraheze-survey-q11-f',
 				'default' => $dbRow['q11-f'] ?? false
 			],
+			'q11-mm' => [
+				'type' => 'check',
+				'cssclass' => 'createwiki-infuse',
+				'label-message' => 'miraheze-survey-q11-mm',
+				'default' => $dbRow['q11-mm'] ?? false
+			],
 			'q11-c' => [
 				'type' => 'check',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q11-c',
 				'default' => $dbRow['q11-c'] ?? false
-			],
-			'q11-cd' => [
-				'type' => 'check',
-				'cssclass' => 'createwiki-infuse',
-				'label-message' => 'miraheze-survey-q11-cd',
-				'default' => $dbRow['q11-cd'] ?? false
-			],
-			'q11-ai' => [
-				'type' => 'check',
-				'cssclass' => 'createwiki-infuse',
-				'label-message' => 'miraheze-survey-q11-ai',
-				'default' => $dbRow['q11-ai'] ?? false
 			],
 			'q12' => [
 				'type' => 'textarea',
