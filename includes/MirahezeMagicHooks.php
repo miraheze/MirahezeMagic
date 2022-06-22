@@ -180,6 +180,7 @@ class MirahezeMagicHooks {
 			'newsignuppage-must-accept-tos',
 			'importtext',
 			'importdump-help-reason',
+			'importdump-help-target',
 			'oathauth-step1',
 			'centralauth-merge-method-admin-desc',
 			'centralauth-merge-method-admin',
