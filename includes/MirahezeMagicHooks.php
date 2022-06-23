@@ -168,6 +168,7 @@ class MirahezeMagicHooks {
 	public static function onMessageCacheGet( &$lcKey ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = [
+			'centralauth-error-nologinattempt',
 			'centralauth-groupname',
 			'dberr-problems',
 			'dberr-again',
