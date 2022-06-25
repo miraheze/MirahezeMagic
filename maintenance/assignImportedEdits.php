@@ -192,7 +192,7 @@ class AssignImportedEdits extends Maintenance {
 					[ 'rev_actor' => $fromActorId ],
 					__METHOD__
 				);
-				$this->output( "done.\n" )
+				$this->output( "done.\n" );
 			}
 
 			if ( $archiveRows ) {
