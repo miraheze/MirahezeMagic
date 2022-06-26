@@ -181,6 +181,7 @@ class MirahezeMagicHooks {
 			'importtext',
 			'importdump-help-reason',
 			'importdump-help-target',
+			'importdump-help-upload-file',
 			'oathauth-step1',
 			'centralauth-merge-method-admin-desc',
 			'centralauth-merge-method-admin',
