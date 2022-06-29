@@ -44,7 +44,12 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			);
 		}
 
-		$this->getOutput()->addWikiMsg( 'miraheze-survey-header' );
+		$out->addWikiMsg( 'miraheze-survey-header' );
+
+		$out->addModules( [ 'ext.createwiki.oouiform' ] );
+
+		$out->addModuleStyles( [ 'ext.createwiki.oouiform.styles' ] );
+		$out->addModuleStyles( [ 'oojs-ui-widgets.styles' ] );
 
 		$form = $this->getForm();
 		if ( $form->show() ) {
@@ -53,11 +58,6 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 	}
 
 	protected function getFormFields() {
-		$this->getOutput()->addModules( [ 'ext.createwiki.oouiform' ] );
-
-		$this->getOutput()->addModuleStyles( [ 'ext.createwiki.oouiform.styles' ] );
-		$this->getOutput()->addModuleStyles( [ 'oojs-ui-widgets.styles' ] );
-
 		$dbRow = json_decode( $this->row->s_data ?? '[]', true );
 
 		$categoryOptions = $this->config->get( 'CreateWikiCategories' );
