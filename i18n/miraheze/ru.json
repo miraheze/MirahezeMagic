@@ -75,7 +75,7 @@
 	"group-oversight-member": "ревизор",
 	"group-wikicreator": "Викисоздатели",
 	"group-wikicreator-member": "{{GENDER:$1|викисоздатель}}",
-	"group-wikimanager": "Вики менеджеры",
+	"group-wikimanager": "Менеджеры вики",
 	"group-wikimanager-member": "{{GENDER:$1|менеджер вики}}",
 	"group-rollbacker": "Откатывающие",
 	"group-rollbacker-member": "{{GENDER:$1|откатывающий|откатывающая}}",
