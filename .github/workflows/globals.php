@@ -13,7 +13,7 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 				return;
 			}
 
-			// 1.39+
+			// MediaWiki 1.39+
 			if ( file_exists( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" ) ) {
 				$dbw->sourceFile( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" );
 			}
