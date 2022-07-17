@@ -36,8 +36,8 @@ class FixUserIdRevision extends Maintenance {
 	public function execute() {
 		$dbr = wfGetDB( DB_REPLICA );
 
-		$start = (int)$dbr->selectField( 'revision_actor_temp', 'MIN(revactor_rev)', false, __METHOD__ );
-		$end = (int)$dbr->selectField( 'revision_actor_temp', 'MAX(revactor_rev)', false, __METHOD__ );
+		$start = (int)$dbr->selectField( 'revision', 'MIN(rev_id)', false, __METHOD__ );
+		$end = (int)$dbr->selectField( 'revision', 'MAX(rev_id)', false, __METHOD__ );
 
 		$wrongRevs = 0;
 
@@ -46,18 +46,18 @@ class FixUserIdRevision extends Maintenance {
 		do {
 			$lastCheckedRevIdNextBatch = $lastCheckedRevId + $this->mBatchSize;
 			$revRes = $dbr->select(
-				'revision_actor_temp',
-				[ 'revactor_rev', 'revactor_actor' ],
-				"revactor_rev BETWEEN $lastCheckedRevId and $lastCheckedRevIdNextBatch",
+				'revision',
+				[ 'rev_id', 'rev_actor' ],
+				"rev_id BETWEEN $lastCheckedRevId and $lastCheckedRevIdNextBatch",
 				__METHOD__
 			);
 
 			foreach ( $revRes as $revRow ) {
-				$revActor = User::newFromActorId( $revRow->revactor_actor );
+				$revActor = User::newFromActorId( $revRow->rev_actor );
 				$goodUserId = $this->getGoodUserId( $revActor->getName() );
 
-				// Ignore revactor_actor 0 for maintenance scripts and such
-				if ( $revRow->revactor_actor != $goodUserId ) {
+				// Ignore rev_actor 0 for maintenance scripts and such
+				if ( $revRow->rev_actor != $goodUserId ) {
 					// PANIC EVERYWHERE DON'T DIE ON US
 					$wrongRevs++;
 
@@ -113,7 +113,7 @@ class FixUserIdRevision extends Maintenance {
 	protected function fixRevEntry( $row ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$dbw = wfGetDB( DB_PRIMARY );
-		$revActor = User::newFromActorId( $row->revactor_actor );
+		$revActor = User::newFromActorId( $row->rev_actor );
 
 		if ( isset( $this->mUserCache[$revActor->getName()] ) ) {
 			$userId = $this->mUserCache[$revActor->getName()];
@@ -133,16 +133,16 @@ class FixUserIdRevision extends Maintenance {
 		}
 
 		$updateParams = [
-			'revactor_actor' => $userId,
+			'rev_actor' => $userId,
 		];
 
-		$dbw->update( 'revision_actor_temp',
+		$dbw->update( 'revision',
 			$updateParams,
-			[ 'revactor_rev' => $row->revactor_rev ],
+			[ 'rev_id' => $row->rev_id ],
 			__METHOD__
 		);
 
-		$this->output( "Done! Updated revactor_rev {$row->revactor_rev} to have the revactor_actor id {$userId} (for '{$revActor->getName()}') instead of {$row->revactor_actor}.\n" );
+		$this->output( "Done! Updated rev_id {$row->rev_id} to have the rev_actor id {$userId} (for '{$revActor->getName()}') instead of {$row->rev_actor}.\n" );
 	}
 }
 
