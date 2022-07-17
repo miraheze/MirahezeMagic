@@ -45,11 +45,11 @@ class CreateUsers extends Maintenance {
 		}
 
 		$res = $this->wikiRevision->select(
-			'revision_actor_temp',
-			'revactor_actor',
+			'revision',
+			'rev_actor',
 			[],
 			__METHOD__,
-			[ 'GROUP BY' => 'revactor_actor' ]
+			[ 'GROUP BY' => 'rev_actor' ]
 		);
 
 		if ( !$res || !is_object( $res ) ) {
@@ -58,7 +58,7 @@ class CreateUsers extends Maintenance {
 
 		foreach ( $res as $row ) {
 			$user = new User;
-			$userActor = $user->newFromActorId( $row->revactor_actor );
+			$userActor = $user->newFromActorId( $row->rev_actor );
 			if ( !$user->isIP( $userActor ) ) {
 				$name = str_replace( $this->importPrefix, '', $userActor->getName() );
 				if ( $this->importPrefix === '' ) {
