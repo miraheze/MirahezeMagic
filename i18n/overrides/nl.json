@@ -5,12 +5,12 @@
 			"Robin van der Vliet"
 		]
 	},
-	"miraheze-dberr-again": "Probeer een paar minuten te wachten en opnieuw te laden. Ga voor meer informatie over deze fout naar onze twitterpagina (https://twitter.com/Miraheze) of neem contact op met de systeembeheerders door verbinding te maken met #miraheze-sre op irc.libera.chat.",
+	"miraheze-dberr-again": "Probeer het over een paar minuten opnieuw. Meestal zijn deze fouten dan opgelost. Blijft deze foutmelding zich voordoen, kijk dan op onze Twitter-pagina (https://twitter.com/Miraheze) voor meer informatie of neem contact op met de Miraheze-systeembeheerders door verbinding te maken met #miraheze-sre op irc.libera.chat.",
 	"miraheze-centralauth-groupname": "Miraheze",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|U}} kunt zich niet aanmelden omdat {{GENDER:$1|uw}} account globaal is geblokkeerd. Neem contact op met <code>cvt[at]miraheze.org</code> voor meer informatie of om in beroep te gaan.",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|U}} kunt zich niet aanmelden omdat {{GENDER:$1|uw}} account [[m:Special:MyLanguage/Global locks|globaal is geblokkeerd]]. Neem contact op met <code>cvt[at]miraheze.org</code> voor meer informatie of om in beroep te gaan.",
 	"miraheze-oathauth-step1": "BELANGRIJK! Zorg ervoor dat u de OATHAuth-pagina leest voordat u dit inschakelt! Stap 1: Download een tweestapsauthenticatieprogramma",
-	"miraheze-prefs-help-realname": "De echte naam is optioneel. Als u er een opgeeft, wordt deze gebruikt om u erkenning voor uw werk te geven. Door een wiki te gebruiken die wordt gehost door Miraheze, gaat u ook akkoord met de <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use gebruiksvoorwaarden]</span> en accepteert u het <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Privacybeleid]</span>.",
-	"miraheze-newsignuppage-loginform-tos": "Ik heb de [https://meta.miraheze.org/wiki/Terms_of_Use gebruiksvoorwaarden] en het [https://meta.miraheze.org/wiki/Privacy_Policy privacybeleid] gelezen en begrepen en ik ga ermee akkoord",
+	"miraheze-prefs-help-realname": "De echte naam is optioneel. Als u er een opgeeft, wordt deze gebruikt om u erkenning voor uw werk te geven. Door een wiki te gebruiken die wordt gehost door Miraheze, gaat u ook akkoord met de <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use gebruiksvoorwaarden]</span> en accepteert u het <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Privacybeleid]</span>.",
+	"miraheze-newsignuppage-loginform-tos": "Ik heb de [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use gebruiksvoorwaarden] en het [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy privacybeleid] gelezen en begrepen en ik ga ermee akkoord",
 	"miraheze-newsignuppage-must-accept-tos": "U moet akkoord gaan met de gebruikersvoorwaarden om een account aan te kunnen maken.",
 	"miraheze-centralauth-merge-method-admin": "Handmatig samengevoegd account",
 	"miraheze-centralauth-merge-method-admin-desc": "Dit account is handmatig samengevoegd door een systeembeheerder of steward. Dit kan nodig zijn geweest vanwege een technisch probleem bij het hernoemen of samenvoegen.",
