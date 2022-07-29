@@ -35,8 +35,6 @@ class FixImageUser extends Maintenance {
 
 	// TODO: Add support for MediaWiki 1.32
 	public function execute() {
-		global $wgActorTableSchemaMigrationStage;
-
 		$wikiDB = wfGetDB( DB_PRIMARY );
 
 		$from = $this->initialiseUser( urldecode( $this->getArg( 0 ) ) );
@@ -60,17 +58,15 @@ class FixImageUser extends Maintenance {
 		foreach ( $pageId as $id ) {
 			$page_id = $id->page_id;
 
-			if ( $wgActorTableSchemaMigrationStage > MIGRATION_OLD ) {
-				$wikiDB->update(
-					'revision_actor_temp',
-					[ 'revactor_actor' => $to->getActorId( $wikiDB ) ],
-					[
-						'revactor_actor' => $from->getActorId(),
-						'revactor_page' => $page_id,
-					],
-					__METHOD__
-				);
-			}
+			$wikiDB->update(
+				'revision',
+				[ 'rev_actor' => $to->getActorId( $wikiDB ) ],
+				[
+					'rev_actor' => $from->getActorId(),
+					'rev_page' => $page_id,
+				],
+				__METHOD__
+			);
 
 			$wikiDB->update(
 				'image',
