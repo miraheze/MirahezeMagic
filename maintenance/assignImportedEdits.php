@@ -21,7 +21,7 @@
  * @author John Lewis
  * @author Paladox
  * @author Universal Omega
- * @version 3.0
+ * @version 4.0
  */
 
 use MediaWiki\MediaWikiServices;
@@ -90,11 +90,11 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		$res = $dbr->select(
-			'revision_actor_temp',
-			'revactor_actor',
+			'revision',
+			'rev_actor',
 			[],
 			__METHOD__,
-			[ 'GROUP BY' => 'revactor_actor' ]
+			[ 'GROUP BY' => 'rev_actor' ]
 		);
 
 		if ( !$res || !is_object( $res ) ) {
@@ -135,7 +135,6 @@ class AssignImportedEdits extends Maintenance {
 			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n"
 		);
 
-		$actorTableSchemaMigrationStage = $this->getConfig()->get( 'ActorTableSchemaMigrationStage' );
 		$dbw = $this->getDB( DB_PRIMARY );
 		$this->beginTransaction( $dbw, __METHOD__ );
 		$actorNormalization = MediaWikiServices::getInstance()->getActorNormalization();
@@ -144,93 +143,82 @@ class AssignImportedEdits extends Maintenance {
 		# Count things
 		$this->output( "Checking current edits..." );
 		$revQueryInfo = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
-		$res = $dbw->select(
+		$revisionRows = $dbw->selectRowCount(
 			[ 'revision' ] + $revQueryInfo['tables'],
-			'COUNT(*) AS count',
+			'*',
 			$revQueryInfo['conds'],
 			__METHOD__,
 			[],
 			$revQueryInfo['joins']
 		);
-		$row = $dbw->fetchObject( $res );
-		$cur = $row->count;
-		$this->output( "found {$cur}.\n" );
+		$this->output( "found {$revisionRows}.\n" );
 
 		$this->output( "Checking deleted edits..." );
-		$res = $dbw->select(
+		$archiveRows = $dbw->selectRowCount(
 			[ 'archive' ],
-			'COUNT(*) AS count',
+			'*',
 			[ 'ar_actor' => $fromActorId ],
 			__METHOD__
 		);
-		$row = $dbw->fetchObject( $res );
-		$del = $row->count;
-		$this->output( "found {$del}.\n" );
+		$this->output( "found {$archiveRows}.\n" );
 
 		# Don't count recent changes if we're not supposed to
 		if ( !$this->getOption( 'norc' ) ) {
 			$this->output( "Checking recent changes..." );
-			$res = $dbw->select(
+			$recentChangesRows = $dbw->selectRowCount(
 				[ 'recentchanges' ],
-				'COUNT(*) AS count',
+				'*',
 				[ 'rc_actor' => $fromActorId ],
 				__METHOD__
 			);
-			$row = $dbw->fetchObject( $res );
-			$rec = $row->count;
-			$this->output( "found {$rec}.\n" );
+			$this->output( "found {$recentChangesRows}.\n" );
 		} else {
-			$rec = 0;
+			$recentChangesRows = 0;
 		}
 
-		$total = $cur + $del + $rec;
+		$total = $revisionRows + $archiveRows + $recentChangesRows;
 		$this->output( "\nTotal entries to change: {$total}\n" );
 
 		$toActorId = $actorNormalization->acquireActorId( $importUser, $dbw );
 
-		if ( !$this->getOption( 'no-run' ) ) {
-			if ( $total ) {
+		if ( !$this->getOption( 'no-run' ) && $total ) {
+			$this->output( "\n" );
+			if ( $revisionRows ) {
 				# Assign edits
-				$this->output( "\nAssigning current edits..." );
-				if ( $actorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_TEMP ) {
-					$dbw->update(
-						'revision_actor_temp',
-						[ 'revactor_actor' => $toActorId ],
-						[ 'revactor_actor' => $fromActorId ],
-						__METHOD__
-					);
-				}
-				if ( $actorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW ) {
-					$dbw->update(
-						'revision',
-						[ 'rev_actor' => $toActorId ],
-						[ 'rev_actor' => $fromActorId ],
-						__METHOD__
-					);
-				}
-				$this->output( "done.\nAssigning deleted edits..." );
+				$this->output( "Assigning current edits..." );
+				$dbw->update(
+					'revision',
+					[ 'rev_actor' => $toActorId ],
+					[ 'rev_actor' => $fromActorId ],
+					__METHOD__
+				);
+				$this->output( "done.\n" );
+			}
+
+			if ( $archiveRows ) {
+				$this->output( "Assigning deleted edits..." );
 				$dbw->update( 'archive',
 					[ 'ar_actor' => $toActorId ],
 					[ 'ar_actor' => $fromActorId ],
 					__METHOD__
 				);
 				$this->output( "done.\n" );
-				# Update recent changes if required
-				if ( !$this->getOption( 'norc' ) ) {
-					$this->output( "Updating recent changes..." );
-					$dbw->update( 'recentchanges',
-						[ 'rc_actor' => $toActorId ],
-						[ 'rc_actor' => $fromActorId ],
-						__METHOD__
-					);
-					$this->output( "done.\n" );
-				}
+			}
+			# Update recent changes if required
+			if ( $recentChangesRows ) {
+				$this->output( "Updating recent changes..." );
+				$dbw->update( 'recentchanges',
+					[ 'rc_actor' => $toActorId ],
+					[ 'rc_actor' => $fromActorId ],
+					__METHOD__
+				);
+				$this->output( "done.\n" );
 			}
 		}
 
 		$this->commitTransaction( $dbw, __METHOD__ );
 
-		return (int)$total;
+		return $total;
 	}
 }
 
