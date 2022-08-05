@@ -51,6 +51,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		 */
 
 		$trustAndSafety = [
+			'Agent (Miraheze)',
 			'Doug (Miraheze)',
 			'Owen (Miraheze)'
 		];
