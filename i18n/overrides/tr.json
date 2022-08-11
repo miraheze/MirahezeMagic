@@ -7,7 +7,8 @@
 			"Joseph",
 			"LisafBia",
 			"MuratTheTurkish",
-			"SaldırganSincap"
+			"SaldırganSincap",
+			"ToprakM"
 		]
 	},
 	"miraheze-dberr-problems": "Bu viki geçici olarak mevcut değildir",
@@ -30,7 +31,7 @@
 	"miraheze-group-bureaucrat": "Bürokratlar",
 	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bürokrat}}",
-	"miraheze-group-sysop": "Hizmetliler",
+	"miraheze-group-sysop": "Yöneticiler",
 	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|hizmetli}}",
 	"miraheze-group-interface-admin": "Arayüz yöneticileri",
