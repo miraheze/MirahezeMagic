@@ -19,6 +19,7 @@
  * @file
  */
 
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 
 /**
@@ -46,21 +47,17 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		}
 
 		/**
-		 * don't send renameuser log events to IRC for
-		 * Miraheze Trust and Safety accounts.
+		 * Don't send renameuser log events to IRC for the
+		 * Miraheze Trust and Safety team.
 		 */
-
-		$trustAndSafety = [
-			'Doug (Miraheze)',
-			'Owen (Miraheze)'
-		];
-
 		if (
 			$attribs['rc_type'] == RC_LOG &&
-			$attribs['rc_log_type'] === 'renameuser' &&
-			in_array( $attribs['rc_user_text'], $trustAndSafety )
+			$attribs['rc_log_type'] === 'renameuser'
 		) {
-			return null;
+			$globalUserGroups = CentralAuthUser::getInstanceByName( $attribs['rc_user_text'] )->getGlobalGroups();
+			if ( in_array( 'trustandsafety', $globalUserGroups ) ) {
+				return null;
+			}
 		}
 
 		if ( $attribs['rc_type'] == RC_LOG ) {
