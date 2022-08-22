@@ -130,7 +130,7 @@
 	"protect-level-user": "Дозволити лише користувачам, які увійшли у систему",
 	"restriction-delete": "Вилучити",
 	"restriction-level-user": "Дозволити лише користувачам, які увійшли у систему",
-	"right-user": "редагування сторінок з рівнем захисту «{{int:protect-level-sysop}}»",
+	"right-user": "Редагування сторінок з рівнем захисту «{{int:protect-level-user}}»",
 	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Список вікі Miraheze",
 	"sitematrix-summary": "Ця спеціальна сторінка перелічує всі вікі Miraheze.",
