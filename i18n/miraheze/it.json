@@ -16,7 +16,7 @@
 	"mirahezemagic-description": "Messaggi MediaWiki, scripts e hooks specifici per Miraheze",
 	"miraheze-categories": "Categorie",
 	"miraheze-close-email-subject": "Il tuo Miraheze wiki ($1) è stato chiuso",
-	"miraheze-close-email-body": "Ciao,\nsfortunatamente, per il fatto che il tuo wiki non ha avuto modifiche negli ultimi 60 giorni, è stato chiuso per la nostra <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">politica di dormienza</a>. Se volessi comunque editare il tuo wiki vai in Special:MediaWiki e deseleziona la casella \"chiusa\" per riaprirlo.\n\nDa notare che se non lo riapri è possibile che un altro utente adotti il tuo wiki a partire da 6 mesi da adesso, e può anche essere candidabile per la cancellazione.",
+	"miraheze-close-email-body": "Ciao,\nquesta email è per informarti che il tuo wiki Miraheze è stato chiuso. Wiki che non ricevono alcuna modifica o azioni da registro negli ultimi 60 giorni vengono chiuse automaticamente per prevenire lo spam, in accordo con la <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">politica di dormienza</a> (che hai accettato quando hai richiesto un wiki). \n\nSe volessi riaprire il tuo wiki, vai in Special:MediaWiki e deseleziona la casella \"chiusa\" per riaprirlo.\nDa notare che se non lo riapri, o nessuno chiede che il wiki venga riaperto (in conformità con la sezione relativa alla richiesta di riapertura della politica sulla dormienza), trascorsi da 6 mesi da adesso il tuo wiki può essere candidabile per la cancellazione definitiva.",
 	"miraheze-donate": "Dona a Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
