@@ -34,7 +34,7 @@ class AssignImportedEdits extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->mDescription = "Assigns imported edits for users";
-		$this->addOption( 'to', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import> prefix.', false, true );
+		$this->addOption( 'to', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import prefix.', false, true );
 		$this->addOption( 'from', 'Username you want edits to be assigned from. (optional), Username excluding prefix.', false, true );
 		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
 		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to \'imported\'.', false, false );
