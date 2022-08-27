@@ -102,7 +102,7 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			$fromUser = User::newFromActorId( $row->revactor_actor );
+			$fromUser = User::newFromActorId( $row->rev_actor );
 
 			if ( !$fromUser ) {
 				$this->output( 'Invalid \'from\' user.' );
