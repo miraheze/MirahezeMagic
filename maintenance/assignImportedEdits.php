@@ -118,8 +118,7 @@ class AssignImportedEdits extends Maintenance {
 			);
 
 			if ( !$toUser ) {
-				$this->output( 'Invalid \'to\' user.' );
-				return;
+				continue;
 			}
 
 			if ( strpos( $fromName, $this->importPrefix ) === 0 ) {
