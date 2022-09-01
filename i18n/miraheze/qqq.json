@@ -23,7 +23,7 @@
 	"miraheze-close-email-body": "A message from the email when a wiki was closed.",
 	"miraheze-donate": "Label for donating to Miraheze.",
 	"miraheze-donatepage": "{{Optional|Only put the existing language pages, like <code>Donate/{{UILANGCODE}}</code>. See [https://meta.miraheze.org/wiki/Donate here].}}",
-	"miraheze-faq": "Label for the Frequently Asked Questions.",
+	"miraheze-faq": "Label for the Frequently Asked Questions.\n{{Identical|FAQ}}",
 	"miraheze-helpcenter": "Link for the help center page.",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
