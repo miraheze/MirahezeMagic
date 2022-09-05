@@ -28,5 +28,6 @@
 	"miraheze-group-bureaucrat": "Бюрократы",
 	"miraheze-group-sysop": "Администраторы",
 	"miraheze-group-interface-admin": "Администраторы интерфейса",
-	"miraheze-group-bot": "Боты"
+	"miraheze-group-bot": "Боты",
+	"miraheze-group-bot-member": "{{GENDER:$1|бот}}"
 }
