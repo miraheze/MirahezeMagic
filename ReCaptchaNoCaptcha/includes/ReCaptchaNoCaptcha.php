@@ -1,7 +1,6 @@
 <?php
 
 use MediaWiki\Auth\AuthenticationRequest;
-
 use MediaWiki\Extension\ConfirmEdit\Auth\CaptchaAuthenticationRequest;
 use MediaWiki\Extension\ConfirmEdit\Hooks as ConfirmEditHooks;
 use MediaWiki\Extension\ConfirmEdit\SimpleCaptcha\SimpleCaptcha;
