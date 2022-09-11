@@ -2,6 +2,10 @@
 
 use MediaWiki\Auth\AuthenticationRequest;
 
+use MediaWiki\Extension\ConfirmEdit\Auth\CaptchaAuthenticationRequest;
+use MediaWiki\Extension\ConfirmEdit\Hooks as ConfirmEditHooks;
+use MediaWiki\Extension\ConfirmEdit\SimpleCaptcha\SimpleCaptcha;
+
 class ReCaptchaNoCaptcha extends SimpleCaptcha {
 	// used for renocaptcha-edit, renocaptcha-addurl, renocaptcha-badlogin, renocaptcha-createaccount,
 	// renocaptcha-create, renocaptcha-sendemail via getMessage()
