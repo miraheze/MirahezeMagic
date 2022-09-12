@@ -4,7 +4,8 @@
 			"Amire80",
 			"DmitTrix",
 			"YaronSh",
-			"לואיקה"
+			"לואיקה",
+			"מקף"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -42,6 +43,7 @@
 	"miraheze-survey-q8-u": "ManageWiki הוא שירות ייחודי",
 	"miraheze-survey-q9": "יש סיבה שבגללה בחרת את Miraheze על פני חוות אחרות לאירוח ויקי?",
 	"group-steward": "דיילים",
+	"group-global-rollbacker": "משחזרים גלובליים",
 	"group-translator": "מתרגמים",
 	"group-translationadmin": "מנהלי תרגומים",
 	"group-trustandsafety": "מהימנות ובטיחות",

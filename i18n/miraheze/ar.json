@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Dr-Taher",
 			"KamalSH",
 			"Meno25",
 			"MuratTheTurkish",
@@ -100,6 +101,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|مراجع تلقائي|مراجعة تلقائية}}",
 	"group-confirmed": "مستخدمون مؤكدون",
 	"group-confirmed-member": "{{GENDER:$1|مستخدم مؤكد|مستخدمة مؤكدة}}",
+	"group-global-rollbacker": "مسترجعون عامون",
+	"group-global-rollbacker-member": "{{GENDER:$1|مسترجع عام}}",
 	"group-proxybot": "بوت وكيل",
 	"group-proxybot-member": "بوت وكيل",
 	"group-translator": "مترجمون",

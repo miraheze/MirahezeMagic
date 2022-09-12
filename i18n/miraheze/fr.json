@@ -129,6 +129,8 @@
 	"group-confirmed-member": "utilisat{{GENDER:$1|eur|rice}} confirmé{{GENDER:$1||e}}",
 	"group-globalsysop": "Administrateurs globaux",
 	"group-globalsysop-member": "Administrat{{GENDER:$1|eur|rice}} global{{GENDER:$1||e}}",
+	"group-global-rollbacker": "Révocateurs globaux",
+	"group-global-rollbacker-member": "Révocat{{GENDER:$1|eur|rice}} global{{GENDER:$1||e}}",
 	"group-proxybot": "Robot mandataire",
 	"group-proxybot-member": "robot mandataire",
 	"group-translator": "Traducteurs",
