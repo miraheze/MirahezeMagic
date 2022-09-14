@@ -191,6 +191,7 @@ class MirahezeMagicHooks {
 			'centralauth-login-error-locked',
 			'snapwikiskin',
 			'skinname-snapwikiskin',
+			'uploadtext',
 			'group-checkuser',
 			'group-checkuser-member',
 			'grouppage-checkuser',
