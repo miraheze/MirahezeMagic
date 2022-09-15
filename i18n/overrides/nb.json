@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"EdoAug",
 			"Jon Harald Søby"
 		]
 	},
@@ -14,5 +15,6 @@
 	"miraheze-centralauth-merge-method-admin-desc": "Denne kontoen ble manuelt sammenslått av en systemadministrator eller en forvalter. Dette kan ha vært på grunn av et teknisk problem i en navneendrings- eller sammenslåingsprosess.",
 	"miraheze-restriction-protect": "Beskytt",
 	"miraheze-restriction-delete": "Slett",
+	"miraheze-uploadtext": "Bruk skjemaet nedenfor for å laste opp filer.\nFor å se eller søke etter tidligere opplasta filer, gå til [[Special:FileList|listen over opplasta filer]]. Opplastinger og gjenopplastinger er også loggført i [[Special:Log/upload|opplastingsloggen]]. Slettinger er loggført i [[Special:Log/delete|sletteloggen]].\n\nFor å inkludere en fil på en side, bruk en lenke i en av de følgende skjemaene:\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Fil.jpg]]</nowiki></code></strong> for å bruke fullversjonen av en fil\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Fil.png|200px|thumb|left|Tekst]]</nowiki></code></strong> for å bruke en 200-piksler bred utgave i en boks lagt til venstre marg, med teksten «Tekst» nedenfor\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Fil.ogg]]</nowiki></code></strong> for å lenke direkte til filen uten å vise den\n\n\n\n{{Note}} Vennligst husk at din wiki '''''må''''' følge britisk opphavsrettslov. Opphavsrettsbrudd og '''wiki-nedstengelse''' forekommer om britisk opphavsrettslov ikke blir fulgt. «Fair use» eksisterer ikke i det britiske systemet, og er heller byttet ut med et strengere «[[w:Fair dealing in United Kingdom law|fair dealing]]»-system.",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-wikier"
 }
