@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"DDPAT",
+			"Deltaspace",
 			"Diman Russkov",
 			"Diralik",
 			"DmitTrix",
@@ -85,6 +86,8 @@
 	"group-confirmed-member": "{{GENDER:$1|подтверждённый участник|подтверждённая участница}}",
 	"group-globalsysop": "Глобальные администраторы",
 	"group-globalsysop-member": "{{GENDER:$1|Глобальный администратор}}",
+	"group-global-rollbacker": "Глобальные откатывающие",
+	"group-global-rollbacker-member": "{{GENDER:$1|глобальный откатывающий|глобальная откатывающая}}",
 	"group-proxybot": "Прокси-бот",
 	"group-proxybot-member": "прокси-бот",
 	"group-translator": "Переводчики",

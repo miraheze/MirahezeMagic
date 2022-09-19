@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Arystanbek",
 			"U.ayaao.p"
 		]
 	},
@@ -15,10 +16,10 @@
 	"miraheze-group-checkuser-member": "қатысушы тексерушісі",
 	"miraheze-group-bureaucrat": "Бітікшілер",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|бітікші}}",
-	"miraheze-group-sysop": "Әкімшілер",
-	"miraheze-group-sysop-member": "{{GENDER:$1|әкімші}}",
+	"miraheze-group-sysop": "Администраторлар",
+	"miraheze-group-sysop-member": "{{GENDER:$1|администратор}}",
 	"miraheze-group-interface-admin": "Интерфейс әкімшілері",
-	"miraheze-group-interface-admin-member": "{{GENDER:$1|интерфейс әкімші}}",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|интерфейс администратор}}",
 	"miraheze-group-bot": "Боттар",
 	"miraheze-group-bot-member": "{{GENDER:$1|бот}}"
 }
