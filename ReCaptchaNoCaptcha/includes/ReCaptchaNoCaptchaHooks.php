@@ -53,7 +53,7 @@ class ReCaptchaNoCaptchaHooks {
 		}
 
 		if ( ( strpos( $title, 'Renocaptcha' ) === 0 ) || $title === 'Wikiforum-captcha' ) {
-			$message = new RawMessage( '' );
+			$message = '';
 		}
 	}
 
