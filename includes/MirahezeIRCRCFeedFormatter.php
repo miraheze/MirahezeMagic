@@ -23,13 +23,19 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 
 /**
- * Generates a colourful notification intended for humans on IRC.
+ * Format a notification as a human-readable string using IRC colour codes.
  *
+ * Parameters:
+ * - `add_interwiki_prefix`: Whether the titles should be prefixed with
+ *   the first entry in the $wgLocalInterwikis array (or the value of
+ *   $wgLocalInterwiki, if set).
+ *   Default: false.
+ *
+ * @see $wgRCFeeds
  * @since 1.22
  */
 
 class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
-
 	/**
 	 * @see RCFeedFormatter::getLine
 	 * @param array $feed
@@ -38,8 +44,12 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 	 * @return string|null
 	 */
 	public function getLine( array $feed, RecentChange $rc, $actionComment ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
+		$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
+		$useRCPatrol = $mainConfig->get( 'UseRCPatrol' );
+		$useNPPatrol = $mainConfig->get( 'UseNPPatrol' );
+		$localInterwikis = $mainConfig->get( 'LocalInterwikis' );
+		$canonicalServer = $mainConfig->get( 'CanonicalServer' );
+		$script = $mainConfig->get( 'Script' );
 		$attribs = $rc->getAttributes();
 		if ( $attribs['rc_type'] == RC_CATEGORIZE ) {
 			// Don't send RC_CATEGORIZE events to IRC feed (T127360)
@@ -73,13 +83,13 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		if ( $attribs['rc_type'] == RC_LOG ) {
 			$url = '';
 		} else {
-			$url = $config->get( 'CanonicalServer' ) . $config->get( 'Script' );
+			$url = $canonicalServer . $script;
 			if ( $attribs['rc_type'] == RC_NEW ) {
 				$query = '?oldid=' . $attribs['rc_this_oldid'];
 			} else {
 				$query = '?diff=' . $attribs['rc_this_oldid'] . '&oldid=' . $attribs['rc_last_oldid'];
 			}
-			if ( $config->get( 'UseRCPatrol' ) || ( $attribs['rc_type'] == RC_NEW && $config->get( 'UseNPPatrol' ) ) ) {
+			if ( $useRCPatrol || ( $attribs['rc_type'] == RC_NEW && $useNPPatrol ) ) {
 				$query .= '&rcid=' . $attribs['rc_id'];
 			}
 
@@ -112,12 +122,10 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			$flag = $attribs['rc_log_action'];
 		} else {
 			$store = MediaWikiServices::getInstance()->getCommentStore();
-			$comment = self::cleanupForIRC(
-				$store->getComment( 'rc_comment', $attribs )->text
-			);
+			$comment = self::cleanupForIRC( $store->getComment( 'rc_comment', $attribs )->text );
 			$flag = '';
 			if ( !$attribs['rc_patrolled']
-				&& ( $config->get( 'UseRCPatrol' ) || $attribs['rc_type'] == RC_NEW && $config->get( 'UseNPPatrol' ) )
+				&& ( $useRCPatrol || $attribs['rc_type'] == RC_NEW && $useNPPatrol )
 			) {
 				$flag .= '!';
 			}
@@ -125,9 +133,9 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 				. ( $attribs['rc_minor'] ? "M" : "" ) . ( $attribs['rc_bot'] ? "B" : "" );
 		}
 
-		if ( $feed['add_interwiki_prefix'] === true && $config->get( 'LocalInterwikis' ) ) {
+		if ( $feed['add_interwiki_prefix'] === true && $localInterwikis ) {
 			// we use the first entry in $wgLocalInterwikis in recent changes feeds
-			$prefix = $config->get( 'LocalInterwikis' )[0];
+			$prefix = $localInterwikis[0];
 		} elseif ( $feed['add_interwiki_prefix'] ) {
 			$prefix = $feed['add_interwiki_prefix'];
 		} else {
@@ -141,8 +149,10 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
 		# see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
 		# no colour (\003) switches back to the term default
-		return "{$config->get( 'DBname' )} \0035*\003 $titleString\0034 $flag\00310 " .
+		$fullString = "$titleString\0034 $flag\00310 " .
 			"\00302$url\003 \0035*\003 \00303$user\003 \0035*\003 $szdiff \00310$comment\003\n";
+
+		return $fullString;
 	}
 
 	/**
