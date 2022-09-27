@@ -7,7 +7,8 @@ use Miraheze\CreateWiki\CreateWikiJson;
 class ResetWikiCaches extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = 'Resets ManageWiki cache.';
+
+		$this->addDescription( 'Resets ManageWiki cache.' );
 	}
 
 	public function execute() {

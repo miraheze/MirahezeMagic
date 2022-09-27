@@ -33,7 +33,8 @@ class CreateUsers extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Creates users accounts - useful if you have imported a wiki, and a user account for a revision did not exist.";
+
+		$this->addDescription( 'Creates users accounts - useful if you have imported a wiki, and a user account for a revision did not exist.' );
 		$this->addOption( 'import-prefix', 'This is the import prefix for the username (in revision table), defaults to empty string', false, false );
 	}
 

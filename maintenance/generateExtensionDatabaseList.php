@@ -8,7 +8,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->mDescription = 'Generate database list(s) of all wikis with given extension or skin enabled within ManageWiki.';
+		$this->addDescription( 'Generate database list(s) of all wikis with given extension or skin enabled within ManageWiki.' );
 
 		$desc = 'Extension or skin to generate database list for. ' .
 			'This option may be passed multiple times to generate multiple database lists at once.';
