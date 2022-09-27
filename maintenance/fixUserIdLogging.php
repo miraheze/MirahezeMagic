@@ -34,8 +34,10 @@ class FixUserIdLogging extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
+
 		$this->addOption( 'fix', 'Actually fix the attribution instead of just checking for wrong entries', false, false );
-		$this->mDescription = 'Fixes user attribution in logs';
+
+		$this->addDescription( 'Fixes user attribution in logs' );
 		$this->setBatchSize( 100 );
 	}
 
