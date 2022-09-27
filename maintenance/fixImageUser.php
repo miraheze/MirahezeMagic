@@ -27,7 +27,9 @@ require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 class FixImageUser extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Fix image ownership of file";
+
+		$this->addDescription( 'Fix image ownership of file' );
+
 		$this->addOption( 'image-name', 'Name of the image you want to reassign image user.', true, true );
 		$this->addArg( 'from', 'Old user to take edits from (can be ip too)' );
 		$this->addArg( 'to', 'New user to give edits to' );
