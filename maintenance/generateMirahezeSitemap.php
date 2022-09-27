@@ -31,7 +31,8 @@ use Miraheze\CreateWiki\RemoteWiki;
 class GenerateMirahezeSitemap extends Maintenance {
 	public function __construct() {
 		parent::__construct();
-		$this->mDescription = "Generates sitemap for all miraheze wikis (apart from private ones).";
+
+		$this->addDescription( 'Generates sitemap for all miraheze wikis (apart from private ones).' );
 	}
 
 	public function execute() {
