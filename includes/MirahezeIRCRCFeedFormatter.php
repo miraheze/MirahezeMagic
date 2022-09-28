@@ -50,6 +50,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		$localInterwikis = $mainConfig->get( 'LocalInterwikis' );
 		$canonicalServer = $mainConfig->get( 'CanonicalServer' );
 		$script = $mainConfig->get( 'Script' );
+		$dbName = $mainConfig->get( 'DBname' );
 		$attribs = $rc->getAttributes();
 		if ( $attribs['rc_type'] == RC_CATEGORIZE ) {
 			// Don't send RC_CATEGORIZE events to IRC feed (T127360)
@@ -149,7 +150,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 
 		# see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
 		# no colour (\003) switches back to the term default
-		$fullString = "$titleString\0034 $flag\00310 " .
+		$fullString = "$dbName \0035*\003 $titleString\0034 $flag\00310 " .
 			"\00302$url\003 \0035*\003 \00303$user\003 \0035*\003 $szdiff \00310$comment\003\n";
 
 		return $fullString;
