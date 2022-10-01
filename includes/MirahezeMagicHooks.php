@@ -493,14 +493,9 @@ class MirahezeMagicHooks {
 	}
 
 	private static function addFooterLink( $skin, $desc, $page ) {
-		// If the link description has been disabled in the default language,
 		if ( $skin->msg( $desc )->inContentLanguage()->isDisabled() ) {
-			// then it is disabled, for all languages.
 			$title = null;
 		} else {
-			// Otherwise, we display the link for the user, described in their
-			// language (which may or may not be the same as the default language),
-			// but we make the link target be the one site-wide page.
 			$title = Title::newFromText( $skin->msg( $page )->inContentLanguage()->text() );
 		}
 
@@ -508,9 +503,6 @@ class MirahezeMagicHooks {
 			return '';
 		}
 
-		// Similar to Skin::addToSidebarPlain
-		// Optimization: Avoid LinkRenderer here as it requires extra DB info
-		// to add unneeded classes even for makeKnownLink (T313462).
 		return Html::element( 'a',
 			[ 'href' => $title->fixSpecialName()->getLinkURL() ],
 			$skin->msg( $desc )->text()
