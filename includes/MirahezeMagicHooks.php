@@ -419,9 +419,9 @@ class MirahezeMagicHooks {
 
 	public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerItems ) {
 		if ( $key === 'places' ) {
-			$footerItems['termsofservice'] = $skin->footerLink( 'termsofservice', 'termsofservicepage' );
+			$footerItems['termsofservice'] = self::addFooterLink( $skin, 'termsofservice', 'termsofservicepage' );
 
-			$footerItems['donate'] = $skin->footerLink( 'miraheze-donate', 'miraheze-donatepage' );
+			$footerItems['donate'] = self::addFooterLink( $skin, 'miraheze-donate', 'miraheze-donatepage' );
 		}
 	}
 
@@ -490,5 +490,22 @@ class MirahezeMagicHooks {
 			// TODO: check for log entry types etc if wanted
 			$logEmailManager->sendEmail( $data, $condition['email'] );
 		}
+	}
+
+	private static function addFooterLink( $skin, $desc, $page ) {
+		if ( $skin->msg( $desc )->inContentLanguage()->isDisabled() ) {
+			$title = null;
+		} else {
+			$title = Title::newFromText( $skin->msg( $page )->inContentLanguage()->text() );
+		}
+
+		if ( !$title ) {
+			return '';
+		}
+
+		return Html::element( 'a',
+			[ 'href' => $title->fixSpecialName()->getLinkURL() ],
+			$skin->msg( $desc )->text()
+		);
 	}
 }
