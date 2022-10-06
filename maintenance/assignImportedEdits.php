@@ -44,7 +44,7 @@ class AssignImportedEdits extends Maintenance {
 	}
 
 	public function execute() {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->getDB( DB_REPLICA );
 
 		if ( $this->getOption( 'import-prefix' ) ) {
 			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";

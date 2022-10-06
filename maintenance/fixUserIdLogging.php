@@ -42,7 +42,7 @@ class FixUserIdLogging extends Maintenance {
 	}
 
 	public function execute() {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = $this->getDB( DB_REPLICA );
 
 		$start = (int)$dbr->selectField( 'logging', 'MIN(log_id)', false, __METHOD__ );
 		$end = (int)$dbr->selectField( 'logging', 'MAX(log_id)', false, __METHOD__ );
@@ -97,7 +97,7 @@ class FixUserIdLogging extends Maintenance {
 		if ( isset( $this->mUserCache[$username] ) ) {
 			$goodUserId = $this->mUserCache[$username];
 		} else {
-			$dbr = wfGetDB( DB_REPLICA );
+			$dbr = $this->getDB( DB_REPLICA );
 
 			$userId = $dbr->selectField(
 					'user',
@@ -121,8 +121,8 @@ class FixUserIdLogging extends Maintenance {
 	protected function fixLogEntry( $row ) {
 		$username = User::newFromActorId( $logRow->log_actor );
 
-		$dbr = wfGetDB( DB_REPLICA );
-		$dbw = wfGetDB( DB_PRIMARY );
+		$dbr = $this->getDB( DB_REPLICA );
+		$dbw = $this->getDB( DB_PRIMARY );
 
 		if ( isset( $this->mUserCache[$username->getName()] ) ) {
 			$userId = $this->mUserCache[$username->getName()];
