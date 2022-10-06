@@ -22,7 +22,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$extArray = $this->getOption( 'extension' );
 
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		$dbr = wfGetDB( DB_REPLICA, [], $config->get( 'CreateWikiDatabase' ) );
+		$dbr = $this->getDB( DB_REPLICA, [], $config->get( 'CreateWikiDatabase' ) );
 
 		foreach ( $extArray as $ext ) {
 			$mwSettings = $dbr->select(
