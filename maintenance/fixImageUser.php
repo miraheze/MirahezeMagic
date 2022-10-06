@@ -37,7 +37,7 @@ class FixImageUser extends Maintenance {
 
 	// TODO: Add support for MediaWiki 1.32
 	public function execute() {
-		$wikiDB = wfGetDB( DB_PRIMARY );
+		$wikiDB = $this->getDB( DB_PRIMARY );
 
 		$from = $this->initialiseUser( urldecode( $this->getArg( 0 ) ) );
 		$to = $this->initialiseUser( urldecode( $this->getArg( 1 ) ) );
