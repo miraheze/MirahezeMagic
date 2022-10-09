@@ -37,6 +37,13 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiCreation( $DBname ) {
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		// we don't need to do anything here if using swift
+		// @TODO remove this entire hook once on swift everywhere
+		if ( wfShouldEnableSwift( $DBname ) ) {
+			return;
+		}
+
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		// Create static directory for wiki
@@ -92,6 +99,7 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		// @TODO add support for swift
 		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
 				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
@@ -124,8 +132,8 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		// @TODO add support for swift
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-
 		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
 			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
 				->limits( $limits )
@@ -143,8 +151,8 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
+		// @TODO add support for swift
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-
 		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
 				->limits( $limits )
