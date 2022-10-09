@@ -151,14 +151,20 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
-		// @TODO add support for swift
-		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
-			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
+		$sitemaps = $localRepo->getBackend()->getFileList( [
+			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
+			'topOnly' => true,
+			'adviseStat' => false,
+		] );
+
+		foreach ( $sitemaps as $file ) {
+			$localRepo->getBackend()->quickDelete( [
+				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $file,
+			] );
 		}
+
+		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
 	public static function onCreateWikiTables( &$tables ) {
