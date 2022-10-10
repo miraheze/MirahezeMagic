@@ -160,7 +160,7 @@ class MirahezeMagicHooks {
 
 		foreach ( $sitemaps as $file ) {
 			$localRepo->getBackend()->quickDelete( [
-				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $file,
+				'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
 			] );
 		}
 
