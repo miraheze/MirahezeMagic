@@ -116,7 +116,7 @@ class MirahezeMagicHooks {
 					foreach ( $files as $file ) {
 						$localRepo->getBackend()->quickDelete( [
 							'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
-						] );	
+						] );
 					}
 				}
 			}
