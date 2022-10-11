@@ -38,6 +38,8 @@ class GenerateManageWikiBackup extends Maintenance {
 		$dbName = $config->get( 'DBname' );
 		$dbw = $this->getDB( DB_PRIMARY, [], $config->get( 'CreateWikiDatabase' ) );
 
+		$fileName = $this->getOption( 'filename' );
+
 		$buildArray = [];
 
 		$nsObjects = $dbw->select(
@@ -104,11 +106,16 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 
-		// @TODO add support for swift
-		$file = $this->getOption( 'filename' );
+		file_put_contents( wfTempDir() . '/' . $fileName, json_encode( $buildArray, JSON_PRETTY_PRINT ) );
 
-		$ddd = $config->get( 'DataDumpDirectory' );
-		file_put_contents( "{$ddd}{$file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
+		$backend = DataDump::getBackend();
+		$backend->quickStore( [
+			'src' => wfTempDir() . '/' . $fileName,
+			'dst' => $backend->getRootStoragePath() . '/dumps-backup/' . $fileName,
+		] );
+
+		// And now we remove the file from the temp directory
+		unlink( wfTempDir() . '/' . $fileName );
 	}
 }
 
