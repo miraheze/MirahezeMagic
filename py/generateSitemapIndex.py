@@ -1,3 +1,5 @@
+# TODO: add support for swift
+
 from datetime import datetime
 import requests
 import xmltodict
