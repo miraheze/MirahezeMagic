@@ -60,7 +60,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				] );
 
 				if ( !$status->isOK() ) {
-					$this->output( 'Failure in deleting sitemap ' . $file . ': ' Status::wrap( $status )->getWikitext() );
+					$this->output( 'Failure in deleting sitemap ' . $file . ': ' . Status::wrap( $status )->getWikitext() );
 				}
 			}
 
@@ -81,7 +81,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				] );
 
 				if ( !$status->isOK() ) {
-					$this->output( 'Failure in deleting sitemap ' . $file . ': ' Status::wrap( $status )->getWikitext() );
+					$this->output( 'Failure in deleting sitemap ' . $file . ': ' . Status::wrap( $status )->getWikitext() );
 				}
 			}
 
