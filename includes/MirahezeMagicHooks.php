@@ -99,13 +99,33 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		// @TODO add support for swift
-		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
-			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
-				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
+		$subdirectories = $backend->getDirectoryList( [
+			'dir' => $backend->getContainerStoragePath( 'local-public' ),
+			'adviseStat' => false,
+		] );
+
+		if ( $subdirectories ) {
+			foreach ( $subdirectories as $directory ) {
+				$files = $backend->getFileList( [
+					'dir' => $backend->getContainerStoragePath( 'local-public/' . $directory ),
+					'adviseStat' => false,
+				] );
+
+				if ( $files ) {
+					foreach ( $files as $file ) {
+						$localRepo->getBackend()->quickDelete( [
+							'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
+						] );	
+					}
+				}
+			}
 		}
+
+		$backend->clean( [
+			'dir' => $backend->getContainerStoragePath( 'local-public' ),
+			'recursive' => true,
+		] );
 
 		static::removeRedisKey( "*{$wiki}*" );
 		// static::removeMemcachedKey( ".*{$wiki}.*" );
