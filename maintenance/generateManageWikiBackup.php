@@ -109,6 +109,8 @@ class GenerateManageWikiBackup extends Maintenance {
 		file_put_contents( wfTempDir() . '/' . $fileName, json_encode( $buildArray, JSON_PRETTY_PRINT ) );
 
 		$backend = DataDump::getBackend();
+		$backend->prepare( [ 'dir' => $backend->getRootStoragePath() . '/dumps-backup/' ] );
+
 		$backend->quickStore( [
 			'src' => wfTempDir() . '/' . $fileName,
 			'dst' => $backend->getRootStoragePath() . '/dumps-backup/' . $fileName,
