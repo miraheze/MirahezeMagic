@@ -99,6 +99,7 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		// @TODO convert to a job
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$subdirectories = $backend->getDirectoryList( [
 			'dir' => $backend->getContainerStoragePath( 'local-public' ),
@@ -107,6 +108,7 @@ class MirahezeMagicHooks {
 
 		if ( $subdirectories ) {
 			foreach ( $subdirectories as $directory ) {
+				var_dump( $directory );
 				$files = $backend->getFileList( [
 					'dir' => $backend->getContainerStoragePath( 'local-public/' . $directory ),
 					'adviseStat' => false,
@@ -114,9 +116,11 @@ class MirahezeMagicHooks {
 
 				if ( $files ) {
 					foreach ( $files as $file ) {
-						$localRepo->getBackend()->quickDelete( [
-							'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
-						] );
+						/* $backend->quickDelete( [
+							'src' => $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . $file,
+						] ); */
+
+						var_dump( $file );
 					}
 				}
 			}
@@ -178,9 +182,9 @@ class MirahezeMagicHooks {
 			'adviseStat' => false,
 		] );
 
-		foreach ( $sitemaps as $file ) {
+		foreach ( $sitemaps as $sitemap ) {
 			$localRepo->getBackend()->quickDelete( [
-				'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
+				'src' => $localRepo->getZonePath( 'public' ) . '/' . $sitemap,
 			] );
 		}
 
