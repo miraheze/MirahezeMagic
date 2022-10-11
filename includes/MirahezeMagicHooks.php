@@ -99,34 +99,39 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		// Does not work - swift does not allow to connect to other wiki containers with it's current setup (need to be able to connect to $wiki here)
+
 		// @TODO convert to a job
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$subdirectories = $backend->getDirectoryList( [
+			// @TODO dir should work with $wiki
 			'dir' => $backend->getContainerStoragePath( 'local-public' ),
 			'adviseStat' => false,
 		] );
 
 		if ( $subdirectories ) {
 			foreach ( $subdirectories as $directory ) {
-				var_dump( $directory );
-				$files = $backend->getFileList( [
+				$directory = ltrim( $directory, $wiki );
+				$files = $backend->getTopFileList( [
+					// @TODO dir should work with $wiki
 					'dir' => $backend->getContainerStoragePath( 'local-public/' . $directory ),
 					'adviseStat' => false,
 				] );
 
 				if ( $files ) {
 					foreach ( $files as $file ) {
-						/* $backend->quickDelete( [
-							'src' => $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . $file,
-						] ); */
-
-						var_dump( $file );
+						$file = ltrim( $file, $wiki );
+						$backend->quickDelete( [
+							// @TODO src should work with $wiki
+							'src' => $backend->normalizeStoragePath( $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) )
+						] );
 					}
 				}
 			}
 		}
 
 		$backend->clean( [
+			// @TODO dir should work with $wiki
 			'dir' => $backend->getContainerStoragePath( 'local-public' ),
 			'recursive' => true,
 		] );
@@ -156,19 +161,43 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		// @TODO add support for swift
-		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
-		} elseif ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+		// Does not work - swift does not allow to connect to other wiki containers with it's current setup (need to be able to connect to $old and $new here)
+
+		// @TODO convert to a job
+		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
+		$subdirectories = $backend->getDirectoryList( [
+			// @TODO dir should work with $old
+			'dir' => $backend->getContainerStoragePath( 'local-public' ),
+			'adviseStat' => false,
+		] );
+
+		if ( $subdirectories ) {
+			foreach ( $subdirectories as $directory ) {
+				$directory = ltrim( $directory, $wiki );
+				$files = $backend->getTopFileList( [
+					// @TODO dir should work with $old
+					'dir' => $backend->getContainerStoragePath( 'local-public/' . $directory ),
+					'adviseStat' => false,
+				] );
+
+				if ( $files ) {
+					foreach ( $files as $file ) {
+						$file = ltrim( $file, $wiki );
+						$backend->quickMove( [
+							// @TODO src should work with $old; dst should work with $new
+							'src' => $backend->normalizeStoragePath( $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) ),
+							'dst' => $backend->normalizeStoragePath( $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) )
+						] );
+					}
+				}
+			}
 		}
+
+		$backend->clean( [
+			// @TODO dir should work with $old
+			'dir' => $backend->getContainerStoragePath( 'local-public' ),
+			'recursive' => true,
+		] );
 
 		static::removeRedisKey( "*{$old}*" );
 		// static::removeMemcachedKey( ".*{$old}.*" );
@@ -183,9 +212,18 @@ class MirahezeMagicHooks {
 		] );
 
 		foreach ( $sitemaps as $sitemap ) {
-			$localRepo->getBackend()->quickDelete( [
+			$status = $localRepo->getBackend()->quickDelete( [
 				'src' => $localRepo->getZonePath( 'public' ) . '/' . $sitemap,
 			] );
+
+			if ( !$status->isOK() ) {
+				/**
+				 * We need to log this, as otherwise the sitemaps may
+				 * not be being deleted for private wikis. We should know that.
+				 */
+				$statusMessage = Status::wrap( $status )->getWikitext();
+				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
+			}
 		}
 
 		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
