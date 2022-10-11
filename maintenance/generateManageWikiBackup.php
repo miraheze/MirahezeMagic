@@ -104,6 +104,8 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 
+
+		// @TODO add support for swift
 		$file = $this->getOption( 'filename' );
 
 		$ddd = $config->get( 'DataDumpDirectory' );
