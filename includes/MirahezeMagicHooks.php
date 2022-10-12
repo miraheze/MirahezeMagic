@@ -99,6 +99,7 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( wfShouldEnableSwift( $wiki ) ) {
 			Shell::command(
 				'swift', 'delete',
