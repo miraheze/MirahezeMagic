@@ -117,7 +117,6 @@ class MirahezeMagicHooks {
 				->execute();
 		}
 
-
 		static::removeRedisKey( "*{$wiki}*" );
 		// static::removeMemcachedKey( ".*{$wiki}.*" );
 	}
