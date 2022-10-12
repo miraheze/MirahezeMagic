@@ -99,42 +99,24 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		// Does not work - swift does not allow to connect to other wiki containers with it's current setup (need to be able to connect to $wiki here)
-
-		// @TODO convert to a job
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-		$subdirectories = $backend->getDirectoryList( [
-			// @TODO dir should work with $wiki
-			'dir' => $backend->getContainerStoragePath( 'local-public' ),
-			'adviseStat' => false,
-		] );
-
-		if ( $subdirectories ) {
-			foreach ( $subdirectories as $directory ) {
-				$directory = ltrim( $directory, $wiki );
-				$files = $backend->getTopFileList( [
-					// @TODO dir should work with $wiki
-					'dir' => $backend->getContainerStoragePath( 'local-public/' . $directory ),
-					'adviseStat' => false,
-				] );
-
-				if ( $files ) {
-					foreach ( $files as $file ) {
-						$file = ltrim( $file, $wiki );
-						$backend->quickDelete( [
-							// @TODO src should work with $wiki
-							'src' => $backend->normalizeStoragePath( $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) )
-						] );
-					}
-				}
-			}
+		if ( wfShouldEnableSwift( $wiki ) ) {
+			Shell::command(
+				'swift', 'delete',
+				'miraheze-mw',
+				'--prefix', $wiki . '/',
+				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-U', 'mw:media',
+				'-K', $wmgSwiftPassword
+			)->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
+		} elseif ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
+			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
+				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
+				->restrict( Shell::RESTRICT_NONE )
+				->execute();
 		}
 
-		$backend->clean( [
-			// @TODO dir should work with $wiki
-			'dir' => $backend->getContainerStoragePath( 'local-public' ),
-			'recursive' => true,
-		] );
 
 		static::removeRedisKey( "*{$wiki}*" );
 		// static::removeMemcachedKey( ".*{$wiki}.*" );
