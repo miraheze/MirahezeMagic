@@ -187,9 +187,8 @@ class MirahezeMagicHooks {
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
 		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
-		$sitemaps = $localRepo->getBackend()->getFileList( [
+		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
-			'topOnly' => true,
 			'adviseStat' => false,
 		] );
 
