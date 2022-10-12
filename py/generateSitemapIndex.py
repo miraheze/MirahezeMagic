@@ -1,4 +1,4 @@
-# TODO: add support for swift
+# Needs support for swift added
 
 from datetime import datetime
 import requests
