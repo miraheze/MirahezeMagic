@@ -48,9 +48,8 @@ class GenerateMirahezeSitemap extends Maintenance {
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
 
-			$sitemaps = $backend->getFileList( [
+			$sitemaps = $backend->getTopFileList( [
 				'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
-				'topOnly' => true,
 				'adviseStat' => false,
 			] );
 
@@ -69,9 +68,8 @@ class GenerateMirahezeSitemap extends Maintenance {
 			$this->output( "Generating sitemap for wiki {$dbName}\n" );
 
 			// Remove old dump
-			$sitemaps = $backend->getFileList( [
+			$sitemaps = $backend->getTopFileList( [
 				'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
-				'topOnly' => true,
 				'adviseStat' => false,
 			] );
 
@@ -87,20 +85,13 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 			// Generate new dump
 			Shell::command(
-				'/usr/bin/php',
-				'/srv/mediawiki/w/maintenance/generateSitemap.php',
-				'--fspath',
-				$filePath,
-				'--urlpath',
-				"/sitemaps/{$dbName}/sitemaps/",
-				'--server',
-				$config->get( 'Server' ),
-				'--compress',
-				'yes',
-				'--wiki',
-				$dbName
-			)
-				->restrict( Shell::RESTRICT_NONE )
+				'/usr/bin/php', '/srv/mediawiki/w/maintenance/generateSitemap.php',
+				'--fspath', $filePath,
+				'--urlpath', '/sitemaps/' . $dbName . '/sitemaps/',
+				'--server', $config->get( 'Server' ),
+				'--compress', 'yes',
+				'--wiki', $dbName
+			)->restrict( Shell::RESTRICT_NONE )
 				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
 				->execute();
 
