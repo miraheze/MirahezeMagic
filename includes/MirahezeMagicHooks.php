@@ -146,38 +146,63 @@ class MirahezeMagicHooks {
 		// Does not work - swift does not allow to connect to other wiki containers with it's current setup (need to be able to connect to $old and $new here)
 
 		// @TODO convert to a job
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-		$subdirectories = $backend->getDirectoryList( [
-			// @TODO dir should work with $old
-			'dir' => $backend->getContainerStoragePath( 'local-public' ),
+
+		// We define the backends here to have 2 seperate (additional) backends for $old and $new
+		// and we rewrite the container paths from the default 'miraheze-swift' backend
+		// to match that of $old or $new and to be able to access the containers from another wiki
+
+		global $wgFileBackends;
+		$wgFileBackends[1] = $wgFileBackends[0];
+		$wgFileBackends[2] = $wgFileBackends[0];
+
+		$new = 'testwiki';
+		$old = 'betawiki';
+
+		$wgFileBackends[1]['name'] = "miraheze-swift-$old";
+		$wgFileBackends[2]['name'] = "miraheze-swift-$new";
+
+		foreach ( $wgFileBackends[0]['containerPaths'] as $container => $config ) {
+			$wgFileBackends[1]['containerPaths'][$container]['directory'] = str_replace(
+				$wgDBname, $old, $wgFileBackends[0]['containerPaths'][$container]['directory']
+			);
+
+			$wgFileBackends[2]['containerPaths'][$container]['directory'] = str_replace(
+				$wgDBname, $new, $wgFileBackends[0]['containerPaths'][$container]['directory']
+			);
+		}
+
+		$oldBackend = MediaWiki\MediaWikiServices::getInstance()->getFileBackendGroup()->get( "miraheze-swift-$old" );
+		$newBackend = MediaWiki\MediaWikiServices::getInstance()->getFileBackendGroup()->get( "miraheze-swift-$new" );
+
+		$subdirectories = $oldBackend->getDirectoryList( [
+			'dir' => $oldBackend->getContainerStoragePath( 'local-public' ),
 			'adviseStat' => false,
 		] );
 
 		if ( $subdirectories ) {
 			foreach ( $subdirectories as $directory ) {
-				$directory = ltrim( $directory, $wiki );
-				$files = $backend->getTopFileList( [
-					// @TODO dir should work with $old
-					'dir' => $backend->getContainerStoragePath( 'local-public/' . $directory ),
+				$directory = ltrim( $directory, $old );
+				$files = $oldBackend->getTopFileList( [
+					'dir' => $oldBackend->getContainerStoragePath( 'local-public/' . $directory ),
 					'adviseStat' => false,
 				] );
 
 				if ( $files ) {
 					foreach ( $files as $file ) {
-						$file = ltrim( $file, $wiki );
-						$backend->quickMove( [
-							// @TODO src should work with $old; dst should work with $new
-							'src' => $backend->normalizeStoragePath( $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) ),
-							'dst' => $backend->normalizeStoragePath( $backend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) )
-						] );
+						var_dump( $file );
+						$file = ltrim( $file, $old );
+						var_dump( $oldBackend->normalizeStoragePath( $oldBackend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) ) );
+						/* $oldBackend->quickMove( [
+							'src' => $oldBackend->normalizeStoragePath( $oldBackend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) ),
+							'dst' => $newBackend->normalizeStoragePath( $newBackend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) )
+						] ); */
 					}
 				}
 			}
 		}
 
 		$backend->clean( [
-			// @TODO dir should work with $old
-			'dir' => $backend->getContainerStoragePath( 'local-public' ),
+			'dir' => $oldBackend->getContainerStoragePath( 'local-public' ),
 			'recursive' => true,
 		] );
 
