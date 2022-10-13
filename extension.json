@@ -35,7 +35,8 @@
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicLogEmailManager": "includes/MirahezeMagicLogEmailManager.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
+		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
+		"CustomSwiftFileBackend": "includes/backends/CustomSwiftFileBackend.php"
 	},
 	"SpecialPages": {
 		"MirahezeSurvey": {
