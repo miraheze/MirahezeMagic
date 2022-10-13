@@ -3,7 +3,8 @@
 		"authors": [
 			"EdoAug",
 			"Gabriel Kielland",
-			"Jon Harald Søby"
+			"Jon Harald Søby",
+			"Telaneo"
 		]
 	},
 	"miraheze-dberr-problems": "Denne wikien er midlertidig utilgjengelig",
@@ -14,7 +15,7 @@
 	"miraheze-importdump-help-reason": "Forklar oss om XMLen er ment for: migrering fra en annen wiki, oppdeling av en annen wiki, eller for import av templater og sider fra Wikipedia.",
 	"miraheze-importdump-help-target": "Dette må være et gyldig databasenavn. For å finne wikiens databasenavn, se wikiens Special:ManageWiki/core.\n\nHvis du ikke ennå har opprettet wikien din kan du først bruke [[Special:RequestWiki]], og deretter komme tilbake hit for å utføre denne forespørselen om importdump etter at wikien din er opprettet.",
 	"miraheze-importdump-help-upload-file": "Bare XML-filer er tillatt. Hvis XML-filen din er i et komprimert arkiv må du ekstrahere den før du prøver å laste den opp.\n\nPass på at du laster opp en versjon av XML-filene som også inneholder hele revisjonshistorien.",
-	"miraheze-oathauth-step1": "'''VIKTIG! Sørg for at du leser OATHAuth-siden før du slår på dette!''' Steg 1: Last ned et program for totrinns pålogging",
+	"miraheze-oathauth-step1": "'''VIKTIG! Sørg for at du leser OATHAuth-siden før du slår på dette!''' Steg 1: Last ned et program for tofaktorautentisering",
 	"miraheze-prefs-help-realname": "Virkelig navn er valgfritt. Hvis du velger å oppgi det vil det brukes for å gi deg attribusjon for arbeidet ditt. Ved å bruke en wiki som betjenes av Miraheze samtykker du i span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use bruksvilkårene]</span> og godtar <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy personvernsreglene]</span>",
 	"miraheze-newsignuppage-loginform-tos": "Jeg har lest, forstått og samtykker i [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use bruksvilkårene] og [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy personvernreglene]",
 	"miraheze-newsignuppage-must-accept-tos": "Du må godta bruksvilkårene for å kunne opprette en konto!",
