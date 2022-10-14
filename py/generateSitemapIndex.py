@@ -7,9 +7,10 @@ import argparse
 from swiftclient import Connection
 from time import sleep
 
+
 def main():
     parser = argparse.ArgumentParser(
-        description='Generate Miraheze sitemap index of all public wikis, and upload the object to the \'miraheze-mw\' Swift container')
+        description='Generate Miraheze sitemap index of all public wikis, and upload the object to the "miraheze-mw" Swift container')
     parser.add_argument(
         '-A', '--auth', dest='auth', default=os.environ.get('ST_AUTH', None),
         help='URL for obtaining an auth token (ST_AUTH)')
@@ -93,10 +94,11 @@ def main():
         'miraheze-mw',
         'sitemap.xml',
         contents=lines,
-        content_type='application/xml'
+        content_type='application/xml',
     )
 
     print('done')
+
 
 if __name__ == '__main__':
     sys.exit(main())
