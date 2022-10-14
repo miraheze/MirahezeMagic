@@ -29,7 +29,6 @@ def main():
         'format': 'json',
         'wdstate': 'public',
         'wdsiteprop': 'dbname',
-        'wdlimit': 10,
     }
     apirequest = reqsession.get(url=URL, params=PARAMS)
     DATA = apirequest.json()
