@@ -13,13 +13,13 @@ def main():
         description='Generate Miraheze sitemap index of all public wikis, and upload the object to the "miraheze-mw" Swift container')
     parser.add_argument(
         '-A', '--auth', dest='auth', default=os.environ.get('ST_AUTH', None),
-        help='URL for obtaining an auth token (ST_AUTH)')
+        help='URL for obtaining an auth token for Swift (ST_AUTH)')
     parser.add_argument(
         '-U', '--user', dest='user', default=os.environ.get('ST_USER', None),
-        help='User name for obtaining an auth token (ST_USER)')
+        help='User name for obtaining an auth token for Swift (ST_USER)')
     parser.add_argument(
         '-K', '--key', dest='key', default=os.environ.get('ST_KEY', None),
-        help='Key for obtaining an auth token (ST_KEY)')
+        help='Key for obtaining an auth token for Swift (ST_KEY)')
     args = parser.parse_args()
 
     reqsession = requests.Session()
