@@ -38,8 +38,6 @@ class GenerateManageWikiBackup extends Maintenance {
 		$dbName = $config->get( 'DBname' );
 		$dbw = $this->getDB( DB_PRIMARY, [], $config->get( 'CreateWikiDatabase' ) );
 
-		$fileName = $this->getOption( 'filename' );
-
 		$buildArray = [];
 
 		$nsObjects = $dbw->select(
@@ -110,7 +108,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		$backend->prepare( [ 'dir' => $backend->getRootStoragePath() . '/dumps-backup/' ] );
 
 		$backend->quickCreate( [
-			'dst' => $backend->getRootStoragePath() . '/dumps-backup/' . $fileName,
+			'dst' => $backend->getRootStoragePath() . '/dumps-backup/' . $this->getOption( 'filename' ),
 			'content' => json_encode( $buildArray, JSON_PRETTY_PRINT ),
 			'overwrite' => true,
 		] );
