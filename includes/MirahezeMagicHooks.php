@@ -151,7 +151,7 @@ class MirahezeMagicHooks {
 		// and we rewrite the container paths from the default 'miraheze-swift' backend
 		// to match that of $old or $new and to be able to access the containers from another wiki
 
-		global $wgFileBackends;
+		global $wgFileBackends, $wgDBname;
 		$wgFileBackends[1] = $wgFileBackends[0];
 		$wgFileBackends[2] = $wgFileBackends[0];
 
