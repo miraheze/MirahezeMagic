@@ -106,18 +106,14 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 
-		file_put_contents( wfTempDir() . '/' . $fileName, json_encode( $buildArray, JSON_PRETTY_PRINT ) );
-
 		$backend = DataDump::getBackend();
 		$backend->prepare( [ 'dir' => $backend->getRootStoragePath() . '/dumps-backup/' ] );
 
-		$backend->quickStore( [
-			'src' => wfTempDir() . '/' . $fileName,
+		$backend->quickCreate( [
 			'dst' => $backend->getRootStoragePath() . '/dumps-backup/' . $fileName,
+			'content' => json_encode( $buildArray, JSON_PRETTY_PRINT ),
+			'overwrite' => true,
 		] );
-
-		// And now we remove the file from the temp directory
-		unlink( wfTempDir() . '/' . $fileName );
 	}
 }
 
