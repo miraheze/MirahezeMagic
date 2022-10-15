@@ -80,8 +80,10 @@ for sitemap in maps:
     dt_string = date.strftime('%Y-%m-%dT%H:%M:%SZ')
     loc = f'\n\t\t<loc>{sitemap}</loc>'
     lastmod = f'\n\t\t<lastmod>{dt_string}</lastmod>'
-    lines += f'\n\t<sitemap>{loc}{lastmod}\n\t</sitemap>'
+    lines += f'\n\t<sitemap>{loc}{lastmod}\n\t</sitemap>'|
+
 lines += '\n</sitemapindex>'
+
 conn = Connection(args.auth, args.user, args.key, retry_on_ratelimit=True)
 conn.put_object(
     'miraheze-mw',
