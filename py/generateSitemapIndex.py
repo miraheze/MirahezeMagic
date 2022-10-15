@@ -74,7 +74,6 @@ for wikidata in data:
     except KeyError as e:
         print(f'Caught exception {str(e)} while parsing "{urlreq}"')  # Sitemap data is not actually saved in this sitemap! Ignore
     sleep(0.5)  # sleep half a second after each one
-
 lines = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 for sitemap in maps:
     date = datetime.now()
@@ -82,16 +81,12 @@ for sitemap in maps:
     loc = f'\n\t\t<loc>{sitemap}</loc>'
     lastmod = f'\n\t\t<lastmod>{dt_string}</lastmod>'
     lines += f'\n\t<sitemap>{loc}{lastmod}\n\t</sitemap>'
-
 lines += '\n</sitemapindex>'
-
 conn = Connection(args.auth, args.user, args.key, retry_on_ratelimit=True)
-
 conn.put_object(
     'miraheze-mw',
     'sitemap.xml',
     contents=lines,
     content_type='application/xml',
 )
-
 print('done')
