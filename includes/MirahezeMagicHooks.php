@@ -182,6 +182,7 @@ class MirahezeMagicHooks {
 		if ( $subdirectories ) {
 			foreach ( $subdirectories as $directory ) {
 				$directory = ltrim( $directory, $old );
+				var_dump( $directory );
 				$files = $oldBackend->getTopFileList( [
 					'dir' => $oldBackend->getContainerStoragePath( 'local-public/' . $directory ),
 					'adviseStat' => false,
