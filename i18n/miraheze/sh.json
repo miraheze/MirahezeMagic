@@ -5,6 +5,7 @@
 		]
 	},
 	"datadump-namespaceselect-label": "Imenski prostor",
+	"mirahezemagic-description": "MediaWiki poruke, skripte i kuke, namijenjene za Miraheze",
 	"miraheze-categories": "Kategorije",
 	"group-steward": "Stjuardi",
 	"group-steward-member": "{{GENDER:$1|stjuard|stjuardica}}",
