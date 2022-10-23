@@ -86,7 +86,7 @@ lines += '\n</sitemapindex>'
 
 conn = Connection(args.auth, args.user, args.key, retry_on_ratelimit=True)
 conn.put_object(
-    'miraheze-mw',
+    'root',
     'sitemap.xml',
     contents=lines,
     content_type='application/xml',
