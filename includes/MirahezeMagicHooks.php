@@ -99,7 +99,7 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		$limits =  [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( wfShouldEnableSwift( $wiki ) ) {
