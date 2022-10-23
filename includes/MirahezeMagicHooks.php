@@ -215,17 +215,15 @@ class MirahezeMagicHooks {
 					->execute();
 
 				// Upload to new container
-				Shell::command(
+				exec( implode( ' ', [
 					'swift', 'upload',
 					str_replace( $old, $new, $container ),
-					'-D', wfTempDir() . '/' . $container,
-					'--object-name',
+					wfTempDir() . '/' . $container,
+					'--object-name ""',
 					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
-				)->limits( $limits )
-					->restrict( Shell::RESTRICT_NONE )
-					->execute();
+				] ) );
 
 				$newContainerList = Shell::command(
 					'swift', 'list',
