@@ -99,21 +99,44 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		$limits =  [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( wfShouldEnableSwift( $wiki ) ) {
-			Shell::command(
-				'swift', 'delete',
-				'miraheze-mw',
-				'--prefix', $wiki . '/',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
-				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
-			)->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+			// Get a list of containers to delete for the wiki
+			$containers = explode( "\n",
+				trim( Shell::command(
+					'swift', 'list',
+					'--prefix', 'miraheze-' . $wiki . '-',
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout()
+				)
+			);
+
+			foreach ( $containers as $container ) {
+				// Just an extra precaution to ensure we don't select the wrong containers
+				if ( !str_contains( $container, $wiki . '-' ) ) {
+					continue;
+				}
+
+				// Delete the container
+				Shell::command(
+					'swift', 'delete',
+					$container,
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+			}
 		} elseif ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
-				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
+				->limits( $limits )
 				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		}
