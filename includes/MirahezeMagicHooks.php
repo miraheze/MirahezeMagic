@@ -166,69 +166,113 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		// Does not work - swift does not allow to connect to other wiki containers with it's current setup (need to be able to connect to $old and $new here)
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
-		// @TODO convert to a job
-
-		// We define the backends here to have 2 seperate (additional) backends for $old and $new
-		// and we rewrite the container paths from the default 'miraheze-swift' backend
-		// to match that of $old or $new and to be able to access the containers from another wiki
-
-		global $wgFileBackends, $wgDBname;
-		$wgFileBackends[1] = $wgFileBackends[0];
-		$wgFileBackends[2] = $wgFileBackends[0];
-
-		$new = 'testwiki';
-		$old = 'betawiki';
-
-		$wgFileBackends[1]['name'] = "miraheze-swift-$old";
-		$wgFileBackends[2]['name'] = "miraheze-swift-$new";
-
-		foreach ( $wgFileBackends[0]['containerPaths'] as $container => $config ) {
-			$wgFileBackends[1]['containerPaths'][$container]['directory'] = str_replace(
-				$wgDBname, $old, $wgFileBackends[0]['containerPaths'][$container]['directory']
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		if ( wfShouldEnableSwift( $wiki ) ) {
+			// Get a list of containers to download, and later upload for the wiki
+			$containers = explode( "\n",
+				trim( Shell::command(
+					'swift', 'list',
+					'--prefix', 'miraheze-' . $old . '-',
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout()
+				)
 			);
 
-			$wgFileBackends[2]['containerPaths'][$container]['directory'] = str_replace(
-				$wgDBname, $new, $wgFileBackends[0]['containerPaths'][$container]['directory']
-			);
-		}
+			foreach ( $containers as $container ) {
+				// Just an extra precaution to ensure we don't select the wrong containers
+				if ( !str_contains( $container, $old . '-' ) ) {
+					continue;
+				}
 
-		$oldBackend = MediaWiki\MediaWikiServices::getInstance()->getFileBackendGroup()->get( "miraheze-swift-$old" );
-		$newBackend = MediaWiki\MediaWikiServices::getInstance()->getFileBackendGroup()->get( "miraheze-swift-$new" );
+				// Get a list of all files in the container to ensure everything is present in new container later.
+				$oldContainerList = Shell::command(
+					'swift', 'list',
+					$container,
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout()
+				);
 
-		$subdirectories = $oldBackend->getDirectoryList( [
-			'dir' => $oldBackend->getContainerStoragePath( 'local-public' ),
-			'adviseStat' => false,
-		] );
+				// Download the container
+				Shell::command(
+					'swift', 'download',
+					$container,
+					'-D', wfTempDir() . '/' . $container,
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
 
-		if ( $subdirectories ) {
-			foreach ( $subdirectories as $directory ) {
-				$directory = ltrim( $directory, $old );
-				var_dump( $directory );
-				$files = $oldBackend->getTopFileList( [
-					'dir' => $oldBackend->getContainerStoragePath( 'local-public/' . $directory ),
-					'adviseStat' => false,
-				] );
+				// Upload to new container
+				Shell::command(
+					'swift', 'upload',
+					str_replace( $old, $new, $container ),
+					'-D', wfTempDir() . '/' . $container,
+					'--object-name'
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
 
-				if ( $files ) {
-					foreach ( $files as $file ) {
-						var_dump( $file );
-						$file = ltrim( $file, $old );
-						var_dump( $oldBackend->normalizeStoragePath( $oldBackend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) ) );
-						/* $oldBackend->quickMove( [
-							'src' => $oldBackend->normalizeStoragePath( $oldBackend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) ),
-							'dst' => $newBackend->normalizeStoragePath( $newBackend->getContainerStoragePath( 'local-public/' . $directory ) . '/' . basename( $file ) )
-						] ); */
-					}
+				$newContainerList = Shell::command(
+					'swift', 'list',
+					str_replace( $old, $new, $container ),
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout()
+				);
+
+				if ( $newContainerList === $oldContainerList ) {
+					// Everything has been correctly copied over
+					// wipe files from the temp directory and delete old container
+
+					// Delete the container
+					Shell::command(
+						'swift', 'delete',
+						$container,
+						'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+						'-U', 'mw:media',
+						'-K', $wmgSwiftPassword
+					)->limits( $limits )
+						->restrict( Shell::RESTRICT_NONE )
+						->execute();
+
+					// Wipe from the temp directory
+					Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
+						->limits( $limits )
+						->restrict( Shell::RESTRICT_NONE )
+						->execute();
 				}
 			}
+		} else {
+			if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
+				Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
+					->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+			} elseif ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
+				Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
+					->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+			}
 		}
-
-		$backend->clean( [
-			'dir' => $oldBackend->getContainerStoragePath( 'local-public' ),
-			'recursive' => true,
-		] );
 
 		static::removeRedisKey( "*{$old}*" );
 		// static::removeMemcachedKey( ".*{$old}.*" );
