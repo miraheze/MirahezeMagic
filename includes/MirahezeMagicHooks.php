@@ -199,8 +199,7 @@ class MirahezeMagicHooks {
 					'-K', $wmgSwiftPassword
 				)->limits( $limits )
 					->restrict( Shell::RESTRICT_NONE )
-					->execute()->getStdout()
-				);
+					->execute()->getStdout();
 
 				// Download the container
 				Shell::command(
@@ -233,8 +232,7 @@ class MirahezeMagicHooks {
 					'-K', $wmgSwiftPassword
 				)->limits( $limits )
 					->restrict( Shell::RESTRICT_NONE )
-					->execute()->getStdout()
-				);
+					->execute()->getStdout();
 
 				if ( $newContainerList === $oldContainerList ) {
 					// Everything has been correctly copied over
