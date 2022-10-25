@@ -221,7 +221,7 @@ class MirahezeMagicHooks {
 						'swift', 'upload',
 						str_replace( $old, $new, $container ),
 						wfTempDir() . '/' . $container,
-						'--object-name ""',
+						'--object-name', '""',
 						'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 						'-U', 'mw:media',
 						'-K', $wmgSwiftPassword
