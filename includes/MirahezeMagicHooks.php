@@ -297,7 +297,7 @@ class MirahezeMagicHooks {
 
 		foreach ( $sitemaps as $sitemap ) {
 			$status = $localRepo->getBackend()->quickDelete( [
-				'src' => $localRepo->getZonePath( 'public' ) . '/' . $sitemap,
+				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
 			] );
 
 			if ( !$status->isOK() ) {
