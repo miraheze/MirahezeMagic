@@ -26,7 +26,6 @@
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Shell\Shell;
 use Miraheze\CreateWiki\RemoteWiki;
 
 class GenerateMirahezeSitemap extends Maintenance {
@@ -85,16 +84,16 @@ class GenerateMirahezeSitemap extends Maintenance {
 			}
 
 			// Generate new dump
-			Shell::command(
-				'/usr/bin/php', '/srv/mediawiki/w/maintenance/generateSitemap.php',
-				'--fspath', $filePath,
-				'--urlpath', '/sitemaps/' . $dbName . '/sitemaps/',
-				'--server', $config->get( 'Server' ),
-				'--compress', 'yes',
-				'--wiki', $dbName
-			)->restrict( Shell::RESTRICT_NONE )
-				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
-				->execute();
+			$generateSitemap = $this->runChild(
+				GenerateSitemap::class,
+				'/srv/mediawiki/w/maintenance/generateSitemap.php'
+			);
+
+			$generateSitemap->setOption( 'fspath', $filePath );
+			$generateSitemap->setOption( 'urlpath', '/sitemaps/' . $dbName . '/sitemaps/' );
+			$generateSitemap->setOption( 'server', $config->get( 'Server' ) );
+			$generateSitemap->setOption( 'compress', 'yes' );
+			$generateSitemap->execute();
 
 			$backend->prepare( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 			foreach ( glob( $filePath . '/sitemap-*' . $dbName . '*' ) as $sitemap ) {
