@@ -215,7 +215,7 @@ class MirahezeMagicHooks {
 
 				// Upload to new container
 				// We have to use exec here, as Shell::command does not work for this
-				// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.exec
+				// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 				exec( escapeshellcmd(
 					implode( ' ', [
 						'swift', 'upload',
