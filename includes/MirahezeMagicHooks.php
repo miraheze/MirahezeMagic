@@ -103,6 +103,8 @@ class MirahezeMagicHooks {
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( wfShouldEnableSwift( $wiki ) ) {
+			global $wmgSwiftPassword;
+
 			// Get a list of containers to delete for the wiki
 			$containers = explode( "\n",
 				trim( Shell::command(
@@ -170,6 +172,8 @@ class MirahezeMagicHooks {
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( wfShouldEnableSwift( $old ) ) {
+			global $wmgSwiftPassword;
+
 			// Get a list of containers to download, and later upload for the wiki
 			$containers = explode( "\n",
 				trim( Shell::command(
