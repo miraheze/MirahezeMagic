@@ -1,7 +1,23 @@
 from datetime import datetime
 import requests
 import xmltodict
+import os
+import argparse
+from swiftclient import Connection
 from time import sleep
+
+parser = argparse.ArgumentParser(
+    description='Generate Miraheze sitemap index of all public wikis, and upload the object to the "miraheze-mw" Swift container')
+parser.add_argument(
+    '-A', '--auth', dest='auth', default=os.environ.get('ST_AUTH', None),
+    help='URL for obtaining an auth token for Swift (ST_AUTH)')
+parser.add_argument(
+    '-U', '--user', dest='user', default=os.environ.get('ST_USER', None),
+    help='User name for obtaining an auth token for Swift (ST_USER)')
+parser.add_argument(
+    '-K', '--key', dest='key', default=os.environ.get('ST_KEY', None),
+    help='Key for obtaining an auth token for Swift (ST_KEY)')
+args = parser.parse_args()
 
 reqsession = requests.Session()
 print('getting wikilist')
@@ -58,18 +74,21 @@ for wikidata in data:
     except KeyError as e:
         print(f'Caught exception {str(e)} while parsing "{urlreq}"')  # Sitemap data is not actually saved in this sitemap! Ignore
     sleep(0.5)  # sleep half a second after each one
-lines = []
-lines.append('<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+lines = '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 for sitemap in maps:
     date = datetime.now()
     dt_string = date.strftime('%Y-%m-%dT%H:%M:%SZ')
     loc = f'\n\t\t<loc>{sitemap}</loc>'
     lastmod = f'\n\t\t<lastmod>{dt_string}</lastmod>'
-    lines.append(f'\t<sitemap>{loc}{lastmod}\n\t</sitemap>')
+    lines += f'\n\t<sitemap>{loc}{lastmod}\n\t</sitemap>'
 
-lines.append('</sitemapindex>')
+lines += '\n</sitemapindex>'
 
-with open('/mnt/mediawiki-static/sitemap.xml', 'w+') as xmlfile:
-    xmlfile.writelines(lines)
-
+conn = Connection(args.auth, args.user, args.key, retry_on_ratelimit=True)
+conn.put_object(
+    'root',
+    'sitemap.xml',
+    contents=lines,
+    content_type='application/xml',
+)
 print('done')

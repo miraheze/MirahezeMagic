@@ -19,13 +19,13 @@
  * @file
  * @ingroup Maintenance
  * @author Paladox
- * @version 1.0
+ * @author Universal Omega
+ * @version 2.0
  */
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Shell\Shell;
 use Miraheze\CreateWiki\RemoteWiki;
 
 class GenerateMirahezeSitemap extends Maintenance {
@@ -37,75 +37,79 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 	public function execute() {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
+		$backend = $localRepo->getBackend();
+
 		$dbName = $config->get( 'DBname' );
-		$filePath = $config->get( 'UploadDirectory' ) . '/sitemaps';
-
-		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-
-		if ( !file_exists( "/mnt/mediawiki-static/{$dbName}/sitemaps/" ) ) {
-			Shell::command(
-				'/bin/mkdir',
-				'-p',
-				$filePath
-			)
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
-		}
+		$filePath = wfTempDir() . '/sitemaps';
 
 		$wiki = new RemoteWiki( $dbName );
 		$isPrivate = $wiki->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
 
-			Shell::command(
-				'rm',
-				'-rf',
-				$filePath
-			)
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+			$sitemaps = $backend->getTopFileList( [
+				'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
+				'adviseStat' => false,
+			] );
+
+			foreach ( $sitemaps as $sitemap ) {
+				$status = $backend->quickDelete( [
+					'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
+				] );
+
+				if ( !$status->isOK() ) {
+					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . Status::wrap( $status )->getWikitext() );
+				}
+			}
+
+			$backend->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 		} else {
 			$this->output( "Generating sitemap for wiki {$dbName}\n" );
 
 			// Remove old dump
-			Shell::command(
-				'rm',
-				'-rf',
-				"{$filePath}/**"
-			)
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+			$sitemaps = $backend->getTopFileList( [
+				'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
+				'adviseStat' => false,
+			] );
+
+			foreach ( $sitemaps as $sitemap ) {
+				$status = $backend->quickDelete( [
+					'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
+				] );
+
+				if ( !$status->isOK() ) {
+					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . Status::wrap( $status )->getWikitext() );
+				}
+			}
 
 			// Generate new dump
-			Shell::command(
-				'/usr/bin/php',
-				'/srv/mediawiki/w/maintenance/generateSitemap.php',
-				'--fspath',
-				$filePath,
-				'--urlpath',
-				"/sitemaps/{$dbName}/sitemaps/",
-				'--server',
-				$config->get( 'Server' ),
-				'--compress',
-				'yes',
-				'--wiki',
-				$dbName
-			)
-				->restrict( Shell::RESTRICT_NONE )
-				->limits( $limits )
-				->execute();
+			$generateSitemap = $this->runChild(
+				GenerateSitemap::class,
+				'/srv/mediawiki/w/maintenance/generateSitemap.php'
+			);
 
-			Shell::command(
-				'/usr/bin/mv',
-				"{$filePath}/sitemap-index-{$dbName}.xml",
-				"{$filePath}/sitemap.xml"
-			)
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+			$generateSitemap->setOption( 'fspath', $filePath );
+			$generateSitemap->setOption( 'urlpath', '/sitemaps/' . $dbName . '/sitemaps/' );
+			$generateSitemap->setOption( 'server', $config->get( 'Server' ) );
+			$generateSitemap->setOption( 'compress', 'yes' );
+			$generateSitemap->execute();
+
+			$backend->prepare( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
+			foreach ( glob( $filePath . '/sitemap-*' . $dbName . '*' ) as $sitemap ) {
+				$backend->quickStore( [
+					'src' => $sitemap,
+					'dst' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . basename( $sitemap ),
+				] );
+
+				// And now we remove the file from the temp directory
+				unlink( $sitemap );
+			}
+
+			$backend->quickMove( [
+				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/sitemap-index-' . $dbName . '.xml',
+				'dst' => $localRepo->getZonePath( 'public' ) . '/sitemaps/sitemap.xml',
+			] );
 		}
 	}
 }

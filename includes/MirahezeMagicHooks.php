@@ -37,6 +37,13 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiCreation( $DBname ) {
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		// we don't need to do anything here if using swift
+		// @TODO remove this entire hook once on swift everywhere
+		if ( wfShouldEnableSwift( $DBname ) ) {
+			return;
+		}
+
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		// Create static directory for wiki
@@ -92,9 +99,46 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		if ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		if ( wfShouldEnableSwift( $wiki ) ) {
+			global $wmgSwiftPassword;
+
+			// Get a list of containers to delete for the wiki
+			$containers = explode( "\n",
+				trim( Shell::command(
+					'swift', 'list',
+					'--prefix', 'miraheze-' . $wiki . '-',
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout()
+				)
+			);
+
+			foreach ( $containers as $container ) {
+				// Just an extra precaution to ensure we don't select the wrong containers
+				if ( !str_contains( $container, $wiki . '-' ) ) {
+					continue;
+				}
+
+				// Delete the container
+				Shell::command(
+					'swift', 'delete',
+					$container,
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+			}
+		} elseif ( file_exists( "/mnt/mediawiki-static/$wiki" ) ) {
 			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/$wiki" )
-				->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )
+				->limits( $limits )
 				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 		}
@@ -126,16 +170,118 @@ class MirahezeMagicHooks {
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
-		if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
-		} elseif ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
-			Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		if ( wfShouldEnableSwift( $old ) ) {
+			global $wmgSwiftPassword;
+
+			// Get a list of containers to download, and later upload for the wiki
+			$containers = explode( "\n",
+				trim( Shell::command(
+					'swift', 'list',
+					'--prefix', 'miraheze-' . $old . '-',
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout()
+				)
+			);
+
+			foreach ( $containers as $container ) {
+				// Just an extra precaution to ensure we don't select the wrong containers
+				if ( !str_contains( $container, $old . '-' ) ) {
+					continue;
+				}
+
+				// Get a list of all files in the container to ensure everything is present in new container later.
+				$oldContainerList = Shell::command(
+					'swift', 'list',
+					$container,
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout();
+
+				// Download the container
+				Shell::command(
+					'swift', 'download',
+					$container,
+					'-D', wfTempDir() . '/' . $container,
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+
+				// Upload to new container
+				// We have to use exec here, as Shell::command does not work for this
+				// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+				exec( escapeshellcmd(
+					implode( ' ', [
+						'swift', 'upload',
+						str_replace( $old, $new, $container ),
+						wfTempDir() . '/' . $container,
+						'--object-name', '""',
+						'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+						'-U', 'mw:media',
+						'-K', $wmgSwiftPassword
+					] )
+				) );
+
+				$newContainerList = Shell::command(
+					'swift', 'list',
+					str_replace( $old, $new, $container ),
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				)->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute()->getStdout();
+
+				if ( $newContainerList === $oldContainerList ) {
+					// Everything has been correctly copied over
+					// wipe files from the temp directory and delete old container
+
+					// Delete the container
+					Shell::command(
+						'swift', 'delete',
+						$container,
+						'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+						'-U', 'mw:media',
+						'-K', $wmgSwiftPassword
+					)->limits( $limits )
+						->restrict( Shell::RESTRICT_NONE )
+						->execute();
+
+					// Wipe from the temp directory
+					Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
+						->limits( $limits )
+						->restrict( Shell::RESTRICT_NONE )
+						->execute();
+				} else {
+					/**
+					 * We need to log this, as otherwise all files may not have been succesfully
+					 * moved to the new container, and they still exist locally. We should know that.
+					 */
+					wfDebugLog( 'MirahezeMagic', "The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()}." );
+				}
+			}
+		} else {
+			if ( file_exists( "/mnt/mediawiki-static/{$old}" ) ) {
+				Shell::command( '/bin/mv', "/mnt/mediawiki-static/{$old}", "/mnt/mediawiki-static/{$new}" )
+					->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+			} elseif ( file_exists( "/mnt/mediawiki-static/private/{$old}" ) ) {
+				Shell::command( '/bin/mv', "/mnt/mediawiki-static/private/{$old}", "/mnt/mediawiki-static/private/{$new}" )
+					->limits( $limits )
+					->restrict( Shell::RESTRICT_NONE )
+					->execute();
+			}
 		}
 
 		static::removeRedisKey( "*{$old}*" );
@@ -143,14 +289,28 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
-		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
+		$sitemaps = $localRepo->getBackend()->getTopFileList( [
+			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
+			'adviseStat' => false,
+		] );
 
-		if ( file_exists( "/mnt/mediawiki-static/{$dbname}/sitemaps" ) ) {
-			Shell::command( '/bin/rm', '-rf', "/mnt/mediawiki-static/{$dbname}/sitemaps" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
+		foreach ( $sitemaps as $sitemap ) {
+			$status = $localRepo->getBackend()->quickDelete( [
+				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
+			] );
+
+			if ( !$status->isOK() ) {
+				/**
+				 * We need to log this, as otherwise the sitemaps may
+				 * not be being deleted for private wikis. We should know that.
+				 */
+				$statusMessage = Status::wrap( $status )->getWikitext();
+				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
+			}
 		}
+
+		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
 	public static function onCreateWikiTables( &$tables ) {

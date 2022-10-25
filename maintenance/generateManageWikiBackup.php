@@ -104,10 +104,14 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 
-		$file = $this->getOption( 'filename' );
+		$backend = DataDump::getBackend();
+		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'dumps-backup' ) ] );
 
-		$ddd = $config->get( 'DataDumpDirectory' );
-		file_put_contents( "{$ddd}{$file}", json_encode( $buildArray, JSON_PRETTY_PRINT ) );
+		$backend->quickCreate( [
+			'dst' => $backend->getContainerStoragePath( 'dumps-backup' ) . '/' . $this->getOption( 'filename' ),
+			'content' => json_encode( $buildArray, JSON_PRETTY_PRINT ),
+			'overwrite' => true,
+		] );
 	}
 }
 
