@@ -53,13 +53,13 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'adviseStat' => false,
 			] );
 
-			foreach ( $sitemaps as $file ) {
+			foreach ( $sitemaps as $sitemap ) {
 				$status = $backend->quickDelete( [
-					'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
+					'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
 				] );
 
 				if ( !$status->isOK() ) {
-					$this->output( 'Failure in deleting sitemap ' . $file . ': ' . Status::wrap( $status )->getWikitext() );
+					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . Status::wrap( $status )->getWikitext() );
 				}
 			}
 
@@ -73,13 +73,13 @@ class GenerateMirahezeSitemap extends Maintenance {
 				'adviseStat' => false,
 			] );
 
-			foreach ( $sitemaps as $file ) {
+			foreach ( $sitemaps as $sitemap ) {
 				$status = $backend->quickDelete( [
-					'src' => $localRepo->getZonePath( 'public' ) . '/' . $file,
+					'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
 				] );
 
 				if ( !$status->isOK() ) {
-					$this->output( 'Failure in deleting sitemap ' . $file . ': ' . Status::wrap( $status )->getWikitext() );
+					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . Status::wrap( $status )->getWikitext() );
 				}
 			}
 
