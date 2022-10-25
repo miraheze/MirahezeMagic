@@ -169,7 +169,7 @@ class MirahezeMagicHooks {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
-		if ( wfShouldEnableSwift( $wiki ) ) {
+		if ( wfShouldEnableSwift( $old ) ) {
 			// Get a list of containers to download, and later upload for the wiki
 			$containers = explode( "\n",
 				trim( Shell::command(
@@ -216,15 +216,17 @@ class MirahezeMagicHooks {
 				// Upload to new container
 				// We have to use exec here, as Shell::command does not work for this
 				// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions.exec
-				exec( implode( ' ', [
-					'swift', 'upload',
-					str_replace( $old, $new, $container ),
-					wfTempDir() . '/' . $container,
-					'--object-name ""',
-					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
-					'-U', 'mw:media',
-					'-K', $wmgSwiftPassword
-				] ) );
+				exec( escapeshellcmd(
+					implode( ' ', [
+						'swift', 'upload',
+						str_replace( $old, $new, $container ),
+						wfTempDir() . '/' . $container,
+						'--object-name ""',
+						'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+						'-U', 'mw:media',
+						'-K', $wmgSwiftPassword
+					] )
+				) );
 
 				$newContainerList = Shell::command(
 					'swift', 'list',
@@ -256,6 +258,12 @@ class MirahezeMagicHooks {
 						->limits( $limits )
 						->restrict( Shell::RESTRICT_NONE )
 						->execute();
+				} else {
+					/**
+					 * We need to log this, as otherwise all files may not have been succesfully
+					 * moved to the new container, and they still exist locally. We should know that.
+					 */
+					wfDebugLog( 'MirahezeMagic', "The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()}." );
 				}
 			}
 		} else {
