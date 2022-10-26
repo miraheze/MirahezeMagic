@@ -330,10 +330,9 @@ class MirahezeMagicHooks {
 
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
-				$backend->streamFile( [
+				$backend->getFileContents( [
 					'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
-					'headless' => true,
-				] )->getValue()
+				] )
 			);
 		}
 	}
