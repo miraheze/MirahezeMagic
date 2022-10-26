@@ -349,7 +349,7 @@ class MirahezeMagicHooks {
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
 
-		$backend->quickCreate( [
+		$backend->create( [
 			'dst' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
 			'content' => $pipeline,
 			'overwrite' => true,
