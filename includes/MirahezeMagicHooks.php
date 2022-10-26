@@ -36,48 +36,6 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
-	public static function onCreateWikiCreation( $DBname ) {
-		// wfShouldEnableSwift() is defined in LocalSettings.php
-		// we don't need to do anything here if using swift
-		// @TODO remove this entire hook once on swift everywhere
-		if ( wfShouldEnableSwift( $DBname ) ) {
-			return;
-		}
-
-		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-
-		// Create static directory for wiki
-		if ( !file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
-			Shell::command( '/bin/mkdir', '-p', "/mnt/mediawiki-static/{$DBname}" )
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
-		}
-
-		// Copy SocialProfile images
-		if ( file_exists( "/mnt/mediawiki-static/{$DBname}" ) ) {
-			Shell::command(
-				'/bin/cp',
-				'-r',
-				'/srv/mediawiki/w/extensions/SocialProfile/avatars',
-				"/mnt/mediawiki-static/{$DBname}/avatars"
-			)
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
-
-			Shell::command(
-				'/bin/cp',
-				'-r',
-				'/srv/mediawiki/w/extensions/SocialProfile/awards',
-				"/mnt/mediawiki-static/{$DBname}/awards"
-			)
-				->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
-				->execute();
-		}
-	}
-
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
