@@ -318,6 +318,46 @@ class MirahezeMagicHooks {
 		$tables['localuser'] = 'lu_wiki';
 	}
 
+	public static function onCreateWikiReadPersistentModel( &$pipeline ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
+			return false;
+		}
+
+		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
+
+		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
+			$pipeline = unserialize(
+				$backend->streamFile( [
+					'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
+					'headless' => true,
+				] )->getValue()
+			);
+		}
+	}
+
+	public static function onCreateWikiWritePersistentModel( $pipeline ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+
+		// wfShouldEnableSwift() is defined in LocalSettings.php
+		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
+			return false;
+		}
+
+		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
+		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
+
+		$backend->quickCreate( [
+			'dst' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
+			'content' => $pipeline,
+			'overwrite' => true,
+		] );
+
+		return true;
+	}
+
 	/**
 	 * From WikimediaMessages. Allows us to add new messages,
 	 * and override ones.
