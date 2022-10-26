@@ -323,11 +323,10 @@ class MirahezeMagicHooks {
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
-			// return;
+			return;
 		}
 
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
 				$backend->getFileContents( [
@@ -342,7 +341,7 @@ class MirahezeMagicHooks {
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
-			// return false;
+			return false;
 		}
 
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
