@@ -64,6 +64,12 @@
 		"CreateWikiTables": [
 			"MirahezeMagicHooks::onCreateWikiTables"
 		],
+		"CreateWikiReadPersistentModel": [
+			"MirahezeMagicHooks::onCreateWikiReadPersistentModel"
+		],
+		"CreateWikiWritePersistentModel": [
+			"MirahezeMagicHooks::onCreateWikiWritePersistentModel"
+		],
 		"MessageCache::get": [
 			"MirahezeMagicHooks::onMessageCacheGet"
 		],
