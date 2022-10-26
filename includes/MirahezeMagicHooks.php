@@ -323,7 +323,7 @@ class MirahezeMagicHooks {
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
-			return false;
+			// return;
 		}
 
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
@@ -343,7 +343,7 @@ class MirahezeMagicHooks {
 
 		// wfShouldEnableSwift() is defined in LocalSettings.php
 		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
-			return false;
+			// return false;
 		}
 
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
