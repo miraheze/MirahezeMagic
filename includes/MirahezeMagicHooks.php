@@ -367,6 +367,7 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = [
 			'centralauth-groupname',
+			'datadump-desc',
 			'dberr-problems',
 			'dberr-again',
 			'globalblocking-ipblocked',
