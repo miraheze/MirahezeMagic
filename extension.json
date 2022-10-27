@@ -49,9 +49,6 @@
 		"AbuseFilterShouldFilterAction": [
 			"MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
 		],
-		"CreateWikiCreation": [
-			"MirahezeMagicHooks::onCreateWikiCreation"
-		],
 		"CreateWikiDeletion": [
 			"MirahezeMagicHooks::onCreateWikiDeletion"
 		],
