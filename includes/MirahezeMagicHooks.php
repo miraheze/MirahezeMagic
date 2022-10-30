@@ -277,13 +277,6 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiReadPersistentModel( &$pipeline ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
-		// wfShouldEnableSwift() is defined in LocalSettings.php
-		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
-			return;
-		}
-
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
@@ -295,13 +288,6 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiWritePersistentModel( $pipeline ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
-		// wfShouldEnableSwift() is defined in LocalSettings.php
-		if ( !wfShouldEnableSwift( $config->get( 'DBname' ) ) ) {
-			return false;
-		}
-
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
 
