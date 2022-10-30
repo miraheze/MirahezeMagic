@@ -308,7 +308,6 @@ class MirahezeMagicHooks {
 	 * @return bool
 	 */
 	public static function onMessageCacheGet( &$lcKey ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		static $keys = [
 			'centralauth-groupname',
 			'datadump-desc',
@@ -358,6 +357,8 @@ class MirahezeMagicHooks {
 			// MessageCache uses ucfirst if ord( key ) is < 128, which is true of all
 			// of the above.  Revisit if non-ASCII keys are used.
 			$ucKey = ucfirst( $lcKey );
+
+			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 			$cache = MediaWikiServices::getInstance()->getMessageCache();
 
 			if (
