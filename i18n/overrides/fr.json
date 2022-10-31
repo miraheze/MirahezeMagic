@@ -12,6 +12,7 @@
 			"Wladek92"
 		]
 	},
+	"miraheze-datadump-desc": "La possibilité de générer un vidage au moyen de DataDump a été temporairement désactivée. Si vous souhaitez demander qu’un vidage des données soit généré pour votre wiki, veuillez [[phab:maniphest/task/edit/form/1|en faire la demande sur Phabricator]]. Merci.",
 	"miraheze-dberr-problems": "Ce wiki est temporairement indisponible",
 	"miraheze-dberr-again": "Essayez d’attendre quelques minutes, ces erreurs se résolvent habituellement par elles-mêmes. Si vous recevez cette erreur de façon persistante, veuillez consulter notre page Twitter (https://twitter.com/Miraheze) pour plus d’informations ou contactez l’administrateur système de Miraheze en vous connectant sur le canal #miraheze-sre sur irc.libera.chat.",
 	"miraheze-centralauth-groupname": "Miraheze",
