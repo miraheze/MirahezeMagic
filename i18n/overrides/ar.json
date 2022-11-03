@@ -9,7 +9,7 @@
 	},
 	"miraheze-dberr-again": "حاول الانتظار بضع دقائق وإعادة التحميل، لمزيد من المعلومات حول هذا الخطأ; تُرجَى مراجعة صفحة تويتر الخاصة بنا (Twitter.com/Miraheze) أو الاتصال بإداريي النظام عن طريق الاتصال بـ#miraheze على irc.libera.chat",
 	"miraheze-centralauth-groupname": "ميراهيز",
-	"miraheze-importtext": "يرجى اصدار الملف من مصدر ويكي باستخدام (Special :export/export utility) والاحتفاظ بها على كمبيوتك الخاص وتحميلها هنا<br /> ملاحظة اذا كان الملف كبير \n(~< 5MB فانك ستحتاج الى {{Moving _a_wiki-to-Mirahez#Request_import|request an import}} والتي لا يمكن ان تتم من خلال المستعرض.",
+	"miraheze-importtext": "يرجى تصدير الملف من ويكي المصدر باستخدام [[Special:Export|أداة التصدير]].! N! احفظه على جهاز الكمبيوتر الخاص بك وقم بتحميله هنا.<br /> يرجى ملاحظة أنه إذا كان الملف كبيرًا قليلاً (~> 2 ميجابايت) ، فستحتاج إلى [[M:Special:RequestImportDump|طلب استيراد]] حيث لا يمكن القيام بذلك هنا بسبب القيود الفنية.",
 	"miraheze-oathauth-step1": "'''مهم! يُرجَى التأكد من قراءة <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> قبل تمكين هذه الإضافة!'''<br/>الخطوة 1: تنزيل برنامج المصادقة الثنائية",
 	"miraheze-prefs-help-realname": "الاسم الحقيقي اختياري، إذا اخترت توفيره، فسيتم استخدامه لمنحك الإحالة إلى عملك، أيضا، باستخدام ويكي يستضيفه ميراهيز، فإنك توافق على <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use شروط الاستخدام]</span> وتقبل <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy سياسة الخصوصية]</span>",
 	"miraheze-newsignuppage-loginform-tos": "لقد قرأت وفهمت ووافقت على [https://meta.miraheze.org/wiki/Terms_of_Use شروط الاستخدام] و[https://meta.miraheze.org/wiki/Privacy_Policy سياسة الخصوصية]",
