@@ -34,7 +34,7 @@
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bürokrat}}",
 	"miraheze-group-sysop": "Yöneticiler",
 	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
-	"miraheze-group-sysop-member": "{{GENDER:$1|hizmetli}}",
+	"miraheze-group-sysop-member": "{{GENDER:$1|yönetici}}",
 	"miraheze-group-interface-admin": "Arayüz yöneticileri",
 	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|arayüz yöneticisi}}",
