@@ -17,6 +17,7 @@
 	"miraheze-donate": "Donate to Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
+	"miraheze-global-renames-disabled": "Global renames are currently disabled due to ongoing issues with one of our database servers (db141). Learn more [[Tech:SRE noticeboard|here]] or by [https://discord.gg/TVAJTE4CUn joining our Discord server].",
 	"miraheze-helpcenter": "Miraheze Help Center",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
