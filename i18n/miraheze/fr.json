@@ -30,6 +30,7 @@
 	"miraheze-donate": "Faire un don à Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
+	"miraheze-global-renames-disabled": "Les changements de nom globaux sont actuellement désactivés en raison de problèmes persistants avec l’un de nos serveurs de base de données (db141). Apprenez-en plus [[Tech:SRE noticeboard|ici]] ou en [https://discord.gg/TVAJTE4CUn rejoignant notre serveur Discord].",
 	"miraheze-helpcenter": "Centre d’aide de Miraheze",
 	"miraheze-requestfeatures": "Demander une fonctionnalité sur un wiki",
 	"miraheze-requestwiki": "Demander un wiki",
