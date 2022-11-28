@@ -19,7 +19,7 @@
 	"miraheze-donate": "Faça um donativo ao Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate/pt",
 	"miraheze-faq": "Perguntas frequentes",
-	"miraheze-global-renames-disabled": "As alterações de nome globais estão neste momento desativadas devido a problemas persistentes com um dos nossos servidores da base de dados (db141). Saiba mais [[Tech:SRE noticeboard|aqui]] ou [https://discord.gg/TVAJTE4CUn juntando-se ao nosso servidor Discord].",
+	"miraheze-global-renames-disabled": "As alterações de nome globais estão neste momento desativadas devido a problemas persistentes com um dos nossos servidores da base de dados (db141). Saiba mais [[m:Tech:SRE noticeboard|aqui]] ou [https://discord.gg/TVAJTE4CUn juntando-se ao nosso servidor Discord].",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",
 	"miraheze-requestfeatures": "Pedir funcionalidades numa wiki",
 	"miraheze-requestwiki": "Pedir uma wiki",
