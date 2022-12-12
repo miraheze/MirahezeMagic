@@ -3,6 +3,7 @@
 		"authors": [
 			"A Chinese Wikipedian",
 			"GuoPC",
+			"LuciferianThomas",
 			"StarrySky",
 			"列维劳德",
 			"沈澄心",
@@ -37,5 +38,5 @@
 	"miraheze-group-bot": "机器人",
 	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
 	"miraheze-group-bot-member": "{{GENDER:$1|机器人}}",
-	"miraheze-grouppage-user": "生成随机哈希值"
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
 }
