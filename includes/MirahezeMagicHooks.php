@@ -287,7 +287,6 @@ class MirahezeMagicHooks {
 	public static function onMessageCacheGet( &$lcKey ) {
 		static $keys = [
 			'centralauth-groupname',
-			'datadump-desc',
 			'dberr-problems',
 			'dberr-again',
 			'globalblocking-ipblocked',
