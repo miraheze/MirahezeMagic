@@ -21,7 +21,11 @@ class FixStaticUrls extends Maintenance {
 				is_string( $val ) &&
 				str_contains( $val, 'static-new.miraheze.org' )
 			) {
-				$manageWikiSettings->modify( [ $var => str_replace( 'static-new.miraheze.org', 'static.miraheze.org', $val ) ] );
+				$new = str_replace( 'static-new.miraheze.org', 'static.miraheze.org', $val );
+
+				$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'" );
+
+				$manageWikiSettings->modify( [ $var => $new ] );
 				$manageWikiSettings->commit();
 			}
 		}
