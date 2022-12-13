@@ -4,7 +4,8 @@ $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
 	$IP = __DIR__ . '/../../..';
 }
-require_once "/srv/mediawiki/w/maintenance/Maintenance.php";
+
+require_once "$IP/maintenance/Maintenance.php";
 
 use MediaWiki\MediaWikiServices;
 use Miraheze\CreateWiki\RemoteWiki;
