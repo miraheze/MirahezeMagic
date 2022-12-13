@@ -24,7 +24,11 @@ class UpdatePrivateAuthUrls extends Maintenance {
 					is_string( $val ) &&
 					str_contains( $val, "static.miraheze.org/$dbName" )
 				) {
-					$manageWikiSettings->modify( [ $var => preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbName/", $config->get( 'Server' ) . '/w/img_auth.php', $val ) ] );
+					$new = preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbName/", $config->get( 'Server' ) . '/w/img_auth.php', $val );
+
+					$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'" );
+
+					$manageWikiSettings->modify( [ $var => $new ] );
 					$manageWikiSettings->commit();
 				}
 			}
