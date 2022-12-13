@@ -12,7 +12,7 @@ use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class UpdatePrivateAuthUrls extends Maintenance {
 	public function execute() {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$config = MediaWikiServices::getInstance()->getMainConfig();
 		$dbName = $config->get( 'DBname' );
 		$wiki = new RemoteWiki( $dbName );
 		$manageWikiSettings = new ManageWikiSettings( $dbName );
