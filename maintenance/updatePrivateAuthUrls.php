@@ -4,7 +4,7 @@ $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
 	$IP = __DIR__ . '/../../..';
 }
-require_once "$IP/maintenance/Maintenance.php";
+require_once "/srv/mediawiki/w/maintenance/Maintenance.php";
 
 use MediaWiki\MediaWikiServices;
 use Miraheze\CreateWiki\RemoteWiki;
@@ -23,7 +23,7 @@ class UpdatePrivateAuthUrls extends Maintenance {
 					is_string( $val ) &&
 					str_contains( $val, "static.miraheze.org/$dbName" )
 				) {
-					$manageWikiSettings->modify( [ $var => str_replace( "static.miraheze.org/$dbName", $config->get( 'Server' ) . '/w/img_auth.php', $val ] );
+					$manageWikiSettings->modify( [ $var => preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbName/", $config->get( 'Server' ) . '/w/img_auth.php', $val ) ] );
 					$manageWikiSettings->commit();
 				}
 			}
