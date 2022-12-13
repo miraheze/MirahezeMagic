@@ -18,12 +18,12 @@ class UpdatePrivateAuthUrls extends Maintenance {
 		$manageWikiSettings = new ManageWikiSettings( $dbName );
 
 		if ( $wiki->isPrivate() ) {
-			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+			foreach ( $manageWikiSettings->list() as $var => $val ) {
 				if (
-					is_string( $manageWikiSettings->list( $var ) ) &&
-					str_contains( $manageWikiSettings->list( $var ), "static.miraheze.org/$dbName" )
+					is_string( $val ) &&
+					str_contains( $val, "static.miraheze.org/$dbName" )
 				) {
-					$manageWikiSettings->modify( [ $var => str_replace( "static.miraheze.org/$dbName", '/w/img_auth', $manageWikiSettings->list( $var ) ] );
+					$manageWikiSettings->modify( [ $var => str_replace( "static.miraheze.org/$dbName", '/w/img_auth', $val ] );
 					$manageWikiSettings->commit();
 				}
 			}
