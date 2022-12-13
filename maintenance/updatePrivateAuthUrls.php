@@ -26,7 +26,7 @@ class UpdatePrivateAuthUrls extends Maintenance {
 				) {
 					$new = preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbName/", $config->get( 'Server' ) . '/w/img_auth.php', $val );
 
-					$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'" );
+					$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'\n" );
 
 					$manageWikiSettings->modify( [ $var => $new ] );
 					$manageWikiSettings->commit();
