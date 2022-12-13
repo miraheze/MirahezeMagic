@@ -10,7 +10,6 @@
 			"Zabe"
 		]
 	},
-	"miraheze-datadump-desc": "Die Möglichkeit, mit DataDump einen Dump zu erzeugen, wurde vorübergehend deaktiviert. Wenn du die Erstellung eines Dumps für dein Wiki beantragen möchtest, wende dich bitte an [[phab:maniphest/task/edit/form/1|make a request on Phabricator]]. Wir danken dir.",
 	"miraheze-dberr-problems": "Dieses Wiki ist vorübergehend nicht verfügbar",
 	"miraheze-dberr-again": "Bitte versuche es in ein paar Minuten noch einmal, denn bis dahin sind diese Fehler normalerweise behoben. Wenn du diesen Fehler ständig erhältst, schaue bitte auf unserem Twitter (https://twitter.com/MirahezeStatus) nach weiteren Informationen oder kontaktiere die Miraheze-Systemadministratoren, indem du #miraheze-sre auf irc.libera.chat oder unserem Discord-Server (https://discord.gg/TVAJTE4CUn) beitrittst.",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Du}} kannst dich nicht anmelden, weil {{GENDER:$1|dein}} Account [[m:Special:MyLanguage/Global locks|global geblockt wurde]]. Bitte kontaktiere <code>cvt[at]miraheze.org</code> für mehr Informationen oder um Berufung einzulegen.",
