@@ -10,7 +10,6 @@
 			"Пан Хаунд"
 		]
 	},
-	"miraheze-datadump-desc": "Можливість генерувати дампи за допомогою DataDump тимчасово вимкнено. Якщо ви бажаєте створити дамп для вашої вікі, [[phab:maniphest/task/edit/form/1|зробіть запит на Phabricator]]. Дякую.",
 	"miraheze-dberr-problems": "Ця вікі тимчасово недоступна",
 	"miraheze-dberr-again": "Спробуйте через кілька хвилин, ці помилки переважно ліквідовуються за такий час. Якщо ви постійно отримуєте цю помилку, будь ласка, перегляньте нашу сторінку на Twitter (https://twitter.com/Miraheze), щоб дізнатись більше, або зв'яжіться із адміністраторами Miraheze System приєднавшись до #miraheze-sre на irc.libera.chat.",
 	"miraheze-centralauth-groupname": "Мірахезе",
