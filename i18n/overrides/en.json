@@ -6,7 +6,6 @@
 			"Universal Omega"
 		]
 	},
-	"miraheze-datadump-desc": "The ability to generate a dumps using DataDump has been temporarily disabled due to the Swift migration. If you wish to request a dump be generated for your wiki, please [[phab:maniphest/task/edit/form/1|make a request on Phabricator]]. Thank you.",
 	"miraheze-dberr-problems": "This wiki is temporarily unavailable",
 	"miraheze-dberr-again": "Please try again in a few minutes, these errors usually resolve by then. If you are receiving this error persistently, please check our Twitter (https://twitter.com/MirahezeStatus) for more information or contact Miraheze System administrators by joining #miraheze-sre on irc.libera.chat or by joining our Discord server (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-centralauth-groupname": "Miraheze",
