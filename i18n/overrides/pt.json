@@ -4,7 +4,6 @@
 			"Hamilton Abreu"
 		]
 	},
-	"miraheze-datadump-desc": "A capacidade de gerar cópias em ficheiro usando o DataDump foi temporariamente desativada devido à migração do Swift. Se deseja pedir a geração de uma cópia em ficheiro da sua wiki [[phab:maniphest/task/edit/form/1|coloque um pedido no Phabricator]], por favor. Obrigado.",
 	"miraheze-dberr-problems": "Esta wiki está temporariamente indisponível",
 	"miraheze-dberr-again": "Tente novamente daqui a alguns minutos, por favor. Estes erros normalmente resolvem-se em períodos curtos. Se está a receber este erro de forma persistente, visite a nossa página no Twitter (https://twitter.com/MirahezeStatus) para obter mais informações ou contacte os administradores do sistema entrando em #miraheze-sre no canal irc.libera.chat ou no nosso servidor Discord (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-centralauth-groupname": "Miraheze",
