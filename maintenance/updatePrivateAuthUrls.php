@@ -15,9 +15,9 @@ class UpdatePrivateAuthUrls extends Maintenance {
 		$config = MediaWikiServices::getInstance()->getMainConfig();
 		$dbName = $config->get( 'DBname' );
 		$wiki = new RemoteWiki( $dbName );
-		$manageWikiSettings = new ManageWikiSettings( $dbName );
 
 		if ( $wiki->isPrivate() ) {
+			$manageWikiSettings = new ManageWikiSettings( $dbName );
 			foreach ( $manageWikiSettings->list() as $var => $val ) {
 				if (
 					is_string( $val ) &&
