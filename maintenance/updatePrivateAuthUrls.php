@@ -23,7 +23,7 @@ class UpdatePrivateAuthUrls extends Maintenance {
 					is_string( $val ) &&
 					str_contains( $val, "static.miraheze.org/$dbName" )
 				) {
-					$manageWikiSettings->modify( [ $var => str_replace( "static.miraheze.org/$dbName", '/w/img_auth', $val ] );
+					$manageWikiSettings->modify( [ $var => str_replace( "static.miraheze.org/$dbName", $config->get( 'Server' ) . '/w/img_auth.php', $val ] );
 					$manageWikiSettings->commit();
 				}
 			}
