@@ -23,7 +23,7 @@ class FixStaticUrls extends Maintenance {
 			) {
 				$new = str_replace( 'static-new.miraheze.org', 'static.miraheze.org', $val );
 
-				$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'" );
+				$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'\n" );
 
 				$manageWikiSettings->modify( [ $var => $new ] );
 				$manageWikiSettings->commit();
