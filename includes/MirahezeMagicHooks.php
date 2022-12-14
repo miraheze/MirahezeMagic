@@ -165,13 +165,15 @@ class MirahezeMagicHooks {
 				->restrict( Shell::RESTRICT_NONE )
 				->execute();
 
+			$newContainer = str_replace( $old, $new, $container );
+
 			// Upload to new container
 			// We have to use exec here, as Shell::command does not work for this
 			// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 			exec( escapeshellcmd(
 				implode( ' ', [
 					'swift', 'upload',
-					str_replace( $old, $new, $container ),
+					$newContainer,
 					wfTempDir() . '/' . $container,
 					'--object-name', '""',
 					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
@@ -179,6 +181,8 @@ class MirahezeMagicHooks {
 					'-K', $wmgSwiftPassword
 				] )
 			) );
+
+			wfDebugLog( 'MirahezeMagic', "Container '$newContainer' created." );
 
 			$newContainerList = Shell::command(
 				'swift', 'list',
@@ -204,6 +208,8 @@ class MirahezeMagicHooks {
 				)->limits( $limits )
 					->restrict( Shell::RESTRICT_NONE )
 					->execute();
+
+				wfDebugLog( 'MirahezeMagic', "Container '$container' deleted." );
 
 				// Wipe from the temp directory
 				Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
