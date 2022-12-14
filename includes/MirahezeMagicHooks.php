@@ -186,7 +186,7 @@ class MirahezeMagicHooks {
 
 			$newContainerList = Shell::command(
 				'swift', 'list',
-				str_replace( $old, $new, $container ),
+				$newContainer,
 				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
