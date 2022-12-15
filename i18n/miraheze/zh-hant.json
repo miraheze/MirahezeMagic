@@ -7,6 +7,7 @@
 			"MuratTheTurkish",
 			"Willy1018",
 			"Winston Sung",
+			"捍粵者",
 			"铁桶"
 		]
 	},
@@ -32,7 +33,7 @@
 	"miraheze-survey-access-d": "每日",
 	"miraheze-survey-access-ft": "這是我的第一次",
 	"miraheze-survey-access-lm": "一個月不到一次",
-	"miraheze-survey-access-m": "一個月一次",
+	"miraheze-survey-access-m": "每月一次",
 	"miraheze-survey-access-sd": "一天數次（2 次以上）",
 	"miraheze-survey-access-sm": "一個月數次（2 次以上）",
 	"miraheze-survey-access-sw": "一週數次（2 次以上）",
@@ -81,9 +82,9 @@
 	"miraheze-survey-q11": "請勾選以下哪個是您對於 Miraheze 所了解情況的方框",
 	"miraheze-survey-q11-d": "Miraheze 的資金是由像您這樣熱心的人所[[m:Special:MyLanguage/Donate|捐款]]來的",
 	"miraheze-survey-q11-f": "Miraheze 發佈其所有的[[m:Special:MyLanguage/Finance|財務資訊]]",
-	"miraheze-survey-q11-fd": "目前有一個正在進行的[[m:Special:MyLanguage/Fundraiser|資金籌集活動]]，您可以參與其中並提供幫助！",
+	"miraheze-survey-q11-fd": "目前有[[m:Special:MyLanguage/Fundraiser|籌款活動]]，您可參與其中並提供協助！",
 	"miraheze-survey-q11-p": "Miraheze 具有強烈的隱私立場（例如，我們從不放送廣告）",
-	"miraheze-survey-q11-s": "Miraheze 僅由志工們所組成",
+	"miraheze-survey-q11-s": "Miraheze只由志工組成",
 	"miraheze-survey-q11-v": "您可以以[[m:Special:MyLanguage/Contributing|志工]]的身份來在技術上或社群裡來協助 Miraheze",
 	"miraheze-survey-q11-c": "Miraheze 在 2019 年 11 月註冊為非營利組織，並設有董事會",
 	"miraheze-survey-q11-cd": "像您這樣的志工可以透過社群選舉來參選 Miraheze 董事會成員",
