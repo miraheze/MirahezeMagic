@@ -621,16 +621,18 @@ class MirahezeMagicHooks {
 	public static function onBlockIpComplete( $block, $user, $priorBlock ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$reportsBlockAlertKeywords = $config->get( 'MirahezeReportsBlockAlertKeywords' );
+		// TODO: do we want to add localisation support for these keywords, so they match in other languages as well?
+		$blockAlertKeywords = $config->get( 'MirahezeReportsBlockAlertKeywords' );
 
-		foreach ( $reportsBlockAlertKeywords as $keyword ) {
+		foreach ( $blockAlertKeywords as $keyword ) {
+			// use strtolower for case insensitivity
 			if ( str_contains( strtolower( $block->getReasonComment()->text ), strtolower( $keyword ) ) ) {
 				$data = [
 					'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
 					'username' => $block->getTargetName(),
 					'reporter' => $user->getName(),
 					'report' => 'people-other',
-					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
+					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID is: ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
 				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
