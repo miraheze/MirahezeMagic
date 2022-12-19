@@ -49,6 +49,9 @@
 		"AbuseFilterShouldFilterAction": [
 			"MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
 		],
+		"BlockIpComplete": [
+			"MirahezeMagicHooks::onBlockIpComplete"
+		],
 		"CreateWikiDeletion": [
 			"MirahezeMagicHooks::onCreateWikiDeletion"
 		],
@@ -104,6 +107,15 @@
 	"config": {
 		"MirahezeMagicLogEmailConditions": {
 			"value": []
+		},
+		"MirahezeReportsBlockAlertKeywords": {
+			"value": []
+		},
+		"MirahezeReportsBlockAlertUsername": {
+			"value": "MediaWiki-BlockAlert"
+		},
+		"MirahezeReportsWriteKey": {
+			"value": ""
 		},
 		"MirahezeStaffAccessIds": {
 			"value": []
