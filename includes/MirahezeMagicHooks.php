@@ -626,7 +626,7 @@ class MirahezeMagicHooks {
 
 		foreach ( $reportsBlockAlertKeywords as $keyword ) {
 			if ( str_contains( $block->getReasonComment()->text, $keyword ) ) {
-				$reportsPostData = [
+				$data = [
 					'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
 					'username' => $block->getTargetName(),
 					'reporter' => $reportsUsername,
@@ -635,7 +635,7 @@ class MirahezeMagicHooks {
 				];
 
 				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
-				$httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $reportsPostData ] );
+				$httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ] );
 			}
 		}
 	}
