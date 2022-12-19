@@ -628,10 +628,10 @@ class MirahezeMagicHooks {
 			if ( str_contains( $block->getReasonComment()->text, $keyword ) ) {
 				$reportsPostData = [
 					'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
-					'subjectuser' => $block->getTargetName(),
-					'type' => 'people-other',
-					'reportinguser' => $reportsUsername,
-					'text' => 'This is an automatic report. A user was blocked on ' . $config->get( 'DBname' ) . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
+					'username' => $block->getTargetName(),
+					'reporter' => $reportsUsername,
+					'report' => 'people-other',
+					'evidence' => 'This is an automatic report. A user was blocked on ' . $config->get( 'DBname' ) . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
 				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
