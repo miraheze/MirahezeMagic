@@ -618,6 +618,28 @@ class MirahezeMagicHooks {
 		}
 	}
 
+	public static function onBlockIpComplete( $block, $user, $priorBlock ) {
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+
+		$reportsUsername = $config->get( 'MirahezeReportsBlockAlertUsername' );
+		$reportsBlockAlertKeywords = $config->get( 'MirahezeReportsBlockAlertKeywords' );
+
+		foreach ( $reportsBlockAlertKeywords as $keyword ) {
+			if ( str_contains( $block->getReasonComment()->text, $keyword ) ) {
+				$reportsPostData = [
+					'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
+					'subjectuser' => $block->getTargetName(),
+					'type' => 'people-other',
+					'reportinguser' => $reportsUsername,
+					'text' => 'This is an automatic report. A user was blocked on ' . $config->get( 'DBname' ) . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
+				];
+
+				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
+				$httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $reportsPostData ] );
+			}
+		}
+	}
+
 	private static function addFooterLink( $skin, $desc, $page ) {
 		if ( $skin->msg( $desc )->inContentLanguage()->isDisabled() ) {
 			$title = null;
