@@ -595,9 +595,7 @@ class MirahezeMagicHooks {
 			return;
 		}
 
-		$user = User::newFromIdentity( $recentChange->getPerformerIdentity() );
-
-		$globalUserGroups = CentralAuthUser::getInstanceByName( $user->getName() )->getGlobalGroups();
+		$globalUserGroups = CentralAuthUser::getInstanceByName( $recentChange->mAttribs['rc_user_text'] )->getGlobalGroups();
 		if ( !in_array( 'trustandsafety', $globalUserGroups ) ) {
 			return;
 		}
@@ -606,7 +604,7 @@ class MirahezeMagicHooks {
 
 		$data = [
 			'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
-			'username' => $user->getName(),
+			'username' => $recentChange->mAttribs['rc_user_text'],
 			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
 			'wiki' => $config->get( 'DBname' ),
 			'comment' => $recentChange->mAttribs['rc_comment_text'],
