@@ -595,27 +595,20 @@ class MirahezeMagicHooks {
 			return;
 		}
 
-		/** @var MirahezeMagicLogEmailManager $logEmailManager */
-		$logEmailManager = MediaWikiServices::getInstance()->get( 'MirahezeMagic.LogEmailManager' );
-
 		$user = User::newFromIdentity( $recentChange->getPerformerIdentity() );
-		$conditions = $logEmailManager->findForUser( $user );
 
-		if ( empty( $conditions ) ) {
-			return;
-		}
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$data = [
-			'user_name' => $user->getName(),
-			'wiki_id' => WikiMap::getCurrentWikiId(),
-			'log_type' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
-			'comment_text' => $recentChange->mAttribs['rc_comment_text'],
+			'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
+			'username' => $user->getName(),
+			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
+			'wiki' => $config->get( 'DBname' ),
+			'comment' => $recentChange->mAttribs['rc_comment_text'],
 		];
 
-		foreach ( $conditions as $condition ) {
-			// TODO: check for log entry types etc if wanted
-			$logEmailManager->sendEmail( $data, $condition['email'] );
-		}
+		$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
+		$httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );
 	}
 
 	private static function addFooterLink( $skin, $desc, $page ) {
