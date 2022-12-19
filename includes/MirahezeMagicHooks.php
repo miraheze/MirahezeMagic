@@ -631,7 +631,7 @@ class MirahezeMagicHooks {
 					'username' => $block->getTargetName(),
 					'reporter' => $reportsUsername,
 					'report' => 'people-other',
-					'evidence' => 'This is an automatic report. A user was blocked on ' . $config->get( 'DBname' ) . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
+					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
 				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
