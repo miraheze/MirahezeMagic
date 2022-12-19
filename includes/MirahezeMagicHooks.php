@@ -635,6 +635,8 @@ class MirahezeMagicHooks {
 
 				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
 				$httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ] );
+
+				break;
 			}
 		}
 	}
