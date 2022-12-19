@@ -111,9 +111,6 @@
 		"MirahezeReportsBlockAlertKeywords": {
 			"value": [ "underage", "death threats" ]
 		},
-		"MirahezeReportsBlockAlertUsername": {
-			"value": "MediaWiki-BlockAlert"
-		},
 		"MirahezeReportsWriteKey": {
 			"value": ""
 		},
