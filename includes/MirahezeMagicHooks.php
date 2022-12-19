@@ -621,15 +621,14 @@ class MirahezeMagicHooks {
 	public static function onBlockIpComplete( $block, $user, $priorBlock ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$reportsUsername = $config->get( 'MirahezeReportsBlockAlertUsername' );
 		$reportsBlockAlertKeywords = $config->get( 'MirahezeReportsBlockAlertKeywords' );
 
 		foreach ( $reportsBlockAlertKeywords as $keyword ) {
-			if ( str_contains( $block->getReasonComment()->text, $keyword ) ) {
+			if ( str_contains( strtolower( $block->getReasonComment()->text ), strtolower( $keyword ) ) ) {
 				$data = [
 					'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
 					'username' => $block->getTargetName(),
-					'reporter' => $reportsUsername,
+					'reporter' => $user->getName(),
 					'report' => 'people-other',
 					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID at the wiki is ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
