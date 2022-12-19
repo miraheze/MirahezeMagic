@@ -606,7 +606,7 @@ class MirahezeMagicHooks {
 			'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
 			'username' => $recentChange->mAttribs['rc_user_text'],
 			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
-			'wiki' => $config->get( 'DBname' ),
+			'wiki' => WikiMap::getCurrentWikiId(),
 			'comment' => $recentChange->mAttribs['rc_comment_text'],
 		];
 
