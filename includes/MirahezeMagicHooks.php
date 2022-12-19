@@ -597,6 +597,11 @@ class MirahezeMagicHooks {
 
 		$user = User::newFromIdentity( $recentChange->getPerformerIdentity() );
 
+		$globalUserGroups = CentralAuthUser::getInstanceByName( $user->getName() )->getGlobalGroups();
+		if ( !in_array( 'trustandsafety', $globalUserGroups ) ) {
+			return;
+		}
+
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
 		$data = [
