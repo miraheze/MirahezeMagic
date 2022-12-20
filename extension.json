@@ -33,7 +33,6 @@
 	},
 	"AutoloadClasses": {
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
-		"MirahezeMagicLogEmailManager": "includes/MirahezeMagicLogEmailManager.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
 		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
 	},
@@ -105,9 +104,6 @@
 		"mirahezemagic": "GlobalVarConfig::newInstance"
 	},
 	"config": {
-		"MirahezeMagicLogEmailConditions": {
-			"value": []
-		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"value": []
 		},
@@ -121,8 +117,5 @@
 			"value": true
 		}
 	},
-	"ServiceWiringFiles": [
-		"includes/ServiceWiring.php"
-	],
 	"manifest_version": 2
 }
