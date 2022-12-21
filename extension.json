@@ -48,6 +48,9 @@
 		"AbuseFilterShouldFilterAction": [
 			"MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
 		],
+		"BlockIpComplete": [
+			"MirahezeMagicHooks::onBlockIpComplete"
+		],
 		"CreateWikiDeletion": [
 			"MirahezeMagicHooks::onCreateWikiDeletion"
 		],
@@ -101,6 +104,12 @@
 		"mirahezemagic": "GlobalVarConfig::newInstance"
 	},
 	"config": {
+		"MirahezeReportsBlockAlertKeywords": {
+			"value": []
+		},
+		"MirahezeReportsWriteKey": {
+			"value": ""
+		},
 		"MirahezeStaffAccessIds": {
 			"value": []
 		},
