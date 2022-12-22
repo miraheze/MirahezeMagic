@@ -98,7 +98,7 @@
 	"group-wikimanager-member": "{{GENDER:$1|مدير|مديرة}} ويكي",
 	"group-rollbacker": "مسترجعون",
 	"group-rollbacker-member": "{{GENDER:$1|مسترجع|مسترجعة}}",
-	"group-autopatrolled": "مراجعون تلقائيون",
+	"group-autopatrolled": "مراجعون تلقائيًا",
 	"group-autopatrolled-member": "{{GENDER:$1|مراجع تلقائي|مراجعة تلقائية}}",
 	"group-confirmed": "مستخدمون مؤكدون",
 	"group-confirmed-member": "{{GENDER:$1|مستخدم مؤكد|مستخدمة مؤكدة}}",
