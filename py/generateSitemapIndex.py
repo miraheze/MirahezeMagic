@@ -7,7 +7,7 @@ from swiftclient import Connection
 from time import sleep
 
 parser = argparse.ArgumentParser(
-    description='Generate Miraheze sitemap index of all public wikis, and upload the object to the "miraheze-mw" Swift container')
+    description='Generate Miraheze sitemap index of all public wikis, and upload the object to the "root" container in Swift')
 parser.add_argument(
     '-A', '--auth', dest='auth', default=os.environ.get('ST_AUTH', None),
     help='URL for obtaining an auth token for Swift (ST_AUTH)')
