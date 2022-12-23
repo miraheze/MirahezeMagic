@@ -45,5 +45,6 @@
 	"miraheze-group-bot": "Bots",
 	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
 	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}",
+	"grant-usedatadumpapi": "Create, view, and delete dumps"
 }
