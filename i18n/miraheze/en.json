@@ -191,6 +191,5 @@
 	"extensions-mediahandlers": "Media handlers",
 	"extensions-parserhooks": "Parser hooks",
 	"extensions-specialpages": "Special pages",
-	"extensions-variable": "Variables",
-	"grant-usedatadumpapi": "Create, view, and delete dumps"
+	"extensions-variable": "Variables"
 }
