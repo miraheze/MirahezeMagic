@@ -332,7 +332,6 @@ class MirahezeMagicHooks {
 			'grouppage-bot',
 			'group-bot-member',
 			'grouppage-user',
-			"grant-usedatadumpapi",
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
