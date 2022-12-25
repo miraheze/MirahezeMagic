@@ -336,6 +336,15 @@ class MirahezeMagicHooks {
 			'grouppage-bot',
 			'group-bot-member',
 			'grouppage-user',
+			'createwiki-defaultmainpage',
+			'createwiki-close-email-sender',
+			'createwiki-email-subject',
+			'createwiki-email-body',
+			'requestwiki-error-invalidcomment',
+			'requestwiki-error-patient',
+			'requestwiki-header',
+			'requestwiki-label-siteurl',
+			'requestwiki-success',
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
