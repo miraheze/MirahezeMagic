@@ -172,5 +172,6 @@
 	"extensions-mediahandlers": "Leitura e tratamento de multimédia",
 	"extensions-parserhooks": "''Hooks'' do analisador sintático",
 	"extensions-specialpages": "Páginas especiais",
-	"extensions-variable": "Variáveis"
+	"extensions-variable": "Variáveis",
+	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em ficheiro"
 }

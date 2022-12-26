@@ -183,5 +183,6 @@
 	"extensions-mediahandlers": "Gestionnaires de médias",
 	"extensions-parserhooks": "Crochets de l’analyseur syntaxique",
 	"extensions-specialpages": "Pages spéciales",
-	"extensions-variable": "Variables"
+	"extensions-variable": "Variables",
+	"grant-usedatadumpapi": "Créer, afficher et supprimer des vidages de données"
 }
