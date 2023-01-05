@@ -182,5 +182,6 @@
 	"extensions-mediahandlers": "Mediennutzungserweiterungen",
 	"extensions-parserhooks": "Parsererweiterungen",
 	"extensions-specialpages": "Spezialseiten",
-	"extensions-variable": "Variablen"
+	"extensions-variable": "Variablen",
+	"grant-usedatadumpapi": "Dumps erstellen, anzeigen und löschen"
 }
