@@ -57,8 +57,5 @@
 	"miraheze-requestwiki-success": "Your wiki request ($1) was successfully submitted. Your request will be reviewed by a volunteer wiki creator as soon as possible.",
 	"miraheze-createwiki-error-disallowed": "The subdomain you have requested cannot be created. Please either request a new subdomain or contact Site Reliability Engineers for help.",
 	"miraheze-log-action-filter-farmer-requestaccept": "Wiki request approved",
-	"miraheze-log-action-filter-farmer-requestwiki": "Wiki request (re)opened",
-	"miraheze-logentry-farmer-requestaccept": "$1 approved wiki request $4",
-	"miraheze-logentry-farmer-requestdecline": "$1 declined wiki request $4",
-	"miraheze-logentry-farmer-requestonhold": "$1 held wiki request $4"
+	"miraheze-log-action-filter-farmer-requestwiki": "Wiki request (re)opened"
 }
