@@ -343,7 +343,6 @@ class MirahezeMagicHooks {
 			'requestwiki-error-invalidcomment',
 			'requestwiki-error-patient',
 			'requestwiki-header',
-			'requestwiki-label-siteurl',
 			'requestwiki-success',
 			'createwiki-error-disallowed',
 		];
