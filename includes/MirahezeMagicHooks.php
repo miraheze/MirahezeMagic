@@ -346,11 +346,6 @@ class MirahezeMagicHooks {
 			'requestwiki-label-siteurl',
 			'requestwiki-success',
 			'createwiki-error-disallowed',
-			'log-action-filter-farmer-requestaccept',
-			'log-action-filter-farmer-requestwiki',
-			'logentry-farmer-requestaccept',
-			'logentry-farmer-requestdecline',
-			'logentry-farmer-requestonhold',
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
