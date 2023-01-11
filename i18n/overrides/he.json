@@ -9,7 +9,7 @@
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-merge-method-admin": "חשבון ממוזג ידנית",
-	"miraheze-centralauth-merge-method-admin-desc": "חשבון זה מוזג ידנית על ידי מפעיל או דייל. ייתכן שזה נבע מבעיה טכנית בתהליך שינוי השם או המיזוג",
+	"miraheze-centralauth-merge-method-admin-desc": "חשבון זה מוזג ידנית על־ידי מהנדס יציבות אתר או דייל. ייתכן שזה נבע מבעיה טכנית בתהליך שינוי השם או המיזוג.",
 	"miraheze-restriction-protect": "הגנה",
 	"miraheze-restriction-delete": "מחיקה",
 	"miraheze-skinname-snapwikiskin": "Snap!",

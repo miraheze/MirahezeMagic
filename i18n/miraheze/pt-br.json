@@ -153,5 +153,6 @@
 	"extensions-mediahandlers": "Executores de mídia",
 	"extensions-parserhooks": "Hooks do analisador (parser)",
 	"extensions-specialpages": "Páginas especiais",
-	"extensions-variable": "Variáveis"
+	"extensions-variable": "Variáveis",
+	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em arquivo"
 }

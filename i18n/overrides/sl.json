@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"miraheze-dberr-problems": "Ta viki trenutno ni na voljo",
+	"miraheze-dberr-again": "Prosimo, poskusite znova čez nekaj minut; te napake so do takrat običajno odpravljene. Če nenehno prejemate to napako, za več informacij preverite naš Twitter (https://twitter.com/MirahezeStatus) ali se obrnite na inženirstvo za zanesljivost spletnega mesta Miraheze tako, da se pridružite #miraheze-sre na irc.libera.chat ali da se pridružite našemu strežniku Discord (https://discord.gg/TVAJTE4CUn).",
+	"miraheze-centralauth-login-error-locked": "Ne {{GENDER:$1|morete}} se prijaviti, ker je {{GENDER:$1|vaš}} račun [[m:Special:MyLanguage/Global locks|globalno zaklenjen]]. Za več informacij ali pritožbo se obrnite na <code>cvt[at]miraheze.org</code>.",
+	"miraheze-centralauth-merge-method-admin": "Ročno spojeni račun",
+	"miraheze-centralauth-merge-method-admin-desc": "Ta račun je ročno združil inženir za zanesljivost spletnega mesta ali upravnik. To je morda posledica tehnične težave pri preimenovanju ali združevanju.",
+	"miraheze-uploadtext": "Za nalaganje datotek uporabite spodnji obrazec.\nČe si želite ogledati ali iskati predhodno naložene datoteke, pojdite na [[Special:FileList|seznam naloženih datotek]]. Naložitve in ponovne naložitve se beležijo tudi v [[Special:Log/upload|dnevniku nalaganja]]. Izbrisi se beležijo v [[Special:Log/delete|dnevnik izbrisov]].\n\nČe želite vključiti datoteko na stran, uporabite povezavo v eni od naslednjih oblik:\n*<strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong> za uporabo polne različice datoteke.\n*<strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|Caption]]</nowiki></code></strong> za uporabo 200 slikovnih pik široke izvedbe v polju na levem robu z besedilom »Caption« spodaj.\n*<strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> za neposredno povezavo do datoteke brez prikaza datoteke.\n\n\n\n{{Note}} Upoštevajte, da ''''''mora'''' vaš viki upoštevati britanski zakon o avtorskih pravicah. Če ga ne boste upoštevali, bo to pomenilo kršitve avtorskih pravic in '''zaprtje vikija'''. V britanskem sistemu poštena uporaba ne obstaja, namesto tega jo nadomešča strožji sistem [[w:Fair dealing in United Kingdom law|poštenega ravnanja]].",
+	"miraheze-skinname-snapwikiskin": "Tlesk!",
+	"miraheze-snapwikiskin": "Tlesk!",
+	"miraheze-group-bot": "Boti",
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
+}

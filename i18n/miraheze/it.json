@@ -8,6 +8,7 @@
 			"Executive",
 			"GpieroMW",
 			"JackLantern",
+			"McDutchie",
 			"MuratTheTurkish"
 		]
 	},
@@ -66,7 +67,7 @@
 	"miraheze-survey-q7": "Prego vota la seguente frase su una scala da 1-5, dove 1 è fortemente in disaccordo e 5 è fortemente in accordo.",
 	"miraheze-survey-q7-ci": "Ho un'impressione positiva di Miraheze come un servizio",
 	"miraheze-survey-q7-oe": "Io sono soddisfatto con la mia esperienza Miraheze",
-	"miraheze-survey-q7-si": "Ho un'impressione positiva degli Miraheze Site Reliability Engineering (amministratori di sistema)",
+	"miraheze-survey-q7-si": "Ho un'impressione positiva dei Site Reliability Engineering di Miraheze",
 	"miraheze-survey-q7-speed": "Sono soddisfatto con la recente (1 o 2 settimane) velocità quando uso il mio wiki",
 	"miraheze-survey-q7-tasks": "I compiti che ho lasciato su Phabricator sono stati risolti soddisfacentemente",
 	"miraheze-survey-q7-up": "Io sono soddisfatto con le tempistiche di Miraheze",
@@ -125,7 +126,7 @@
 	"group-global-ipblock-exempt": "Esente dal blocco IP globale",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|esente dal blocco IP globale}}",
 	"group-member": "Membri",
-	"group-member-member": "{{GENDER:$1|membto}}",
+	"group-member-member": "{{GENDER:$1|membro}}",
 	"protect-level-user": "Consenti solo gli utenti registrati",
 	"restriction-delete": "Elimina",
 	"restriction-level-user": "Consenti solo gli utenti registrati",
