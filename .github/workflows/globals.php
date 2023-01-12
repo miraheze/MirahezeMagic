@@ -1,33 +1,21 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\DBConnectionError;
+use Wikimedia\Rdbms\DBQueryError;
+use Wikimedia\Rdbms\DBUnexpectedError;
+
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
-function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
+function wfOnMediaWikiServices( MediaWikiServices $services ) {
 	try {
-		global $IP;
+		$dbw = $services->getDBLoadBalancer()
+			->getMaintenanceConnectionRef( DB_PRIMARY );
 
-		static $dbr = null;
-		static $dbw = null;
-
-		$dbr ??= $services->getDBLoadBalancer()
-			->getMaintenanceConnectionRef( DB_REPLICA );
-
-		if ( !$dbr->tableExists( 'echo_unread_wikis' ) ) {
-			$dbw ??= $services->getDBLoadBalancer()
-				->getMaintenanceConnectionRef( DB_PRIMARY );
-
-			// < MediaWiki 1.39 — Remove once CI drops MediaWiki 1.38 support
-			if ( file_exists( "$IP/extensions/Echo/db_patches/echo_unread_wikis.sql" ) ) {
-				$dbw->sourceFile( "$IP/extensions/Echo/db_patches/echo_unread_wikis.sql" );
-				return;
-			}
-
-			// MediaWiki 1.39+
-			if ( file_exists( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" ) ) {
-				$dbw->sourceFile( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" );
-			}
+		if ( !$dbw->tableExists( 'echo_unread_wikis' ) ) {
+			$dbw->sourceFile( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" );
 		}
-	} catch ( Wikimedia\Rdbms\DBQueryError $e ) {
+	} catch ( DBConnectionError | DBQueryError | DBUnexpectedError $e ) {
 		return;
 	}
 }
