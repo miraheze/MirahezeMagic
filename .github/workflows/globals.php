@@ -1,15 +1,23 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+use Wikimedia\Rdbms\DBQueryError;
+use Wikimedia\Rdbms\DBUnexpectedError;
+
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
-function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
+function wfOnMediaWikiServices( MediaWikiServices $services ) {
 	try {
 		global $IP;
-		$dbw = wfGetDB( DB_PRIMARY );
+
+		static $dbw = null;
+		$dbw ??= $services->getDBLoadBalancer()
+			->getMaintenanceConnectionRef( DB_PRIMARY );
+
 		if ( !$dbw->tableExists( 'echo_unread_wikis' ) ) {
 			$dbw->sourceFile( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" );
 		}
-	} catch ( Wikimedia\Rdbms\DBQueryError $e ) {
+	} catch ( DBQueryError | DBUnexpectedError $e ) {
 		return;
 	}
 }
