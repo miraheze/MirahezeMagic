@@ -9,6 +9,8 @@ $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWikiServices $services ) {
 	try {
+		global $IP;
+
 		$dbw = $services->getDBLoadBalancer()
 			->getMaintenanceConnectionRef( DB_PRIMARY );
 
