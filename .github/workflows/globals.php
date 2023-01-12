@@ -6,7 +6,8 @@ function wfOnMediaWikiServices( MediaWiki\MediaWikiServices $services ) {
 	try {
 		global $IP;
 
-		$dbw = $services->getDBLoadBalancer()
+		static $dbw = null;
+		$dbw ??= $services->getDBLoadBalancer()
 			->getMaintenanceConnectionRef( DB_PRIMARY );
 
 		if ( !$dbw->tableExists( 'echo_unread_wikis' ) ) {
