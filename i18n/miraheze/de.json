@@ -29,7 +29,6 @@
 	"miraheze-donate": "Spende an Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "Häufig gestellte Fragen",
-	"miraheze-global-renames-disabled": "Globale Umbenennungen sind derzeit aufgrund von Problemen mit einem unserer Datenbankserver (db141) deaktiviert. Weitere Informationen findest du [[m:Tech:SRE noticeboard|hier]] oder indem du [https://discord.gg/TVAJTE4CUn unserem Discord-Server beitrittst].",
 	"miraheze-helpcenter": "Miraheze-Hilfezentrum",
 	"miraheze-requestfeatures": "Funktionen auf einem Wiki anfordern",
 	"miraheze-requestwiki": "Ein Wiki beantragen",
