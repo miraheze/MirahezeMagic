@@ -41,7 +41,9 @@ class MirahezeMagicHooks {
 
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			->getMainLB( $config->get( 'EchoSharedTrackingDB' ) )
+			->getMaintenanceConnectionRef( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
@@ -102,7 +104,9 @@ class MirahezeMagicHooks {
 
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 
-		$dbw = wfGetDB( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
+		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			->getMainLB( $config->get( 'EchoSharedTrackingDB' ) )
+			->getMaintenanceConnectionRef( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
