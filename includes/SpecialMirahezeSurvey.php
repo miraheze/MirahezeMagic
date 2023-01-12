@@ -26,7 +26,9 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			return $out->addHTML( Html::errorBox( $this->msg( 'miraheze-survey-disabled' )->parse() ) );
 		}
 
-		$this->dbw = wfGetDB( DB_PRIMARY, [], 'survey' );
+		$this->dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
+			->getMainLB( 'survey' )
+			->getMaintenanceConnectionRef( DB_PRIMARY, [], 'survey' );
 
 		$this->row = $this->dbw->selectRow(
 			'survey',
