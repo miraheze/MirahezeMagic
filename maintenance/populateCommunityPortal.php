@@ -34,8 +34,8 @@ class PopulateCommunityPortal extends Maintenance {
 		$communityPortalName = wfMessage( 'portal' )->inLanguage( $language )->plain();
 		$title = Title::newFromText( $communityPortalName, $defaultNamespace = NS_PROJECT );
 		$article = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title )->newPageUpdater( User::newSystemUser( 'MediaWiki default', [ 'steal' => true ] ) );
-		$article->setContent( SlotRecord::MAIN, new WikitextContent( wfMessage( 'mirahezemagic-communityportlatext' )->inLanguage( $language )->plain() ) );
-		$article->saveRevision( CommentStoreComment::newUnsavedComment( wfMessage( 'mirahezemagic-communityportal-summary' )->inLanguage( $language )->plain() ), EDIT_SUPPRESS_RC );
+		$article->setContent( SlotRecord::MAIN, new WikitextContent( wfMessage( 'miraheze-communityportal-text' )->inLanguage( $language )->plain() ) );
+		$article->saveRevision( CommentStoreComment::newUnsavedComment( wfMessage( 'miraheze-communityportal-summary' )->inLanguage( $language )->plain() ), EDIT_SUPPRESS_RC );
 	}
 }
 
