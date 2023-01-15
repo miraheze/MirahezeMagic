@@ -36,6 +36,17 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
+	public static function onCreateWikiCreation( $wiki ) {
+
+		Shell::makeScriptCommand(
+			$blankConfig->get( 'IP' ) . '/extensions/MirahezeMagic/maintenance/populateCommunityPortal.php',
+			[
+				'--wiki', $wiki
+			]
+		)->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )->execute();
+
+	}
+
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
 		global $wmgSwiftPassword;
 
