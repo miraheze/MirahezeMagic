@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Buehl",
 			"MathXplore",
 			"Omotecho",
 			"RYOUMA1117",
@@ -35,5 +36,6 @@
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|ビューロクラット}}",
 	"miraheze-group-sysop": "管理者",
 	"miraheze-group-interface-admin": "インターフェース管理者",
-	"miraheze-group-bot": "ボット"
+	"miraheze-group-bot": "ボット",
+	"miraheze-group-bot-member": "{{GENDER:$1|ボット}}"
 }
