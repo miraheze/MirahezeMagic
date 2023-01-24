@@ -336,7 +336,6 @@ class MirahezeMagicHooks {
 			'grouppage-bot',
 			'group-bot-member',
 			'grouppage-user',
-			'createwiki-defaultmainpage',
 			'createwiki-close-email-sender',
 			'createwiki-email-subject',
 			'createwiki-email-body',
