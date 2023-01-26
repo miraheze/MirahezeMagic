@@ -229,6 +229,13 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		Shell::makeScriptCommand(
+			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
+			[
+				'--wiki', $new
+			]
+		)->limits( $limits )->execute();
+
 		static::removeRedisKey( "*{$old}*" );
 		// static::removeMemcachedKey( ".*{$old}.*" );
 	}
