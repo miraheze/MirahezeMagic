@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"Apzp79",
+			"Cerulean",
 			"Codenstory",
 			"John Lewis",
 			"MuratTheTurkish",
@@ -105,5 +106,10 @@
 	"settings-seo": "SEO",
 	"settings-socialtools": "소셜 도구",
 	"settings-styling": "형식",
-	"extensions-skins": "스킨"
+	"extensions-skins": "스킨",
+	"extensions-editors": "편집자",
+	"extensions-parserhooks": "파서 훅",
+	"extensions-specialpages": "특수 문서",
+	"extensions-variable": "변수",
+	"grant-usedatadumpapi": "덤프 생성, 보기, 삭제"
 }
