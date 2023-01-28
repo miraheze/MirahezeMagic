@@ -24,6 +24,10 @@ class MirahezeMagicHooks {
 		User $user,
 		array &$skipReasons
 	) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true;
+		}
+
 		$varManager = AbuseFilterServices::getVariablesManager();
 
 		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
