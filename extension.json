@@ -117,5 +117,6 @@
 			"value": true
 		}
 	},
+	"load_composer_autoloader": true,
 	"manifest_version": 2
 }
