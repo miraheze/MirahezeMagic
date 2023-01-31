@@ -9,6 +9,10 @@
 		"php-parallel-lint/php-console-highlighter": "1.0.0",
 		"php-parallel-lint/php-parallel-lint": "1.3.2"
 	},
+	"require": {
+		"composer/installers": ">=1.0.1",
+		"qmegas/memcache-search": "^0.1.2"
+	},
 	"scripts": {
 		"fix": [
 			"minus-x fix .",
@@ -21,5 +25,12 @@
 		],
 		"phan": "phan -d . --long-progress-bar",
 		"phpcs": "phpcs -sp --cache"
+	},
+	"config": {
+		"prepend-autoloader": false,
+		"optimize-autoloader": true,
+		"allow-plugins": {
+			"composer/installers": true
+		}
 	}
 }
