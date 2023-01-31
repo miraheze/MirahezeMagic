@@ -6,6 +6,8 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Qmegas\Finder\RegExp;
+use Qmegas\MemcacheSearch;
 use Wikimedia\IPUtils;
 
 class MirahezeMagicHooks {
@@ -100,7 +102,7 @@ class MirahezeMagicHooks {
 		}
 
 		static::removeRedisKey( "*{$wiki}*" );
-		// static::removeMemcachedKey( ".*{$wiki}.*" );
+		static::removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
 	public static function onCreateWikiRename( $dbw, $old, $new ) {
@@ -241,7 +243,7 @@ class MirahezeMagicHooks {
 		)->limits( $limits )->execute();
 
 		static::removeRedisKey( "*{$old}*" );
-		// static::removeMemcachedKey( ".*{$old}.*" );
+		static::removeMemcachedKey( ".*{$old}.*" );
 	}
 
 	public static function onCreateWikiStatePrivate( $dbname ) {
@@ -522,32 +524,21 @@ class MirahezeMagicHooks {
 
 	/** Remove memcached keys */
 	public static function removeMemcachedKey( string $key ) {
-		global $wmgCacheSettings;
+		global $wgObjectCaches, $wgMainCacheType;
 
-		$memcacheServer = explode( ':', $wmgCacheSettings['memcached']['server'][0] );
+		$memcachedServer = explode( ':', $wgObjectCaches[$wgMainCacheType]['servers'][0] );
 
 		try {
-			$memcached = new \Memcached();
-			$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
+			$memcached = new Memcached();
+			$memcached->addServer( $memcachedServer[0], $memcachedServer[1] );
 
-			// Fetch all keys
-			$keys = $memcached->getAllKeys();
-			if ( !is_array( $keys ) ) {
-				return;
-			}
+			// We use this one to fetch
+			$search = new MemcacheSearch();
+			$search->addServer( $memcachedServer[0], $memcachedServer[1] );
 
-			$memcached->getDelayed( $keys );
-
-			$store = $memcached->fetchAll();
-
-			$keys = $memcached->getAllKeys();
-			foreach ( $keys as $item ) {
-				// Decide which keys to delete
-				if ( preg_match( "/{$key}/", $item ) ) {
-					$memcached->delete( $item );
-				} else {
-					continue;
-				}
+			$find = new RegExp( "/{$key}/" );
+			foreach ( $search->search( $find ) as $item ) {
+				$memcached->delete( $item->getKey() );
 			}
 		} catch ( Throwable $ex ) {
 			// empty
