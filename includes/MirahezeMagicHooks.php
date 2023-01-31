@@ -540,7 +540,7 @@ class MirahezeMagicHooks {
 			foreach ( $search->search( $find ) as $item ) {
 				$memcached->delete( $item->getKey() );
 			}
-		} catch ( Throwable $ex ) {
+		} catch ( Exception $ex ) {
 			// empty
 		}
 	}
