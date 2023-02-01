@@ -191,5 +191,7 @@
 	"extensions-parserhooks": "Parser hooks",
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
-	"grant-usedatadumpapi": "Create, view, and delete dumps"
+	"grant-usedatadumpapi": "Create, view, and delete dumps",
+	"pref-forcesafemode": "Force safemode?",
+	"miraheze-forcesafemode": "Always force safemode? Similar to always forcing ?safemode=1."
 }
