@@ -674,7 +674,7 @@ class MirahezeMagicHooks {
 	public static function onGetPreferences( User $user, array &$preferences ) {
 		$preferences['forcesafemode'] = [
 			'type' => 'toggle',
-			'label-message' => 'miraheze-forcesafemode',
+			'label-message' => 'prefs-forcesafemode-label',
 			'section' => 'rendering',
 		];
 	}
