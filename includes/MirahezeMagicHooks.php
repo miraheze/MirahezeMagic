@@ -670,4 +670,19 @@ class MirahezeMagicHooks {
 			$skin->msg( $desc )->text()
 		);
 	}
+
+	public static function onGetPreferences( User $user, array &$preferences ) {
+		$preferences['forcesafemode'] = [
+			'type' => 'toggle',
+			'label-message' => 'miraheze-force-safemode',
+			'section' => 'rendering',
+		];
+	}
+
+	public static function onBeforeInitialize( $title, $unused, $output, $user, $request, $mediaWiki ) {
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
+		if ( $userOptionsLookup->getBoolOption( $user, 'forcesafemode' ) ) {
+			$request->setVal( 'safemode', '1' );
+		}
+	}
 }
