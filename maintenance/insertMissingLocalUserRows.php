@@ -23,8 +23,6 @@
 
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
-use Wikimedia\Rdbms\DBConnectionError;
-use Wikimedia\Rdbms\DBUnexpectedError;
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
