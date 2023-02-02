@@ -22,11 +22,8 @@
 	"miraheze-wikibase-sitelinks-miraheze": "วิกิของ Miraheze",
 	"miraheze-group-bureaucrat": "ผู้ดูแลสิทธิ์แต่งตั้ง",
 	"miraheze-group-sysop": "ผู้ดูแลระบบ",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|ผู้ดูแลระบบ}}",
 	"miraheze-group-interface-admin": "ผู้ดูแลระบบอินเตอร์เฟซ",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-bot": "บอต",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
 	"miraheze-group-bot-member": "{{GENDER:$1|บอต}}"
 }

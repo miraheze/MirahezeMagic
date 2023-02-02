@@ -37,18 +37,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Wikis de Miraheze",
 	"miraheze-group-checkuser": "Vérificateurs d’utilisateurs",
 	"miraheze-group-checkuser-member": "vérificateur d’utilisateurs",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Bureaucrates",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "bureaucrate{{GENDER:$1|}}",
 	"miraheze-group-sysop": "Administrateurs",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "administrat{{GENDER:$1|eur|rice}}",
 	"miraheze-group-interface-admin": "Administrateurs d’interface",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "administrat{{GENDER:$1|eur|rice}} d’interface",
 	"miraheze-group-bot": "Robots",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "robot{{GENDER:$1|}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "robot{{GENDER:$1|}}"
 }

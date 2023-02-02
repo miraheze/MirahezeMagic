@@ -28,18 +28,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Vikileri",
 	"miraheze-group-checkuser": "Denetçiler",
 	"miraheze-group-checkuser-member": "denetçi",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Bürokratlar",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bürokrat}}",
 	"miraheze-group-sysop": "Yöneticiler",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|yönetici}}",
 	"miraheze-group-interface-admin": "Arayüz yöneticileri",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|arayüz yöneticisi}}",
 	"miraheze-group-bot": "Botlar",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
 }

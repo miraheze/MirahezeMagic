@@ -12,18 +12,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze wikiji",
 	"miraheze-group-checkuser": "Čekjuzeri",
 	"miraheze-group-checkuser-member": "čekjuzer",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Birokrati",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|birokrat|birokratica}}",
 	"miraheze-group-sysop": "Administratori",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|administrator|administratorica}}",
 	"miraheze-group-interface-admin": "Administratori interfejsa",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|administrator interfejsa|administratorica interfejsa}}",
 	"miraheze-group-bot": "Botovi",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
 }

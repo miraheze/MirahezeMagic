@@ -34,18 +34,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-вікі",
 	"miraheze-group-checkuser": "Чек'юзери",
 	"miraheze-group-checkuser-member": "чек'юзер",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Бюрократи",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|бюрократ|бюрократка}}",
 	"miraheze-group-sysop": "Адміністратори",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|адміністратор|адміністраторка}}",
 	"miraheze-group-interface-admin": "Адміністратори інтерфейсу",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|адміністратор інтерфейсу|адміністраторка інтерфейсу}}",
 	"miraheze-group-bot": "Боти",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|бот}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|бот}}"
 }
