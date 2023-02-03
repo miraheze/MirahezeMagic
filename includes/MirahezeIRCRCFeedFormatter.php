@@ -20,6 +20,7 @@
  */
 
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 
 /**
@@ -45,12 +46,12 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 	 */
 	public function getLine( array $feed, RecentChange $rc, $actionComment ) {
 		$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
-		$useRCPatrol = $mainConfig->get( 'UseRCPatrol' );
-		$useNPPatrol = $mainConfig->get( 'UseNPPatrol' );
-		$localInterwikis = $mainConfig->get( 'LocalInterwikis' );
-		$canonicalServer = $mainConfig->get( 'CanonicalServer' );
-		$script = $mainConfig->get( 'Script' );
-		$dbName = $mainConfig->get( 'DBname' );
+		$useRCPatrol = $mainConfig->get( MainConfigNames::UseRCPatrol );
+		$useNPPatrol = $mainConfig->get( MainConfigNames::UseNPPatrol );
+		$localInterwikis = $mainConfig->get( MainConfigNames::LocalInterwikis );
+		$canonicalServer = $mainConfig->get( MainConfigNames::CanonicalServer );
+		$script = $mainConfig->get( MainConfigNames::Script );
+		$dbName = $mainConfig->get( MainConfigNames::DBname );
 		$attribs = $rc->getAttributes();
 		if ( $attribs['rc_type'] == RC_CATEGORIZE ) {
 			// Don't send RC_CATEGORIZE events to IRC feed (T127360)
