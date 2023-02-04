@@ -676,11 +676,7 @@ class MirahezeMagicHooks {
 		if ( $specialPage->getUser()->isAllowed( 'centralauth-lock' ) ) {
 			$tools['centralauth'] = $specialPage->getLinkRenderer()->makeKnownLink(
 				SpecialPage::getTitleFor( 'CentralAuth', $username ),
-				$specialPage->msg( 'centralauth-ro' )->text(),
-				[
-					'title' => $specialPage->msg( 'centralauth-ro' )->text(),
-					'class' => 'mw-contributions-link-centralauth'
-				]
+				$specialPage->msg( 'centralauth-ro' )->text()
 			);
 		}
 	}
