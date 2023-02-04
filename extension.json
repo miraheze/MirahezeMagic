@@ -98,6 +98,9 @@
 		],
 		"RecentChange_save": [
 			"MirahezeMagicHooks::onRecentChange_save"
+		],
+		"ContributionsToolLinks": [
+			"MirahezeMagicHooks::onContributionsToolLinks"
 		]
 	},
 	"ConfigRegistry": {
