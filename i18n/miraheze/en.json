@@ -192,6 +192,5 @@
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
 	"grant-usedatadumpapi": "Create, view, and delete dumps",
-	"prefs-forcesafemode": "Force safemode?",
-	"prefs-forcesafemode-label": "Always force safemode? Similar to always forcing ?safemode=1."
+	"prefs-forcesafemode-label": "Always force safemode?"
 }
