@@ -670,4 +670,18 @@ class MirahezeMagicHooks {
 			$skin->msg( $desc )->text()
 		);
 	}
+
+	public static function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
+		$username = $title->getText();
+		if ( $specialPage->getUser()->isAllowed( 'centralauth-lock' ) ) {
+			$tools['centralauth'] = $specialPage->getLinkRenderer()->makeKnownLink(
+				SpecialPage::getTitleFor( 'CentralAuth', $username ),
+				$specialPage->msg( 'centralauth-ro' )->text(),
+				[
+					'title' => $specialPage->msg( 'centralauth-ro' )->text(),
+					'class' => 'mw-contributions-link-centralauth'
+				]
+			);
+		}
+	}
 }
