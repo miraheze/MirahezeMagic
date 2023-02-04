@@ -685,4 +685,14 @@ class MirahezeMagicHooks {
 			$request->setVal( 'safemode', '1' );
 		}
 	}
+
+	public static function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
+		$username = $title->getText();
+		if ( $specialPage->getUser()->isAllowed( 'centralauth-lock' ) && !IPUtils::isIPAddress( $username ) ) {
+			$tools['centralauth'] = $specialPage->getLinkRenderer()->makeKnownLink(
+				SpecialPage::getTitleFor( 'CentralAuth', $username ),
+				strtolower( $specialPage->msg( 'centralauth' )->text() )
+			);
+		}
+	}
 }

@@ -104,6 +104,9 @@
 		],
 		"BeforeInitialize": [
 			"MirahezeMagicHooks::onBeforeInitialize"
+		],
+		"ContributionsToolLinks": [
+			"MirahezeMagicHooks::onContributionsToolLinks"
 		]
 	},
 	"ConfigRegistry": {
