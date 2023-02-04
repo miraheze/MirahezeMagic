@@ -98,6 +98,12 @@
 		],
 		"RecentChange_save": [
 			"MirahezeMagicHooks::onRecentChange_save"
+		],
+		"GetPreferences": [
+			"MirahezeMagicHooks::onGetPreferences"
+		],
+		"BeforeInitialize": [
+			"MirahezeMagicHooks::onBeforeInitialize"
 		]
 	},
 	"ConfigRegistry": {
