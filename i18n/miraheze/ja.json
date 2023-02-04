@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Buehl",
 			"Buntschann",
 			"Funa-enpitu",
 			"Kkairri",
@@ -113,6 +114,7 @@
 	"group-interwiki-admin-member": "インターウィキ管理者",
 	"group-oversight": "秘匿者",
 	"group-oversight-member": "秘匿者",
+	"group-requestwikiblocked-member": "ウィキリクエストをブロックされた利用者",
 	"group-wikicreator": "Wiki作成者",
 	"group-wikicreator-member": "{{GENDER:$1|Wiki作成者}}",
 	"group-wikimanager": "Wiki管理者",
@@ -126,6 +128,7 @@
 	"group-globalsysop": "グローバル管理者",
 	"group-globalsysop-member": "{{GENDER:$1|グローバル管理者}}",
 	"group-global-rollbacker": "グローバル巻き戻し者",
+	"group-global-rollbacker-member": "{{GENDER:$1|グローバル巻き戻し者}}",
 	"group-proxybot": "プロキシーBot",
 	"group-proxybot-member": "プロキシーBot",
 	"group-translator": "翻訳者",
@@ -175,5 +178,6 @@
 	"extensions-mediahandlers": "メディアハンドラー",
 	"extensions-parserhooks": "構文解析フック",
 	"extensions-specialpages": "特別ページ",
-	"extensions-variable": "変数"
+	"extensions-variable": "変数",
+	"grant-usedatadumpapi": "ダンプの作成、表示及び削除"
 }

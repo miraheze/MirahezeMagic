@@ -7,18 +7,12 @@
 	"miraheze-restriction-protect": "Pruteggi",
 	"miraheze-restriction-delete": "Cancella",
 	"miraheze-wikibase-sitelinks-miraheze": "Wiki di Miraheze",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Buròcrati",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|buròcrati}}",
 	"miraheze-group-sysop": "Amministratura",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|amministraturi|amministratrici|amministraturi/trici}}",
 	"miraheze-group-interface-admin": "Amministratura dâ ntirfaccia",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|amministraturi|amministratrici|amministraturi/trici}} dâ ntirfaccia",
 	"miraheze-group-bot": "Bot",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
 }

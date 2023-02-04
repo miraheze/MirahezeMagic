@@ -24,6 +24,10 @@ class MirahezeMagicHooks {
 		User $user,
 		array &$skipReasons
 	) {
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return true;
+		}
+
 		$varManager = AbuseFilterServices::getVariablesManager();
 
 		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
@@ -228,6 +232,13 @@ class MirahezeMagicHooks {
 				wfDebugLog( 'MirahezeMagic', "The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist." );
 			}
 		}
+
+		Shell::makeScriptCommand(
+			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
+			[
+				'--wiki', $new
+			]
+		)->limits( $limits )->execute();
 
 		static::removeRedisKey( "*{$old}*" );
 		// static::removeMemcachedKey( ".*{$old}.*" );
@@ -666,5 +677,30 @@ class MirahezeMagicHooks {
 			[ 'href' => $title->fixSpecialName()->getLinkURL() ],
 			$skin->msg( $desc )->text()
 		);
+	}
+
+	public static function onGetPreferences( User $user, array &$preferences ) {
+		$preferences['forcesafemode'] = [
+			'type' => 'toggle',
+			'label-message' => 'prefs-forcesafemode-label',
+			'section' => 'rendering',
+		];
+	}
+
+	public static function onBeforeInitialize( $title, $unused, $output, $user, $request, $mediaWiki ) {
+		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
+		if ( $userOptionsLookup->getBoolOption( $user, 'forcesafemode' ) ) {
+			$request->setVal( 'safemode', '1' );
+		}
+	}
+
+	public static function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
+		$username = $title->getText();
+		if ( $specialPage->getUser()->isAllowed( 'centralauth-lock' ) && !IPUtils::isIPAddress( $username ) ) {
+			$tools['centralauth'] = $specialPage->getLinkRenderer()->makeKnownLink(
+				SpecialPage::getTitleFor( 'CentralAuth', $username ),
+				strtolower( $specialPage->msg( 'centralauth' )->text() )
+			);
+		}
 	}
 }

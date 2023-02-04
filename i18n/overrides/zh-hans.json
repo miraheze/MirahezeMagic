@@ -26,18 +26,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze wiki",
 	"miraheze-group-checkuser": "用户查核员",
 	"miraheze-group-checkuser-member": "用户查核员",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "行政员",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|行政员}}",
 	"miraheze-group-sysop": "管理员",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|管理员}}",
 	"miraheze-group-interface-admin": "界面管理员",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|interface administrator}}",
 	"miraheze-group-bot": "机器人",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|机器人}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|机器人}}"
 }

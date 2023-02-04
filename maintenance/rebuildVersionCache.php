@@ -50,12 +50,11 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		$blankConfig = new GlobalVarConfig( '' );
 		$hashConfig = new HashConfig();
 
 		$hashConfig->set( 'ShellRestrictionMethod', false );
 
-		$baseDirectory = $blankConfig->get( 'IP' );
+		$baseDirectory = MW_INSTALL_PATH;
 		$gitInfo = new GitInfo( $baseDirectory, false );
 
 		$gitInfo->precomputeValues();

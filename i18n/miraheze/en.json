@@ -191,5 +191,6 @@
 	"extensions-parserhooks": "Parser hooks",
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
-	"grant-usedatadumpapi": "Create, view, and delete dumps"
+	"grant-usedatadumpapi": "Create, view, and delete dumps",
+	"prefs-forcesafemode-label": "Always force safemode?"
 }
