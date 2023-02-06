@@ -3,6 +3,7 @@
 		"authors": [
 			"BadDog",
 			"Kizule",
+			"Milicevic01",
 			"Zoranzoki21"
 		]
 	},
@@ -52,5 +53,6 @@
 	"specialpages-group-wikimanage": "Вики управљање",
 	"termsofservice": "Услови коришћења",
 	"settings-media": "Медији",
-	"extensions-skins": "Теме"
+	"extensions-skins": "Теме",
+	"prefs-forcesafemode-label": "Увек форсирај сигурни режим?"
 }

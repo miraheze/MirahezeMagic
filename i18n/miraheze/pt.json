@@ -172,5 +172,6 @@
 	"extensions-parserhooks": "''Hooks'' do analisador sintático",
 	"extensions-specialpages": "Páginas especiais",
 	"extensions-variable": "Variáveis",
-	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em ficheiro"
+	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em ficheiro",
+	"prefs-forcesafemode-label": "Forçar sempre o modo de segurança?"
 }

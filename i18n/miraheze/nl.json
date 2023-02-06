@@ -173,5 +173,6 @@
 	"extensions-parserhooks": "Parserhooks",
 	"extensions-specialpages": "Speciale pagina's",
 	"extensions-variable": "Variabelen",
-	"grant-usedatadumpapi": "Dumps maken, bekijken en verwijderen"
+	"grant-usedatadumpapi": "Dumps maken, bekijken en verwijderen",
+	"prefs-forcesafemode-label": "Altijd veilige modus forceren?"
 }
