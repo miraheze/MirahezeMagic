@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"renocaptcha-desc": "מודול reCAPTCHA של Miraheze לתמיכה ב־reCAPTCHA V3.",
+	"renocaptcha-edit": "כדי להגן את הוויקי מפני עריכות זבל אוטומטיות, אנחנו מבקשים ממך לפתור את ה־CAPTCHA הבאה:",
+	"renocaptcha-addurl": "העריכה שלך כוללת קישורים חיצוניים חדשים. כדי להגן על הוויקי מפני עריכות זבל אוטומטיות, אנו מבקשים ממך לפתור את ה־CAPTCHA הבאה:",
+	"renocaptcha-badlogin": "כדי להגן על הוויקי מפני פיצוח סיסמאות אוטומטי, אנו מבקשים ממך לפתור את ה־CAPTCHA הבאה:",
+	"renocaptcha-createaccount": "כדי להגן את הוויקי מפני יצירת חשבון אוטומטית, אנחנו מבקשים ממך לפתור את ה־CAPTCHA הבאה:",
+	"renocaptcha-createaccount-fail": "נראה שלא פתרת את ה־CAPTCHA.",
+	"renocaptcha-v3-failed": "אימות reCAPTCHA נכשל: הציון שאוחזר מהשרת נמוך מהציון המינימלי הנדרש. נא לנסות שוב '''בעוד כמה דקות''' לאחר רענון הדף. אם הבעיות נמשכות, נא למלא את [[m:Special:Contact/requestaccount|הטופס הזה]]",
+	"renocaptcha-create": "כדי להגן על הוויקי מפני יצירת דפים אוטומטית, אנו מבקשים ממך לפתור את ה־CAPTCHA הבאה:",
+	"renocaptcha-noscript": "למרבה הצער, כיבית את JavaScript, כך שאיננו יכולים לזהות באופן אוטומטי אם {{GENDER:|אתה|את}} בן אדם או לא. נא לפתוח את ה־CAPTCHA למעלה ולהעתיק את הטקסט שנוצר לאזור הטקסט הבא:",
+	"renocaptcha-help": "נא לפתוח אתגר reCaptcha ולהחזיר את ערך התגובה כ־captchaWord."
+}

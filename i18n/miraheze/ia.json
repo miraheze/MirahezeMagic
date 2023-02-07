@@ -166,5 +166,6 @@
 	"extensions-parserhooks": "Uncinos del analysator syntactic",
 	"extensions-specialpages": "Paginas special",
 	"extensions-variable": "Variabiles",
-	"grant-usedatadumpapi": "Crear, vider e deler instantaneos"
+	"grant-usedatadumpapi": "Crear, vider e deler instantaneos",
+	"prefs-forcesafemode-label": "Sempre fortiar le modo secur?"
 }

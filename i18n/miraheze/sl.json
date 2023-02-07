@@ -167,5 +167,6 @@
 	"extensions-parserhooks": "Vstavki razčlenjevalnika",
 	"extensions-specialpages": "Posebne strani",
 	"extensions-variable": "Spremenljivke",
-	"grant-usedatadumpapi": "Ustvarite, oglejte si in izbrišite izpise"
+	"grant-usedatadumpapi": "Ustvarite, oglejte si in izbrišite izpise",
+	"prefs-forcesafemode-label": "Želite vedno vsiliti varen način?"
 }

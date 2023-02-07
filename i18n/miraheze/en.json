@@ -145,6 +145,9 @@
 	"group-global-ipblock-exempt": "Global IP block exemption",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
 	"grouppage-global-ipblock-exempt": "m:Special:MyLanguage/Global IP block exemption",
+	"group-flood": "Flooders",
+	"group-flood-member": "{{GENDER:$1|flooder}}",
+	"grouppage-flood": "m:Special:MyLanguage/Meta:Flood flag",
 	"group-member": "Members",
  	"group-member-member": "{{GENDER:$1|member}}",
 	"grouppage-member": "m:Special:MyLanguage/User groups#{{int:Group-member}}",
@@ -191,5 +194,6 @@
 	"extensions-parserhooks": "Parser hooks",
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
-	"grant-usedatadumpapi": "Create, view, and delete dumps"
+	"grant-usedatadumpapi": "Create, view, and delete dumps",
+	"prefs-forcesafemode-label": "Always force safemode?"
 }

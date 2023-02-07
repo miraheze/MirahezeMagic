@@ -5,6 +5,7 @@
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"MuratTheTurkish",
+			"Robertpontes",
 			"Tks4Fish"
 		]
 	},
@@ -154,5 +155,6 @@
 	"extensions-parserhooks": "Hooks do analisador (parser)",
 	"extensions-specialpages": "Páginas especiais",
 	"extensions-variable": "Variáveis",
-	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em arquivo"
+	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em arquivo",
+	"prefs-forcesafemode-label": "Sempre forçar o modo de segurança?"
 }
