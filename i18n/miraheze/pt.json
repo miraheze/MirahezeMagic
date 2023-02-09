@@ -131,6 +131,8 @@
 	"group-trustandsafety-member": "Confiança e segurança",
 	"group-global-ipblock-exempt": "Isenção de bloqueios globais de IP",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|isento|isenta}} de bloqueios globais de IP",
+	"group-flood": "Inundadores",
+	"group-flood-member": "{{GENDER:$1|inundador|inundadora}}",
 	"group-member": "Membros",
 	"group-member-member": "{{GENDER:$1|membro}}",
 	"protect-level-user": "Permitir apenas utilizadores com sessão iniciada",

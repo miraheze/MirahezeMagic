@@ -125,6 +125,8 @@
 	"group-trustandsafety-member": "confidentia e securitate",
 	"group-global-ipblock-exempt": "Exemption de blocage IP global",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|exempto|exempta}} de blocage IP global",
+	"group-flood": "Inundatores",
+	"group-flood-member": "inundat{{GENDER:$1|or|rice}}",
 	"group-member": "Membros",
 	"group-member-member": "{{GENDER:$1|membro}}",
 	"protect-level-user": "Permitter solmente le usatores con session aperte",

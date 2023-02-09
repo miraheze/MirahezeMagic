@@ -71,5 +71,6 @@
 	"extensions-mediahandlers": "Upravljači medije",
 	"extensions-parserhooks": "Okidači parsera",
 	"extensions-specialpages": "Posebne stranice",
-	"extensions-variable": "Promjenjive"
+	"extensions-variable": "Promjenjive",
+	"prefs-forcesafemode-label": "Uvijek forsirati sigurni režim?"
 }

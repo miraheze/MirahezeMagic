@@ -142,6 +142,8 @@
 	"group-trustandsafety-member": "Confiance et sécurité",
 	"group-global-ipblock-exempt": "Exemption globale de blocage d’adresses IP",
 	"group-global-ipblock-exempt-member": "exempté{{GENDER:$1||e}} globalement de blocage d’adresse IP",
+	"group-flood": "Pollueurs",
+	"group-flood-member": "{{GENDER:$1|pollueur|pollueuse}}",
 	"group-member": "Membres",
 	"group-member-member": "{{GENDER:$1|}}membre",
 	"protect-level-user": "Autoriser les utilisateurs enregistrés seulement",

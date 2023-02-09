@@ -5,6 +5,7 @@
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"MuratTheTurkish",
+			"Re demz",
 			"Robertpontes",
 			"Tks4Fish"
 		]
@@ -116,6 +117,7 @@
 	"group-trustandsafety-member": "Confiança e segurança",
 	"group-global-ipblock-exempt": "Isenção de bloqueio de IP global",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|Isento|Isenta|Isento(a)}} de bloqueio de IP",
+	"group-flood-member": "{{GENDER:$1|inundador|inundadora}}",
 	"group-member": "Membros",
 	"protect-level-user": "Permitir apenas usuários registrados",
 	"restriction-delete": "Apagar",

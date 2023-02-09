@@ -126,6 +126,8 @@
 	"group-trustandsafety-member": "Zaupanje in varnost",
 	"group-global-ipblock-exempt": "Globalna izjema IP-blokiranja",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|globalna izjema IP-blokiranja}}",
+	"group-flood": "Poplavniki",
+	"group-flood-member": "{{GENDER:$1|poplavnik|poplavnica|poplavnik_ca}}",
 	"group-member": "Člani",
 	"group-member-member": "{{GENDER:$1|član|članica|član_ica}}",
 	"protect-level-user": "Dovoli samo prijavljenim uporabnikom",
