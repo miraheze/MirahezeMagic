@@ -132,6 +132,8 @@
 	"group-trustandsafety-member": "Vertrouwen en veiligheid",
 	"group-global-ipblock-exempt": "Uitgezonderd van globale IP-adresblokkades",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|uitgezonderde van globale IP-adresblokkades}}",
+	"group-flood": "Overspoelers",
+	"group-flood-member": "{{GENDER:$1|overspoeler}}",
 	"group-member": "Leden",
 	"group-member-member": "{{GENDER:$1|lid}}",
 	"protect-level-user": "Alleen ingelogde gebruikers toestaan",
