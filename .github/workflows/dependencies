@@ -4,9 +4,6 @@ AbuseFilter:
 CentralAuth:
   branch: auto
   repo: auto
-ConfirmEdit:
-  branch: auto
-  repo: auto
 CreateWiki:
   branch: master
   repo: https://github.com/miraheze/CreateWiki
