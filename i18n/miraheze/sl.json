@@ -12,7 +12,6 @@
 	"miraheze-close-email-subject": "Vaš Miraheze viki ($1) je zaprt",
 	"miraheze-close-email-body": "Pozdravljeni,\n\ns tem e-poštnim sporočilom vas obveščamo, da je bil vaš Miraheze viki zaprt. Vikiji, ki v 60 dneh ne prejmejo nobenih urejanj ali dnevniških dejanj, se samodejno zaprejo, da se prepreči smetenje, kakor to določa <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Pravilnik o mirovanju</a> (s katerim ste se strinjali, ko ste zaprosili za viki).\n\nČe želite svoj viki znova odpreti, obiščite Special:ManageWiki in počistite polje »Zaprto«, da ga znova odprete. Upoštevajte, da če svojega vikija ne odprete znova in če nihče ne bo zaprosil za odprtje vašega vikija (v skladu z razdelkom o zahtevkih za ponovno odprtje v Pravilniku o mirovanju) v 6 mesecih od zdaj, bo vaš viki označen kot primeren za trajni izbris.",
 	"miraheze-donate": "Donirajte Mirahezeju",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "PPV",
 	"miraheze-helpcenter": "Forum za pomoč Mirahezeja",
 	"miraheze-requestfeatures": "Zaprosite za možnosti v vikiju",

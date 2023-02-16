@@ -17,7 +17,6 @@
 	"miraheze-close-email-subject": "Mirahezen wiki ($1) suljettu",
 	"miraheze-close-email-body": "Hei,\n\nkoska wikissäsi ei ole ollut muokkauksia edellisen 60 päivän aikana, se on valitettavasti suljettu <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">epäaktiivisuuskäytännön</a> vuoksi. Jos haluat edelleen muokata wikiäsi, mene sivulle Special:ManageWiki ja ota rasti pois \"suljettu\"-ruudusta avataksesi sen uudelleen.\n\nHuomioithan, että jos et avaa wikiäsi, on mahdollista, että toinen käyttäjä adoptoi sen. Jos et avaa wikiäsi tai kukaan ei adoptoi sitä 6 kuukauden kuluessa tästä hetkestä, se voidaan poistaa.",
 	"miraheze-donate": "Lahjoita Mirahezelle",
-	"miraheze-donatepage": "m:Donate/fi",
 	"miraheze-faq": "UKK",
 	"miraheze-helpcenter": "Mirahezen apukeskus",
 	"miraheze-requestfeatures": "Pyydä ominaisuuksia wikiin",

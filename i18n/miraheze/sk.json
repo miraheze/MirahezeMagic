@@ -13,7 +13,6 @@
 	"miraheze-close-email-subject": "Zatvorené Miraheze Wiki ($1)",
 	"miraheze-close-email-body": "Ahoj,\n\nvzhľadom na to, že Vaša wiki nebola vôbec upravená za posledných 60 dní, bola bohužiaľ na základe našich podmienok <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Dormancy Policy</a> zrušená. Ak chcete svoju wiki upraviť, choďte na Special:Spravovať wiki a vymažte zaškrtnutie políčka \"zatvorené\", pre znovu otvorenie.\n\nProsím berte na vedomie, že ak svoju wiki neotvoríte, je možné že bude pridelené inému používateľovi. Ak ju neotvoríte, alebo nebude pridelená inému používateľovi počas nasledovných 6 mesiacov, bude zaradená na vymazanie.",
 	"miraheze-donate": "Darovať",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "Často kladené otázky",
 	"miraheze-helpcenter": "Miraheze centrum pomoci",
 	"miraheze-requestfeatures": "Vyžiadať funkcie na wiki",

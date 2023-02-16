@@ -27,7 +27,6 @@
 	"miraheze-close-email-subject": "Dein Miraheze-Wiki ($1) wurde geschlossen",
 	"miraheze-close-email-body": "Hallo,\n\ndiese E-Mail soll dich darüber informieren, dass dein Miraheze-Wiki geschlossen wurde. Wikis, die innerhalb von 60 Tagen keine Bearbeitungen oder Log-Aktionen erhalten, werden automatisch geschlossen, um Spam zu verhindern, in Übereinstimmung mit der <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Ruhestandsrichtlinie</a> (der du bei der Beantragung eines Wikis zugestimmt hast).\n\nWenn du dein Wiki wieder öffnen möchtest, besuche bitte Special:ManageWiki und entferne das Häkchen bei „Geschlossen“, um es wieder zu öffnen. Bitte beachte, dass dein Wiki, wenn du es nicht wieder öffnest oder wenn niemand innerhalb von 6 Monaten (gemäß dem Abschnitt „Antrag auf Wiedereröffnung“ in der Ruhestandsrichtlinie) darum bittet, es zu öffnen, für eine endgültige Löschung markiert wird.",
 	"miraheze-donate": "Spende an Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "Häufig gestellte Fragen",
 	"miraheze-helpcenter": "Miraheze-Hilfezentrum",
 	"miraheze-requestfeatures": "Funktionen auf einem Wiki anfordern",

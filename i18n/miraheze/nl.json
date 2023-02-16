@@ -18,7 +18,6 @@
 	"miraheze-close-email-subject": "Uw Miraheze-wiki ($1) is gesloten",
 	"miraheze-close-email-body": "Hallo,\n\nMet deze e-mail willen wij u informeren dat uw Miraheze-wiki gesloten is. Wiki's die 60 dagen lang niet worden bewerkt en geen handelingen in het logboek bijschrijven, worden automatisch gesloten om spam te voorkomen; dit in overeenstemming met het <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">inactiviteitsbeleid</a> (waarmee u akkoord bent gegaan bij het aanvragen van een wiki).\n\nAls u uw wiki wilt heropenen, ga dan naar Special:ManageWiki en verwijder het vinkje uit het vakje \"Gesloten\". N.B.: als u uw wiki niet heropent of als niemand binnen 6 maanden een verzoek indient om uw wiki te heropenen (in overeenstemming met de sectie Heropening van het inactiviteitsbeleid), zal uw wiki gemarkeerd worden als in aanmerking komend voor permanente verwijdering.",
 	"miraheze-donate": "Doneer aan Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "Vraag en antwoord",
 	"miraheze-helpcenter": "Miraheze-helpcentrum",
 	"miraheze-requestfeatures": "Functies op een wiki aanvragen",

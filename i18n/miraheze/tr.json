@@ -20,7 +20,6 @@
 	"miraheze-close-email-subject": "Miraheze vikiniz ($1) kapatıldı",
 	"miraheze-close-email-body": "Merhaba,\n\nBu e-posta, Miraheze vikinizin kapatıldığını size bildirmek için gönderilmiştir. 60 gün içinde herhangi bir düzenleme veya günlük işlemi almayan vikiler, <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Dormansi Politikasına</a> (bir viki talep ederken kabul ettiğiniz) uygun olarak spam'i önlemek için otomatik olarak kapatılır.\n\nVikinizi yeniden açmak istiyorsanız, lütfen Special:ManageWiki sayfasını ziyaret edin ve yeniden açmak için \"Kapalı\" kutusunun işaretini kaldırın. Şu andan itibaren 6 ay içinde vikinizi yeniden açmazsanız veya hiç kimse vikinizin açılmasını talep etmezse (Dormansi Politikasının yeniden açma talebi bölümü uyarınca), vikinizin kalıcı olarak silinmeye uygun olarak işaretleneceğini lütfen unutmayın.",
 	"miraheze-donate": "Miraheze'ye bağış yap",
-	"miraheze-donatepage": "m:Donate/tr",
 	"miraheze-faq": "SSS",
 	"miraheze-helpcenter": "Miraheze Yardım Merkezi",
 	"miraheze-requestfeatures": "Bir viki için özellik talep et",

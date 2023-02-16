@@ -16,7 +16,6 @@
 	"miraheze-close-email-subject": "Miraheze Wiki ($1) Stängd",
 	"miraheze-close-email-body": "Hej,\n\nPå grund av att din wiki inte har haft några redigeringar de senaste 60 dagarna har den tyvärr blivit nedstängd på grund av inaktivitetspolicyn. Om du fortfarande önskar att redigera wikin, gå till Special:ManageWiki och bocka ur \"stängd\" för att öppna den igen.\n\nObs: om du inte öppnar wikin igen kan andra användare adoptera wikin. Om du inte öppnar wikin igen eller ingen adopterar den på 6 månader från och med nu kan den komma att raderas.",
 	"miraheze-donate": "Donera till Miraheze",
-	"miraheze-donatepage": "m:Donate/sv",
 	"miraheze-faq": "Vanliga frågor",
 	"miraheze-helpcenter": "Miraheze hjälpcenter",
 	"miraheze-requestfeatures": "Begär funktioner på en wiki",

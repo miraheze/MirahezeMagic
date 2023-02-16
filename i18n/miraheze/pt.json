@@ -17,7 +17,6 @@
 	"miraheze-close-email-subject": "A sua wiki Mirahezee ($1) foi fechada",
 	"miraheze-close-email-body": "Olá,\n\nEsta mensagem é para informar que a sua wiki Miraheze foi fechada. As wikis que não têm edições nem entradas nos registos durante 60 dias são automaticamente fechadas para prevenir ''spam'', de acordo com as <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">normas de dormência</a> (com que concordou ao pedir uma wiki).\n\nSe quiser reabrir a sua wiki, visite Special:ManageWiki e desmarque a caixa \"fechada\", para reabri-la. Note que, se não reabrir a sua wiki e ninguém pedir que a sua wiki seja reaberta (de acordo com a secção de pedidos de reabertura nas normas de dormência) durante os próximos 6 meses, a sua wiki será marcada como apta para eliminação permanente.",
 	"miraheze-donate": "Faça um donativo ao Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate/pt",
 	"miraheze-faq": "Perguntas frequentes",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",
 	"miraheze-requestfeatures": "Pedir funcionalidades numa wiki",

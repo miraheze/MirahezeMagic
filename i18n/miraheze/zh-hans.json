@@ -37,7 +37,6 @@
 	"miraheze-close-email-subject": "您的Miraheze wiki（$1）已被关闭",
 	"miraheze-close-email-body": "您好，\n\n此电子邮件是为了通知您您的Miraheze wiki已被关闭。根据<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">休眠政策</a>，60天内未进行任何编辑或日志操作的wiki被自动关闭以防止垃圾邮件（您在请求建立wiki时已同意此政策）。\n\n如果您想重新开启您的wiki，请访问Special:ManageWiki将“已关闭”取消勾选以重新开启。请注意如果您没有重新开启您的wiki或者没有人在从现在起6个月内请求重新开启您的wiki（根据休眠政策的重新开启请求一节），您的wiki将被会标记为可进行永久删除。",
 	"miraheze-donate": "捐赠给Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "常见问题",
 	"miraheze-helpcenter": "Miraheze帮助中心",
 	"miraheze-requestfeatures": "为wiki申请功能",
