@@ -473,6 +473,10 @@ class MirahezeMagicHooks {
 			'Watchlist'
 		];
 
+		if ( $user->isAllowed( 'interwiki' ) ) {
+			$specialsArray[] = 'Interwiki';
+		}
+
 		if ( $title->isSpecialPage() ) {
 			$rootName = strtok( $title->getText(), '/' );
 			$rootTitle = Title::makeTitle( $title->getNamespace(), $rootName );
