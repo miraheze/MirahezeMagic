@@ -48,5 +48,6 @@
 	"specialpages-group-wikimanage": "Viki upravljanje",
 	"termsofservice": "Uslovi korišćenja",
 	"settings-media": "Mediji",
-	"extensions-skins": "Teme"
+	"extensions-skins": "Teme",
+	"prefs-forcesafemode-label": "Uvek forsiraj sigurni režim?"
 }

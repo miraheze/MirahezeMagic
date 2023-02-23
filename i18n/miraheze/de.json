@@ -140,6 +140,8 @@
 	"group-trustandsafety-member": "Trust and Safety",
 	"group-global-ipblock-exempt": "Globale IP-Sperren-Ausgenommene",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|Globaler IP-Sperren-Ausgenommener|Globale IP-Sperren-Ausgenommene}}",
+	"group-flood": "Fluter",
+	"group-flood-member": "{{GENDER:$1|fluter}}",
 	"group-member": "Mitglieder",
 	"group-member-member": "{{GENDER:$1|Mitglied}}",
 	"protect-level-user": "Nur angemeldeten Benutzern erlauben",
@@ -181,5 +183,6 @@
 	"extensions-parserhooks": "Parsererweiterungen",
 	"extensions-specialpages": "Spezialseiten",
 	"extensions-variable": "Variablen",
-	"grant-usedatadumpapi": "Dumps erstellen, anzeigen und löschen"
+	"grant-usedatadumpapi": "Dumps erstellen, anzeigen und löschen",
+	"prefs-forcesafemode-label": "Immer den Safemodus erzwingen?"
 }
