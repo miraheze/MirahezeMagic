@@ -25,10 +25,11 @@ class PopulateCommunityPortal extends Maintenance {
 		$this->addOption( 'lang', 'Language of the Community portal, otherwise defaults to the wiki\'s language.', false );
 
 		$this->requireExtension( 'CreateWiki' );
+		$this->requireExtension( 'MirahezeMagic' );
 	}
 
 	public function execute() {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CreateWiki' );
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$language = $this->getOption( 'lang', $config->get( 'LanguageCode' ) );
 
 		$communityPortalName = wfMessage( 'portal' )->inLanguage( $language )->plain();
