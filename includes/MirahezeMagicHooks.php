@@ -41,9 +41,8 @@ class MirahezeMagicHooks {
 	}
 
 	public static function onCreateWikiCreation( $wiki ) {
-
 		Shell::makeScriptCommand(
-			$blankConfig->get( 'IP' ) . '/extensions/MirahezeMagic/maintenance/populateCommunityPortal.php',
+			MW_INSTALL_PATH . '/extensions/MirahezeMagic/maintenance/populateCommunityPortal.php',
 			[
 				'--wiki', $wiki
 			]
