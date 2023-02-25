@@ -11,7 +11,6 @@
 	"miraheze-close-email-subject": "Tu wiki Miraheze ($1) ha essite claudite",
 	"miraheze-close-email-body": "Salute,\n\nIste e-mail es pro informar te que tu wiki Miraheze ha essite claudite. Le wikis que non recipe alcun modificationes o actiones de registro in 60 dies es automaticamente claudite pro impedir le spam, in accordo con le <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Politica de Dormientia</a> (que tu acceptava quando tu requestava un wiki).\n\nSi tu vole reaperir tu wiki, per favor visita Special:ManageWiki e dismarca le quadrato \"Claudite\" pro reaperir lo. Per favor nota que si tu non reaperi tu wiki o si nulle persona requesta que tu wiki essera aperite (in accordo con le section de requesta de reapertura del Politica de Dormientia) intra 6 menses a partir de ora, tu wiki essera marcate como eligibile pro deletion permanente.",
 	"miraheze-donate": "Donar a Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de adjuta de Miraheze",
 	"miraheze-requestfeatures": "Requestar functionalitate sur un wiki",
@@ -111,8 +110,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|autopatruliate}}",
 	"group-confirmed": "Usatores confirmate",
 	"group-confirmed-member": "{{GENDER:$1|usator|usatrice}} confirmate",
-	"group-globalsysop": "Administratores global",
-	"group-globalsysop-member": "{{GENDER:$1|administrator|administratrice}} global",
+	"group-global-sysop": "Administratores global",
+	"group-global-sysop-member": "{{GENDER:$1|administrator|administratrice}} global",
 	"group-global-rollbacker": "Revocatores global",
 	"group-global-rollbacker-member": "{{GENDER:$1|revocator|revocatrice}} global",
 	"group-proxybot": "Robot proxy",
@@ -125,6 +124,8 @@
 	"group-trustandsafety-member": "confidentia e securitate",
 	"group-global-ipblock-exempt": "Exemption de blocage IP global",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|exempto|exempta}} de blocage IP global",
+	"group-flood": "Inundatores",
+	"group-flood-member": "inundat{{GENDER:$1|or|rice}}",
 	"group-member": "Membros",
 	"group-member-member": "{{GENDER:$1|membro}}",
 	"protect-level-user": "Permitter solmente le usatores con session aperte",
@@ -166,5 +167,6 @@
 	"extensions-parserhooks": "Uncinos del analysator syntactic",
 	"extensions-specialpages": "Paginas special",
 	"extensions-variable": "Variabiles",
-	"grant-usedatadumpapi": "Crear, vider e deler instantaneos"
+	"grant-usedatadumpapi": "Crear, vider e deler instantaneos",
+	"prefs-forcesafemode-label": "Sempre fortiar le modo secur?"
 }

@@ -21,18 +21,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Wiki na Miraheze",
 	"miraheze-group-checkuser": "Kontrolní používatelia",
 	"miraheze-group-checkuser-member": "kontrolný používateľ",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Byrokrati",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|byrokrat|byrokratka}}",
 	"miraheze-group-sysop": "Správcovia",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|správca|správkyňa|správca}}",
 	"miraheze-group-interface-admin": "Správcovia rozhrania",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|správca rozhrania|správkyňa rozhrania}}",
 	"miraheze-group-bot": "Boti",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
 }

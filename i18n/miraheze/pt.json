@@ -17,7 +17,6 @@
 	"miraheze-close-email-subject": "A sua wiki Mirahezee ($1) foi fechada",
 	"miraheze-close-email-body": "Olá,\n\nEsta mensagem é para informar que a sua wiki Miraheze foi fechada. As wikis que não têm edições nem entradas nos registos durante 60 dias são automaticamente fechadas para prevenir ''spam'', de acordo com as <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">normas de dormência</a> (com que concordou ao pedir uma wiki).\n\nSe quiser reabrir a sua wiki, visite Special:ManageWiki e desmarque a caixa \"fechada\", para reabri-la. Note que, se não reabrir a sua wiki e ninguém pedir que a sua wiki seja reaberta (de acordo com a secção de pedidos de reabertura nas normas de dormência) durante os próximos 6 meses, a sua wiki será marcada como apta para eliminação permanente.",
 	"miraheze-donate": "Faça um donativo ao Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate/pt",
 	"miraheze-faq": "Perguntas frequentes",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",
 	"miraheze-requestfeatures": "Pedir funcionalidades numa wiki",
@@ -117,8 +116,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|autopatrulhado|autopatrulhada}}",
 	"group-confirmed": "Utilizadores confirmados",
 	"group-confirmed-member": "{{GENDER:$1|utilizador confirmado|utilizadora confirmada}}",
-	"group-globalsysop": "Administradores globais",
-	"group-globalsysop-member": "{{GENDER:$1|Administrador|Administradora}} global",
+	"group-global-sysop": "Administradores globais",
+	"group-global-sysop-member": "{{GENDER:$1|Administrador|Administradora}} global",
 	"group-global-rollbacker": "Reversores globais",
 	"group-global-rollbacker-member": "{{GENDER:$1|Reversor|Reversora}} global",
 	"group-proxybot": "Robô proxy",
@@ -131,6 +130,8 @@
 	"group-trustandsafety-member": "Confiança e segurança",
 	"group-global-ipblock-exempt": "Isenção de bloqueios globais de IP",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|isento|isenta}} de bloqueios globais de IP",
+	"group-flood": "Inundadores",
+	"group-flood-member": "{{GENDER:$1|inundador|inundadora}}",
 	"group-member": "Membros",
 	"group-member-member": "{{GENDER:$1|membro}}",
 	"protect-level-user": "Permitir apenas utilizadores com sessão iniciada",
@@ -172,5 +173,6 @@
 	"extensions-parserhooks": "''Hooks'' do analisador sintático",
 	"extensions-specialpages": "Páginas especiais",
 	"extensions-variable": "Variáveis",
-	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em ficheiro"
+	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em ficheiro",
+	"prefs-forcesafemode-label": "Forçar sempre o modo de segurança?"
 }

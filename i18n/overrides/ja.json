@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Buehl",
 			"MathXplore",
 			"Omotecho",
 			"RYOUMA1117",
@@ -29,11 +30,10 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wiki",
 	"miraheze-group-checkuser": "利用者調査者",
 	"miraheze-group-checkuser-member": "利用者調査者",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "ビューロクラット",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|ビューロクラット}}",
 	"miraheze-group-sysop": "管理者",
 	"miraheze-group-interface-admin": "インターフェース管理者",
-	"miraheze-group-bot": "ボット"
+	"miraheze-group-bot": "ボット",
+	"miraheze-group-bot-member": "{{GENDER:$1|ボット}}"
 }

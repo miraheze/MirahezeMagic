@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Buehl",
 			"Buntschann",
 			"Funa-enpitu",
 			"Kkairri",
@@ -25,7 +26,6 @@
 	"miraheze-close-email-subject": "あなたのMirahezeウィキ($1)は閉鎖されました",
 	"miraheze-close-email-body": "こんにちは、\n\nこのメールは、あなたのMirahezeウィキが閉鎖されたことをお知らせするものです。60日以内に編集やログアクションを受信しないウィキは、<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">休眠ポリシー</a>(Wikiをリクエストする際に同意した)に従って、スパムを防ぐために自動的に閉じられます。\n\nウィキを再度開きたい場合は、Special:ManageWikiにアクセスし、「閉じる」ボックスのチェックを外して再度開いてください。ウィキを再開しない場合、または誰も(休眠ポリシーの再開要求セクションに従って)あなたのウィキを開くことを要求しなかった場合、あなたのウィキは永久削除の対象としてマークされることに注意してください。",
 	"miraheze-donate": "Mirahezeに寄付",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "よくある質問と回答",
 	"miraheze-helpcenter": "Mirahezeヘルプセンターについて",
 	"miraheze-requestfeatures": "Wikiの機能を申請する",
@@ -113,6 +113,7 @@
 	"group-interwiki-admin-member": "インターウィキ管理者",
 	"group-oversight": "秘匿者",
 	"group-oversight-member": "秘匿者",
+	"group-requestwikiblocked-member": "ウィキリクエストをブロックされた利用者",
 	"group-wikicreator": "Wiki作成者",
 	"group-wikicreator-member": "{{GENDER:$1|Wiki作成者}}",
 	"group-wikimanager": "Wiki管理者",
@@ -123,9 +124,10 @@
 	"group-autopatrolled-member": "{{GENDER:$1|自動巡回者}}",
 	"group-confirmed": "承認された利用者",
 	"group-confirmed-member": "{{GENDER:$1|承認された利用者}}",
-	"group-globalsysop": "グローバル管理者",
-	"group-globalsysop-member": "{{GENDER:$1|グローバル管理者}}",
+	"group-global-sysop": "グローバル管理者",
+	"group-global-sysop-member": "{{GENDER:$1|グローバル管理者}}",
 	"group-global-rollbacker": "グローバル巻き戻し者",
+	"group-global-rollbacker-member": "{{GENDER:$1|グローバル巻き戻し者}}",
 	"group-proxybot": "プロキシーBot",
 	"group-proxybot-member": "プロキシーBot",
 	"group-translator": "翻訳者",
@@ -175,5 +177,6 @@
 	"extensions-mediahandlers": "メディアハンドラー",
 	"extensions-parserhooks": "構文解析フック",
 	"extensions-specialpages": "特別ページ",
-	"extensions-variable": "変数"
+	"extensions-variable": "変数",
+	"grant-usedatadumpapi": "ダンプの作成、表示及び削除"
 }

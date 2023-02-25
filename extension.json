@@ -15,7 +15,7 @@
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.38.0"
+		"MediaWiki": ">= 1.39.0"
 	},
 	"MessagesDirs": {
 		"MirahezeMagic": [
@@ -98,6 +98,15 @@
 		],
 		"RecentChange_save": [
 			"MirahezeMagicHooks::onRecentChange_save"
+		],
+		"GetPreferences": [
+			"MirahezeMagicHooks::onGetPreferences"
+		],
+		"BeforeInitialize": [
+			"MirahezeMagicHooks::onBeforeInitialize"
+		],
+		"ContributionsToolLinks": [
+			"MirahezeMagicHooks::onContributionsToolLinks"
 		]
 	},
 	"ConfigRegistry": {

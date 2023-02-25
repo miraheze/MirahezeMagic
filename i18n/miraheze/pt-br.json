@@ -5,6 +5,8 @@
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"MuratTheTurkish",
+			"Re demz",
+			"Robertpontes",
 			"Tks4Fish"
 		]
 	},
@@ -15,7 +17,6 @@
 	"miraheze-close-email-subject": "Wiki de Mirahezee ($1) Fechada",
 	"miraheze-close-email-body": "Olá,\n\nInfelizmente, devido ao sua wiki não ter edições nos últimos 60 dias, ele foi fechado devido à política de dormência. Se você ainda quiser editar o seu wiki, vá para Special:ManageWiki e desmarque a caixa \"fechado\" para reabri-lo.\n\nPor favor, note que se você não reabrir seu wiki, é possível que outro usuário adote seu wiki. Se você não reabrir seu wiki ou ninguém adotar sua wiki em 6 meses a partir de agora, ele poderá ser excluído.",
 	"miraheze-donate": "Doar para Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",
 	"miraheze-requestfeatures": "Solicitar recursos em um wiki",
@@ -103,8 +104,8 @@
 	"group-autopatrolled-member": "autopatrulhador",
 	"group-confirmed": "Usuários confirmados",
 	"group-confirmed-member": "usuário(a) confirmado(a)",
-	"group-globalsysop": "Administradores globais",
-	"group-globalsysop-member": "{{GENDER:$1|administrador|administradora|administrador(a)}} global",
+	"group-global-sysop": "Administradores globais",
+	"group-global-sysop-member": "{{GENDER:$1|administrador|administradora|administrador(a)}} global",
 	"group-proxybot": "Proxy do robô",
 	"group-proxybot-member": "proxy do robô",
 	"group-translator": "Tradutores",
@@ -115,6 +116,7 @@
 	"group-trustandsafety-member": "Confiança e segurança",
 	"group-global-ipblock-exempt": "Isenção de bloqueio de IP global",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|Isento|Isenta|Isento(a)}} de bloqueio de IP",
+	"group-flood-member": "{{GENDER:$1|inundador|inundadora}}",
 	"group-member": "Membros",
 	"protect-level-user": "Permitir apenas usuários registrados",
 	"restriction-delete": "Apagar",
@@ -154,5 +156,6 @@
 	"extensions-parserhooks": "Hooks do analisador (parser)",
 	"extensions-specialpages": "Páginas especiais",
 	"extensions-variable": "Variáveis",
-	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em arquivo"
+	"grant-usedatadumpapi": "Criar, ver e eliminar cópias em arquivo",
+	"prefs-forcesafemode-label": "Sempre forçar o modo de segurança?"
 }

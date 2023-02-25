@@ -29,18 +29,12 @@
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-wikier",
 	"miraheze-group-checkuser": "IP-kontrollører",
 	"miraheze-group-checkuser-member": "IP-kontrollør",
-	"miraheze-grouppage-checkuser": "m:Special:MyLanguage/CheckUser",
 	"miraheze-group-bureaucrat": "Byråkrater",
-	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|byråkrat}}",
 	"miraheze-group-sysop": "Administratorer",
-	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
 	"miraheze-group-interface-admin": "Grensesnittadministratorer",
-	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|grensesnittadministrator}}",
 	"miraheze-group-bot": "Boter",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
 }

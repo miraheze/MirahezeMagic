@@ -28,7 +28,6 @@
 	"miraheze-close-email-subject": "Votre wiki Miraheze ($1) a été fermé",
 	"miraheze-close-email-body": "Bonjour,\n\nCe courriel a pour but de vous informer que votre wiki Miraheze a été fermé. Les wikis qui ne reçoivent aucune modification ou action journalisée au bout de 60 jours sont automatiquement fermés pour prévenir le pollupostage, conformément à la <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">politique d’inactivité</a> (que vous avez acceptée en demandant un wiki).\n\nSi vous désirez rouvrir votre wiki, veuillez visiter Special:ManageWiki et décocher l’option « fermé » pour le rouvrir. Veuillez noter que si vous ne rouvrez pas votre wiki ou que si personne ne demande à ce que votre wiki soit rouvert (conformément à la section sur la demande de réouverture dans la politique d’inactivité) dans les 6 mois à compter de maintenant, votre wiki sera marqué comme éligible à une suppression permanente.",
 	"miraheze-donate": "Faire un don à Miraheze",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centre d’aide de Miraheze",
 	"miraheze-requestfeatures": "Demander une fonctionnalité sur un wiki",
@@ -128,8 +127,8 @@
 	"group-autopatrolled-member": "patrouilleu{{GENDER:$1|r|se}} automatique",
 	"group-confirmed": "Utilisateurs confirmés",
 	"group-confirmed-member": "utilisat{{GENDER:$1|eur|rice}} confirmé{{GENDER:$1||e}}",
-	"group-globalsysop": "Administrateurs globaux",
-	"group-globalsysop-member": "Administrat{{GENDER:$1|eur|rice}} global{{GENDER:$1||e}}",
+	"group-global-sysop": "Administrateurs globaux",
+	"group-global-sysop-member": "Administrat{{GENDER:$1|eur|rice}} global{{GENDER:$1||e}}",
 	"group-global-rollbacker": "Révocateurs globaux",
 	"group-global-rollbacker-member": "Révocat{{GENDER:$1|eur|rice}} global{{GENDER:$1||e}}",
 	"group-proxybot": "Robot mandataire",
@@ -142,6 +141,8 @@
 	"group-trustandsafety-member": "Confiance et sécurité",
 	"group-global-ipblock-exempt": "Exemption globale de blocage d’adresses IP",
 	"group-global-ipblock-exempt-member": "exempté{{GENDER:$1||e}} globalement de blocage d’adresse IP",
+	"group-flood": "Pollueurs",
+	"group-flood-member": "pollueu{{GENDER:$1|r|se}}",
 	"group-member": "Membres",
 	"group-member-member": "{{GENDER:$1|}}membre",
 	"protect-level-user": "Autoriser les utilisateurs enregistrés seulement",
@@ -183,5 +184,6 @@
 	"extensions-parserhooks": "Crochets de l’analyseur syntaxique",
 	"extensions-specialpages": "Pages spéciales",
 	"extensions-variable": "Variables",
-	"grant-usedatadumpapi": "Créer, afficher et supprimer des vidages de données"
+	"grant-usedatadumpapi": "Créer, afficher et supprimer des vidages de données",
+	"prefs-forcesafemode-label": "Toujours forcer le mode sécurisé ?"
 }

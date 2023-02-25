@@ -14,7 +14,5 @@
 	"miraheze-group-sysop": "Administrateuren",
 	"miraheze-group-sysop-member": "{{GENDER:$1|Administrateur|Administratrice}}",
 	"miraheze-group-bot": "Botten",
-	"miraheze-grouppage-bot": "m:Special:MyLanguage/User groups#{{int:Group-bot}}",
-	"miraheze-group-bot-member": "{{GENDER:$1|Bot}}",
-	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|Bot}}"
 }

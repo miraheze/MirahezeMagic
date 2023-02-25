@@ -12,9 +12,8 @@
 	"miraheze-close-email-subject": "Vaš Miraheze viki ($1) je zaprt",
 	"miraheze-close-email-body": "Pozdravljeni,\n\ns tem e-poštnim sporočilom vas obveščamo, da je bil vaš Miraheze viki zaprt. Vikiji, ki v 60 dneh ne prejmejo nobenih urejanj ali dnevniških dejanj, se samodejno zaprejo, da se prepreči smetenje, kakor to določa <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Pravilnik o mirovanju</a> (s katerim ste se strinjali, ko ste zaprosili za viki).\n\nČe želite svoj viki znova odpreti, obiščite Special:ManageWiki in počistite polje »Zaprto«, da ga znova odprete. Upoštevajte, da če svojega vikija ne odprete znova in če nihče ne bo zaprosil za odprtje vašega vikija (v skladu z razdelkom o zahtevkih za ponovno odprtje v Pravilniku o mirovanju) v 6 mesecih od zdaj, bo vaš viki označen kot primeren za trajni izbris.",
 	"miraheze-donate": "Donirajte Mirahezeju",
-	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "PPV",
-	"miraheze-helpcenter": "Center za pomoč Mirahezeja",
+	"miraheze-helpcenter": "Forum za pomoč Mirahezeja",
 	"miraheze-requestfeatures": "Zaprosite za možnosti v vikiju",
 	"miraheze-requestwiki": "Zaprosite za viki",
 	"miraheze-sidebar-donate": "Donirajte",
@@ -112,8 +111,8 @@
 	"group-autopatrolled-member": "{{GENDER:$1|samodejno pregledani|samodejno pregledana|samodejno pregledan_a}}",
 	"group-confirmed": "Potrjeni uporabniki",
 	"group-confirmed-member": "{{GENDER:$1|potrjeni uporabnik|potrjena uporabnica|potrjeni_a uporabnik_ca}}",
-	"group-globalsysop": "Globalni administratorji",
-	"group-globalsysop-member": "{{GENDER:$1|globalni administrator|globalna administratorka|globalni_a administrator_ka}}",
+	"group-global-sysop": "Globalni administratorji",
+	"group-global-sysop-member": "{{GENDER:$1|globalni administrator|globalna administratorka|globalni_a administrator_ka}}",
 	"group-global-rollbacker": "Globalni vračalci urejanj",
 	"group-global-rollbacker-member": "{{GENDER:$1|Globalni vračalec|Globalna vračalka|Globalni_a vračalec_ka}} urejanj",
 	"group-proxybot": "Posredniški bot",
@@ -126,6 +125,8 @@
 	"group-trustandsafety-member": "Zaupanje in varnost",
 	"group-global-ipblock-exempt": "Globalna izjema IP-blokiranja",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|globalna izjema IP-blokiranja}}",
+	"group-flood": "Poplavniki",
+	"group-flood-member": "{{GENDER:$1|poplavnik|poplavnica|poplavnik_ca}}",
 	"group-member": "Člani",
 	"group-member-member": "{{GENDER:$1|član|članica|član_ica}}",
 	"protect-level-user": "Dovoli samo prijavljenim uporabnikom",
@@ -167,5 +168,6 @@
 	"extensions-parserhooks": "Vstavki razčlenjevalnika",
 	"extensions-specialpages": "Posebne strani",
 	"extensions-variable": "Spremenljivke",
-	"grant-usedatadumpapi": "Ustvarite, oglejte si in izbrišite izpise"
+	"grant-usedatadumpapi": "Ustvarite, oglejte si in izbrišite izpise",
+	"prefs-forcesafemode-label": "Želite vedno vsiliti varen način?"
 }

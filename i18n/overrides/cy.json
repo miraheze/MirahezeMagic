@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Afalau"
+		]
+	},
+	"miraheze-restriction-protect": "Diogelu",
+	"miraheze-restriction-delete": "Dileu",
+	"miraheze-skinname-snapwikiskin": "Snap!",
+	"miraheze-snapwikiskin": "Snap!",
+	"miraheze-wikibase-sitelinks-miraheze": "Wiciau Miraheze",
+	"miraheze-group-bureaucrat": "Biwrocratiaid",
+	"miraheze-group-bureaucrat-member": "{{GENDER:$1|biwrocrat}}",
+	"miraheze-group-sysop": "Gweinyddwyr",
+	"miraheze-group-sysop-member": "{{GENDER:$1|gweinyddwr}}",
+	"miraheze-group-interface-admin": "Gweinyddwyr rhyngwyneb",
+	"miraheze-group-interface-admin-member": "{{GENDER:$1|gweinyddwr rhyngwyneb}}",
+	"miraheze-group-bot": "Botiau",
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
+}

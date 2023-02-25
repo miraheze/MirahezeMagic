@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"Apzp79",
+			"Cerulean",
 			"Codenstory",
 			"John Lewis",
 			"MuratTheTurkish",
@@ -17,7 +18,6 @@
 	"miraheze-categories": "분류",
 	"miraheze-close-email-subject": "Miraheze 위키 ($1) 닫힘",
 	"miraheze-donate": "Miraheze에 기부",
-	"miraheze-donatepage": "m:Donate/ko",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Miraheze 도움말 센터",
 	"miraheze-requestfeatures": "위키 기능 요청",
@@ -65,8 +65,8 @@
 	"group-autopatrolled-member": "점검 면제자",
 	"group-confirmed": "인증된 사용자",
 	"group-confirmed-member": "{{GENDER:$1|인증된 사용자}}",
-	"group-globalsysop": "전역 시스템 관리자",
-	"group-globalsysop-member": "{{GENDER:$1|전역 시스템 관리자}}",
+	"group-global-sysop": "전역 시스템 관리자",
+	"group-global-sysop-member": "{{GENDER:$1|전역 시스템 관리자}}",
 	"group-proxybot": "프록시 봇",
 	"group-proxybot-member": "프록시 봇",
 	"group-translator": "번역자",
@@ -81,7 +81,7 @@
 	"protect-level-user": "로그인 사용자에게만 허용",
 	"restriction-delete": "삭제",
 	"restriction-level-user": "로그인한 사용자에게만 허용",
-	"right-user": "\"{{int:protect-level-user}}\"으로 보호된 문서 편집",
+	"right-user": "\"{{int:protect-level-user}}\" 단계로 보호된 문서 편집",
 	"sitematrix": "Miraheze 위키의 목록",
 	"sitematrix-summary": "이 특수 문서는 모든 Miraheze 위키를 나열합니다.",
 	"sitematrix-desc": "[[Special:SiteMatrix|Miraheze 위키 목록]]을 보여줍니다",
@@ -105,5 +105,10 @@
 	"settings-seo": "SEO",
 	"settings-socialtools": "소셜 도구",
 	"settings-styling": "형식",
-	"extensions-skins": "스킨"
+	"extensions-skins": "스킨",
+	"extensions-editors": "편집자",
+	"extensions-parserhooks": "파서 훅",
+	"extensions-specialpages": "특수 문서",
+	"extensions-variable": "변수",
+	"grant-usedatadumpapi": "덤프 생성, 보기, 삭제"
 }

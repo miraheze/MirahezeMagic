@@ -78,6 +78,9 @@
 	"grouppage-trustandsafety": "m:Trust and Safety",
 	"group-global-ipblock-exempt": "Global IP block exemptions",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|global IP block exempt}}",
+	"group-flood": "Flooders",
+	"group-flood-member": "{{GENDER:$1|flooder}}",
+	"grouppage-flood": "m:Special:MyLanguage/Meta:Flood flag",
 	"group-member": "Members\n\n{{Identical|Member}}",
 	"group-member-member": "member\n\n{{Identical|Member}}",
 	"grouppage-member": "m:User groups#{{int:Group-member}}",
@@ -115,5 +118,6 @@
 	"extensions-mediahandlers": "Media handlers",
 	"extensions-parserhooks": "Parser hooks",
 	"extensions-specialpages": "Special pages\n{{identical|Special page}}",
-	"extensions-variable": "Variables\n{{identical|Variable}}"
+	"extensions-variable": "Variables\n{{identical|Variable}}",
+	"prefs-forcesafemode-label": "The label for the force safemode checkbox preference"
 }
