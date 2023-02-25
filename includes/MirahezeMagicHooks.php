@@ -40,14 +40,19 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
-	public static function onCreateWikiCreation( $wiki ) {
-		Shell::makeScriptCommand(
-			MW_INSTALL_PATH . '/extensions/MirahezeMagic/maintenance/populateCommunityPortal.php',
-			[
-				'--wiki', $wiki
-			]
-		)->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )->execute();
-
+	public static function onCreateWikiCreation( $cwdb, $wiki, $private ) {
+		DeferredUpdates::addCallableUpdate(
+			static function () use ( $wiki ) {
+				Shell::makeScriptCommand(
+					MW_INSTALL_PATH . '/extensions/MirahezeMagic/maintenance/populateCommunityPortal.php',
+					[
+						'--wiki', $wiki
+					]
+				)->limits( [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ] )->execute();
+			},
+			DeferredUpdates::POSTSEND,
+			$cwdb
+		);
 	}
 
 	public static function onCreateWikiDeletion( $dbw, $wiki ) {
