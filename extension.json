@@ -51,6 +51,9 @@
 		"BlockIpComplete": [
 			"MirahezeMagicHooks::onBlockIpComplete"
 		],
+		"CreateWikiCreation": [
+			"MirahezeMagicHooks::onCreateWikiCreation"
+		],
 		"CreateWikiDeletion": [
 			"MirahezeMagicHooks::onCreateWikiDeletion"
 		],
