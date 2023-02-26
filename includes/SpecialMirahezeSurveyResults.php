@@ -134,7 +134,7 @@ class SpecialMirahezeSurveyResults extends SpecialPage {
 			new Tag( 'th', [], $this->msg( 'miraheze-survey-results-heading-q12' )->escaped() ),
 			new Tag( 'th', [], $this->msg( 'miraheze-survey-results-heading-q13' )->escaped() ),
 			new Tag( 'th', [], $this->msg( 'miraheze-survey-results-heading-q14' )->escaped() ),
-		] );
+		];
 
 		$bodyRows = [];
 
