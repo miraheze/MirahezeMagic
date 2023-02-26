@@ -7,6 +7,7 @@
 			"Universal Omega"
 		]
 	},
+	"action-viewmirahezesurveyresults": "view miraheze survey results",
 	"centralauth-groupname": "Miraheze",
 	"content-model-flow-board": "StructuredDiscussions board",
 	"datadump-namespaceselect-label": "Namespace",
@@ -201,5 +202,6 @@
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
 	"grant-usedatadumpapi": "Create, view, and delete dumps",
-	"prefs-forcesafemode-label": "Always force safemode?"
+	"prefs-forcesafemode-label": "Always force safemode?",
+	"right-viewmirahezesurveyresults": "View miraheze survey results"
 }
