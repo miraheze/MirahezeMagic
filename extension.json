@@ -17,6 +17,9 @@
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
 	},
+	"AvailableRights": [
+		"viewmirahezesurveyresults"
+	],
 	"MessagesDirs": {
 		"MirahezeMagic": [
 			"i18n/miraheze"
@@ -34,11 +37,18 @@
 	"AutoloadClasses": {
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
+		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
+		"SpecialMirahezeSurveyResults": "includes/SpecialMirahezeSurveyResults.php"
 	},
 	"SpecialPages": {
 		"MirahezeSurvey": {
 			"class": "SpecialMirahezeSurvey",
+			"services": [
+				"ConfigFactory"
+			]
+		},
+		"MirahezeSurveyResults": {
+			"class": "SpecialMirahezeSurveyResults",
 			"services": [
 				"ConfigFactory"
 			]
