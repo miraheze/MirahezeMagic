@@ -80,10 +80,14 @@ class RebuildVersionCache extends Maintenance {
 
 		$data = $processor->getExtractedInfo();
 
-		$extensionCredits = array_merge( $data['credits'], array_values(
-				array_merge( ...array_values( $this->getConfig()->get( 'ExtensionCredits' ) ) )
-			)
-		);
+		$extensionCredits = $data['credits'];
+		$legacyCredits = $this->getConfig()->get( 'ExtensionCredits' );
+		if ( $legacyCredits ) {
+			$extensionCredits = array_merge( $extensionCredits, array_values(
+					array_merge( ...array_values( $legacyCredits ) )
+				)
+			);
+		}
 
 		foreach ( $extensionCredits as $extension => $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
