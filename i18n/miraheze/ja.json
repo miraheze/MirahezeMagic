@@ -15,7 +15,8 @@
 			"おはぐろ蜻蛉",
 			"しぃ",
 			"そらたこ",
-			"ぺばる"
+			"ぺばる",
+			"もなー(偽物)"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -110,7 +111,7 @@
 	"group-sysadmin": "システム管理者",
 	"group-sysadmin-member": "{{GENDER:$1|システム管理者}}",
 	"group-interwiki-admin": "インターウィキ管理者",
-	"group-interwiki-admin-member": "インターウィキ管理者",
+	"group-interwiki-admin-member": "{{GENDER:$1|インターウィキ管理者}}",
 	"group-oversight": "秘匿者",
 	"group-oversight-member": "秘匿者",
 	"group-requestwikiblocked-member": "{{GENDER:$1|ウィキリクエストをブロックされた利用者}}",
@@ -124,6 +125,7 @@
 	"group-autopatrolled-member": "{{GENDER:$1|自動巡回者}}",
 	"group-confirmed": "承認された利用者",
 	"group-confirmed-member": "{{GENDER:$1|承認された利用者}}",
+	"group-global-interwiki-admin": "グローバル Interwiki 管理者",
 	"group-global-sysop": "グローバル管理者",
 	"group-global-sysop-member": "{{GENDER:$1|グローバル管理者}}",
 	"group-global-rollbacker": "グローバル巻き戻し者",
@@ -178,5 +180,6 @@
 	"extensions-parserhooks": "構文解析フック",
 	"extensions-specialpages": "特別ページ",
 	"extensions-variable": "変数",
-	"grant-usedatadumpapi": "ダンプの作成、表示及び削除"
+	"grant-usedatadumpapi": "ダンプの作成、表示及び削除",
+	"prefs-forcesafemode-label": "常にセーフモードを強制しますか?"
 }
