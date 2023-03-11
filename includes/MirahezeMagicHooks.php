@@ -469,8 +469,7 @@ class MirahezeMagicHooks {
 			'CreateAccount',
 			'Notifications',
 			'OAuth',
-			'ResetPassword',
-			'Watchlist'
+			'ResetPassword'
 		];
 
 		if ( $user->isAllowed( 'interwiki' ) ) {
