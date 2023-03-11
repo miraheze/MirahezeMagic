@@ -144,6 +144,9 @@ class MirahezeMagicHooks {
 			)
 		);
 
+		$remoteWiki = new RemoteWiki( $new );
+		$isPrivate = $wiki->isPrivate();
+
 		foreach ( $containers as $container ) {
 			// Just an extra precaution to ensure we don't select the wrong containers
 			if ( !str_contains( $container, $old . '-' ) ) {
@@ -200,8 +203,8 @@ class MirahezeMagicHooks {
 				implode( ' ', [
 					'swift', 'upload',
 					$newContainer,
-					'--read-acl', 'mw:media,mw:media,.r:*',
-					'--write-acl', 'mw:media,mw:media',
+					'--read-acl', $isPrivate ? 'mw:media' : 'mw:media,mw:media,.r:*',
+					'--write-acl', $isPrivate ? 'mw:media' : 'mw:media,mw:media',
 					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
