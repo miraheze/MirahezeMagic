@@ -192,6 +192,24 @@ class MirahezeMagicHooks {
 
 			wfDebugLog( 'MirahezeMagic', "Container '$newContainer' created." );
 
+			// We have to set the acls after creating the new container
+			// as the acls are not set by default.
+			// We have to use exec here, as Shell::command does not work for this
+			// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+			exec( escapeshellcmd(
+				implode( ' ', [
+					'swift', 'upload',
+					$newContainer,
+					'--read-acl', 'mw:media,mw:media,.r:*',
+					'--write-acl', 'mw:media,mw:media',
+					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-U', 'mw:media',
+					'-K', $wmgSwiftPassword
+				] )
+			) );
+
+			wfDebugLog( 'MirahezeMagic', "Container permissions for '$newContainer' updated." );
+
 			$newContainerList = Shell::command(
 				'swift', 'list',
 				$newContainer,
@@ -233,6 +251,9 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		// This is to ensure all the required containers exists
+		// it does not change any permissions on containers if they
+		// already exist.
 		Shell::makeScriptCommand(
 			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
 			[
