@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"01miki10",
-			"MITO"
+			"MITO",
+			"Pyscowicz"
 		]
 	},
 	"miraheze-dberr-again": "Odota muutama minuutti ja lataa sivu uudelleen. Saadaksesi lisätietoja tästä virheestä katso Twitter-sivumme (https://twitter.com/Miraheze) tai ota yhteyttä järjestelmän ylläpitäjiin kanavalla #miraheze palvelimella irc.libera.chat.",
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Et}} voi kirjautua sisään, koska {{GENDER:$1|käyttäjäsi}} on lukittu järjestelmänlaajuisesti. Ota yhteyttä osoitteeseen <code>cvt[at]miraheze.org</code> saadaksesi lisätietoja tai valittaaksesi",
-	"miraheze-oathauth-step1": "TÄRKEÄÄ! Varmista, että luet OATHAuth-sivun ennen käyttöönottoa!  Vaihe 1: Lataa kaksivaiheisen tunnistautumisen sovellus",
-	"miraheze-prefs-help-realname": "Oikean nimen ilmoittaminen on vapaaehtoista. Jos ilmoitettu, sitä voidaan käyttää tekijän mainitsemiseen. Lisäksi käyttämällä Mirahezen ylläpitämää wikiä hyväksyt <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use käyttöehdot]</span> ja <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy tietosuojakäytännön]</span>.",
-	"miraheze-newsignuppage-loginform-tos": "Olen lukenut, ymmärtänyt ja hyväksyn [https://meta.miraheze.org/wiki/Terms_of_Use käyttöehdot] ja [https://meta.miraheze.org/wiki/Privacy_Policy tietosuojakäytännön]",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Et}} voi kirjautua sisään, koska {{GENDER:$1|käyttäjäsi}} on [[m:Special:MyLanguage/Global locks|lukittu järjestelmänlaajuisesti]]. Ota yhteyttä osoitteeseen <code>cvt[at]miraheze.org</code> saadaksesi lisätietoja tai valittaaksesi",
+	"miraheze-oathauth-step1": "TÄRKEÄÄ! Varmista, että luet OATHAuth-sivun ennen käyttöönottoa! Vaihe 1: Lataa kaksivaiheisen tunnistautumisen sovellus",
+	"miraheze-prefs-help-realname": "Oikean nimen ilmoittaminen on vapaaehtoista. Jos ilmoitettu, sitä voidaan käyttää tekijän mainitsemiseen. Lisäksi käyttämällä Mirahezen ylläpitämää wikiä hyväksyt <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use käyttöehdot]</span> ja <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy tietosuojakäytännön]</span>.",
+	"miraheze-newsignuppage-loginform-tos": "Olen lukenut, ymmärtänyt ja hyväksyn [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use käyttöehdot] ja [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy tietosuojakäytännön]",
 	"miraheze-newsignuppage-must-accept-tos": "Sinun täytyy hyväksyä käyttöehdot voidaksesi luoda käyttäjän!",
 	"miraheze-centralauth-merge-method-admin": "Manuaalisesti yhdistetty käyttäjä",
 	"miraheze-centralauth-merge-method-admin-desc": "Tämä käyttäjä on yhdistetty manuaalisesti järjestelmän ylläpitäjän tai ylivalvojan toimesta. Tämä on voinut aiheutua teknisestä ongelmasta uudelleennimeämisen tai yhdistämisen aikana.",
