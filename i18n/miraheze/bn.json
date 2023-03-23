@@ -39,7 +39,7 @@
 	"group-oversight": "গোপন পর্যবেক্ষক",
 	"group-oversight-member": "{{GENDER:$1|গোপন পর্যবেক্ষক}}",
 	"group-requestwikiblocked": "রিকুয়েস্টউইকির বাধাপ্রাপ্ত ব্যবহারকারীগণ",
-	"group-requestwikiblocked-member": "রিকুয়েস্টউইকির বাধাপ্রাপ্ত ব্যবহারকারী",
+	"group-requestwikiblocked-member": "{{GENDER:$1|রিকুয়েস্টউইকির বাধাপ্রাপ্ত ব্যবহারকারী}}",
 	"group-wikicreator": "উইকি স্রষ্টা",
 	"group-rollbacker": "রোলব্যাকার",
 	"group-rollbacker-member": "{{GENDER:$1|রোলব্যাকার}}",
