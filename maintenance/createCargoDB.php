@@ -24,24 +24,24 @@
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class CreateCargoDB extends Maintenance {
-    public function __construct() {
-        parent::__construct();
-        
-        $this->addDescription( 'Creates a database for Cargo for the current wiki' );
-    }
+	public function __construct() {
+		parent::__construct();
 
-    public function execute() {
-        $dbw = $this->getDB( DB_PRIMARY );
-        $dbname = $dbw->getDBname();
-        $cargodb = $dbname . 'cargo';
+		$this->addDescription( 'Creates a database for Cargo for the current wiki' );
+	}
 
-        try {
-            $dbQuotes = $dbw->addIdentifierQuotes( $cargodb );
-            $dbw->query( "CREATE DATABASE {$dbQuotes};");
-        } catch ( Exception $e ) {
-            throw new FatalError( "Database '{$cargodb}' already exists." );
-        }
-    }
+	public function execute() {
+		$dbw = $this->getDB( DB_PRIMARY );
+		$dbname = $dbw->getDBname();
+		$cargodb = $dbname . 'cargo';
+
+		try {
+			$dbQuotes = $dbw->addIdentifierQuotes( $cargodb );
+			$dbw->query( "CREATE DATABASE {$dbQuotes};" );
+		} catch ( Exception $e ) {
+			throw new FatalError( "Database '{$cargodb}' already exists." );
+		}
+	}
 }
 
 $maintClass = 'CreateCargoDB';
