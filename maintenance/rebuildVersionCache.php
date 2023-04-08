@@ -25,7 +25,7 @@
  * @ingroup Maintenance
  *
  * @author Universal Omega
- * @version 2.0
+ * @version 3.0
  */
 
 $IP = getenv( 'MW_INSTALL_PATH' );
@@ -55,12 +55,11 @@ class RebuildVersionCache extends Maintenance {
 		$hashConfig->set( 'ShellRestrictionMethod', false );
 
 		$baseDirectory = MW_INSTALL_PATH;
-		$gitInfo = new GitInfo( $baseDirectory, false );
 
-		$gitInfo->precomputeValues();
+		$this->saveCache( $baseDirectory );
 
 		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
-		$coreId = $gitInfo->getHeadSHA1() ?: '';
+		$coreId = $this->getGitInfo( $baseDirectory )['headSHA1'] ?? '';
 
 		$queue = array_fill_keys( array_merge(
 				glob( $baseDirectory . '/extensions/*/extension*.json' ),
@@ -94,10 +93,8 @@ class RebuildVersionCache extends Maintenance {
 				$extensionDirectory = dirname( $extensionData['path'] );
 				$extensionPath = str_replace( '/srv/mediawiki/w', $baseDirectory, $extensionDirectory );
 
-				$gitInfo = new GitInfo( $extensionPath, false );
-
 				if ( $this->hasOption( 'save-gitinfo' ) ) {
-					$gitInfo->precomputeValues();
+					$this->saveCache( $extensionPath );
 				}
 
 				$memcKey = $cache->makeKey(
@@ -107,6 +104,104 @@ class RebuildVersionCache extends Maintenance {
 				$cache->delete( $memcKey );
 			}
 		}
+	}
+
+	private function getGitInfo( string $directory ): ?array {
+		$gitDir = $directory . '/.git';
+		if ( !file_exists( $gitDir ) ) {
+			return null;
+		}
+
+		$gitInfo = [];
+
+		// Calculate the SHA1 hash of the HEAD commit
+		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+		$headSHA1 = trim( shell_exec( "git --git-dir=$gitDir log -1 --format=%H" ) );
+
+		// Get the HEAD
+		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+		$head = trim( shell_exec( "git --git-dir=$gitDir symbolic-ref HEAD 2>/dev/null" ) ) ?: $headSHA1;
+
+		if ( !empty( $head ) ) {
+			$gitInfo['head'] = $head;
+		}
+
+		if ( !empty( $headSHA1 ) ) {
+			$gitInfo['headSHA1'] = $headSHA1;
+		}
+
+		// Get the date of the HEAD commit
+		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+		$headCommitDate = trim( shell_exec( "git --git-dir=$gitDir log -1 --format=%ct" ) );
+		if ( !empty( $headCommitDate ) ) {
+			$gitInfo['headCommitDate'] = $headCommitDate;
+		}
+
+		// Get the branch name
+		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+		$branch = trim( shell_exec( "git --git-dir=$gitDir rev-parse --abbrev-ref HEAD" ) );
+		if ( !empty( $branch ) ) {
+			if ( $branch === 'HEAD' ) {
+				$branch = $headSHA1;
+			}
+
+			$gitInfo['branch'] = $branch;
+		}
+
+		// Get the remote URL
+		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
+		$remoteURL = trim( shell_exec( "git --git-dir=$gitDir remote get-url origin" ) );
+		if ( !empty( $remoteURL ) ) {
+			$gitInfo['remoteURL'] = $remoteURL;
+		}
+
+		return $gitInfo;
+	}
+
+	private function getCacheFilePath( string $repoDir ) {
+		$gitInfoCacheDirectory = $this->getConfig()->get( 'GitInfoCacheDirectory' );
+
+		if ( $gitInfoCacheDirectory === false ) {
+			$gitInfoCacheDirectory = $this->getConfig()->get( 'CacheDirectory' ) . '/gitinfo';
+		}
+
+		$baseDir = $this->getConfig()->get( 'BaseDirectory' );
+
+		if ( $gitInfoCacheDirectory ) {
+			// Convert both MW_INSTALL_PATH and $repoDir to canonical paths to protect against
+			// MW_INSTALL_PATH having changed between the settings files and runtime.
+			$realIP = realpath( $baseDir );
+			$repoName = realpath( $repoDir );
+
+			if ( $repoName === false ) {
+				// Unit tests use fake path names
+				$repoName = $repoDir;
+			}
+
+			if ( strpos( $repoName, $realIP ) === 0 ) {
+				// Strip MW_INSTALL_PATH from path
+				$repoName = substr( $repoName, strlen( $realIP ) );
+			}
+
+			// Transform path to git repo to something we can safely embed in
+			// a filename
+			$repoName = strtr( $repoName, DIRECTORY_SEPARATOR, '-' );
+			$fileName = 'info' . $repoName . '.json';
+			return "{$gitInfoCacheDirectory}/{$fileName}";
+		}
+
+		return "$repoDir/gitinfo.json";
+	}
+
+	private function saveCache( string $repoDir ) {
+		$cacheDir = dirname( $this->getCacheFilePath( $repoDir ) );
+		if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
+			|| !is_writable( $cacheDir )
+		) {
+			throw new MWException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
+		}
+
+		file_put_contents( $this->getCacheFilePath( $repoDir ), FormatJson::encode( $this->getGitInfo( $repoDir ) ) );
 	}
 }
 
