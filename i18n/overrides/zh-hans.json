@@ -3,6 +3,7 @@
 		"authors": [
 			"A Chinese Wikipedian",
 			"GuoPC",
+			"Hehua",
 			"LuciferianThomas",
 			"StarrySky",
 			"XtexChooser",
@@ -18,7 +19,7 @@
 	"miraheze-newsignuppage-loginform-tos": "我已阅读并同意\n[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用条款]和[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隐私政策]",
 	"miraheze-newsignuppage-must-accept-tos": "您一定要先接受使用条款才可以创建新的账户。",
 	"miraheze-centralauth-merge-method-admin": "手动合并账号",
-	"miraheze-centralauth-merge-method-admin-desc": "此帐户由系统管理员或管理员手动合并。 这可能是由于重命名或合并过程中的技术问题。",
+	"miraheze-centralauth-merge-method-admin-desc": "此帐户由站点可靠性工程师或监管员手动合并。这可能是由于重命名或合并过程中的技术问题。",
 	"miraheze-restriction-protect": "保护",
 	"miraheze-restriction-delete": "删除",
 	"miraheze-skinname-snapwikiskin": "Snap!",
