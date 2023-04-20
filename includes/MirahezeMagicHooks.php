@@ -347,6 +347,7 @@ class MirahezeMagicHooks {
 			'grouppage-bot',
 			'group-bot-member',
 			'grouppage-user',
+			'webauthn-module-description',
 		];
 
 		if ( in_array( $lcKey, $keys, true ) ) {
