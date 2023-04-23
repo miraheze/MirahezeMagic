@@ -63,46 +63,24 @@ class RebuildVersionCache extends Maintenance {
 
 		$queue = array_fill_keys( array_merge(
 				glob( $baseDirectory . '/extensions/*/extension*.json' ),
+				glob( $baseDirectory . '/extensions/SocialProfile/SocialProfile.php' ),
 				glob( $baseDirectory . '/skins/*/skin.json' )
 			),
 		true );
 
-		$processor = new ExtensionProcessor();
-
 		foreach ( $queue as $path => $mtime ) {
-			$json = file_get_contents( $path );
-			$info = json_decode( $json, true );
-			$version = $info['manifest_version'];
+			$extensionDirectory = dirname( $path );
+			$extensionPath = str_replace( '/srv/mediawiki/w', $baseDirectory, $extensionDirectory );
 
-			$processor->extractInfo( $path, $info, $version );
-		}
-
-		$data = $processor->getExtractedInfo();
-
-		$extensionCredits = $data['credits'];
-		$legacyCredits = $this->getConfig()->get( 'ExtensionCredits' );
-		if ( $legacyCredits ) {
-			$extensionCredits = array_merge( $extensionCredits, array_values(
-					array_merge( ...array_values( $legacyCredits ) )
-				)
-			);
-		}
-
-		foreach ( $extensionCredits as $extension => $extensionData ) {
-			if ( isset( $extensionData['path'] ) ) {
-				$extensionDirectory = dirname( $extensionData['path'] );
-				$extensionPath = str_replace( '/srv/mediawiki/w', $baseDirectory, $extensionDirectory );
-
-				if ( $this->hasOption( 'save-gitinfo' ) ) {
-					$this->saveCache( $extensionPath );
-				}
-
-				$memcKey = $cache->makeKey(
-					'specialversion-ext-version-text', str_replace( $baseDirectory, '/srv/mediawiki/w', $extensionData['path'] ), $coreId
-				);
-
-				$cache->delete( $memcKey );
+			if ( $this->hasOption( 'save-gitinfo' ) ) {
+				$this->saveCache( $extensionPath );
 			}
+
+			$memcKey = $cache->makeKey(
+				'specialversion-ext-version-text', str_replace( $baseDirectory, '/srv/mediawiki/w', $path ), $coreId
+			);
+
+			$cache->delete( $memcKey );
 		}
 	}
 
