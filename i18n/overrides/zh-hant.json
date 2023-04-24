@@ -23,7 +23,7 @@
 	"miraheze-centralauth-merge-method-admin-desc": "此帳號已被站台可靠性工程師或是監管員給手動合併。這出自於在重新命名或合併的過程中出現一些技術上問題。",
 	"miraheze-restriction-protect": "保護",
 	"miraheze-restriction-delete": "刪除",
-	"miraheze-uploadtext": "使用以下的表格來上傳檔案。\n要查看或搜尋之前上傳的檔案，請前往[[Special:FileList|上傳檔案清單]]。上傳與重新上傳都會記錄在[[Special:Log/upload|上傳日誌]]裡。刪除則記錄在[[Special:Log/delete|刪除日誌]]。\n\n要在頁面裡包含檔案，請使用以下形式之一的連結：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong> 用來使用完整版本的檔案\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|Caption]]</nowiki></code></strong> 用來呈現出帶有 200 像素寬度檔案的左側方框，並在檔案下方有說明文字\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> 用於連結到檔案但不顯示檔案內容\n\n\n\n請注意，您上傳的檔案'''''必須'''''遵守英國的版權法律，屢試的失敗因此會導致侵犯版權，並可能導致'''關閉 wiki'''。合理使用並不存在於英國體制，取而代之的是概念類似但更嚴格的[[w:Fair dealing in United Kingdom law|公平處理]]體制。",
+	"miraheze-uploadtext": "請使用以下的表單來上傳檔案。\n要查看或搜尋之前上傳的檔案，請前往[[Special:FileList|上傳檔案清單]]。上傳與重新上傳都會記錄在[[Special:Log/upload|上傳日誌]]裡。刪除則記錄在[[Special:Log/delete|刪除日誌]]。\n\n要在頁面裡包含檔案，請使用以下形式之一的連結：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong> 用來使用完整版本的檔案\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|Caption]]</nowiki></code></strong> 用來呈現出帶有 200 像素寬度檔案的左側方框，並在檔案下方有說明文字\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> 用於連結到檔案但不顯示檔案內容\n\n\n\n請注意，您上傳的檔案'''''必須'''''遵守英國的版權法律，屢試的失敗因此會導致侵犯版權，並可能導致'''關閉 wiki'''。合理使用並不存在於英國體制，取而代之的是概念類似但更嚴格的[[w:Fair dealing in United Kingdom law|公平處理]]體制。",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis",
@@ -36,5 +36,6 @@
 	"miraheze-group-interface-admin": "介面管理員",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|介面管理員}}",
 	"miraheze-group-bot": "機器人",
-	"miraheze-group-bot-member": "{{GENDER:$1|機器人}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|機器人}}",
+	"miraheze-webauthn-module-description": "WebAuthn（Web Authentication）是由全球資訊網協會（World Wide Web Consortium、W3C）發布的網路標準。WebAuthn 是在 FIDO 聯盟指引下的 FIDO2 專案之核心內容。該專案目的是要標準化基於網路應用程式且採用公鑰加密服務來驗證使用者的介面。[https://zh.wikipedia.org/wiki/WebAuthn 了解更多]。<br>'''請注意您需要在已註冊身分驗證器的 wiki 上登入'''。出於此原因，您可能會在 [[mh:meta|Meta]] 上註冊身分驗證器。"
 }

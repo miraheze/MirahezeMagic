@@ -44,5 +44,6 @@
 	"miraheze-group-interface-admin": "Administrateurs d’interface",
 	"miraheze-group-interface-admin-member": "administrat{{GENDER:$1|eur|rice}} d’interface",
 	"miraheze-group-bot": "Robots",
-	"miraheze-group-bot-member": "robot{{GENDER:$1|}}"
+	"miraheze-group-bot-member": "robot{{GENDER:$1|}}",
+	"miraheze-webauthn-module-description": "''WebAuthn'' (authentification web) est un standard du web publié par le ''World Wide Web Consortium'' (W3C). ''WebAuthn'' est un composant cœur du projet ''FIDO2'' sous la direction de l’''Alliance FIDO''. Le but du projet est de standardiser une interface pour authentifier les utilisateurs des applications et services basés sur le web, en utilisant le chiffrement à clé publique. [https://fr.wikipedia.org/wiki/WebAuthn En savoir plus]. '''Veuillez garder à l’esprit que vous devrez vous rendre sur le même wiki que là où vous avez initialement inscrit votre appareil de vérification pour vous connecter.''' Vous voudrez peut-être inscrire l’authentificateur sur [[mh:meta|Meta]] pour cette raison."
 }

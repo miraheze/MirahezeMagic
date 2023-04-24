@@ -35,5 +35,6 @@
 	"miraheze-group-interface-admin": "Administratorji vmesnika",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|administrator vmesnika|administratorka vmesnika|administrator_ka vmesnika}}",
 	"miraheze-group-bot": "Boti",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|bot}}",
+	"miraheze-webauthn-module-description": "WebAuthn (Web Authentication) je spletni standard, ki ga je objavilo združenje World Wide Web Consortium (W3C). WebAuth je ključna komponenta projekta FIDO2 pod vodstvom združenja FIDO Alliance. Cilj projekta je standardizirati vmesnik za avtentikacijo uporabnikov spletnih aplikacij in storitev, ki uporabljajo kriptografijo z javnim ključem. [https://en.wikipedia.org/wiki/WebAuthn Read more] <br> '''Upoštevajte, da se boste morali prijaviti v isti viki, v katerem ste prvotno registrirali svojo napravo za preverjanje.''' Avtentikator boste zato morda želeli registrirati na [[mh:meta|Meta]]."
 }
