@@ -347,6 +347,7 @@ class MirahezeMagicHooks {
 			'grouppage-bot',
 			'group-bot-member',
 			'grouppage-user',
+			'grouppage-suppress',
 			'webauthn-module-description',
 		];
 
