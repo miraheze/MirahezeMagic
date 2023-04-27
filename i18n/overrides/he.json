@@ -39,5 +39,6 @@
 	"miraheze-group-interface-admin": "עורכי ממשק",
 	"miraheze-group-interface-admin-member": "{{GENDER:$1|עורך|עורכת}} ממשק",
 	"miraheze-group-bot": "בוטים",
-	"miraheze-group-bot-member": "{{GENDER:$1|בוט}}"
+	"miraheze-group-bot-member": "{{GENDER:$1|בוט}}",
+	"miraheze-webauthn-module-description": "WebAuthn (אימות וב, Web Authentication) הוא תקן וב שמפורסם על־ידי מאגד המארג העולמי (W3C). תקן WebAuthn הוא רכיב ליבה של מיזם FIDO2 תחת ההובלה של איגוד FIDO. מטרת המיזם היא לתקנן ממשק לאימות משתמשים עם יישומים ושירותים בווב באמצעות קריפטוגרפיה עם מפתחות ציבוריים. [https://en.wikipedia.org/wiki/WebAuthn מידע נוסף]. <br> '''נא לשים לב לכך שיש להיכנס לאותו הוויקי שהשתמשת בו במקור כדי לרשום את המכשיר שלך.''' אולי כדאי גם לרשום את המאמת ב־[[mh:meta|Meta]] מהסיבה הזאת."
 }
