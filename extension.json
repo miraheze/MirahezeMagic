@@ -1,6 +1,7 @@
 {
 	"name": "MirahezeMagic",
 	"author": [
+		"Agent Isai",
 		"John Lewis",
 		"Labster",
 		"MacFan4000",
@@ -17,42 +18,31 @@
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
 	},
-	"MessagesDirs": {
-		"MirahezeMagic": [
-			"i18n/miraheze"
-		],
-		"MirahezeOverrideMessagesMagic": [
-			"i18n/overrides"
-		],
-		"MirahezeLocalizedProjectNames": [
-			"i18n/mirahezeprojectnames"
-		]
-	},
-	"ExtensionMessagesFiles": {
-		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
-	},
 	"AutoloadClasses": {
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
 		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
 		"SpecialVanishUser": "includes/SpecialVanishUser.php"
 	},
-	"SpecialPages": {
-		"MirahezeSurvey": {
-			"class": "SpecialMirahezeSurvey",
-			"services": [
-				"ConfigFactory"
-			]
+	"ConfigRegistry": {
+		"mirahezemagic": "GlobalVarConfig::newInstance"
+	},
+	"config": {
+		"MirahezeReportsBlockAlertKeywords": {
+			"value": []
 		},
-		"VanishUser": {
-			"class": "SpecialVanishUser",
-			"services" : [
-				"CentralAuth.CentralAuthDatabaseManager",
-                                "CentralAuth.GlobalRenameUserValidator",
-                                "JobQueueGroupFactory",
-                                "UserFactory"
-			],
+		"MirahezeReportsWriteKey": {
+			"value": ""
+		},
+		"MirahezeStaffAccessIds": {
+			"value": []
+		},
+		"MirahezeSurveyEnabled": {
+			"value": true
 		}
+	},
+	"ExtensionMessagesFiles": {
+		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": [
@@ -119,21 +109,44 @@
 			"MirahezeMagicHooks::onContributionsToolLinks"
 		]
 	},
-	"ConfigRegistry": {
-		"mirahezemagic": "GlobalVarConfig::newInstance"
+        "LogActionsHandlers": {
+                "vanishuser/*": "LogFormatter"
+        },
+        "LogHeaders": {
+                "vanishuser": "vanishuser-log-header"
+        },
+        "LogNames": {
+                "vanishuser": "vanishuser-log-name"
+        },
+        "LogTypes": [
+                "vanishuser"
+        ],
+	"MessagesDirs": {
+		"MirahezeMagic": [
+			"i18n/miraheze"
+		],
+		"MirahezeOverrideMessagesMagic": [
+			"i18n/overrides"
+		],
+		"MirahezeLocalizedProjectNames": [
+			"i18n/mirahezeprojectnames"
+		]
 	},
-	"config": {
-		"MirahezeReportsBlockAlertKeywords": {
-			"value": []
+	"SpecialPages": {
+		"MirahezeSurvey": {
+			"class": "SpecialMirahezeSurvey",
+			"services": [
+				"ConfigFactory"
+			]
 		},
-		"MirahezeReportsWriteKey": {
-			"value": ""
-		},
-		"MirahezeStaffAccessIds": {
-			"value": []
-		},
-		"MirahezeSurveyEnabled": {
-			"value": true
+		"VanishUser": {
+			"class": "SpecialVanishUser",
+			"services" : [
+				"CentralAuth.CentralAuthDatabaseManager",
+                                "CentralAuth.GlobalRenameUserValidator",
+                                "JobQueueGroupFactory",
+                                "UserFactory"
+			],
 		}
 	},
 	"manifest_version": 2
