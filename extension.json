@@ -146,7 +146,7 @@
                                 "CentralAuth.GlobalRenameUserValidator",
                                 "JobQueueGroupFactory",
                                 "UserFactory"
-			],
+			]
 		}
 	},
 	"manifest_version": 2
