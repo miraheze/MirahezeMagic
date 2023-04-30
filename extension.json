@@ -34,7 +34,8 @@
 	"AutoloadClasses": {
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
 		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
+		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
+		"SpecialVanishUser": "includes/SpecialVanishUser.php"
 	},
 	"SpecialPages": {
 		"MirahezeSurvey": {
@@ -42,6 +43,15 @@
 			"services": [
 				"ConfigFactory"
 			]
+		},
+		"VanishUser": {
+			"class": "SpecialVanishUser",
+			"services" : [
+				"CentralAuth.CentralAuthDatabaseManager",
+                                "CentralAuth.GlobalRenameUserValidator",
+                                "JobQueueGroupFactory",
+                                "UserFactory"
+			],
 		}
 	},
 	"Hooks": {
