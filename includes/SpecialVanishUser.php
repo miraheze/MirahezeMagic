@@ -1,9 +1,11 @@
 <?php
 
+// phpcs:disable MediaWiki.Classes.UnusedUseStatement.UnnecessaryUse
 use ExtensionRegistry;
 use FormSpecialPage;
 use Html;
 use ManualLogEntry;
+// phpcs:enable
 use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
@@ -14,9 +16,11 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\User\UserFactory;
+// phpcs:disable MediaWiki.Classes.UnusedUseStatement.UnnecessaryUse
 use SpecialPage;
 use Status;
 
+// phpcs:enable
 class SpecialVanishUser extends FormSpecialPage {
 	/** @var CentralAuthDatabaseManager */
 	private $centralAuthDatabaseManager;
