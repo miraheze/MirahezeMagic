@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Agent Isai",
 			"Ajeje Brazorf",
 			"AlvaroMolina",
 			"John Lewis",
@@ -77,7 +78,7 @@
 	"group-translationadmin-member": "{{Identical|Group-translationadmin-member}}",
 	"group-trustandsafety": "Trust and Safety",
 	"group-trustandsafety-member": "Trust and Safety",
-	"grouppage-trustandsafety": "m:Trust and Safety",
+	"grouppage-trustandsafety": "{{Notranslate}}",
 	"group-global-ipblock-exempt": "{{Identical|Group-global-ipblock-exempt}}",
 	"group-global-ipblock-exempt-member": "{{Identical|Group-global-ipblock-exempt-member}}",
 	"group-flood": "{{Identical|Group-flood}}",
@@ -85,7 +86,7 @@
 	"grouppage-flood": "{{Notranslate}}",
 	"group-member": "Members\n\n{{Identical|Member}}",
 	"group-member-member": "member\n\n{{Identical|Member}}",
-	"grouppage-member": "m:User groups#{{int:Group-member}}",
+	"grouppage-member": "{{Notranslate}}",
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",
