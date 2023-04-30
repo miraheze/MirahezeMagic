@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic;
+
 use MediaWiki\MediaWikiServices;
 
 class SpecialMirahezeSurvey extends FormSpecialPage {

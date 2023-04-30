@@ -39,7 +39,7 @@
 		}
 	},
 	"ExtensionMessagesFiles": {
-		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
+		"MirahezeMagicAliases": "MirahezeMagicAliases.php"
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": [

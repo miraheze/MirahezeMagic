@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic;
+
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
