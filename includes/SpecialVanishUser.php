@@ -1,5 +1,8 @@
 <?php
 
+use FormSpecialPage;
+use Html;
+use ManualLogEntry;
 use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
@@ -10,6 +13,8 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\User\UserFactory;
+use SpecialPage;
+use Status;
 
 class SpecialVanishUser extends FormSpecialPage {
 	/** @var CentralAuthDatabaseManager */
