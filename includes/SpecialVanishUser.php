@@ -1,9 +1,5 @@
 <?php
 
-use ExtensionRegistry;
-use FormSpecialPage;
-use Html;
-use ManualLogEntry;
 use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
@@ -14,8 +10,6 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\User\UserFactory;
-use SpecialPage;
-use Status;
 
 class SpecialVanishUser extends FormSpecialPage {
 	/** @var CentralAuthDatabaseManager */
@@ -58,7 +52,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		$this->requireLogIn();
 		$this->getOutput()->disallowUserJs();
 		$this->checkPermissions();
- 
+
 		parent::execute( $par );
 	}
 
@@ -172,7 +166,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			new GlobalRenameUserStatus( $newUser->getName() ),
 			$this->jobQueueGroupFactory,
 			new GlobalRenameUserDatabaseUpdates( $this->centralAuthDatabaseManager ),
-			new GlobalRenameUserLogger ( $this->getUser() ),
+			new GlobalRenameUserLogger( $this->getUser() ),
 			$session
 		);
 
