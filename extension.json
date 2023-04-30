@@ -18,11 +18,8 @@
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
 	},
-	"AutoloadClasses": {
-		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
-		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
-		"SpecialVanishUser": "includes/SpecialVanishUser.php"
+	"AutoloadNamespaces": {
+		"Miraheze\\MirahezeMagic\\": "includes/"
 	},
 	"ConfigRegistry": {
 		"mirahezemagic": "GlobalVarConfig::newInstance"
