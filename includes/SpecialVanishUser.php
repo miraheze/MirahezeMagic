@@ -1,5 +1,6 @@
 <?php
 
+use ExtensionRegistry;
 use FormSpecialPage;
 use Html;
 use ManualLogEntry;
