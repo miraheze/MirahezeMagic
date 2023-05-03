@@ -131,13 +131,13 @@
 	},
 	"SpecialPages": {
 		"MirahezeSurvey": {
-			"class": "SpecialMirahezeSurvey",
+			"class": "Miraheze\\MirahezeMagic\\SpecialMirahezeSurvey",
 			"services": [
 				"ConfigFactory"
 			]
 		},
 		"VanishUser": {
-			"class": "SpecialVanishUser",
+			"class": "Miraheze\\MirahezeMagic\\SpecialVanishUser",
 			"services" : [
 				"CentralAuth.CentralAuthDatabaseManager",
                                 "CentralAuth.GlobalRenameUserValidator",
