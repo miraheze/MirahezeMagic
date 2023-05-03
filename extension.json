@@ -46,64 +46,64 @@
 			"MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
 		],
 		"BlockIpComplete": [
-			"MirahezeMagicHooks::onBlockIpComplete"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onBlockIpComplete"
 		],
 		"CreateWikiDeletion": [
-			"MirahezeMagicHooks::onCreateWikiDeletion"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiDeletion"
 		],
 		"CreateWikiRename": [
-			"MirahezeMagicHooks::onCreateWikiRename"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiRename"
 		],
 		"CreateWikiStatePrivate": [
-			"MirahezeMagicHooks::onCreateWikiStatePrivate"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiStatePrivate"
 		],
 		"CreateWikiTables": [
-			"MirahezeMagicHooks::onCreateWikiTables"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiTables"
 		],
 		"CreateWikiReadPersistentModel": [
-			"MirahezeMagicHooks::onCreateWikiReadPersistentModel"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiReadPersistentModel"
 		],
 		"CreateWikiWritePersistentModel": [
-			"MirahezeMagicHooks::onCreateWikiWritePersistentModel"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiWritePersistentModel"
 		],
 		"MessageCache::get": [
-			"MirahezeMagicHooks::onMessageCacheGet"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onMessageCacheGet"
 		],
 		"TitleReadWhitelist": [
-			"MirahezeMagicHooks::onTitleReadWhitelist"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onTitleReadWhitelist"
 		],
 		"HtmlPageLinkRendererEnd": [
-			"MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
 		],
 		"InitializeArticleMaybeRedirect": [
-			"MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
 		],
 		"GlobalUserPageWikis": [
-			"MirahezeMagicHooks::onGlobalUserPageWikis"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onGlobalUserPageWikis"
 		],
 		"MimeMagicInit": [
-			"MirahezeMagicHooks::onMimeMagicInit"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onMimeMagicInit"
 		],
 		"SiteNoticeAfter": [
-			"MirahezeMagicHooks::onSiteNoticeAfter"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onSiteNoticeAfter"
 		],
 		"SkinAddFooterLinks": [
-			"MirahezeMagicHooks::onSkinAddFooterLinks"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onSkinAddFooterLinks"
 		],
 		"UserGetRightsRemove": [
-			"MirahezeMagicHooks::onUserGetRightsRemove"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onUserGetRightsRemove"
 		],
 		"RecentChange_save": [
-			"MirahezeMagicHooks::onRecentChange_save"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onRecentChange_save"
 		],
 		"GetPreferences": [
-			"MirahezeMagicHooks::onGetPreferences"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onGetPreferences"
 		],
 		"BeforeInitialize": [
-			"MirahezeMagicHooks::onBeforeInitialize"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onBeforeInitialize"
 		],
 		"ContributionsToolLinks": [
-			"MirahezeMagicHooks::onContributionsToolLinks"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onContributionsToolLinks"
 		]
 	},
         "LogActionsHandlers": {
