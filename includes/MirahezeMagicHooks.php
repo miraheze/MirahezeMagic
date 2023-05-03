@@ -10,6 +10,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use RecentChange;
+use Title;
 use User;
 use Wikimedia\IPUtils;
 
