@@ -2,7 +2,9 @@
 
 namespace Miraheze\MirahezeMagic;
 
+use HTMLForm;
 use MediaWiki\MediaWikiServices;
+use SpecialPage;
 
 class SpecialMirahezeSurvey extends FormSpecialPage {
 	/** @var Config */
