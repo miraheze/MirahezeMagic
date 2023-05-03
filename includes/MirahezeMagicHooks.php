@@ -8,6 +8,7 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use User;
 use Wikimedia\IPUtils;
 
 class MirahezeMagicHooks {
