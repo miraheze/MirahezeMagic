@@ -43,7 +43,7 @@
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": [
-			"MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
+			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
 		],
 		"BlockIpComplete": [
 			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onBlockIpComplete"
