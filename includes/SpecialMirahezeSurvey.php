@@ -2,6 +2,7 @@
 
 namespace Miraheze\MirahezeMagic;
 
+use FormSpecialPage;
 use HTMLForm;
 use MediaWiki\MediaWikiServices;
 use SpecialPage;
