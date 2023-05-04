@@ -24,6 +24,8 @@
  * @version 4.0
  */
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 use MediaWiki\MediaWikiServices;
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
