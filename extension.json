@@ -147,15 +147,6 @@
 			"services": [
 				"ConfigFactory"
 			]
-		},
-		"VanishUser": {
-			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
-			"services" : [
-					"CentralAuth.CentralAuthDatabaseManager",
-                   "CentralAuth.GlobalRenameUserValidator",
-                   "JobQueueGroupFactory",
-                    "UserFactory"
-			]
 		}
 	},
 	"manifest_version": 2
