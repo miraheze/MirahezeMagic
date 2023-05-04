@@ -23,6 +23,8 @@
  * @version 1.0
  */
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use Wikimedia\AtEase\AtEase;
