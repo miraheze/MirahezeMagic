@@ -2,6 +2,7 @@
 
 namespace Miraheze\MirahezeMagic;
 
+use GlobalVarConfig;
 use Html;
 use HtmlArmor;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
