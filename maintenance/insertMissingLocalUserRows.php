@@ -21,6 +21,8 @@
  * @version 1.0
  */
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
 
