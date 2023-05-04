@@ -2,6 +2,7 @@
 
 namespace Miraheze\MirahezeMagic;
 
+use Html;
 use HtmlArmor;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
