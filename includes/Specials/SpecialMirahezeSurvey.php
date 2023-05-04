@@ -1,6 +1,6 @@
 <?php
 
-namespace Miraheze\MirahezeMagic;
+namespace Miraheze\MirahezeMagic\Specials;
 
 use ConfigFactory;
 use FormSpecialPage;

@@ -17,7 +17,7 @@ use Title;
 use User;
 use Wikimedia\IPUtils;
 
-class MirahezeMagicHooks {
+class Hooks {
 	/**
 	 * Avoid filtering automatic account creation
 	 *

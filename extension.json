@@ -18,6 +18,9 @@
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
 	},
+	"AutoloadClasses": {
+		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php"
+	},
 	"AutoloadNamespaces": {
 		"Miraheze\\MirahezeMagic\\": "includes/"
 	},
@@ -26,15 +29,19 @@
 	},
 	"config": {
 		"MirahezeReportsBlockAlertKeywords": {
+			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
 			"value": []
 		},
 		"MirahezeReportsWriteKey": {
+			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
 		},
 		"MirahezeStaffAccessIds": {
+			"description": "Array. Usernames of users authorised to access staffwiki.",
 			"value": []
 		},
 		"MirahezeSurveyEnabled": {
+			"description": "Boolean. Enable Miraheze Annual Survey?",
 			"value": true
 		}
 	},
@@ -42,69 +49,74 @@
 		"MirahezeMagicAliases": "MirahezeMagicAliases.php"
 	},
 	"Hooks": {
-		"AbuseFilterShouldFilterAction": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onAbuseFilterShouldFilterAction"
-		],
-		"BlockIpComplete": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onBlockIpComplete"
-		],
-		"CreateWikiDeletion": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiDeletion"
-		],
-		"CreateWikiRename": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiRename"
-		],
-		"CreateWikiStatePrivate": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiStatePrivate"
-		],
-		"CreateWikiTables": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiTables"
-		],
-		"CreateWikiReadPersistentModel": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiReadPersistentModel"
-		],
-		"CreateWikiWritePersistentModel": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onCreateWikiWritePersistentModel"
-		],
-		"MessageCache::get": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onMessageCacheGet"
-		],
-		"TitleReadWhitelist": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onTitleReadWhitelist"
-		],
-		"HtmlPageLinkRendererEnd": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
-		],
-		"InitializeArticleMaybeRedirect": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
-		],
-		"GlobalUserPageWikis": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onGlobalUserPageWikis"
-		],
-		"MimeMagicInit": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onMimeMagicInit"
-		],
-		"SiteNoticeAfter": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onSiteNoticeAfter"
-		],
-		"SkinAddFooterLinks": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onSkinAddFooterLinks"
-		],
-		"UserGetRightsRemove": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onUserGetRightsRemove"
-		],
-		"RecentChange_save": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onRecentChange_save"
-		],
-		"GetPreferences": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onGetPreferences"
-		],
-		"BeforeInitialize": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onBeforeInitialize"
-		],
-		"ContributionsToolLinks": [
-			"Miraheze\\MirahezeMagic\\MirahezeMagicHooks::onContributionsToolLinks"
-		]
+		"AbuseFilterShouldFilterAction": {
+			"handler": "default"
+		},
+		"BlockIpComplete": {
+			"handler": "default"
+		},
+		"CreateWikiDeletion": {
+			"handler": "default"
+		},
+		"CreateWikiRename": {
+			"handler": "default"
+		},
+		"CreateWikiStatePrivate": {
+			"handler": "default"
+		},
+		"CreateWikiTables": {
+			"handler": "default"
+		},
+		"CreateWikiReadPersistentModel": {
+			"handler": "default"
+		},
+		"CreateWikiWritePersistentModel": {
+			"handler": "default"
+		},
+		"MessageCache::get": {
+			"handler": "default"
+		},
+		"TitleReadWhitelist": {
+			"handler": "default"
+		},
+		"HtmlPageLinkRendererEnd": {
+			"handler": "default"
+		},
+		"InitializeArticleMaybeRedirect": {
+			"handler": "default"
+		},
+		"GlobalUserPageWikis": {
+			"handler": "default"
+		},
+		"MimeMagicInit": {
+			"handler": "default"
+		},
+		"SiteNoticeAfter": {
+			"handler": "default"
+		},
+		"SkinAddFooterLinks": {
+			"handler": "default"
+		},
+		"UserGetRightsRemove": {
+			"handler": "default"
+		},
+		"RecentChange_save": {
+			"handler": "default"
+		},
+		"GetPreferences": {
+			"handler": "default"
+		},
+		"BeforeInitialize": {
+			"handler": "default"
+		},
+		"ContributionsToolLinks": {
+			"handler": "default"
+		}
+	},
+	"HookHandlers": {
+		"default": {
+			"class": "Miraheze\\MirahezeMagic\\Hooks"
+		}
 	},
         "LogActionsHandlers": {
                 "vanishuser/*": "LogFormatter"
@@ -131,18 +143,18 @@
 	},
 	"SpecialPages": {
 		"MirahezeSurvey": {
-			"class": "Miraheze\\MirahezeMagic\\SpecialMirahezeSurvey",
+			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
 			"services": [
 				"ConfigFactory"
 			]
 		},
 		"VanishUser": {
-			"class": "Miraheze\\MirahezeMagic\\SpecialVanishUser",
+			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
 			"services" : [
-				"CentralAuth.CentralAuthDatabaseManager",
-                                "CentralAuth.GlobalRenameUserValidator",
-                                "JobQueueGroupFactory",
-                                "UserFactory"
+					"CentralAuth.CentralAuthDatabaseManager",
+                   "CentralAuth.GlobalRenameUserValidator",
+                   "JobQueueGroupFactory",
+                    "UserFactory"
 			]
 		}
 	},
