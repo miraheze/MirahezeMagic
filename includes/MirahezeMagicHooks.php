@@ -7,6 +7,7 @@ use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Skin;
 use MediaWiki\Shell\Shell;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use RecentChange;
