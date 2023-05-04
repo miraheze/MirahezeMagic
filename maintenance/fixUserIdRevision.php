@@ -21,6 +21,8 @@
  * @version 1.0
  */
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class FixUserIdRevision extends Maintenance {
