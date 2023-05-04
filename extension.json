@@ -22,7 +22,8 @@
 		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php"
 	},
 	"AutoloadNamespaces": {
-		"Miraheze\\MirahezeMagic\\": "includes/"
+		"Miraheze\\MirahezeMagic\\": "includes/",
+		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
 	"ConfigRegistry": {
 		"mirahezemagic": "GlobalVarConfig::newInstance"
