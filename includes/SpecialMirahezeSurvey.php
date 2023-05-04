@@ -2,6 +2,7 @@
 
 namespace Miraheze\MirahezeMagic;
 
+use ConfigFactory;
 use FormSpecialPage;
 use MediaWiki\MediaWikiServices;
 
