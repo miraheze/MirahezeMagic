@@ -119,18 +119,6 @@
 			"class": "Miraheze\\MirahezeMagic\\Hooks"
 		}
 	},
-        "LogActionsHandlers": {
-                "vanishuser/*": "LogFormatter"
-        },
-        "LogHeaders": {
-                "vanishuser": "vanishuser-log-header"
-        },
-        "LogNames": {
-                "vanishuser": "vanishuser-log-name"
-        },
-        "LogTypes": [
-                "vanishuser"
-        ],
 	"MessagesDirs": {
 		"MirahezeMagic": [
 			"i18n/miraheze"
