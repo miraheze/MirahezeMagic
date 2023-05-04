@@ -21,6 +21,8 @@
  * @ingroup Wikimedia
  */
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use MediaWiki\MediaWikiServices;
