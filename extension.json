@@ -73,7 +73,7 @@
 		"CreateWikiWritePersistentModel": {
 			"handler": "default"
 		},
-		"MessageCache::get": {
+		"MessageCacheGet": {
 			"handler": "default"
 		},
 		"TitleReadWhitelist": {
