@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alshamiri1",
 			"Dr-Taher",
 			"KamalSH",
 			"Meno25",
@@ -21,10 +22,12 @@
 	"group-confirmed-member": "{{GENDER:$1|مستخدم مؤكد|مستخدمة مؤكدة}}",
 	"group-global-ipblock-exempt": "مستثنون عالميون من منع الآيبي",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|مستثنى عالمي|مستثناة عالمية}} من منع الآيبي",
+	"group-global-renamer": "مغيرو أسماء عالميون",
 	"group-global-rollbacker": "مسترجعون عامون",
 	"group-global-rollbacker-member": "{{GENDER:$1|مسترجع عام}}",
 	"group-interwiki-admin": "إداري إنترويكي",
 	"group-interwiki-admin-member": "إداري إنترويكي",
+	"group-ipblock-exempt": "إعفاء حظر IP",
 	"group-member": "أعضاء",
 	"group-oversight": "منظورة",
 	"group-oversight-member": "مراقبة",
