@@ -212,5 +212,12 @@
 	"specialpages-group-wikimanage": "Wiki management",
 	"termsofservice": "Terms of Use",
 	"termsofservicepage": "m:Special:MyLanguage/Terms of Use",
-	"tooltip-n-sitesupport": ""
+	"tooltip-n-sitesupport": "",
+	"vanishuser": "Vanish a user",
+	"vanishuser-action-label": "Do you '''really''' want to vanish this user?",
+	"vanishuser-action-help": "Please make sure all details are filled out correctly and make sure to log this.",
+	"vanishuser-warning": "'''Warning''': You are about to globally vanish a user! Please review all details carefully before proceeding.",
+	"vanishuser-log-name": "User vanish log",
+	"vanishuser-log-header": "This is a basic log of all user vanishes.",
+	"logentry-vanishuser-action": "$1 vanished a user."
 }

@@ -1,6 +1,7 @@
 {
 	"name": "MirahezeMagic",
 	"author": [
+		"Agent Isai",
 		"John Lewis",
 		"Labster",
 		"MacFan4000",
@@ -17,6 +18,32 @@
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
 	},
+	"AutoloadClasses": {
+		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
+		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
+		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
+		"SpecialVanishUser": "includes/SpecialVanishUser.php"
+	},
+	"config": {
+		"MirahezeReportsBlockAlertKeywords": {
+			"value": []
+		},
+		"MirahezeReportsWriteKey": {
+			"value": ""
+		},
+		"MirahezeStaffAccessIds": {
+			"value": []
+		},
+		"MirahezeSurveyEnabled": {
+			"value": true
+		}
+	},
+	"ConfigRegistry": {
+		"mirahezemagic": "GlobalVarConfig::newInstance"
+	},
+	"ExtensionMessagesFiles": {
+		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
+	},
 	"MessagesDirs": {
 		"MirahezeMagic": [
 			"i18n/miraheze"
@@ -27,22 +54,6 @@
 		"MirahezeLocalizedProjectNames": [
 			"i18n/mirahezeprojectnames"
 		]
-	},
-	"ExtensionMessagesFiles": {
-		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
-	},
-	"AutoloadClasses": {
-		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
-		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php"
-	},
-	"SpecialPages": {
-		"MirahezeSurvey": {
-			"class": "SpecialMirahezeSurvey",
-			"services": [
-				"ConfigFactory"
-			]
-		}
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": [
@@ -109,21 +120,21 @@
 			"MirahezeMagicHooks::onContributionsToolLinks"
 		]
 	},
-	"ConfigRegistry": {
-		"mirahezemagic": "GlobalVarConfig::newInstance"
-	},
-	"config": {
-		"MirahezeReportsBlockAlertKeywords": {
-			"value": []
+	"SpecialPages": {
+		"MirahezeSurvey": {
+			"class": "SpecialMirahezeSurvey",
+			"services": [
+				"ConfigFactory"
+			]
 		},
-		"MirahezeReportsWriteKey": {
-			"value": ""
-		},
-		"MirahezeStaffAccessIds": {
-			"value": []
-		},
-		"MirahezeSurveyEnabled": {
-			"value": true
+		"VanishUser": {
+			"class": "SpecialVanishUser",
+			"services" : [
+				"CentralAuth.CentralAuthDatabaseManager",
+				"CentralAuth.GlobalRenameUserValidator",
+				"JobQueueGroupFactory",
+				"UserFactory"
+			]
 		}
 	},
 	"manifest_version": 2
