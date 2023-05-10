@@ -4,7 +4,6 @@
 			"Elisardojm"
 		]
 	},
-	"group-abuse": "Equipo antiabusos",
 	"group-autopatrolled": "Patrulleiros automáticos",
 	"group-autopatrolled-member": "{{GENDER:$1|patrulleiro automático|patrulleira automática}}",
 	"group-confirmed": "Usuarios confirmados",
@@ -37,7 +36,6 @@
 	"shared-repo-name-mirahezecommons": "Commons de Miraheze",
 	"sitematrix": "Lista de wikis de Miraheze",
 	"sitematrix-summary": "Esta páxina especial lista tódalas wikis de Miraheze.",
-	"sitematrix-desc": "Amosa unha [[Special:SiteMatrix|lista de wikis de Miraheze]]",
 	"sitematrix-others": "Outras wikis de Miraheze",
 	"specialpages-group-wikimanage": "Xestión de wikis",
 	"termsofservice": "Termos de uso",

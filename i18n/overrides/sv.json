@@ -11,8 +11,6 @@
 	"miraheze-prefs-help-realname": "Riktigt namn är valfritt. Väljer du att ange det, kommer det att användas för att tillskriva dig ditt arbete. Genom att använda Miraheze accepterar du dessutom till <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use användarvillkoren]</span> och <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy integritetspolicyn]</span>.",
 	"miraheze-newsignuppage-loginform-tos": "Jag har läst, förstått och samtycker i [https://meta.miraheze.org/wiki/Terms_of_Use användarvillkoren] och [https://meta.miraheze.org/wiki/Privacy_Policy integritetspolicyn]",
 	"miraheze-newsignuppage-must-accept-tos": "Du måste acceptera användarvillkoren för att skapa ett konto!",
-	"miraheze-centralauth-merge-method-admin": "Manuellt sammanslaget konto",
-	"miraheze-centralauth-merge-method-admin-desc": "Det här kontot blev manuellt sammanslaget av en systemadministratör eller en steward. Detta kan ha varit på grund av ett tekniskt problem i en namnförändrings- eller sammanslagningsprocess.",
 	"miraheze-restriction-protect": "Skrivskydda",
 	"miraheze-restriction-delete": "Radera",
 	"miraheze-skinname-snapwikiskin": "Snäpp!",

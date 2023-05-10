@@ -7,8 +7,6 @@
 		]
 	},
 	"datadump-namespaceselect-label": "Именски простор",
-	"group-abuse": "Екипа за злоупотреби",
-	"group-abuse-member": "{{GENDER:$1|екипа за злоупотреби}}",
 	"group-autopatrolled": "Автопатролирани корисници",
 	"group-autopatrolled-member": "{{GENDER:$1|автопатролирани}}",
 	"group-confirmed": "Потврдени корисници",
@@ -61,7 +59,6 @@
 	"shared-repo-name-mirahezecommons": "Ризница на Мирахезе",
 	"sitematrix": "Список на викија на Мирахезе",
 	"sitematrix-summary": "На оваа службена страница се наведени сите викија на Мирахезе.",
-	"sitematrix-desc": "Прикажува [[Special:SiteMatrix|список на викија на Мирахезе]]",
 	"sitematrix-others": "Други викија на Мирахезе",
 	"specialpages-group-wikimanage": "Викираководство",
 	"termsofservice": "Услови на употреба",

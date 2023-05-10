@@ -4,8 +4,6 @@
 			"Jon Harald Søby"
 		]
 	},
-	"group-abuse": "Misbruksteam",
-	"group-abuse-member": "{{GENDER:$1|misbruksteam}}",
 	"group-autopatrolled": "Autopatruljerte brukere",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatruljør}}",
 	"group-confirmed": "Bekreftede brukere",
@@ -113,7 +111,6 @@
 	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix": "Liste over Miraheze-wikier",
 	"sitematrix-summary": "Denne spesialsiden lister opp alle Miraheze-wikier.",
-	"sitematrix-desc": "Viser en [[Special:SiteMatrix|liste over Miraheze-wikier]]",
 	"sitematrix-others": "Andre Miraheze-wikier",
 	"specialpages-group-wikimanage": "Wikibehandling",
 	"termsofservice": "Bruksvilkår",

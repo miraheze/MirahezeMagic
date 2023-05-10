@@ -12,8 +12,6 @@
 	"miraheze-prefs-help-realname": "Imię i nazwisko jest opcjonalne. Jeśli zdecydujesz się je podać, zostaną użyte, by udokumentować twoje autorstwo. Ponadto korzystając z wiki hostowanej przez Miraheze akceptujesz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania]</span> oraz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]</span>",
 	"miraheze-newsignuppage-loginform-tos": "Przeczytałem, zrozumiałem oraz akceptuję [https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania] i [https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]",
 	"miraheze-newsignuppage-must-accept-tos": "Musisz zaakceptować Zasady użytkowania aby móc założyć konto!",
-	"miraheze-centralauth-merge-method-admin": "Ręcznie scalone konto",
-	"miraheze-centralauth-merge-method-admin-desc": "To konto zostało ręcznie scalone przez Sysadmina lub Stewarda. Mogło być to spowodowane problemem technicznym podczas procesów zmiany nazwy użytkownika lub scalania kont.",
 	"miraheze-restriction-protect": "Zabezpiecz",
 	"miraheze-restriction-delete": "Usuń",
 	"miraheze-wikibase-sitelinks-miraheze": "Wiki Miraheze"

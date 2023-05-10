@@ -5,7 +5,6 @@
 			"U.ayaao.p"
 		]
 	},
-	"group-abuse-member": "{{GENDER:$1|қорлау командасы}}",
 	"group-autopatrolled": "Тексерілген қатысушылар",
 	"group-autopatrolled-member": "{{GENDER:$1|өздікті қадағалаушы}}",
 	"group-confirmed": "Өздіктіқұпталған қатысушылар",
@@ -60,7 +59,6 @@
 	"right-user": "\"{{int:protect-level-user}}\" деп қорғалған беттерді өңдеу",
 	"sitematrix": "Miraheze-дегі уикилердің тізімі",
 	"sitematrix-summary": "Бұл арнайы бетте барлық Miraheze уикилерінің тізімі берілген.",
-	"sitematrix-desc": "[[Special:SiteMatrix|Miraheze уикилерінің тізімін]] көрсетеді",
 	"sitematrix-others": "Басқа Miraheze уикилер",
 	"specialpages-group-wikimanage": "Уики басқару",
 	"termsofservice": "Қолдану шарты",

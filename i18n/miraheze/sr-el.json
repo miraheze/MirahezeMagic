@@ -2,8 +2,6 @@
 	"@metadata": {
 		"authors": []
 	},
-	"group-abuse": "Tim protiv zloupotrebe",
-	"group-abuse-member": "{{GENDER:$1|tim protiv zloupotrebe}}",
 	"group-autopatrolled": "Automatski patrolirani korisnici",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatroler}}",
 	"group-confirmed": "Potvrđeni korisnici",
@@ -43,7 +41,6 @@
 	"shared-repo-name-mirahezecommons": "Miraheze Ostava",
 	"sitematrix": "Lista Miraheze vikija",
 	"sitematrix-summary": "Ova posebna stranica navodi sve Miraheze vikije.",
-	"sitematrix-desc": "Prikazuje [[Special:SiteMatrix|listu Miraheze vikija]]",
 	"sitematrix-others": "Drugi Miraheze vikiji",
 	"specialpages-group-wikimanage": "Viki upravljanje",
 	"termsofservice": "Uslovi korišćenja",

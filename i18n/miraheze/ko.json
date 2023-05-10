@@ -88,7 +88,6 @@
 	"right-user": "\"{{int:protect-level-user}}\" 단계로 보호된 문서 편집",
 	"sitematrix": "Miraheze 위키의 목록",
 	"sitematrix-summary": "이 특수 문서는 모든 Miraheze 위키를 나열합니다.",
-	"sitematrix-desc": "[[Special:SiteMatrix|Miraheze 위키 목록]]을 보여줍니다",
 	"sitematrix-others": "다른 Miraheze 위키",
 	"specialpages-group-wikimanage": "위키 관리",
 	"termsofservice": "이용 약관",
