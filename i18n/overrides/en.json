@@ -36,6 +36,7 @@
 	"miraheze-group-bureaucrat": "Bureaucrats",
 	"miraheze-grouppage-bureaucrat": "m:Special:MyLanguage/User groups#{{int:Group-bureaucrat}}",
 	"miraheze-group-bureaucrat-member": "{{GENDER:$1|bureaucrat}}",
+	"miraheze-grouppage-suppress": "m:Special:MyLanguage/Suppression",
 	"miraheze-group-sysop": "Administrators",
 	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-group-sysop-member": "{{GENDER:$1|administrator}}",
