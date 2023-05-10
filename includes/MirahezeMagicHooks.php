@@ -328,7 +328,7 @@ class MirahezeMagicHooks {
 			'grouppage-flow-bot',
 			'grouppage-interface-admin',
 			'grouppage-moderator',
-			'grouppage-no-ipinfo'
+			'grouppage-no-ipinfo',
 			'grouppage-reviewer',
 			'grouppage-suppress',
 			'grouppage-sysop',
