@@ -19,8 +19,6 @@
 	"miraheze-prefs-help-realname": "真實姓名為選填。若您有意提供，這會用在您成品的姓名標示上。另外，依據使用由 Miraheze 所託管的 wiki，表示您同意<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用條款]</span>並接受<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隱私方針]</span>。",
 	"miraheze-newsignuppage-loginform-tos": "我已讀過、了解以上內容，並同意[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用條款]與[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隱私方針]",
 	"miraheze-newsignuppage-must-accept-tos": "您必須接受使用條款才能夠建立帳號！",
-	"miraheze-centralauth-merge-method-admin": "手動合併帳號",
-	"miraheze-centralauth-merge-method-admin-desc": "此帳號已被站台可靠性工程師或是監管員給手動合併。這出自於在重新命名或合併的過程中出現一些技術上問題。",
 	"miraheze-restriction-protect": "保護",
 	"miraheze-restriction-delete": "刪除",
 	"miraheze-uploadtext": "請使用以下的表單來上傳檔案。\n要查看或搜尋之前上傳的檔案，請前往[[Special:FileList|上傳檔案清單]]。上傳與重新上傳都會記錄在[[Special:Log/upload|上傳日誌]]裡。刪除則記錄在[[Special:Log/delete|刪除日誌]]。\n\n要在頁面裡包含檔案，請使用以下形式之一的連結：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong> 用來使用完整版本的檔案\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|Caption]]</nowiki></code></strong> 用來呈現出帶有 200 像素寬度檔案的左側方框，並在檔案下方有說明文字\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> 用於連結到檔案但不顯示檔案內容\n\n\n\n請注意，您上傳的檔案'''''必須'''''遵守英國的版權法律，屢試的失敗因此會導致侵犯版權，並可能導致'''關閉 wiki'''。合理使用並不存在於英國體制，取而代之的是概念類似但更嚴格的[[w:Fair dealing in United Kingdom law|公平處理]]體制。",

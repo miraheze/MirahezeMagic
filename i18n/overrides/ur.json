@@ -8,8 +8,6 @@
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|آپ}} داخل نہیں ہوسکتے کیونکہ{{GENDER:$1|آپ}} کا کھاتہ عالمی سطح پر مقفل ہے۔ براہ کرم مزید معلومات یا اپیل کرنے کے لیے <code>cvt[at]miraheze.org</code> سے رابطہ کریں۔",
 	"miraheze-newsignuppage-loginform-tos": "میں نے [https://meta.miraheze.org/wiki/Terms_of_Use استعمال کی شرائط] اور [https://meta.miraheze.org/wiki/Privacy_Policy رازداری پالیسی] کو پڑھا، سمجھا اور ان سے اتفاق کیا ہے۔",
 	"miraheze-newsignuppage-must-accept-tos": "ایک کھاتہ بنانے کے قابل ہونے کے لیے آپ کو استعمال کی شرائط کو قبول کرنا ہوگا!",
-	"miraheze-centralauth-merge-method-admin": "دستی طور پر ضم شدہ کھاتہ",
-	"miraheze-centralauth-merge-method-admin-desc": "اس کھاتے کو سسٹم منتظمین یا اسٹیوارڈ نے دستی طور پر ضم کیا تھا۔ یہ نام تبدیل کرنے یا انضمام کے عمل میں کسی تکنیکی مسئلے کی وجہ سے ہو سکتا ہے۔",
 	"miraheze-restriction-protect": "محفوظ",
 	"miraheze-restriction-delete": "حذف",
 	"miraheze-wikibase-sitelinks-miraheze": "میراہیزی ویکیاں",

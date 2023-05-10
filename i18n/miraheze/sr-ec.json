@@ -7,8 +7,6 @@
 			"Zoranzoki21"
 		]
 	},
-	"group-abuse": "Тим против злоупотребе",
-	"group-abuse-member": "{{GENDER:$1|тим против злоупотребе}}",
 	"group-autopatrolled": "Аутоматски патролирани корисници",
 	"group-autopatrolled-member": "{{GENDER:$1|аутопатролер}}",
 	"group-confirmed": "Потврђени корисници",
@@ -56,7 +54,6 @@
 	"shared-repo-name-mirahezecommons": "Miraheze Остава",
 	"sitematrix": "Листа Miraheze викија",
 	"sitematrix-summary": "Ова посебна страница наводи све Miraheze викије.",
-	"sitematrix-desc": "Приказује [[Special:SiteMatrix|листу Miraheze викија]]",
 	"sitematrix-others": "Други Miraheze викији",
 	"specialpages-group-wikimanage": "Вики управљање",
 	"termsofservice": "Услови коришћења",

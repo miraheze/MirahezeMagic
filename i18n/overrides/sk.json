@@ -12,8 +12,6 @@
 	"miraheze-prefs-help-realname": "Skutočné meno nie je povinné. Ak sa rozhodnete ho uviesť, bude uvádzané pri Vašej práci. Taktiež používaním Miraheze súhlasíte s<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Podmienkami používania]</span> a súhlasíte so <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Zásadami ochrany súkromia]</span>.",
 	"miraheze-newsignuppage-loginform-tos": "Čítal/a som, rozumiem a súhlasím s [https://meta.miraheze.org/wiki/Terms_of_Use Podmienkami používania] a so [https://meta.miraheze.org/wiki/Privacy_Policy Zásadami ochrany súkromia]",
 	"miraheze-newsignuppage-must-accept-tos": "Pre vytvorenie účtu musíte súhlasiť s podmienkami používania!",
-	"miraheze-centralauth-merge-method-admin": "Manuálne zlúčený účet",
-	"miraheze-centralauth-merge-method-admin-desc": "Tento účet bol manuálne zlúčený správcom alebo dozorcom. To sa mohlo stať kvôli technickým problém pri procese premenovania alebo zlučovania.",
 	"miraheze-restriction-protect": "Chrániť",
 	"miraheze-restriction-delete": "Vymazať",
 	"miraheze-skinname-snapwikiskin": "Prásk!",

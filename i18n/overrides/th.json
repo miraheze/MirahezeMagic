@@ -13,8 +13,6 @@
 	"miraheze-prefs-help-realname": "คุณไม่จำเป็นต้องใช้ชื่อจริง หากคุณเลือกที่จะให้ จะเป็นการใช้สำหรับการแสดงที่มาในงานของคุณโดยใช้ชื่อนี้ของคุณ และการใช้งานวิกิใด ๆ ที่มิราเฮซเป็นแม่ข่าย ถือว่าคุณเห็นด้วยกับ<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]</span>และยอมรับใน<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]</span>",
 	"miraheze-newsignuppage-loginform-tos": "ฉันได้อ่านและยอมรับใน[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]และ[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]แล้ว",
 	"miraheze-newsignuppage-must-accept-tos": "คุณต้องยอมรับข้อกำหนดการใช้งานก่อนสร้างบัญชีผู้ใช้",
-	"miraheze-centralauth-merge-method-admin": "การรวมบัญชีด้วยมือ",
-	"miraheze-centralauth-merge-method-admin-desc": "บัญชีนี้ถูกรวมเข้าด้วยมือโดยผู้ดูแลระบบโครงข่ายหรือผู้ดูแลโครงการ อาจเนื่องจากปัญหาด้านเทคนิคระหว่างกระบวนการเปลี่ยนชื่อหรือการรวมบัญชี",
 	"miraheze-restriction-protect": "ป้องกัน",
 	"miraheze-restriction-delete": "ลบ",
 	"miraheze-skinname-snapwikiskin": "สแนป!",
