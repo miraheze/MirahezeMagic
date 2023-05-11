@@ -26,15 +26,19 @@
 	},
 	"config": {
 		"MirahezeReportsBlockAlertKeywords": {
+			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
 			"value": []
 		},
 		"MirahezeReportsWriteKey": {
+			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
 		},
 		"MirahezeStaffAccessIds": {
+			"description": "Array. Usernames of users authorised to access staffwiki.",
 			"value": []
 		},
 		"MirahezeSurveyEnabled": {
+			"description": "Boolean. Enable Miraheze Annual Survey?",
 			"value": true
 		}
 	},
@@ -44,6 +48,18 @@
 	"ExtensionMessagesFiles": {
 		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
 	},
+        "LogActionsHandlers": {
+                "vanishuser/*": "LogFormatter"
+        },
+        "LogHeaders": {
+                "vanishuser": "vanishuser-log-header"
+        },
+        "LogNames": {
+                "vanishuser": "vanishuser-log-name"
+        },
+        "LogTypes": [
+                "vanishuser"
+        ],
 	"MessagesDirs": {
 		"MirahezeMagic": [
 			"i18n/miraheze"
