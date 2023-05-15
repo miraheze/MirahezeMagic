@@ -4,15 +4,7 @@
 			"Ajeje Brazorf"
 		]
 	},
-	"miraheze-restriction-protect": "Pruteggi",
 	"miraheze-restriction-delete": "Cancella",
-	"miraheze-wikibase-sitelinks-miraheze": "Wiki di Miraheze",
-	"miraheze-group-bureaucrat": "Buròcrati",
-	"miraheze-group-bureaucrat-member": "{{GENDER:$1|buròcrati}}",
-	"miraheze-group-sysop": "Amministratura",
-	"miraheze-group-sysop-member": "{{GENDER:$1|amministraturi|amministratrici|amministraturi/trici}}",
-	"miraheze-group-interface-admin": "Amministratura dâ ntirfaccia",
-	"miraheze-group-interface-admin-member": "{{GENDER:$1|amministraturi|amministratrici|amministraturi/trici}} dâ ntirfaccia",
-	"miraheze-group-bot": "Bot",
-	"miraheze-group-bot-member": "{{GENDER:$1|bot}}"
+	"miraheze-restriction-protect": "Pruteggi",
+	"miraheze-wikibase-sitelinks-miraheze": "Wiki di Miraheze"
 }

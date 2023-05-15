@@ -7,19 +7,9 @@
 		]
 	},
 	"miraheze-centralauth-groupname": "মিরাহীজ",
-	"miraheze-prefs-help-realname": "আসল নাম ঐচ্ছিক। আপনি যদি এটি প্রদান করেন, তবে আপনার কাজে আপনাকে কৃতিত্ব দিতে এটি ব্যবহার করা হবে। এছাড়া, মিরাহেজ দ্বারা হোস্টকৃত উইকি ব্যবহার করার দ্বারা, আপনি <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use ব্যবহারের শর্তাবলীর]</span> সাথে সম্মত হচ্ছেন ও <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy গোপনীয়তার নীতি]</span> গ্রহণ করে নিচ্ছেন।",
 	"miraheze-newsignuppage-loginform-tos": "আমি [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use ব্যবহারের শর্তাবলী] ও [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy গোপনীয়তার নীতি] পড়েছি, তা বুঝেছি এবং তা গ্রহণ করতে সম্মত হচ্ছি।",
 	"miraheze-newsignuppage-must-accept-tos": "অ্যাকাউন্ট তৈরি করতে সক্ষম হওয়ার জন্য আপনাকে অবশ্যই ব্যবহারের শর্তাবলী গ্রহণ করতে হবে!",
-	"miraheze-restriction-protect": "সুরক্ষা",
+	"miraheze-prefs-help-realname": "আসল নাম ঐচ্ছিক। আপনি যদি এটি প্রদান করেন, তবে আপনার কাজে আপনাকে কৃতিত্ব দিতে এটি ব্যবহার করা হবে। এছাড়া, মিরাহেজ দ্বারা হোস্টকৃত উইকি ব্যবহার করার দ্বারা, আপনি <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use ব্যবহারের শর্তাবলীর]</span> সাথে সম্মত হচ্ছেন ও <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy গোপনীয়তার নীতি]</span> গ্রহণ করে নিচ্ছেন।",
 	"miraheze-restriction-delete": "অপসারণ",
-	"miraheze-group-checkuser": "ব্যবহারকারী পরীক্ষক",
-	"miraheze-group-checkuser-member": "ব্যবহারকারী পরীক্ষক",
-	"miraheze-group-bureaucrat": "ব্যুরোক্র্যাট",
-	"miraheze-group-bureaucrat-member": "{{GENDER:$1|ব্যুরোক্র্যাট}}",
-	"miraheze-group-sysop": "প্রশাসক",
-	"miraheze-group-sysop-member": "{{GENDER:$1|প্রশাসক}}",
-	"miraheze-group-interface-admin": "ইন্টারফেস প্রশাসক",
-	"miraheze-group-interface-admin-member": "{{GENDER:$1|ইন্টারফেস প্রশাসক}}",
-	"miraheze-group-bot": "বট",
-	"miraheze-group-bot-member": "{{GENDER:$1|বট}}"
+	"miraheze-restriction-protect": "সুরক্ষা"
 }

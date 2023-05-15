@@ -8,17 +8,7 @@
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|آپ}} داخل نہیں ہوسکتے کیونکہ{{GENDER:$1|آپ}} کا کھاتہ عالمی سطح پر مقفل ہے۔ براہ کرم مزید معلومات یا اپیل کرنے کے لیے <code>cvt[at]miraheze.org</code> سے رابطہ کریں۔",
 	"miraheze-newsignuppage-loginform-tos": "میں نے [https://meta.miraheze.org/wiki/Terms_of_Use استعمال کی شرائط] اور [https://meta.miraheze.org/wiki/Privacy_Policy رازداری پالیسی] کو پڑھا، سمجھا اور ان سے اتفاق کیا ہے۔",
 	"miraheze-newsignuppage-must-accept-tos": "ایک کھاتہ بنانے کے قابل ہونے کے لیے آپ کو استعمال کی شرائط کو قبول کرنا ہوگا!",
-	"miraheze-restriction-protect": "محفوظ",
 	"miraheze-restriction-delete": "حذف",
-	"miraheze-wikibase-sitelinks-miraheze": "میراہیزی ویکیاں",
-	"miraheze-group-checkuser": "پڑتال کنندگان",
-	"miraheze-group-checkuser-member": "پڑتال کنندہ",
-	"miraheze-group-bureaucrat": "مامورین اداری",
-	"miraheze-group-bureaucrat-member": "{{GENDER:$1|مامور اداری}}",
-	"miraheze-group-sysop": "منتظمین",
-	"miraheze-group-sysop-member": "{{GENDER:$1|منتظم}}",
-	"miraheze-group-interface-admin": "انٹرفیس منتظمین",
-	"miraheze-group-interface-admin-member": "{{GENDER:$1|انٹرفیس منتظم}}",
-	"miraheze-group-bot": "روبہ جات",
-	"miraheze-group-bot-member": "{{GENDER:$1|خودکار صارف}}"
+	"miraheze-restriction-protect": "محفوظ",
+	"miraheze-wikibase-sitelinks-miraheze": "میراہیزی ویکیاں"
 }

@@ -5,14 +5,8 @@
 		]
 	},
 	"miraheze-dberr-problems": "Dës Wiki ass den Ament net disponibel",
-	"miraheze-restriction-protect": "Spären",
 	"miraheze-restriction-delete": "Läschen",
+	"miraheze-restriction-protect": "Spären",
 	"miraheze-skinname-snapwikiskin": "Snap!",
-	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-group-bureaucrat": "Bürokraten",
-	"miraheze-group-bureaucrat-member": "{{GENDER:$1|Bürokrat|Bürokratin}}",
-	"miraheze-group-sysop": "Administrateuren",
-	"miraheze-group-sysop-member": "{{GENDER:$1|Administrateur|Administratrice}}",
-	"miraheze-group-bot": "Botten",
-	"miraheze-group-bot-member": "{{GENDER:$1|Bot}}"
+	"miraheze-snapwikiskin": "Snap!"
 }

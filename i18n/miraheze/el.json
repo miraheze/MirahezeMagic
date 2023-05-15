@@ -10,10 +10,11 @@
 			"Protnet"
 		]
 	},
+	"extensions-skins": "Θέματα εμφάνισης",
 	"group-confirmed": "Επιβεβαιωμένοι χρήστες",
 	"group-oversight-member": "επιτηρητής",
-	"group-translationadmin": "Διαχειριστές μετάφρασης",
 	"group-translationadmin-member": "Διαχειριστής μετάφρασης",
+	"group-translationadmin": "Διαχειριστές μετάφρασης",
 	"group-translator-member": "Μεταφραστής",
 	"miraheze-donate": "Δωρεά",
 	"miraheze-faq": "Συχνές ερωτήσεις",
@@ -21,11 +22,10 @@
 	"mirahezesurvey": "Ετήσια έρευνα Miraheze 2021",
 	"protect-level-user": "Να επιτρέπονται μόνο συνδεδεμένοι χρήστες",
 	"restriction-delete": "Διαγραφή",
-	"shared-repo-name-mirahezecommons": "Miraheze Commons",
-	"specialpages-group-wikimanage": "Διαχείριση βίκι",
-	"termsofservice": "Όροι χρήσης",
 	"settings-links": "Σύνδεσμοι",
 	"settings-media": "Πολυμέσο",
 	"settings-permissions": "Άδειες",
-	"extensions-skins": "Θέματα εμφάνισης"
+	"shared-repo-name-mirahezecommons": "Miraheze Commons",
+	"specialpages-group-wikimanage": "Διαχείριση βίκι",
+	"termsofservice": "Όροι χρήσης"
 }

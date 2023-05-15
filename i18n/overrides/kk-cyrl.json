@@ -5,21 +5,11 @@
 			"U.ayaao.p"
 		]
 	},
-	"miraheze-dberr-problems": "Бұл уики уақытша қолжетімсіз",
-	"miraheze-dberr-again": "Бірнеше минуттан кейін қайталап көріңіз, бұл қателер әдетте сол уақытта жойылады. Егер сіз бұл қатені үнемі алып жатсаңыз, қосымша ақпарат үшін біздің Twitter (https://twitter.com/Miraheze) парақшамызды тексеріңіз немесе irc.libera.chat ішіндегі #miraheze-sre'ге қосылу арқылы Miraheze жүйе әкімшілеріне хабарласыңыз.",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Сіздің}} парақшаңыз [[m:Special:MyLanguage/Global locks|жаһандық құлыптаулы]] болғаннан жүйеге кіре алмайсыз. Қосымша ақпарат алу немесе шағымдану үшін <code>cvt[at]miraheze.org</code> хабарласыңыз.",
-	"miraheze-restriction-protect": "Қорғау",
+	"miraheze-dberr-again": "Бірнеше минуттан кейін қайталап көріңіз, бұл қателер әдетте сол уақытта жойылады. Егер сіз бұл қатені үнемі алып жатсаңыз, қосымша ақпарат үшін біздің Twitter (https://twitter.com/Miraheze) парақшамызды тексеріңіз немесе irc.libera.chat ішіндегі #miraheze-sre'ге қосылу арқылы Miraheze жүйе әкімшілеріне хабарласыңыз.",
+	"miraheze-dberr-problems": "Бұл уики уақытша қолжетімсіз",
 	"miraheze-restriction-delete": "Жою",
+	"miraheze-restriction-protect": "Қорғау",
 	"miraheze-skinname-snapwikiskin": "Snap!",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze уикилері",
-	"miraheze-group-checkuser": "Қатысушы тексерушілері",
-	"miraheze-group-checkuser-member": "қатысушы тексерушісі",
-	"miraheze-group-bureaucrat": "Бітікшілер",
-	"miraheze-group-bureaucrat-member": "{{GENDER:$1|бітікші}}",
-	"miraheze-group-sysop": "Администраторлар",
-	"miraheze-group-sysop-member": "{{GENDER:$1|администратор}}",
-	"miraheze-group-interface-admin": "Интерфейс әкімшілері",
-	"miraheze-group-interface-admin-member": "{{GENDER:$1|интерфейс администратор}}",
-	"miraheze-group-bot": "Боттар",
-	"miraheze-group-bot-member": "{{GENDER:$1|бот}}"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze уикилері"
 }

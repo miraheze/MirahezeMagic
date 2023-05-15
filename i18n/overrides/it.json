@@ -5,15 +5,15 @@
 			"Executive"
 		]
 	},
-	"miraheze-dberr-again": "Riprova tra qualche minuto, questi errori di solito si risolvono velocemente. Se ricevi questo errore in modo persistente, controlla il nostro Twitter (https://twitter.com/MirahezeStatus) per ulteriori informazioni o contatta i Site Reliability Engineer di Miraheze unendoti a #miraheze-sre su irc.libera.chat o unendoti al nostro server Discord (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-centralauth-login-error-locked": "Non {{GENDER:$1|puoi}} accedere perché la tua utenza è stata [[m:Special:MyLanguage/Global locks|bloccata globalmente]]. Contatta <code>cvt[at]miraheze.org</code> per ulteriori informazioni o per appellarti.",
-	"miraheze-oathauth-step1": "IMPORTANTE! Leggi la pagina OATHAuth prima di attivare! Passo 1: Scarica un programma di autentificazione a due fattori",
-	"miraheze-prefs-help-realname": "Il nome reale è opzionale. Se scegli di fornirlo, questo sarà usato per darti attribuzione del tuo lavoro. Usando anche una Wiki ospitata da Miraheze, tu accetti le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Condizioni d'uso]</span> e accetti le <span class=\"plainlinks\"> [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Politiche sulla Privacy]</span>.",
+	"miraheze-dberr-again": "Riprova tra qualche minuto, questi errori di solito si risolvono velocemente. Se ricevi questo errore in modo persistente, controlla il nostro Twitter (https://twitter.com/MirahezeStatus) per ulteriori informazioni o informaci unendoti a #miraheze-sre su irc.libera.chat o al nostro server Discord (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-newsignuppage-loginform-tos": "Io ho letto, capito e accettato le\n[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Condizioni d'uso] e la [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Politica sulla Privacy]",
 	"miraheze-newsignuppage-must-accept-tos": "Tu devi accettare i termini d’uso per essere capace di creare un account!",
-	"miraheze-restriction-protect": "Proteggi",
+	"miraheze-oathauth-step1": "IMPORTANTE! Leggi la pagina OATHAuth prima di attivare! Passo 1: Scarica un programma di autentificazione a due fattori",
+	"miraheze-prefs-help-realname": "Il nome reale è opzionale. Se scegli di fornirlo, questo sarà usato per darti attribuzione del tuo lavoro. Usando anche una Wiki ospitata da Miraheze, tu accetti le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Condizioni d'uso]</span> e accetti le <span class=\"plainlinks\"> [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Politiche sulla Privacy]</span>.",
 	"miraheze-restriction-delete": "Cancella",
+	"miraheze-restriction-protect": "Proteggi",
 	"miraheze-skinname-snapwikiskin": "Scatta!",
 	"miraheze-snapwikiskin": "Scatto!",
-	"miraheze-wikibase-sitelinks-miraheze": "Wikis di Miraheze"
+	"miraheze-wikibase-sitelinks-miraheze": "Wiki di Miraheze"
 }

@@ -4,16 +4,17 @@
 			"Robby"
 		]
 	},
-	"group-global-rollbacker": "Global Zrécksetzer",
+	"extensions-skins": "Design",
 	"group-global-rollbacker-member": "{{GENDER:$1|Globalen Zrécksetzer}}",
-	"group-global-sysop": "Global Administrateuren",
+	"group-global-rollbacker": "Global Zrécksetzer",
 	"group-global-sysop-member": "{{GENDER:$1|Globalen Administrateur|Global Administratrice}}",
+	"group-global-sysop": "Global Administrateuren",
 	"group-member": "Memberen",
 	"group-member-member": "{{GENDER:$1|Member}}",
-	"group-translator": "Iwwersetzer",
 	"group-translator-member": "Iwwersetzer",
-	"group-trustandsafety": "Vertrauen a Sécherheet",
+	"group-translator": "Iwwersetzer",
 	"group-trustandsafety-member": "Vertrauen a Sécherheet",
+	"group-trustandsafety": "Vertrauen a Sécherheet",
 	"miraheze-categories": "Kategorien",
 	"miraheze-donate": "Maacht en Don fir Miraheze",
 	"miraheze-sidebar-donate": "Maacht en Don",
@@ -25,12 +26,11 @@
 	"miraheze-survey-disagree": "Refuséieren",
 	"miraheze-survey-neutral": "Neutral",
 	"miraheze-survey-no": "Neen",
-	"miraheze-survey-yes": "Jo",
 	"miraheze-survey-q8-e": "ManageWiki ass einfach ze benotzen",
+	"miraheze-survey-yes": "Jo",
 	"protect-level-user": "Nëmmen ageloggt Benotzer zouloossen",
 	"restriction-delete": "Läschen",
 	"restriction-level-user": "Nëmmen ageloggt Benotzer zouloossen",
-	"termsofservice": "Benotzungs-Bedingungen",
 	"settings-beta": "Beta",
 	"settings-categories": "Kategorien",
 	"settings-discussion": "Diskussioun",
@@ -44,5 +44,5 @@
 	"settings-preferences": "Astellungen",
 	"settings-restricted": "Limitéiert",
 	"settings-styling": "Stil",
-	"extensions-skins": "Design"
+	"termsofservice": "Benotzungs-Bedingungen"
 }
