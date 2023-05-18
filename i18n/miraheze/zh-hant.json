@@ -29,6 +29,8 @@
 	"group-confirmed": "已確認的使用者",
 	"group-flood-member": "{{GENDER:$1|偽機器人}}",
 	"group-flood": "偽機器人",
+	"group-founder": "建立者",
+	"group-founder-member": "{{GENDER:$1|建立者}}",
 	"group-global-flood-member": "{{GENDER:$1|全域偽機器人}}",
 	"group-global-flood": "全域偽機器人",
 	"group-global-interwiki-admin-member": "{{GENDER:$1|全域跨 wiki 管理員}}",
@@ -184,5 +186,12 @@
 	"sitematrix-summary": "這個特殊頁面中列出所有的 Miraheze wiki。",
 	"sitematrix": "Miraheze wiki 清單",
 	"specialpages-group-wikimanage": "Wiki 管理",
-	"termsofservice": "使用條款"
+	"termsofservice": "使用條款",
+	"vanishuser": "清除一名使用者",
+	"vanishuser-action-label": "您'''確定'''真的要清除這名使用者嗎？",
+	"vanishuser-action-help": "請確認所有詳細內容已正確填寫，並確認將其記錄下來。",
+	"vanishuser-warning": "'''警告'''：您即將全域清除一名使用者！請在繼續之前，仔細檢查所有詳細內容。",
+	"vanishuser-log-name": "使用者清除日誌",
+	"vanishuser-log-header": "這是所有清除使用者的基本日誌。",
+	"logentry-vanishuser-action": "$1清除了一名使用者。"
 }

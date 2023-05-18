@@ -14,7 +14,7 @@
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|您}}不能登录因为{{GENDER:$1|您的}}账号[[m:Special:MyLanguage/Global locks|被全域锁定]]。请联系 <code>cvt[at]miraheze.org</code> 获取更多信息或申诉。",
-	"miraheze-dberr-again": "请在几分钟后重试，这些错误通常几分钟后即可解决。如果您持续收到此错误，请查看我们的 Twitter（https://twitter.com/MirahezeStatus）以获得更多信息或通过加入到 irc.libera.chat 上的#miraheze-sre 或加入我们的 Discord 服务器（https://discord.gg/TVAJTE4CUn）来联系 Miraheze 站点可靠性工程师。",
+	"miraheze-dberr-again": "请在几分钟后重试，这些错误通常几分钟后即可解决。如果您持续收到此错误，请查看我们的 Twitter（https://twitter.com/MirahezeStatus）以获得更多信息或者通过加入到 irc.libera.chat 上的#miraheze-sre 或我们的 Discord 服务器（https://discord.gg/TVAJTE4CUn）来告知我们。",
 	"miraheze-newsignuppage-loginform-tos": "我已阅读并同意\n[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用条款]和[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隐私政策]",
 	"miraheze-newsignuppage-must-accept-tos": "您一定要先接受使用条款才可以创建新的账户。",
 	"miraheze-prefs-help-realname": "真实姓名是可选的。如果您选择提供它，这将用于为您的贡献提供署名。 此外，通过使用 Miraheze 托管的 wiki，您应当同意 <span class=\"plainlinks\">[https://meta.mirahze.org/wiki/Special:MyLanguage/Terms_of_Use 使用条款]</span> 并接受 <span class =\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隐私政策]</span>。",
