@@ -7,6 +7,7 @@
 			"Hedda",
 			"Joseph",
 			"LisafBia",
+			"MrSchipunov",
 			"MuratTheTurkish",
 			"SaldırganSincap",
 			"Sezgin İbiş"
@@ -162,5 +163,6 @@
 	"sitematrix-summary": "Bu özel sayfa tüm Miraheze vikilerini listeler.",
 	"sitematrix": "Miraheze vikileri listesi",
 	"specialpages-group-wikimanage": "Viki Yönetimi",
-	"termsofservice": "Kullanım Şartları"
+	"termsofservice": "Kullanım Şartları",
+	"logentry-vanishuser-action": "$1 bir kullanıcıyı kayıplara karıştırdı."
 }
