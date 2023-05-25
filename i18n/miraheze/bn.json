@@ -22,6 +22,7 @@
 	"group-autopatrolled": "স্বয়ংক্রিয় পরীক্ষক ব্যবহারকারী",
 	"group-confirmed-member": "{{GENDER:$1|নিশ্চিতকৃত ব্যবহারকারী}}",
 	"group-confirmed": "নিশ্চিতকৃত ব্যবহারকারী",
+	"group-founder": "প্রতিষ্ঠাতা",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|বৈশ্বিক আইপি বাধামুক্ত}}",
 	"group-global-ipblock-exempt": "বৈশ্বিক আইপি বাধামুক্ত",
 	"group-global-sysop-member": "{{GENDER:$1|বৈশ্বিক প্রশাসক}}",
