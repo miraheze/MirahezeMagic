@@ -37,6 +37,7 @@
 	"group-autopatrolled": "Автопатрулируемые участники",
 	"group-confirmed-member": "{{GENDER:$1|подтверждённый участник|подтверждённая участница}}",
 	"group-confirmed": "Подтверждённые участники",
+	"group-founder": "Основатели",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|глобальное исключение из IP-блокировок}}",
 	"group-global-ipblock-exempt": "Исключения из глобальных IP-блокировок",
 	"group-global-rollbacker-member": "{{GENDER:$1|глобальный откатывающий|глобальная откатывающая}}",
