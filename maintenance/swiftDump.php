@@ -6,6 +6,7 @@ use MediaWiki\Shell\Shell;
 class SwiftDump extends Maintenance {
 	public function __construct() {
 		parent::__construct();
+		$this->addOption( 'filename', 'Filename of the .tar.gz dump', true, true );
 	}
 
 	public function execute() {
@@ -44,7 +45,7 @@ class SwiftDump extends Maintenance {
 		// Compress Swift container (.tar.gz)
 		Shell::command(
 			'tar', '-czf',
-			"/srv/swiftdump/$wiki.tar.gz",
+			'/tmp/' . $this->getOption( 'filename' ),
 			'-C', "/tmp/$wiki",
 			'--remove-files'
 		)->limits( $limits )
