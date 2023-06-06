@@ -51,29 +51,6 @@ class SwiftDump extends Maintenance {
 			->restrict( Shell::RESTRICT_NONE )
 			->execute();
 
-		// Upload the Swift dump
-		// We have to use exec here, as Shell::command does not work for this
-		exec( escapeshellcmd(
-			implode( ' ', [
-				'swift', 'upload',
-				"miraheze-$wiki-dumps-backup",
-				"$wiki.tar.gz",
-				'--object-name', '""',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
-				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword,
-				'-D', "/tmp/$wiki",
-				'--object-threads', 1,
-			] )
-		) );
-
-		// Remove the temporary file
-		Shell::command(
-			'rm', "/tmp/$wiki.tar.gz",
-		)->limits( $limits )
-			->restrict( Shell::RESTRICT_NONE )
-			->execute();
-
 		$this->output( "Swift dump for $wiki complete!\n" );
 	}
 }
