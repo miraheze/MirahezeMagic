@@ -46,7 +46,7 @@ class SwiftDump extends Maintenance {
 		Shell::command(
 			'tar', '-czf',
 			'/tmp/' . $this->getOption( 'filename' ),
-			'-C', "/tmp/$wiki",
+			"/tmp/$wiki",
 			'--remove-files'
 		)->limits( $limits )
 			->restrict( Shell::RESTRICT_NONE )
