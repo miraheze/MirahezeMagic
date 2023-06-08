@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
 	"extensions-skins": "Design",
@@ -42,6 +43,7 @@
 	"settings-parserfunctions": "Parser-Funktiounen",
 	"settings-permissions": "Autorisatiounen",
 	"settings-preferences": "Astellungen",
+	"settings-recentchanges": "Rezent Ännerungen",
 	"settings-restricted": "Limitéiert",
 	"settings-styling": "Stil",
 	"termsofservice": "Benotzungs-Bedingungen"
