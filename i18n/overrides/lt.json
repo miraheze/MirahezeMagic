@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Jūs}} negalite prisijungti, nes {{GENDER:$1|jūsų}} paskyra [[m:Special:MyLanguage/Global locks|visuotinai užrakinta]]. Prašome susisiekti <code>cvt[at]miraheze.org</code> dėl daugiau informacijos ar apeliacijai.",
+	"miraheze-dberr-again": "Bandykite dar kartą po kelių minučių, paprastai per tiek laiko šios klaidos išsprendžiamos. Jei šią klaidą gaunate nuolat, daugiau informacijos rasite mūsų Twitter (https://twitter.com/MirahezeStatus) arba praneškite mums prisijungdami prie #miraheze-sre adresu irc.libera.chat arba mūsų Discord serveryje (https:// discord.gg/TVAJTE4CUn).",
+	"miraheze-dberr-problems": "Ši viki laikinai nepasiekiama",
+	"miraheze-globalblocking-ipblocked-range": "'''Jūsų IP adresas yra diapazone, kuris „Miraheze“ buvo [[m:Special:MyLanguage/Global blocks|visuotinai užblokuotas]].'''\n\nBlokavimą atliko $1 ($2).\nNurodyta priežastis – ''$3''.\n\n* Blokavimo pradžia: $4\n* Blokavimo pabaiga: $5\n\nŠis visuotinis blokavimas, tikėtina, nėra nukreiptas specifiškai prieš jus. Kažkas jūsų IP diapazone sutrikdė „Miraheze“ viki veiklą, kas lėmė blokavimą. Papildomai, atkreipkite dėmesį, kad VPN ir kitos panašios paslaugos „Miraheze“ [[m:Special:MyLanguage/No open proxies policy|nėra leidžiamos]]. Jei šiuo metu ją naudojate, išjunkite. Jei jums reikia tolimesnės pagalbos, parašykite el. laišką adresu cvt[at]miraheze.org arba susisiekite $1.\nJūsų dabartinis IP adresas yra $6, o blokuojamas diapazonas – $7.\nĮ bet kokias užklausas įtraukite aukščiau pateikiamą informaciją.",
+	"miraheze-globalblocking-ipblocked": "'''Jūsų IP adresas „Miraheze“ buvo [[m:Special:MyLanguage/Global blocks|visuotinai užblokuotas]].'''\n\nBlokavimą atliko $1 ($2).\nNurodyta priežastis – ''$3''.\n\n* Blokavimo pradžia: $4\n* Blokavimo pabaiga: $5\n\nŠis visuotinis blokavimas, tikėtina, nėra nukreiptas specifiškai prieš jus. Kažkas naudodamas jūsų IP sutrikdė „Miraheze“ viki veiklą, kas lėmė blokavimą. Papildomai, atkreipkite dėmesį, kad VPN ir kitos panašios paslaugos „Miraheze“ [[m:Special:MyLanguage/No open proxies policy|nėra leidžiamos]]. Jei šiuo metu ją naudojate, išjunkite. Jei jums reikia tolimesnės pagalbos, parašykite el. laišką adresu cvt[at]miraheze.org arba susisiekite $1.\nJūsų dabartinis IP adresas $6.\nĮ bet kokias užklausas įtraukite aukščiau pateikiamą informaciją.",
+	"miraheze-newsignuppage-loginform-tos": "Perskaičiau, supratau ir sutinku su [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Naudojimo sąlygomis] ir [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Privatumo politika]",
+	"miraheze-newsignuppage-must-accept-tos": "Kad galėtumėte sukurti paskyrą, turite sutikti su Naudojimo sąlygomis!",
+	"miraheze-oathauth-step1": "SVARBU! Prieš įjungdami būtinai perskaitykite OATHAuth puslapį! 1 žingsnis: atsisiųskite dviejų veiksnių autentifikavimo programą"
+}
