@@ -82,6 +82,7 @@
 	"miraheze-requestfeatures": "Functies op een wiki aanvragen",
 	"miraheze-requestwiki": "Een wiki aanvragen",
 	"miraheze-sidebar-donate": "Doneren",
+	"miraheze-sitenotice-closed-locked": "Deze wiki is gesloten omdat [[m:Special:MyLanguage/Stewards|Stewards]] of [[m:Special:MyLanguage/Trust and Safety|Trust and Safety]] hebben vastgesteld dat deze in strijd is met Miraheze's [[m:Content Policy|inhoudsbeleid]] of ander globaal beleid. Bureaucraten zouden ofwel een e-mail ofwel een bericht op een overlegpagina moeten hebben ontvangen met meer informatie, waaronder hoe ze in beroep kunnen gaan.",
 	"miraheze-sitenotice-closed-private": "Deze wiki is automatisch gesloten omdat er de afgelopen 60 dagen niets is '''bewerkt''' of '''gelogd'''. Aangezien deze wiki privé is, kan hij niet opnieuw worden geopend via het normale proces voor heropeningsverzoeken. Als deze wiki niet binnen 6 maanden wordt heropend, kan hij worden verwijderd. Let op: als u een bureaucraat bent op deze wiki, gaat u naar [[Special:ManageWiki]] en schakelt u het vakje \"Gesloten\" uit om de wiki te heropenen.",
 	"miraheze-sitenotice-closed": "Deze wiki is automatisch [[m:Special:MyLanguage/Dormancy Policy|gesloten]] omdat er de afgelopen 60 dagen niets is '''bewerkt''' of '''gelogd'''. Wilt u (als niet-bureaucraat) dat deze wiki weer geopend wordt, dien dan bij [[m:Requests for reopening wikis|Heropeningsverzoeken wiki's]] een verzoek in. Als deze wiki niet binnen 6 maanden wordt heropend, kan hij worden verwijderd. Let op: als u een bureaucraat bent op deze wiki, gaat u naar [[Special:ManageWiki]] en schakelt u het vakje \"Gesloten\" uit om de wiki te heropenen.",
 	"miraheze-sitenotice-inactive-private": "Op deze wiki is in de afgelopen 45 dagen niets '''bewerkt''' of '''gelogd'''. Daarom is de wiki automatisch gemarkeerd als '''inactief'''. Als u wilt voorkomen dat deze wiki '''gesloten''' wordt, moet u hier wat tekenen van activiteit gaan vertonen. Als er binnen de komende 15 dagen geen tekenen zijn dat deze wiki wordt gebruikt, wordt deze wiki gesloten krachtens het [[m:Special:MyLanguage/Dormancy Policy|inactiviteitsbeleid]] (dat alle wiki-oprichters accepteren bij het aanvragen van een wiki). Deze wiki komt niet in aanmerking voor heropening op verzoek van een andere gebruiker omdat hij privé is. Als deze wiki over 135 dagen nog altijd inactief is, kan hij '''verwijderd''' worden. Let op: als u een bureaucraat bent, kun u naar [[Special:ManageWiki]] gaan en zelf \"inactief\" uitschakelen.",
@@ -185,5 +186,12 @@
 	"sitematrix-summary": "Deze speciale pagina laat een lijst van alle Miraheze-wiki's zien.",
 	"sitematrix": "Lijst van Miraheze wiki's",
 	"specialpages-group-wikimanage": "Wikibeheer",
-	"termsofservice": "Gebruiksvoorwaarden"
+	"termsofservice": "Gebruiksvoorwaarden",
+	"vanishuser": "Een gebruiker laten verdwijnen",
+	"vanishuser-action-label": "Wilt u '''echt''' deze gebruiker laten verdwijnen?",
+	"vanishuser-action-help": "Zorg ervoor dat alle gegevens correct zijn ingevuld en vergeet niet dit in het logboek op te nemen.",
+	"vanishuser-warning": "'''Waarschuwing''': U staat op het punt een gebruiker wereldwijd te laten verdwijnen! Controleer alle details zorgvuldig voordat u verder gaat.",
+	"vanishuser-log-name": "Verdwijnlogboek gebruikers",
+	"vanishuser-log-header": "Dit is een basislogboek van alle verdwijningen van gebruikers.",
+	"logentry-vanishuser-action": "$1 heeft een gebruiker laten verdwijnen."
 }
