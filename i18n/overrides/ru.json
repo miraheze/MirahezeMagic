@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Alexander Yukal",
+			"BerryAVGN",
 			"Deltaspace",
 			"Kareyac",
 			"Katunchik",
@@ -14,7 +15,7 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Вы}} не можете авторизоваться, потому что {{GENDER:$1|ваша}} учётная запись [[m:Special:MyLanguage/Global locks|глобально отключена]]. Пожалуйста, напишите на <code>cvt[собака]miraheze.org</code>, чтобы узнать подробности или оспорить отключение.",
-	"miraheze-dberr-again": "Повторите, пожалуйста, попытку через несколько минут, обычно к тому времени эти ошибки устраняются. Если вы постоянно получаете эту ошибку, пожалуйста, проверьте наш Twitter (https://twitter.com/Miraheze) для получения дополнительной информации или свяжитесь с администраторами системы Miraheze, присоединившись к #miraheze-sre на irc.libera.chat.",
+	"miraheze-dberr-again": "Повторите, пожалуйста, попытку через несколько минут, обычно к тому времени эти ошибки устраняются. Если вы постоянно получаете эту ошибку, пожалуйста, проверьте наш Твиттер (https://twitter.com/MirahezeStatus) для получения дополнительной информации или проинформируйте нас, присоединившись к #miraheze-sre на irc.libera.chat или к нашему Discord-серверу (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-dberr-problems": "Эта вики временно недоступна",
 	"miraheze-newsignuppage-loginform-tos": "Мною были прочитаны, поняты и я соглашаюсь с [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Условиями использования] и [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Политикой приватности]",
 	"miraheze-newsignuppage-must-accept-tos": "Вы должны принять Условия использования, чтобы создать учётную запись!",
@@ -23,6 +24,7 @@
 	"miraheze-restriction-delete": "Удалить",
 	"miraheze-restriction-protect": "Защитить",
 	"miraheze-skinname-snapwikiskin": "Щелчок!",
+	"miraheze-snapwikiskin": "Щелчок!",
 	"miraheze-uploadtext": "Используйте форму ниже, чтобы загрузить файлы.\nЧтобы просмотреть или найти ранее загруженные файлы, перейдите в [[Special:FileList|список загруженных файлов]]. Загрузки и повторные загрузки также регистрируются в [[Special:Log/upload|журнале загрузок]]. Удаления записываются в [[Special:Log/delete|журнал удалений]].\n\nЧтобы включить файл на страницу, используйте ссылку в одном из следующих форматов:\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong>, чтобы использовать полную версию файла\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|Caption]]</nowiki></code></strong>, чтобы использовать изображение шириной 200 пикселей в поле по левой границе с текстом «Подпись» ниже\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> для прямой ссылки на файл без отображения файла\n\n\n\nПожалуйста, помните, что ваша вики '''''должна''''' соблюдать британский закон об авторском праве, в противном случае это приведет к нарушению авторских прав и «закрытию вики». Добросовестное использование не существует в британской системе, вместо этого оно заменено более строгой системой [[w:Fair dealing in United Kingdom law|добросовестного ведения дел]].",
 	"miraheze-wikibase-sitelinks-miraheze": "Вики Miraheze"
 }
