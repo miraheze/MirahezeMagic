@@ -143,7 +143,7 @@ class RebuildVersionCache extends Maintenance {
 			$gitInfoCacheDirectory = $this->getConfig()->get( 'CacheDirectory' ) . '/gitinfo';
 		}
 
-		$baseDir = $this->getConfig()->get( 'BaseDirectory' );
+		$baseDir = MW_INSTALL_PATH;
 
 		if ( $gitInfoCacheDirectory ) {
 			// Convert both MW_INSTALL_PATH and $repoDir to canonical paths to protect against
