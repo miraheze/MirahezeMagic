@@ -12,7 +12,6 @@
 			"Wladek92"
 		]
 	},
-	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|}}Vous ne pouvez pas vous connecter parce que {{GENDER:$1|}}votre compte est [[m:Special:MyLanguage/Global locks|bloqué globalement]]. Veuillez contacter <code>cvt[à]miraheze.org</code> pour plus d’informations ou pour faire appel.",
 	"miraheze-dberr-again": "Veuillez essayer de patienter quelques minutes, ces erreurs se résolvent habituellement par elles-mêmes. Si vous recevez cette erreur de façon persistante, veuillez consulter notre page Twitter (https://twitter.com/MirahezeStatus) pour plus d’informations ou nous en informer en vous connectant sur le canal #miraheze-sre sur irc.libera.chat ou sur notre serveur Discord (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-dberr-problems": "Ce wiki est temporairement indisponible",

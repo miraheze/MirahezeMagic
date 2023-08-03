@@ -7,7 +7,6 @@
 			"לואיקה"
 		]
 	},
-	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|אתה לא יכול|את לא יכולה}} להיכנס כי החשבון שלך הוא [[m:Special:MyLanguage/Global locks|נעול גלובלית]]. נא ליצור קשר עם <code>cvt[at]miraheze.org</code> למידע נוסף או לערעור.",
 	"miraheze-dberr-again": "נא לנסות שוב בעוד כמה דקות, השגיאות האלו בדרך־כלל נפתרות עד אז. אם השגיאה הזאת מתרחשת אצלך כל הזמן, נא לבדוק בטוויטר שלנו (https://twitter.com/MirahezeStatus) למידע נוסף או להודיע לנו על־ידי הצטרפות לערוץ #miraheze-sre ב־irc.libera.chat או על־ידי הצטרפות לשרת ה־Discord שלנו (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-dberr-problems": "הוויקי הזה אינו זמין באופן זמני",

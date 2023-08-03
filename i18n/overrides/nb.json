@@ -7,7 +7,6 @@
 			"Telaneo"
 		]
 	},
-	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Du}} kan ikke logge inn fordi kontoen din er [[m:Special:MyLanguage/Global locks|låst globalt]]. Kontakt <code>cvt[at]miraheze.org</code> for mer informasjon eller for å klage.",
 	"miraheze-dberr-again": "Prøv å vente noen minutter. Vanligvis vil slike feil gå over. Hvis du får denne meldingen gjentatte ganger kan du sjekke twitter-siden (https://twitter.com/Miraheze) vår for mer informasjon eller kontakte systemadministratorene ved å knytte deg til #miraheze-sre på irc.libera.chat.",
 	"miraheze-dberr-problems": "Denne wikien er midlertidig utilgjengelig",

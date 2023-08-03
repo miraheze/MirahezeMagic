@@ -6,7 +6,6 @@
 			"Robin van der Vliet"
 		]
 	},
-	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|U}} kunt zich niet aanmelden omdat {{GENDER:$1|uw}} account [[m:Special:MyLanguage/Global locks|globaal is geblokkeerd]]. Neem contact op met <code>cvt[at]miraheze.org</code> voor meer informatie of om in beroep te gaan.",
 	"miraheze-dberr-again": "Probeer het over een paar minuten opnieuw. Meestal zijn deze fouten dan opgelost. Blijft deze fout zich voordoen, kijk dan op onze Twitter-pagina (https://twitter.com/MirahezeStatus) voor meer informatie of neem contact op door deel te nemen via #miraheze-sre op irc.libera.chat of met onze Discord-server (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-dberr-problems": "Deze wiki is tijdelijk niet beschikbaar",

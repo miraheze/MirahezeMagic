@@ -8,7 +8,6 @@
 			"MuratTheTurkish"
 		]
 	},
-	"centralauth-groupname": "Miraheze",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatrullat|autopatrullada}}",
 	"group-autopatrolled": "Usuaris autopatrullats",
 	"group-confirmed-member": "{{GENDER:$1|usuari confirmat|usuària confirmada}}",

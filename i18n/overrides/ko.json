@@ -9,7 +9,6 @@
 			"아라"
 		]
 	},
-	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-dberr-again": "몇 분 기다렸다가 다시 로드해보십시오. 이 오류에 관한 더 자세한 정보의 경우 저희 트위터 문서(Twitter.com/Miraheze)를 참고하거나 irc.libera.chat의 #miraheze에 연결하여 시스템 관리자에게 문의하십시오",
 	"miraheze-dberr-problems": "위키를 일시적으로 사용할 수 없음",
 	"miraheze-importdump-help-reason": "XML이 다른 위키에서 마이그레이션하기 위한 것인지, 다른 위키에서 포크하는지 또는 위키백과에서 틀이나 문서를 가져오기 위한 것인지 알려주십시오.",
