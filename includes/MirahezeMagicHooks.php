@@ -496,7 +496,8 @@ class MirahezeMagicHooks {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
-			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
+			$databaseFile = file_get_contents( "{$cwCacheDir}/databases.json" );
+			$databasesArray = json_decode( $databaseFile, true );
 			$list = array_keys( $databasesArray['combi'] );
 			return false;
 		}
