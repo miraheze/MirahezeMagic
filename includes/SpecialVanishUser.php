@@ -26,23 +26,11 @@
  * @version 1.0
  */
 
-use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
-use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
-use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
-use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserLogger;
-use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserStatus;
-use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserValidator;
-use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
-use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\User\UserFactory;
 
 class SpecialVanishUser extends FormSpecialPage {
-	/** @var CentralAuthDatabaseManager */
-	private $centralAuthDatabaseManager;
-
-	/** @var GlobalRenameUserValidator */
-	private $globalRenameUserValidator;
 
 	/** @var JobQueueGroupFactory */
 	private $jobQueueGroupFactory;
@@ -51,21 +39,15 @@ class SpecialVanishUser extends FormSpecialPage {
 	private $userFactory;
 
 	/**
-	 * @param CentralAuthDatabaseManager $centralAuthDatabaseManager
-	 * @param GlobalRenameUserValidator $globalRenameUserValidator
 	 * @param JobQueueGroupFactory $jobQueueGroupFactory
 	 * @param UserFactory $userFactory
 	 */
 	public function __construct(
-		CentralAuthDatabaseManager $centralAuthDatabaseManager,
-		GlobalRenameUserValidator $globalRenameUserValidator,
 		JobQueueGroupFactory $jobQueueGroupFactory,
 		UserFactory $userFactory
 	) {
 		parent::__construct( 'VanishUser', 'centralauth-rename' );
 
-		$this->centralAuthDatabaseManager = $centralAuthDatabaseManager;
-		$this->globalRenameUserValidator = $globalRenameUserValidator;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 		$this->userFactory = $userFactory;
 	}
@@ -96,7 +78,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		];
 
 		$formDescriptor['oldname'] = [
-			'class' => HTMLGlobalUserTextField::class,
+			'class' => MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField::class,
 			'required' => true,
 			'label-message' => 'removepii-oldname-label',
 		];
@@ -160,7 +142,10 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'centralauth-rename-badusername' );
 		}
 
-		return $this->globalRenameUserValidator->validate( $oldUser, $newUser );
+		$globalRenameUserValidator = MediaWikiServices::getInstance()->getService(
+			'CentralAuth.GlobalRenameUserValidator'
+		);
+		return $globalRenameUserValidator->validate( $oldUser, $newUser );
 	}
 
 	/**
@@ -175,6 +160,10 @@ class SpecialVanishUser extends FormSpecialPage {
 			return $validCentralAuth;
 		}
 
+		$caDbManager = MediaWikiServices::getInstance()->getService(
+			'CentralAuth.CentralAuthDatabaseManager'
+		);
+		
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		$newUser = $this->userFactory->newFromName( $formData['newname'], UserFactory::RIGOR_CREATABLE );
 
@@ -183,16 +172,16 @@ class SpecialVanishUser extends FormSpecialPage {
 		}
 
 		$session = $this->getContext()->exportSession();
-		$globalRenameUser = new GlobalRenameUser(
+		$globalRenameUser = new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser(
 			$this->getUser(),
 			$oldUser,
-			CentralAuthUser::getInstance( $oldUser ),
+			MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstance( $oldUser ),
 			$newUser,
-			CentralAuthUser::getInstance( $newUser ),
-			new GlobalRenameUserStatus( $newUser->getName() ),
+			MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstance( $newUser ),
+			new use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserStatus( $newUser->getName() ),
 			$this->jobQueueGroupFactory,
-			new GlobalRenameUserDatabaseUpdates( $this->centralAuthDatabaseManager ),
-			new GlobalRenameUserLogger( $this->getUser() ),
+			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates( $caDbManager ),
+			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserLogger( $this->getUser() ),
 			$session
 		);
 
@@ -211,7 +200,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		$logID = $logEntry->insert();
 		$logEntry->publish( $logID );
 
-		$globalUser = CentralAuthUser::getInstance( $newUser );
+		$globalUser = MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstance( $newUser );
 
 		$globalUser->adminLockHide(
 			true,
