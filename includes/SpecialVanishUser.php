@@ -26,8 +26,8 @@
  * @version 1.0
  */
 
-use MediaWiki\MediaWikiServices;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\User\UserFactory;
 
 class SpecialVanishUser extends FormSpecialPage {
@@ -163,7 +163,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		$caDbManager = MediaWikiServices::getInstance()->getService(
 			'CentralAuth.CentralAuthDatabaseManager'
 		);
-		
+
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		$newUser = $this->userFactory->newFromName( $formData['newname'], UserFactory::RIGOR_CREATABLE );
 
