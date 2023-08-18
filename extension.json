@@ -146,8 +146,6 @@
 		"VanishUser": {
 			"class": "SpecialVanishUser",
 			"services" : [
-				"CentralAuth.CentralAuthDatabaseManager",
-				"CentralAuth.GlobalRenameUserValidator",
 				"JobQueueGroupFactory",
 				"UserFactory"
 			]
