@@ -124,7 +124,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'centralauth-rename-doesnotexist' );
 		}
 
-		$oldCentral = CentralAuthUser::getInstanceByName( $formData['oldname'] );
+		$oldCentral = MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstanceByName( $formData['oldname'] );
 		$canSuppress = $this->getUser() && $this->getUser()->isAllowed( 'centralauth-suppress' );
 
 		if ( ( $oldCentral->isSuppressed() || $oldCentral->isHidden() ) &&
