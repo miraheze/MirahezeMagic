@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Buehl",
+			"M1660661",
 			"MathXplore",
 			"Omotecho",
 			"RYOUMA1117",
@@ -12,17 +13,25 @@
 			"そらたこ"
 		]
 	},
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|あなた}}はログインすることができません {{GENDER:$1|あなた}}のアカウントはブロックされました。詳細か訴えるためには <code>cvt[at]miraheze.org</code> にお問い合わせください。",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1| {{GENDER:$1|のため、}} はログインできません。あなたの}} アカウントは [[m:Special:MyLanguage/Global locks|グローバルにロックされています]] です。詳細または異議申し立てについては、 <code>cvt[at]miraheze.org</code>までお問い合わせください。",
 	"miraheze-dberr-again": "数分待ってから再読み込みしてみてください。このエラーに関する詳しい情報は、Twitter (https://twitter.com/Miraheze) をご覧になるか、irc.libera.chat の #miraheze-sre に接続してシステム管理者にお問い合わせください。",
 	"miraheze-dberr-problems": "このウィキは一時的に利用できません",
-	"miraheze-importtext": "[[Special:Export|エクスポート機能]]を使用して、元のウィキからファイルをエクスポートします。まずご使用のコンピューターに保存してから、ここにアップロードしてください。<br />ファイルが大きい場合 (5MB 超) はブラウザー経由では不可能なので、[[M:Moving_a_wiki_to_Miraheze#Request_import|インポートの申請]]が必要である点に注意してください。",
+	"miraheze-globalblocking-ipblocked-range": "'''あなたの IP アドレスは、Miraheze 全体で [[m:Special:MyLanguage/Global ブロック|グローバルにブロックされている]] の範囲内にあります。'''\n\nブロックは$1 ( $2 ) によって発行されました。 \n 指定された理由は '' $3 '' です。\n\n* ブロックの開始: $4 \n* ブロックの有効期限: $5 \n\n このグローバル ブロックは、特にあなたに向けられたものではない可能性があります。あなたの IP 範囲内の誰かが Miraheze wiki を妨害し、このブロックにつながった可能性があります。さらに、Miraheze では VPN およびその他の同様のサービスが [[m:Special:MyLanguage/オープン プロキシ ポリシーなし|許可されていません]] であることに注意してください。現在使用している場合は、無効にしてください。さらにサポートが必要な場合は、 cvt[at]miraheze.org に電子メールでご連絡いただくか、 $1 .\n 現在の IP アドレスは$6で、ブロックされている範囲は$7 .\n クエリには上記の詳細をすべて含めてください。",
+	"miraheze-globalblocking-ipblocked-xff": "'''リクエストで使用された 1 つ以上のプロキシ サーバーが Miraheze 全体で [[m:Special:MyLanguage/Global ブロック|グローバルにブロック]] されました'''\n\nブロックは$1 ( $2 ) によって発行されました。 \n 指定された理由は '' $3 '' です。\n\n* ブロックの開始: $4 \n* ブロックの有効期限: $5 \n\n このグローバル ブロックは、特にあなたに向けられたものではない可能性があります。 Miraheze では、VPN およびその他の同様のサービスが [[m:Special:MyLanguage/オープン プロキシ ポリシーなし|許可されません]] であることに注意してください。現在使用している場合は、無効にしてください。さらにサポートが必要な場合は、cvt[at]miraheze.org に電子メールでご連絡いただくか、 $1 .\n ブロックされたプロキシ アドレスは$6 .\n クエリに上記の詳細をすべて含めてください。",
+	"miraheze-globalblocking-ipblocked": "'''あなたの IP アドレスは、Miraheze 全体で [[m:Special:MyLanguage/Global ブロック|グローバルにブロックされている]] の範囲内にあります。'''\n\nブロックは$1 ( $2 ) によって発行されました。 \n 指定された理由は '' $3 '' です。\n\n* ブロックの開始: $4 \n* ブロックの有効期限: $5 \n\n このグローバル ブロックは、特にあなたに向けられたものではない可能性があります。あなたの IP 範囲内の誰かが Miraheze wiki を妨害し、このブロックにつながった可能性があります。さらに、Miraheze では VPN およびその他の同様のサービスが [[m:Special:MyLanguage/オープン プロキシ ポリシーなし|許可されていません]] であることに注意してください。現在使用している場合は、無効にしてください。さらにサポートが必要な場合は、 cvt[at]miraheze.org に電子メールでご連絡いただくか、 $1 .\n 現在の IP アドレスは$6で、ブロックされている範囲は$7 .\n クエリには上記の詳細をすべて含めてください。",
+	"miraheze-importdump-help-reason": "XML の目的が、別の Wiki からの移行、別の Wiki のフォーク、または Wikipedia からのテンプレートやページのインポートであるかどうかを教えてください。",
+	"miraheze-importdump-help-target": "これは有効なデータベース名である必要があります。 Wiki のデータベース名を見つけるには、Wiki の Special:ManageWiki/core を参照してください。\n\n Wiki をまだ作成していない場合は、まず [[Special:RequestWiki]] を使用して Wiki をリクエストしてください。 Wiki が作成されたら、ここに戻ってこのインポート ダンプ リクエストを行ってください。",
+	"miraheze-importdump-help-upload-file": "XML ファイルのみが許可されます。 XML ファイルが圧縮アーカイブ内にある場合は、アップロードする前に解凍してください。\n\nすべての改訂履歴も含まれるバージョンの XML ファイルをアップロードしていることを確認してください。",
+	"miraheze-importtext": "[[特殊:エクスポート|エクスポート ユーティリティ]] を使用してソース Wiki からファイルをエクスポートしてください。\n それをコンピュータに保存し、ここにアップロードしてください。<br />ファイルが少し大きい (~ >2MB) 場合は、[[M:Special:RequestImportDump|インポートをリクエスト]] する必要があることに注意してください。技術的な制限により、これはここでは実行できません。",
 	"miraheze-newsignuppage-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
 	"miraheze-newsignuppage-must-accept-tos": "アカウントを作成するには、利用規約に同意する必要があります！",
 	"miraheze-oathauth-step1": "重要なお知らせ：この機能を有効にする前に、OATHAuthのページを必ずお読みください。\nステップ1：二要素認証プログラムをダウンロードする",
-	"miraheze-prefs-help-realname": "本名は省略できます。入力すると、あなたの著作物の帰属表示に使用されます。また、MirahezeがホストするWikiを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]</span>に同意し、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]</span>に同意したことになります",
+	"miraheze-prefs-help-realname": "本名は任意です。提供することを選択した場合、これはあなたの作品の帰属を示すために使用されます。また、Miraheze がホストする wiki を使用すると、 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 利用規約]</span>に同意し、 <span class=\"plainlinks\">[https://meta.miraheze.org/]</span>に同意したことになります。 <span class=\"plainlinks\">wiki/Special:MyLanguage/Privacy_Policy プライバシー ポリシー]</span> 。",
 	"miraheze-restriction-delete": "削除",
 	"miraheze-restriction-protect": "保護",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
+	"miraheze-uploadtext": "ファイルをアップロードするには、以下のフォームを使用してください。\n 以前にアップロードしたファイルを表示または検索するには、[[Special:FileList|アップロードされたファイルのリスト]] に移動してください。アップロードと再アップロードも [[Special:Log/upload|upload log]] に記録されます。削除は [[特殊:ログ/削除|削除ログ]] に記録されます。\n\n ページにファイルを含めるには、次のいずれかの形式のリンクを使用します:\n*<nowiki> <strong><code>[[ {{ns:file}} :File.jpg]]</code></strong></nowiki> <strong><code>[[ {{ns:file}} :File.jpg]]</code></strong><nowiki> <strong><code>[[ {{ns:file}} :File.jpg]]</code></strong></nowiki>ファイルのフルバージョンを使用するには\n*<nowiki> <strong><code>[[ {{ns:file}} :File.png|200px|thumb|left|Caption]]</code></strong></nowiki> <strong><code>[[ {{ns:file}} :File.png|200px|thumb|left|Caption]]</code></strong><nowiki> <strong><code>[[ {{ns:file}} :File.png|200px|thumb|left|Caption]]</code></strong></nowiki>左マージンのボックス内で 200 ピクセル幅のレンディションを使用し、その下に「キャプション」というテキストが表示されます\n*<nowiki> <strong><code>[[ {{ns:media}} :File.ogg]]</code></strong></nowiki> <strong><code>[[ {{ns:media}} :File.ogg]]</code></strong><nowiki> <strong><code>[[ {{ns:media}} :File.ogg]]</code></strong></nowiki>ファイルを表示せずにファイルに直接リンクする場合\n\nアップロードされたファイルに関するライセンス情報 (該当する場合) を必ず追加してください。すべてのファイルは英国の著作権法を「遵守する必要があります」。遵守しない場合は、著作権侵害や「wiki の閉鎖」が発生する可能性があります。 「フェアユース」は英国の制度には存在せず、代わりに類似しているが異なる [[w:英国法におけるフェア ディーリング|フェア ディーリング]] システムに置き換えられることに留意してください。",
+	"miraheze-webauthn-module-description": "WebAuthn (Web Authentication) は、World Wide Web Consortium (W3C) によって発行された Web 標準です。 WebAuthn は、FIDO Alliance の指導の下、FIDO2 プロジェクトの中核コンポーネントです。プロジェクトの目標は、公開キー暗号化を使用して Web ベースのアプリケーションやサービスに対してユーザーを認証するためのインターフェイスを標準化することです。 [https://en.wikipedia.org/wiki/WebAuthn 続きを読む]<br> 「ログインするには、認証システムを登録した Wiki にアクセスする必要があることに注意してください。」この理由から、[[mh:meta|Meta]] に認証子を登録することができます。",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze ウィキ"
 }
