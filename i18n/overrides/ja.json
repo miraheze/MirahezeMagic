@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Buehl",
+			"Kokage si",
 			"M1660661",
 			"MathXplore",
 			"Omotecho",
@@ -20,7 +21,7 @@
 	"miraheze-globalblocking-ipblocked-xff": "'''リクエストで使用された 1 つ以上のプロキシ サーバーが Miraheze 全体で [[m:Special:MyLanguage/Global ブロック|グローバルにブロック]] されました'''\n\nブロックは$1 ( $2 ) によって発行されました。 \n 指定された理由は '' $3 '' です。\n\n* ブロックの開始: $4 \n* ブロックの有効期限: $5 \n\n このグローバル ブロックは、特にあなたに向けられたものではない可能性があります。 Miraheze では、VPN およびその他の同様のサービスが [[m:Special:MyLanguage/オープン プロキシ ポリシーなし|許可されません]] であることに注意してください。現在使用している場合は、無効にしてください。さらにサポートが必要な場合は、cvt[at]miraheze.org に電子メールでご連絡いただくか、 $1 .\n ブロックされたプロキシ アドレスは$6 .\n クエリに上記の詳細をすべて含めてください。",
 	"miraheze-globalblocking-ipblocked": "'''あなたの IP アドレスは、Miraheze 全体で [[m:Special:MyLanguage/Global ブロック|グローバルにブロックされている]] の範囲内にあります。'''\n\nブロックは$1 ( $2 ) によって発行されました。 \n 指定された理由は '' $3 '' です。\n\n* ブロックの開始: $4 \n* ブロックの有効期限: $5 \n\n このグローバル ブロックは、特にあなたに向けられたものではない可能性があります。あなたの IP 範囲内の誰かが Miraheze wiki を妨害し、このブロックにつながった可能性があります。さらに、Miraheze では VPN およびその他の同様のサービスが [[m:Special:MyLanguage/オープン プロキシ ポリシーなし|許可されていません]] であることに注意してください。現在使用している場合は、無効にしてください。さらにサポートが必要な場合は、 cvt[at]miraheze.org に電子メールでご連絡いただくか、 $1 .\n 現在の IP アドレスは$6で、ブロックされている範囲は$7 .\n クエリには上記の詳細をすべて含めてください。",
 	"miraheze-importdump-help-reason": "XML の目的が、別の Wiki からの移行、別の Wiki のフォーク、または Wikipedia からのテンプレートやページのインポートであるかどうかを教えてください。",
-	"miraheze-importdump-help-target": "これは有効なデータベース名である必要があります。 Wiki のデータベース名を見つけるには、Wiki の Special:ManageWiki/core を参照してください。\n\n Wiki をまだ作成していない場合は、まず [[Special:RequestWiki]] を使用して Wiki をリクエストしてください。 Wiki が作成されたら、ここに戻ってこのインポート ダンプ リクエストを行ってください。",
+	"miraheze-importdump-help-target": "これは有効なデータベース名である必要があります。ウィキのデータベース名を見つけるには、そのウィキ上で Special:ManageWiki/core を参照してください。\n\nウィキをまだ作成していない場合は、まず [[Special:RequestWiki]] を使用して ウィキをリクエストしてください。ウィキが作成されたら、ここに戻ってこのインポート ダンプ リクエストを行ってください。",
 	"miraheze-importdump-help-upload-file": "XML ファイルのみが許可されます。 XML ファイルが圧縮アーカイブ内にある場合は、アップロードする前に解凍してください。\n\nすべての改訂履歴も含まれるバージョンの XML ファイルをアップロードしていることを確認してください。",
 	"miraheze-importtext": "[[特殊:エクスポート|エクスポート ユーティリティ]] を使用してソース Wiki からファイルをエクスポートしてください。\n それをコンピュータに保存し、ここにアップロードしてください。<br />ファイルが少し大きい (~ >2MB) 場合は、[[M:Special:RequestImportDump|インポートをリクエスト]] する必要があることに注意してください。技術的な制限により、これはここでは実行できません。",
 	"miraheze-newsignuppage-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
@@ -31,7 +32,7 @@
 	"miraheze-restriction-protect": "保護",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-uploadtext": "ファイルをアップロードするには、以下のフォームを使用してください。\n以前にアップロードしたファイルを表示または検索するには、[[Special:FileList|アップロードされたファイルのリスト]]に移動してください。アップロードと再アップロードも [[Special:Log/upload|upload log]] に記録されます。削除は [[special:Log/delete|deletion log]] に記録されます。\n\nページにファイルを含めるには、次のいずれかの形式のリンクを使用します。\n*ファイルを実寸で使用するには <nowiki><strong><code>[[{{ns:file}}:ファイル名.jpg]]</code></strong></nowiki>\n*横幅200ピクセルの縮尺で左寄せに配置し、画像の下に「キャプション」という文字列を表示するには<nowiki><strong><code>[[{{ns:file}}:File.png|200px|thumb|left|キャプション]]</code></strong></nowiki>\n* ファイルを表示せずにファイルに直接リンクする場合は<nowiki><strong><code>[[{{ns:media}}:File.ogg]]</code></strong></nowiki>\n\nアップロードしたファイルに関するライセンス情報を必ず追加してください（該当する場合）。すべてのファイルはイギリスの著作権法を'''必ず遵守しなければなりません'''。たびたび遵守しないと著作権侵害に該当し'''ウィキが閉鎖される'''可能性があります。イギリスの法制には〈フェアユース〉は存在せず、代わりに[[w:Fair dealing in United Kingdom law|フェア ディーリング]]式に置き換えられ、類似はしていても異なる点に留意してください。",
+	"miraheze-uploadtext": "ファイルをアップロードするには、以下のフォームを使用してください。\n以前にアップロードしたファイルを表示または検索するには、[[Special:FileList|アップロードされたファイルの一覧]]に移動してください。アップロードと再アップロードも[[Special:Log/upload|アップロード記録]]に記録されます。削除は[[Special:Log/delete|削除記録]]に記録されます。\n\nページにファイルを含めるには、次のいずれかの形式のリンクを使用します。\n*ファイルを実寸で使用するには<strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:ファイル.jpg]]</nowiki></code></strong>\n*横幅200ピクセルの縮尺で左寄せに配置し、画像の下に「キャプション」という文字列を表示するには<strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:ファイル.png|200px|thumb|left|キャプション]]</nowiki></code></strong>\n* ファイルを表示せずにファイルに直接リンクする場合は<strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:ファイル.ogg]]</nowiki></code></strong>\n\nアップロードしたファイルに関するライセンス情報を必ず追加してください（該当する場合）。すべてのファイルはイギリスの著作権法を'''必ず遵守しなければなりません'''。たびたび遵守しないと著作権侵害に該当し'''ウィキが閉鎖される'''可能性があります。イギリスの法制には〈フェアユース〉は存在せず、代わりに[[w:Fair dealing in United Kingdom law|フェア ディーリング]]式に置き換えられ、類似はしていても異なる点に留意してください。",
 	"miraheze-webauthn-module-description": "WebAuthn (Web Authentication) は、World Wide Web Consortium (W3C) によって発行された Web 標準です。 WebAuthn は、FIDO Alliance の指導の下、FIDO2 プロジェクトの中核コンポーネントです。プロジェクトの目標は、公開キー暗号化を使用して Web ベースのアプリケーションやサービスに対してユーザーを認証するためのインターフェイスを標準化することです。 [https://en.wikipedia.org/wiki/WebAuthn 続きを読む]<br> 「ログインするには、認証システムを登録した Wiki にアクセスする必要があることに注意してください。」この理由から、[[mh:meta|Meta]] に認証子を登録することができます。",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze ウィキ"
 }
