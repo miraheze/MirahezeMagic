@@ -116,7 +116,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		}
 
 		if ( version_compare( MW_VERSION, '1.40', '<' ) &&
-		    !ExtensionRegistry::getInstance()->isLoaded( 'Renameuser' )
+			!ExtensionRegistry::getInstance()->isLoaded( 'Renameuser' )
 		) {
 			return Status::newFatal( 'centralauth-rename-notinstalled' );
 		}
