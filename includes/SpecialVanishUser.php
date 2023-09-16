@@ -115,7 +115,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'removepii-centralauth-notinstalled' );
 		}
 
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'Renameuser' ) ) {
+		if ( version_compare( MW_VERSION, '1.40', '<' ) && !ExtensionRegistry::getInstance()->isLoaded( 'Renameuser' ) ) {
 			return Status::newFatal( 'centralauth-rename-notinstalled' );
 		}
 
