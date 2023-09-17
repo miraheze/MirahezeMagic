@@ -54,7 +54,7 @@ class FixImageUser extends Maintenance {
 		);
 
 		if ( !$pageId || !is_object( $pageId ) ) {
-			throw new MWException( '$pageId was not set to a valid array.' );
+			throw new UnexpectedValueException( '$pageId was not set to a valid array.' );
 		}
 
 		foreach ( $pageId as $id ) {
