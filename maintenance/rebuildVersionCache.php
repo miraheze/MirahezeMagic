@@ -176,7 +176,7 @@ class RebuildVersionCache extends Maintenance {
 		if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
 			|| !is_writable( $cacheDir )
 		) {
-			throw new MWException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
+			throw new RuntimeException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
 		}
 
 		file_put_contents( $this->getCacheFilePath( $repoDir ), FormatJson::encode( $this->getGitInfo( $repoDir ) ) );

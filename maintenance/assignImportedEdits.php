@@ -100,7 +100,7 @@ class AssignImportedEdits extends Maintenance {
 		);
 
 		if ( !$res || !is_object( $res ) ) {
-			throw new MWException( '$res was not set to a valid array.' );
+			throw new UnexpectedValueException( '$res was not set to a valid array.' );
 		}
 
 		foreach ( $res as $row ) {

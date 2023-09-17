@@ -78,7 +78,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
-		} catch ( MWException $e ) {
+		} catch ( Exception $e ) {
 			$this->output( $e->getMessage() );
 		}
 
@@ -88,7 +88,6 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	/**
 	 * @param string $url
 	 *
-	 * @throws MWException
 	 * @return string
 	 */
 	protected function getWikiDiscoveryData( $url ) {
@@ -102,7 +101,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
 
 		if ( !$json ) {
-			throw new MWException( "Got no data from $url\n" );
+			throw new RuntimeException( "Got no data from $url\n" );
 		}
 
 		return $json;
