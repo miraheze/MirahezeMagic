@@ -7,7 +7,7 @@ $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWikiServices $services ) {
 	try {
-		if ( getenv( 'WIKI_CREATION_SQL_EXECUTED' ) ) {
+		if ( getenv( 'WIKI_ECHO_CREATION_SQL_EXECUTED' ) ) {
 			return;
 		}
 
@@ -19,7 +19,7 @@ function wfOnMediaWikiServices( MediaWikiServices $services ) {
 			$dbw->sourceFile( "$IP/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql" );
 		}
 
-		putenv( 'WIKI_CREATION_SQL_EXECUTED=true' );
+		putenv( 'WIKI_ECHO_CREATION_SQL_EXECUTED=true' );
 	} catch ( DBQueryError $e ) {
 		return;
 	}
