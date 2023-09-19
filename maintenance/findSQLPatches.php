@@ -28,7 +28,7 @@
  * @version 1.0
  */
 
-require_once '/srv/mediawiki/1.40/maintenance/Maintenance.php';
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class FindSQLPatches extends Maintenance {
 		public function __construct() {
