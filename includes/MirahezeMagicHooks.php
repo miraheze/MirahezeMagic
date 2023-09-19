@@ -167,7 +167,7 @@ class MirahezeMagicHooks {
 				// Copy file from old container to new container
 				Shell::command(
 					'swift', 'copy',
-					'-d', '/' . $newContainer . '/' . $file, $container, $file 
+					'-d', '/' . $newContainer . '/' . $file, $container, $file
 					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
