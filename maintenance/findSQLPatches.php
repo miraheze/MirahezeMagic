@@ -31,77 +31,77 @@
 require_once '/srv/mediawiki/1.40/maintenance/Maintenance.php';
 
 class FindSQLPatches extends Maintenance {
-        public function __construct() {
-                parent::__construct();
+		public function __construct() {
+				parent::__construct();
 
-                $this->addDescription( 'List new or updated SQL patches between two MediaWiki versions.' );
+				$this->addDescription( 'List new or updated SQL patches between two MediaWiki versions.' );
 
-                $this->addOption( 'from-version', 'Path for MediaWiki version to start from', true, true );
-                $this->addOption( 'to-version', 'Path for MediaWiki version to end with', true, true );
-        }
+				$this->addOption( 'from-version', 'Path for MediaWiki version to start from', true, true );
+				$this->addOption( 'to-version', 'Path for MediaWiki version to end with', true, true );
+		}
 
-        public function execute() {
-                $fromVersionPath = $this->getOption( 'from-version-path' );
-                $toVersionPath = $this->getOption( 'to-version-path' );
-                $patches = [];
-                $this->findPatches( $fromVersionPath, $toVersionPath, $patches );
-                foreach ( $patches as $patch ) {
-                        $this->output( $patch . "\n" );
-                }
+		public function execute() {
+				$fromVersionPath = $this->getOption( 'from-version-path' );
+				$toVersionPath = $this->getOption( 'to-version-path' );
+				$patches = [];
+				$this->findPatches( $fromVersionPath, $toVersionPath, $patches );
+				foreach ( $patches as $patch ) {
+						$this->output( $patch . "\n" );
+				}
 
-                $this->output( "\nCount: " . count( $patches ) . "\n" );
-        }
+				$this->output( "\nCount: " . count( $patches ) . "\n" );
+		}
 
-        private function findPatches( $fromVersionPath, $toVersionpath, &$patches ) {
-                $fromPatches = $this->findSqlPatches( $fromVersionPath );
-                $toPatches = $this->findSqlPatches( $toVersionpath );
-                foreach ( $toPatches as $patch ) {
-                        $filename = basename( $patch );
-                        if ( array_key_exists( $filename, $fromPatches ) ) {
-                                if ( $this->isPatchUpdated( $fromPatches[$filename], $patch ) ) {
-                                        $patches[] = $patch;
-                                }
-                        } else {
-                                $patches[] = $patch;
-                        }
-                }
-        }
+		private function findPatches( $fromVersionPath, $toVersionpath, &$patches ) {
+				$fromPatches = $this->findSqlPatches( $fromVersionPath );
+				$toPatches = $this->findSqlPatches( $toVersionpath );
+				foreach ( $toPatches as $patch ) {
+						$filename = basename( $patch );
+						if ( array_key_exists( $filename, $fromPatches ) ) {
+								if ( $this->isPatchUpdated( $fromPatches[$filename], $patch ) ) {
+										$patches[] = $patch;
+								}
+						} else {
+								$patches[] = $patch;
+						}
+				}
+		}
 
-        private function findSqlPatches( $path ) {
-                $patches = [];
+		private function findSqlPatches( $path ) {
+				$patches = [];
 
-                $files = $this->findFilesRecursively( $path );
+				$files = $this->findFilesRecursively( $path );
 
-                foreach ( $files as $file ) {
-                        if (
-                                str_contains( $file, '/postgres/' ) ||
-                                str_contains( $file, '/sqlite/' ) ||
-                                str_contains( $file, '/tests/' )
-                        ) {
-                                continue;
-                        }
+				foreach ( $files as $file ) {
+						if (
+								str_contains( $file, '/postgres/' ) ||
+								str_contains( $file, '/sqlite/' ) ||
+								str_contains( $file, '/tests/' )
+						) {
+								continue;
+						}
 
-                        $patches[basename( $file )] = $file;
-                }
+						$patches[basename( $file )] = $file;
+				}
 
-                return $patches;
-        }
+				return $patches;
+		}
 
-        private function isPatchUpdated( $oldPatch, $newPatch ) {
-                // TO-DO
-        }
+		private function isPatchUpdated( $oldPatch, $newPatch ) {
+				// TO-DO
+		}
 
-        private function findFilesRecursively( $pattern ) {
-                $files = glob( $pattern );
-                foreach ( glob( dirname( $pattern ) . '/*', GLOB_ONLYDIR | GLOB_NOSORT ) as $dir ) {
-                        $files = array_merge(
-                                [],
-                                ...[ $files, $this->findFilesRecursively( $dir . '/' . basename( $pattern ) ) ]
-                        );
-                }
+		private function findFilesRecursively( $pattern ) {
+				$files = glob( $pattern );
+				foreach ( glob( dirname( $pattern ) . '/*', GLOB_ONLYDIR | GLOB_NOSORT ) as $dir ) {
+						$files = array_merge(
+								[],
+								...[ $files, $this->findFilesRecursively( $dir . '/' . basename( $pattern ) ) ]
+						);
+				}
 
-                return $files;
-        }
+				return $files;
+		}
 }
 
 $maintClass = FindSQLPatches::class;
