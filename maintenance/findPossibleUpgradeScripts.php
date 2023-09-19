@@ -31,89 +31,87 @@
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 class FindPossibleUpgradeScripts extends Maintenance {
-        public function __construct() {
-                parent::__construct();
+		public function __construct() {
+				parent::__construct();
 
-                $this->addDescription( 'List new or updated maintenance scripts between two MediaWiki versions.' );
+				$this->addDescription( 'List new or updated maintenance scripts between two MediaWiki versions.' );
 
-                $this->addOption( 'from-version-path', 'Path to MediaWiki version to start from', true, true );
-                $this->addOption( 'to-version-path', 'Path to MediaWiki version to end with', true, true );
-        }
+				$this->addOption( 'from-version-path', 'Path to MediaWiki version to start from', true, true );
+				$this->addOption( 'to-version-path', 'Path to MediaWiki version to end with', true, true );
+		}
 
-        public function execute() {
-                $fromVersionPath = $this->getOption( 'from-version-path' );
-                $toVersionPath = $this->getOption( 'to-version-path' );
-                $scripts = [];
-                $this->findScripts( $fromVersionPath, $toVersionPath, $scripts );
-                foreach ( $scripts as $script ) {
-                        $this->output( $script . $this->findExtendedClass( $script ) . "\n" );
-                }
+		public function execute() {
+				$fromVersionPath = $this->getOption( 'from-version-path' );
+				$toVersionPath = $this->getOption( 'to-version-path' );
+				$scripts = [];
+				$this->findScripts( $fromVersionPath, $toVersionPath, $scripts );
+				foreach ( $scripts as $script ) {
+						$this->output( $script . $this->findExtendedClass( $script ) . "\n" );
+				}
 
-                $this->output( "\nCount: " . count( $scripts ) . "\n" );
-        }
+				$this->output( "\nCount: " . count( $scripts ) . "\n" );
+		}
 
-        private function findScripts( $fromVersion, $toVersion, &$scripts ) {
-                $fromScripts = $this->findMaintenanceScripts( $fromVersionPath );
-                $toScripts = $this->findMaintenanceScripts( $toVersionPath );
-                foreach ( $toScripts as $script ) {
-                        $filename = basename( $script );
-                        if ( array_key_exists( $filename, $fromScripts ) ) {
-                                if ( $this->isScriptUpdated( $fromScripts[$filename], $script ) ) {
-                                        $scripts[] = $script;
-                                }
-                        } else {
-                                $scripts[] = $script;
-                        }
-                }
-        }
+		private function findScripts( $fromVersion, $toVersion, &$scripts ) {
+				$fromScripts = $this->findMaintenanceScripts( $fromVersionPath );
+				$toScripts = $this->findMaintenanceScripts( $toVersionPath );
+				foreach ( $toScripts as $script ) {
+						$filename = basename( $script );
+						if ( array_key_exists( $filename, $fromScripts ) ) {
+								if ( $this->isScriptUpdated( $fromScripts[$filename], $script ) ) {
+										$scripts[] = $script;
+								}
+						} else {
+								$scripts[] = $script;
+						}
+				}
+		}
 
-        private function findMaintenanceScripts( $path ) {
-                $scripts = [];
+		private function findMaintenanceScripts( $path ) {
+				$scripts = [];
 
-                $files1 = $this->findFilesRecursively( $path . '/**/**/maintenance/*.php' );
-                $files2 = $this->findFilesRecursively( $path . '/**/**/**/maintenance/*.php' );
-                $coreFiles = $this->findFilesRecursively( $path . '/maintenance/*.php' );
+				$files1 = $this->findFilesRecursively( $path . '/**/**/maintenance/*.php' );
+				$files2 = $this->findFilesRecursively( $path . '/**/**/**/maintenance/*.php' );
+				$coreFiles = $this->findFilesRecursively( $path . '/maintenance/*.php' );
 
-                foreach ( array_merge( $files1, $files2, $coreFiles ) as $file ) {
-                        if ( str_contains( $file, '/tests/' ) ) {
-                                continue;
-                        }
+				foreach ( array_merge( $files1, $files2, $coreFiles ) as $file ) {
+						if ( str_contains( $file, '/tests/' ) ) {
+								continue;
+						}
 
-                        $scripts[basename( $file )] = $file;
-                }
+						$scripts[basename( $file )] = $file;
+				}
 
+				return $scripts;
+		}
 
-                return $scripts;
-        }
+		private function isScriptUpdated( $oldScript, $newScript ) {
+				// TO-DO
+		}
 
-        private function isScriptUpdated( $oldScript, $newScript ) {
-                // TO-DO
-        }
+		private function findFilesRecursively( $pattern ) {
+				$files = glob( $pattern );
+				foreach ( glob( dirname( $pattern ) . '/*', GLOB_ONLYDIR | GLOB_NOSORT ) as $dir ) {
+						$files = array_merge(
+								[],
+								...[ $files, $this->findFilesRecursively( $dir . '/' . basename( $pattern ) ) ]
+						);
+				}
 
-        private function findFilesRecursively( $pattern ) {
-                $files = glob( $pattern );
-                foreach ( glob( dirname( $pattern ) . '/*', GLOB_ONLYDIR | GLOB_NOSORT ) as $dir ) {
-                        $files = array_merge(
-                                [],
-                                ...[ $files, $this->findFilesRecursively( $dir . '/' . basename( $pattern ) ) ]
-                        );
-                }
+				return $files;
+		}
 
-                return $files;
-        }
+		private function findExtendedClass( $script ) {
+				$file = file_get_contents( $script );
+				if ( preg_match( '/extends\s+([^\s]+)\s+/', $file, $matches ) ) {
+						if ( $matches[1] !== Maintenance::class ) {
+								return ' (' . $matches[1] . ')';
+						}
+				}
 
-        private function findExtendedClass( $script ) {
-                $file = file_get_contents( $script );
-                if ( preg_match( '/extends\s+([^\s]+)\s+/', $file, $matches ) ) {
-                        if ( $matches[1] !== Maintenance::class ) {
-                                return ' (' . $matches[1] . ')';
-                        }
-                }
-
-                return '';
-        }
+				return '';
+		}
 }
-
 
 $maintClass = FindPossibleUpgradeScripts::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
