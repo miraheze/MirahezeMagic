@@ -233,11 +233,17 @@ class MirahezeMagicHooks {
 			}
 		}
 
+		$scriptOptions = [];
+		if ( version_compare( MW_VERSION, '1.40', '>=' ) ) {
+			$scriptOptions = [ 'wrapper' => MW_INSTALL_PATH . '/maintenance/run.php' ];
+		}
+
 		Shell::makeScriptCommand(
 			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
 			[
 				'--wiki', $new
-			]
+			],
+			$scriptOptions
 		)->limits( $limits )->execute();
 
 		static::removeRedisKey( "*{$old}*" );
