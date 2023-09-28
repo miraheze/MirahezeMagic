@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Vlad5250",
 			"Winston Sung"
 		]
 	},
@@ -18,6 +19,7 @@
 	"group-confirmed-member": "{{GENDER:$1|potvrđen korisnik|potvrđena korisnica}}",
 	"group-confirmed": "Potvrđeni korisnici",
 	"group-global-interwiki-admin-member": "{{GENDER:$1|globalni administrator međuvikija|globalna administratorka međuvikija}}",
+	"group-global-interwiki-admin": "Globalni administratori međuvikija",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|izuzetak od globalnog IP bloka}}",
 	"group-global-ipblock-exempt": "Iznimke od globalnih IP blokova",
 	"group-global-renamer-member": "{{GENDER:$1|globalni preimenjivač|globalna preimenjivačica}}",
@@ -28,9 +30,10 @@
 	"group-interwiki-admin-member": "{{GENDER:$1|administrator međuvikija|administratorka međuvikija}}",
 	"group-interwiki-admin": "Administratori međuvikija",
 	"group-ipblock-exempt-member": "{{GENDER:$1|Izuzetak od IP blokiranja}}",
+	"group-ipblock-exempt": "Izuzeci od IP blokiranja",
 	"group-member": "Članovi",
 	"group-member-member": "{{GENDER:$1|član|članica}}",
-	"group-oversight-member": "revizor",
+	"group-oversight-member": "{{GENDER:$1|revizor|revizorka}}",
 	"group-oversight": "Revizori",
 	"group-patroller-member": "{{GENDER:$1|patrolac|patrolka}}",
 	"group-patroller": "Patrolci",
@@ -68,12 +71,13 @@
 	"settings-localisation": "Lokalizacija",
 	"settings-maps": "Mape",
 	"settings-notifications": "Obavještenja",
+	"settings-permissions": "Dozvole",
 	"settings-preferences": "Postavke",
 	"settings-recentchanges": "Nedavne izmjene",
 	"settings-styling": "Stil",
 	"shared-repo-name-mirahezecommons": "Miraheze Ostava",
-	"sitematrix-others": "Drugi Miraheze wikiji",
-	"sitematrix-summary": "Ova posebna stranica prikazuje popis svih Miraheze wikija.",
-	"sitematrix": "Spisak Miraheze wikija",
+	"sitematrix-others": "Drugi Miraheze vikiji",
+	"sitematrix-summary": "Ova posebna stranica navodi sve Miraheze vikije.",
+	"sitematrix": "Lista Miraheze vikija",
 	"termsofservice": "Uslovi korišćenja"
 }
