@@ -686,21 +686,6 @@ class MirahezeMagicHooks {
 		);
 	}
 
-	public static function onGetPreferences( User $user, array &$preferences ) {
-		$preferences['forcesafemode'] = [
-			'type' => 'toggle',
-			'label-message' => 'prefs-forcesafemode-label',
-			'section' => 'rendering',
-		];
-	}
-
-	public static function onBeforeInitialize( $title, $unused, $output, $user, $request, $mediaWiki ) {
-		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
-		if ( $userOptionsLookup->getBoolOption( $user, 'forcesafemode' ) ) {
-			$request->setVal( 'safemode', '1' );
-		}
-	}
-
 	public static function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
 		$username = $title->getText();
 		if ( $specialPage->getUser()->isAllowed( 'centralauth-lock' ) && !IPUtils::isIPAddress( $username ) ) {
