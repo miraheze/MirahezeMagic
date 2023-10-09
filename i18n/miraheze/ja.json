@@ -19,7 +19,8 @@
 			"しぃ",
 			"そらたこ",
 			"ぺばる",
-			"もなー(偽物)"
+			"もなー(偽物)",
+			"背番号4のエース"
 		]
 	},
 	"content-model-flow-board": "構造化された議論ボード",
@@ -55,6 +56,7 @@
 	"group-global-sysop": "グローバル管理者",
 	"group-interwiki-admin-member": "{{GENDER:$1|インターウィキ管理者}}",
 	"group-interwiki-admin": "インターウィキ管理者",
+	"group-ipblock-exempt-member": "{{GENDER:$1|IPブロック適用除外者}}",
 	"group-ipblock-exempt": "IPブロック適用除外者",
 	"group-member": "メンバー",
 	"group-member-member": "{{GENDER:$1|メンバー}}",
@@ -196,7 +198,11 @@
 	"sitematrix": "Mirahezeウィキの一覧",
 	"specialpages-group-wikimanage": "ウィキ管理",
 	"termsofservice": "利用規約",
+	"vanishuser": "ユーザが消える",
+	"vanishuser-action-label": "このユーザーを本当に消したいですか?",
+	"vanishuser-action-help": "すべての詳細が正しく入力されていることを必ず確認し、記録してください。",
 	"vanishuser-warning": "'''警告''': ユーザーをグローバルに消去しようとしています。続行する前に、すべての詳細を注意深く確認してください。",
 	"vanishuser-log-name": "ユーザー消失ログ",
+	"vanishuser-log-header": "これは、すべてのユーザーの失踪に関する基本的なログです。",
 	"logentry-vanishuser-action": "$1でユーザーが消滅しました。"
 }
