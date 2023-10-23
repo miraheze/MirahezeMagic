@@ -28,7 +28,7 @@ use MediaWiki\Settings\SettingsBuilder;
 
 define( 'MW_NO_EXTENSION_MESSAGES', 1 );
 
-require_once __DIR__ . '/Maintenance.php';
+require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 /**
  * Maintenance script that merges $wgExtensionMessagesFiles from various
