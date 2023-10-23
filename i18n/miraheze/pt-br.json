@@ -34,7 +34,7 @@
 	"group-global-sysop-member": "{{GENDER:$1|administrador|administradora|administrador(a)}} global",
 	"group-global-sysop": "Administradores globais",
 	"group-interwiki-admin-member": "{{GENDER:$1|administrador interwiki|administradora interwiki}}",
-	"group-interwiki-admin": "Administrador Interwiki",
+	"group-interwiki-admin": "Administradores interwiki",
 	"group-member": "Membros",
 	"group-oversight-member": "{{GENDER:$1|supervisor|supervisora}}",
 	"group-oversight": "Supervisores",
