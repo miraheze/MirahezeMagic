@@ -13,6 +13,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$desc = 'Extension or skin to generate database list for. ' .
 			'This option may be passed multiple times to generate multiple database lists at once.';
 
+		$this->addOption( 'directory', 'Directory to store the json file in.', true, true );
 		$this->addOption( 'extension', $desc, true, true, false, true );
 	}
 
@@ -39,9 +40,9 @@ class GenerateExtensionDatabaseList extends Maintenance {
 			}
 		}
 
-		$shellUser = posix_getpwuid( posix_geteuid() )['name'];
+		$directory = $this->getOption( 'directory' );
 		foreach ( $extArray as $ext ) {
-			file_put_contents( "/home/{$shellUser}/{$ext}.json", json_encode( [ 'combi' => $lists[$ext] ] ), LOCK_EX );
+			file_put_contents( "{$directory}/{$ext}.json", json_encode( [ 'combi' => $lists[$ext] ] ), LOCK_EX );
 		}
 	}
 }

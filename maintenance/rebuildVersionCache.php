@@ -94,11 +94,11 @@ class RebuildVersionCache extends Maintenance {
 
 		// Calculate the SHA1 hash of the HEAD commit
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
-		$headSHA1 = trim( shell_exec( "git --git-dir=$gitDir log -1 --format=%H" ) );
+		$headSHA1 = trim( (string)shell_exec( "git --git-dir=$gitDir log -1 --format=%H" ) );
 
 		// Get the HEAD
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
-		$head = trim( shell_exec( "git --git-dir=$gitDir symbolic-ref HEAD 2>/dev/null" ) ) ?: $headSHA1;
+		$head = trim( (string)shell_exec( "git --git-dir=$gitDir symbolic-ref HEAD 2>/dev/null" ) ) ?: $headSHA1;
 
 		if ( !empty( $head ) ) {
 			$gitInfo['head'] = $head;
@@ -110,14 +110,14 @@ class RebuildVersionCache extends Maintenance {
 
 		// Get the date of the HEAD commit
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
-		$headCommitDate = trim( shell_exec( "git --git-dir=$gitDir log -1 --format=%ct" ) );
+		$headCommitDate = trim( (string)shell_exec( "git --git-dir=$gitDir log -1 --format=%ct" ) );
 		if ( !empty( $headCommitDate ) ) {
 			$gitInfo['headCommitDate'] = $headCommitDate;
 		}
 
 		// Get the branch name
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
-		$branch = trim( shell_exec( "git --git-dir=$gitDir rev-parse --abbrev-ref HEAD" ) );
+		$branch = trim( (string)shell_exec( "git --git-dir=$gitDir rev-parse --abbrev-ref HEAD" ) );
 		if ( !empty( $branch ) ) {
 			if ( $branch === 'HEAD' ) {
 				$branch = $headSHA1;
@@ -128,7 +128,7 @@ class RebuildVersionCache extends Maintenance {
 
 		// Get the remote URL
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
-		$remoteURL = trim( shell_exec( "git --git-dir=$gitDir remote get-url origin" ) );
+		$remoteURL = trim( (string)shell_exec( "git --git-dir=$gitDir remote get-url origin" ) );
 		if ( !empty( $remoteURL ) ) {
 			$gitInfo['remoteURL'] = $remoteURL;
 		}
@@ -176,7 +176,7 @@ class RebuildVersionCache extends Maintenance {
 		if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
 			|| !is_writable( $cacheDir )
 		) {
-			throw new MWException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
+			throw new RuntimeException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
 		}
 
 		file_put_contents( $this->getCacheFilePath( $repoDir ), FormatJson::encode( $this->getGitInfo( $repoDir ) ) );

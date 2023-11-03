@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vlad5250",
+			"Winston Sung"
+		]
+	},
+	"miraheze-restriction-delete": "Izbriši",
+	"miraheze-restriction-protect": "Zaštiti",
+	"miraheze-skinname-snapwikiskin": "Snap!",
+	"miraheze-snapwikiskin": "Snap!",
+	"miraheze-uploadtext": "Koristite formu ispod za otpremanje datoteka.\nDa bi ste vidjeli ili pretražili ranije otpremljene datoteke, pogledajte [[Special:FileList|spisak otpremljenih datoteka]]. Otpremanja i ponovna otpremanja su također zapisana u [[Special:Log/upload|dnevniku otpremanja]], a brisanja u [[Special:Log/delete|dnevniku brisanja]].\n\nDa bi ste prikazali datoteku na stranici, koristite link na jedan od slijedećih načina:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datoteka.jpg]]</nowiki></code>''' da upotrijebite potpunu veziju datoteke\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datoteka.png|200px|thumb|lijevo|opis slike]]</nowiki></code>''' da upotrijebite smanjeni prikaz širine 200 piksela unutar okvira, s lijevim poravnanjem i ''opisom slike''.\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Datoteka.ogg]]</nowiki></code>''' za direkno povezivanje datoteke bez njenog prikazivanja\n\nNe zaboravite dodati podatke o licenci (ako je primjenjivo) za otpremanje datoteke. Sve datoteke '''moraju''' poštivati ​​britanski zakon o autorskim pravima, opetovano nepoštivanje toga može rezultirati kršenjem autorskih prava i '''zatvaranjem vikija'''. Imajte na umu da 'poštena upotreba' ne postoji u britanskom sustavu, umjesto toga zamijenjena je sličnim, ali drugačijim sustavom za [[w:Fair dealing in United Kingdom law|pošteno postupanje]].",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze vikiji"
+}

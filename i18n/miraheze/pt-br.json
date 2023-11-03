@@ -7,7 +7,8 @@
 			"MuratTheTurkish",
 			"Re demz",
 			"Robertpontes",
-			"Tks4Fish"
+			"Tks4Fish",
+			"YuriNikolai"
 		]
 	},
 	"datadump-namespaceselect-label": "Espaço nominal",
@@ -33,7 +34,7 @@
 	"group-global-sysop-member": "{{GENDER:$1|administrador|administradora|administrador(a)}} global",
 	"group-global-sysop": "Administradores globais",
 	"group-interwiki-admin-member": "{{GENDER:$1|administrador interwiki|administradora interwiki}}",
-	"group-interwiki-admin": "Administrador Interwiki",
+	"group-interwiki-admin": "Administradores interwiki",
 	"group-member": "Membros",
 	"group-oversight-member": "{{GENDER:$1|supervisor|supervisora}}",
 	"group-oversight": "Supervisores",
@@ -137,7 +138,7 @@
 	"settings-beta": "Beta",
 	"settings-categories": "Categorias",
 	"settings-discussion": "Discussão",
-	"settings-editing": "Editar",
+	"settings-editing": "Editando",
 	"settings-links": "Links",
 	"settings-localisation": "Localização",
 	"settings-maps": "Mapas",
