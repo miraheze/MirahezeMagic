@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
-use MediaWiki\MediaWikiServices;
-
 class JobQueueCollector extends Maintenance {
 	public function __construct() {
 		parent::__construct();
@@ -175,7 +173,7 @@ class JobQueueCollector extends Maintenance {
 				foreach ( $queues as $queue ) {
 					$lsum = 0;
 					$lkeys = $redis->keys( "*:jobqueue:$job:$queue" );
-					foreach( $lkeys as $lkey ) {
+					foreach ( $lkeys as $lkey ) {
 						if ( str_contains( $queue, 'l-unclaimed' ) ) {
 							$lsum = $lsum + (int)$redis->zCard( $lkey );
 						} else {
