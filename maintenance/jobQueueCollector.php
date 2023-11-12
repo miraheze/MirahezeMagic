@@ -173,10 +173,10 @@ class JobQueueCollector extends Maintenance {
 			$result = [];
 			foreach ( $jobs as $job ) {
 				foreach ( $queues as $queue ) {
-					$lsum = 0;
+					$lsum = (int)0;
 					$lkeys = $redis->keys( "*:jobqueue:$job:$queue" );
 					foreach ( $lkeys as $lkey ) {
-						if ( str_contains( $queue, 'l-unclaimed' ) ) {
+						if ( !str_contains( $queue, 'l-unclaimed' ) ) {
 							$lsum = $lsum + (int)$redis->zCard( $lkey );
 						} else {
 							$lsum = $lsum + (int)$redis->lLen( $lkey );
