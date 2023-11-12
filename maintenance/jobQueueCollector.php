@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
+use Wikimedia\IPUtils;
+
 class JobQueueCollector extends Maintenance {
 	public function __construct() {
 		parent::__construct();
