@@ -498,19 +498,6 @@ class MirahezeMagicHooks {
 		}
 	}
 
-	public static function onGlobalUserPageWikis( &$list ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
-		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
-			$databaseFile = file_get_contents( "{$cwCacheDir}/databases.json" );
-			$databasesArray = json_decode( $databaseFile, true );
-			$list = array_keys( $databasesArray['combi'] );
-			return false;
-		}
-
-		return true;
-	}
-
 	/** Removes redis keys for jobrunner */
 	public static function removeRedisKey( string $key ) {
 		global $wgJobTypeConf;
