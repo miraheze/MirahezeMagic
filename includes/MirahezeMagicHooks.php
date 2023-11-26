@@ -397,8 +397,8 @@ class MirahezeMagicHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/MessageCacheFetchOverrides
 	 * @param string[] &$keys
 	 */
-	public function onMessageCacheFetchOverrides( array &$keys ): void {
-		static $keys = [
+	public static function onMessageCacheFetchOverrides( array &$keys ): void {
+		static $keysToOverride = [
 			'centralauth-groupname',
 			'centralauth-login-error-locked',
 			'dberr-again',
@@ -444,7 +444,8 @@ class MirahezeMagicHooks {
 			'wikibase-sitelinks-miraheze',
 		];
 
-		$languageCode = $this->options->get( 'LanguageCode' );
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
+		$languageCode = $config->get( 'LanguageCode' );
 
 		$transformationCallback = static function ( string $key, MessageCache $cache ) use ( $languageCode ): string {
 			$transformedKey = "miraheze-$key";
