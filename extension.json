@@ -99,6 +99,9 @@
 		"MessageCache::get": [
 			"MirahezeMagicHooks::onMessageCacheGet"
 		],
+		"MessageCacheFetchOverrides": [
+			"MirahezeMagicHooks::onMessageCacheFetchOverrides"
+		],
 		"TitleReadWhitelist": [
 			"MirahezeMagicHooks::onTitleReadWhitelist"
 		],
