@@ -11,7 +11,6 @@
 		]
 	},
 	"extensions-antispam": "Ochrona przed spamem",
-	"extensions-api": "API",
 	"extensions-editors": "Edytory",
 	"extensions-mediahandlers": "Wtyczki obsługi mediów",
 	"extensions-parserhooks": "Haki parsera",
@@ -141,7 +140,6 @@
 	"settings-seo": "Optymalizacja dla wyszukiwarek",
 	"settings-socialtools": "Specjalne narzędzia",
 	"settings-styling": "Wygląd",
-	"shared-repo-name-mirahezecommons": "Miraheze Commons",
 	"sitematrix-others": "Inne wiki Miraheze",
 	"sitematrix-summary": "Ta strona specjalna zawiera listę wszystkich wiki Miraheze.",
 	"sitematrix": "Wiki lista Miraheze",

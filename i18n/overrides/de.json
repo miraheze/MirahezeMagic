@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Brettchenweber",
 			"FF-11",
 			"Justman10000",
 			"Metalhead64",
@@ -29,5 +30,6 @@
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-uploadtext": "Verwende das untenstehende Formular, um Dateien hochzuladen.\nUm bereits hochgeladene Dateien anzusehen oder zu durchsuchen, gehe auf die [[Special:FileList|Liste der hochgeladenen Dateien]]. Uploads und Re-Uploads werden zudem im [[Special:Log/upload|upload log]] protokolliert. Löschungen werden im [[Special:Log/delete|Löschungslog]] protokolliert.\n\nUm eine Datei in eine Seite einzubinden, verwende einen Link in einer der folgenden Formen:\n* <strong><code><nowiki>[[</nowiki>{{ns:Datei}}<nowiki>:Datei.jpg]]</nowiki></code></strong> um die Vollversion der Datei zu verwenden\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datei.png|200px|thumb|left|Caption]]</nowiki></code></strong> um eine 200 Pixel breite Wiedergabe in einem Kasten am linken Rand mit dem Text \"Caption\" darunter zu verwenden\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> für die direkte Verlinkung auf die Datei, ohne die Datei anzuzeigen\n\n\n\nBitte beachte, dass die Datei, die du '''''must''''' hochlädst, dem britischen Urheberrecht entsprechen muss. Wiederholte Verstöße dagegen führen zu Urheberrechtsverletzungen und können zur '''Wiki-Schließung''' führen. Fair Use als solches existiert im britischen System nicht, sondern wird durch ein ähnliches, jedoch strengeres [[w:Fair Dealing in United Kingdom law|fair dealing]]-System ersetzt.",
+	"miraheze-webauthn-module-description": "WebAuthn (engl. ''Web Authentication'') ist ein vom World Wide Web Consortium (W3C) veröffentlichter Web-Standard. WebAuthn ist eine Kernkomponente des FIDO2-Projekts unter der Leitung der FIDO Alliance. Ziel des Projekts ist die Standardisierung einer Schnittstelle zur Authentifizierung von Benutzern bei webbasierten Anwendungen und Diensten mithilfe der Public-Key-Kryptographie. [https://de.wikipedia.org/wiki/WebAuthn Weiterlesen]<br> Bitte denken Sie daran, dass Sie zum Anmelden das Wiki aufrufen müssen, in dem Sie den Authentifikator registriert haben. Aus diesem Grund kann es sinnvoll sein, den Authentifikator auf [[mh:meta|Meta]] zu registrieren.",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze Wikis"
 }
