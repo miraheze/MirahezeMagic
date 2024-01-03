@@ -102,9 +102,6 @@
 		"MessageCacheFetchOverrides": [
 			"MirahezeMagicHooks::onMessageCacheFetchOverrides"
 		],
-		"TitleReadWhitelist": [
-			"MirahezeMagicHooks::onTitleReadWhitelist"
-		],
 		"GlobalUserPageWikis": [
 			"MirahezeMagicHooks::onGlobalUserPageWikis"
 		],
