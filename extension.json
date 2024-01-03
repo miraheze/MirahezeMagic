@@ -105,12 +105,6 @@
 		"TitleReadWhitelist": [
 			"MirahezeMagicHooks::onTitleReadWhitelist"
 		],
-		"HtmlPageLinkRendererEnd": [
-			"MirahezeMagicHooks::onHtmlPageLinkRendererEnd"
-		],
-		"InitializeArticleMaybeRedirect": [
-			"MirahezeMagicHooks::onInitializeArticleMaybeRedirect"
-		],
 		"GlobalUserPageWikis": [
 			"MirahezeMagicHooks::onGlobalUserPageWikis"
 		],
