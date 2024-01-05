@@ -101,6 +101,7 @@
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Miraheze Help Center",
+	"miraheze-label-managewiki-mediawiki-version": "MediaWiki version",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
 	"miraheze-sidebar-donate": "Donate",
