@@ -99,7 +99,7 @@ class MirahezeMagicHooks implements
 					'LanguageCode',
 					'LocalDatabases',
 					'ManageWikiSettings',
-					'MirahezeMagicMemcachedServer',
+					'MirahezeMagicMemcachedServers',
 					'MirahezeReportsBlockAlertKeywords',
 					'MirahezeReportsWriteKey',
 					'MirahezeStaffAccessIds',
@@ -807,11 +807,14 @@ class MirahezeMagicHooks implements
 
 	/** Remove memcached keys */
 	private function removeMemcachedKey( string $key ) {
-		$memcacheServer = explode( ':', $this->options->get( 'MirahezeMagicMemcachedServer' ) );
+		$memcachedServers = $this->options->get( 'MirahezeMagicMemcachedServers' );
 
 		try {
 			$memcached = new Memcached();
-			$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
+
+			if ( !$memcached->getServerList() ) {
+				$memcached->addServers( $memcachedServers );
+			}
 
 			// Fetch all keys
 			$keys = $memcached->getAllKeys();
