@@ -35,9 +35,9 @@
 		"SpecialVanishUser": "includes/SpecialVanishUser.php"
 	},
 	"config": {
-		"MirahezeMagicMemcachedServer": {
-			"description": "String. Memcached server to use for clearing memcached keys when a wiki is deleted or renamed",
-			"value": ""
+		"MirahezeMagicMemcachedServers": {
+			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
+			"value": []
 		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
