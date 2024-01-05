@@ -1,14 +1,117 @@
 <?php
 
+use MediaWiki\Cache\Hook\MessageCache__getHook;
+use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
+use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\Hook\BeforeInitializeHook;
+use MediaWiki\Hook\BlockIpCompleteHook;
+use MediaWiki\Hook\ContributionsToolLinksHook;
+use MediaWiki\Hook\GetLocalURL__InternalHook;
+use MediaWiki\Hook\MimeMagicInitHook;
+use MediaWiki\Hook\RecentChange_saveHook;
+use MediaWiki\Hook\SiteNoticeAfterHook;
+use MediaWiki\Hook\SkinAddFooterLinksHook;
+use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
+use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
+use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Shell\Shell;
+use MediaWiki\User\UserOptionsManager;
+use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
+use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
+use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
+use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
+use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
+use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Wikimedia\IPUtils;
 
-class MirahezeMagicHooks {
+class MirahezeMagicHooks implements
+	AbuseFilterShouldFilterActionHook,
+	BeforeInitializeHook,
+	BlockIpCompleteHook,
+	ContributionsToolLinksHook,
+	CreateWikiDeletionHook,
+	CreateWikiReadPersistentModelHook,
+	CreateWikiRenameHook,
+	CreateWikiStatePrivateHook,
+	CreateWikiTablesHook,
+	CreateWikiWritePersistentModelHook,
+	GetLocalURL__InternalHook,
+	GetPreferencesHook,
+	MessageCache__getHook,
+	MimeMagicInitHook,
+	RecentChange_saveHook,
+	SiteNoticeAfterHook,
+	SkinAddFooterLinksHook,
+	TitleReadWhitelistHook,
+	UserGetRightsRemoveHook
+{
+
+	/** @var ServiceOptions */
+	private $options;
+
+	/** @var HttpRequestFactory */
+	private $httpRequestFactory;
+
+	/** @var UserOptionsManager */
+	private $userOptionsManager;
+
+	/**
+	 * @param ServiceOptions $options
+	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param UserOptionsManager $userOptionsManager
+	 */
+	public function __construct(
+		ServiceOptions $options,
+		HttpRequestFactory $httpRequestFactory,
+		UserOptionsManager $userOptionsManager
+	) {
+		$this->options = $options;
+		$this->httpRequestFactory = $httpRequestFactory;
+		$this->userOptionsManager = $userOptionsManager;
+	}
+
+	/**
+	 * @param Config $mainConfig
+	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param UserOptionsManager $userOptionsManager
+	 *
+	 * @return self
+	 */
+	public static function factory(
+		Config $mainConfig,
+		HttpRequestFactory $httpRequestFactory,
+		UserOptionsManager $userOptionsManager
+	): self {
+		return new self(
+			new ServiceOptions(
+				[
+					'ArticlePath',
+					'CreateWikiCacheDirectory',
+					'CreateWikiGlobalWiki',
+					'EchoSharedTrackingDB',
+					'JobTypeConf',
+					'LanguageCode',
+					'LocalDatabases',
+					'ManageWikiSettings',
+					'MirahezeMagicMemcachedServers',
+					'MirahezeReportsBlockAlertKeywords',
+					'MirahezeReportsWriteKey',
+					'MirahezeStaffAccessIds',
+					'Script',
+				],
+				$mainConfig
+			),
+			$httpRequestFactory,
+			$userOptionsManager
+		);
+	}
+
 	/**
 	 * Avoid filtering automatic account creation
 	 *
@@ -16,16 +119,16 @@ class MirahezeMagicHooks {
 	 * @param Title $title
 	 * @param User $user
 	 * @param array &$skipReasons
-	 * @return bool
+	 * @return bool|void
 	 */
-	public static function onAbuseFilterShouldFilterAction(
+	public function onAbuseFilterShouldFilterAction(
 		VariableHolder $vars,
 		Title $title,
 		User $user,
 		array &$skipReasons
 	) {
 		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-			return true;
+			return;
 		}
 
 		$varManager = AbuseFilterServices::getVariablesManager();
@@ -36,25 +139,21 @@ class MirahezeMagicHooks {
 
 			return false;
 		}
-
-		return true;
 	}
 
-	public static function onCreateWikiDeletion( $dbw, $wiki ) {
+	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
 		global $wmgSwiftPassword;
 
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
 		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( $config->get( 'EchoSharedTrackingDB' ) )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
+			->getMainLB( $this->options->get( 'EchoSharedTrackingDB' ) )
+			->getMaintenanceConnectionRef( DB_PRIMARY, [], $this->options->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
-		foreach ( $config->get( 'LocalDatabases' ) as $db ) {
+		foreach ( $this->options->get( 'LocalDatabases' ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
 
-			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
 					$manageWikiSettings->list( $var ) === $wiki
@@ -99,25 +198,23 @@ class MirahezeMagicHooks {
 				->execute();
 		}
 
-		static::removeRedisKey( "*{$wiki}*" );
-		// static::removeMemcachedKey( ".*{$wiki}.*" );
+		$this->removeRedisKey( "*{$wiki}*" );
+		// $this->removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
-	public static function onCreateWikiRename( $dbw, $old, $new ) {
+	public function onCreateWikiRename( $cwdb, $old, $new ): void {
 		global $wmgSwiftPassword;
 
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
 		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( $config->get( 'EchoSharedTrackingDB' ) )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], $config->get( 'EchoSharedTrackingDB' ) );
+			->getMainLB( $this->options->get( 'EchoSharedTrackingDB' ) )
+			->getMaintenanceConnectionRef( DB_PRIMARY, [], $this->options->get( 'EchoSharedTrackingDB' ) );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
-		foreach ( $config->get( 'LocalDatabases' ) as $db ) {
+		foreach ( $this->options->get( 'LocalDatabases' ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
 
-			foreach ( $config->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
+			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
 					$manageWikiSettings->list( $var ) === $old
@@ -233,10 +330,7 @@ class MirahezeMagicHooks {
 			}
 		}
 
-		$scriptOptions = [];
-		if ( version_compare( MW_VERSION, '1.40', '>=' ) ) {
-			$scriptOptions = [ 'wrapper' => MW_INSTALL_PATH . '/maintenance/run.php' ];
-		}
+		$scriptOptions = [ 'wrapper' => MW_INSTALL_PATH . '/maintenance/run.php' ];
 
 		Shell::makeScriptCommand(
 			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
@@ -246,11 +340,11 @@ class MirahezeMagicHooks {
 			$scriptOptions
 		)->limits( $limits )->execute();
 
-		static::removeRedisKey( "*{$old}*" );
-		// static::removeMemcachedKey( ".*{$old}.*" );
+		$this->removeRedisKey( "*{$old}*" );
+		// $this->removeMemcachedKey( ".*{$old}.*" );
 	}
 
-	public static function onCreateWikiStatePrivate( $dbname ) {
+	public function onCreateWikiStatePrivate( $dbname ): void {
 		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
@@ -275,12 +369,12 @@ class MirahezeMagicHooks {
 		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
-	public static function onCreateWikiTables( &$tables ) {
-		$tables['localnames'] = 'ln_wiki';
-		$tables['localuser'] = 'lu_wiki';
+	public function onCreateWikiTables( &$cTables ): void {
+		$cTables['localnames'] = 'ln_wiki';
+		$cTables['localuser'] = 'lu_wiki';
 	}
 
-	public static function onCreateWikiReadPersistentModel( &$pipeline ) {
+	public function onCreateWikiReadPersistentModel( &$pipeline ): void {
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
@@ -291,7 +385,7 @@ class MirahezeMagicHooks {
 		}
 	}
 
-	public static function onCreateWikiWritePersistentModel( $pipeline ) {
+	public function onCreateWikiWritePersistentModel( $pipeline ): bool {
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
 
@@ -307,11 +401,13 @@ class MirahezeMagicHooks {
 	/**
 	 * From WikimediaMessages. Allows us to add new messages,
 	 * and override ones.
+	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 	 *
 	 * @param string &$lcKey Key of message to lookup.
-	 * @return bool
 	 */
-	public static function onMessageCacheGet( &$lcKey ) {
+	public function onMessageCache__get( &$lcKey ) {
+		// phpcs:enable
+
 		if ( version_compare( MW_VERSION, '1.41', '>=' ) ) {
 			return;
 		}
@@ -368,7 +464,6 @@ class MirahezeMagicHooks {
 			// of the above.  Revisit if non-ASCII keys are used.
 			$ucKey = ucfirst( $lcKey );
 
-			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
 			$cache = MediaWikiServices::getInstance()->getMessageCache();
 
 			if (
@@ -381,23 +476,21 @@ class MirahezeMagicHooks {
 			//
 			// 2. Otherwise, use the prefixed key with normal fallback order
 			// (including MediaWiki pages if they exist).
-			$cache->getMsgFromNamespace( $ucKey, $config->get( 'LanguageCode' ) ) === false
+			$cache->getMsgFromNamespace( $ucKey, $this->options->get( 'LanguageCode' ) ) === false
 			) {
 				$lcKey = $prefixedKey;
 			}
 		}
-
-		return true;
 	}
 
 	/**
-	 * From WikimediaMessages. Allows us to add new messages,
-	 * and override ones.
+	 * From WikimediaMessages
+	 * When core requests certain messages, change the key to a Miraheze version.
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/MessageCacheFetchOverrides
 	 * @param string[] &$keys
 	 */
-	public static function onMessageCacheFetchOverrides( array &$keys ): void {
+	public function onMessageCacheFetchOverrides( array &$keys ): void {
 		static $keysToOverride = [
 			'centralauth-groupname',
 			'centralauth-login-error-locked',
@@ -444,8 +537,7 @@ class MirahezeMagicHooks {
 			'wikibase-sitelinks-miraheze',
 		];
 
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		$languageCode = $config->get( 'LanguageCode' );
+		$languageCode = $this->options->get( 'LanguageCode' );
 
 		$transformationCallback = static function ( string $key, MessageCache $cache ) use ( $languageCode ): string {
 			$transformedKey = "miraheze-$key";
@@ -479,12 +571,43 @@ class MirahezeMagicHooks {
 		}
 	}
 
-	public static function onGlobalUserPageWikis( &$list ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		$cwCacheDir = $config->get( 'CreateWikiCacheDirectory' );
+	public function onTitleReadWhitelist( $title, $user, &$whitelisted ) {
+		if ( $title->equals( Title::newMainPage() ) ) {
+			$whitelisted = true;
+			return;
+		}
+
+		$specialsArray = [
+			'CentralAutoLogin',
+			'CentralLogin',
+			'ConfirmEmail',
+			'CreateAccount',
+			'Notifications',
+			'OAuth',
+			'ResetPassword'
+		];
+
+		if ( $user->isAllowed( 'interwiki' ) ) {
+			$specialsArray[] = 'Interwiki';
+		}
+
+		if ( $title->isSpecialPage() ) {
+			$rootName = strtok( $title->getText(), '/' );
+			$rootTitle = Title::makeTitle( $title->getNamespace(), $rootName );
+
+			foreach ( $specialsArray as $page ) {
+				if ( $rootTitle->equals( SpecialPage::getTitleFor( $page ) ) ) {
+					$whitelisted = true;
+					return;
+				}
+			}
+		}
+	}
+
+	public function onGlobalUserPageWikis( &$list ) {
+		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
-			$databaseFile = file_get_contents( "{$cwCacheDir}/databases.json" );
-			$databasesArray = json_decode( $databaseFile, true );
+			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
 			$list = array_keys( $databasesArray['combi'] );
 			return false;
 		}
@@ -492,91 +615,33 @@ class MirahezeMagicHooks {
 		return true;
 	}
 
-	/** Removes redis keys for jobrunner */
-	public static function removeRedisKey( string $key ) {
-		global $wgJobTypeConf;
-
-		if ( !isset( $wgJobTypeConf['default']['redisServer'] ) || !$wgJobTypeConf['default']['redisServer'] ) {
-			return;
-		}
-
-		$hostAndPort = IPUtils::splitHostAndPort( $wgJobTypeConf['default']['redisServer'] );
-
-		if ( $hostAndPort ) {
-			try {
-				$redis = new Redis();
-				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
-				$redis->auth( $wgJobTypeConf['default']['redisConfig']['password'] );
-				$redis->del( $redis->keys( $key ) );
-			} catch ( Throwable $ex ) {
-				// empty
-			}
-		}
+	public function onMimeMagicInit( $mimeMagic ) {
+		$mimeMagic->addExtraTypes( 'text/plain txt off' );
 	}
 
-	/** Remove memcached keys */
-	public static function removeMemcachedKey( string $key ) {
-		global $wmgCacheSettings;
-
-		$memcacheServer = explode( ':', $wmgCacheSettings['memcached']['server'][0] );
-
-		try {
-			$memcached = new \Memcached();
-			$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
-
-			// Fetch all keys
-			$keys = $memcached->getAllKeys();
-			if ( !is_array( $keys ) ) {
-				return;
-			}
-
-			$memcached->getDelayed( $keys );
-
-			$store = $memcached->fetchAll();
-
-			$keys = $memcached->getAllKeys();
-			foreach ( $keys as $item ) {
-				// Decide which keys to delete
-				if ( preg_match( "/{$key}/", $item ) ) {
-					$memcached->delete( $item );
-				} else {
-					continue;
-				}
-			}
-		} catch ( Throwable $ex ) {
-			// empty
-		}
-	}
-
-	public static function onMimeMagicInit( $magic ) {
-		$magic->addExtraTypes( 'text/plain txt off' );
-	}
-
-	public static function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerItems ) {
+	public function onSkinAddFooterLinks( Skin $skin, string $key, array &$footerItems ) {
 		if ( $key === 'places' ) {
-			$footerItems['termsofservice'] = self::addFooterLink( $skin, 'termsofservice', 'termsofservicepage' );
-
-			$footerItems['donate'] = self::addFooterLink( $skin, 'miraheze-donate', 'miraheze-donatepage' );
+			$footerItems['termsofservice'] = $this->addFooterLink( $skin, 'termsofservice', 'termsofservicepage' );
+			$footerItems['donate'] = $this->addFooterLink( $skin, 'miraheze-donate', 'miraheze-donatepage' );
 		}
 	}
 
-	public static function onUserGetRightsRemove( User $user, array &$aRights ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		// Remove read from stewards on staff wiki.
-		if ( $config->get( 'DBname' ) === 'staffwiki' && $user->isRegistered() ) {
+	public function onUserGetRightsRemove( $user, &$rights ) {
+		// Remove read from stewards on staffwiki.
+		if ( WikiMap::isCurrentWikiId( 'staffwiki' ) && $user->isRegistered() ) {
 			$centralAuthUser = CentralAuthUser::getInstance( $user );
 
 			if ( $centralAuthUser &&
 				$centralAuthUser->exists() &&
-				!in_array( $centralAuthUser->getId(), $config->get( 'MirahezeStaffAccessIds' ) )
+				!in_array( $centralAuthUser->getId(), $this->options->get( 'MirahezeStaffAccessIds' ) )
 			) {
-				$aRights = array_unique( $aRights );
-				unset( $aRights[array_search( 'read', $aRights )] );
+				$rights = array_unique( $rights );
+				unset( $rights[array_search( 'read', $rights )] );
 			}
 		}
 	}
 
-	public static function onSiteNoticeAfter( &$siteNotice, $skin ) {
+	public function onSiteNoticeAfter( &$siteNotice, $skin ) {
 		$cwConfig = new GlobalVarConfig( 'cw' );
 
 		if ( $cwConfig->get( 'Closed' ) ) {
@@ -592,14 +657,14 @@ class MirahezeMagicHooks {
 				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
 			}
 		} elseif ( $cwConfig->get( 'Closed' ) && $cwConfig->get( 'Locked' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
+			$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
 		}
 	}
 
 	/**
 	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
 	 */
-	public static function onRecentChange_save( RecentChange $recentChange ) {
+	public function onRecentChange_save( $recentChange ) {
  		// phpcs:enable
 
 		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
@@ -611,46 +676,98 @@ class MirahezeMagicHooks {
 			return;
 		}
 
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
 		$data = [
-			'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
+			'writekey' => $this->options->get( 'MirahezeReportsWriteKey' ),
 			'username' => $recentChange->mAttribs['rc_user_text'],
 			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
 			'wiki' => WikiMap::getCurrentWikiId(),
 			'comment' => $recentChange->mAttribs['rc_comment_text'],
 		];
 
-		$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
-		$httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );
+		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );
 	}
 
-	public static function onBlockIpComplete( $block, $user, $priorBlock ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
-		// TODO: do we want to add localisation support for these keywords, so they match in other languages as well?
-		$blockAlertKeywords = $config->get( 'MirahezeReportsBlockAlertKeywords' );
+	public function onBlockIpComplete( $block, $user, $priorBlock ) {
+		// TODO: do we want to add localization support for these keywords, so they match in other languages as well?
+		$blockAlertKeywords = $this->options->get( 'MirahezeReportsBlockAlertKeywords' );
 
 		foreach ( $blockAlertKeywords as $keyword ) {
 			// use strtolower for case insensitivity
 			if ( str_contains( strtolower( $block->getReasonComment()->text ), strtolower( $keyword ) ) ) {
 				$data = [
-					'writekey' => $config->get( 'MirahezeReportsWriteKey' ),
+					'writekey' => $this->options->get( 'MirahezeReportsWriteKey' ),
 					'username' => $block->getTargetName(),
 					'reporter' => $user->getName(),
 					'report' => 'people-other',
 					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID is: ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
-				$httpRequestFactory = MediaWikiServices::getInstance()->getHttpRequestFactory();
-				$httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ] );
+				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ] );
 
 				break;
 			}
 		}
 	}
 
-	private static function addFooterLink( $skin, $desc, $page ) {
+	public function onGetPreferences( $user, &$preferences ) {
+		$preferences['forcesafemode'] = [
+			'type' => 'toggle',
+			'label-message' => 'prefs-forcesafemode-label',
+			'section' => 'rendering',
+		];
+	}
+
+	public function onBeforeInitialize( $title, $unused, $output, $user, $request, $mediaWiki ) {
+		if ( $this->userOptionsManager->getBoolOption( $user, 'forcesafemode' ) ) {
+			$request->setVal( 'safemode', '1' );
+		}
+	}
+
+	public function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
+		$username = $title->getText();
+		$globalUserGroups = CentralAuthUser::getInstanceByName( $username )->getGlobalGroups();
+
+		if (
+			!in_array( 'steward', $globalUserGroups ) &&
+			!in_array( 'global-sysop', $globalUserGroups ) &&
+			!$specialPage->getUser()->isAllowed( 'centralauth-lock' )
+		) {
+			return;
+		}
+
+		if ( !IPUtils::isIPAddress( $username ) ) {
+			$tools['centralauth'] = Linker::makeExternalLink(
+				'https://meta.miraheze.org/wiki/Special:CentralAuth/' . $username,
+				strtolower( $specialPage->msg( 'centralauth' )->text() )
+			);
+		}
+	}
+
+	/**
+	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+	 *
+	 * @param Title $title
+	 * @param string &$url
+	 * @param string $query
+	 */
+	public function onGetLocalURL__Internal( $title, &$url, $query ) {
+		// phpcs:enable
+
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return;
+		}
+
+		// If the URL contains wgScript, rewrite it to use wgArticlePath
+		if ( str_contains( $url, $this->options->get( 'Script' ) ) ) {
+			$dbkey = wfUrlencode( $title->getPrefixedDBkey() );
+			$url = str_replace( '$1', $dbkey, $this->options->get( 'ArticlePath' ) );
+			if ( $query !== '' ) {
+				$url = wfAppendQuery( $url, $query );
+			}
+		}
+	}
+
+	private function addFooterLink( $skin, $desc, $page ) {
 		if ( $skin->msg( $desc )->inContentLanguage()->isDisabled() ) {
 			$title = null;
 		} else {
@@ -667,28 +784,57 @@ class MirahezeMagicHooks {
 		);
 	}
 
-	public static function onGetPreferences( User $user, array &$preferences ) {
-		$preferences['forcesafemode'] = [
-			'type' => 'toggle',
-			'label-message' => 'prefs-forcesafemode-label',
-			'section' => 'rendering',
-		];
-	}
+	/** Removes redis keys for jobrunner */
+	private function removeRedisKey( string $key ) {
+		$jobTypeConf = $this->options->get( 'JobTypeConf' );
+		if ( !isset( $jobTypeConf['default']['redisServer'] ) || !$jobTypeConf['default']['redisServer'] ) {
+			return;
+		}
 
-	public static function onBeforeInitialize( $title, $unused, $output, $user, $request, $mediaWiki ) {
-		$userOptionsLookup = MediaWikiServices::getInstance()->getUserOptionsLookup();
-		if ( $userOptionsLookup->getBoolOption( $user, 'forcesafemode' ) ) {
-			$request->setVal( 'safemode', '1' );
+		$hostAndPort = IPUtils::splitHostAndPort( $jobTypeConf['default']['redisServer'] );
+
+		if ( $hostAndPort ) {
+			try {
+				$redis = new Redis();
+				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
+				$redis->auth( $jobTypeConf['default']['redisConfig']['password'] );
+				$redis->del( $redis->keys( $key ) );
+			} catch ( Throwable $ex ) {
+				// empty
+			}
 		}
 	}
 
-	public static function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
-		$username = $title->getText();
-		if ( $specialPage->getUser()->isAllowed( 'centralauth-lock' ) && !IPUtils::isIPAddress( $username ) ) {
-			$tools['centralauth'] = $specialPage->getLinkRenderer()->makeKnownLink(
-				SpecialPage::getTitleFor( 'CentralAuth', $username ),
-				strtolower( $specialPage->msg( 'centralauth' )->text() )
-			);
+	/** Remove memcached keys */
+	private function removeMemcachedKey( string $key ) {
+		$memcachedServers = $this->options->get( 'MirahezeMagicMemcachedServers' );
+
+		try {
+			$memcached = new Memcached();
+
+			if ( !$memcached->getServerList() ) {
+				$memcached->addServers( $memcachedServers );
+			}
+
+			// Fetch all keys
+			$keys = $memcached->getAllKeys();
+			if ( !is_array( $keys ) ) {
+				return;
+			}
+
+			$memcached->getDelayed( $keys );
+
+			$keys = $memcached->getAllKeys();
+			foreach ( $keys as $item ) {
+				// Decide which keys to delete
+				if ( preg_match( "/{$key}/", $item ) ) {
+					$memcached->delete( $item );
+				} else {
+					continue;
+				}
+			}
+		} catch ( Throwable $ex ) {
+			// empty
 		}
 	}
 }
