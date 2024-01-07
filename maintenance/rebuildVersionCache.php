@@ -45,8 +45,10 @@ require_once "$IP/maintenance/Maintenance.php";
 class RebuildVersionCache extends Maintenance {
 	public function __construct() {
 		parent::__construct();
+
 		$this->addDescription( 'Rebuild the version cache' );
 		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
+		$this->addOption( 'version', 'MediaWiki version to save gitinfo.json files for' );
 	}
 
 	public function execute() {
@@ -63,24 +65,47 @@ class RebuildVersionCache extends Maintenance {
 
 		$queue = array_fill_keys( array_merge(
 				glob( $baseDirectory . '/extensions/*/extension*.json' ),
-				glob( $baseDirectory . '/extensions/SocialProfile/SocialProfile.php' ),
 				glob( $baseDirectory . '/skins/*/skin.json' )
 			),
 		true );
 
+		$processor = new ExtensionProcessor();
+
 		foreach ( $queue as $path => $mtime ) {
-			$extensionDirectory = dirname( $path );
-			$extensionPath = str_replace( '/srv/mediawiki/w', $baseDirectory, $extensionDirectory );
+			$json = file_get_contents( $path );
+			$info = json_decode( $json, true );
+			$version = $info['manifest_version'];
 
-			if ( $this->hasOption( 'save-gitinfo' ) ) {
-				$this->saveCache( $extensionPath );
-			}
+			$processor->extractInfo( $path, $info, $version );
+		}
 
-			$memcKey = $cache->makeKey(
-				'specialversion-ext-version-text', str_replace( $baseDirectory, '/srv/mediawiki/w', $path ), $coreId
+		$data = $processor->getExtractedInfo();
+
+		$extensionCredits = $data['credits'];
+		$legacyCredits = $this->getConfig()->get( 'ExtensionCredits' );
+		if ( $legacyCredits ) {
+			$extensionCredits = array_merge( $extensionCredits, array_values(
+					array_merge( ...array_values( $legacyCredits ) )
+				)
 			);
+		}
 
-			$cache->delete( $memcKey );
+		$version = $this->getOption( 'version' );
+		foreach ( $extensionCredits as $extension => $extensionData ) {
+			if ( isset( $extensionData['path'] ) ) {
+				$extensionDirectory = dirname( $extensionData['path'] );
+				$extensionPath = str_replace( '/srv/mediawiki/' . $version, $baseDirectory, $extensionDirectory );
+
+				if ( $this->hasOption( 'save-gitinfo' ) ) {
+					$this->saveCache( $extensionPath );
+				}
+
+				$memcKey = $cache->makeKey(
+					'specialversion-ext-version-text', str_replace( $baseDirectory, '/srv/mediawiki/' . $version, $extensionData['path'] ), $coreId
+				);
+
+				$cache->delete( $memcKey );
+			}
 		}
 	}
 
