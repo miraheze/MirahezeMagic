@@ -190,6 +190,8 @@ class MirahezeMagicHooks implements
 			Shell::command(
 				'swift', 'delete',
 				$container,
+				'--object-threads', '1',
+				'--container-threads', '1',
 				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
