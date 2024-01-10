@@ -9,13 +9,13 @@ from time import sleep
 parser = argparse.ArgumentParser(
     description='Generate Miraheze sitemap index of all public wikis, and upload the object to the "root" container in Swift')
 parser.add_argument(
-    '-A', '--auth', dest='auth', default=os.environ.get('ST_AUTH', None),
+    '-A', '--auth', dest='auth', default=os.environ.get('ST_AUTH'),
     help='URL for obtaining an auth token for Swift (ST_AUTH)')
 parser.add_argument(
-    '-U', '--user', dest='user', default=os.environ.get('ST_USER', None),
+    '-U', '--user', dest='user', default=os.environ.get('ST_USER'),
     help='User name for obtaining an auth token for Swift (ST_USER)')
 parser.add_argument(
-    '-K', '--key', dest='key', default=os.environ.get('ST_KEY', None),
+    '-K', '--key', dest='key', default=os.environ.get('ST_KEY'),
     help='Key for obtaining an auth token for Swift (ST_KEY)')
 args = parser.parse_args()
 
