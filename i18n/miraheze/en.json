@@ -182,6 +182,7 @@
 	"prefs-forcesafemode-label": "Always force safemode?",
 	"protect-level-user": "Allow only logged in users",
 	"requestimportdump-text": "Welcome to ImportDump! To get started with your import, please fill out this form so we can review your request. Your wiki request will be reviewed by a member of Site Reliability Engineering, and it can be tracked at the page that will be given when submitting your request.\n\nIf your XML dump times out during upload, please create a task on [[Phabricator]].\n\nIf you wish to import images as well, please create a task on [[Phabricator]].",
+	"requestssl-text": "Welcome to Request SSL! Please make sure to read [[Custom domains]] before requesting an SSL. Your wiki must also be created before you can request an SSL. Your custom domain request will be reviewed by a system administrator, and it can be tracked at the page that will be given when submitting your request.\n\nIf you don't want Lets Encrypt and want your own SSL certificate, please comment "CSR"\n\nIn case of errors, please create a task on [[Phabricator]].",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
 	"right-user": "Edit pages protected as \"{{int:protect-level-user}}\"",
