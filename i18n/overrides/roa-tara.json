@@ -4,7 +4,7 @@
 			"Joetaras"
 		]
 	},
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tu}} non ge puè reasè purcé 'u cunde {{GENDER:$1|tune}} jè bloccate globbalmende. Pe piacere condatte <code>cvt[at]miraheze.org</code> pe cchiù 'mbormaziune o pe fà appelle.",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Tu}} non ge puè trasè purcé 'u cunde {{GENDER:$1|tune}} [[m:Special:MyLanguage/Global locks|jè bloccate globbalmende]]. Pe piacere condatte <code>cvt[at]miraheze.org</code> pe cchiù 'mbormaziune o pe fà appelle.",
 	"miraheze-dberr-again": "Pruève ad aspettà quacche minute e recareche. Pe cchiù 'mbormaziune sus a stu errore manne 'nu tuitt sus 'a pàgena nostre de Tuitter (http://twitter.com/Miraheze) o condatte l'amministrature de sisteme ausanne le collegaminde a #miraheze sus a irc.libera.chat.",
 	"miraheze-newsignuppage-loginform-tos": "Agghie lette, capite e sò d'accorde a le [https://meta.miraheze.org/wiki/Terms_of_Use Termine d'Ause] e a le [https://meta.miraheze.org/wiki/Privacy_Policy Regole d'a Privacy]",
 	"miraheze-newsignuppage-must-accept-tos": "A accettà le termine de ause pe ccrejà 'nu cunde utende!",
