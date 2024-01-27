@@ -17,7 +17,7 @@ class ResetWikiCaches extends Maintenance {
 		$cWJ = new CreateWikiJson( $config->get( 'DBname' ) );
 		$cWJ->resetWiki();
 
-		sleep( 0.02 );
+		sleep( (int)0.02 );
 	}
 }
 
