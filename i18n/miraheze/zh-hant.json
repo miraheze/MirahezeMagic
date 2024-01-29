@@ -44,7 +44,7 @@
 	"group-interwiki-admin-member": "{{GENDER:$1|跨 wiki 管理員}}",
 	"group-interwiki-admin": "跨 wiki 管理員",
 	"group-ipblock-exempt-member": "{{GENDER:$1|IP 封鎖例外者}}",
-	"group-ipblock-exempt": "IP 封鎖例外者",
+	"group-ipblock-exempt": "IP 封鎖豁免者",
 	"group-member": "成員",
 	"group-member-member": "{{GENDER:$1|會員}}",
 	"group-oversight-member": "{{GENDER:$1|監督員}}",

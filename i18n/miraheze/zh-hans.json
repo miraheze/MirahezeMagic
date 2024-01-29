@@ -62,6 +62,7 @@
 	"group-global-sysop": "全域管理员",
 	"group-interwiki-admin-member": "{{GENDER:$1|跨wiki管理员}}",
 	"group-interwiki-admin": "跨wiki管理员",
+	"group-ipblock-exempt": "IP封禁豁免者",
 	"group-member": "成员",
 	"group-member-member": "{{GENDER:$1|成员}}",
 	"group-oversight-member": "{{GENDER:$1|监督员}}",
@@ -157,5 +158,6 @@
 	"sitematrix-summary": "本特殊页面中列出了所有Miraheze wiki。",
 	"sitematrix": "Miraheze wiki列表",
 	"specialpages-group-wikimanage": "Wiki管理",
-	"termsofservice": "使用条款"
+	"termsofservice": "使用条款",
+	"vanishuser-log-name": "用户清除日志"
 }
