@@ -3,6 +3,7 @@
 		"authors": [
 			"AlvaroMolina",
 			"BerryAVGN",
+			"Butko",
 			"DDPAT",
 			"Deltaspace",
 			"Diman Russkov",
@@ -90,6 +91,7 @@
 	"miraheze-donate": "Пожертвовать Miraheze",
 	"miraheze-faq": "ЧЗВ",
 	"miraheze-helpcenter": "Центр помощи Miraheze",
+	"miraheze-label-managewiki-mediawiki-version": "Версия MediaWiki",
 	"miraheze-requestfeatures": "Запрос возможностей на вики",
 	"miraheze-requestwiki": "Запрос вики",
 	"miraheze-sidebar-donate": "Пожертвовать",
