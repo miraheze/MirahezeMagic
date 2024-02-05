@@ -201,7 +201,7 @@ class MirahezeMagicHooks implements
 		}
 
 		$this->removeRedisKey( "*{$wiki}*" );
-		// $this->removeMemcachedKey( ".*{$wiki}.*" );
+		$this->removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
 	public function onCreateWikiRename( $cwdb, $old, $new ): void {
@@ -343,7 +343,7 @@ class MirahezeMagicHooks implements
 		)->limits( $limits )->execute();
 
 		$this->removeRedisKey( "*{$old}*" );
-		// $this->removeMemcachedKey( ".*{$old}.*" );
+		$this->removeMemcachedKey( ".*{$old}.*" );
 	}
 
 	public function onCreateWikiStatePrivate( $dbname ): void {
