@@ -162,11 +162,7 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	private function getCacheFilePath( string $repoDir ) {
-		$gitInfoCacheDirectory = $this->getConfig()->get( 'GitInfoCacheDirectory' );
-
-		if ( $gitInfoCacheDirectory === false ) {
-			$gitInfoCacheDirectory = $this->getConfig()->get( 'CacheDirectory' ) . '/gitinfo';
-		}
+		$gitInfoCacheDirectory = '/srv/mediawiki/cache/' . $this->getOption( 'version' ) . '/gitinfo';
 
 		$baseDir = MW_INSTALL_PATH;
 
