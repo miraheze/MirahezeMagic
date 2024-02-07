@@ -24,7 +24,6 @@
 
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
-use Maintenance;
 use Miraheze\CreateWiki\CreateWikiJson;
 
 class RestoreManageWikiBackup extends Maintenance {
