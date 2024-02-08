@@ -74,6 +74,9 @@ class RebuildVersionCache extends Maintenance {
 		foreach ( $queue as $path => $mtime ) {
 			$json = file_get_contents( $path );
 			$info = json_decode( $json, true );
+			if ( $info === null ) {
+				continue;
+			}
 			$version = $info['manifest_version'];
 
 			$processor->extractInfo( $path, $info, $version );
