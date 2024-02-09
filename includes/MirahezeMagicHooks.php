@@ -629,8 +629,8 @@ class MirahezeMagicHooks implements
 	}
 
 	public function onUserGetRightsRemove( $user, &$rights ) {
-		// Remove read from stewards on staffwiki.
-		if ( WikiMap::isCurrentWikiId( 'staffwiki' ) && $user->isRegistered() ) {
+		// Remove read from stewards on staffwiki and iowiki.
+		if ( ( WikiMap::isCurrentWikiId( 'staffwiki' ) || WikiMap::isCurrentWikiId( 'iowiki' ) ) && $user->isRegistered() ) {
 			$centralAuthUser = CentralAuthUser::getInstance( $user );
 
 			if ( $centralAuthUser &&
