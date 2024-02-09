@@ -812,27 +812,27 @@ class MirahezeMagicHooks implements
 		$memcachedServers = $this->options->get( 'MirahezeMagicMemcachedServers' );
 
 		try {
-			$memcached = new Memcached();
+			foreach ( $memcachedServers as $memcachedServer ) {
+				$memcached = new Memcached();
 
-			if ( !$memcached->getServerList() ) {
-				$memcached->addServers( $memcachedServers );
-			}
+				$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
 
-			// Fetch all keys
-			$keys = $memcached->getAllKeys();
-			if ( !is_array( $keys ) ) {
-				return;
-			}
+				// Fetch all keys
+				$keys = $memcached->getAllKeys();
+				if ( !is_array( $keys ) ) {
+					return;
+				}
 
-			$memcached->getDelayed( $keys );
+				$memcached->getDelayed( $keys );
 
-			$keys = $memcached->getAllKeys();
-			foreach ( $keys as $item ) {
-				// Decide which keys to delete
-				if ( preg_match( "/{$key}/", $item ) ) {
-					$memcached->delete( $item );
-				} else {
-					continue;
+				$keys = $memcached->getAllKeys();
+				foreach ( $keys as $item ) {
+					// Decide which keys to delete
+					if ( preg_match( "/{$key}/", $item ) ) {
+						$memcached->delete( $item );
+					} else {
+						continue;
+					}
 				}
 			}
 		} catch ( Throwable $ex ) {
