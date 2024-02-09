@@ -25,6 +25,7 @@
 require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
 use Miraheze\CreateWiki\CreateWikiJson;
+use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 
 class RestoreManageWikiBackup extends Maintenance {
 	public function __construct() {
@@ -123,11 +124,13 @@ class RestoreManageWikiBackup extends Maintenance {
 				$settingsData['s_settings'] = json_encode( $data['settings'] );
 			}
 
-			if ( isset( $data['extensions'] ) ) {
-				$settingsData['s_extensions'] = json_encode( $data['extensions'] );
-			}
-
 			$dbw->insert( 'mw_settings', $settingsData );
+	
+			if ( isset( $data['extensions'] ) ) {
+				$mwExt = new ManageWikiExtensions( $dbName );
+				$mwExt->overwriteAll( $data['extensions'] );
+				$mwExt->commit();
+			}
 		}
 
 		$cWJ = new CreateWikiJson( $dbName );
