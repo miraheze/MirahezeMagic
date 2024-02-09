@@ -815,7 +815,7 @@ class MirahezeMagicHooks implements
 			foreach ( $memcachedServers as $memcachedServer ) {
 				$memcached = new Memcached();
 
-				$memcached->addServer( $memcacheServer[0], $memcacheServer[1] );
+				$memcached->addServer( $memcachedServer[0], (string)$memcachedServer[1] );
 
 				// Fetch all keys
 				$keys = $memcached->getAllKeys();
