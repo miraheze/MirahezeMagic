@@ -823,9 +823,6 @@ class MirahezeMagicHooks implements
 					return;
 				}
 
-				$memcached->getDelayed( $keys );
-
-				$keys = $memcached->getAllKeys();
 				foreach ( $keys as $item ) {
 					// Decide which keys to delete
 					if ( preg_match( "/{$key}/", $item ) ) {
