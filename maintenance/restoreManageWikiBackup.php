@@ -125,7 +125,7 @@ class RestoreManageWikiBackup extends Maintenance {
 			}
 
 			$dbw->insert( 'mw_settings', $settingsData );
-	
+
 			if ( isset( $data['extensions'] ) ) {
 				$mwExt = new ManageWikiExtensions( $dbName );
 				$mwExt->overwriteAll( $data['extensions'] );
