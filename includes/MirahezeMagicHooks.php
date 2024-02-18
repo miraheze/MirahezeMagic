@@ -27,6 +27,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Wikimedia\IPUtils;
 
@@ -43,6 +44,7 @@ class MirahezeMagicHooks implements
 	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	GetPreferencesHook,
+	ImportDumpJobGetFileHook,
 	MessageCache__getHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
@@ -398,6 +400,28 @@ class MirahezeMagicHooks implements
 		] );
 
 		return true;
+	}
+
+	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
+		global $wmgSwiftPassword;
+
+		$container = WikiMap::isCurrentWikiId( 'metawikibeta' ) ?
+			'miraheze-metawikibeta-local-public' :
+			'miraheze-metawiki-local-public';
+
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
+		Shell::command(
+			'swift', 'download',
+			$container,
+			$importDumpRequestManager->getSplitFilePath(),
+			'-o',  $filePath,
+			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+			'-U', 'mw:media',
+			'-K', $wmgSwiftPassword
+		)->limits( $limits )
+			->restrict( Shell::RESTRICT_NONE )
+			->execute();
 	}
 
 	/**
