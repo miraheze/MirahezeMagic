@@ -97,6 +97,7 @@ class MirahezeMagicHooks implements
 					'CreateWikiCacheDirectory',
 					'CreateWikiGlobalWiki',
 					'EchoSharedTrackingDB',
+					'ImportDumpCentralWiki',
 					'JobTypeConf',
 					'LanguageCode',
 					'LocalDatabases',
@@ -405,7 +406,7 @@ class MirahezeMagicHooks implements
 	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
 		global $wmgSwiftPassword;
 
-		$container = WikiMap::isCurrentWikiId( 'metawikibeta' ) ?
+		$container = $this->options->get( 'ImportDumpCentralWiki' ) === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :
 			'miraheze-metawiki-local-public';
 
