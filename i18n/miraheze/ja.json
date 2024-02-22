@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"1108-Kiju",
 			"Buehl",
 			"Buntschann",
 			"Funa-enpitu",
@@ -198,11 +199,11 @@
 	"sitematrix": "Mirahezeウィキの一覧",
 	"specialpages-group-wikimanage": "ウィキ管理",
 	"termsofservice": "利用規約",
-	"vanishuser": "ユーザが消える",
+	"vanishuser": "ユーザを消去する",
 	"vanishuser-action-label": "このユーザーを本当に消したいですか?",
-	"vanishuser-action-help": "すべての詳細が正しく入力されていることを必ず確認し、記録してください。",
+	"vanishuser-action-help": "すべての詳細が正しく入力されていることを必ず確認し、実行してください。",
 	"vanishuser-warning": "'''警告''': ユーザーをグローバルに消去しようとしています。続行する前に、すべての詳細を注意深く確認してください。",
-	"vanishuser-log-name": "ユーザー消失ログ",
-	"vanishuser-log-header": "これは、すべてのユーザーの失踪に関する基本的なログです。",
-	"logentry-vanishuser-action": "$1でユーザーが消滅しました。"
+	"vanishuser-log-name": "ユーザー消去ログ",
+	"vanishuser-log-header": "これは、すべてのユーザー消去に関するログです。",
+	"logentry-vanishuser-action": "$1 がユーザーを消去しました"
 }

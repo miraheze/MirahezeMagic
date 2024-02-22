@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Pisceskaze",
 			"Reception123",
 			"RhinosF1"
 		]
@@ -36,7 +37,7 @@
 	"managewiki-setting-wgPopupsBetaFeature-name": "{{doc-MirahezeManageWiki-name|wgPopupsBetaFeature}}",
 	"managewiki-setting-wgPopupsBetaFeature-help": "{{doc-MirahezeManageWiki-help|wgPopupsBetaFeature}}",
 	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-name": "{{doc-MirahezeManageWiki-name|wgVisualEditorEnableDiffPageBetaFeature}}",
-	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-help": "{{doc-MirahezeManageWiki-help|wgVisualEditorEnableDiffPageBetaFeature}}", 
+	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-help": "{{doc-MirahezeManageWiki-help|wgVisualEditorEnableDiffPageBetaFeature}}",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "{{doc-MirahezeManageWiki-name|wgVisualEditorEnableWikitextBetaFeature}}",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-help": "{{doc-MirahezeManageWiki-help|wgVisualEditorEnableWikitextBetaFeature}}",
 	"managewiki-setting-wgVisualEditorShowBetaWelcome-name": "{{doc-MirahezeManageWiki-name|wgVisualEditorShowBetaWelcome}}",
@@ -65,7 +66,7 @@
 	"managewiki-setting-wgCommentsInRecentChanges-help": "{{doc-MirahezeManageWiki-help|wgCommentsInRecentChanges}}",
 	"managewiki-setting-wgCommentsSortDescending-name": "{{doc-MirahezeManageWiki-name|wgCommentsSortDescending}}",
 	"managewiki-setting-wgCommentsSortDescending-help": "{{doc-MirahezeManageWiki-help|wgCommentsSortDescending}}",
-	"managewiki-setting-wgEnableScaryTranscluding-name": "{{doc-MirahezeManageWiki-name|wgEnableScaryTranscluding}}",
+	"managewiki-setting-wgEnableScaryTranscluding-name": "{{doc-MirahezeManageWiki-name|wgEnableScaryTranscluding}}\n\nvi: Scary Transcluding = Chuyển tải đáng sợ",
 	"managewiki-setting-wgEnableScaryTranscluding-help": "{{doc-MirahezeManageWiki-help|wgEnableScaryTranscluding}}",
 	"managewiki-setting-wmgVisualEditorEnableDefault-name": "{{doc-MirahezeManageWiki-name|wmgVisualEditorEnableDefault}}",
 	"managewiki-setting-wmgVisualEditorEnableDefault-help": "{{doc-MirahezeManageWiki-help|wmgVisualEditorEnableDefault}}",

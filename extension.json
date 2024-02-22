@@ -16,7 +16,7 @@
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.39.0"
+		"MediaWiki": ">= 1.40.0"
 	},
 	"MessagesDirs": {
 		"MirahezeMagic": [
@@ -126,9 +126,6 @@
 			"handler": "MirahezeMagicHooks"
 		},
 		"ImportDumpJobGetFile": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"MessageCache::get": {
 			"handler": "MirahezeMagicHooks"
 		},
 		"MessageCacheFetchOverrides": {

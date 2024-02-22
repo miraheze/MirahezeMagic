@@ -1,6 +1,5 @@
 <?php
 
-use MediaWiki\Cache\Hook\MessageCache__getHook;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
@@ -47,7 +46,6 @@ class MirahezeMagicHooks implements
 	GetPreferencesHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
-	MessageCache__getHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
 	SiteNoticeAfterHook,
@@ -433,91 +431,6 @@ class MirahezeMagicHooks implements
 		)->limits( $limits )
 			->restrict( Shell::RESTRICT_NONE )
 			->execute();
-	}
-
-	/**
-	 * From WikimediaMessages. Allows us to add new messages,
-	 * and override ones.
-	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
-	 *
-	 * @param string &$lcKey Key of message to lookup.
-	 */
-	public function onMessageCache__get( &$lcKey ) {
-		// phpcs:enable
-
-		if ( version_compare( MW_VERSION, '1.41', '>=' ) ) {
-			return;
-		}
-
-		static $keys = [
-			'centralauth-groupname',
-			'centralauth-login-error-locked',
-			'dberr-again',
-			'dberr-problems',
-			'globalblocking-ipblocked-range',
-			'globalblocking-ipblocked-xff',
-			'globalblocking-ipblocked',
-			'grouppage-autoconfirmed',
-			'grouppage-automoderated',
-			'grouppage-autoreview',
-			'grouppage-blockedfromchat',
-			'grouppage-bot',
-			'grouppage-bureaucrat',
-			'grouppage-chatmod',
-			'grouppage-checkuser',
-			'grouppage-commentadmin',
-			'grouppage-csmoderator',
-			'grouppage-editor',
-			'grouppage-flow-bot',
-			'grouppage-interface-admin',
-			'grouppage-moderator',
-			'grouppage-no-ipinfo',
-			'grouppage-reviewer',
-			'grouppage-suppress',
-			'grouppage-sysop',
-			'grouppage-upwizcampeditors',
-			'grouppage-user',
-			'importdump-help-reason',
-			'importdump-help-target',
-			'importdump-help-upload-file',
-			'importtext',
-			'newsignuppage-loginform-tos',
-			'newsignuppage-must-accept-tos',
-			'oathauth-step1',
-			'prefs-help-realname',
-			'privacypage',
-			'restriction-delete',
-			'restriction-protect',
-			'skinname-snapwikiskin',
-			'snapwikiskin',
-			'uploadtext',
-			'webauthn-module-description',
-			'wikibase-sitelinks-miraheze',
-		];
-
-		if ( in_array( $lcKey, $keys, true ) ) {
-			$prefixedKey = "miraheze-$lcKey";
-			// MessageCache uses ucfirst if ord( key ) is < 128, which is true of all
-			// of the above.  Revisit if non-ASCII keys are used.
-			$ucKey = ucfirst( $lcKey );
-
-			$cache = MediaWikiServices::getInstance()->getMessageCache();
-
-			if (
-			// Override order:
-			// 1. If the MediaWiki:$ucKey page exists, use the key unprefixed
-			// (in all languages) with normal fallback order.  Specific
-			// language pages (MediaWiki:$ucKey/xy) are not checked when
-			// deciding which key to use, but are still used if applicable
-			// after the key is decided.
-			//
-			// 2. Otherwise, use the prefixed key with normal fallback order
-			// (including MediaWiki pages if they exist).
-			$cache->getMsgFromNamespace( $ucKey, $this->options->get( 'LanguageCode' ) ) === false
-			) {
-				$lcKey = $prefixedKey;
-			}
-		}
 	}
 
 	/**

@@ -166,6 +166,10 @@ class SpecialVanishUser extends FormSpecialPage {
 			'CentralAuth.CentralAuthDatabaseManager'
 		);
 
+		$caAntiSpoofManager = MediaWikiServices::getInstance()->getService(
+			'CentralAuth.CentralAuthAntiSpoofManager'
+		);
+
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		$newUser = $this->userFactory->newFromName( $formData['newname'], UserFactory::RIGOR_CREATABLE );
 
@@ -173,7 +177,6 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'unknown-error' );
 		}
 
-		$session = $this->getContext()->exportSession();
 		$globalRenameUser = new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser(
 			$this->getUser(),
 			$oldUser,
@@ -184,7 +187,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			$this->jobQueueGroupFactory,
 			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates( $caDbManager ),
 			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserLogger( $this->getUser() ),
-			$session
+			$caAntiSpoofManager
 		);
 
 		$globalRenameUser->rename(
