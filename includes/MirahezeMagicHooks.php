@@ -27,6 +27,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Wikimedia\IPUtils;
@@ -44,6 +45,7 @@ class MirahezeMagicHooks implements
 	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	GetPreferencesHook,
+	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
 	MessageCache__getHook,
 	MimeMagicInitHook,
@@ -401,6 +403,14 @@ class MirahezeMagicHooks implements
 		] );
 
 		return true;
+	}
+
+	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		Shell::command( '/bin/rm', '-rf', $filePath )
+			->limits( $limits )
+			->restrict( Shell::RESTRICT_NONE )
+			->execute();
 	}
 
 	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
