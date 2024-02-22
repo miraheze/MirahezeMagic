@@ -472,6 +472,7 @@ class MirahezeMagicHooks implements
 			'importdump-help-reason',
 			'importdump-help-target',
 			'importdump-help-upload-file',
+			'importdump-import-failed-comment',
 			'importtext',
 			'newsignuppage-loginform-tos',
 			'newsignuppage-must-accept-tos',
