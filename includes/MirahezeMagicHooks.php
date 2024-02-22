@@ -407,7 +407,7 @@ class MirahezeMagicHooks implements
 
 	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
-		Shell::command( '/bin/rm', '-rf', $filePath )
+		Shell::command( '/bin/rm', $filePath )
 			->limits( $limits )
 			->restrict( Shell::RESTRICT_NONE )
 			->execute();
