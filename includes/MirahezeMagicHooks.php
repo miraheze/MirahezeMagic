@@ -1,5 +1,6 @@
 <?php
 
+use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
@@ -57,6 +58,9 @@ class MirahezeMagicHooks implements
 	/** @var ServiceOptions */
 	private $options;
 
+	/** @var CommentStore */
+	private $commentStore;
+
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
@@ -65,21 +69,25 @@ class MirahezeMagicHooks implements
 
 	/**
 	 * @param ServiceOptions $options
+	 * @param CommentStore $commentStore
 	 * @param HttpRequestFactory $httpRequestFactory
 	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
 		ServiceOptions $options,
+		CommentStore $commentStore,
 		HttpRequestFactory $httpRequestFactory,
 		UserOptionsManager $userOptionsManager
 	) {
 		$this->options = $options;
+		$this->commentStore = $commentStore;
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->userOptionsManager = $userOptionsManager;
 	}
 
 	/**
 	 * @param Config $mainConfig
+	 * @param CommentStore $commentStore
 	 * @param HttpRequestFactory $httpRequestFactory
 	 * @param UserOptionsManager $userOptionsManager
 	 *
@@ -87,6 +95,7 @@ class MirahezeMagicHooks implements
 	 */
 	public static function factory(
 		Config $mainConfig,
+		CommentStore $commentStore,
 		HttpRequestFactory $httpRequestFactory,
 		UserOptionsManager $userOptionsManager
 	): self {
@@ -110,6 +119,7 @@ class MirahezeMagicHooks implements
 				],
 				$mainConfig
 			),
+			$commentStore,
 			$httpRequestFactory,
 			$userOptionsManager
 		);
@@ -632,7 +642,7 @@ class MirahezeMagicHooks implements
 			'username' => $recentChange->mAttribs['rc_user_text'],
 			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
 			'wiki' => WikiMap::getCurrentWikiId(),
-			'comment' => $recentChange->mAttribs['rc_comment_text'],
+			'comment' => $this->commentStore->getComment( 'rc_comment', $recentChange->mAttribs )->text,
 		];
 
 		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );

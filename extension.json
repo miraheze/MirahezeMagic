@@ -77,6 +77,7 @@
 			"factory": "MirahezeMagicHooks::factory",
 			"services": [
 				"MainConfig",
+				"CommentStore",
 				"HttpRequestFactory",
 				"UserOptionsManager"
 			]
