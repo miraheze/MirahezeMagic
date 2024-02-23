@@ -26,6 +26,8 @@ use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
+use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Wikimedia\IPUtils;
 
@@ -42,6 +44,8 @@ class MirahezeMagicHooks implements
 	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	GetPreferencesHook,
+	ImportDumpJobAfterImportHook,
+	ImportDumpJobGetFileHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
 	SiteNoticeAfterHook,
@@ -93,6 +97,7 @@ class MirahezeMagicHooks implements
 					'CreateWikiCacheDirectory',
 					'CreateWikiGlobalWiki',
 					'EchoSharedTrackingDB',
+					'ImportDumpCentralWiki',
 					'JobTypeConf',
 					'LanguageCode',
 					'LocalDatabases',
@@ -398,6 +403,36 @@ class MirahezeMagicHooks implements
 		return true;
 	}
 
+	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		Shell::command( '/bin/rm', $filePath )
+			->limits( $limits )
+			->restrict( Shell::RESTRICT_NONE )
+			->execute();
+	}
+
+	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
+		global $wmgSwiftPassword;
+
+		$container = $this->options->get( 'ImportDumpCentralWiki' ) === 'metawikibeta' ?
+			'miraheze-metawikibeta-local-public' :
+			'miraheze-metawiki-local-public';
+
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+
+		Shell::command(
+			'swift', 'download',
+			$container,
+			$importDumpRequestManager->getSplitFilePath(),
+			'-o',  $filePath,
+			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+			'-U', 'mw:media',
+			'-K', $wmgSwiftPassword
+		)->limits( $limits )
+			->restrict( Shell::RESTRICT_NONE )
+			->execute();
+	}
+
 	/**
 	 * From WikimediaMessages
 	 * When core requests certain messages, change the key to a Miraheze version.
@@ -437,6 +472,7 @@ class MirahezeMagicHooks implements
 			'importdump-help-reason',
 			'importdump-help-target',
 			'importdump-help-upload-file',
+			'importdump-import-failed-comment',
 			'importtext',
 			'newsignuppage-loginform-tos',
 			'newsignuppage-must-accept-tos',

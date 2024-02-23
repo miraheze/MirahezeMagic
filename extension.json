@@ -122,6 +122,12 @@
 		"GlobalUserPageWikis": {
 			"handler": "MirahezeMagicHooks"
 		},
+		"ImportDumpJobAfterImport": {
+			"handler": "MirahezeMagicHooks"
+		},
+		"ImportDumpJobGetFile": {
+			"handler": "MirahezeMagicHooks"
+		},
 		"MessageCacheFetchOverrides": {
 			"handler": "MirahezeMagicHooks"
 		},
