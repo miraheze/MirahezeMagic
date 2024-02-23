@@ -14,7 +14,7 @@ GlobalUserPage:
   branch: auto
   repo: auto
 ImportDump:
-  branch: importdump-automation
+  branch: master
   repo: https://github.com/miraheze/ImportDump
 ManageWiki:
   branch: master
