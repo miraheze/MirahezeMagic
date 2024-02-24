@@ -107,7 +107,7 @@ class FixImageUser extends Maintenance {
 			$user->setId( 0 );
 			$user->setName( $username );
 		} else {
-			$user = User::newFromName( $username );
+			$user = $this->getServiceContainer()->getUserFactory()->newFromName( $username );
 			if ( !$user ) {
 				$this->fatalError( 'Invalid username' );
 			}
