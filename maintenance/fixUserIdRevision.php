@@ -32,7 +32,6 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
-use User;
 
 class FixUserIdRevision extends Maintenance {
 
@@ -67,7 +66,7 @@ class FixUserIdRevision extends Maintenance {
 			);
 
 			foreach ( $revRes as $revRow ) {
-				$revActor = User::newFromActorId( $revRow->rev_actor );
+				$revActor = $this->getServiceContainer()->getUserFactory()->newFromActorId( $revRow->rev_actor );
 				$goodUserId = $this->getGoodUserId( $revActor->getName() );
 
 				// Ignore rev_actor 0 for maintenance scripts and such
@@ -127,7 +126,7 @@ class FixUserIdRevision extends Maintenance {
 	protected function fixRevEntry( $row ) {
 		$dbr = $this->getDB( DB_REPLICA );
 		$dbw = $this->getDB( DB_PRIMARY );
-		$revActor = User::newFromActorId( $row->rev_actor );
+		$revActor = $this->getServiceContainer()->getUserFactory()->newFromActorId( $row->rev_actor );
 
 		if ( isset( $this->userCache[$revActor->getName()] ) ) {
 			$userId = $this->userCache[$revActor->getName()];
