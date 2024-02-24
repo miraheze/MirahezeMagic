@@ -3,7 +3,6 @@
 namespace Miraheze\MirahezeMagic;
 
 use Config;
-use FileBackendGroup;
 use GlobalVarConfig;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\ServiceOptions;
@@ -42,7 +41,6 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Redis;
-use RepoGroup;
 use Skin;
 use SpecialPage;
 use Status;
@@ -83,14 +81,8 @@ class Hooks implements
 	/** @var ILBFactory */
 	private $dbLoadBalancerFactory;
 
-	/** @var FileBackendGroup */
-	private $fileBackendGroup;
-
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
-
-	/** @var RepoGroup */
-	private $repoGroup;
 
 	/** @var UserOptionsManager */
 	private $userOptionsManager;
@@ -100,7 +92,6 @@ class Hooks implements
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
@@ -108,15 +99,12 @@ class Hooks implements
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
 		HttpRequestFactory $httpRequestFactory,
-		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
-		$this->fileBackendGroup = $fileBackendGroup;
 		$this->httpRequestFactory = $httpRequestFactory;
-		$this->repoGroup = $repoGroup;
 		$this->userOptionsManager = $userOptionsManager;
 	}
 
@@ -125,7 +113,6 @@ class Hooks implements
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 *
 	 * @return self
@@ -135,7 +122,6 @@ class Hooks implements
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
 		HttpRequestFactory $httpRequestFactory,
-		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	): self {
 		return new self(
@@ -161,7 +147,6 @@ class Hooks implements
 			$commentStore,
 			$dbLoadBalancerFactory,
 			$httpRequestFactory,
-			$repoGroup,
 			$userOptionsManager
 		);
 	}
@@ -403,7 +388,7 @@ class Hooks implements
 	}
 
 	public function onCreateWikiStatePrivate( $dbname ): void {
-		$localRepo = $this->repoGroup->getLocalRepo();
+		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
 			'adviseStat' => false,
