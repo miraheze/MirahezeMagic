@@ -72,7 +72,7 @@ class CreateUsers extends Maintenance {
 		foreach ( $res as $row ) {
 			$user = new User;
 			$userActor = $user->newFromActorId( $row->rev_actor );
-			if ( !$user->isIP( $userActor ) ) {
+			if ( !$this->getServiceContainer()->getUserNameUtils()->isIP( $userActor ) ) {
 				$name = str_replace( $this->importPrefix, '', $userActor->getName() );
 				if ( $this->importPrefix === '' ) {
 					if ( $name ) {
