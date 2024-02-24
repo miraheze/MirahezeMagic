@@ -128,7 +128,6 @@ class Hooks implements
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param FileBackendGroup $fileBackendGroup
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 *
 	 * @return self
@@ -139,7 +138,6 @@ class Hooks implements
 		ILBFactory $dbLoadBalancerFactory,
 		FileBackendGroup $fileBackendGroup,
 		HttpRequestFactory $httpRequestFactory,
-		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	): self {
 		$services = MediaWikiServices::getInstance();
