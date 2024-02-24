@@ -48,7 +48,7 @@ class SwiftDump extends Maintenance {
 			'-D', "/tmp/$wiki",
 			'--object-threads', '1',
 		)->limits( $limits )
-			->restrict( Shell::RESTRICT_NONE )
+			->disableSandbox()
 			->execute();
 
 		// Compress Swift container (.tar.gz)
@@ -58,7 +58,7 @@ class SwiftDump extends Maintenance {
 			"/tmp/$wiki",
 			'--remove-files'
 		)->limits( $limits )
-			->restrict( Shell::RESTRICT_NONE )
+			->disableSandbox()
 			->execute();
 
 		$this->output( "Swift dump for $wiki complete!\n" );
