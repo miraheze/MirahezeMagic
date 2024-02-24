@@ -36,7 +36,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
-use User;
+use MediaWiki\User\User;
 
 class CreateUsers extends Maintenance {
 	private $wikiRevision = null;
@@ -71,7 +71,7 @@ class CreateUsers extends Maintenance {
 
 		foreach ( $res as $row ) {
 			$user = new User;
-			$userActor = $user->newFromActorId( $row->rev_actor );
+			$userActor = $this->getServiceContainer()->getUserFactory()->newFromActorId( $row->rev_actor );
 			if ( !$this->getServiceContainer()->getUserNameUtils()->isIP( $userActor ) ) {
 				$name = str_replace( $this->importPrefix, '', $userActor->getName() );
 				if ( $this->importPrefix === '' ) {
