@@ -35,6 +35,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Exception;
 use Maintenance;
 use MediaWikiSite;
+use Site;
 use Wikibase\Lib\Sites\SitesBuilder;
 
 if ( !class_exists( SitesBuilder::class ) ) {
@@ -176,7 +177,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	/**
 	 * @param array $siteData
 	 *
-	 * @return MediaWikiSite
+	 * @return Site
 	 */
 	private function getSiteFromSiteData( array $siteData ) {
 		$site = new MediaWikiSite();
