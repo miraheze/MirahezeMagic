@@ -53,8 +53,8 @@ class FixUserIdLogging extends Maintenance {
 	public function execute() {
 		$dbr = $this->getDB( DB_REPLICA );
 
-		$start = (int)$dbr->selectField( 'logging', 'MIN(log_id)', false, __METHOD__ );
-		$end = (int)$dbr->selectField( 'logging', 'MAX(log_id)', false, __METHOD__ );
+		$start = (int)$dbr->selectField( 'logging', 'MIN(log_id)', [], __METHOD__ );
+		$end = (int)$dbr->selectField( 'logging', 'MAX(log_id)', [], __METHOD__ );
 
 		$wrongLogs = 0;
 
@@ -84,7 +84,7 @@ class FixUserIdLogging extends Maintenance {
 				}
 			}
 
-			$lastCheckedLogId = $lastCheckedLogId + $this->getBatchSize();
+			$lastCheckedLogId += $this->getBatchSize();
 		} while ( $lastCheckedLogId <= $end );
 
 		$line = "$wrongLogs wrong logs detected.";
@@ -124,11 +124,11 @@ class FixUserIdLogging extends Maintenance {
 			$this->userCache[$username] = $goodUserId;
 		}
 
-			return $goodUserId;
+		return $goodUserId;
 	}
 
 	protected function fixLogEntry( $row ) {
-		$username = User::newFromActorId( $logRow->log_actor );
+		$username = User::newFromActorId( $row->log_actor );
 
 		$dbr = $this->getDB( DB_REPLICA );
 		$dbw = $this->getDB( DB_PRIMARY );
