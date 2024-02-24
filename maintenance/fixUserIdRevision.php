@@ -1,4 +1,7 @@
 <?php
+
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +24,20 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use User;
 
 class FixUserIdRevision extends Maintenance {
-	public $mUserCache;
+
+	/** @var array */
+	private $userCache;
 
 	public function __construct() {
 		parent::__construct();
@@ -45,7 +58,7 @@ class FixUserIdRevision extends Maintenance {
 		$lastCheckedRevId = 0;
 
 		do {
-			$lastCheckedRevIdNextBatch = $lastCheckedRevId + $this->mBatchSize;
+			$lastCheckedRevIdNextBatch = $lastCheckedRevId + $this->getBatchSize();
 			$revRes = $dbr->select(
 				'revision',
 				[ 'rev_id', 'rev_actor' ],
@@ -68,13 +81,13 @@ class FixUserIdRevision extends Maintenance {
 				}
 			}
 
-			$lastCheckedRevId = $lastCheckedRevId + $this->mBatchSize;
+			$lastCheckedRevId = $lastCheckedRevId + $this->getBatchSize();
 		} while ( $lastCheckedRevId <= $end );
 
 		$line = "$wrongRevs wrong revisions detected.";
 
 		if ( !$this->hasOption( 'fix' ) ) {
-			$line .= " Run this script with --fix to actually fix the revisions.";
+			$line .= ' Run this script with --fix to actually fix the revisions.';
 		}
 
 		$this->output( $line . "\n" );
@@ -87,8 +100,8 @@ class FixUserIdRevision extends Maintenance {
 			return 0;
 		}
 
-		if ( isset( $this->mUserCache[$username] ) ) {
-			$goodUserId = $this->mUserCache[$username];
+		if ( isset( $this->userCache[$username] ) ) {
+			$goodUserId = $this->userCache[$username];
 		} else {
 			$dbr = $this->getDB( DB_REPLICA );
 
@@ -105,7 +118,7 @@ class FixUserIdRevision extends Maintenance {
 				$goodUserId = 0;
 			}
 
-			$this->mUserCache[$username] = $goodUserId;
+			$this->userCache[$username] = $goodUserId;
 		}
 
 		return $goodUserId;
@@ -116,8 +129,8 @@ class FixUserIdRevision extends Maintenance {
 		$dbw = $this->getDB( DB_PRIMARY );
 		$revActor = User::newFromActorId( $row->rev_actor );
 
-		if ( isset( $this->mUserCache[$revActor->getName()] ) ) {
-			$userId = $this->mUserCache[$revActor->getName()];
+		if ( isset( $this->userCache[$revActor->getName()] ) ) {
+			$userId = $this->userCache[$revActor->getName()];
 		} else {
 			$userId = $dbr->selectField(
 				'user',
@@ -126,7 +139,7 @@ class FixUserIdRevision extends Maintenance {
 				__METHOD__
 			);
 
-			$this->mUserCache[$revActor->getName()] = $userId;
+			$this->userCache[$revActor->getName()] = $userId;
 		}
 
 		if ( !( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) ) {
@@ -147,5 +160,5 @@ class FixUserIdRevision extends Maintenance {
 	}
 }
 
-$maintClass = 'FixUserIdRevision';
+$maintClass = FixUserIdRevision::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
