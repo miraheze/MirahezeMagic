@@ -45,7 +45,6 @@ class FixImageUser extends Maintenance {
 		$this->addArg( 'to', 'New user to give edits to' );
 	}
 
-	// TODO: Add support for MediaWiki 1.32
 	public function execute() {
 		$wikiDB = $this->getDB( DB_PRIMARY );
 
@@ -103,7 +102,7 @@ class FixImageUser extends Maintenance {
 	 * @return User
 	 */
 	private function initializeUser( $username ) {
-		if ( User::isIP( $username ) ) {
+		if ( $this->getServiceContainer()->getUserNameUtils()->isIP( $username ) ) {
 			$user = new User();
 			$user->setId( 0 );
 			$user->setName( $username );
