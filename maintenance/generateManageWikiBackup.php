@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +24,16 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-use MediaWiki\MediaWikiServices;
+require_once "$IP/maintenance/Maintenance.php";
+
+use DataDump;
+use Maintenance;
+use MediaWiki\MainConfigNames;
 
 class GenerateManageWikiBackup extends Maintenance {
 	public function __construct() {
@@ -33,29 +42,27 @@ class GenerateManageWikiBackup extends Maintenance {
 	}
 
 	public function execute() {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-
-		$dbName = $config->get( 'DBname' );
-		$dbw = $this->getDB( DB_PRIMARY, [], $config->get( 'CreateWikiDatabase' ) );
+		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
+		$dbw = $this->getDB( DB_PRIMARY, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
 
 		$buildArray = [];
 
 		$nsObjects = $dbw->select(
 			'mw_namespaces',
 			'*',
-			[ 'ns_dbname' => $dbName ]
+			[ 'ns_dbname' => $dbname ]
 		);
 
 		$permObjects = $dbw->select(
 			'mw_permissions',
 			'*',
-			[ 'perm_dbname' => $dbName ]
+			[ 'perm_dbname' => $dbname ]
 		);
 
 		$settingsObjects = $dbw->selectRow(
 			'mw_settings',
 			'*',
-			[ 's_dbname' => $dbName ],
+			[ 's_dbname' => $dbname ],
 			__METHOD__
 		);
 
@@ -64,7 +71,7 @@ class GenerateManageWikiBackup extends Maintenance {
 
 			$buildArray['settings'] = json_decode( $settingsObjects->s_settings, true );
 
-			foreach ( $config->get( 'ManageWikiSettings' ) as $setting => $options ) {
+			foreach ( $this->getConfig()->get( 'ManageWikiSettings' ) as $setting => $options ) {
 				if ( isset( $options['requires']['visibility']['permissions'] ) ) {
 					unset( $buildArray['settings'][$setting] );
 				}
@@ -88,7 +95,7 @@ class GenerateManageWikiBackup extends Maintenance {
 		foreach ( $permObjects as $perm ) {
 			$addPerms = [];
 
-			foreach ( ( $config->get( 'ManageWikiPermissionsAdditionalRights' )[$perm->perm_group] ?? [] ) as $right => $bool ) {
+			foreach ( ( $this->getConfig()->get( 'ManageWikiPermissionsAdditionalRights' )[$perm->perm_group] ?? [] ) as $right => $bool ) {
 				if ( $bool ) {
 					$addPerms[] = $right;
 				}
@@ -96,8 +103,8 @@ class GenerateManageWikiBackup extends Maintenance {
 
 			$buildArray['permissions'][$perm->perm_group] = [
 				'permissions' => array_merge( json_decode( $perm->perm_permissions, true ), $addPerms ),
-				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $config->get( 'ManageWikiPermissionsAdditionalAddGroups' )[$perm->perm_group] ?? [] ),
-				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $config->get( 'ManageWikiPermissionsAdditionalRemoveGroups' )[$perm->perm_group] ?? [] ),
+				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $this->getConfig()->get( 'ManageWikiPermissionsAdditionalAddGroups' )[$perm->perm_group] ?? [] ),
+				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $this->getConfig()->get( 'ManageWikiPermissionsAdditionalRemoveGroups' )[$perm->perm_group] ?? [] ),
 				'addself' => json_decode( $perm->perm_addgroupstoself, true ),
 				'removeself' => json_decode( $perm->perm_removegroupsfromself, true ),
 				'autopromote' => json_decode( $perm->perm_autopromote, true )
@@ -115,5 +122,5 @@ class GenerateManageWikiBackup extends Maintenance {
 	}
 }
 
-$maintClass = 'GenerateManageWikiBackup';
+$maintClass = GenerateManageWikiBackup::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
