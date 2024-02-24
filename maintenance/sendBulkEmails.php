@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +23,21 @@
  * @ingroup Wikimedia
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-use MediaWiki\MediaWikiServices;
+require_once "$IP/maintenance/Maintenance.php";
+
+use ContentHandler;
+use Hooks;
+use MailAddress;
+use Maintenance;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Title\Title;
+use Status;
+use User;
 
 /**
  * Send a bulk email message to a list of wiki account holders using
@@ -145,7 +158,9 @@ class SendBulkEmails extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
+
 		$this->start = microtime( true );
+
 		$this->addDescription( 'Send bulk email to a list of wiki account holders' );
 		$this->addOption( 'subject', 'Email subject (string)', true, true );
 		$this->addOption( 'body', 'Email body (file)', true, true );
@@ -373,9 +388,7 @@ class SendBulkEmails extends Maintenance {
 			}
 			$this->optoutUrl = $title->getFullURL(
 				'', false, PROTO_CANONICAL );
-			$rev = MediaWikiServices::getInstance()
-				->getRevisionLookup()
-				->getRevisionByTitle( $title );
+			$rev = $this->getServiceContainer()->getRevisionLookup()->getRevisionByTitle( $title );
 			$content = ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) );
 			$inList = false;
 			foreach ( explode( "\n", $content ) as $line ) {
