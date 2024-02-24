@@ -13,6 +13,7 @@
 	],
 	"url": "https://github.com/miraheze/MirahezeMagic",
 	"descriptionmsg": "mirahezemagic-description",
+	"namemsg": "mirahezemagic-extensionname",
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
@@ -26,38 +27,10 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"MirahezeMagicAliases": "includes/MirahezeMagicAliases.php"
+		"MirahezeMagicAliases": "MirahezeMagicAliases.php"
 	},
-	"AutoloadClasses": {
-		"MirahezeIRCRCFeedFormatter": "includes/MirahezeIRCRCFeedFormatter.php",
-		"MirahezeMagicHooks": "includes/MirahezeMagicHooks.php",
-		"SpecialMirahezeSurvey": "includes/SpecialMirahezeSurvey.php",
-		"SpecialVanishUser": "includes/SpecialVanishUser.php"
-	},
-	"config": {
-		"MirahezeMagicMemcachedServers": {
-			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
-			"value": []
-		},
-		"MirahezeReportsBlockAlertKeywords": {
-			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
-			"value": []
-		},
-		"MirahezeReportsWriteKey": {
-			"description": "String. TSPortal write key to be used when connecting to it.",
-			"value": ""
-		},
-		"MirahezeStaffAccessIds": {
-			"description": "Array. Usernames of users authorized to access staffwiki.",
-			"value": []
-		},
-		"MirahezeSurveyEnabled": {
-			"description": "Boolean. Enable Miraheze Annual Survey?",
-			"value": true
-		}
-	},
-	"ConfigRegistry": {
-		"mirahezemagic": "GlobalVarConfig::newInstance"
+	"AutoloadNamespaces": {
+		"Miraheze\\MirahezeMagic\\": "includes/"
 	},
         "LogActionsHandlers": {
                 "vanishuser/*": "LogFormatter"
@@ -71,15 +44,20 @@
         "LogTypes": [
                 "vanishuser"
         ],
-	"HookHandlers": {
-		"MirahezeMagicHooks": {
-			"class": "MirahezeMagicHooks",
-			"factory": "MirahezeMagicHooks::factory",
+	"SpecialPages": {
+		"MirahezeSurvey": {
+			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
 			"services": [
-				"MainConfig",
-				"CommentStore",
-				"HttpRequestFactory",
-				"UserOptionsManager"
+				"ConfigFactory",
+				"DBLoadBalancerFactory",
+				"UserOptionsLookup"
+			]
+		},
+		"VanishUser": {
+			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
+			"services" : [
+				"JobQueueGroupFactory",
+				"UserFactory"
 			]
 		}
 	},
@@ -151,20 +129,45 @@
 			"handler": "MirahezeMagicHooks"
 		}
 	},
-	"SpecialPages": {
-		"MirahezeSurvey": {
-			"class": "SpecialMirahezeSurvey",
+	"HookHandlers": {
+		"MirahezeMagicHooks": {
+			"class": "Miraheze\\MirahezeMagic\\Hooks",
+			"factory": "Miraheze\\MirahezeMagic\\Hooks::factory",
 			"services": [
-				"ConfigFactory"
-			]
-		},
-		"VanishUser": {
-			"class": "SpecialVanishUser",
-			"services" : [
-				"JobQueueGroupFactory",
-				"UserFactory"
+				"MainConfig",
+				"CommentStore",
+				"DBLoadBalancerFactory",
+				"FileBackendGroup",
+				"HttpRequestFactory",
+				"RepoGroup",
+				"UserOptionsManager"
 			]
 		}
+	},
+	"config": {
+		"MirahezeMagicMemcachedServers": {
+			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
+			"value": []
+		},
+		"MirahezeReportsBlockAlertKeywords": {
+			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
+			"value": []
+		},
+		"MirahezeReportsWriteKey": {
+			"description": "String. TSPortal write key to be used when connecting to it.",
+			"value": ""
+		},
+		"MirahezeStaffAccessIds": {
+			"description": "Array. Usernames of users authorized to access staffwiki.",
+			"value": []
+		},
+		"MirahezeSurveyEnabled": {
+			"description": "Boolean. Enable Miraheze Annual Survey?",
+			"value": true
+		}
+	},
+	"ConfigRegistry": {
+		"MirahezeMagic": "GlobalVarConfig::newInstance"
 	},
 	"manifest_version": 2
 }
