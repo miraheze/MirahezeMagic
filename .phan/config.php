@@ -7,10 +7,12 @@ $cfg['directory_list'] = array_merge(
 		'../../extensions/AbuseFilter',
 		'../../extensions/CentralAuth',
 		'../../extensions/CreateWiki',
+		'../../extensions/DataDump',
 		'../../extensions/Echo',
 		'../../extensions/GlobalUserPage',
 		'../../extensions/ImportDump',
 		'../../extensions/ManageWiki',
+		'../../extensions/Wikibase',
 	]
 );
 
@@ -19,10 +21,12 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 		'../../extensions/AbuseFilter',
 		'../../extensions/CentralAuth',
 		'../../extensions/CreateWiki',
+		'../../extensions/DataDump',
 		'../../extensions/Echo',
 		'../../extensions/GlobalUserPage',
 		'../../extensions/ImportDump',
 		'../../extensions/ManageWiki',
+		'../../extensions/Wikibase',
 	]
 );
 
