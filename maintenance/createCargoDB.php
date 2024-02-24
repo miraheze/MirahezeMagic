@@ -43,6 +43,7 @@ class CreateCargoDB extends Maintenance {
 	}
 
 	public function execute() {
+		$dbw = $this->getDB( DB_PRIMARY );
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 		if ( $dbname === null ) {
 			$this->fatalError( 'Could not identify current database name!' );
