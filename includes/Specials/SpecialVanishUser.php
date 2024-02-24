@@ -69,7 +69,6 @@ class SpecialVanishUser extends FormSpecialPage {
 
 	/**
 	 * @param string $par
-	 * @return string
 	 */
 	public function execute( $par ) {
 		$this->requireLogIn();
