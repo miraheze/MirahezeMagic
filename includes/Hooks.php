@@ -23,6 +23,7 @@ use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
@@ -141,6 +142,7 @@ class Hooks implements
 		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	): self {
+		$services = MediaWikiServices::getInstance();
 		return new self(
 			new ServiceOptions(
 				[
@@ -165,7 +167,7 @@ class Hooks implements
 			$dbLoadBalancerFactory,
 			$fileBackendGroup,
 			$httpRequestFactory,
-			$repoGroup,
+			$services->getRepoGroup(),
 			$userOptionsManager
 		);
 	}
