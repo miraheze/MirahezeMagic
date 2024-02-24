@@ -42,7 +42,6 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Redis;
-use RepoGroup;
 use Skin;
 use SpecialPage;
 use Status;
@@ -89,9 +88,6 @@ class Hooks implements
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
-	/** @var RepoGroup */
-	private $repoGroup;
-
 	/** @var UserOptionsManager */
 	private $userOptionsManager;
 
@@ -117,9 +113,6 @@ class Hooks implements
 		$this->fileBackendGroup = $fileBackendGroup;
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->userOptionsManager = $userOptionsManager;
-
-		$services = MediaWikiServices::getInstance();
-		$this->repoGroup = $services->getRepoGroup();
 	}
 
 	/**
@@ -405,7 +398,12 @@ class Hooks implements
 	}
 
 	public function onCreateWikiStatePrivate( $dbname ): void {
-		$localRepo = $this->repoGroup->getLocalRepo();
+		// We can't inject this due to:
+		// Recursive service instantiation: Circular dependency when creating service!
+		// RepoGroup -> MimeAnalyzer -> FileBackendGroup -> MimeAnalyzer
+		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
+
+		$localRepo = $repoGroup->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
 			'adviseStat' => false,
