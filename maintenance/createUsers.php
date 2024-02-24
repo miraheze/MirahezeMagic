@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +26,18 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\MainConfigNames;
+use UnexpectedValueException;
+use User;
 
 class CreateUsers extends Maintenance {
 	private $wikiRevision = null;
@@ -78,15 +91,16 @@ class CreateUsers extends Maintenance {
 	}
 
 	private function createUser( $name ) {
-		global $wgDBname;
 		$user = new User;
 		$userActor = $user->createNew( $name );
+		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
+
 		if ( $userActor ) {
-			$this->output( "Created local {$userActor->getName()} on wiki {$wgDBname}\n" );
+			$this->output( "Created local {$userActor->getName()} on wiki {$dbname}\n" );
 		}
 
 		$cau = new CentralAuthUser( $name, 0 );
-		$create = $cau->promoteToGlobal( $wgDBname );
+		$create = $cau->promoteToGlobal( $dbname );
 
 		if ( $create->isGood() ) {
 			$this->output( "Created global {$userActor->getName()}\n" );
@@ -98,5 +112,5 @@ class CreateUsers extends Maintenance {
 	}
 }
 
-$maintClass = 'CreateUsers';
+$maintClass = CreateUsers::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
