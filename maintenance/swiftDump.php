@@ -1,11 +1,22 @@
 <?php
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Shell\Shell;
 
 class SwiftDump extends Maintenance {
 	public function __construct() {
 		parent::__construct();
+
 		$this->addOption( 'filename', 'Filename of the .tar.gz dump', true, true );
 	}
 
@@ -14,19 +25,17 @@ class SwiftDump extends Maintenance {
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
-		$wiki = $this->getConfig()->get( 'DBname' );
+		$wiki = $this->getConfig()->get( MainConfigNames::DBname );
 		$this->output( "Starting swift dump for $wiki...\n" );
 
 		// Available disk space must be 10GB
 		$df = disk_free_space( '/tmp' );
 		if ( $df < 10 * 1024 * 1024 * 1024 ) {
-			$this->error( "Not enough disk space available ( < 10GB). Aborting dump.\n" );
-			return;
+			$this->fatalError( "Not enough disk space available ( < 10GB). Aborting dump.\n" );
 		}
 		// If no wiki then errror
 		if ( !$wiki ) {
-			$this->error( "No wiki has been defined" );
-			return;
+			$this->fatalError( 'No wiki has been defined' );
 		}
 
 		// Download the Swift container
