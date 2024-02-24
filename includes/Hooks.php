@@ -101,7 +101,6 @@ class Hooks implements
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param FileBackendGroup $fileBackendGroup
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
@@ -110,7 +109,6 @@ class Hooks implements
 		ILBFactory $dbLoadBalancerFactory,
 		FileBackendGroup $fileBackendGroup,
 		HttpRequestFactory $httpRequestFactory,
-		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	) {
 		$this->options = $options;
@@ -120,6 +118,9 @@ class Hooks implements
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->repoGroup = $repoGroup;
 		$this->userOptionsManager = $userOptionsManager;
+
+		$services = MediaWikiServices::getInstance();
+		$this->repoGroup = $services->getRepoGroup();
 	}
 
 	/**
@@ -140,7 +141,6 @@ class Hooks implements
 		HttpRequestFactory $httpRequestFactory,
 		UserOptionsManager $userOptionsManager
 	): self {
-		$services = MediaWikiServices::getInstance();
 		return new self(
 			new ServiceOptions(
 				[
@@ -165,7 +165,6 @@ class Hooks implements
 			$dbLoadBalancerFactory,
 			$fileBackendGroup,
 			$httpRequestFactory,
-			$services->getRepoGroup(),
 			$userOptionsManager
 		);
 	}
