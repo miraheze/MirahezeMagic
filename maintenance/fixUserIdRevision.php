@@ -50,8 +50,8 @@ class FixUserIdRevision extends Maintenance {
 	public function execute() {
 		$dbr = $this->getDB( DB_REPLICA );
 
-		$start = (int)$dbr->selectField( 'revision', 'MIN(rev_id)', false, __METHOD__ );
-		$end = (int)$dbr->selectField( 'revision', 'MAX(rev_id)', false, __METHOD__ );
+		$start = (int)$dbr->selectField( 'revision', 'MIN(rev_id)', [], __METHOD__ );
+		$end = (int)$dbr->selectField( 'revision', 'MAX(rev_id)', [], __METHOD__ );
 
 		$wrongRevs = 0;
 
