@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * Rebuild the version cache.
  *
@@ -35,6 +37,13 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
+use ExtensionProcessor;
+use FormatJson;
+use HashConfig;
+use Maintenance;
+use MediaWiki\MainConfigNames;
+use ObjectCache;
+
 /**
  * Maintenance script to rebuild the version cache.
  *
@@ -54,7 +63,7 @@ class RebuildVersionCache extends Maintenance {
 	public function execute() {
 		$hashConfig = new HashConfig();
 
-		$hashConfig->set( 'ShellRestrictionMethod', false );
+		$hashConfig->set( MainConfigNames::ShellRestrictionMethod, false );
 
 		$baseDirectory = MW_INSTALL_PATH;
 
@@ -85,7 +94,7 @@ class RebuildVersionCache extends Maintenance {
 		$data = $processor->getExtractedInfo();
 
 		$extensionCredits = $data['credits'];
-		$legacyCredits = $this->getConfig()->get( 'ExtensionCredits' );
+		$legacyCredits = $this->getConfig()->get( MainConfigNames::ExtensionCredits );
 		if ( $legacyCredits ) {
 			$extensionCredits = array_merge( $extensionCredits, array_values(
 					array_merge( ...array_values( $legacyCredits ) )
@@ -200,7 +209,7 @@ class RebuildVersionCache extends Maintenance {
 		if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
 			|| !is_writable( $cacheDir )
 		) {
-			throw new RuntimeException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
+			$this->fatalError( "Unable to create GitInfo cache \"{$cacheDir}\"" );
 		}
 
 		file_put_contents( $this->getCacheFilePath( $repoDir ), FormatJson::encode( $this->getGitInfo( $repoDir ) ) );
