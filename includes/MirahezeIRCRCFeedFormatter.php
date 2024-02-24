@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +21,14 @@
  * @file
  */
 
+use Hooks;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
+use RCFeedFormatter;
+use RecentChange;
+use Sanitizer;
 
 /**
  * Format a notification as a human-readable string using IRC colour codes.
