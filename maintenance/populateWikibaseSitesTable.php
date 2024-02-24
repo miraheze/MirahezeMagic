@@ -115,7 +115,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$this->fatalError( "Got no data from $url\n" );
 		}
 
-		return $json;
+		return $json ?? '';
 	}
 
 	/**
@@ -132,7 +132,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$this->fatalError( 'Cannot decode site matrix data.' );
 		}
 
-		$groups = $data['wikidiscover'];
+		$groups = $data['wikidiscover'] ?? [];
 
 		$sites = [];
 
