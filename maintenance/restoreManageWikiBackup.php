@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +24,15 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\MainConfigNames;
 use Miraheze\CreateWiki\CreateWikiJson;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 
@@ -37,9 +46,9 @@ class RestoreManageWikiBackup extends Maintenance {
 	}
 
 	public function execute() {
-		$dbName = $this->getConfig()->get( 'DBname' );
+		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 
-		if ( $dbName === 'default' ) {
+		if ( $dbname === 'default' ) {
 			$this->fatalError( 'Invalid wiki. You can not overwrite default.' );
 		}
 
@@ -58,14 +67,14 @@ class RestoreManageWikiBackup extends Maintenance {
 			$this->fatalError( 'Invalid backup file.' );
 		}
 
-		$confirm = readline( "Are you sure you want to restore the ManageWiki settings from $backupFile to $dbName? This will overwrite all current settings on the wiki! (y/n) " );
+		$confirm = readline( "Are you sure you want to restore the ManageWiki settings from $backupFile to $dbname? This will overwrite all current settings on the wiki! (y/n) " );
 		if ( strtolower( $confirm ) !== 'y' ) {
 			$this->fatalError( 'Aborted.', 2 );
 		}
 
-		$dbw->delete( 'mw_namespaces', [ 'ns_dbname' => $dbName ] );
-		$dbw->delete( 'mw_permissions', [ 'perm_dbname' => $dbName ] );
-		$dbw->delete( 'mw_settings', [ 's_dbname' => $dbName ] );
+		$dbw->delete( 'mw_namespaces', [ 'ns_dbname' => $dbname ] );
+		$dbw->delete( 'mw_permissions', [ 'perm_dbname' => $dbname ] );
+		$dbw->delete( 'mw_settings', [ 's_dbname' => $dbname ] );
 
 		foreach ( $data['namespaces'] as $name => $nsData ) {
 			foreach ( $nsData as $key => $value ) {
@@ -88,7 +97,7 @@ class RestoreManageWikiBackup extends Maintenance {
 			}
 
 			$nsData['ns_namespace_name'] = $name;
-			$nsData['ns_dbname'] = $dbName;
+			$nsData['ns_dbname'] = $dbname;
 
 			$dbw->insert( 'mw_namespaces', $nsData );
 		}
@@ -110,7 +119,7 @@ class RestoreManageWikiBackup extends Maintenance {
 				}
 
 				$permData['perm_group'] = $group;
-				$permData['perm_dbname'] = $dbName;
+				$permData['perm_dbname'] = $dbname;
 
 				$dbw->insert( 'mw_permissions', $permData );
 			}
@@ -118,7 +127,7 @@ class RestoreManageWikiBackup extends Maintenance {
 
 		if ( isset( $data['settings'] ) || isset( $data['extensions'] ) ) {
 			$settingsData = [];
-			$settingsData['s_dbname'] = $dbName;
+			$settingsData['s_dbname'] = $dbname;
 
 			if ( isset( $data['settings'] ) ) {
 				$settingsData['s_settings'] = json_encode( $data['settings'] );
@@ -127,13 +136,13 @@ class RestoreManageWikiBackup extends Maintenance {
 			$dbw->insert( 'mw_settings', $settingsData );
 
 			if ( isset( $data['extensions'] ) ) {
-				$mwExt = new ManageWikiExtensions( $dbName );
+				$mwExt = new ManageWikiExtensions( $dbname );
 				$mwExt->overwriteAll( $data['extensions'] );
 				$mwExt->commit();
 			}
 		}
 
-		$cWJ = new CreateWikiJson( $dbName );
+		$cWJ = new CreateWikiJson( $dbname );
 		$cWJ->resetWiki();
 
 		$this->output( "Successfully restored the backup from '{$this->getOption( 'filename' )}'.\n" );
