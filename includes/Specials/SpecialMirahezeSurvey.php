@@ -1,19 +1,43 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
+namespace Miraheze\MirahezeMagic\Specials;
+
+use ConfigFactory;
+use FormSpecialPage;
+use MediaWiki\Html\Html;
+use MediaWiki\User\UserOptionsLookup;
+use stdClass;
+use Wikimedia\Rdbms\DBConnRef;
+use Wikimedia\Rdbms\ILBFactory;
 
 class SpecialMirahezeSurvey extends FormSpecialPage {
+
 	/** @var Config */
 	private $config;
 
+	/** @var ILBFactory */
+	private $dbLoadBalancerFactory;
+
+	/** @var UserOptionsLookup */
+	private $userOptionsLookup;
+
+	/** @var DBConnRef */
 	private $dbw;
 
+	/** @var stdClass|bool */
 	private $row;
 
-	public function __construct( ConfigFactory $configFactory ) {
+	public function __construct(
+		ConfigFactory $configFactory,
+		ILBFactory $dbLoadBalancerFactory,
+		UserOptionsLookup $userOptionsLookup
+	) {
 		parent::__construct( 'MirahezeSurvey' );
 
-		$this->config = $configFactory->makeConfig( 'mirahezemagic' );
+		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
+		$this->userOptionsLookup = $userOptionsLookup;
+
+		$this->config = $configFactory->makeConfig( 'MirahezeMagic' );
 	}
 
 	public function execute( $par ) {
@@ -26,9 +50,8 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			return $out->addHTML( Html::errorBox( $this->msg( 'miraheze-survey-disabled' )->parse() ) );
 		}
 
-		$this->dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( 'survey' )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], 'survey' );
+		$this->dbw = $this->dbLoadBalancerFactory->getMainLB( 'survey' )
+			->getConnection( DB_PRIMARY, [], 'survey' );
 
 		$this->row = $this->dbw->selectRow(
 			'survey',
@@ -153,7 +176,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			],
 			'skin' => [
 				'type' => 'hidden',
-				'default' => MediaWikiServices::getInstance()->getUserOptionsLookup()->getOption( $this->getUser(), 'skin', 'vector' )
+				'default' => $this->userOptionsLookup->getOption( $this->getUser(), 'skin', 'vector' )
 			],
 			'q6' => [
 				'type' => 'radio',
