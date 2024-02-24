@@ -36,7 +36,6 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
-use UnexpectedValueException;
 use User;
 
 class CreateUsers extends Maintenance {
@@ -67,7 +66,7 @@ class CreateUsers extends Maintenance {
 		);
 
 		if ( !$res || !is_object( $res ) ) {
-			throw new UnexpectedValueException( '$res was not set to a valid array.' );
+			$this->fatalError( '$res was not set to a valid array.' );
 		}
 
 		foreach ( $res as $row ) {
