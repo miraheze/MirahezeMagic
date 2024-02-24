@@ -35,9 +35,9 @@ use MailAddress;
 use Maintenance;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use Message;
 use Status;
-use User;
 
 /**
  * Send a bulk email message to a list of wiki account holders using
@@ -219,7 +219,7 @@ class SendBulkEmails extends Maintenance {
 	 */
 	private function processUser( $username ) {
 		$this->total++;
-		$user = User::newFromName( $username );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( $username );
 		if ( !$user || !$user->getId() ) {
 			$this->missing++;
 			$this->output( "ERROR - Unknown user {$username}\n" );
@@ -305,7 +305,7 @@ class SendBulkEmails extends Maintenance {
 	private function getSender() {
 		if ( $this->hasOption( 'from' ) ) {
 			$uname = $this->getOption( 'from' );
-			$from = User::newFromName( $uname );
+			$from = $this->getServiceContainer()->getUserFactory()->newFromName( $uname );
 			if ( !$from || !$from->getId() ) {
 				$this->fatalError( "ERROR - Unknown user {$uname}" );
 			}
@@ -320,7 +320,7 @@ class SendBulkEmails extends Maintenance {
 	private function getReplyTo() {
 		if ( $this->hasOption( 'reply-to' ) ) {
 			$uname = $this->getOption( 'reply-to' );
-			$rt = User::newFromName( $uname );
+			$rt = $this->getServiceContainer()->getUserFactory()->newFromName( $uname );
 			if ( !$rt || !$rt->getId() ) {
 				$this->fatalError( "ERROR - Unknown user {$uname}" );
 			}
