@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +25,21 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use User;
 use Wikimedia\AtEase\AtEase;
 
 class FixUserIdLogging extends Maintenance {
 
 	/** @var array */
-	public $mUserCache;
+	public $userCache;
 
 	public function __construct() {
 		parent::__construct();
@@ -52,7 +61,7 @@ class FixUserIdLogging extends Maintenance {
 		$lastCheckedLogId = 0;
 
 		do {
-			$lastCheckedLogIdNextBatch = $lastCheckedLogId + $this->mBatchSize;
+			$lastCheckedLogIdNextBatch = $lastCheckedLogId + $this->getBatchSize();
 			$logRes = $dbr->select(
 				'logging',
 				[ 'log_id', 'log_params', 'log_actor' ],
@@ -75,13 +84,13 @@ class FixUserIdLogging extends Maintenance {
 				}
 			}
 
-			$lastCheckedLogId = $lastCheckedLogId + $this->mBatchSize;
+			$lastCheckedLogId = $lastCheckedLogId + $this->getBatchSize();
 		} while ( $lastCheckedLogId <= $end );
 
 		$line = "$wrongLogs wrong logs detected.";
 
 		if ( !$this->hasOption( 'fix' ) ) {
-			$line .= " Run this script with --fix to actually fix the log entries.";
+			$line .= ' Run this script with --fix to actually fix the log entries.';
 		}
 
 		$this->output( $line . "\n" );
@@ -94,16 +103,16 @@ class FixUserIdLogging extends Maintenance {
 			return 0;
 		}
 
-		if ( isset( $this->mUserCache[$username] ) ) {
-			$goodUserId = $this->mUserCache[$username];
+		if ( isset( $this->userCache[$username] ) ) {
+			$goodUserId = $this->userCache[$username];
 		} else {
 			$dbr = $this->getDB( DB_REPLICA );
 
 			$userId = $dbr->selectField(
-					'user',
-					'user_id',
-					[ 'user_name' => $username ],
-					__METHOD__
+				'user',
+				'user_id',
+				[ 'user_name' => $username ],
+				__METHOD__
 			);
 
 			if ( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) {
@@ -112,7 +121,7 @@ class FixUserIdLogging extends Maintenance {
 				$goodUserId = 0;
 			}
 
-			$this->mUserCache[$username] = $goodUserId;
+			$this->userCache[$username] = $goodUserId;
 		}
 
 			return $goodUserId;
@@ -124,8 +133,8 @@ class FixUserIdLogging extends Maintenance {
 		$dbr = $this->getDB( DB_REPLICA );
 		$dbw = $this->getDB( DB_PRIMARY );
 
-		if ( isset( $this->mUserCache[$username->getName()] ) ) {
-			$userId = $this->mUserCache[$username->getName()];
+		if ( isset( $this->userCache[$username->getName()] ) ) {
+			$userId = $this->userCache[$username->getName()];
 		} else {
 			$userId = $dbr->selectField(
 				'user',
@@ -134,7 +143,7 @@ class FixUserIdLogging extends Maintenance {
 				__METHOD__
 			);
 
-			$this->mUserCache[$username->getName()] = $userId;
+			$this->userCache[$username->getName()] = $userId;
 		}
 
 		if ( !( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) ) {
@@ -168,5 +177,5 @@ class FixUserIdLogging extends Maintenance {
 	}
 }
 
-$maintClass = 'FixUserIdLogging';
+$maintClass = FixUserIdLogging::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
