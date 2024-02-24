@@ -7,6 +7,9 @@ CentralAuth:
 CreateWiki:
   branch: master
   repo: https://github.com/miraheze/CreateWiki
+DataDump:
+  branch: master
+  repo: https://github.com/miraheze/DataDump
 Echo:
   branch: auto
   repo: auto
@@ -19,3 +22,6 @@ ImportDump:
 ManageWiki:
   branch: master
   repo: https://github.com/miraheze/ManageWiki
+Wikibase:
+  branch: auto
+  repo: auto
