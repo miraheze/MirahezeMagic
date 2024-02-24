@@ -81,7 +81,7 @@ class FixUserIdRevision extends Maintenance {
 				}
 			}
 
-			$lastCheckedRevId = $lastCheckedRevId + $this->getBatchSize();
+			$lastCheckedRevId += $this->getBatchSize();
 		} while ( $lastCheckedRevId <= $end );
 
 		$line = "$wrongRevs wrong revisions detected.";
