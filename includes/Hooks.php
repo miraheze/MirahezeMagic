@@ -42,6 +42,7 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Redis;
+use RepoGroup;
 use Skin;
 use SpecialPage;
 use Status;
@@ -88,6 +89,9 @@ class Hooks implements
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
+	/** @var RepoGroup */
+	private $repoGroup;
+
 	/** @var UserOptionsManager */
 	private $userOptionsManager;
 
@@ -95,16 +99,16 @@ class Hooks implements
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
-	 * @param FileBackendGroup $fileBackendGroup
 	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		FileBackendGroup $fileBackendGroup,
 		HttpRequestFactory $httpRequestFactory,
+		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	) {
 		$this->options = $options;
@@ -112,6 +116,7 @@ class Hooks implements
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->fileBackendGroup = $fileBackendGroup;
 		$this->httpRequestFactory = $httpRequestFactory;
+		$this->repoGroup = $repoGroup;
 		$this->userOptionsManager = $userOptionsManager;
 	}
 
@@ -120,6 +125,7 @@ class Hooks implements
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 *
 	 * @return self
@@ -129,9 +135,9 @@ class Hooks implements
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
 		HttpRequestFactory $httpRequestFactory,
+		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	): self {
-		$services = MediaWikiServices::getInstance();
 		return new self(
 			new ServiceOptions(
 				[
@@ -154,8 +160,8 @@ class Hooks implements
 			),
 			$commentStore,
 			$dbLoadBalancerFactory,
-			$services->getFileBackendGroup(),
 			$httpRequestFactory,
+			$repoGroup,
 			$userOptionsManager
 		);
 	}
@@ -397,12 +403,7 @@ class Hooks implements
 	}
 
 	public function onCreateWikiStatePrivate( $dbname ): void {
-		// We can't inject this due to:
-		// Recursive service instantiation: Circular dependency when creating service!
-		// RepoGroup -> MimeAnalyzer -> FileBackendGroup -> MimeAnalyzer
-		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
-
-		$localRepo = $repoGroup->getLocalRepo();
+		$localRepo = $this->repoGroup->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
 			'adviseStat' => false,
@@ -432,7 +433,7 @@ class Hooks implements
 	}
 
 	public function onCreateWikiReadPersistentModel( &$pipeline ): void {
-		$backend = $this->fileBackendGroup->get( 'miraheze-swift' );
+		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
 				$backend->getFileContents( [
@@ -443,7 +444,7 @@ class Hooks implements
 	}
 
 	public function onCreateWikiWritePersistentModel( $pipeline ): bool {
-		$backend = $this->fileBackendGroup->get( 'miraheze-swift' );
+		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
 
 		$backend->quickCreate( [
