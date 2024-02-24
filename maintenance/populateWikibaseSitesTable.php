@@ -176,7 +176,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	/**
 	 * @param array $siteData
 	 *
-	 * @return Site
+	 * @return MediaWikiSite
 	 */
 	private function getSiteFromSiteData( array $siteData ) {
 		$site = new MediaWikiSite();
