@@ -35,8 +35,6 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
-use MediaWiki\User\ActorMigration;
-use User;
 
 class AssignImportedEdits extends Maintenance {
 	private $importPrefix = 'imported>';
@@ -60,6 +58,8 @@ class AssignImportedEdits extends Maintenance {
 			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
 		}
 
+		$userFactory = $this->getServiceContainer()->getUserFactory();
+
 		if ( $this->getOption( 'from' ) ) {
 			$from = $this->importPrefix . $this->getOption( 'from' );
 			$row = $dbr->selectRow(
@@ -72,28 +72,25 @@ class AssignImportedEdits extends Maintenance {
 			);
 
 			if ( !$row ) {
-				$this->output( 'Invalid \'from\' user.' );
-				return;
+				$this->fatalError( 'Invalid \'from\' user.' );
 			}
 
-			$fromUser = User::newFromActorId( $row->actor_id );
+			$fromUser = $userFactory->newFromActorId( $row->actor_id );
 
 			if ( !$fromUser ) {
-				$this->output( 'Invalid \'from\' user.' );
-				return;
+				$this->fatalError( 'Invalid \'from\' user.' );
 			}
 
 			$fromName = $fromUser->getName();
 
-			$toUser = User::newFromName(
+			$toUser = $userFactory->newFromName(
 				$this->getOption( 'to' ) ?: str_replace(
 					$this->importPrefix, '', $fromName
 				)
 			);
 
 			if ( !$toUser ) {
-				$this->output( 'Invalid \'to\' user.' );
-				return;
+				$this->fatalError( 'Invalid \'to\' user.' );
 			}
 
 			$this->assignEdits( $fromUser, $toUser );
@@ -114,7 +111,7 @@ class AssignImportedEdits extends Maintenance {
 		}
 
 		foreach ( $res as $row ) {
-			$fromUser = User::newFromActorId( $row->rev_actor );
+			$fromUser = $userFactory->newFromActorId( $row->rev_actor );
 
 			if ( !$fromUser ) {
 				$this->output( 'Invalid \'from\' user.' );
@@ -123,7 +120,7 @@ class AssignImportedEdits extends Maintenance {
 
 			$fromName = $fromUser->getName();
 
-			$toUser = User::newFromName(
+			$toUser = $userFactory->newFromName(
 				$this->getOption( 'to' ) ?: str_replace(
 					$this->importPrefix, '', $fromName
 				)
@@ -153,35 +150,32 @@ class AssignImportedEdits extends Maintenance {
 
 		# Count things
 		$this->output( "Checking current edits..." );
-		$revQueryInfo = ActorMigration::newMigration()->getWhere( $dbw, 'rev_user', $user );
-		$revisionRows = $dbw->selectRowCount(
-			[ 'revision' ] + $revQueryInfo['tables'],
-			'*',
-			$revQueryInfo['conds'],
-			__METHOD__,
-			[],
-			$revQueryInfo['joins']
-		);
+
+		$revisionRows = $dbw->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'revision' )
+			->where( [ 'rev_actor' => $fromActorId ] )
+			->caller( __METHOD__ )
+			->fetchRowCount();
+
 		$this->output( "found {$revisionRows}.\n" );
 
 		$this->output( "Checking deleted edits..." );
-		$archiveRows = $dbw->selectRowCount(
-			[ 'archive' ],
-			'*',
-			[ 'ar_actor' => $fromActorId ],
-			__METHOD__
-		);
+		$archiveRows = $dbw->newSelectQueryBuilder()
+			->select( '*' )
+			->from( 'archive' )
+			->where( [ 'ar_actor' => $fromActorId ] )
+			->caller( __METHOD__ )->fetchRowCount();
 		$this->output( "found {$archiveRows}.\n" );
 
 		# Don't count recent changes if we're not supposed to
 		if ( !$this->getOption( 'norc' ) ) {
 			$this->output( "Checking recent changes..." );
-			$recentChangesRows = $dbw->selectRowCount(
-				[ 'recentchanges' ],
-				'*',
-				[ 'rc_actor' => $fromActorId ],
-				__METHOD__
-			);
+			$recentChangesRows = $dbw->newSelectQueryBuilder()
+				->select( '*' )
+				->from( 'recentchanges' )
+				->where( [ 'rc_actor' => $fromActorId ] )
+				->caller( __METHOD__ )->fetchRowCount();
 			$this->output( "found {$recentChangesRows}.\n" );
 		} else {
 			$recentChangesRows = 0;
@@ -191,38 +185,42 @@ class AssignImportedEdits extends Maintenance {
 		$this->output( "\nTotal entries to change: {$total}\n" );
 
 		$toActorId = $actorNormalization->acquireActorId( $importUser, $dbw );
-
 		if ( !$this->getOption( 'no-run' ) && $total ) {
 			$this->output( "\n" );
 			if ( $revisionRows ) {
 				# Assign edits
 				$this->output( "Assigning current edits..." );
-				$dbw->update(
-					'revision',
-					[ 'rev_actor' => $toActorId ],
-					[ 'rev_actor' => $fromActorId ],
-					__METHOD__
-				);
+
+				$dbw->newUpdateQueryBuilder()
+					->update( 'revision' )
+					->set( [ 'rev_actor' => $toActorId ] )
+					->where( [ 'rev_actor' => $fromActorId ] )
+					->caller( __METHOD__ )->execute();
+
 				$this->output( "done.\n" );
 			}
 
 			if ( $archiveRows ) {
 				$this->output( "Assigning deleted edits..." );
-				$dbw->update( 'archive',
-					[ 'ar_actor' => $toActorId ],
-					[ 'ar_actor' => $fromActorId ],
-					__METHOD__
-				);
+
+				$dbw->newUpdateQueryBuilder()
+					->update( 'archive' )
+					->set( [ 'ar_actor' => $toActorId ] )
+					->where( [ 'ar_actor' => $fromActorId ] )
+					->caller( __METHOD__ )->execute();
+
 				$this->output( "done.\n" );
 			}
 			# Update recent changes if required
 			if ( $recentChangesRows ) {
 				$this->output( "Updating recent changes..." );
-				$dbw->update( 'recentchanges',
-					[ 'rc_actor' => $toActorId ],
-					[ 'rc_actor' => $fromActorId ],
-					__METHOD__
-				);
+
+				$dbw->newUpdateQueryBuilder()
+					->update( 'recentchanges' )
+					->set( [ 'rc_actor' => $toActorId ] )
+					->where( [ 'rc_actor' => $fromActorId ] )
+					->caller( __METHOD__ )->execute();
+
 				$this->output( "done.\n" );
 			}
 		}
