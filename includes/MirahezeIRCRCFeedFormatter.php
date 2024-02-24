@@ -21,14 +21,13 @@ namespace Miraheze\MirahezeMagic;
  * @file
  */
 
-use Hooks;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Sanitizer;
 use MediaWiki\Title\Title;
 use RCFeedFormatter;
 use RecentChange;
-use Sanitizer;
 
 /**
  * Format a notification as a human-readable string using IRC colour codes.
@@ -52,12 +51,11 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 	 * @return string|null
 	 */
 	public function getLine( array $feed, RecentChange $rc, $actionComment ) {
-		$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
+		$services = MediaWikiServices::getInstance();
+		$mainConfig = $services->getMainConfig();
+		$localInterwikis = $mainConfig->get( MainConfigNames::LocalInterwikis );
 		$useRCPatrol = $mainConfig->get( MainConfigNames::UseRCPatrol );
 		$useNPPatrol = $mainConfig->get( MainConfigNames::UseNPPatrol );
-		$localInterwikis = $mainConfig->get( MainConfigNames::LocalInterwikis );
-		$canonicalServer = $mainConfig->get( MainConfigNames::CanonicalServer );
-		$script = $mainConfig->get( MainConfigNames::Script );
 		$dbName = $mainConfig->get( MainConfigNames::DBname );
 		$attribs = $rc->getAttributes();
 		if ( $attribs['rc_type'] == RC_CATEGORIZE ) {
@@ -89,22 +87,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		$title = $titleObj->getPrefixedText();
 		$title = self::cleanupForIRC( $title );
 
-		if ( $attribs['rc_type'] == RC_LOG ) {
-			$url = '';
-		} else {
-			$url = $canonicalServer . $script;
-			if ( $attribs['rc_type'] == RC_NEW ) {
-				$query = '?oldid=' . $attribs['rc_this_oldid'];
-			} else {
-				$query = '?diff=' . $attribs['rc_this_oldid'] . '&oldid=' . $attribs['rc_last_oldid'];
-			}
-			if ( $useRCPatrol || ( $attribs['rc_type'] == RC_NEW && $useNPPatrol ) ) {
-				$query .= '&rcid=' . $attribs['rc_id'];
-			}
-
-			Hooks::runner()->onIRCLineURL( $url, $query, $rc );
-			$url .= $query;
-		}
+		$notifyUrl = $rc->getNotifyUrl() ?? '';
 
 		if ( $attribs['rc_old_len'] !== null && $attribs['rc_new_len'] !== null ) {
 			$szdiff = $attribs['rc_new_len'] - $attribs['rc_old_len'];
@@ -130,7 +113,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			) );
 			$flag = $attribs['rc_log_action'];
 		} else {
-			$store = MediaWikiServices::getInstance()->getCommentStore();
+			$store = $services->getCommentStore();
 			$comment = self::cleanupForIRC( $store->getComment( 'rc_comment', $attribs )->text );
 			$flag = '';
 			if ( !$attribs['rc_patrolled']
@@ -159,7 +142,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		# see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
 		# no colour (\003) switches back to the term default
 		$fullString = "$dbName \0035*\003 $titleString\0034 $flag\00310 " .
-			"\00302$url\003 \0035*\003 \00303$user\003 \0035*\003 $szdiff \00310$comment\003\n";
+			"\00302$notifyUrl\003 \0035*\003 \00303$user\003 \0035*\003 $szdiff \00310$comment\003\n";
 
 		return $fullString;
 	}
