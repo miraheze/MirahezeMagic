@@ -116,7 +116,6 @@ class Hooks implements
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->fileBackendGroup = $fileBackendGroup;
 		$this->httpRequestFactory = $httpRequestFactory;
-		$this->repoGroup = $repoGroup;
 		$this->userOptionsManager = $userOptionsManager;
 
 		$services = MediaWikiServices::getInstance();
