@@ -74,7 +74,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 			$backend->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 		} else {
-			$this->output( "Generating sitemap for wiki {$dbName}\n" );
+			$this->output( "Generating sitemap for wiki {$dbname}\n" );
 
 			// Remove old dump
 			$sitemaps = $backend->getTopFileList( [
