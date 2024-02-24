@@ -221,7 +221,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			null,
 			'Self-requested vanish',
 			$this->getContext(),
-			1
+			true
 		);
 
 		return true;
