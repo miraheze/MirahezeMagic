@@ -36,8 +36,8 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use MediaWiki\User\ActorMigration;
-use User;
 use UnexpectedValueException;
+use User;
 
 class AssignImportedEdits extends Maintenance {
 	private $importPrefix = 'imported>';
