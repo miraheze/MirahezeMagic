@@ -44,7 +44,7 @@ if ( !class_exists( SitesBuilder::class ) ) {
 
 /**
  * Maintenance script for populating the Sites table from another wiki that runs the
- * WikiDiscovery extension.
+ * WikiDiscover extension.
  *
  * @license GPL-2.0-or-later
  * @author Daniel Kinzler
@@ -121,7 +121,6 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	/**
 	 * @param string $json
 	 *
-	 * @throws InvalidArgumentException
 	 * @return Site[]
 	 */
 	public function sitesFromJson( $json ) {
