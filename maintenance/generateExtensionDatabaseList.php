@@ -1,8 +1,15 @@
 <?php
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+namespace Miraheze\MirahezeMagic\Maintenance;
 
-use MediaWiki\MediaWikiServices;
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
 
 class GenerateExtensionDatabaseList extends Maintenance {
 	public function __construct() {
@@ -22,8 +29,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 
 		$extArray = $this->getOption( 'extension' );
 
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		$dbr = $this->getDB( DB_REPLICA, [], $config->get( 'CreateWikiDatabase' ) );
+		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
 
 		foreach ( $extArray as $ext ) {
 			$mwSettings = $dbr->select(
@@ -47,5 +53,5 @@ class GenerateExtensionDatabaseList extends Maintenance {
 	}
 }
 
-$maintClass = 'GenerateExtensionDatabaseList';
+$maintClass = GenerateExtensionDatabaseList::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
