@@ -2,6 +2,7 @@
 
 namespace Miraheze\MirahezeMagic\Specials;
 
+use Config;
 use ConfigFactory;
 use FormSpecialPage;
 use MediaWiki\Html\Html;
