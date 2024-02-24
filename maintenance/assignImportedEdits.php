@@ -1,4 +1,7 @@
 <?php
+
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +27,17 @@
  * @version 4.0
  */
 
-use MediaWiki\MediaWikiServices;
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\User\ActorMigration;
+use User;
+use UnexpectedValueException;
 
 class AssignImportedEdits extends Maintenance {
 	private $importPrefix = 'imported>';
@@ -138,7 +149,7 @@ class AssignImportedEdits extends Maintenance {
 
 		$dbw = $this->getDB( DB_PRIMARY );
 		$this->beginTransaction( $dbw, __METHOD__ );
-		$actorNormalization = MediaWikiServices::getInstance()->getActorNormalization();
+		$actorNormalization = $this->getServiceContainer()->getActorNormalization();
 		$fromActorId = $actorNormalization->findActorId( $user, $dbw );
 
 		# Count things
