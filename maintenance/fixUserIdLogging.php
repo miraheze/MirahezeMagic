@@ -39,7 +39,7 @@ use Wikimedia\AtEase\AtEase;
 class FixUserIdLogging extends Maintenance {
 
 	/** @var array */
-	public $userCache;
+	private $userCache;
 
 	public function __construct() {
 		parent::__construct();
