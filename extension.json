@@ -137,7 +137,6 @@
 				"MainConfig",
 				"CommentStore",
 				"DBLoadBalancerFactory",
-				"FileBackendGroup",
 				"HttpRequestFactory",
 				"UserOptionsManager"
 			]
