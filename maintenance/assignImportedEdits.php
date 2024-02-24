@@ -36,7 +36,6 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use MediaWiki\User\ActorMigration;
-use UnexpectedValueException;
 use User;
 
 class AssignImportedEdits extends Maintenance {
@@ -111,7 +110,7 @@ class AssignImportedEdits extends Maintenance {
 		);
 
 		if ( !$res || !is_object( $res ) ) {
-			throw new UnexpectedValueException( '$res was not set to a valid array.' );
+			$this->fatalError( '$res was not set to a valid array.' );
 		}
 
 		foreach ( $res as $row ) {
