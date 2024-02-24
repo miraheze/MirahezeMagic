@@ -31,6 +31,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\UserOptionsManager;
 use MediaWiki\WikiMap\WikiMap;
 use Memcached;
+use MessageCache;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
@@ -597,7 +598,7 @@ class Hooks implements
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
 			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
-			$list = array_keys( $databasesArray['combi'] );
+			$list = array_keys( $databasesArray['combi'] ?? [] );
 			return false;
 		}
 
