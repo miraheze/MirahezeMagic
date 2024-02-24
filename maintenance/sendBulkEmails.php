@@ -30,7 +30,6 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use ContentHandler;
 use MailAddress;
 use Maintenance;
 use MediaWiki\Revision\SlotRecord;
@@ -38,6 +37,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Message;
 use Status;
+use TextContent;
 
 /**
  * Send a bulk email message to a list of wiki account holders using
@@ -388,7 +388,8 @@ class SendBulkEmails extends Maintenance {
 			$this->optoutUrl = $title->getFullURL(
 				'', false, PROTO_CANONICAL );
 			$rev = $this->getServiceContainer()->getRevisionLookup()->getRevisionByTitle( $title );
-			$content = ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) );
+			$contentText = $rev->getContent( SlotRecord::MAIN );
+			$content = ( $contentText instanceof TextContent ) ? $contentText->getText() : '';
 			$inList = false;
 			foreach ( explode( "\n", $content ) as $line ) {
 				if ( !$inList ) {
