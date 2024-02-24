@@ -91,19 +91,19 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 		unset( $categoryOptions[ array_search( 'uncategorised', $categoryOptions ) ] );
 
 		$yesNoOptions = [
-			$this->msg( 'miraheze-survey-yes' )->text() => 1,
-			$this->msg( 'miraheze-survey-no' )->text() => 0
+			'miraheze-survey-yes' => 1,
+			'miraheze-survey-no' => 0
 		];
 
 		$accessOptions = [
-			$this->msg( 'miraheze-survey-access-sd' )->text() => 'severaldaily',
-			$this->msg( 'miraheze-survey-access-d' )->text() => 'daily',
-			$this->msg( 'miraheze-survey-access-sw' )->text() => 'severalweekly',
-			$this->msg( 'miraheze-survey-access-w' )->text() => 'weekly',
-			$this->msg( 'miraheze-survey-access-sm' )->text() => 'severalmonthly',
-			$this->msg( 'miraheze-survey-access-m' )->text() => 'monthly',
-			$this->msg( 'miraheze-survey-access-lm' )->text() => 'lessmothly',
-			$this->msg( 'miraheze-survey-access-ft' )->text() => 'firsttime'
+			'miraheze-survey-access-sd' => 'severaldaily',
+			'miraheze-survey-access-d' => 'daily',
+			'miraheze-survey-access-sw' => 'severalweekly',
+			'miraheze-survey-access-w' => 'weekly',
+			'miraheze-survey-access-sm' => 'severalmonthly',
+			'miraheze-survey-access-m' => 'monthly',
+			'miraheze-survey-access-lm' => 'lessmothly',
+			'miraheze-survey-access-ft' => 'firsttime'
 		];
 
 		$formDescriptor = [
@@ -111,12 +111,12 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'type' => 'select',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q1',
-				'options' => [
-					$this->msg( 'miraheze-survey-q1-anon-read' )->text() => 'anon-read',
-					$this->msg( 'miraheze-survey-q1-anon-edit' )->text() => 'anon-edit',
-					$this->msg( 'miraheze-survey-q1-account-read' )->text() => 'account-read',
-					$this->msg( 'miraheze-survey-q1-account-edit' )->text() => 'account-edit',
-					$this->msg( 'miraheze-survey-q1-account-manage' )->text() => 'account-manage'
+				'options-messages' => [
+					'miraheze-survey-q1-anon-read' => 'anon-read',
+					'miraheze-survey-q1-anon-edit' => 'anon-edit',
+					'miraheze-survey-q1-account-read' => 'account-read',
+					'miraheze-survey-q1-account-edit' => 'account-edit',
+					'miraheze-survey-q1-account-manage' => 'account-manage'
 				],
 				'default' => $dbRow['q1'] ?? false
 			],
@@ -131,7 +131,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'type' => 'select',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q3a',
-				'options' => $accessOptions,
+				'options-messages' => $accessOptions,
 				'default' => $dbRow['q3a'] ?? false,
 				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-read' ], [ '===', 'wpq1', 'account-read' ] ]
 			],
@@ -139,7 +139,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'type' => 'select',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q3b',
-				'options' => $accessOptions,
+				'options-messages' => $accessOptions,
 				'default' => $dbRow['3b'] ?? false,
 				'hide-if' => [ 'NOR', [ '===', 'wpq1', 'anon-edit' ], [ '===', 'wpq1', 'account-edit' ], [ '===', 'wpq1', 'account-manage' ] ]
 			],
@@ -183,7 +183,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'type' => 'radio',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q6',
-				'options' => $yesNoOptions,
+				'options-messages' => $yesNoOptions,
 				'default' => $dbRow['q6'] ?? false
 			],
 			'q6-1' => [
@@ -408,7 +408,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'type' => 'radio',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q15',
-				'options' => $yesNoOptions,
+				'options-messages' => $yesNoOptions,
 				'default' => $dbRow['contact'] ?? 0
 			]
 		];
@@ -423,7 +423,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 				'type' => 'email',
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'miraheze-survey-q15-1',
-				'default' => $row->s_email ?? '',
+				'default' => $this->row->s_email ?? '',
 				'hide-if' => [ '===', 'wpcontact', '0' ]
 			];
 		}
@@ -433,7 +433,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 
 	public function onSubmit( array $formData ) {
 		if ( !$this->config->get( 'MirahezeSurveyEnabled' ) ) {
-			return;
+			return false;
 		}
 
 		$email = $formData['email'];
