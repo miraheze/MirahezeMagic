@@ -139,7 +139,6 @@
 				"DBLoadBalancerFactory",
 				"FileBackendGroup",
 				"HttpRequestFactory",
-				"RepoGroup",
 				"UserOptionsManager"
 			]
 		}
