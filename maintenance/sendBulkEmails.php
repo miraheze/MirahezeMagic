@@ -31,11 +31,11 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use ContentHandler;
-use Hooks;
 use MailAddress;
 use Maintenance;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
+use Message;
 use Status;
 use User;
 
@@ -193,9 +193,8 @@ class SendBulkEmails extends Maintenance {
 		$this->delay = $this->getOption( 'delay', self::DEFAULT_DELAY );
 		$this->dryRun = $this->hasOption( 'dry-run' );
 
-		Hooks::register(
-			'UserMailerTransformMessage',
-			[ $this, 'onUserMailerTransformMessage' ]
+		$this->getServiceContainer()->getHookContainer()->register(
+			'UserMailerTransformMessage', [ $this, 'onUserMailerTransformMessage' ]
 		);
 
 		$to = $this->getFileHandle( 'to' );
