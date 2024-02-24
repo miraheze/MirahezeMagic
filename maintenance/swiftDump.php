@@ -46,7 +46,7 @@ class SwiftDump extends Maintenance {
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword,
 			'-D', "/tmp/$wiki",
-			'--object-threads', 1,
+			'--object-threads', '1',
 		)->limits( $limits )
 			->restrict( Shell::RESTRICT_NONE )
 			->execute();
