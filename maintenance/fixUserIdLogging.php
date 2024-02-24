@@ -33,7 +33,6 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
-use User;
 use Wikimedia\AtEase\AtEase;
 
 class FixUserIdLogging extends Maintenance {
@@ -70,7 +69,7 @@ class FixUserIdLogging extends Maintenance {
 			);
 
 			foreach ( $logRes as $logRow ) {
-				$username = User::newFromActorId( $logRow->log_actor );
+				$username = $this->getServiceContainer()->getUserFactory()->newFromActorId( $logRow->log_actor );
 				$goodUserId = $this->getGoodUserId( $username->getName() );
 
 				// Ignore log_actor 0 for maintenance scripts and such
@@ -128,7 +127,7 @@ class FixUserIdLogging extends Maintenance {
 	}
 
 	protected function fixLogEntry( $row ) {
-		$username = User::newFromActorId( $row->log_actor );
+		$username = $this->getServiceContainer()->getUserFactory()->newFromActorId( $row->log_actor );
 
 		$dbr = $this->getDB( DB_REPLICA );
 		$dbw = $this->getDB( DB_PRIMARY );
