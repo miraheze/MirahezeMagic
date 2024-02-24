@@ -216,7 +216,7 @@ class Hooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout()
 			)
 		);
@@ -237,7 +237,7 @@ class Hooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute();
 		}
 
@@ -280,7 +280,7 @@ class Hooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout()
 			)
 		);
@@ -299,7 +299,7 @@ class Hooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout();
 
 			// Download the container
@@ -311,7 +311,7 @@ class Hooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute();
 
 			$newContainer = str_replace( $old, $new, $container );
@@ -340,7 +340,7 @@ class Hooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout();
 
 			if ( $newContainerList === $oldContainerList ) {
@@ -355,7 +355,7 @@ class Hooks implements
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
 				)->limits( $limits )
-					->restrict( Shell::RESTRICT_NONE )
+					->disableSandbox()
 					->execute();
 
 				wfDebugLog( 'MirahezeMagic', "Container '$container' deleted." );
@@ -363,7 +363,7 @@ class Hooks implements
 				// Wipe from the temp directory
 				Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
 					->limits( $limits )
-					->restrict( Shell::RESTRICT_NONE )
+					->disableSandbox()
 					->execute();
 			} else {
 				/**
@@ -446,7 +446,7 @@ class Hooks implements
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		Shell::command( '/bin/rm', $filePath )
 			->limits( $limits )
-			->restrict( Shell::RESTRICT_NONE )
+			->disableSandbox()
 			->execute();
 	}
 
@@ -468,7 +468,7 @@ class Hooks implements
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword
 		)->limits( $limits )
-			->restrict( Shell::RESTRICT_NONE )
+			->disableSandbox()
 			->execute();
 	}
 
