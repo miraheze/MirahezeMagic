@@ -137,25 +137,25 @@ class RebuildVersionCache extends Maintenance {
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$head = trim( (string)shell_exec( "git --git-dir=$gitDir symbolic-ref HEAD 2>/dev/null" ) ) ?: $headSHA1;
 
-		if ( !empty( $head ) ) {
+		if ( $head ) {
 			$gitInfo['head'] = $head;
 		}
 
-		if ( !empty( $headSHA1 ) ) {
+		if ( $headSHA1 ) {
 			$gitInfo['headSHA1'] = $headSHA1;
 		}
 
 		// Get the date of the HEAD commit
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$headCommitDate = trim( (string)shell_exec( "git --git-dir=$gitDir log -1 --format=%ct" ) );
-		if ( !empty( $headCommitDate ) ) {
+		if ( $headCommitDate ) {
 			$gitInfo['headCommitDate'] = $headCommitDate;
 		}
 
 		// Get the branch name
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$branch = trim( (string)shell_exec( "git --git-dir=$gitDir rev-parse --abbrev-ref HEAD" ) );
-		if ( !empty( $branch ) ) {
+		if ( $branch ) {
 			if ( $branch === 'HEAD' ) {
 				$branch = $headSHA1;
 			}
@@ -166,7 +166,7 @@ class RebuildVersionCache extends Maintenance {
 		// Get the remote URL
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$remoteURL = trim( (string)shell_exec( "git --git-dir=$gitDir remote get-url origin" ) );
-		if ( !empty( $remoteURL ) ) {
+		if ( $remoteURL ) {
 			$gitInfo['remoteURL'] = $remoteURL;
 		}
 
