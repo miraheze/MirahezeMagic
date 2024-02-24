@@ -138,7 +138,6 @@
 				"CommentStore",
 				"DBLoadBalancerFactory",
 				"HttpRequestFactory",
-				"RepoGroup",
 				"UserOptionsManager"
 			]
 		}
