@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,12 +25,20 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-use MediaWiki\MediaWikiServices;
+require_once "$IP/maintenance/Maintenance.php";
 
-if ( !class_exists( Wikibase\Lib\Sites\SitesBuilder::class ) ) {
-	require_once __DIR__ . '/../../Wikibase/lib/includes/Sites/SitesBuilder.php';
+use Exception;
+use Maintenance;
+use MediaWikiSite;
+use Wikibase\Lib\Sites\SitesBuilder;
+
+if ( !class_exists( SitesBuilder::class ) ) {
+	require_once "$IP/extensions/Wikibase/lib/includes/Sites/SitesBuilder.php";
 }
 
 /**
@@ -70,16 +80,16 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$validGroups = $this->getOption( 'valid-groups', $groups );
 
 		try {
-			$json = $this->getWikiDiscoveryData( $url );
+			$json = $this->getWikiDiscoverData( $url );
 
 			$sites = $this->sitesFromJson( $json );
 
-			$store = MediaWiki\MediaWikiServices::getInstance()->getSiteStore();
-			$sitesBuilder = new Wikibase\Lib\Sites\SitesBuilder( $store, $validGroups );
+			$store = $this->getServiceContainer()->getSiteStore();
+			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 
 		} catch ( Exception $e ) {
-			$this->output( $e->getMessage() );
+			$this->fatalError( $e->getMessage() );
 		}
 
 		$this->output( "done.\n" );
@@ -90,7 +100,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	 *
 	 * @return string
 	 */
-	protected function getWikiDiscoveryData( $url ) {
+	protected function getWikiDiscoverData( $url ) {
 		$url .= '?action=wikidiscover&format=json';
 
 		$list = $this->getOption( 'wiki-list' );
@@ -98,10 +108,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$url .= "&wdwikislist=$list";
 		}
 
-		$json = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
+		$json = $this->getServiceContainer()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
 
 		if ( !$json ) {
-			throw new RuntimeException( "Got no data from $url\n" );
+			$this->fatalError( "Got no data from $url\n" );
 		}
 
 		return $json;
@@ -119,7 +129,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$data = json_decode( $json, true );
 
 		if ( !is_array( $data ) || !array_key_exists( 'wikidiscover', $data ) ) {
-			throw new InvalidArgumentException( 'Cannot decode site matrix data.' );
+			$this->fatalError( 'Cannot decode site matrix data.' );
 		}
 
 		$groups = $data['wikidiscover'];
