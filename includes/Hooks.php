@@ -1,5 +1,10 @@
 <?php
 
+namespace Miraheze\MirahezeMagic;
+
+use Config;
+use FileBackendGroup;
+use GlobalVarConfig;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
@@ -14,13 +19,18 @@ use MediaWiki\Hook\MimeMagicInitHook;
 use MediaWiki\Hook\RecentChange_saveHook;
 use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
+use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\MediaWikiServices;
+use MediaWiki\Linker\Linker;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Shell\Shell;
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserOptionsManager;
+use MediaWiki\WikiMap\WikiMap;
+use Memcached;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
@@ -30,9 +40,17 @@ use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Redis;
+use RepoGroup;
+use Skin;
+use SpecialPage;
+use Status;
+use Throwable;
+use User;
 use Wikimedia\IPUtils;
+use Wikimedia\Rdbms\ILBFactory;
 
-class MirahezeMagicHooks implements
+class Hooks implements
 	AbuseFilterShouldFilterActionHook,
 	BeforeInitializeHook,
 	BlockIpCompleteHook,
@@ -61,8 +79,17 @@ class MirahezeMagicHooks implements
 	/** @var CommentStore */
 	private $commentStore;
 
+	/** @var ILBFactory */
+	private $dbLoadBalancerFactory;
+
+	/** @var FileBackendGroup */
+	private $fileBackendGroup;
+
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
+
+	/** @var RepoGroup */
+	private $repoGroup;
 
 	/** @var UserOptionsManager */
 	private $userOptionsManager;
@@ -70,25 +97,37 @@ class MirahezeMagicHooks implements
 	/**
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
+	 * @param ILBFactory $dbLoadBalancerFactory
+	 * @param FileBackendGroup $fileBackendGroup
 	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
+		ILBFactory $dbLoadBalancerFactory,
+		FileBackendGroup $fileBackendGroup,
 		HttpRequestFactory $httpRequestFactory,
+		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
+		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
+		$this->fileBackendGroup = $fileBackendGroup;
 		$this->httpRequestFactory = $httpRequestFactory;
+		$this->repoGroup = $repoGroup;
 		$this->userOptionsManager = $userOptionsManager;
 	}
 
 	/**
 	 * @param Config $mainConfig
 	 * @param CommentStore $commentStore
+	 * @param ILBFactory $dbLoadBalancerFactory
+	 * @param FileBackendGroup $fileBackendGroup
 	 * @param HttpRequestFactory $httpRequestFactory
+	 * @param RepoGroup $repoGroup
 	 * @param UserOptionsManager $userOptionsManager
 	 *
 	 * @return self
@@ -96,7 +135,10 @@ class MirahezeMagicHooks implements
 	public static function factory(
 		Config $mainConfig,
 		CommentStore $commentStore,
+		ILBFactory $dbLoadBalancerFactory,
+		FileBackendGroup $fileBackendGroup,
 		HttpRequestFactory $httpRequestFactory,
+		RepoGroup $repoGroup,
 		UserOptionsManager $userOptionsManager
 	): self {
 		return new self(
@@ -120,7 +162,10 @@ class MirahezeMagicHooks implements
 				$mainConfig
 			),
 			$commentStore,
+			$dbLoadBalancerFactory,
+			$fileBackendGroup,
 			$httpRequestFactory,
+			$repoGroup,
 			$userOptionsManager
 		);
 	}
@@ -157,13 +202,14 @@ class MirahezeMagicHooks implements
 	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
 		global $wmgSwiftPassword;
 
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( $this->options->get( 'EchoSharedTrackingDB' ) )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], $this->options->get( 'EchoSharedTrackingDB' ) );
+		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
+		$dbw = $this->dbLoadBalancerFactory->getMainLB(
+			$echoSharedTrackingDB
+		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
-		foreach ( $this->options->get( 'LocalDatabases' ) as $db ) {
+		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
@@ -220,13 +266,14 @@ class MirahezeMagicHooks implements
 	public function onCreateWikiRename( $cwdb, $old, $new ): void {
 		global $wmgSwiftPassword;
 
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( $this->options->get( 'EchoSharedTrackingDB' ) )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], $this->options->get( 'EchoSharedTrackingDB' ) );
+		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
+		$dbw = $this->dbLoadBalancerFactory->getMainLB(
+			$echoSharedTrackingDB
+		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
-		foreach ( $this->options->get( 'LocalDatabases' ) as $db ) {
+		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
@@ -360,7 +407,7 @@ class MirahezeMagicHooks implements
 	}
 
 	public function onCreateWikiStatePrivate( $dbname ): void {
-		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
+		$localRepo = $this->repoGroup->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
 			'adviseStat' => false,
@@ -390,7 +437,7 @@ class MirahezeMagicHooks implements
 	}
 
 	public function onCreateWikiReadPersistentModel( &$pipeline ): void {
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
+		$backend = $this->fileBackendGroup->get( 'miraheze-swift' );
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
 				$backend->getFileContents( [
@@ -401,7 +448,7 @@ class MirahezeMagicHooks implements
 	}
 
 	public function onCreateWikiWritePersistentModel( $pipeline ): bool {
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
+		$backend = $this->fileBackendGroup->get( 'miraheze-swift' );
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
 
 		$backend->quickCreate( [
@@ -498,7 +545,7 @@ class MirahezeMagicHooks implements
 			'wikibase-sitelinks-miraheze',
 		];
 
-		$languageCode = $this->options->get( 'LanguageCode' );
+		$languageCode = $this->options->get( MainConfigNames::LanguageCode );
 
 		$transformationCallback = static function ( string $key, MessageCache $cache ) use ( $languageCode ): string {
 			$transformedKey = "miraheze-$key";
@@ -719,9 +766,9 @@ class MirahezeMagicHooks implements
 		}
 
 		// If the URL contains wgScript, rewrite it to use wgArticlePath
-		if ( str_contains( $url, $this->options->get( 'Script' ) ) ) {
+		if ( str_contains( $url, $this->options->get( MainConfigNames::Script ) ) ) {
 			$dbkey = wfUrlencode( $title->getPrefixedDBkey() );
-			$url = str_replace( '$1', $dbkey, $this->options->get( 'ArticlePath' ) );
+			$url = str_replace( '$1', $dbkey, $this->options->get( MainConfigNames::ArticlePath ) );
 			if ( $query !== '' ) {
 				$url = wfAppendQuery( $url, $query );
 			}
@@ -747,7 +794,7 @@ class MirahezeMagicHooks implements
 
 	/** Removes redis keys for jobrunner */
 	private function removeRedisKey( string $key ) {
-		$jobTypeConf = $this->options->get( 'JobTypeConf' );
+		$jobTypeConf = $this->options->get( MainConfigNames::JobTypeConf );
 		if ( !isset( $jobTypeConf['default']['redisServer'] ) || !$jobTypeConf['default']['redisServer'] ) {
 			return;
 		}
