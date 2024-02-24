@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
 	$IP = __DIR__ . '/../../..';
@@ -7,26 +9,26 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use MediaWiki\MediaWikiServices;
+use Maintenance;
+use MediaWiki\MainConfigNames;
 use Miraheze\CreateWiki\RemoteWiki;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class UpdatePrivateAuthUrls extends Maintenance {
 	public function execute() {
-		$config = MediaWikiServices::getInstance()->getMainConfig();
-		$dbName = $config->get( 'DBname' );
-		$wiki = new RemoteWiki( $dbName );
+		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
+		$wiki = new RemoteWiki( $dbname );
 
 		if ( $wiki->isPrivate() ) {
-			$manageWikiSettings = new ManageWikiSettings( $dbName );
+			$manageWikiSettings = new ManageWikiSettings( $dbname );
 			foreach ( $manageWikiSettings->list() as $var => $val ) {
 				if (
 					is_string( $val ) &&
-					str_contains( $val, "static.miraheze.org/$dbName" )
+					str_contains( $val, "static.miraheze.org/$dbname" )
 				) {
-					$new = preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbName/", $config->get( 'Server' ) . '/w/img_auth.php', $val );
+					$new = preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbname/", $this->getConfig()->get( MainConfigNames::Server ) . '/w/img_auth.php', $val );
 
-					$this->output( "Updating {$var} for {$dbName} '{$val} => {$new}'\n" );
+					$this->output( "Updating {$var} for {$dbname} '{$val} => {$new}'\n" );
 
 					$manageWikiSettings->modify( [ $var => $new ] );
 					$manageWikiSettings->commit();
