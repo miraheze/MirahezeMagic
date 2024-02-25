@@ -33,10 +33,10 @@ require_once "$IP/maintenance/Maintenance.php";
 use MailAddress;
 use Maintenance;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use Message;
-use Status;
 use TextContent;
 
 /**
