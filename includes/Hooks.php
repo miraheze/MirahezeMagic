@@ -2,10 +2,10 @@
 
 namespace Miraheze\MirahezeMagic;
 
-use Config;
-use GlobalVarConfig;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
+use MediaWiki\Config\Config;
+use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
@@ -28,7 +28,10 @@ use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Shell\Shell;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWiki\User\UserOptionsManager;
 use MediaWiki\WikiMap\WikiMap;
 use Memcached;
@@ -44,10 +47,7 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Redis;
 use Skin;
-use SpecialPage;
-use Status;
 use Throwable;
-use User;
 use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\ILBFactory;
 
