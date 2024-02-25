@@ -322,9 +322,10 @@ class SendBulkEmails extends Maintenance {
 			$uname = $this->getOption( 'reply-to' );
 			$rt = $this->getServiceContainer()->getUserFactory()->newFromName( $uname );
 			if ( !$rt || !$rt->getId() ) {
+				$rt = new User;
 				$this->fatalError( "ERROR - Unknown user {$uname}" );
 			}
-			return $rt ? MailAddress::newFromUser( $rt ) : null;
+			return MailAddress::newFromUser( $rt );
 		}
 		return null;
 	}
