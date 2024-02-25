@@ -77,10 +77,6 @@ class AssignImportedEdits extends Maintenance {
 
 			$fromUser = $userFactory->newFromActorId( $row->actor_id );
 
-			if ( !$fromUser ) {
-				$this->fatalError( 'Invalid \'from\' user.' );
-			}
-
 			$fromName = $fromUser->getName();
 
 			$toUser = $userFactory->newFromName(
@@ -112,11 +108,6 @@ class AssignImportedEdits extends Maintenance {
 
 		foreach ( $res as $row ) {
 			$fromUser = $userFactory->newFromActorId( $row->rev_actor );
-
-			if ( !$fromUser ) {
-				$this->output( 'Invalid \'from\' user.' );
-				return;
-			}
 
 			$fromName = $fromUser->getName();
 
