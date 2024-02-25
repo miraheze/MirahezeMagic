@@ -4,6 +4,7 @@ namespace Miraheze\MirahezeMagic;
 
 use Config;
 use GlobalVarConfig;
+use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
@@ -65,6 +66,7 @@ class Hooks implements
 	GetPreferencesHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
+	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
 	SiteNoticeAfterHook,
