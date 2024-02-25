@@ -35,8 +35,8 @@ require_once "$IP/maintenance/Maintenance.php";
 use GenerateSitemap;
 use Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Status\Status;
 use Miraheze\CreateWiki\RemoteWiki;
-use Status;
 
 class GenerateMirahezeSitemap extends Maintenance {
 	public function __construct() {
