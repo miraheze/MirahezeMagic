@@ -82,7 +82,7 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 			// IRC API which expects "Log".
 			$titleObj = Title::newFromText( 'Log/' . $attribs['rc_log_type'], NS_SPECIAL );
 		} else {
-			$titleObj = $rc->getTitle();
+			$titleObj = Title::castFromPageReference( $rc->getPage() ) ?: Title::makeTitle( NS_SPECIAL, 'BadTitle' );
 		}
 		$title = $titleObj->getPrefixedText();
 		$title = self::cleanupForIRC( $title );
@@ -105,7 +105,8 @@ class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
 		$user = self::cleanupForIRC( $attribs['rc_user_text'] );
 
 		if ( $attribs['rc_type'] == RC_LOG ) {
-			$targetText = $rc->getTitle()->getPrefixedText();
+			$targetTitle = Title::castFromPageReference( $rc->getPage() ) ?: Title::makeTitle( NS_SPECIAL, 'BadTitle' );
+			$targetText = $targetTitle->getPrefixedText();
 			$comment = self::cleanupForIRC( str_replace(
 				"[[$targetText]]",
 				"[[\00302$targetText\00310]]",
