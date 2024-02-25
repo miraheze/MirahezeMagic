@@ -2,9 +2,9 @@
 
 namespace Miraheze\MirahezeMagic\Specials;
 
-use Config;
-use ConfigFactory;
 use FormSpecialPage;
+use MediaWiki\Config\Config;
+use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\User\UserOptionsLookup;
 use stdClass;
