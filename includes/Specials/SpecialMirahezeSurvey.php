@@ -2,10 +2,10 @@
 
 namespace Miraheze\MirahezeMagic\Specials;
 
-use FormSpecialPage;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Html\Html;
+use MediaWiki\SpecialPage\FormSpecialPage;
 use MediaWiki\User\UserOptionsLookup;
 use stdClass;
 use Wikimedia\Rdbms\DBConnRef;
