@@ -142,7 +142,10 @@ class RestoreManageWikiBackup extends Maintenance {
 			}
 		}
 
-		$cWJ = new CreateWikiJson( $dbname );
+		$cWJ = new CreateWikiJson(
+			$dbname,
+			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+		);
 		$cWJ->resetWiki();
 
 		$this->output( "Successfully restored the backup from '{$this->getOption( 'filename' )}'.\n" );
