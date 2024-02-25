@@ -112,8 +112,8 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$json = $this->getServiceContainer()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
 
 		if ( !$json ) {
+			$json = '';
 			$this->fatalError( "Got no data from $url\n" );
-			return '';
 		}
 
 		return $json;
