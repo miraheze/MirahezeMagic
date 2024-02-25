@@ -30,7 +30,6 @@ namespace Miraheze\MirahezeMagic\Specials;
  */
 
 use ExtensionRegistry;
-use FormSpecialPage;
 use ManualLogEntry;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
@@ -41,9 +40,10 @@ use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
 use MediaWiki\Html\Html;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\FormSpecialPage;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
-use SpecialPage;
-use Status;
 
 class SpecialVanishUser extends FormSpecialPage {
 
