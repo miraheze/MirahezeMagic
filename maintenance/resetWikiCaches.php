@@ -21,7 +21,10 @@ class ResetWikiCaches extends Maintenance {
 	}
 
 	public function execute() {
-		$cWJ = new CreateWikiJson( $this->getConfig()->get( MainConfigNames::DBname ) );
+		$cWJ = new CreateWikiJson(
+			$this->getConfig()->get( MainConfigNames::DBname ),
+			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+		);
 		$cWJ->resetWiki();
 
 		usleep( 20000 );
