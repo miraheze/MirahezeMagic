@@ -32,7 +32,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
-use User;
+use MediaWiki\User\User;
 
 class FixImageUser extends Maintenance {
 	public function __construct() {
@@ -99,7 +99,7 @@ class FixImageUser extends Maintenance {
 	 * Initialize the user object
 	 *
 	 * @param string $username Username or IP address
-	 * @return User
+	 * @return ?User
 	 */
 	private function initializeUser( $username ) {
 		if ( $this->getServiceContainer()->getUserNameUtils()->isIP( $username ) ) {
