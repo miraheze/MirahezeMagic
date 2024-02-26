@@ -86,5 +86,12 @@
 	"managewiki-setting-wgFavicon-name": "Favicon",
 	"managewiki-setting-wgFavicon-help": "Favicon là một hình ảnh lối tắt được hiển thị trên thanh địa chỉ trình duyệt của khách truy cập và trong trang dấu trang. Thông thường nó là một phiên bản nhỏ hơn của logo. Xem https://meta.miraheze.org/wiki/ManageWiki#How_do_I_change_my_logo.2Ffavicon.3F để biết cách bạn có thể thêm một tài khoản.",
 	"managewiki-setting-wgAppleTouchIcon-name": "Biểu tượng ứng dụng điện thoại",
-	"managewiki-setting-wgAppleTouchIcon-help": "Favicon dành cho màn hình thiết bị di động. Xem https://meta.miraheze.org/wiki/ManageWiki#How_do_I_change_my_logo.2Ffavicon.3F về cách bạn có thể thêm một cái."
+	"managewiki-setting-wgAppleTouchIcon-help": "Favicon dành cho màn hình thiết bị di động. Xem https://meta.miraheze.org/wiki/ManageWiki#How_do_I_change_my_logo.2Ffavicon.3F về cách bạn có thể thêm một cái.",
+	"managewiki-setting-wgAllowUserCss-name": "Cho phép CSS cá nhân",
+	"managewiki-setting-wgAllowUserCss-help": "Cho phép sử dụng đoạn mã CSS cá nhân. Ví dụ: Thành viên:Tennguoidung/*.css.",
+	"managewiki-setting-wgAllowUserJs-name": "Cho phép JavaScript cá nhân",
+	"managewiki-setting-wgAllowUserJs-help": "Cho phép sử dụng đoạn mã JavaScript cá nhân. Ví dụ: Thành viên:Tennguoidung/*.js.",
+	"managewiki-setting-wgDefaultTheme-name": "Chủ đề mặc định",
+	"managewiki-setting-wgManageWikiForceSidebarLinks-name": "Bắt buộc bao gồm liên kết thanh bên ManageWiki",
+	"managewiki-setting-wgManageWikiForceSidebarLinks-help": "Bắt buộc hiển thị các liên kết ManageWiki trong thanh bên cho tất cả người dùng. Các văn bản liên kết sẽ khác nhau cho người dùng không được ưu tiên."
 }
