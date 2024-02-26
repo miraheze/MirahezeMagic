@@ -1,4 +1,7 @@
 <?php
+
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +24,16 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Exception;
+use Maintenance;
+use MediaWiki\MainConfigNames;
 
 class CreateCargoDB extends Maintenance {
 	public function __construct() {
@@ -32,20 +44,21 @@ class CreateCargoDB extends Maintenance {
 
 	public function execute() {
 		$dbw = $this->getDB( DB_PRIMARY );
-		$dbname = $dbw->getDBname();
+		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 		if ( $dbname === null ) {
-			$this->fatalError( "Could not identify current database name!" );
+			$this->fatalError( 'Could not identify current database name!' );
 		}
+
 		$cargodb = $dbname . 'cargo';
 
 		try {
 			$dbQuotes = $dbw->addIdentifierQuotes( $cargodb );
 			$dbw->query( "CREATE DATABASE {$dbQuotes};" );
 		} catch ( Exception $e ) {
-			throw new FatalError( "Database '{$cargodb}' already exists." );
+			$this->fatalError( "Database '{$cargodb}' already exists." );
 		}
 	}
 }
 
-$maintClass = 'CreateCargoDB';
+$maintClass = CreateCargoDB::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * Rebuild the version cache.
  *
@@ -35,6 +37,13 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
+use ExtensionProcessor;
+use FormatJson;
+use Maintenance;
+use MediaWiki\Config\HashConfig;
+use MediaWiki\MainConfigNames;
+use ObjectCache;
+
 /**
  * Maintenance script to rebuild the version cache.
  *
@@ -54,7 +63,7 @@ class RebuildVersionCache extends Maintenance {
 	public function execute() {
 		$hashConfig = new HashConfig();
 
-		$hashConfig->set( 'ShellRestrictionMethod', false );
+		$hashConfig->set( MainConfigNames::ShellRestrictionMethod, false );
 
 		$baseDirectory = MW_INSTALL_PATH;
 
@@ -85,7 +94,7 @@ class RebuildVersionCache extends Maintenance {
 		$data = $processor->getExtractedInfo();
 
 		$extensionCredits = $data['credits'];
-		$legacyCredits = $this->getConfig()->get( 'ExtensionCredits' );
+		$legacyCredits = $this->getConfig()->get( MainConfigNames::ExtensionCredits );
 		if ( $legacyCredits ) {
 			$extensionCredits = array_merge( $extensionCredits, array_values(
 					array_merge( ...array_values( $legacyCredits ) )
@@ -128,25 +137,25 @@ class RebuildVersionCache extends Maintenance {
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$head = trim( (string)shell_exec( "git --git-dir=$gitDir symbolic-ref HEAD 2>/dev/null" ) ) ?: $headSHA1;
 
-		if ( !empty( $head ) ) {
+		if ( $head ) {
 			$gitInfo['head'] = $head;
 		}
 
-		if ( !empty( $headSHA1 ) ) {
+		if ( $headSHA1 ) {
 			$gitInfo['headSHA1'] = $headSHA1;
 		}
 
 		// Get the date of the HEAD commit
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$headCommitDate = trim( (string)shell_exec( "git --git-dir=$gitDir log -1 --format=%ct" ) );
-		if ( !empty( $headCommitDate ) ) {
+		if ( $headCommitDate ) {
 			$gitInfo['headCommitDate'] = $headCommitDate;
 		}
 
 		// Get the branch name
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$branch = trim( (string)shell_exec( "git --git-dir=$gitDir rev-parse --abbrev-ref HEAD" ) );
-		if ( !empty( $branch ) ) {
+		if ( $branch ) {
 			if ( $branch === 'HEAD' ) {
 				$branch = $headSHA1;
 			}
@@ -157,7 +166,7 @@ class RebuildVersionCache extends Maintenance {
 		// Get the remote URL
 		// phpcs:ignore MediaWiki.Usage.ForbiddenFunctions
 		$remoteURL = trim( (string)shell_exec( "git --git-dir=$gitDir remote get-url origin" ) );
-		if ( !empty( $remoteURL ) ) {
+		if ( $remoteURL ) {
 			$gitInfo['remoteURL'] = $remoteURL;
 		}
 
@@ -200,7 +209,7 @@ class RebuildVersionCache extends Maintenance {
 		if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
 			|| !is_writable( $cacheDir )
 		) {
-			throw new RuntimeException( "Unable to create GitInfo cache \"{$cacheDir}\"" );
+			$this->fatalError( "Unable to create GitInfo cache \"{$cacheDir}\"" );
 		}
 
 		file_put_contents( $this->getCacheFilePath( $repoDir ), FormatJson::encode( $this->getGitInfo( $repoDir ) ) );

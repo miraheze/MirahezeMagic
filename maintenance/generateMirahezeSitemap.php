@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,30 +25,37 @@
  * @version 2.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-use MediaWiki\MediaWikiServices;
+require_once "$IP/maintenance/Maintenance.php";
+
+use GenerateSitemap;
+use Maintenance;
+use MediaWiki\MainConfigNames;
+use MediaWiki\Status\Status;
 use Miraheze\CreateWiki\RemoteWiki;
 
 class GenerateMirahezeSitemap extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Generates sitemap for all miraheze wikis (apart from private ones).' );
+		$this->addDescription( 'Generates sitemap for all Miraheze wikis (apart from private ones).' );
 	}
 
 	public function execute() {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'mirahezemagic' );
-		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
+		$localRepo = $this->getServiceContainer()->getRepoGroup()->getLocalRepo();
 		$backend = $localRepo->getBackend();
 
-		$dbName = $config->get( 'DBname' );
+		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 		$filePath = wfTempDir() . '/sitemaps';
 
-		$wiki = new RemoteWiki( $dbName );
+		$wiki = new RemoteWiki( $dbname );
 		$isPrivate = $wiki->isPrivate();
 		if ( $isPrivate ) {
-			$this->output( "Deleting sitemap for wiki {$dbName}\n" );
+			$this->output( "Deleting sitemap for wiki {$dbname}\n" );
 
 			$sitemaps = $backend->getTopFileList( [
 				'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
@@ -65,7 +74,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 			$backend->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 		} else {
-			$this->output( "Generating sitemap for wiki {$dbName}\n" );
+			$this->output( "Generating sitemap for wiki {$dbname}\n" );
 
 			// Remove old dump
 			$sitemaps = $backend->getTopFileList( [
@@ -86,17 +95,17 @@ class GenerateMirahezeSitemap extends Maintenance {
 			// Generate new dump
 			$generateSitemap = $this->runChild(
 				GenerateSitemap::class,
-				'/srv/mediawiki/w/maintenance/generateSitemap.php'
+				MW_INSTALL_PATH . '/maintenance/generateSitemap.php'
 			);
 
 			$generateSitemap->setOption( 'fspath', $filePath );
-			$generateSitemap->setOption( 'urlpath', '/sitemaps/' . $dbName . '/sitemaps/' );
-			$generateSitemap->setOption( 'server', $config->get( 'Server' ) );
+			$generateSitemap->setOption( 'urlpath', '/sitemaps/' . $dbname . '/sitemaps/' );
+			$generateSitemap->setOption( 'server', $this->getConfig()->get( MainConfigNames::Server ) );
 			$generateSitemap->setOption( 'compress', 'yes' );
 			$generateSitemap->execute();
 
 			$backend->prepare( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
-			foreach ( glob( $filePath . '/sitemap-*' . $dbName . '*' ) as $sitemap ) {
+			foreach ( glob( $filePath . '/sitemap-*' . $dbname . '*' ) as $sitemap ) {
 				$backend->quickStore( [
 					'src' => $sitemap,
 					'dst' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . basename( $sitemap ),
@@ -107,12 +116,12 @@ class GenerateMirahezeSitemap extends Maintenance {
 			}
 
 			$backend->quickMove( [
-				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/sitemap-index-' . $dbName . '.xml',
+				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/sitemap-index-' . $dbname . '.xml',
 				'dst' => $localRepo->getZonePath( 'public' ) . '/sitemaps/sitemap.xml',
 			] );
 		}
 	}
 }
 
-$maintClass = 'GenerateMirahezeSitemap';
+$maintClass = GenerateMirahezeSitemap::class;
 require_once RUN_MAINTENANCE_IF_MAIN;
