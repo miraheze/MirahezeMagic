@@ -22,6 +22,3 @@ ImportDump:
 ManageWiki:
   branch: master
   repo: https://github.com/miraheze/ManageWiki
-Wikibase:
-  branch: auto
-  repo: auto
