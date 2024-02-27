@@ -153,7 +153,7 @@
 	"miraheze-survey-q7-si": "I have a positive impression of Miraheze Site Reliability Engineering",
 	"miraheze-survey-q7-speed": "I am satisfied with the recent (think, 1 to 2 weeks) speeds when using my wiki",
 	"miraheze-survey-q7-st": "I have a positive impression of Miraheze Stewards",
-	"miraheze-survey-q7-tasks": "Tasks I filed on Phabricator were resolved to my satisfaction",
+	"miraheze-survey-q7-tasks": "Tasks I filed on Phorge were resolved to my satisfaction",
 	"miraheze-survey-q7-up": "I am satisfied with Miraheze's uptime",
 	"miraheze-survey-q7-wc": "The wiki I requested was created quickly",
 	"miraheze-survey-q7": "Please rate the following statements on a scale of 1-5, where 1 is strongly disagree and 5 is strongly agree.",
