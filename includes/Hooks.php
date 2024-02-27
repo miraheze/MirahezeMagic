@@ -1,6 +1,11 @@
 <?php
 
-use MediaWiki\Cache\Hook\MessageCache__getHook;
+namespace Miraheze\MirahezeMagic;
+
+use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
+use MediaWiki\CommentStore\CommentStore;
+use MediaWiki\Config\Config;
+use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
@@ -14,23 +19,39 @@ use MediaWiki\Hook\MimeMagicInitHook;
 use MediaWiki\Hook\RecentChange_saveHook;
 use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
+use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Linker\Linker;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Shell\Shell;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Status\Status;
+use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWiki\User\UserOptionsManager;
+use MediaWiki\WikiMap\WikiMap;
+use Memcached;
+use MessageCache;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
+use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Redis;
+use Skin;
+use Throwable;
 use Wikimedia\IPUtils;
+use Wikimedia\Rdbms\ILBFactory;
 
-class MirahezeMagicHooks implements
+class Hooks implements
 	AbuseFilterShouldFilterActionHook,
 	BeforeInitializeHook,
 	BlockIpCompleteHook,
@@ -43,7 +64,9 @@ class MirahezeMagicHooks implements
 	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	GetPreferencesHook,
-	MessageCache__getHook,
+	ImportDumpJobAfterImportHook,
+	ImportDumpJobGetFileHook,
+	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
 	SiteNoticeAfterHook,
@@ -55,6 +78,12 @@ class MirahezeMagicHooks implements
 	/** @var ServiceOptions */
 	private $options;
 
+	/** @var CommentStore */
+	private $commentStore;
+
+	/** @var ILBFactory */
+	private $dbLoadBalancerFactory;
+
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
@@ -63,21 +92,29 @@ class MirahezeMagicHooks implements
 
 	/**
 	 * @param ServiceOptions $options
+	 * @param CommentStore $commentStore
+	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
 	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
 		ServiceOptions $options,
+		CommentStore $commentStore,
+		ILBFactory $dbLoadBalancerFactory,
 		HttpRequestFactory $httpRequestFactory,
 		UserOptionsManager $userOptionsManager
 	) {
 		$this->options = $options;
+		$this->commentStore = $commentStore;
+		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->userOptionsManager = $userOptionsManager;
 	}
 
 	/**
 	 * @param Config $mainConfig
+	 * @param CommentStore $commentStore
+	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
 	 * @param UserOptionsManager $userOptionsManager
 	 *
@@ -85,6 +122,8 @@ class MirahezeMagicHooks implements
 	 */
 	public static function factory(
 		Config $mainConfig,
+		CommentStore $commentStore,
+		ILBFactory $dbLoadBalancerFactory,
 		HttpRequestFactory $httpRequestFactory,
 		UserOptionsManager $userOptionsManager
 	): self {
@@ -95,6 +134,7 @@ class MirahezeMagicHooks implements
 					'CreateWikiCacheDirectory',
 					'CreateWikiGlobalWiki',
 					'EchoSharedTrackingDB',
+					'ImportDumpCentralWiki',
 					'JobTypeConf',
 					'LanguageCode',
 					'LocalDatabases',
@@ -107,6 +147,8 @@ class MirahezeMagicHooks implements
 				],
 				$mainConfig
 			),
+			$commentStore,
+			$dbLoadBalancerFactory,
 			$httpRequestFactory,
 			$userOptionsManager
 		);
@@ -144,13 +186,14 @@ class MirahezeMagicHooks implements
 	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
 		global $wmgSwiftPassword;
 
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( $this->options->get( 'EchoSharedTrackingDB' ) )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], $this->options->get( 'EchoSharedTrackingDB' ) );
+		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
+		$dbw = $this->dbLoadBalancerFactory->getMainLB(
+			$echoSharedTrackingDB
+		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
 
-		foreach ( $this->options->get( 'LocalDatabases' ) as $db ) {
+		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
@@ -175,7 +218,7 @@ class MirahezeMagicHooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout()
 			)
 		);
@@ -196,24 +239,25 @@ class MirahezeMagicHooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute();
 		}
 
 		$this->removeRedisKey( "*{$wiki}*" );
-		// $this->removeMemcachedKey( ".*{$wiki}.*" );
+		$this->removeMemcachedKey( ".*{$wiki}.*" );
 	}
 
 	public function onCreateWikiRename( $cwdb, $old, $new ): void {
 		global $wmgSwiftPassword;
 
-		$dbw = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()
-			->getMainLB( $this->options->get( 'EchoSharedTrackingDB' ) )
-			->getMaintenanceConnectionRef( DB_PRIMARY, [], $this->options->get( 'EchoSharedTrackingDB' ) );
+		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
+		$dbw = $this->dbLoadBalancerFactory->getMainLB(
+			$echoSharedTrackingDB
+		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
 
-		foreach ( $this->options->get( 'LocalDatabases' ) as $db ) {
+		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
@@ -238,7 +282,7 @@ class MirahezeMagicHooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout()
 			)
 		);
@@ -257,7 +301,7 @@ class MirahezeMagicHooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout();
 
 			// Download the container
@@ -269,7 +313,7 @@ class MirahezeMagicHooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute();
 
 			$newContainer = str_replace( $old, $new, $container );
@@ -298,7 +342,7 @@ class MirahezeMagicHooks implements
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
-				->restrict( Shell::RESTRICT_NONE )
+				->disableSandbox()
 				->execute()->getStdout();
 
 			if ( $newContainerList === $oldContainerList ) {
@@ -313,7 +357,7 @@ class MirahezeMagicHooks implements
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
 				)->limits( $limits )
-					->restrict( Shell::RESTRICT_NONE )
+					->disableSandbox()
 					->execute();
 
 				wfDebugLog( 'MirahezeMagic', "Container '$container' deleted." );
@@ -321,7 +365,7 @@ class MirahezeMagicHooks implements
 				// Wipe from the temp directory
 				Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
 					->limits( $limits )
-					->restrict( Shell::RESTRICT_NONE )
+					->disableSandbox()
 					->execute();
 			} else {
 				/**
@@ -343,7 +387,7 @@ class MirahezeMagicHooks implements
 		)->limits( $limits )->execute();
 
 		$this->removeRedisKey( "*{$old}*" );
-		// $this->removeMemcachedKey( ".*{$old}.*" );
+		$this->removeMemcachedKey( ".*{$old}.*" );
 	}
 
 	public function onCreateWikiStatePrivate( $dbname ): void {
@@ -400,89 +444,34 @@ class MirahezeMagicHooks implements
 		return true;
 	}
 
-	/**
-	 * From WikimediaMessages. Allows us to add new messages,
-	 * and override ones.
-	 * phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
-	 *
-	 * @param string &$lcKey Key of message to lookup.
-	 */
-	public function onMessageCache__get( &$lcKey ) {
-		// phpcs:enable
+	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		Shell::command( '/bin/rm', $filePath )
+			->limits( $limits )
+			->disableSandbox()
+			->execute();
+	}
 
-		if ( version_compare( MW_VERSION, '1.41', '>=' ) ) {
-			return;
-		}
+	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
+		global $wmgSwiftPassword;
 
-		static $keys = [
-			'centralauth-groupname',
-			'centralauth-login-error-locked',
-			'dberr-again',
-			'dberr-problems',
-			'globalblocking-ipblocked-range',
-			'globalblocking-ipblocked-xff',
-			'globalblocking-ipblocked',
-			'grouppage-autoconfirmed',
-			'grouppage-automoderated',
-			'grouppage-autoreview',
-			'grouppage-blockedfromchat',
-			'grouppage-bot',
-			'grouppage-bureaucrat',
-			'grouppage-chatmod',
-			'grouppage-checkuser',
-			'grouppage-commentadmin',
-			'grouppage-csmoderator',
-			'grouppage-editor',
-			'grouppage-flow-bot',
-			'grouppage-interface-admin',
-			'grouppage-moderator',
-			'grouppage-no-ipinfo',
-			'grouppage-reviewer',
-			'grouppage-suppress',
-			'grouppage-sysop',
-			'grouppage-upwizcampeditors',
-			'grouppage-user',
-			'importdump-help-reason',
-			'importdump-help-target',
-			'importdump-help-upload-file',
-			'importtext',
-			'newsignuppage-loginform-tos',
-			'newsignuppage-must-accept-tos',
-			'oathauth-step1',
-			'prefs-help-realname',
-			'privacypage',
-			'restriction-delete',
-			'restriction-protect',
-			'skinname-snapwikiskin',
-			'snapwikiskin',
-			'uploadtext',
-			'webauthn-module-description',
-			'wikibase-sitelinks-miraheze',
-		];
+		$container = $this->options->get( 'ImportDumpCentralWiki' ) === 'metawikibeta' ?
+			'miraheze-metawikibeta-local-public' :
+			'miraheze-metawiki-local-public';
 
-		if ( in_array( $lcKey, $keys, true ) ) {
-			$prefixedKey = "miraheze-$lcKey";
-			// MessageCache uses ucfirst if ord( key ) is < 128, which is true of all
-			// of the above.  Revisit if non-ASCII keys are used.
-			$ucKey = ucfirst( $lcKey );
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
-			$cache = MediaWikiServices::getInstance()->getMessageCache();
-
-			if (
-			// Override order:
-			// 1. If the MediaWiki:$ucKey page exists, use the key unprefixed
-			// (in all languages) with normal fallback order.  Specific
-			// language pages (MediaWiki:$ucKey/xy) are not checked when
-			// deciding which key to use, but are still used if applicable
-			// after the key is decided.
-			//
-			// 2. Otherwise, use the prefixed key with normal fallback order
-			// (including MediaWiki pages if they exist).
-			$cache->getMsgFromNamespace( $ucKey, $this->options->get( 'LanguageCode' ) ) === false
-			) {
-				$lcKey = $prefixedKey;
-			}
-		}
+		Shell::command(
+			'swift', 'download',
+			$container,
+			$importDumpRequestManager->getSplitFilePath(),
+			'-o',  $filePath,
+			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+			'-U', 'mw:media',
+			'-K', $wmgSwiftPassword
+		)->limits( $limits )
+			->disableSandbox()
+			->execute();
 	}
 
 	/**
@@ -524,6 +513,7 @@ class MirahezeMagicHooks implements
 			'importdump-help-reason',
 			'importdump-help-target',
 			'importdump-help-upload-file',
+			'importdump-import-failed-comment',
 			'importtext',
 			'newsignuppage-loginform-tos',
 			'newsignuppage-must-accept-tos',
@@ -539,7 +529,7 @@ class MirahezeMagicHooks implements
 			'wikibase-sitelinks-miraheze',
 		];
 
-		$languageCode = $this->options->get( 'LanguageCode' );
+		$languageCode = $this->options->get( MainConfigNames::LanguageCode );
 
 		$transformationCallback = static function ( string $key, MessageCache $cache ) use ( $languageCode ): string {
 			$transformedKey = "miraheze-$key";
@@ -610,7 +600,7 @@ class MirahezeMagicHooks implements
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
 			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
-			$list = array_keys( $databasesArray['combi'] );
+			$list = array_keys( $databasesArray['combi'] ?? [] );
 			return false;
 		}
 
@@ -629,8 +619,8 @@ class MirahezeMagicHooks implements
 	}
 
 	public function onUserGetRightsRemove( $user, &$rights ) {
-		// Remove read from stewards on staffwiki.
-		if ( WikiMap::isCurrentWikiId( 'staffwiki' ) && $user->isRegistered() ) {
+		// Remove read from stewards on staffwiki and iowiki.
+		if ( ( WikiMap::isCurrentWikiId( 'staffwiki' ) || WikiMap::isCurrentWikiId( 'iowiki' ) ) && $user->isRegistered() ) {
 			$centralAuthUser = CentralAuthUser::getInstance( $user );
 
 			if ( $centralAuthUser &&
@@ -683,7 +673,7 @@ class MirahezeMagicHooks implements
 			'username' => $recentChange->mAttribs['rc_user_text'],
 			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
 			'wiki' => WikiMap::getCurrentWikiId(),
-			'comment' => $recentChange->mAttribs['rc_comment_text'],
+			'comment' => $this->commentStore->getComment( 'rc_comment', $recentChange->mAttribs )->text,
 		];
 
 		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );
@@ -760,9 +750,9 @@ class MirahezeMagicHooks implements
 		}
 
 		// If the URL contains wgScript, rewrite it to use wgArticlePath
-		if ( str_contains( $url, $this->options->get( 'Script' ) ) ) {
+		if ( str_contains( $url, $this->options->get( MainConfigNames::Script ) ) ) {
 			$dbkey = wfUrlencode( $title->getPrefixedDBkey() );
-			$url = str_replace( '$1', $dbkey, $this->options->get( 'ArticlePath' ) );
+			$url = str_replace( '$1', $dbkey, $this->options->get( MainConfigNames::ArticlePath ) );
 			if ( $query !== '' ) {
 				$url = wfAppendQuery( $url, $query );
 			}
@@ -788,7 +778,7 @@ class MirahezeMagicHooks implements
 
 	/** Removes redis keys for jobrunner */
 	private function removeRedisKey( string $key ) {
-		$jobTypeConf = $this->options->get( 'JobTypeConf' );
+		$jobTypeConf = $this->options->get( MainConfigNames::JobTypeConf );
 		if ( !isset( $jobTypeConf['default']['redisServer'] ) || !$jobTypeConf['default']['redisServer'] ) {
 			return;
 		}
@@ -812,27 +802,24 @@ class MirahezeMagicHooks implements
 		$memcachedServers = $this->options->get( 'MirahezeMagicMemcachedServers' );
 
 		try {
-			$memcached = new Memcached();
+			foreach ( $memcachedServers as $memcachedServer ) {
+				$memcached = new Memcached();
 
-			if ( !$memcached->getServerList() ) {
-				$memcached->addServers( $memcachedServers );
-			}
+				$memcached->addServer( $memcachedServer[0], (string)$memcachedServer[1] );
 
-			// Fetch all keys
-			$keys = $memcached->getAllKeys();
-			if ( !is_array( $keys ) ) {
-				return;
-			}
+				// Fetch all keys
+				$keys = $memcached->getAllKeys();
+				if ( !is_array( $keys ) ) {
+					return;
+				}
 
-			$memcached->getDelayed( $keys );
-
-			$keys = $memcached->getAllKeys();
-			foreach ( $keys as $item ) {
-				// Decide which keys to delete
-				if ( preg_match( "/{$key}/", $item ) ) {
-					$memcached->delete( $item );
-				} else {
-					continue;
+				foreach ( $keys as $item ) {
+					// Decide which keys to delete
+					if ( preg_match( "/{$key}/", $item ) ) {
+						$memcached->delete( $item );
+					} else {
+						continue;
+					}
 				}
 			}
 		} catch ( Throwable $ex ) {

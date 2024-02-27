@@ -128,7 +128,7 @@
 	"miraheze-survey-q7-oe": "Estoy satisfecho/a con mi experiencia en Miraheze",
 	"miraheze-survey-q7-si": "Tengo una impresión positiva de los administradores de sistemas de Miraheze (Miraheze Site Reliability Engineering - Administradores de Sistemas).",
 	"miraheze-survey-q7-speed": "Estoy satisfecho/a con la velocidad de Miraheze al usar la wiki",
-	"miraheze-survey-q7-tasks": "Las tareas que archivé en Phabricator fueron resueltas a mi satisfacción",
+	"miraheze-survey-q7-tasks": "Las tareas que archivé en Phorge fueron resueltas a mi satisfacción",
 	"miraheze-survey-q7-up": "Estoy satisfecho/a con el tiempo de funcionamiento (uptime) de Miraheze",
 	"miraheze-survey-q7-wc": "La wiki que pedí fue creada rápidamente",
 	"miraheze-survey-q7": "Por favor, valora las declaraciones siguientes en una escala de 1 a 5, donde 1 es fuertemente en desacuerdo y 5 es fuertemente de acuerdo.",

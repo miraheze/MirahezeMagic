@@ -1,4 +1,7 @@
 <?php
+
+namespace Miraheze\MirahezeMagic\Specials;
+
 /**
  * Creates Special:VanishUser for Stewards to use to vanish users easily.
  * Derived from RemovePII's Special:RemovePII code located at
@@ -26,8 +29,20 @@
  * @version 1.0
  */
 
+use ExtensionRegistry;
+use ManualLogEntry;
+use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
+use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
+use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserLogger;
+use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserStatus;
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
+use MediaWiki\Html\Html;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\FormSpecialPage;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 
 class SpecialVanishUser extends FormSpecialPage {
@@ -54,7 +69,6 @@ class SpecialVanishUser extends FormSpecialPage {
 
 	/**
 	 * @param string $par
-	 * @return string
 	 */
 	public function execute( $par ) {
 		$this->requireLogIn();
@@ -78,7 +92,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		];
 
 		$formDescriptor['oldname'] = [
-			'class' => MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField::class,
+			'class' => HTMLGlobalUserTextField::class,
 			'required' => true,
 			'label-message' => 'removepii-oldname-label',
 		];
@@ -115,18 +129,12 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'removepii-centralauth-notinstalled' );
 		}
 
-		if ( version_compare( MW_VERSION, '1.40', '<' ) &&
-			!ExtensionRegistry::getInstance()->isLoaded( 'Renameuser' )
-		) {
-			return Status::newFatal( 'centralauth-rename-notinstalled' );
-		}
-
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		if ( !$oldUser ) {
 			return Status::newFatal( 'centralauth-rename-doesnotexist' );
 		}
 
-		$oldCentral = MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstanceByName( $formData['oldname'] );
+		$oldCentral = CentralAuthUser::getInstanceByName( $formData['oldname'] );
 		$canSuppress = $this->getUser() && $this->getUser()->isAllowed( 'centralauth-suppress' );
 
 		if ( ( $oldCentral->isSuppressed() || $oldCentral->isHidden() ) &&
@@ -147,6 +155,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		$globalRenameUserValidator = MediaWikiServices::getInstance()->getService(
 			'CentralAuth.GlobalRenameUserValidator'
 		);
+
 		return $globalRenameUserValidator->validate( $oldUser, $newUser );
 	}
 
@@ -166,6 +175,10 @@ class SpecialVanishUser extends FormSpecialPage {
 			'CentralAuth.CentralAuthDatabaseManager'
 		);
 
+		$caAntiSpoofManager = MediaWikiServices::getInstance()->getService(
+			'CentralAuth.CentralAuthAntiSpoofManager'
+		);
+
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		$newUser = $this->userFactory->newFromName( $formData['newname'], UserFactory::RIGOR_CREATABLE );
 
@@ -173,18 +186,17 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'unknown-error' );
 		}
 
-		$session = $this->getContext()->exportSession();
-		$globalRenameUser = new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser(
+		$globalRenameUser = new GlobalRenameUser(
 			$this->getUser(),
 			$oldUser,
-			MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstance( $oldUser ),
+			CentralAuthUser::getInstance( $oldUser ),
 			$newUser,
-			MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstance( $newUser ),
-			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserStatus( $newUser->getName() ),
+			CentralAuthUser::getInstance( $newUser ),
+			new GlobalRenameUserStatus( $newUser->getName() ),
 			$this->jobQueueGroupFactory,
-			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates( $caDbManager ),
-			new MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserLogger( $this->getUser() ),
-			$session
+			new GlobalRenameUserDatabaseUpdates( $caDbManager ),
+			new GlobalRenameUserLogger( $this->getUser() ),
+			$caAntiSpoofManager
 		);
 
 		$globalRenameUser->rename(
@@ -202,14 +214,14 @@ class SpecialVanishUser extends FormSpecialPage {
 		$logID = $logEntry->insert();
 		$logEntry->publish( $logID );
 
-		$globalUser = MediaWiki\Extension\CentralAuth\User\CentralAuthUser::getInstance( $newUser );
+		$globalUser = CentralAuthUser::getInstance( $newUser );
 
 		$globalUser->adminLockHide(
 			true,
 			null,
 			'Self-requested vanish',
 			$this->getContext(),
-			1
+			true
 		);
 
 		return true;

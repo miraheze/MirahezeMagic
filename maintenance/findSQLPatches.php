@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * List new or updated SQL patches between two MediaWiki versions.
  *
@@ -27,7 +29,14 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
 
 class FindSQLPatches extends Maintenance {
 	public function __construct() {

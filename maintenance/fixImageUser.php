@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +24,15 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\User\User;
 
 class FixImageUser extends Maintenance {
 	public function __construct() {
@@ -35,12 +45,11 @@ class FixImageUser extends Maintenance {
 		$this->addArg( 'to', 'New user to give edits to' );
 	}
 
-	// TODO: Add support for MediaWiki 1.32
 	public function execute() {
 		$wikiDB = $this->getDB( DB_PRIMARY );
 
-		$from = $this->initialiseUser( urldecode( $this->getArg( 0 ) ) );
-		$to = $this->initialiseUser( urldecode( $this->getArg( 1 ) ) );
+		$from = $this->initializeUser( urldecode( $this->getArg( 0 ) ) );
+		$to = $this->initializeUser( urldecode( $this->getArg( 1 ) ) );
 
 		$imageName = urldecode( $this->getOption( 'image-name' ) );
 
@@ -54,7 +63,7 @@ class FixImageUser extends Maintenance {
 		);
 
 		if ( !$pageId || !is_object( $pageId ) ) {
-			throw new UnexpectedValueException( '$pageId was not set to a valid array.' );
+			$this->fatalError( '$pageId was not set to a valid array.' );
 		}
 
 		foreach ( $pageId as $id ) {
@@ -87,20 +96,20 @@ class FixImageUser extends Maintenance {
 	}
 
 	/**
-	 * Initialise the user object
+	 * Initialize the user object
 	 *
 	 * @param string $username Username or IP address
-	 * @return User
+	 * @return ?User
 	 */
-	private function initialiseUser( $username ) {
-		if ( User::isIP( $username ) ) {
+	private function initializeUser( $username ) {
+		if ( $this->getServiceContainer()->getUserNameUtils()->isIP( $username ) ) {
 			$user = new User();
 			$user->setId( 0 );
 			$user->setName( $username );
 		} else {
-			$user = User::newFromName( $username );
+			$user = $this->getServiceContainer()->getUserFactory()->newFromName( $username );
 			if ( !$user ) {
-				$this->fatalError( "Invalid username" );
+				$this->fatalError( 'Invalid username' );
 			}
 		}
 		$user->load();
@@ -109,5 +118,5 @@ class FixImageUser extends Maintenance {
 	}
 }
 
-$maintClass = 'FixImageUser';
+$maintClass = FixImageUser::class;
 require_once RUN_MAINTENANCE_IF_MAIN;

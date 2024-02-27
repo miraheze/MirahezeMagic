@@ -3,6 +3,7 @@
 		"authors": [
 			"Alshamiri1",
 			"Dr-Taher",
+			"Hubaishan",
 			"KamalSH",
 			"Meno25",
 			"MuratTheTurkish",
@@ -19,6 +20,8 @@
 	"group-autopatrolled": "مراجعون تلقائيًا",
 	"group-confirmed-member": "{{GENDER:$1|مستخدم مؤكد|مستخدمة مؤكدة}}",
 	"group-confirmed": "مستخدمون مؤكدون",
+	"group-flood-member": "{{GENDER:$1|مفيض|مفيضة}}",
+	"group-global-flood-member": "{{GENDER:$1|مفيض عالمي|مفيضة عالمية}}",
 	"group-global-flood": "الفيضانات العالمية",
 	"group-global-interwiki-admin-member": "{{GENDER:$1| مسؤول إنترويكي العالمي}}",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|مستثنى عالمي|مستثناة عالمية}} من منع الآيبي",

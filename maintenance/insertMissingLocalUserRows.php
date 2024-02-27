@@ -1,4 +1,7 @@
 <?php
+
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +24,17 @@
  * @version 1.0
  */
 
-use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
-use MediaWiki\MediaWikiServices;
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\MainConfigNames;
+use MediaWiki\WikiMap\WikiMap;
 
 class InsertMissingLocalUserRows extends Maintenance {
 	public function __construct() {
@@ -35,18 +45,15 @@ class InsertMissingLocalUserRows extends Maintenance {
 	}
 
 	public function execute() {
-		$config = MediaWikiServices::getInstance()->getMainConfig();
-
 		$dryRun = $this->getOption( 'dry-run', false );
 		$all = $this->getOption( 'all-wikis', false );
 
-		$centralDB = MediaWikiServices::getInstance()
-			->getDBLoadBalancerFactory()
-			->getMainLB( $config->get( 'CentralAuthDatabase' ) )
-			->getMaintenanceConnectionRef( DB_REPLICA, [], $config->get( 'CentralAuthDatabase' ) );
+		$centralDB = $this->getServiceContainer()->getDBLoadBalancerFactory()
+			->getMainLB( $this->getConfig()->get( 'CentralAuthDatabase' ) )
+			->getMaintenanceConnectionRef( DB_REPLICA, [], $this->getConfig()->get( 'CentralAuthDatabase' ) );
 
-		foreach ( ( $all ? $config->get( 'LocalDatabases' ) : [ WikiMap::getCurrentWikiId() ] ) as $wiki ) {
-			$lb = MediaWikiServices::getInstance()->getDBLoadBalancerFactory()->getMainLB( $wiki );
+		foreach ( ( $all ? $this->getConfig()->get( MainConfigNames::LocalDatabases ) : [ WikiMap::getCurrentWikiId() ] ) as $wiki ) {
+			$lb = $this->getServiceContainer()->getDBLoadBalancerFactory()->getMainLB( $wiki );
 
 			$res = $lb->getMaintenanceConnectionRef( DB_REPLICA, [], $wiki )->select(
 				'user',
