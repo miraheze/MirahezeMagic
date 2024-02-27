@@ -465,7 +465,7 @@ class Hooks implements
 			'swift', 'download',
 			$container,
 			$importDumpRequestManager->getSplitFilePath(),
-			'-o',  $filePath,
+			'-o', $filePath,
 			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword
