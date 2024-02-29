@@ -73,7 +73,10 @@ class ChangeMediaWikiVersion extends Maintenance {
 					continue;
 				}
 
-				$wiki = new RemoteWiki( $dbname );
+				$wiki = new RemoteWiki(
+					$dbname,
+					$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+				);
 
 				$wiki->newRows['wiki_version'] = $newVersion;
 				$wiki->changes['mediawiki-version'] = [
