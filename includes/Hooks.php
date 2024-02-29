@@ -369,7 +369,7 @@ class Hooks implements
 					->disableSandbox()
 					->execute();
 
-				$this->logger->info( 'RENAME: Swift container '$container' deleted.' );
+				$this->logger->info( 'RENAME: Swift container \"{$container}\" deleted.' );
 
 				// Wipe from the temp directory
 				Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
