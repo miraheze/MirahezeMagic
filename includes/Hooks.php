@@ -22,6 +22,7 @@ use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Linker\Linker;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
@@ -109,6 +110,9 @@ class Hooks implements
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->userOptionsManager = $userOptionsManager;
+		$this->logger = LoggerFactory::getInstance( 'MirahezeMagic' );
+
+
 	}
 
 	/**
@@ -192,6 +196,7 @@ class Hooks implements
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
+		$this->logger->debug( 'Deletion job: Deleted mentions of {$wiki} in the Echo notification table' );
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
@@ -206,10 +211,12 @@ class Hooks implements
 				}
 			}
 		}
+		$this->logger->debug( 'Deletion job: Deleted ManageWiki settings for {$wiki}' );
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 		// Get a list of containers to delete for the wiki
+		$this->logger->debug( 'Deletion job: Grabbing list of Swift containers to delete for {$wiki}' );
 		$containers = explode( "\n",
 			trim( Shell::command(
 				'swift', 'list',
@@ -229,6 +236,7 @@ class Hooks implements
 				continue;
 			}
 
+			$this->logger->debug( 'Deletion job: Deleting {$container} for {$wiki}' );
 			// Delete the container
 			Shell::command(
 				'swift', 'delete',
@@ -244,7 +252,10 @@ class Hooks implements
 		}
 
 		$this->removeRedisKey( "*{$wiki}*" );
+		$this->logger->debug( 'Deletion job: Deleted Redis keys for {$wiki}' );
+
 		$this->removeMemcachedKey( ".*{$wiki}.*" );
+		$this->logger->debug( 'Deletion job: Deleted Memcached keys for {$wiki}' );
 	}
 
 	public function onCreateWikiRename( $cwdb, $old, $new ): void {
@@ -333,7 +344,7 @@ class Hooks implements
 				] )
 			) );
 
-			wfDebugLog( 'MirahezeMagic', "Container '$newContainer' created." );
+			$this->logger->info( 'RENAME: Swift container '$newContainer' created.' );
 
 			$newContainerList = Shell::command(
 				'swift', 'list',
@@ -360,7 +371,7 @@ class Hooks implements
 					->disableSandbox()
 					->execute();
 
-				wfDebugLog( 'MirahezeMagic', "Container '$container' deleted." );
+				$this->logger->info( 'RENAME: Swift container '$container' deleted.' );
 
 				// Wipe from the temp directory
 				Shell::command( '/bin/rm', '-rf', wfTempDir() . '/' . $container )
@@ -372,7 +383,7 @@ class Hooks implements
 				 * We need to log this, as otherwise all files may not have been succesfully
 				 * moved to the new container, and they still exist locally. We should know that.
 				 */
-				wfDebugLog( 'MirahezeMagic', "The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist." );
+				$this->logger->info( 'The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist.' );
 			}
 		}
 
@@ -408,7 +419,7 @@ class Hooks implements
 				 * not be being deleted for private wikis. We should know that.
 				 */
 				$statusMessage = Status::wrap( $status )->getWikitext();
-				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
+				$this->logger->info( 'During a wiki private conversion job, the sitemap \"{$sitemap}\" failed to delete: {$statusMessage}' );
 			}
 		}
 
