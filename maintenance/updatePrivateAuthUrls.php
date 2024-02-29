@@ -17,7 +17,11 @@ use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 class UpdatePrivateAuthUrls extends Maintenance {
 	public function execute() {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-		$wiki = new RemoteWiki( $dbname );
+
+		$wiki = new RemoteWiki(
+			$dbname,
+			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+		);
 
 		if ( $wiki->isPrivate() ) {
 			$manageWikiSettings = new ManageWikiSettings( $dbname );
