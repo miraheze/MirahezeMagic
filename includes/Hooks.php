@@ -342,7 +342,7 @@ class Hooks implements
 				] )
 			) );
 
-			$this->logger->info( 'RENAME: Swift container '$newContainer' created.' );
+			$this->logger->info( 'RENAME: Swift container \"{$newContainer}\" created.' );
 
 			$newContainerList = Shell::command(
 				'swift', 'list',
