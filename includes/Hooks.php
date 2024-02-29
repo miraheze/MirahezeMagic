@@ -111,8 +111,6 @@ class Hooks implements
 		$this->httpRequestFactory = $httpRequestFactory;
 		$this->userOptionsManager = $userOptionsManager;
 		$this->logger = LoggerFactory::getInstance( 'MirahezeMagic' );
-
-
 	}
 
 	/**
