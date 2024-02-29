@@ -31,9 +31,9 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use DataDump;
 use Maintenance;
 use MediaWiki\MainConfigNames;
+use Miraheze\DataDump\DataDump;
 
 class GenerateManageWikiBackup extends Maintenance {
 	public function __construct() {
