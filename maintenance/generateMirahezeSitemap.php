@@ -52,7 +52,11 @@ class GenerateMirahezeSitemap extends Maintenance {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 		$filePath = wfTempDir() . '/sitemaps';
 
-		$wiki = new RemoteWiki( $dbname );
+		$wiki = new RemoteWiki(
+			$dbname,
+			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+		);
+
 		$isPrivate = $wiki->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbname}\n" );
