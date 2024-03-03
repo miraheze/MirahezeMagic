@@ -35,7 +35,7 @@
 	"managewiki-setting-wgMediaViewerIsInBeta-help": "This makes Media Viewer a beta feature, so it will not be enabled for all users.",
 	"managewiki-setting-wgPopupsBetaFeature-name": "Enable Popups Beta Mode",
 	"managewiki-setting-wgPopupsBetaFeature-help": "This enables Popups as a beta feature, rather than showing it to all users.",
-	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-name": "Enable VisualEditor Diff Page Beta Feature",
+	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-name": "Enable Visual Diff Beta Feature",
 	"managewiki-setting-wgVisualEditorEnableDiffPageBetaFeature-help": "Enable the new visual mode as a beta feature on revision difference pages.", 
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Enable VisualEditor Wikitext Beta Feature",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-help": "Enable the new wikitext mode inside the visual editor as a beta feature. It has many of the tools present in the visual editor, uses a similar design, and allows better switching between the two.",
