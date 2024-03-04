@@ -139,10 +139,10 @@ class Hooks implements
 					'LanguageCode',
 					'LocalDatabases',
 					'ManageWikiSettings',
+					'MirahezeMagicAccessIdsMap',
 					'MirahezeMagicMemcachedServers',
 					'MirahezeReportsBlockAlertKeywords',
 					'MirahezeReportsWriteKey',
-					'MirahezeStaffAccessIds',
 					'Script',
 				],
 				$mainConfig
