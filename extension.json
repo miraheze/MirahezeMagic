@@ -58,6 +58,11 @@
 			"services" : [
 				"JobQueueGroupFactory",
 				"UserFactory"
+			],
+			"optional_services": [
+				"CentralAuth.CentralAuthAntiSpoofManager",
+				"CentralAuth.CentralAuthDatabaseManager",
+				"CentralAuth.GlobalRenameUserValidator"
 			]
 		}
 	},
