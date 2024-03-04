@@ -31,21 +31,32 @@ namespace Miraheze\MirahezeMagic\Specials;
 
 use ExtensionRegistry;
 use ManualLogEntry;
+use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserLogger;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserStatus;
+use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserValidator;
+use MediaWiki\Extension\CentralAuth\User\CentralAuthAntiSpoofManager;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
 use MediaWiki\Html\Html;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\FormSpecialPage;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
 
 class SpecialVanishUser extends FormSpecialPage {
+
+	/** @var CentralAuthAntiSpoofManager|null */
+	private $centralAuthAntiSpoofManager;
+
+	/** @var CentralAuthDatabaseManager|null */
+	private $centralAuthDatabaseManager;
+
+	/** @var GlobalRenameUserValidator|null */
+	private $globalRenameUserValidator;
 
 	/** @var JobQueueGroupFactory */
 	private $jobQueueGroupFactory;
@@ -56,13 +67,22 @@ class SpecialVanishUser extends FormSpecialPage {
 	/**
 	 * @param JobQueueGroupFactory $jobQueueGroupFactory
 	 * @param UserFactory $userFactory
+	 * @param ?CentralAuthAntiSpoofManager $centralAuthAntiSpoofManager
+	 * @param ?CentralAuthDatabaseManager $centralAuthDatabaseManager
+	 * @param ?GlobalRenameUserValidator $globalRenameUserValidator
 	 */
 	public function __construct(
 		JobQueueGroupFactory $jobQueueGroupFactory,
-		UserFactory $userFactory
+		UserFactory $userFactory,
+		?CentralAuthAntiSpoofManager $centralAuthAntiSpoofManager,
+		?CentralAuthDatabaseManager $centralAuthDatabaseManager,
+		?GlobalRenameUserValidator $globalRenameUserValidator
 	) {
 		parent::__construct( 'VanishUser', 'centralauth-rename' );
 
+		$this->centralAuthAntiSpoofManager = $centralAuthAntiSpoofManager;
+		$this->centralAuthDatabaseManager = $centralAuthDatabaseManager;
+		$this->globalRenameUserValidator = $globalRenameUserValidator;
 		$this->jobQueueGroupFactory = $jobQueueGroupFactory;
 		$this->userFactory = $userFactory;
 	}
@@ -152,11 +172,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			return Status::newFatal( 'centralauth-rename-badusername' );
 		}
 
-		$globalRenameUserValidator = MediaWikiServices::getInstance()->getService(
-			'CentralAuth.GlobalRenameUserValidator'
-		);
-
-		return $globalRenameUserValidator->validate( $oldUser, $newUser );
+		return $this->globalRenameUserValidator->validate( $oldUser, $newUser );
 	}
 
 	/**
@@ -170,14 +186,6 @@ class SpecialVanishUser extends FormSpecialPage {
 		if ( !$validCentralAuth->isOK() ) {
 			return $validCentralAuth;
 		}
-
-		$caDbManager = MediaWikiServices::getInstance()->getService(
-			'CentralAuth.CentralAuthDatabaseManager'
-		);
-
-		$caAntiSpoofManager = MediaWikiServices::getInstance()->getService(
-			'CentralAuth.CentralAuthAntiSpoofManager'
-		);
 
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		$newUser = $this->userFactory->newFromName( $formData['newname'], UserFactory::RIGOR_CREATABLE );
@@ -194,9 +202,9 @@ class SpecialVanishUser extends FormSpecialPage {
 			CentralAuthUser::getInstance( $newUser ),
 			new GlobalRenameUserStatus( $newUser->getName() ),
 			$this->jobQueueGroupFactory,
-			new GlobalRenameUserDatabaseUpdates( $caDbManager ),
+			new GlobalRenameUserDatabaseUpdates( $this->centralAuthDatabaseManager ),
 			new GlobalRenameUserLogger( $this->getUser() ),
-			$caAntiSpoofManager
+			$this->centralAuthAntiSpoofManager
 		);
 
 		$globalRenameUser->rename(
