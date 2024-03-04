@@ -148,6 +148,10 @@
 		}
 	},
 	"config": {
+		"MirahezeMagicAccessIdsMap": {
+			"description": "Array, in the format of wiki => [ central ids ]. Users authorized to access certain wikis to prevent global read rights from applying.",
+			"value": []
+		},
 		"MirahezeMagicMemcachedServers": {
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
@@ -159,10 +163,6 @@
 		"MirahezeReportsWriteKey": {
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
-		},
-		"MirahezeStaffAccessIds": {
-			"description": "Array. Usernames of users authorized to access staffwiki.",
-			"value": []
 		},
 		"MirahezeSurveyEnabled": {
 			"description": "Boolean. Enable Miraheze Annual Survey?",
