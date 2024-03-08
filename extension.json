@@ -70,9 +70,6 @@
 		"AbuseFilterShouldFilterAction": {
 			"handler": "MirahezeMagicHooks"
 		},
-		"BeforeInitialize": {
-			"handler": "MirahezeMagicHooks"
-		},
 		"BlockIpComplete": {
 			"handler": "MirahezeMagicHooks"
 		},
@@ -98,9 +95,6 @@
 			"handler": "MirahezeMagicHooks"
 		},
 		"GetLocalURL::Internal": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"GetPreferences": {
 			"handler": "MirahezeMagicHooks"
 		},
 		"GlobalUserPageWikis": {
