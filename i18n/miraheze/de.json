@@ -162,7 +162,7 @@
 	"mirahezesurvey": "Miraheze jährliche Umfrage 2022",
 	"prefs-forcesafemode-label": "Immer den Safemodus erzwingen?",
 	"protect-level-user": "Nur angemeldeten Benutzern erlauben",
-	"requestimport-text": "Willkommen bei ImportDump! Um mit deinem Import zu beginnen, fülle bitte dieses Formular aus, damit wir deine Anfrage prüfen können. Deine Wiki-Anfrage wird von einem Mitarbeiter des Site Reliability Engineering geprüft und kann auf der Seite verfolgt werden, die beim Einreichen deiner Anfrage angegeben wird.\n\nWenn dein XML-Dump während des Uploads eine Zeitüberschreitung aufweist, erstelle bitte eine Aufgabe auf [[Phorge]].\n\nWenn du auch Bilder importieren möchtest, erstelle bitte eine Aufgabe in [[Phorge]].",
+	"requestimport-text": "Willkommen bei RequestImport! Um mit deinem Import zu beginnen, fülle bitte dieses Formular aus, damit wir deine Anfrage prüfen können. Deine Wiki-Anfrage wird von einem Mitarbeiter des Site Reliability Engineering geprüft und kann auf der Seite verfolgt werden, die beim Einreichen deiner Anfrage angegeben wird.\n\nWenn dein XML-Dump während des Uploads eine Zeitüberschreitung aufweist, erstelle bitte eine Aufgabe auf [[Phorge]].\n\nWenn du auch Bilder importieren möchtest, erstelle bitte eine Aufgabe in [[Phorge]].",
 	"restriction-delete": "Löschen",
 	"restriction-level-user": "Nur angemeldeten Benutzern erlauben",
 	"right-user": "Seiten bearbeiten, die als „{{int:protect-level-user}}“ geschützt sind.",
