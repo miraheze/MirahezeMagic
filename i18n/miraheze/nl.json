@@ -157,7 +157,7 @@
 	"mirahezesurvey": "Miraheze Jaaronderzoek 2022",
 	"prefs-forcesafemode-label": "Altijd veilige modus forceren?",
 	"protect-level-user": "Alleen ingelogde gebruikers toestaan",
-	"requestimportdump-text": "Welkom bij ImportDump! Om aan de slag te gaan met uw import, vult u dit formulier in zodat we het kunnen beoordelen. Uw wiki-verzoek zal worden beoordeeld door een lid van Site Reliability Engineering, en kan worden gevolgd op de pagina die zal worden gegeven wanneer u uw verzoek indient.\n\nAls uw XML-dump tijdens het uploaden een time-out krijgt, maak dan een taak aan op [[Phorge]].\n\nWilt u ook afbeeldingen importeren, maak ook dan een taak aan op [[Phorge]].",
+	"requestimport-text": "Welkom bij ImportDump! Om aan de slag te gaan met uw import, vult u dit formulier in zodat we het kunnen beoordelen. Uw wiki-verzoek zal worden beoordeeld door een lid van Site Reliability Engineering, en kan worden gevolgd op de pagina die zal worden gegeven wanneer u uw verzoek indient.\n\nAls uw XML-dump tijdens het uploaden een time-out krijgt, maak dan een taak aan op [[Phorge]].\n\nWilt u ook afbeeldingen importeren, maak ook dan een taak aan op [[Phorge]].",
 	"restriction-delete": "Verwijderen",
 	"restriction-level-user": "Alleen ingelogde gebruikers toestaan",
 	"right-user": "Pagina's bewerken die beveiligd zijn als \"{{int:protect-level-user}}\"",

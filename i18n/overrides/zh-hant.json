@@ -15,7 +15,7 @@
 	"miraheze-importdump-help-target": "這必須是有效的資料庫名稱。要查找 wiki 的資料庫名稱，請參閱 wiki 上的 Special:ManageWiki/core。\n\n如果您尚未建立 wiki，請先使用 [[Special:RequestWiki]] 來請求您的 wiki，然後然後在您的 wiki 建立後返回此處，來發出此匯入傾印請求。",
 	"miraheze-importdump-help-upload-file": "僅允許 XML 檔案。如果您的 XML 檔案在壓縮存檔裡，請嘗試在上傳之前先解壓縮。。\n\n請確認您上傳的 XML 檔案版本裡包含所有修訂歷史記錄。",
 	"miraheze-importdump-import-failed-comment": "匯入提供的 XML 時發生錯誤。系統管理員已收到相關通知。",
-	"miraheze-importtext": "請從來源 wiki 使用[[Special:Export|匯出工具]]來匯出檔案。之後儲存在您的電腦裡並上傳於此。<br />請注意，若檔案內容較大（大於 2 MB）會因技術方面限制無法完成，您會需要[[M:Special:RequestImportDump|請求匯入]]。<br />我們建議不要直接從維基百科匯入資訊框，請參閱[[m:Infoboxes|此頁面]]來獲得更多資訊。",
+	"miraheze-importtext": "請從來源 wiki 使用[[Special:Export|匯出工具]]來匯出檔案。之後儲存在您的電腦裡並上傳於此。<br />請注意，若檔案內容較大（大於 2 MB）會因技術方面限制無法完成，您會需要[[M:Special:RequestImport|請求匯入]]。<br />我們建議不要直接從維基百科匯入資訊框，請參閱[[m:Infoboxes|此頁面]]來獲得更多資訊。",
 	"miraheze-newsignuppage-loginform-tos": "我已讀過、了解以上內容，並同意[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用條款]與[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隱私方針]",
 	"miraheze-newsignuppage-must-accept-tos": "您必須接受使用條款才能夠建立帳號！",
 	"miraheze-oathauth-step1": "重要！在啟用此之前請確認已讀過 OATHAuth 頁面！步驟 1：下載雙重驗證程式",

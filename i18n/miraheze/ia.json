@@ -149,7 +149,7 @@
 	"mirahezesurvey": "Sondage annual 2022 de Miraheze",
 	"prefs-forcesafemode-label": "Sempre fortiar le modo secur?",
 	"protect-level-user": "Permitter solmente le usatores con session aperte",
-	"requestimportdump-text": "Benvenite a ImportDump! Pro comenciar con tu importation, per favor completa iste formulario de sorta que nos pote examinar tu requesta. Tu requesta de wiki essera examinate per un membro de Site Reliability Engineering, e illo pote esser traciate al pagina que apparera quando tu submitte tu requesta.\n\nSi tu instantaneo XML expira durante le incargamento, per favor crea un carga sur [[Phorge]].\n\nSi tu vole importar imagines tamben, per favor crea un carga sur [[Phorge]].",
+	"requestimport-text": "Benvenite a ImportDump! Pro comenciar con tu importation, per favor completa iste formulario de sorta que nos pote examinar tu requesta. Tu requesta de wiki essera examinate per un membro de Site Reliability Engineering, e illo pote esser traciate al pagina que apparera quando tu submitte tu requesta.\n\nSi tu instantaneo XML expira durante le incargamento, per favor crea un carga sur [[Phorge]].\n\nSi tu vole importar imagines tamben, per favor crea un carga sur [[Phorge]].",
 	"restriction-delete": "Deler",
 	"restriction-level-user": "Permitter solmente le usatores con session aperte",
 	"right-user": "Modificar paginas protegite con \"{{int:protect-level-user}}\"",

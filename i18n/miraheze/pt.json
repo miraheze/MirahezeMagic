@@ -141,7 +141,7 @@
 	"mirahezesurvey": "Sondagem Anual do Miraheze 2022",
 	"prefs-forcesafemode-label": "Forçar sempre o modo de segurança?",
 	"protect-level-user": "Permitir apenas utilizadores com sessão iniciada",
-	"requestimportdump-text": "Bem-vindo(a) ao ImportDump! Para começar a importar, preencha este formulário para que possamos analisar o seu pedido. O pedido será revisto por um membro da Área de Fiabilidade do ''Site'' e pode ser seguido na página que será fornecida ao submetê-lo.\n\nSe o XML expirar durante o carregamento, crie uma tarefa no [[Phorge]].\n\nSe deseja importar também imagens, crie uma tarefa no [[Phorge]].",
+	"requestimport-text": "Bem-vindo(a) ao ImportDump! Para começar a importar, preencha este formulário para que possamos analisar o seu pedido. O pedido será revisto por um membro da Área de Fiabilidade do ''Site'' e pode ser seguido na página que será fornecida ao submetê-lo.\n\nSe o XML expirar durante o carregamento, crie uma tarefa no [[Phorge]].\n\nSe deseja importar também imagens, crie uma tarefa no [[Phorge]].",
 	"restriction-delete": "Eliminar",
 	"restriction-level-user": "Permitir apenas utilizadores com sessão iniciada",
 	"right-user": "Editar páginas protegidas como \"{{int:protect-level-user}}\"",
