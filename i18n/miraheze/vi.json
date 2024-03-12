@@ -110,7 +110,7 @@
 	"mirahezesurvey": "Khảo sát Hàng năm Miraheze 2022",
 	"prefs-forcesafemode-label": "Luôn buộc chế độ an toàn?",
 	"protect-level-user": "Chỉ cho phép người dùng đã đăng nhập",
-	"requestimportdump-text": "Chào mừng bạn đến với ImportDump! Để bắt đầu quá trình nhập, vui lòng điền vào biểu mẫu này để chúng tôi có thể xem xét yêu cầu của bạn. Yêu cầu wiki của bạn sẽ được một Quản trị viên hệ thống xem xét và nó có thể được theo dõi tại trang sẽ được cung cấp khi bạn gửi yêu cầu.\n\nNếu kết xuất XML của bạn hết thời gian trong quá trình tải lên, hoặc bạn cũng muốn nhập hình ảnh, vui lòng tạo một tác vụ trên [[Phorge]].",
+	"requestimport-text": "Chào mừng bạn đến với RequestImport! Để bắt đầu quá trình nhập, vui lòng điền vào biểu mẫu này để chúng tôi có thể xem xét yêu cầu của bạn. Yêu cầu wiki của bạn sẽ được một Quản trị viên hệ thống xem xét và nó có thể được theo dõi tại trang sẽ được cung cấp khi bạn gửi yêu cầu.\n\nNếu kết xuất XML của bạn hết thời gian trong quá trình tải lên, hoặc bạn cũng muốn nhập hình ảnh, vui lòng tạo một tác vụ trên [[Phorge]].",
 	"requestssl-text": "Chào mừng đến với RequestSSL! Vui lòng đảm bảo đã đọc hướng dẫn [[Custom domains|Tên miền tùy chỉnh]] và đảm bảo miền của bạn được trỏ chính xác cũng như wiki của bạn đã được tạo trước khi thực hiện yêu cầu chứng chỉ SSL. Yêu cầu miền tùy chỉnh của bạn sẽ được quản trị viên hệ thống xem xét và nó có thể được theo dõi tại trang sẽ được cung cấp khi bạn gửi yêu cầu.\n\nNếu bạn muốn sử dụng chứng chỉ SSL của riêng mình; hay khi có lỗi hoặc bạn muốn thiết lập chuyển hướng, vui lòng tạo tác vụ trên [[Phorge]].",
 	"restriction-delete": "Xóa",
 	"restriction-level-user": "Chỉ cho phép người dùng đã đăng nhập",

@@ -9,7 +9,7 @@
 	},
 	"miraheze-centralauth-groupname": "ميراهيز",
 	"miraheze-dberr-again": "حاول الانتظار بضع دقائق وإعادة التحميل، لمزيد من المعلومات حول هذا الخطأ; تُرجَى مراجعة صفحة تويتر الخاصة بنا (Twitter.com/Miraheze) أو الاتصال بإداريي النظام عن طريق الاتصال بـ#miraheze على irc.libera.chat",
-	"miraheze-importtext": "يرجى تصدير الملف من ويكي المصدر باستخدام [[Special:Export|أداة التصدير]].! N! احفظه على جهاز الكمبيوتر الخاص بك وقم بتحميله هنا.<br /> يرجى ملاحظة أنه إذا كان الملف كبيرًا قليلاً (~> 2 ميجابايت) ، فستحتاج إلى [[M:Special:RequestImportDump|طلب استيراد]] حيث لا يمكن القيام بذلك هنا بسبب القيود الفنية.",
+	"miraheze-importtext": "يرجى تصدير الملف من ويكي المصدر باستخدام [[Special:Export|أداة التصدير]].! N! احفظه على جهاز الكمبيوتر الخاص بك وقم بتحميله هنا.<br /> يرجى ملاحظة أنه إذا كان الملف كبيرًا قليلاً (~> 2 ميجابايت) ، فستحتاج إلى [[M:Special:RequestImport|طلب استيراد]] حيث لا يمكن القيام بذلك هنا بسبب القيود الفنية.",
 	"miraheze-newsignuppage-loginform-tos": "لقد قرأت وفهمت ووافقت على [https://meta.miraheze.org/wiki/Terms_of_Use شروط الاستخدام] و[https://meta.miraheze.org/wiki/Privacy_Policy سياسة الخصوصية]",
 	"miraheze-newsignuppage-must-accept-tos": "يجب عليك قبول شروط الاستخدام حتى تتمكن من إنشاء حساب!",
 	"miraheze-oathauth-step1": "'''مهم! يُرجَى التأكد من قراءة <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/OATHAuth OATHAuth]</span> قبل تمكين هذه الإضافة!'''<br/>الخطوة 1: تنزيل برنامج المصادقة الثنائية",

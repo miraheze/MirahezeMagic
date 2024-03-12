@@ -151,7 +151,7 @@
 	"mirahezesurvey": "Letna raziskava Miraheze 2022",
 	"prefs-forcesafemode-label": "Želite vedno vsiliti varen način?",
 	"protect-level-user": "Dovoli samo prijavljenim uporabnikom",
-	"requestimportdump-text": "Pozdravljeni v ImportDump! Če želite začeti z uvozom, izpolnite ta obrazec, da bomo lahko pregledali vašo prošnjo. Vašo prošnjo za viki bo pregledal član inženirstva za zanesljivost spletnega mesta in ji boste lahko sledili na strani, ki bo navedena ob oddaji vaše prošnje.\n\nČe bo izpis XML-ja med nalaganjem pretekel, ustvarite opravilo v [[Phorge]]ju.\n\nČe želite uvoziti tudi slike, ustvarite opravilo v [[Phorge]]ju.",
+	"requestimport-text": "Pozdravljeni v RequestImport! Če želite začeti z uvozom, izpolnite ta obrazec, da bomo lahko pregledali vašo prošnjo. Vašo prošnjo za viki bo pregledal član inženirstva za zanesljivost spletnega mesta in ji boste lahko sledili na strani, ki bo navedena ob oddaji vaše prošnje.\n\nČe bo izpis XML-ja med nalaganjem pretekel, ustvarite opravilo v [[Phorge]]ju.\n\nČe želite uvoziti tudi slike, ustvarite opravilo v [[Phorge]]ju.",
 	"requestssl-text": "Pozdravljeni v RequestSSL! Preberite [[Custom domains]] in se prepričajte, da je vaša domena pravilno usmerjena, preden tu zaprosite za SSL. Preden lahko zaprosite za SSL, morate ustvariti tudi svoj viki. Vašo prošnjo za domeno po meri bo pregledal administrator sistema in ji bo mogoče slediti na strani, ki bo ustvarjena ob njeni oddaji.\n\nČe ne želite Let's Encrypt in želite svoje lastno potrdilo SSL, komentirajte z uporabo [[Phorge]]ja.\n\nV primeru napak ustvarite opravilo v [[Phorge]]ju.",
 	"restriction-delete": "Izbriši",
 	"restriction-level-user": "Dovoli samo prijavljenim uporabnikom",
