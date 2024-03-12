@@ -30,7 +30,6 @@ use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use MediaWiki\User\UserOptionsManager;
 use MediaWiki\WikiMap\WikiMap;
 use Memcached;
 use MessageCache;
@@ -83,28 +82,22 @@ class Hooks implements
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
-	/** @var UserOptionsManager */
-	private $userOptionsManager;
-
 	/**
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		HttpRequestFactory $httpRequestFactory,
-		UserOptionsManager $userOptionsManager
+		HttpRequestFactory $httpRequestFactory
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
-		$this->userOptionsManager = $userOptionsManager;
 	}
 
 	/**
@@ -112,7 +105,6 @@ class Hooks implements
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param UserOptionsManager $userOptionsManager
 	 *
 	 * @return self
 	 */
@@ -120,8 +112,7 @@ class Hooks implements
 		Config $mainConfig,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		HttpRequestFactory $httpRequestFactory,
-		UserOptionsManager $userOptionsManager
+		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
 			new ServiceOptions(
@@ -145,8 +136,7 @@ class Hooks implements
 			),
 			$commentStore,
 			$dbLoadBalancerFactory,
-			$httpRequestFactory,
-			$userOptionsManager
+			$httpRequestFactory
 		);
 	}
 
