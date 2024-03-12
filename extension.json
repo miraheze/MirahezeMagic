@@ -136,8 +136,7 @@
 				"MainConfig",
 				"CommentStore",
 				"DBLoadBalancerFactory",
-				"HttpRequestFactory",
-				"UserOptionsManager"
+				"HttpRequestFactory"
 			]
 		}
 	},
