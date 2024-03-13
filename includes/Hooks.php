@@ -126,10 +126,10 @@ class Hooks implements
 					'LanguageCode',
 					'LocalDatabases',
 					'ManageWikiSettings',
+					'MirahezeMagicAccessIdsMap',
 					'MirahezeMagicMemcachedServers',
 					'MirahezeReportsBlockAlertKeywords',
 					'MirahezeReportsWriteKey',
-					'MirahezeStaffAccessIds',
 					'Script',
 				],
 				$mainConfig
@@ -605,16 +605,18 @@ class Hooks implements
 	}
 
 	public function onUserGetRightsRemove( $user, &$rights ) {
-		// Remove read from stewards on staffwiki and iowiki.
-		if ( ( WikiMap::isCurrentWikiId( 'staffwiki' ) || WikiMap::isCurrentWikiId( 'iowiki' ) ) && $user->isRegistered() ) {
-			$centralAuthUser = CentralAuthUser::getInstance( $user );
+		// Remove read from global groups on some wikis
+		foreach ( $this->options->get( 'MirahezeMagicAccessIdsMap' ) as $wiki => $ids ) {
+			if ( WikiMap::isCurrentWikiId( $wiki ) && $user->isRegistered() ) {
+				$centralAuthUser = CentralAuthUser::getInstance( $user );
 
-			if ( $centralAuthUser &&
-				$centralAuthUser->exists() &&
-				!in_array( $centralAuthUser->getId(), $this->options->get( 'MirahezeStaffAccessIds' ) )
-			) {
-				$rights = array_unique( $rights );
-				unset( $rights[array_search( 'read', $rights )] );
+				if ( $centralAuthUser &&
+					$centralAuthUser->exists() &&
+					!in_array( $centralAuthUser->getId(), $ids )
+				) {
+					$rights = array_unique( $rights );
+					unset( $rights[array_search( 'read', $rights )] );
+				}
 			}
 		}
 	}
