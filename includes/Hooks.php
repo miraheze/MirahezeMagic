@@ -11,7 +11,6 @@ use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
-use MediaWiki\Hook\BeforeInitializeHook;
 use MediaWiki\Hook\BlockIpCompleteHook;
 use MediaWiki\Hook\ContributionsToolLinksHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
@@ -26,13 +25,11 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
-use MediaWiki\Preferences\Hook\GetPreferencesHook;
 use MediaWiki\Shell\Shell;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use MediaWiki\User\UserOptionsManager;
 use MediaWiki\WikiMap\WikiMap;
 use Memcached;
 use MessageCache;
@@ -53,7 +50,6 @@ use Wikimedia\Rdbms\ILBFactory;
 
 class Hooks implements
 	AbuseFilterShouldFilterActionHook,
-	BeforeInitializeHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
@@ -63,7 +59,6 @@ class Hooks implements
 	CreateWikiTablesHook,
 	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
-	GetPreferencesHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
 	MessageCacheFetchOverridesHook,
@@ -87,28 +82,22 @@ class Hooks implements
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
-	/** @var UserOptionsManager */
-	private $userOptionsManager;
-
 	/**
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param UserOptionsManager $userOptionsManager
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		HttpRequestFactory $httpRequestFactory,
-		UserOptionsManager $userOptionsManager
+		HttpRequestFactory $httpRequestFactory
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
-		$this->userOptionsManager = $userOptionsManager;
 	}
 
 	/**
@@ -116,7 +105,6 @@ class Hooks implements
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
 	 * @param HttpRequestFactory $httpRequestFactory
-	 * @param UserOptionsManager $userOptionsManager
 	 *
 	 * @return self
 	 */
@@ -124,8 +112,7 @@ class Hooks implements
 		Config $mainConfig,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		HttpRequestFactory $httpRequestFactory,
-		UserOptionsManager $userOptionsManager
+		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
 			new ServiceOptions(
@@ -149,8 +136,7 @@ class Hooks implements
 			),
 			$commentStore,
 			$dbLoadBalancerFactory,
-			$httpRequestFactory,
-			$userOptionsManager
+			$httpRequestFactory
 		);
 	}
 
@@ -698,20 +684,6 @@ class Hooks implements
 
 				break;
 			}
-		}
-	}
-
-	public function onGetPreferences( $user, &$preferences ) {
-		$preferences['forcesafemode'] = [
-			'type' => 'toggle',
-			'label-message' => 'prefs-forcesafemode-label',
-			'section' => 'rendering',
-		];
-	}
-
-	public function onBeforeInitialize( $title, $unused, $output, $user, $request, $mediaWiki ) {
-		if ( $this->userOptionsManager->getBoolOption( $user, 'forcesafemode' ) ) {
-			$request->setVal( 'safemode', '1' );
 		}
 	}
 
