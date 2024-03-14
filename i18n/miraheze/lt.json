@@ -111,7 +111,6 @@
 	"miraheze-survey-yes": "Taip",
 	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''„Miraheze“ darbuotojai'''] pastebėjo, kad šioje viki nėra [[Special:RecentChanges|'''keitimų''']] ar [[Special:Logs|'''žurnalo įrašų''']], atliktų per paskutines 45 dienas. Jei norite, kad ši viki nebūtų '''uždaryta''', pradėkite čia rodyti veiklos požymius. Jei per ateinančias 15 dienų nebus jokių požymių, kad ši viki naudojama, ši viki gali būti uždaryta pagal [https://meta.miraheze.org/wiki/Dormancy_Policy '''Ramybės politika''']. Tada šį vikį galės perimti kitas naudotojas. Jei po 135 dienų ji nebus perimta ir vis dar bus neaktyvi, ši viki bus tinkama '''trinti'''. Būtinai susipažinkite su „Miraheze“ [https://meta.miraheze.org/wiki/Dormancy_Policy ramybės politika]. Jei šioje viki yra veiklos, galite pereiti į [[MediaWiki:Sitenotice]] ir patys pašalinti šį pranešimą. Jei turite kitų klausimų ar rūpesčių, nedvejodami [https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''kreipkitės į mus'''].</span></div>",
 	"mirahezesurvey": "2022 m. „Miraheze“ metinė apklausa",
-	"prefs-forcesafemode-label": "Visada priverstinai naudoti saugųjį režimą?",
 	"protect-level-user": "Leisti tik prisijungusius naudotojus",
 	"restriction-delete": "Ištrinti",
 	"restriction-level-user": "Leisti tik prisijungusius naudotojus",

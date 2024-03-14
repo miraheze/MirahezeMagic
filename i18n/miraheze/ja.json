@@ -169,7 +169,6 @@
 	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze スタッフ'''] は、このWikiに過去45日以内に行われた[[Special:RecentChanges|'''編集''']]や [[Special:Logs|'''ログ''']] がないことに気づきました。のWikiが'''閉鎖'''されるのを防ぎたいのであれば、ここで活動の兆しを見せてください。今後15日以内にこのWikiが使われる兆しがない場合、このWikiは[https://meta.miraheze.org/wiki/Dormancy_Policy '''休眠ポリシー''']に従って閉鎖されるかもしれません。その場合、このWikiは他の利用者による引き継ぎの対象となります。もし引き継がれず、135日経っても活動していない場合、このWikiは'''削除'''の対象となります。Mirahezeの[https://meta.miraheze.org/wiki/Dormancy_Policy 休眠ポリシー]をよく理解しておいてください。このWikiに活動があれば、[[MediaWiki:Sitenotice]]にアクセスして、自分でこの通知を削除することができます。また、何か質問や心配事があれば、お気軽に[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''スチュワードの掲示板''']でご相談ください。",
 	"mirahezemagic-description": "Miraheze固有のMediaWikiメッセージ・スクリプト・フック",
 	"mirahezesurvey": "Miraheze 2022年次調査",
-	"prefs-forcesafemode-label": "常にセーフモードを強制しますか?",
 	"protect-level-user": "登録利用者にのみ許可",
 	"requestimport-text": "RequestImport へようこそ!インポートを開始するには、リクエストを確認できるよう、このフォームにご記入ください。あなたのウィキ リクエストはサイト信頼性エンジニアリングのメンバーによって検討され、リクエストの送信時に表示されるページで追跡できます。\n\nアップロード中に XML ダンプがタイムアウトした場合は、[[Phorge]] でタスクを作成してください。\n\n画像もインポートしたい場合は、[[Phorge]] でタスクを作成してください。",
 	"restriction-delete": "削除",

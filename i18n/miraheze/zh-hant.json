@@ -159,7 +159,6 @@
 	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze 人員''']已通知此 wiki 在過去 45 天內[[Special:RecentChanges|'''沒有做出編輯''']]或產生出[[Special:Logs|'''日誌''']]。若您想防止此 wiki 被'''關閉'''，請在此開始弄出有操作的跡象。若在下一個 15 天後仍沒有跡象顯示出此 wiki 有被使用，此 wiki 可能會被依照[https://meta.miraheze.org/wiki/Dormancy_Policy/zh-hant '''休眠方針''']給關閉。此 wiki 如有被其他人接手，便可符合使用資格。若未被其他人接手，並且從現在開始 135 天期間仍沒有做出操作，此 wiki 將符合被'''刪除'''的條件。請確認您已孰悉 Miraheze 的[https://meta.miraheze.org/wiki/Dormancy_Policy/zh-hant 休眠方針]。若此 wiki 已有操作在進行，您可以前往 [[MediaWiki:Sitenotice]] 自行移除此通知。如果您有任何其它問題或在意的地方，請不要猶豫馬上[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''聯絡我們''']。</span></div>",
 	"mirahezemagic-description": "MediaWiki 訊息、腳本，以及用於 Miraheze 的特定掛勾",
 	"mirahezesurvey": "Miraheze 2022 年度調查",
-	"prefs-forcesafemode-label": "總是強制使用安全模式？",
 	"protect-level-user": "只允許登入使用者",
 	"requestimport-text": "歡迎來到 RequestImport！要開始您的匯入前，請填寫此份表單，以便我們審核您的申請。您的 wiki 申請將由站點可靠性工程團隊的成員審核，並且可以在提交申請時提供的頁面上追踪狀態。\n\n如果您的 XML 傾印在上傳過程中逾時，請在 [[Phorge]] 上新增工單。\n\n若您想匯入圖片，也請在 [[Phorge]] 上新增工單。",
 	"requestssl-text": "歡迎來到 RequestSSL！在這裡請求 SSL 憑證之前，請閱讀[[Custom domains|自訂網域]]，在請求 SSL 憑證前與建立您的 wiki 之前，請確保可以正確指向您的網域。您的自訂網域請求會由系統管理員審核，並且會在提交請求後，給予您可追蹤處理情況的頁面。\n\n如果您想要用自己的 SSL 憑證供應商以取代 Let's Encrypt，請使用 [[Phorge]] 來建立任務。\n\n若有發生錯誤的情況，或是您想請求重新導向，一樣請在 [[Phorge]] 上建立任務。",
