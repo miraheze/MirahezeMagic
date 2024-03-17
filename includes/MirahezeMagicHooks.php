@@ -446,7 +446,6 @@ class MirahezeMagicHooks implements
 			'importdump-help-target',
 			'importdump-help-upload-file',
 			'importtext',
-			'interwiki_intro',
 			'newsignuppage-loginform-tos',
 			'newsignuppage-must-accept-tos',
 			'oathauth-step1',
