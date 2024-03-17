@@ -501,6 +501,7 @@ class Hooks implements
 			'importdump-help-upload-file',
 			'importdump-import-failed-comment',
 			'importtext',
+			'interwiki_intro',
 			'newsignuppage-loginform-tos',
 			'newsignuppage-must-accept-tos',
 			'oathauth-step1',
