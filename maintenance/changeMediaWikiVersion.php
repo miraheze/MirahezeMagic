@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +24,17 @@
  * @version 1.0
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
+require_once "$IP/maintenance/Maintenance.php";
+
+use Maintenance;
+use MediaWiki\MainConfigNames;
 use Miraheze\CreateWiki\RemoteWiki;
+use MirahezeFunctions;
 
 class ChangeMediaWikiVersion extends Maintenance {
 	public function __construct() {
@@ -50,7 +60,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 				$this->fatalError( 'Unable to read file, exiting' );
 			}
 		} else {
-			$dbnames[] = $this->getConfig()->get( 'DBname' );
+			$dbnames[] = $this->getConfig()->get( MainConfigNames::DBname );
 		}
 
 		foreach ( $dbnames as $dbname ) {
@@ -63,7 +73,10 @@ class ChangeMediaWikiVersion extends Maintenance {
 					continue;
 				}
 
-				$wiki = new RemoteWiki( $dbname );
+				$wiki = new RemoteWiki(
+					$dbname,
+					$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+				);
 
 				$wiki->newRows['wiki_version'] = $newVersion;
 				$wiki->changes['mediawiki-version'] = [
@@ -79,7 +92,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 	}
 
 	private function getWikiDbNamesByRegex( string $pattern ): array {
-		$allDbNames = $this->getConfig()->get( 'LocalDatabases' );
+		$allDbNames = $this->getConfig()->get( MainConfigNames::LocalDatabases );
 
 		$matchingDbNames = [];
 		foreach ( $allDbNames as $dbName ) {

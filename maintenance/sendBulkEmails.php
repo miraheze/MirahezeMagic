@@ -1,5 +1,7 @@
 <?php
 
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,10 +23,21 @@
  * @ingroup Wikimedia
  */
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
 
-use MediaWiki\MediaWikiServices;
+require_once "$IP/maintenance/Maintenance.php";
+
+use MailAddress;
+use Maintenance;
 use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Status\Status;
+use MediaWiki\Title\Title;
+use MediaWiki\User\User;
+use Message;
+use TextContent;
 
 /**
  * Send a bulk email message to a list of wiki account holders using
@@ -145,7 +158,9 @@ class SendBulkEmails extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
+
 		$this->start = microtime( true );
+
 		$this->addDescription( 'Send bulk email to a list of wiki account holders' );
 		$this->addOption( 'subject', 'Email subject (string)', true, true );
 		$this->addOption( 'body', 'Email body (file)', true, true );
@@ -178,9 +193,8 @@ class SendBulkEmails extends Maintenance {
 		$this->delay = $this->getOption( 'delay', self::DEFAULT_DELAY );
 		$this->dryRun = $this->hasOption( 'dry-run' );
 
-		Hooks::register(
-			'UserMailerTransformMessage',
-			[ $this, 'onUserMailerTransformMessage' ]
+		$this->getServiceContainer()->getHookContainer()->register(
+			'UserMailerTransformMessage', [ $this, 'onUserMailerTransformMessage' ]
 		);
 
 		$to = $this->getFileHandle( 'to' );
@@ -205,7 +219,7 @@ class SendBulkEmails extends Maintenance {
 	 */
 	private function processUser( $username ) {
 		$this->total++;
-		$user = User::newFromName( $username );
+		$user = $this->getServiceContainer()->getUserFactory()->newFromName( $username );
 		if ( !$user || !$user->getId() ) {
 			$this->missing++;
 			$this->output( "ERROR - Unknown user {$username}\n" );
@@ -276,12 +290,12 @@ class SendBulkEmails extends Maintenance {
 			"\n";
 		$this->output( sprintf( $format,
 			wfTimestamp( TS_DB ),
-			$this->total,     $this->total / $delta,
-			$this->ok,        $this->reportPcnt( $this->ok ),
-			$this->failed,    $this->reportPcnt( $this->failed ),
-			$this->missing,   $this->reportPcnt( $this->missing ),
+			$this->total, $this->total / $delta,
+			$this->ok, $this->reportPcnt( $this->ok ),
+			$this->failed, $this->reportPcnt( $this->failed ),
+			$this->missing, $this->reportPcnt( $this->missing ),
 			$this->noreceive, $this->reportPcnt( $this->noreceive ),
-			$this->optedout,  $this->reportPcnt( $this->optedout )
+			$this->optedout, $this->reportPcnt( $this->optedout )
 		) );
 	}
 
@@ -291,7 +305,7 @@ class SendBulkEmails extends Maintenance {
 	private function getSender() {
 		if ( $this->hasOption( 'from' ) ) {
 			$uname = $this->getOption( 'from' );
-			$from = User::newFromName( $uname );
+			$from = $this->getServiceContainer()->getUserFactory()->newFromName( $uname );
 			if ( !$from || !$from->getId() ) {
 				$this->fatalError( "ERROR - Unknown user {$uname}" );
 			}
@@ -306,8 +320,9 @@ class SendBulkEmails extends Maintenance {
 	private function getReplyTo() {
 		if ( $this->hasOption( 'reply-to' ) ) {
 			$uname = $this->getOption( 'reply-to' );
-			$rt = User::newFromName( $uname );
+			$rt = $this->getServiceContainer()->getUserFactory()->newFromName( $uname );
 			if ( !$rt || !$rt->getId() ) {
+				$rt = new User;
 				$this->fatalError( "ERROR - Unknown user {$uname}" );
 			}
 			return MailAddress::newFromUser( $rt );
@@ -373,10 +388,9 @@ class SendBulkEmails extends Maintenance {
 			}
 			$this->optoutUrl = $title->getFullURL(
 				'', false, PROTO_CANONICAL );
-			$rev = MediaWikiServices::getInstance()
-				->getRevisionLookup()
-				->getRevisionByTitle( $title );
-			$content = ContentHandler::getContentText( $rev->getContent( SlotRecord::MAIN ) );
+			$rev = $this->getServiceContainer()->getRevisionLookup()->getRevisionByTitle( $title );
+			$contentText = $rev->getContent( SlotRecord::MAIN );
+			$content = ( $contentText instanceof TextContent ) ? $contentText->getText() : '';
 			$inList = false;
 			foreach ( explode( "\n", $content ) as $line ) {
 				if ( !$inList ) {

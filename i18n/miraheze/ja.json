@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"1108-Kiju",
 			"Buehl",
 			"Buntschann",
 			"Funa-enpitu",
@@ -14,6 +15,7 @@
 			"MuratTheTurkish",
 			"Omotecho",
 			"Shirayuki",
+			"Waki285",
 			"Yamagata Yusuke",
 			"おはぐろ蜻蛉",
 			"しぃ",
@@ -89,6 +91,7 @@
 	"miraheze-donate": "Mirahezeに寄付",
 	"miraheze-faq": "よくある質問と回答",
 	"miraheze-helpcenter": "Mirahezeヘルプセンターについて",
+	"miraheze-label-managewiki-mediawiki-version": "MediaWiki バージョン",
 	"miraheze-requestfeatures": "ウィキの機能を申請する",
 	"miraheze-requestwiki": "ウィキを申請する",
 	"miraheze-sidebar-donate": "寄付",
@@ -136,7 +139,7 @@
 	"miraheze-survey-q7-si": "Miraheze Site Reliability Engineering には好印象を持っています",
 	"miraheze-survey-q7-speed": "ウィキを利用するとき、最近の（1〜2週間）の閲覧速度に満足しています。",
 	"miraheze-survey-q7-st": "Miraheze Stewardsに良い印象があります",
-	"miraheze-survey-q7-tasks": "Phabricatorで申請したタスクが満足のいく形で解決した。",
+	"miraheze-survey-q7-tasks": "Phorgeで申請したタスクが解決されて満足した。",
 	"miraheze-survey-q7-up": "Mirahezeの連続稼働時間に満足しています。",
 	"miraheze-survey-q7-wc": "依頼したウィキはすぐに作成された",
 	"miraheze-survey-q7": "以下の記述について、1が全くそう思わない、5がそうおもうという1～5の評価をお願いします。",
@@ -166,9 +169,8 @@
 	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze スタッフ'''] は、このWikiに過去45日以内に行われた[[Special:RecentChanges|'''編集''']]や [[Special:Logs|'''ログ''']] がないことに気づきました。のWikiが'''閉鎖'''されるのを防ぎたいのであれば、ここで活動の兆しを見せてください。今後15日以内にこのWikiが使われる兆しがない場合、このWikiは[https://meta.miraheze.org/wiki/Dormancy_Policy '''休眠ポリシー''']に従って閉鎖されるかもしれません。その場合、このWikiは他の利用者による引き継ぎの対象となります。もし引き継がれず、135日経っても活動していない場合、このWikiは'''削除'''の対象となります。Mirahezeの[https://meta.miraheze.org/wiki/Dormancy_Policy 休眠ポリシー]をよく理解しておいてください。このWikiに活動があれば、[[MediaWiki:Sitenotice]]にアクセスして、自分でこの通知を削除することができます。また、何か質問や心配事があれば、お気軽に[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''スチュワードの掲示板''']でご相談ください。",
 	"mirahezemagic-description": "Miraheze固有のMediaWikiメッセージ・スクリプト・フック",
 	"mirahezesurvey": "Miraheze 2022年次調査",
-	"prefs-forcesafemode-label": "常にセーフモードを強制しますか?",
 	"protect-level-user": "登録利用者にのみ許可",
-	"requestimportdump-text": "ImportDump へようこそ!インポートを開始するには、リクエストを確認できるよう、このフォームにご記入ください。あなたのウィキ リクエストはサイト信頼性エンジニアリングのメンバーによって検討され、リクエストの送信時に表示されるページで追跡できます。\n\nアップロード中に XML ダンプがタイムアウトした場合は、[[Phabricator]] でタスクを作成してください。\n\n画像もインポートしたい場合は、[[Phabricator]] でタスクを作成してください。",
+	"requestimport-text": "RequestImport へようこそ!インポートを開始するには、リクエストを確認できるよう、このフォームにご記入ください。あなたのウィキ リクエストはサイト信頼性エンジニアリングのメンバーによって検討され、リクエストの送信時に表示されるページで追跡できます。\n\nアップロード中に XML ダンプがタイムアウトした場合は、[[Phorge]] でタスクを作成してください。\n\n画像もインポートしたい場合は、[[Phorge]] でタスクを作成してください。",
 	"restriction-delete": "削除",
 	"restriction-level-user": "登録利用者にのみ許可",
 	"right-user": "「{{int:protect-level-user}}」の保護が設定されたページを編集",
@@ -196,11 +198,11 @@
 	"sitematrix": "Mirahezeウィキの一覧",
 	"specialpages-group-wikimanage": "ウィキ管理",
 	"termsofservice": "利用規約",
-	"vanishuser": "ユーザが消える",
+	"vanishuser": "ユーザを消去する",
 	"vanishuser-action-label": "このユーザーを本当に消したいですか?",
-	"vanishuser-action-help": "すべての詳細が正しく入力されていることを必ず確認し、記録してください。",
+	"vanishuser-action-help": "すべての詳細が正しく入力されていることを必ず確認し、実行してください。",
 	"vanishuser-warning": "'''警告''': ユーザーをグローバルに消去しようとしています。続行する前に、すべての詳細を注意深く確認してください。",
-	"vanishuser-log-name": "ユーザー消失ログ",
-	"vanishuser-log-header": "これは、すべてのユーザーの失踪に関する基本的なログです。",
-	"logentry-vanishuser-action": "$1でユーザーが消滅しました。"
+	"vanishuser-log-name": "ユーザー消去ログ",
+	"vanishuser-log-header": "これは、すべてのユーザー消去に関するログです。",
+	"logentry-vanishuser-action": "$1 がユーザーを消去しました"
 }

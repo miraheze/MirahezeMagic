@@ -96,7 +96,6 @@
 	"miraheze-survey-yes": "{{Identical|Yes}}",
 	"miraheze-warnmessage": "Message to be displayed in site notice when a public wiki is inactive.",
 	"mirahezemagic-description": "The description of [[Special:Version]].",
-	"prefs-forcesafemode-label": "The label for the force safemode checkbox preference",
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",

@@ -1,4 +1,7 @@
 <?php
+
+namespace Miraheze\MirahezeMagic\Maintenance;
+
 /**
  * Merge $wgExtensionMessagesFiles from various extensions to produce a
  * single array containing all message files.
@@ -22,13 +25,20 @@
  * @ingroup Maintenance
  */
 
-# Start from scratch
-use MediaWiki\MainConfigNames;
-use MediaWiki\Settings\SettingsBuilder;
-
 define( 'MW_NO_EXTENSION_MESSAGES', 1 );
 
-require_once __DIR__ . '/../../../maintenance/Maintenance.php';
+$IP = getenv( 'MW_INSTALL_PATH' );
+if ( $IP === false ) {
+	$IP = __DIR__ . '/../../..';
+}
+
+require_once "$IP/maintenance/Maintenance.php";
+
+# Start from scratch
+use ExtensionRegistry;
+use Maintenance;
+use MediaWiki\MainConfigNames;
+use MediaWiki\Settings\SettingsBuilder;
 
 /**
  * Maintenance script that merges $wgExtensionMessagesFiles from various
@@ -53,15 +63,14 @@ class MergeMessageFileList extends Maintenance {
 	}
 
 	public function execute() {
-		$config = $this->getConfig();
-		$extensionEntryPointListFiles = $config->get( MainConfigNames::ExtensionEntryPointListFiles );
+		$extensionEntryPointListFiles = $this->getConfig()->get( MainConfigNames::ExtensionEntryPointListFiles );
 
 		if ( !count( $extensionEntryPointListFiles )
 			&& !$this->hasOption( 'list-file' )
 			&& !$this->hasOption( 'extensions-dir' )
 		) {
-			$this->fatalError( "Either --list-file or --extensions-dir must be provided if " .
-				"\$wgExtensionEntryPointListFiles is not set" );
+			$this->fatalError( 'Either --list-file or --extensions-dir must be provided if ' .
+				'$wgExtensionEntryPointListFiles is not set' );
 		}
 
 		$setupFiles = [];
@@ -186,10 +195,9 @@ class MergeMessageFileList extends Maintenance {
 			}
 		}
 
-		$config = $this->getConfig();
 		$vars = [
-			'wgExtensionMessagesFiles' => $config->get( MainConfigNames::ExtensionMessagesFiles ),
-			'wgMessagesDirs' => $config->get( MainConfigNames::MessagesDirs ),
+			'wgExtensionMessagesFiles' => $this->getConfig()->get( MainConfigNames::ExtensionMessagesFiles ),
+			'wgMessagesDirs' => $this->getConfig()->get( MainConfigNames::MessagesDirs ),
 		];
 
 		if ( $queue ) {
