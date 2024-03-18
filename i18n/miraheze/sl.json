@@ -53,8 +53,6 @@
 	"group-rollbacker": "Vračalci urejanj",
 	"group-steward-member": "{{GENDER:$1|upravnik|upravnica|upravnik_ca}}",
 	"group-steward": "Upravniki",
-	"group-sysadmin-member": "{{GENDER:$1|sistemski administrator|sistemska administratorka|sistemski_ka administrator_ka}}",
-	"group-sysadmin": "Sistemski administratorji",
 	"group-translationadmin-member": "{{GENDER:$1|administrator prevajanja|administratorka prevajanja|administrator_ka prevajanja}}",
 	"group-translationadmin": "Administratorji prevajanja",
 	"group-translator-member": "{{GENDER:$1|prevajalec|prevajalka|prevajalec_ka}}",

@@ -30,8 +30,6 @@
 	"group-rollbacker": "Tilbakestillere",
 	"group-steward-member": "{{GENDER:$1|forvalter}}",
 	"group-steward": "Forvaltere",
-	"group-sysadmin-member": "{{GENDER:$1|systemadministrator}}",
-	"group-sysadmin": "Systemadministratorer",
 	"group-translationadmin-member": "{{GENDER:$1|oversettelsesadministrator}}",
 	"group-translationadmin": "Oversettelsesadministratorer",
 	"group-translator-member": "{{GENDER:$1|oversetter}}",

@@ -44,8 +44,6 @@
 	"group-rollbacker": "Відкочувачі",
 	"group-steward-member": "{{GENDER:$1|стюард}}",
 	"group-steward": "Стюарди",
-	"group-sysadmin-member": "{{GENDER:$1|системний адміністратор|системна адміністраторка}}",
-	"group-sysadmin": "Системні адміністратори",
 	"group-translationadmin-member": "адміністратор перекладу",
 	"group-translationadmin": "Адміністратори перекладу",
 	"group-translator-member": "перекладач",

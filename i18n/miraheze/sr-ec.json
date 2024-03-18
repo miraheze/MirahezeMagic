@@ -39,8 +39,6 @@
 	"group-rollbacker": "Враћачи",
 	"group-steward-member": "{{GENDER:$1|стјуард}}",
 	"group-steward": "Стјуарди",
-	"group-sysadmin-member": "{{GENDER:$1|администратор система|администраторка система}}",
-	"group-sysadmin": "Администратори система",
 	"group-translationadmin-member": "{{GENDER:$1|администратор|администраторка}} за преводе",
 	"group-translationadmin": "Администратори превода",
 	"group-translator-member": "{{GENDER:$1|преводилац}}",

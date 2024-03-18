@@ -37,8 +37,6 @@
 	"group-rollbacker": "Tillbakarullare",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-steward": "Stewarder",
-	"group-sysadmin-member": "{{GENDER:$1|systemadministratör}}",
-	"group-sysadmin": "Systemadministratörer",
 	"group-translationadmin-member": "översättningsadministratörer",
 	"group-translationadmin": "Översättningsadministratörer",
 	"group-translator-member": "översättare",

@@ -37,8 +37,6 @@
 	"group-rollbacker": "रोलबैकर",
 	"group-steward-member": "{{GENDER:$1|स्टीवार्ड}}",
 	"group-steward": "स्टीवार्ड्स",
-	"group-sysadmin-member": "{{GENDER:$1|सिस्टम प्रबंधक}}",
-	"group-sysadmin": "सिस्टम प्रबंधक",
 	"group-translationadmin-member": "अनुवाद प्रबंधक",
 	"group-translationadmin": "अनुवाद प्रबंधक",
 	"group-translator-member": "अनुवादक",

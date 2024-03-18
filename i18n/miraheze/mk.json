@@ -32,8 +32,6 @@
 	"group-rollbacker": "Отповикувачи",
 	"group-steward-member": "{{GENDER:$1|надзорник}}",
 	"group-steward": "Надзорници",
-	"group-sysadmin-member": "{{GENDER:$1|системски администратор}}",
-	"group-sysadmin": "Системски администратори",
 	"group-translationadmin-member": "преводен администратор",
 	"group-translationadmin": "Преводни администратори",
 	"group-translator-member": "преведувач",

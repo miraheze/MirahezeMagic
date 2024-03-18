@@ -22,8 +22,6 @@
 	"group-proxybot": "Proxy Bot",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-steward": "Steward",
-	"group-sysadmin-member": "{{GENDER:$1|amministratore de sisteme}}",
-	"group-sysadmin": "Amministrature d'u sisteme",
 	"group-translationadmin-member": "{{GENDER:$1|amministratore de le traduziune}}",
 	"group-translationadmin": "Amministrature de le traduziune",
 	"group-translator-member": "{{GENDER:$1|traduttore}}",

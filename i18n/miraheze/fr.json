@@ -70,8 +70,6 @@
 	"group-rollbacker": "Révocateurs",
 	"group-steward-member": "{{GENDER:$1|}}steward",
 	"group-steward": "Stewards",
-	"group-sysadmin-member": "administrat{{GENDER:$1|eur|rice}} système",
-	"group-sysadmin": "Administrateurs système",
 	"group-translationadmin-member": "administrat{{GENDER:$1|eur|rice}} de traduction",
 	"group-translationadmin": "Administrateurs de traduction",
 	"group-translator-member": "traduct{{GENDER:$1|eur|rice}}",

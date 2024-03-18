@@ -37,8 +37,6 @@
 	"group-rollbacker": "S právom rollback",
 	"group-steward-member": "{{GENDER:$1|steward|stewardka}}",
 	"group-steward": "Stewardi",
-	"group-sysadmin-member": "{{GENDER:$1|správca systému|správkyňa systému}}",
-	"group-sysadmin": "Správcovia systému",
 	"group-translationadmin-member": "správca prekladov",
 	"group-translationadmin": "Správcovia prekladov",
 	"group-translator-member": "prekladateľ/ka",

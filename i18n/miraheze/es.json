@@ -66,8 +66,6 @@
 	"group-rollbacker": "Reversores",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-steward": "Stewards",
-	"group-sysadmin-member": "{{GENDER:$1|administrador de sistema|administradora de sistema}}",
-	"group-sysadmin": "Administradores de sistema",
 	"group-translationadmin-member": "{{GENDER:$1|administrador|administradora}} de traducción",
 	"group-translationadmin": "Administradores de traducción",
 	"group-translator-member": "{{GENDER:$1|traductor|traductora}}",

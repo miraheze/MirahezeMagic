@@ -79,8 +79,6 @@
 	"group-rollbacker": "回退员",
 	"group-steward-member": "{{GENDER:$1|监管员}}",
 	"group-steward": "监管员",
-	"group-sysadmin-member": "{{GENDER:$1|系统管理员}}",
-	"group-sysadmin": "系统管理员",
 	"group-translationadmin-member": "{{GENDER:$1|翻译管理员}}",
 	"group-translationadmin": "翻译管理员",
 	"group-translator-member": "{{GENDER:$1|译者}}",

@@ -41,8 +41,6 @@
 	"group-rollbacker": "Rollbacker",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-steward": "Stewards",
-	"group-sysadmin-member": "{{GENDER:$1|amministratore|amministratrice|amministratore/trice}} di sistema",
-	"group-sysadmin": "Amministratori di sistema",
 	"group-translationadmin-member": "{{GENDER:$1|amministratore|amministratrice|amministratore/trice}} delle traduzioni",
 	"group-translationadmin": "Amministratori delle traduzioni",
 	"group-translator-member": "{{GENDER:$1|traduttore|traduttrice|traduttore/trice}}",

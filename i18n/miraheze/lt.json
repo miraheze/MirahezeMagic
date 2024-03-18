@@ -24,8 +24,6 @@
 	"group-ipblock-exempt": "IP blokavimo išimtis",
 	"group-member": "Nariai",
 	"group-member-member": "{{GENDER:$1|narys|narė}}",
-	"group-sysadmin-member": "{{GENDER:$1|sistemos administratorius|sistemos administratorė}}",
-	"group-sysadmin": "Sistemos administratoriai",
 	"group-translationadmin-member": "{{GENDER:$1|vertimo administratorius|vertimo administratorė}}",
 	"group-translationadmin": "Vertimų administratoriai",
 	"group-translator-member": "{{GENDER:$1|vertėjas|vertėja}}",

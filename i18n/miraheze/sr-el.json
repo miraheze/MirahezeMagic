@@ -18,8 +18,6 @@
 	"group-rollbacker": "Vraćači",
 	"group-steward-member": "{{GENDER:$1|stjuard}}",
 	"group-steward": "Stjuardi",
-	"group-sysadmin-member": "{{GENDER:$1|administrator sistema|administratorka sistema}}",
-	"group-sysadmin": "Administratori sistema",
 	"group-translationadmin-member": "administrator prevoda",
 	"group-translationadmin": "Administratori prevoda",
 	"group-translator-member": "prevodilac",

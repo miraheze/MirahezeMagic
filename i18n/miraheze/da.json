@@ -17,8 +17,6 @@
 	"group-rollbacker": "Tilbagerullere",
 	"group-steward-member": "{{GENDER:$1|forvalter}}",
 	"group-steward": "Forvaltere",
-	"group-sysadmin-member": "{{GENDER:$1|systemadministrator}}",
-	"group-sysadmin": "Systemadministratorer",
 	"group-translationadmin-member": "oversættelsesadministrator",
 	"group-translationadmin": "Oversættelsesadministratorer",
 	"group-translator-member": "oversætter",

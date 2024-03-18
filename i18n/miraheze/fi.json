@@ -37,8 +37,6 @@
 	"group-rollbacker": "Palauttajat",
 	"group-steward-member": "{{GENDER:$1|ylivalvoja}}",
 	"group-steward": "Ylivalvojat",
-	"group-sysadmin-member": "{{GENDER:$1|järjestelmän ylläpitäjä}}",
-	"group-sysadmin": "Järjestelmän ylläpitäjät",
 	"group-translationadmin-member": "käännösylläpitäjä",
 	"group-translationadmin": "käännösylläpitäjät",
 	"group-translator-member": "kääntäjä",

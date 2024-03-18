@@ -23,8 +23,6 @@
 	"group-rollbacker": "استرجع کنندگان",
 	"group-steward-member": "{{GENDER:$1|مضیف}}",
 	"group-steward": "مضیفین",
-	"group-sysadmin-member": "{{GENDER:$1|نظامی منتظم}}",
-	"group-sysadmin": "منتظمینِ نظام",
 	"group-translationadmin-member": "ترجمہ منتظم",
 	"group-translationadmin": "ترجمہ منتظمین",
 	"group-translator-member": "مترجم",

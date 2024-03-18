@@ -45,8 +45,6 @@
 	"group-rollbacker": "Geri döndürücüler",
 	"group-steward-member": "{{GENDER:$1|kâhya}}",
 	"group-steward": "Kâhyalar",
-	"group-sysadmin-member": "{{GENDER:$1|sistem hizmetlisi}}",
-	"group-sysadmin": "Sistem hizmetlileri",
 	"group-translationadmin-member": "çeviri hizmetlisi",
 	"group-translationadmin": "Çeviri hizmetlileri",
 	"group-translator-member": "çevirmen",

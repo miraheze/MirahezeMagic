@@ -65,8 +65,6 @@
 	"group-rollbacker": "Zurücksetzer",
 	"group-steward-member": "{{GENDER:$1|Steward}}",
 	"group-steward": "Stewards",
-	"group-sysadmin-member": "{{GENDER:$1|System-Administrator|System-Administratorin}}",
-	"group-sysadmin": "System-Administratoren",
 	"group-translationadmin-member": "{{GENDER:$1|Übersetzungsverwalter}}",
 	"group-translationadmin": "Übersetzungs-Administratoren",
 	"group-translator-member": "{{GENDER:$1|Übersetzer}}",

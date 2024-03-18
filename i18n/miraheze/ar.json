@@ -46,8 +46,6 @@
 	"group-rollbacker": "مسترجعون",
 	"group-steward-member": "{{GENDER:$1|مضيف|مضيفة}}",
 	"group-steward": "مضيفون",
-	"group-sysadmin-member": "{{GENDER:$1|إداري نظام|إدارية نظام}}",
-	"group-sysadmin": "إداريو النظام",
 	"group-translationadmin-member": "{{GENDER:$1|إداري ترجمة|إدارية ترجمة}}",
 	"group-translationadmin": "إداريو الترجمة",
 	"group-translator-member": "{{GENDER:$1|مترجم|مترجمة}}",

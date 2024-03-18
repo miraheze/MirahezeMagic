@@ -47,8 +47,6 @@
 	"group-rollbacker": "일괄 되돌리기 기능 사용자",
 	"group-steward-member": "{{GENDER:$1|사무장}}",
 	"group-steward": "사무장",
-	"group-sysadmin-member": "{{GENDER:$1|시스템 관리자}}",
-	"group-sysadmin": "시스템 관리자",
 	"group-translationadmin-member": "{{GENDER:$1|번역 관리자}}",
 	"group-translationadmin": "번역 관리자",
 	"group-translator-member": "{{GENDER:$1|번역자}}",

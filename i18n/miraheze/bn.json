@@ -40,8 +40,6 @@
 	"group-rollbacker": "রোলব্যাকার",
 	"group-steward-member": "{{GENDER:$1|স্টুয়ার্ড}}",
 	"group-steward": "স্টুয়ার্ড",
-	"group-sysadmin-member": "{{GENDER:$1|সিস্টেম প্রশাসক}}",
-	"group-sysadmin": "সিস্টেম প্রশাসক",
 	"group-translationadmin-member": "{{GENDER:$1|অনুবাদ প্রশাসক}}",
 	"group-translationadmin": "অনুবাদ প্রশাসক",
 	"group-translator-member": "{{GENDER:$1|অনুবাদক}}",

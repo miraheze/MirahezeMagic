@@ -56,8 +56,6 @@
 	"group-rollbacker": "Người lùi sửa",
 	"group-steward-member": "{{GENDER:$1|tiếp viên}}",
 	"group-steward": "Tiếp viên",
-	"group-sysadmin-member": "{{GENDER:$1|quản trị hệ thống}}",
-	"group-sysadmin": "Quản trị viên hệ thống",
 	"group-translationadmin-member": "{{GENDER:$1|bảo quản viên biên dịch}}",
 	"group-translationadmin": "Quản trị viên dịch thuật",
 	"group-translator-member": "{{GENDER:$1|người biên dịch}}",
