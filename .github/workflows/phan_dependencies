@@ -1,6 +1,3 @@
-MobileFrontend:
-  branch: auto
-  repo: auto
 Wikibase:
   branch: auto
   repo: auto
