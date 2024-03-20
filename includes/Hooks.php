@@ -2,11 +2,14 @@
 
 namespace Miraheze\MirahezeMagic;
 
+use Article;
+use ExtensionRegistry;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
@@ -23,6 +26,8 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\Hook\ArticleViewHeaderHook;
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Shell\Shell;
@@ -42,7 +47,9 @@ use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use MobileContext;
 use Redis;
+use RequestContext;
 use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
@@ -50,6 +57,7 @@ use Wikimedia\Rdbms\ILBFactory;
 
 class Hooks implements
 	AbuseFilterShouldFilterActionHook,
+	ArticleViewHeaderHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
@@ -167,6 +175,31 @@ class Hooks implements
 
 			return false;
 		}
+	}
+
+	/**
+	 * @param Article $article
+	 * @param bool|ParserOutput|null &$outputDone
+	 * @param bool &$pcache
+	 */
+	public function onArticleViewHeader( $article, &$outputDone, &$pcache ) {
+		DeferredUpdates::addCallableUpdate( static function () {
+			$context = RequestContext::getMain();
+			$timing = $context->getTiming();
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' )
+				&& MobileContext::singleton()->shouldDisplayMobileView()
+			) {
+				$platform = 'mobile';
+			} else {
+				$platform = 'desktop';
+			}
+
+			$measure = $timing->measure( 'viewResponseTime', 'requestStart', 'requestShutdown' );
+			if ( $measure !== false ) {
+				MediaWikiServices::getInstance()->getStatsdDataFactory()->timing(
+					"timing.viewResponseTime.{$platform}", $measure['duration'] * 1000 );
+			}
+		} );
 	}
 
 	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
