@@ -59,6 +59,8 @@
 	"group-rollbacker": "回退員",
 	"group-steward-member": "{{GENDER:$1|監管員}}",
 	"group-steward": "監管員",
+	"group-sre-member": "{{GENDER:$1|站台可靠性工程師}}",
+	"group-sre": "站台可靠性工程師",
 	"group-translationadmin-member": "{{GENDER:$1|翻譯管理員}}",
 	"group-translationadmin": "翻譯管理員",
 	"group-translator-member": "{{GENDER:$1|翻譯人員}}",

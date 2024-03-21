@@ -56,6 +56,8 @@
 	"group-rollbacker": "משחזרים",
 	"group-steward-member": "{{GENDER:$1|דייל|דיילת}}",
 	"group-steward": "דיילים",
+	"group-sre-member": "{{GENDER:$1|מנהל}} יציבות אתר",
+	"group-sre": "מנהלי יציבות אתר",
 	"group-translationadmin-member": "{{GENDER:$1|מנהל|מנהלת}} תרגום",
 	"group-translationadmin": "מנהלי תרגומים",
 	"group-translator-member": "{{GENDER:$1|מתרגם|מתרגמת}}",
