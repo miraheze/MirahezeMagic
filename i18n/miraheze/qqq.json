@@ -12,7 +12,8 @@
 			"Piramidion",
 			"Robby",
 			"Universal Omega",
-			"Verdy p"
+			"Verdy p",
+			"dmehus"
 		]
 	},
 	"centralauth-groupname": "The name of group name in CentralAuth.",
@@ -26,6 +27,8 @@
 	"extensions-skins": "Skins\n{{identical|Skin}}",
 	"extensions-specialpages": "Special pages\n{{identical|Special page}}",
 	"extensions-variable": "Variables\n{{identical|Variable}}",
+	"group-abusefilter-blocker": "AbuseFilter",
+	"group-abusefilter-blocker-member": "{{GENDER:$1|abusefilter-blocker}}",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatrolled}}",
 	"group-autopatrolled": "Autopatrolled users",
 	"group-confirmed-member": "{{GENDER:$1|confirmed user}}",
@@ -60,6 +63,7 @@
 	"group-wiki-creator": "Wiki Creators",
 	"group-wikimanager-member": "{{GENDER:$1|wiki manager}}",
 	"group-wikimanager": "Wiki Managers",
+	"grouppage-abusefilter-blocker": "mw:Special:MyLanguage/Extension:AbuseFilter",
 	"grouppage-autopatrolled": "{{Notranslate}}",
 	"grouppage-confirmed": "{{Notranslate}}",
 	"grouppage-flood": "{{Notranslate}}",
