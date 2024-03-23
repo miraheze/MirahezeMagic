@@ -5,7 +5,8 @@
 			"John Lewis",
 			"AlvaroMolina",
 			"MacFan4000",
-			"Universal Omega"
+			"Universal Omega",
+			"dmehus"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -20,8 +21,12 @@
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
 	"grant-usedatadumpapi": "Create, view, and delete dumps",
+	"group-abusefilter-blocker": "AbuseFilter",
+	"group-abusefilter-blocker-member": "{{GENDER:$1|abusefilter-blocker}}",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatrolled}}",
 	"group-autopatrolled": "Autopatrolled users",
+	"group-checkuser-member": "{{GENDER:$1|checkuser}}",
+	"group-checkuser": "CheckUsers",
 	"group-confirmed-member": "{{GENDER:$1|confirmed user}}",
 	"group-confirmed": "Confirmed users",
 	"group-flood-member": "{{GENDER:$1|flooder}}",
@@ -70,7 +75,9 @@
 	"group-wiki-creator": "Wiki creators",
 	"group-wikimanager-member": "{{GENDER:$1|wiki manager}}",
 	"group-wikimanager": "Wiki managers",
+	"grouppage-abusefilter-blocker": "mw:Special:MyLanguage/Extension:AbuseFilter",
 	"grouppage-autopatrolled": "m:Special:MyLanguage/User groups#{{int:Group-autopatrolled}}",
+	"grouppage-checkuser": "m:Special:MyLanguage/User groups#{{int:Group-checkuser}}",
 	"grouppage-confirmed": "m:Special:MyLanguage/User groups#{{int:Group-autoconfirmed}}",
 	"grouppage-flood": "m:Special:MyLanguage/User groups#{{int:Group-flood}}",
 	"grouppage-founder": "m:Special:MyLanguage/User groups#{{int:Group-founder}}",
