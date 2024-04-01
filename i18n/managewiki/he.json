@@ -136,7 +136,9 @@
 	"managewiki-setting-wgCopyUploadsFromSpecialUpload-name": "לאפשר העלאות קבצים דרך כתובת אתר ב־Special:Upload",
 	"managewiki-setting-wgCopyUploadsFromSpecialUpload-help": "האפשרות הזאת מוסיפה תיבת טקסט ל־Special:Upload המאפשרת לך להעלות קבצים מכל כתובת URL.",
 	"managewiki-setting-wgUseInstantCommons-name": "הפעלת קובצי ויקישיתוף",
+	"managewiki-setting-wgUseInstantCommons-help": "זה מאפשר לך להשתמש בקבצים ממאגר ויקישיתוף (Wikimedia Commons) בוויקי שלך.",
 	"managewiki-setting-wgMirahezeCommons-name": "הפעלת Miraheze Commons (קישור ל־commons.miraheze.org)",
+	"managewiki-setting-wgMirahezeCommons-help": "זה מאפשר לך להשתמש בקבצים ממאגר Miraheze Commons בוויקי שלך.",
 	"managewiki-setting-wgShowArchiveThumbnails-name": "הצגת תמונות ממוזערות ישנות בדף התיאור",
 	"managewiki-setting-wgShowArchiveThumbnails-help": "האם להציג תמונות ממוזערות עבור תמונות ישנות בדף התיאור של תמונה.",
 	"managewiki-setting-wgAllowExternalImages-name": "לאפשר תמונות חיצוניות",
@@ -148,5 +150,12 @@
 	"managewiki-setting-wgMediaViewerEnableByDefault-name": "להפעיל את מציג המדיה בתור ברירת מחדל",
 	"managewiki-setting-wgMediaViewerEnableByDefault-help": "זה מפעיל את מציג המדיה לכולם.",
 	"managewiki-setting-wgMSU_checkAutoCat-help": "אם זה מוגדר, מפעיל את תיבת הסימון להוספת קטגוריה לדף במצב ברירת מחדל.",
+	"managewiki-setting-wgCommonsMetadataForceRecalculate-name": "לכפות פענוח מרוחק של תיאור תמונה",
+	"managewiki-setting-wgCommonsMetadataForceRecalculate-help": "יש להגדיר את זה לערך true כדי לאלץ את CommonsMetadata לפענח את דף התיאור של התמונה ולחלץ את המטא־נתונים בעת שימוש בתמונות מאתרי ויקי אחרים.",
+	"managewiki-setting-wgEchoCrossWikiNotifications-name": "הודעות חוצות־ויקי של Echo",
+	"managewiki-setting-wgEchoCrossWikiNotifications-help": "האם להפעיל את תכונת התראות חוצות־הוויקי.",
+	"managewiki-setting-wgEchoMentionStatusNotifications-name": "התראות מצב אזכור של Echo",
+	"managewiki-setting-wgEchoMentionStatusNotifications-help": "הפעלת התראות הצלחה או כישלון של אזכור ב־Echo.",
+	"managewiki-setting-wmgSiteNoticeOptOut-name": "לבטל התראות Miraheze גלובליות",
 	"managewiki-setting-wgServer-name": "שם תחום מותאם"
 }
