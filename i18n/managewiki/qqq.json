@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"McDutchie",
 			"Pisceskaze",
 			"Reception123",
 			"RhinosF1"
@@ -19,7 +20,7 @@
 	"managewiki-setting-wgCookieSetOnIpBlock-help": "{{doc-MirahezeManageWiki-help|wgCookieSetOnIpBlock}}",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "{{doc-MirahezeManageWiki-name|wgEmailConfirmToEdit}}",
 	"managewiki-setting-wgEmailConfirmToEdit-help": "{{doc-MirahezeManageWiki-help|wgEmailConfirmToEdit}}",
-	"managewiki-setting-wgProtectSiteLimit-name": "{{doc-MirahezeManageWiki-name|wgProtectSiteLimit}}",
+	"managewiki-setting-wgProtectSiteLimit-name": "{{doc-MirahezeManageWiki-name|wgProtectSiteLimit}}\n\nThis refers to the maximum time allowed for the protection of the site.",
 	"managewiki-setting-wgProtectSiteLimit-help": "{{doc-MirahezeManageWiki-help|wgProtectSiteLimit}}",
 	"managewiki-setting-wgProtectSiteDefaultTimeout-name": "{{doc-MirahezeManageWiki-name|wgProtectSiteDefaultTimeout}}",
 	"managewiki-setting-wgProtectSiteDefaultTimeout-help": "{{doc-MirahezeManageWiki-help|wgProtectSiteDefaultTimeout}}",

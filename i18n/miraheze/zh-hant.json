@@ -82,6 +82,7 @@
 	"miraheze-label-managewiki-article-path-wiki": "條目路徑使用 /wiki/",
 	"miraheze-label-managewiki-mainpage-is-domain-root": "讓這個 wiki 的主頁面使用網域根路徑？",
 	"miraheze-label-managewiki-mediawiki-version": "MediaWiki 版本",
+	"miraheze-label-managewiki-primary-domain": "主網域",
 	"miraheze-requestfeatures": "請求在 wiki 上的功能",
 	"miraheze-requestwiki": "申請 wiki",
 	"miraheze-sidebar-donate": "捐款",

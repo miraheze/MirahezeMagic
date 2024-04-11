@@ -75,6 +75,7 @@
 	"miraheze-label-managewiki-article-path-wiki": "Usar /wiki/ pro articulos",
 	"miraheze-label-managewiki-mainpage-is-domain-root": "Facer le pagina principal de iste wiki usar le radice del dominio?",
 	"miraheze-label-managewiki-mediawiki-version": "Version de MediaWiki",
+	"miraheze-label-managewiki-primary-domain": "Dominio primari",
 	"miraheze-requestfeatures": "Requestar functionalitate sur un wiki",
 	"miraheze-requestwiki": "Requestar un wiki",
 	"miraheze-sidebar-donate": "Donar",

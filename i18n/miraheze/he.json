@@ -79,6 +79,7 @@
 	"miraheze-label-managewiki-article-path-wiki": "להשתמש ב־/wiki/ לערכים",
 	"miraheze-label-managewiki-mainpage-is-domain-root": "האם לגרום לעמוד הראשי של הוויקי הזה להשתמש בשורש התחום (domain root)?",
 	"miraheze-label-managewiki-mediawiki-version": "גרסת מדיה־ויקי",
+	"miraheze-label-managewiki-primary-domain": "תחום ראשי",
 	"miraheze-requestfeatures": "בקשת תכונות לאתר ויקי",
 	"miraheze-requestwiki": "בקשת אתר ויקי",
 	"miraheze-sidebar-donate": "לתרום",
