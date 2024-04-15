@@ -5,7 +5,8 @@
 			"John Lewis",
 			"AlvaroMolina",
 			"MacFan4000",
-			"Universal Omega"
+			"Universal Omega",
+			"Waki285"
 		]
 	},
 	"centralauth-groupname": "Miraheze",
@@ -24,6 +25,8 @@
 	"group-autopatrolled": "Autopatrolled users",
 	"group-confirmed-member": "{{GENDER:$1|confirmed user}}",
 	"group-confirmed": "Confirmed users",
+	"group-electionadmin": "Election administrators",
+	"group-electionadmin-member": "{{GENDER:$1|election administrator}}",
 	"group-flood-member": "{{GENDER:$1|flooder}}",
 	"group-flood": "Flooders",
 	"group-founder": "Founders",
@@ -60,6 +63,7 @@
 	"group-steward": "Stewards",
 	"group-sre-member": "{{GENDER:$1|site reliability engineer}}",
 	"group-sre": "Site Reliability Engineers",
+	
 	"group-translationadmin-member": "{{GENDER:$1|translation administrator}}",
 	"group-translationadmin": "Translation administrators",
 	"group-translator-member": "{{GENDER:$1|translator}}",
@@ -72,6 +76,7 @@
 	"group-wikimanager": "Wiki managers",
 	"grouppage-autopatrolled": "m:Special:MyLanguage/User groups#{{int:Group-autopatrolled}}",
 	"grouppage-confirmed": "m:Special:MyLanguage/User groups#{{int:Group-autoconfirmed}}",
+	"grouppage-electionadmin": "m:Special:MyLanguage/Meta:Election administrators",
 	"grouppage-flood": "m:Special:MyLanguage/User groups#{{int:Group-flood}}",
 	"grouppage-founder": "m:Special:MyLanguage/User groups#{{int:Group-founder}}",
 	"grouppage-global-flood": "m:Special:MyLanguage/Global flooders",
