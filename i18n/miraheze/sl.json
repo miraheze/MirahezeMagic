@@ -178,11 +178,11 @@
 	"sitematrix": "Seznam vikijev Mirahezeja",
 	"specialpages-group-wikimanage": "Upravljanje vikijev",
 	"termsofservice": "Pogoji uporabe",
-	"vanishuser": "Izvedi izginotje uporabnika",
-	"vanishuser-action-label": "Ali '''res''' želite izvesti izginotje tega uporabnika?",
+	"vanishuser": "Izbriši uporabnika",
+	"vanishuser-action-label": "Ali '''res''' želite izbrisati tega uporabnika?",
 	"vanishuser-action-help": "Prepričajte se, da so vsi podatki pravilno izpolnjeni, in poskrbite, da boste to zabeležili.",
 	"vanishuser-warning": "'''Opozorilo''': Globalno boste izvedli izginotje uporabnika! Preden nadaljujete, natančno preglejte vse podrobnosti.",
 	"vanishuser-log-name": "Dnevnik izginotij uporabnikov",
 	"vanishuser-log-header": "To je osnovni dnevnik vseh izginotij uporabnikov.",
-	"logentry-vanishuser-action": "$1 je izvedel izginotje uporabnika."
+	"logentry-vanishuser-action": "$1 je izbrisal_a uporabnika."
 }
