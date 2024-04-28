@@ -63,7 +63,6 @@
 	"group-steward": "Stewards",
 	"group-sre-member": "{{GENDER:$1|site reliability engineer}}",
 	"group-sre": "Site Reliability Engineers",
-	
 	"group-translationadmin-member": "{{GENDER:$1|translation administrator}}",
 	"group-translationadmin": "Translation administrators",
 	"group-translator-member": "{{GENDER:$1|translator}}",
