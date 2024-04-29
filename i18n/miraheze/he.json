@@ -22,6 +22,8 @@
 	"group-autopatrolled": "משתמשים בדוקי עריכות אוטומטית",
 	"group-confirmed-member": "{{GENDER:$1|משתמש מאומת|משתמשת מאומתת}}",
 	"group-confirmed": "משתמשים מאומתים",
+	"group-electionadmin": "מנהלי בחירות",
+	"group-electionadmin-member": "{{GENDER:$1|מנהל|מנהלת}} בחירות",
 	"group-flood-member": "{{GENDER:$1|מציף|מציפה}}",
 	"group-flood": "מציפים",
 	"group-founder": "מייסדים",

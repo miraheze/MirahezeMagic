@@ -14,6 +14,7 @@
 			"Nekky-chan",
 			"Pittigrilli",
 			"Tkarcher",
+			"TomatoCake",
 			"Umlaut",
 			"Void",
 			"Zabe"
@@ -33,6 +34,8 @@
 	"group-autopatrolled": "Automatische Kontrollierer",
 	"group-confirmed-member": "{{GENDER:$1|Bestätigter Benutzer|Bestätigte Benutzerin}}",
 	"group-confirmed": "Bestätigte Benutzer",
+	"group-electionadmin": "Wahlleiter",
+	"group-electionadmin-member": "{{GENDER:$1|Wahlleiter|Wahlleiterin}}",
 	"group-flood-member": "{{GENDER:$1|fluter}}",
 	"group-flood": "Fluter",
 	"group-global-flood-member": "{{GENDER:$1|globaler fluter}}",

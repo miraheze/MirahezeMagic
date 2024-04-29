@@ -35,6 +35,8 @@
 	"group-autopatrolled": "Usuarios autoverificados",
 	"group-confirmed-member": "{{GENDER:$1|confirmado|confirmada}}",
 	"group-confirmed": "Confirmados",
+	"group-electionadmin": "Administradores electorales",
+	"group-electionadmin-member": "{{GENDER:$1|Administrador electoral}}",
 	"group-flood-member": "{{GENDER:$1|inundador|inundadora}}",
 	"group-flood": "Inundadores",
 	"group-global-flood-member": "{{GENDER:$1|inundador|inundadora}} global",

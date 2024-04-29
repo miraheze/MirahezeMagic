@@ -25,6 +25,8 @@
 	"group-autopatrolled": "自動巡查使用者",
 	"group-confirmed-member": "{{GENDER:$1|已確認的使用者}}",
 	"group-confirmed": "已確認的使用者",
+	"group-electionadmin": "選舉管理員",
+	"group-electionadmin-member": "{{GENDER:$1|選舉管理員}}",
 	"group-flood-member": "{{GENDER:$1|偽機器人}}",
 	"group-flood": "偽機器人",
 	"group-founder": "創始人",
