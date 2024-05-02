@@ -18,6 +18,8 @@
 	"group-autopatrolled": "Usatores autopatruliate",
 	"group-confirmed-member": "{{GENDER:$1|usator|usatrice}} confirmate",
 	"group-confirmed": "Usatores confirmate",
+	"group-electionadmin": "Administratores electoral",
+	"group-electionadmin-member": "administrat{{GENDER:$1|or|rice}} electoral",
 	"group-flood-member": "inundat{{GENDER:$1|or|rice}}",
 	"group-flood": "Inundatores",
 	"group-founder": "Fundatores",
