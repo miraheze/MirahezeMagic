@@ -74,7 +74,7 @@
 	"miraheze-survey-disagree-strong": "Vahvasti eri mieltä",
 	"miraheze-survey-disagree": "Eri mieltä",
 	"miraheze-survey-done": "Kiitos kun täytit kyselyn ja kerroit meille, kuinka käytät palvelua ja mitä ajattelet! Jos olet suostunut siihen, että Miraheze ottaa sinuun yhteyttä, otamme sinuun yhteyttä pian. Jos et suostunut, näet analyysin kyselyn vastauksista 22. heinäkuuta jälkeen osoitteessa meta.miraheze.org!",
-	"miraheze-survey-header": "Täytä alla oleva kysely, jotta Miraheze ymmärtää, miten käytät palvelua ja mitä mieltä olet siitä. Jos suostut Mirahezen ottamaan sinuun yhteyttä, sähköpostiosoitteesi tallennetaan aina 24. heinäkuuta asti, jolloin se poistetaan kyselymuistista. Jos et haluakaan, että sinuun otetaan yhteyttä, tai haluat vaihtaa sähköpostiosoitteen, ota yhteyttä osoitteeseen sre[at]miraheze.org mieluiten sähköpostista, jonka annoit kyselyn yhteydessä. Käyttäjänimeäsi ei tallenneta vastauksien kanssa, vaikka olisit kirjautuneena.",
+	"miraheze-survey-header": "Täytä alla oleva kysely, jotta Miraheze ymmärtää, miten käytät palvelua ja mitä mieltä olet siitä. Jos suostut Mirahezen ottamaan sinuun yhteyttä, sähköpostiosoitteesi tallennetaan aina 24. heinäkuuta asti, jolloin se poistetaan kyselymuistista. Jos et haluakaan, että sinuun otetaan yhteyttä, tai haluat vaihtaa sähköpostiosoitteen, ota yhteyttä osoitteeseen tech[at]miraheze.org mieluiten sähköpostista, jonka annoit kyselyn yhteydessä. Käyttäjänimeäsi ei tallenneta vastauksien kanssa, vaikka olisit kirjautuneena.",
 	"miraheze-survey-neutral": "Neutraali",
 	"miraheze-survey-no": "Ei",
 	"miraheze-survey-q1-account-edit": "Minulla on rekisteröity tunnus ja muokkaan wikejä.",
