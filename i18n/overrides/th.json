@@ -7,7 +7,7 @@
 	},
 	"miraheze-centralauth-groupname": "มิราเฮซ",
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|คุณ}}ไม่สามารถเข้าสู่ระบบได้เนื่องจากบัญชี{{GENDER:$1|ของคุณ}}[[m:Special:MyLanguage/Global locks|ถูกล็อกข้ามโครงการ]] กรุณาติดต่อที่ <code>cvt[at]miraheze.org</code> สำหรับข้อมูลเพิ่มเติม",
-	"miraheze-dberr-again": "โปรดลองใหม่อีกครั้งในอีกสักครู่หนึ่ง ข้อผิดพลาดเหล่านี้มักใช้เวลาแก้ไขไม่นาน หากคุณยังได้รับข้อความนี้ติดต่อกันเป็นเวลานาน โปรดตรวจสอบทวิตเตอร์ของเรา (https://twitter.com/Miraheze) หรือติดต่อวิศวกรผู้ดูแลระบบของมิราเฮซโดยไปที่ #miraheze-sre บน irc.libera.chat",
+	"miraheze-dberr-again": "โปรดลองใหม่อีกครั้งในอีกสักครู่หนึ่ง ข้อผิดพลาดเหล่านี้มักใช้เวลาแก้ไขไม่นาน หากคุณยังได้รับข้อความนี้ติดต่อกันเป็นเวลานาน โปรดตรวจสอบทวิตเตอร์ของเรา (https://twitter.com/Miraheze) หรือติดต่อวิศวกรผู้ดูแลระบบของมิราเฮซโดยไปที่ #miraheze-tech-ops บน irc.libera.chat",
 	"miraheze-dberr-problems": "วิกินี้ไม่พร้อมใช้งานชั่วคราว",
 	"miraheze-newsignuppage-loginform-tos": "ฉันได้อ่านและยอมรับใน[https://meta.miraheze.org/wiki/Terms_of_Use ข้อกำหนดการใช้งาน]และ[https://meta.miraheze.org/wiki/Privacy_Policy นโยบายความเป็นส่วนตัว]แล้ว",
 	"miraheze-newsignuppage-must-accept-tos": "คุณต้องยอมรับข้อกำหนดการใช้งานก่อนสร้างบัญชีผู้ใช้",

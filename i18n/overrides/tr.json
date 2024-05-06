@@ -12,7 +12,7 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "Hesabınız küresel olarak kilitlendiği için oturum {{GENDER:$1|açamazsınız}}. Daha fazla bilgi almak veya itiraz etmek için lütfen <code>cvt[at]miraheze.org</code> ile iletişime geçin.",
-	"miraheze-dberr-again": "Birkaç dakika beklemeyi ve tekrar yüklemeyi deneyin. Bu hata hakkında daha fazla bilgi için lütfen twitter sayfamıza (https://twitter.com/Miraheze) göz atın veya irc.libera.chat adresindeki #miraheze-sre ağına bağlanarak sistem hizmetlileriyle iletişime geçin.",
+	"miraheze-dberr-again": "Birkaç dakika beklemeyi ve tekrar yüklemeyi deneyin. Bu hata hakkında daha fazla bilgi için lütfen twitter sayfamıza (https://twitter.com/Miraheze) göz atın veya irc.libera.chat adresindeki #miraheze-tech-ops ağına bağlanarak sistem hizmetlileriyle iletişime geçin.",
 	"miraheze-dberr-problems": "Bu viki geçici olarak mevcut değildir",
 	"miraheze-newsignuppage-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use/tr Kullanım Şartları] ve [https://meta.miraheze.org/wiki/Privacy_Policy/tr Gizlilik Politikasını] okudum, anladım ve kabul ediyorum.",
 	"miraheze-newsignuppage-must-accept-tos": "Hesap açabilmek için Kullanım Şartlarını kabul etmelisin!",

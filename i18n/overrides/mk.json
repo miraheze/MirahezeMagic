@@ -6,7 +6,7 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Не можете}} да се најавите бидејќи {{GENDER:$1|вашата}} сметка е [[m:Special:MyLanguage/Global locks|глобално заклучена]]. Обратете се на <code>cvt[at]miraheze.org</code> за повеќе информации или да поднесете жалба.",
-	"miraheze-dberr-again": "Пробајте да почекате неколку минути, овие грешки обично се решаваат дотогаш. Ако често ја добивате оваа грешка, проверете го нашиот Твитер (Twitter.com/Miraheze) за повеќе информации или обратете се кај системските администратори на #miraheze-sre на irc.libera.chat.",
+	"miraheze-dberr-again": "Пробајте да почекате неколку минути, овие грешки обично се решаваат дотогаш. Ако често ја добивате оваа грешка, проверете го нашиот Твитер (Twitter.com/Miraheze) за повеќе информации или обратете се кај системските администратори на #miraheze-tech-ops на irc.libera.chat.",
 	"miraheze-newsignuppage-loginform-tos": "Ги прочитав разбрав [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Условите на употреба] и [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Правилата за заштите на личните податоци], и се согласувам со нив.",
 	"miraheze-newsignuppage-must-accept-tos": "Ќе мора да ги прифатите Условите на употреба за да можете да направите сметка!",
 	"miraheze-oathauth-step1": "'''ВАЖНО! Прочитајте ја страницата за OATHAuth пред да ја вклучите оваа можност!'''\nЧекор 1: Преземете програма за двочинителска заверка",

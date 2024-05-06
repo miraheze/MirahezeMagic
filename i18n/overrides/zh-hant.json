@@ -6,7 +6,7 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被[[m:Special:MyLanguage/Global locks|全域鎖定]]，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
-	"miraheze-dberr-again": "請嘗試等待幾分鐘來重試，這些錯誤通常稍待後就會解決。若您持續收到錯誤訊息，請查看我們在推特上的頁面（https://twitter.com/MirahezeStatus）。需要更多資訊或是聯絡我們，請透過加入 irc.libera.chat 上的 #miraheze-sre，或是我們的 Discord 伺服器（https://discord.gg/TVAJTE4CUn）。",
+	"miraheze-dberr-again": "請嘗試等待幾分鐘來重試，這些錯誤通常稍待後就會解決。若您持續收到錯誤訊息，請查看我們在推特上的頁面（https://twitter.com/MirahezeStatus）。需要更多資訊或是聯絡我們，請透過加入 irc.libera.chat 上的 #miraheze-tech-ops，或是我們的 Discord 伺服器（https://discord.gg/TVAJTE4CUn）。",
 	"miraheze-dberr-problems": "此 wiki 暫時不可用",
 	"miraheze-globalblocking-ipblocked-range": "'''您的 IP 位址已被 Miraheze [[m:Special:MyLanguage/Global blocks|全域封鎖]]。'''\n\n封鎖由$1（$2）做出。\n原因為''$3''。\n\n* 封鎖起始時間：$4 \n* 封鎖到期時間：$5 \n\n這個全域封鎖並非是特別針對您。在您的 IP 範圍內的某個使用者可能破壞了 Miraheze wiki，而導致被封鎖。另外，請注意 VPN 和其他類似服務在 Miraheze 上是[[m:Special:MyLanguage/No open proxies policy|不被允許]]的。如果您現在正在使用，請停用。若您需要進一步的幫助，請發送電子郵件給 cvt@miraheze.org，或是聯絡$1 .\n您現在的 IP 位址是 $6，被封鎖的範圍是 $7。請在您提出的任何查詢中，包含以上的所有詳細資訊。",
 	"miraheze-globalblocking-ipblocked-xff": "'''有一台或以上由您使用的代理伺服器已被 Miraheze [[m:Special:MyLanguage/Global blocks|全域封鎖]]。'''\n\n封鎖由$1（$2）做出。\n原因為''$3''。\n\n* 封鎖起始時間：$4 \n* 封鎖到期時間：$5 \n\n這個全域封鎖並非是特別針對您。請注意 VPN 和其他類似服務在 Miraheze 上是[[m:Special:MyLanguage/No open proxies policy|不被允許]]的。如果您現在正在使用，請停用。若您需要進一步的幫助，請發送電子郵件給 cvt@miraheze.org，或是聯絡$1 .\n被封鎖的代理伺服器位址是 $6。請在您提出的任何查詢中，包含以上的所有詳細資訊。",
