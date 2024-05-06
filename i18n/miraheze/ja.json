@@ -39,6 +39,8 @@
 	"group-autopatrolled": "自動巡回者",
 	"group-confirmed-member": "{{GENDER:$1|承認された利用者}}",
 	"group-confirmed": "承認された利用者",
+	"group-electionadmin": "投票管理者",
+	"group-electionadmin-member": "{{GENDER:$1|投票管理者}}",
 	"group-flood-member": "{{GENDER:$1|氾濫防止フラグ}}",
 	"group-flood": "氾濫防止フラグ",
 	"group-founder": "創設者",
