@@ -166,7 +166,7 @@
 		}
 	},
 	"ConfigRegistry": {
-		"MirahezeMagic": "GlobalVarConfig::newInstance"
+		"MirahezeMagic": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"manifest_version": 2
 }
