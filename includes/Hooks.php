@@ -2,9 +2,7 @@
 
 namespace Miraheze\MirahezeMagic;
 
-use Article;
-use DeferredUpdates;
-use ExtensionRegistry;
+// Built-in MediaWiki hooks
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
@@ -29,14 +27,10 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Hook\ArticleViewHeaderHook;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
-use MediaWiki\Shell\Shell;
-use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\Status\Status;
-use MediaWiki\Title\Title;
-use MediaWiki\User\User;
-use MediaWiki\WikiMap\WikiMap;
-use Memcached;
-use MessageCache;
+use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
+
+// Hooks from Miraheze extensions
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
@@ -46,6 +40,19 @@ use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+
+// Built-in MediaWiki imports that aren't hooks
+use MediaWiki\Shell\Shell;
+use MediaWiki\SpecialPage\SpecialPage;
+use MediaWiki\Status\Status;
+use MediaWiki\Title\Title;
+use MediaWiki\User\User;
+use MediaWiki\WikiMap\WikiMap;
+use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\Linker\LinkTarget;
+use MediaWiki\Output\OutputPage;
+use Memcached;
+use MessageCache;
 use MobileContext;
 use ParserOutput;
 use Redis;
@@ -54,6 +61,9 @@ use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\ILBFactory;
+use Article;
+use DeferredUpdates;
+use ExtensionRegistry;
 
 class Hooks implements
 	AbuseFilterShouldFilterActionHook,
@@ -75,7 +85,9 @@ class Hooks implements
 	SiteNoticeAfterHook,
 	SkinAddFooterLinksHook,
 	TitleReadWhitelistHook,
-	UserGetRightsRemoveHook
+	UserGetRightsRemoveHook,
+	HtmlPageLinkRendererEndHook,
+	BeforePageDisplayHook
 {
 
 	/** @var ServiceOptions */
@@ -106,6 +118,94 @@ class Hooks implements
 		$this->commentStore = $commentStore;
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
+	}
+
+	/**
+	 * Prevent following redlinks for SEO purposes. This does not remove redlinks or make any other visual changes to them.
+	 * 
+	 * @see https://github.com/marohh/mediawikiRemoveRedlinks/blob/master/includes/RemoveRedlinks.php
+	 */
+	public function onHtmlPageLinkRendererEnd(
+		$linkRenderer, 
+		$target,
+		$isKnown,
+		&$text,
+		&$attribs,
+		&$ret 
+	) {
+		if ( $isKnown || $target->isExternal() ) {
+			return true;
+		}
+
+		$attribs['rel'] = 'nofollow';
+
+		return true;
+	}
+
+	/**
+	 * Add noindex to some pages for SEO purposes. Indexing pages that are not valuable to searchers is bad for SEO, so we'll reduce the indexing of such pages.
+	 * 
+	 * @see https://ahrefs.com/blog/content-pruning/
+	 * @see https://gitlab.com/hydrawiki/extensions/seo/-/blob/master/SEOHooks.php?ref_type=heads
+	 */
+	public function onBeforePageDisplay( $out, $skin ) : void {
+		$noIndexNamespaces = [
+			-1,  // Special
+			15,  // Category talk
+			8,   // MediaWiki
+			9,   // MediaWiki talk
+			2,   // User
+			3    // User talk
+		];
+
+		if ( self::isRequestInBlacklist( $out->getRequest()->getValues() ) ||
+			in_array( $out->getTitle()->getNamespace(), $noIndexNamespaces )
+		) {
+			$out->setRobotPolicy( 'noindex,nofollow' );
+		}
+	}
+
+	/**
+	 * Check a blacklist of URL parameters and values to see if we should add a noindex meta tag
+	 * 
+	 * @see https://gitlab.com/hydrawiki/extensions/seo/-/blob/master/SEOHooks.php?ref_type=heads
+	 *
+	 * @param array $paramsAndValues URL Parameters and Values
+	 *
+	 * @return boolean
+	 */
+	private static function isRequestInBlacklist($paramsAndValues) {
+		$blockedURLParamKeys = [
+			'curid', 'diff', 'from', 'group', 'mobileaction', 'oldid',
+			'printable', 'profile', 'redirect', 'redlink', 'stableid'
+		];
+
+		$blockedURLParamKeyValuePairs = [
+			'action' => [
+				'delete', 'edit', 'history', 'info',
+				'pagevalues', 'purge', 'visualeditor', 'watch'
+			],
+			'feed' => ['rss'],
+			'limit' => ['500'],
+			'title' => [
+				'Category:Noindexed_pages',
+				'Category:Noindexed pages',
+				'Category:Noindexed%20pages'
+			],
+			'veaction' => ['edit']
+		];
+
+		foreach ($paramsAndValues as $key => $value) {
+			if (in_array($key, $blockedURLParamKeys)) {
+				return true;
+			}
+
+			if (isset($blockedURLParamKeyValuePairs[$key]) && in_array($value, $blockedURLParamKeyValuePairs[$key])) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -147,6 +247,8 @@ class Hooks implements
 			$httpRequestFactory
 		);
 	}
+
+
 
 	/**
 	 * Avoid filtering automatic account creation

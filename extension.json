@@ -129,6 +129,12 @@
 		},
 		"UserGetRightsRemove": {
 			"handler": "MirahezeMagicHooks"
+		},
+		"HtmlPageLinkRendererEnd": {
+			"handler": "MirahezeMagicHooks"
+		},
+		"BeforePageDisplay": {
+			"handler": "MirahezeMagicHooks"
 		}
 	},
 	"HookHandlers": {
