@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Reception123",
-			"RhinosF1"
+			"RhinosF1",
+			"Universal Omega"
 		]
 	},
 	"managewiki-setting-wgAbuseFilterActions-name": "AbuseFilter Actions",
@@ -174,7 +175,7 @@
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-name": "Dismissable Site Notice For Anons",
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-help": "This allows to set whether or not it should be possible for anonymous visitors of the wiki to dismiss the site notice shown.",
 	"managewiki-setting-wgServer-name": "Custom Domain",
-	"managewiki-setting-wgServer-help": "By default your wiki is available at https://yourwiki.miraheze.org - a subdomain of Miraheze. You can ask us to redirect your wiki to a domain you own. Right now, it is not yet possible to do it without assistance from our Site Reliability Engineering team, but you can learn more at https://meta.miraheze.org/wiki/Custom_domains .",
+	"managewiki-setting-wgServer-help": "By default your wiki is available at https://yourwiki.miraheze.org - a subdomain of Miraheze. You can ask us to redirect your wiki to a domain you own. Right now, it is not yet possible to do it without assistance from our Technology team, but you can learn more at https://meta.miraheze.org/wiki/Custom_domains .",
 	"managewiki-setting-wgMobileUrlTemplate-name": "Mobile URL",
 	"managewiki-setting-wgMobileUrlTemplate-help": "This sets your mobile URL. Defaults to [domain].",
 	"managewiki-setting-wgDefaultRobotPolicy-name": "Default Robot Policy",
