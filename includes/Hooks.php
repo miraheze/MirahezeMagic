@@ -223,7 +223,7 @@ class Hooks implements
 			]
 		];
 
-		foreach ( $paramsAndValues as $key => $value ) {
+		foreach ( $out->getRequest()->getValues() as $key => $value ) {
 			if ( in_array($key, $blockedURLParamKeys) ) {
 				$out->setRobotPolicy( 'noindex,nofollow' );
 				return;
