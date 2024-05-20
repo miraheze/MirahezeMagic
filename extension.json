@@ -73,6 +73,9 @@
 		"ArticleViewHeader": {
 			"handler": "MirahezeMagicHooks"
 		},
+		"BeforePageDisplay": {
+			"handler": "MirahezeMagicHooks"
+		},
 		"BlockIpComplete": {
 			"handler": "MirahezeMagicHooks"
 		},
@@ -103,6 +106,9 @@
 		"GlobalUserPageWikis": {
 			"handler": "MirahezeMagicHooks"
 		},
+		"HtmlPageLinkRendererEnd": {
+			"handler": "MirahezeMagicHooks"
+		},
 		"ImportDumpJobAfterImport": {
 			"handler": "MirahezeMagicHooks"
 		},
@@ -128,12 +134,6 @@
 			"handler": "MirahezeMagicHooks"
 		},
 		"UserGetRightsRemove": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"HtmlPageLinkRendererEnd": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"BeforePageDisplay": {
 			"handler": "MirahezeMagicHooks"
 		}
 	},
