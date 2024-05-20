@@ -153,16 +153,16 @@ class Hooks implements
 	}
 
 	/**
-	 * Prevent following redlinks for SEO purposes. This does not remove redlinks or make any other visual changes to them.
+	 * Add nofollow to redlinks to prevent search engines from indexing these links to save crawl budget because redlinks are noindex 404 pages
 	 * 
 	 * @see https://github.com/marohh/mediawikiRemoveRedlinks/blob/master/includes/RemoveRedlinks.php
 	 * 
 	 * @param LinkRenderer $linkRendere The LinkRenderer object
-     * @param LinkTarget $target The target of the link
-     * @param boolean $isKnown Whether the page exists or not
-     * @param HtmlArmor|string $text The contents of the <a> tag
-     * @param string[] &$attribs Link attributes
-     * @param string &$ret The value to return if the hook returns false
+	 * @param LinkTarget $target The target of the link
+	 * @param boolean $isKnown Whether the page exists or not
+	 * @param HtmlArmor|string $text The contents of the <a> tag
+	 * @param string[] &$attribs Link attributes
+	 * @param string &$ret The value to return if the hook returns false
 	 * 
 	 * @return bool
 	 */
