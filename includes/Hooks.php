@@ -81,6 +81,7 @@ class Hooks implements
 	TitleReadWhitelistHook,
 	UserGetRightsRemoveHook
 {
+
 	/** @var ServiceOptions */
 	private $options;
 
@@ -153,11 +154,16 @@ class Hooks implements
 	}
 
 	/**
-	 * Add nofollow to redlinks to prevent search engines from indexing these links to save crawl budget because redlinks are noindex 404 pages
+	 * Add nofollow to redlinks to prevent search engines from following these links
+	 * to save crawl budget because redlinks are noindex 404 pages
+	 * 
+	 * Crawl budget is not a worry for most sites, but on Miraheze, 
+	 * wikis can have thousands of pages, making it a valid concern.
 	 * 
 	 * @see https://github.com/marohh/mediawikiRemoveRedlinks/blob/master/includes/RemoveRedlinks.php
+	 * @see https://ahrefs.com/blog/crawl-budget/
 	 * 
-	 * @param LinkRenderer $linkRendere The LinkRenderer object
+	 * @param LinkRenderer $linkRenderer The LinkRenderer object
 	 * @param LinkTarget $target The target of the link
 	 * @param boolean $isKnown Whether the page exists or not
 	 * @param HtmlArmor|string $text The contents of the <a> tag
@@ -167,7 +173,7 @@ class Hooks implements
 	 * @return bool
 	 */
 	public function onHtmlPageLinkRendererEnd(
-		$linkRenderer, 
+		$linkRenderer,
 		$target,
 		$isKnown,
 		&$text,
@@ -184,22 +190,38 @@ class Hooks implements
 	}
 
 	/**
-	 * Add noindex to some pages for SEO purposes. Indexing pages that are not valuable to searchers is bad for SEO, so we'll reduce the indexing of such pages.
+	 * Add noindex to some pages for SEO purposes. Indexing these pages is bad for SEO because
+	 * it wastes crawl budget, so we'll reduce the indexing of such pages.
 	 * 
 	 * @see https://ahrefs.com/blog/content-pruning/
+	 * @see https://ahrefs.com/blog/crawl-budget/
 	 * @see https://gitlab.com/hydrawiki/extensions/seo/-/blob/master/SEOHooks.php?ref_type=heads
 	 * 
 	 * @param OutputPage $out The OutputPage object
 	 * @param Skin $skin The Skin object that will be used to generate the page
 	 */
-	public function onBeforePageDisplay( $out, $skin ) : void {
+	public function onBeforePageDisplay( $out, $skin ): void {
+
+		// If something has absolutely no value to someone searching on Google, then inclue it in $noIndexNamespaces
+		// For example, a wiki's CSS styles, a user's user page, the talk page of an article, etc. do not need to appear in Google,
+		// because they are not something you'd actually look up to find any kind of useful information.
+
+		// I am tempted to add templates and modules here, but I believe some wikis, like devwiki, may want their templates to be indexed.
+		// Perhaps a ManageWiki setting in the future to control indexing of those namespaces?
+		// It *can* be set in the wiki's namespace management, but most people don't know how or why to do that.
+
 		$noIndexNamespaces = [
 			NS_SPECIAL,
 			NS_CATEGORY_TALK,
 			NS_MEDIAWIKI,
 			NS_MEDIAWIKI_TALK,
 			NS_USER,
-			NS_USER_TALK
+			NS_USER_TALK,
+			NS_TALK,
+			NS_FILE_TALK,
+			NS_PROJECT_TALK,
+			NS_TEMPLATE_TALK,
+			NS_HELP_TALK,
 		];
 
 		if ( in_array( $out->getTitle()->getNamespace(), $noIndexNamespaces ) ) {
@@ -207,29 +229,39 @@ class Hooks implements
 			return;
 		}
 
-		$blockedURLParamKeys = [
-			'curid', 'diff', 'from', 'group', 'mobileaction', 'oldid',
-			'printable', 'profile', 'redirect', 'redlink', 'stableid',
-			'veaction', 'action'
+		$noIndexURLParamKeys = [
+			'action',
+			'curid',
+			'diff',
+			'from',
+			'group',
+			'mobileaction',
+			'oldid',
+			'printable',
+			'profile',
+			'redirect',
+			'redlink',
+			'stableid',
+			'veaction',
 		];
 
-		$blockedURLParamKeyValuePairs = [
-			'feed' => ['rss'],
-			'limit' => ['500'],
+		$noIndexURLParamKeyValuePairs = [
+			'feed' => [ 'rss' ],
+			'limit' => [ '500' ],
 			'title' => [
 				'Category:Noindexed_pages',
 				'Category:Noindexed pages',
 				'Category:Noindexed%20pages'
-			]
+			],
 		];
 
 		foreach ( $out->getRequest()->getValues() as $key => $value ) {
-			if ( in_array($key, $blockedURLParamKeys) ) {
+			if ( in_array( $key, $noIndexURLParamKeys ) ) {
 				$out->setRobotPolicy( 'noindex,nofollow' );
 				return;
 			}
 
-			if ( isset($blockedURLParamKeyValuePairs[$key] ) && in_array( $value, $blockedURLParamKeyValuePairs[$key] ) ) {
+			if ( in_array( $value, $noIndexURLParamKeyValuePairs[$key] ?? [] ) ) {
 				$out->setRobotPolicy( 'noindex,nofollow' );
 				return;
 			}
