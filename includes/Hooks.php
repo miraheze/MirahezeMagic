@@ -112,7 +112,6 @@ class Hooks implements
 		$this->httpRequestFactory = $httpRequestFactory;
 	}
 
-
 	/**
 	 * @param Config $mainConfig
 	 * @param CommentStore $commentStore
