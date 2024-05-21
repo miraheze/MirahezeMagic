@@ -26,7 +26,7 @@
 	"miraheze-importdump-help-reason": "XML の目的が、別のウィキからの移行、別のウィキのフォーク (複製、分岐)、またはウィキペディアからのテンプレートやページの取り込みであるかどうかを教えてください。",
 	"miraheze-importdump-help-target": "これは有効なデータベース名である必要があります。ウィキのデータベース名を見つけるには、そのウィキ上で Special:ManageWiki/core を参照してください。\n\nウィキをまだ作成していない場合は、まず [[Special:RequestWiki]] を使用してウィキをリクエストしてください。ウィキが作成されたら、ここに戻ってこの取り込み申請を行ってください。",
 	"miraheze-importdump-help-upload-file": "XML ファイルのみが許可されます。 XML ファイルが圧縮アーカイブ内にある場合は、アップロードする前に解凍してください。\n\nすべての改訂履歴も含まれるバージョンの XML ファイルをアップロードしていることを確認してください。",
-	"miraheze-importdump-import-failed-comment": "提供されたXMLの取り込み中にエラーが発生しました。サイト信頼性エンジニアに通知されました。",
+	"miraheze-importdump-import-failed-comment": "提供されたXMLの取り込み中にエラーが発生しました。技術チームに通知されました。",
 	"miraheze-importtext": "[[Special:Export|書き出しページ]]を使用してソースウィキからファイルを書き出ししてください。\nそれをコンピュータに保存し、ここにアップロードしてください。<br />技術的な制限により、ファイルが少し大きい（~ >2MB）場合は実行できず、[[M:Special:RequestImport|取り込みを申請]]する必要があることに注意してください。ウィキペディアからInfoboxを直接インポートすることはお勧めしません。詳しくは[[m:Infoboxes|このページ]]をご覧ください。",
 	"miraheze-interwiki_intro": "以下はインターウィキのテーブルです。これは、すぐに別のウィキや他の外部サイトへのリンクに使用されるプレフィックスのショートカットを定義します。推奨される使用のために、次をご覧ください。[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Interwiki MediaWiki.org 上のマニュアル]\n\nすべてのインターウィキテーブルの追加は監視されており、テーブルに悪意のあるリンクを挿入しようとすると制裁を受けることに注意してください。",
 	"miraheze-newsignuppage-loginform-tos": "[https://meta.miraheze.org/wiki/Terms_of_Use 利用規約]と[https://meta.miraheze.org/wiki/Privacy_Policy プライバシーポリシー]を読んで、同意した。",
