@@ -74,8 +74,6 @@
 	"group-rollbacker": "Откатывающие",
 	"group-steward-member": "{{GENDER:$1|стюард}}",
 	"group-steward": "Стюарды",
-	"group-sre-member": "{{GENDER:$1| инженер по надежности сайта}}",
-	"group-sre": "Инженеры по надёжности сайта",
 	"group-translationadmin-member": "{{GENDER:$1|администратор перевода}}",
 	"group-translationadmin": "Администраторы перевода",
 	"group-translator-member": "{{GENDER:$1|переводчик|переводчица}}",

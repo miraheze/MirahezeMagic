@@ -173,7 +173,7 @@
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-name": "Permitter que anonymos claude avisos de sito",
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-help": "Isto permitte definir si debe esser possibile que visitatores anonyme del wiki claude le aviso de sito monstrate.",
 	"managewiki-setting-wgServer-name": "Dominio personalisate",
-	"managewiki-setting-wgServer-help": "Per definition, tu wiki es disponibile sur https://tuwiki.miraheze.org, un subdominio de Miraheze. Tu pote demandar nos a rediriger tu wiki a un dominio que tu possede. In iste momento, non es possibile facer lo sin assistentia de nostre equipa de Ingenieria de Confidibilitate del Sito, ma tu pote leger plus sur https://meta.miraheze.org/wiki/Custom_domains .",
+	"managewiki-setting-wgServer-help": "Per definition, tu wiki es disponibile sur https://tuwiki.miraheze.org, un subdominio de Miraheze. Tu pote demandar nos a rediriger tu wiki a un dominio que tu possede. In iste momento, non es possibile facer lo sin assistentia de nostre equipa technologic, ma tu pote leger plus sur https://meta.miraheze.org/wiki/Custom_domains .",
 	"managewiki-setting-wgMobileUrlTemplate-name": "URL mobile",
 	"managewiki-setting-wgMobileUrlTemplate-help": "Isto defini tu URL mobile. Le valor predefinite es [domain].",
 	"managewiki-setting-wgDefaultRobotPolicy-name": "Politica predefinite de robot",

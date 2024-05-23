@@ -174,7 +174,7 @@
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-name": "הודעת אתר בת־הסתרה למשתמשים אלמוניים",
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-help": "זה מאפשר להגדיר האם למבקרים האלמוניים של הוויקי צריך להיות מותר או אסור להסתיר את הודעת האתר (sitenotice).",
 	"managewiki-setting-wgServer-name": "שם תחום מותאם",
-	"managewiki-setting-wgServer-help": "כברירת מחדל, הוויקי שלך זמין בכתובת https://yourwiki.miraheze.org - תת־תחום של Miraheze. באפשרותך לבקש מאיתנו להפנות את הוויקי שלך לתחום בבעלותך. נכון לעכשיו, עדיין לא ניתן לעשות זאת ללא סיוע מצוות הנדסת אמינות האתר שלנו, אך אפשר לקרוא עוד בכתובת https://meta.miraheze.org/wiki/Custom_domains.",
+	"managewiki-setting-wgServer-help": "כברירת מחדל, הוויקי שלך זמין בכתובת https://yourwiki.miraheze.org - תת־תחום של Miraheze. באפשרותך לבקש מאיתנו להפנות את הוויקי שלך לתחום בבעלותך. נכון לעכשיו, עדיין לא ניתן לעשות זאת ללא סיוע מצוות הטכנולוגיה שלנו, אך אפשר לקרוא עוד בכתובת https://meta.miraheze.org/wiki/Custom_domains.",
 	"managewiki-setting-wgMobileUrlTemplate-name": "כתובת URL לניידים",
 	"managewiki-setting-wgMobileUrlTemplate-help": "זה מגדיר את כתובת ה־URL שלך למכשירים ניידים. ברירת המחדל היא [domain].",
 	"managewiki-setting-wgDefaultRobotPolicy-name": "מדיניות ברירת מחדל רובוטים",

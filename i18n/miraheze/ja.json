@@ -75,8 +75,6 @@
 	"group-rollbacker": "巻き戻し者",
 	"group-steward-member": "{{GENDER:$1|スチュワード}}",
 	"group-steward": "スチュワード",
-	"group-sre-member": "{{GENDER:$1|サイト信頼性エンジニア}}",
-	"group-sre": "サイト信頼性エンジニア",
 	"group-translationadmin-member": "{{GENDER:$1|翻訳管理者}}",
 	"group-translationadmin": "翻訳管理者",
 	"group-translator-member": "{{GENDER:$1|翻訳者}}",
