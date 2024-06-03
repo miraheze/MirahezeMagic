@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Key0121",
 			"Kly"
 		]
 	},
@@ -173,7 +174,7 @@
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-name": "匿名使用者可不接受網站通知",
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-help": "這可設定來讓 wiki 的匿名使用者是否能不接受所顯示網站通知。",
 	"managewiki-setting-wgServer-name": "自訂網域",
-	"managewiki-setting-wgServer-help": "預設情況下，您的 wiki 可在 https://yourwiki.miraheze.org（Miraheze 的子網域）上找到。您可以要求我們將您的 wiki 重新導向到您擁有的網域。這一點目前需要我們的站台可靠性工程團隊的協助才能做到。您可以在 https://meta.miraheze.org/wiki/Custom_domains 了解更多資訊。",
+	"managewiki-setting-wgServer-help": "預設情況下，您的 wiki 可在 https://yourwiki.miraheze.org（Miraheze 的子網域）上找到。您可以要求我們將您的 wiki 重新導向到您擁有的網域。這一點目前需要我們的技術團隊的協助才能做到。您可以在 https://meta.miraheze.org/wiki/Custom_domains 了解更多資訊。",
 	"managewiki-setting-wgMobileUrlTemplate-name": "行動裝置用 URL",
 	"managewiki-setting-wgMobileUrlTemplate-help": "這可設定您的行動裝置用 URL。預設為[網域]。",
 	"managewiki-setting-wgDefaultRobotPolicy-name": "預設機器人方針",
