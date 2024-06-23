@@ -153,9 +153,8 @@ class Hooks implements
 	}
 
 	/**
-	 * Add nofollow to redlinks to prevent search engines from following these links
-	 * to save crawl budget because redlinks are noindex 404 pages
-	 * 
+ * This method modifies the 'rel' attribute of links to include 'nofollow' when the target page does not exist. This is to prevent search engines from trying to index non-existent or low-value pages. This is important for SEO as it helps to optimize the crawl budget by not wasting it on pages that do not contribute to the site's content 
+  * 
 	 * Crawl budget is not a worry for most sites, but on Miraheze, 
 	 * wikis can have thousands of pages, making it a valid concern.
 	 * 
@@ -189,8 +188,7 @@ class Hooks implements
 	}
 
 	/**
-	 * Add noindex to some pages for SEO purposes. Indexing these pages is bad for SEO because
-	 * it wastes crawl budget, so we'll reduce the indexing of such pages.
+	 * Add noindex to some pages for SEO purposes. Indexing these pages is bad for SEO because it wastes crawl budget.
 	 * 
 	 * @see https://ahrefs.com/blog/content-pruning/
 	 * @see https://ahrefs.com/blog/crawl-budget/
