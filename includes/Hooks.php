@@ -200,36 +200,6 @@ class Hooks implements
 	 * @param Skin $skin The Skin object that will be used to generate the page
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
-
-		// If something has absolutely no value to someone searching on Google, then inclue it in $noIndexNamespaces
-		// For example, a wiki's CSS styles, a user's user page, the talk page of an article, etc. do not need to appear in Google,
-		// because they are not something you'd actually look up to find any kind of useful information.
-		// 
-		// I am tempted to add templates and modules here, but I believe some wikis, like devwiki, may want their templates to be indexed.
-		// I also am not including every possible talk page here, because some wikis might have troubleshooting instructions or other interesting things there.
-		// 
-		// In general, if you can think of any wiki where it might be useful to index a namespace, it's best not to add it here.
-		// 
-		// TODO: Change ManageWiki so that some namespaces default to noindex, then remove this.
-
-		$noIndexNamespaces = [
-			NS_SPECIAL,
-			NS_CATEGORY_TALK,
-			NS_MEDIAWIKI,
-			NS_MEDIAWIKI_TALK,
-			NS_USER,
-			NS_USER_TALK,
-			NS_TALK,
-			NS_FILE_TALK,
-			NS_PROJECT_TALK,
-			NS_TEMPLATE_TALK
-		];
-
-		if ( in_array( $out->getTitle()->getNamespace(), $noIndexNamespaces ) ) {
-			$out->setRobotPolicy( 'noindex,nofollow' );
-			return;
-		}
-
 		$noIndexURLParamKeys = [
 			'action',
 			'curid',
