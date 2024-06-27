@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"MdsShakil",
 			"Meghmollar2017",
 			"MuratTheTurkish",
 			"R4356th",
@@ -31,7 +32,7 @@
 	"group-interwiki-admin": "আন্তঃউইকি প্রশাসক",
 	"group-member": "সদস্য",
 	"group-oversight-member": "{{GENDER:$1|গোপন পর্যবেক্ষক}}",
-	"group-oversight": "গোপন পর্যবেক্ষক",
+	"group-oversight": "গোপনকারী",
 	"group-proxybot-member": "প্রক্সি বট",
 	"group-proxybot": "প্রক্সি বট",
 	"group-requestwikiblocked-member": "{{GENDER:$1|রিকুয়েস্টউইকির বাধাপ্রাপ্ত ব্যবহারকারী}}",

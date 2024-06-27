@@ -8,6 +8,7 @@
 			"McDutchie",
 			"Mitsjol",
 			"MuratTheTurkish",
+			"Romaine",
 			"Siebrand",
 			"Southparkfan"
 		]
@@ -78,6 +79,7 @@
 	"miraheze-helpcenter": "Miraheze-helpcentrum",
 	"miraheze-label-managewiki-article-path-wiki": "Gebruik /wiki/ voor artikelen",
 	"miraheze-label-managewiki-mediawiki-version": "MediaWiki-versie",
+	"miraheze-label-managewiki-primary-domain": "Primair domein",
 	"miraheze-requestfeatures": "Functies op een wiki aanvragen",
 	"miraheze-requestwiki": "Een wiki aanvragen",
 	"miraheze-sidebar-donate": "Doneren",
