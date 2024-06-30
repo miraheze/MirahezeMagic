@@ -85,6 +85,8 @@
 	"group-trustandsafety": "信頼・安心",
 	"group-wiki-creator-member": "{{GENDER:$1|ウィキ作成者}}",
 	"group-wiki-creator": "ウィキ作成者",
+	"group-wiki-mechanic-member": "{{GENDER:$1|ウィキ整備士}}",
+	"group-wiki-mechanic": "ウィキ整備士",
 	"group-wikimanager-member": "{{GENDER:$1|ウィキ管理者}}",
 	"group-wikimanager": "ウィキ管理者",
 	"miraheze-categories": "カテゴリ",
