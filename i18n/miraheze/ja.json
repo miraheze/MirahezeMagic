@@ -51,6 +51,8 @@
 	"group-global-interwiki-admin": "グローバル Interwiki 管理者",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|グローバルIPブロック適用除外者}}",
 	"group-global-ipblock-exempt": "グローバルIPブロック適用除外者",
+	"group-global-patroller-member": "{{GENDER:$1|グローバル巡回者}}",
+	"group-global-patroller": "グローバル巡回者",
 	"group-global-renamer-member": "{{GENDER:$1|グローバル利用者名変更者}}",
 	"group-global-renamer": "グローバル利用者名変更者",
 	"group-global-rollbacker-member": "{{GENDER:$1|グローバル巻き戻し者}}",
