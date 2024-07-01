@@ -48,7 +48,7 @@ class GenerateExtensionDatabaseList extends Maintenance {
 
 		$directory = $this->getOption( 'directory' );
 		foreach ( $extArray as $ext ) {
-			file_put_contents( "{$directory}/{$ext}.json", json_encode( [ 'combi' => $lists[$ext] ] ), LOCK_EX );
+			file_put_contents( "{$directory}/{$ext}.json", json_encode( [ 'combi' => $lists[$ext] ], JSON_PRETTY_PRINT ), LOCK_EX );
 		}
 	}
 }
