@@ -14,6 +14,7 @@ use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Hook\BlockIpCompleteHook;
 use MediaWiki\Hook\ContributionsToolLinksHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
@@ -23,6 +24,7 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Linker\Hook\HtmlPageLinkRendererEndHook;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
@@ -58,6 +60,7 @@ use Wikimedia\Rdbms\ILBFactory;
 class Hooks implements
 	AbuseFilterShouldFilterActionHook,
 	ArticleViewHeaderHook,
+	BeforePageDisplayHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
@@ -67,6 +70,7 @@ class Hooks implements
 	CreateWikiTablesHook,
 	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
+	HtmlPageLinkRendererEndHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
 	MessageCacheFetchOverridesHook,
@@ -146,6 +150,90 @@ class Hooks implements
 			$dbLoadBalancerFactory,
 			$httpRequestFactory
 		);
+	}
+
+	/**
+ * This method modifies the 'rel' attribute of links to include 'nofollow' when the target page does not exist. This is to prevent search engines from trying to index non-existent or low-value pages. This is important for SEO as it helps to optimize the crawl budget by not wasting it on pages that do not contribute to the site's content 
+  * 
+	 * Crawl budget is not a worry for most sites, but on Miraheze, 
+	 * wikis can have thousands of pages, making it a valid concern.
+	 * 
+	 * @see https://github.com/marohh/mediawikiRemoveRedlinks/blob/master/includes/RemoveRedlinks.php
+	 * @see https://ahrefs.com/blog/crawl-budget/
+	 * 
+	 * @param LinkRenderer $linkRenderer The LinkRenderer object
+	 * @param LinkTarget $target The target of the link
+	 * @param boolean $isKnown Whether the page exists or not
+	 * @param HtmlArmor|string $text The contents of the <a> tag
+	 * @param string[] &$attribs Link attributes
+	 * @param string &$ret The value to return if the hook returns false
+	 * 
+	 * @return bool
+	 */
+	public function onHtmlPageLinkRendererEnd(
+		$linkRenderer,
+		$target,
+		$isKnown,
+		&$text,
+		&$attribs,
+		&$ret
+	) {
+		if ( $isKnown || $target->isExternal() ) {
+			return true;
+		}
+
+		$attribs['rel'] = 'nofollow';
+
+		return true;
+	}
+
+	/**
+	 * Add noindex to some pages for SEO purposes. Indexing these pages is bad for SEO because it wastes crawl budget.
+	 * 
+	 * @see https://ahrefs.com/blog/content-pruning/
+	 * @see https://ahrefs.com/blog/crawl-budget/
+	 * @see https://gitlab.com/hydrawiki/extensions/seo/-/blob/master/SEOHooks.php?ref_type=heads
+	 * 
+	 * @param OutputPage $out The OutputPage object
+	 * @param Skin $skin The Skin object that will be used to generate the page
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		$noIndexURLParamKeys = [
+			'action',
+			'curid',
+			'diff',
+			'from',
+			'group',
+			'mobileaction',
+			'oldid',
+			'printable',
+			'profile',
+			'redirect',
+			'redlink',
+			'stableid',
+			'veaction',
+		];
+
+		$noIndexURLParamKeyValuePairs = [
+			'feed' => [ 'rss' ],
+			'limit' => [ '500' ],
+			'title' => [
+				'Category:Noindexed_pages',
+				'Category:Hidden_categories',
+			],
+		];
+
+		foreach ( $out->getRequest()->getValues() as $key => $value ) {
+			if ( in_array( $key, $noIndexURLParamKeys ) ) {
+				$out->setRobotPolicy( 'noindex,nofollow' );
+				return;
+			}
+
+			if ( in_array( $value, $noIndexURLParamKeyValuePairs[$key] ?? [] ) ) {
+				$out->setRobotPolicy( 'noindex,nofollow' );
+				return;
+			}
+		}
 	}
 
 	/**

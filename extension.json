@@ -73,6 +73,9 @@
 		"ArticleViewHeader": {
 			"handler": "MirahezeMagicHooks"
 		},
+		"BeforePageDisplay": {
+			"handler": "MirahezeMagicHooks"
+		},
 		"BlockIpComplete": {
 			"handler": "MirahezeMagicHooks"
 		},
@@ -101,6 +104,9 @@
 			"handler": "MirahezeMagicHooks"
 		},
 		"GlobalUserPageWikis": {
+			"handler": "MirahezeMagicHooks"
+		},
+		"HtmlPageLinkRendererEnd": {
 			"handler": "MirahezeMagicHooks"
 		},
 		"ImportDumpJobAfterImport": {
