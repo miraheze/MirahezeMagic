@@ -44,6 +44,7 @@
 	"group-flood": "Флудеры",
 	"group-founder": "Основатели",
 	"group-founder-member": "{{GENDER:$1|основатель|основательница}}",
+	"group-global-admin": "Глобальные администраторы",
 	"group-global-flood-member": "{{GENDER:$1|глобальный флудер}}",
 	"group-global-flood": "Глобальные флудеры",
 	"group-global-interwiki-admin-member": "{{GENDER:$1|глобальный администратор интервики}}",

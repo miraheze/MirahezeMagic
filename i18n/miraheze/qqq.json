@@ -61,7 +61,7 @@
 	"group-wiki-creator-member": "{{GENDER:$1|wiki creator}}",
 	"group-wiki-creator": "Wiki Creators",
 	"group-wiki-mechanic-member": "{{GENDER:$1|wiki mechanic}}",
-	"group-wiki-mechanic": "Wiki Mechanics",
+	"group-wiki-mechanic": "A name of a user group. \"Mechanics\" is a plural noun that refers to people who fix technical things on the wiki.",
 	"group-wikimanager-member": "{{GENDER:$1|wiki manager}}",
 	"group-wikimanager": "Wiki Managers",
 	"grouppage-autopatrolled": "{{Notranslate}}",
