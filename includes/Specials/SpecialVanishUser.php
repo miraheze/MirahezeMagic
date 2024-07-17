@@ -200,7 +200,7 @@ class SpecialVanishUser extends FormSpecialPage {
 			CentralAuthUser::getInstance( $oldUser ),
 			$newUser,
 			CentralAuthUser::getInstance( $newUser ),
-			new GlobalRenameUserStatus( $newUser->getName() ),
+			new GlobalRenameUserStatus( $this->centralAuthDatabaseManager, $newUser->getName() ),
 			$this->jobQueueGroupFactory,
 			new GlobalRenameUserDatabaseUpdates( $this->centralAuthDatabaseManager ),
 			new GlobalRenameUserLogger( $this->getUser() ),
