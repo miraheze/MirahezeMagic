@@ -171,7 +171,7 @@
 	"managewiki-setting-wmgSiteNoticeOptOut-name": "{{doc-MirahezeManageWiki-name|wmgSiteNoticeOptOut}}",
 	"managewiki-setting-wmgSiteNoticeOptOut-help": "{{doc-MirahezeManageWiki-help|wmgSiteNoticeOptOut}}",
 	"managewiki-setting-wgModerationNotificationEnable-name": "{{doc-MirahezeManageWiki-name|wgModerationNotificationEnable}}",
-	"managewiki-setting-wgModerationNotificationEnable-help": "{{doc-MirahezeManageWiki-help|wgModerationNotificationEnable}}",
+	"managewiki-setting-wgModerationNotificationEnable-help": "{{doc-MirahezeManageWiki-help|wgModerationNotificationEnable}}\n\n“Moderation Email” refers to {{msg-mw|Managewiki-setting-wgModerationEmail-name}} and should be translated the same as in that message.",
 	"managewiki-setting-wgModerationNotificationNewOnly-name": "{{doc-MirahezeManageWiki-name|wgModerationNotificationNewOnly}}",
 	"managewiki-setting-wgModerationNotificationNewOnly-help": "{{doc-MirahezeManageWiki-help|wgModerationNotificationNewOnly}}",
 	"managewiki-setting-wgDismissableSiteNoticeForAnons-name": "{{doc-MirahezeManageWiki-name|wgDismissableSiteNoticeForAnons}}",

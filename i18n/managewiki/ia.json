@@ -145,7 +145,7 @@
 	"managewiki-setting-wgAllowImageTag-name": "Permitter le etiquetta img",
 	"managewiki-setting-wgAllowImageTag-help": "Permitte le uso del etiquetta img (imagine) in wikitexto.",
 	"managewiki-setting-wgSVGConverter-name": "Convertitor SVG",
-	"managewiki-setting-wgSVGConverter-help": "Isto face que le convertitor converte le files Scalable Vector Graphics (SVG) in PNG. Pote esser preferibile eliger Inkscape si le conversion SVG->PNG resulta in un imagine nigre.",
+	"managewiki-setting-wgSVGConverter-help": "Isto selige le convertitor pro converter le files Scalable Vector Graphics (SVG) in PNG. Pote esser preferibile eliger Inkscape si le conversion SVG->PNG resulta in un imagine nigre.",
 	"managewiki-setting-wgMediaViewerEnableByDefault-name": "Activar MediaViewer per predefinition",
 	"managewiki-setting-wgMediaViewerEnableByDefault-help": "Isto activa MediaViewer pro omnes.",
 	"managewiki-setting-wgMSU_checkAutoCat-name": "MsUpload: pre-marcar option de categoria",
