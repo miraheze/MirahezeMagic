@@ -725,17 +725,18 @@ class Hooks implements
 
 	public function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
 		$username = $title->getText();
-		$globalUserGroups = CentralAuthUser::getInstanceByName( $username )->getGlobalGroups();
-
-		if (
-			!in_array( 'steward', $globalUserGroups ) &&
-			!in_array( 'global-sysop', $globalUserGroups ) &&
-			!$specialPage->getUser()->isAllowed( 'centralauth-lock' )
-		) {
-			return;
-		}
 
 		if ( !IPUtils::isIPAddress( $username ) ) {
+			$globalUserGroups = CentralAuthUser::getInstanceByName( $username )->getGlobalGroups();
+
+			if (
+				!in_array( 'steward', $globalUserGroups ) &&
+				!in_array( 'global-sysop', $globalUserGroups ) &&
+				!$specialPage->getUser()->isAllowed( 'centralauth-lock' )
+			) {
+				return;
+			}
+
 			$tools['centralauth'] = Linker::makeExternalLink(
 				'https://meta.miraheze.org/wiki/Special:CentralAuth/' . $username,
 				strtolower( $specialPage->msg( 'centralauth' )->text() )
