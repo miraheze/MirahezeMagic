@@ -207,7 +207,7 @@
 	"managewiki-setting-wgMetrolookUploadButton-name": "{{doc-MirahezeManageWiki-name|wgMetrolookUploadButton}}\n\nSee [[:mw:Skin:Metrolook#Configuration]] for details.",
 	"managewiki-setting-wgMetrolookUploadButton-help": "{{doc-MirahezeManageWiki-help|wgMetrolookUploadButton}}",
 	"managewiki-setting-wgMetrolookBartile-name": "{{doc-MirahezeManageWiki-name|wgMetrolookBartile}}\n\nSee [[:mw:Skin:Metrolook#Configuration]] for details.",
-	"managewiki-setting-wgMetrolookBartile-help": "{{doc-MirahezeManageWiki-help|wgMetrolookBartile}}",
+	"managewiki-setting-wgMetrolookBartile-help": "{{doc-MirahezeManageWiki-help|wgMetrolookBartile}}\n\n* “Metrolook Down Arrow” is {{msg-mw|Managewiki-setting-wgMetrolookDownArrow-name}}\n* “Metrolook Bartile” is {{msg-mw|Managewiki-setting-wgMetrolookBartile-name}}",
 	"managewiki-setting-wgMetrolookMobile-name": "{{doc-MirahezeManageWiki-name|wgMetrolookMobile}}\n\nSee [[:mw:Skin:Metrolook#Configuration]] for details.",
 	"managewiki-setting-wgMetrolookMobile-help": "{{doc-MirahezeManageWiki-help|wgMetrolookMobile}}",
 	"managewiki-setting-wgMetrolookUseIconWatch-name": "{{doc-MirahezeManageWiki-name|wgMetrolookUseIconWatch}}\n\nSee [[:mw:Skin:Metrolook#Configuration]] for details.",
