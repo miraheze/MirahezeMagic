@@ -210,5 +210,18 @@
 	"managewiki-setting-wgMetrolookMobile-help": "Als deze optie is ingeschakeld, wordt de gebruikersinterface op mobiele apparaten aangepast.",
 	"managewiki-setting-wgMetrolookUseIconWatch-name": "Metrolook: pictogram voor volgen gebruiken",
 	"managewiki-setting-wgMetrolookUseIconWatch-help": "Wanneer deze optie is ingeschakeld, wordt er een pictogram gebruikt voor de knop Volgen/Ontvolgen.",
-	"managewiki-setting-wgDefaultTheme-name": "Standaard Thema"
+	"managewiki-setting-wgMetrolookLine-name": "Metrolook-lijn",
+	"managewiki-setting-wgMetrolookLine-help": "Als dit niet is ingesteld, wordt het element img.line (witte scheidingslijn in het bovenste menu, tussen de sitenaam en de pijl omlaag/koppeling “Bestand uploaden”) niet gegenereerd.",
+	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-name": "Vormgevingen die de voettekst gerelateerde artikelen toestaan",
+	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-help": "Lijst met namen van vormgevingen (bv. “minerva”, “vector”) waar gerelateerde artikelen in de voettekst worden getoond.",
+	"managewiki-setting-wgMultiBoilerplateDiplaySpecialPage-name": "Speciale pagina MultiBoilerplate tonen",
+	"managewiki-setting-wgMultiBoilerplateDiplaySpecialPage-help": "Indien ingesteld, wordt er een pagina aan de wiki toegevoegd met de naam Special:Boilerplates die de momenteel ingestelde modelteksten toont.",
+	"managewiki-setting-wgAllowUserCss-name": "Gebruikers-CSS toestaan",
+	"managewiki-setting-wgAllowUserCss-help": "Laat de gebruiker eigen Cascading Style Sheets (CSS) instellen, bijvoorbeeld User:Username/*.css.",
+	"managewiki-setting-wgAllowUserJs-name": "Gebruikers-JS toestaan",
+	"managewiki-setting-wgAllowUserJs-help": "Laat de gebruiker eigen JavaScript (JS)-pagina’s instellen, bijvoorbeeld User:Username/*.js.",
+	"managewiki-setting-wgDefaultTheme-name": "Standaard Thema",
+	"managewiki-setting-wgDefaultTheme-help": "Stelt in welk thema standaard wordt weergegeven wanneer gebruikers uw wiki bezoeken.",
+	"managewiki-setting-wgManageWikiForceSidebarLinks-name": "ManageWiki-zijbalkkoppelingen forceren",
+	"managewiki-setting-wgManageWikiForceSidebarLinks-help": "Forceert voor alle gebruikers de weergave van ManageWiki-koppelingen in de zijbalk. De koppelingstekst is anders voor niet-geprivilegieerde gebruikers."
 }

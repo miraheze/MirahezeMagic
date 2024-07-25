@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pisceskaze"
+			"Pisceskaze",
+			"SongNgu.xyz"
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Bạn}} không thể đăng nhập vì tài khoản của {{GENDER:$1|bạn}} đã bị [[m:Special:MyLanguage/Global locks|khóa toàn cục]]. Vui lòng liên hệ <code>cvt[at]miraheze.org</code> để biết thêm thông tin hoặc khiếu nại.",
