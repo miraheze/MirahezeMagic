@@ -3,6 +3,7 @@
 		"authors": [
 			"Alien333",
 			"Graineahumus",
+			"Kubuya kanane leopold",
 			"SleaY"
 		]
 	},
@@ -31,15 +32,18 @@
 	"managewiki-setting-wmgFlaggedRevsLowProfile-name": "Profil bas FlaggedRevs",
 	"managewiki-setting-wmgFlaggedRevsLowProfile-help": "Pour les visiteurs, affichez uniquement les étiquettes/icônes pour les pages non révisées/obsolètes lorsque cette option est activée.",
 	"managewiki-setting-wgEchoUseCrossWikiBetaFeature-name": "Activer la fonctionnalité bêta du wiki Echo Cross",
+	"managewiki-setting-wgEchoUseCrossWikiBetaFeature-help": "Indicateur de fonctionnalité pour la fonctionnalité beta des notifications inter-wiki",
 	"managewiki-setting-wgMediaViewerIsInBeta-name": "Activer le mode bêta de Media Viewer",
 	"managewiki-setting-wgMediaViewerIsInBeta-help": "Cela fait de Media Viewer une fonctionnalité bêta, elle ne sera donc pas activée pour tous les utilisateurs.",
 	"managewiki-setting-wgPopupsBetaFeature-name": "Activer le mode bêta des fenêtres contextuelles",
 	"managewiki-setting-wgPopupsBetaFeature-help": "Cela active les fenêtres contextuelles en tant que fonctionnalité bêta, plutôt que de les montrer à tous les utilisateurs.",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Activer la fonctionnalité bêta de VisualEditor Wikitext",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-help": "Activez le nouveau mode Wikitext dans l'éditeur visuel en tant que fonctionnalité bêta. Il possède de nombreux outils présents dans l'éditeur visuel, utilise une conception similaire et permet une meilleure passage de l’un à l’autre.",
+	"managewiki-setting-wgVisualEditorShowBetaWelcome-name": "Activer l'éditeur visuel afficher la version beta bienvenue",
 	"managewiki-setting-wgVisualEditorShowBetaWelcome-help": "Affiche une version bêta de bienvenue pour les utilisateurs de VisualEditor.",
 	"managewiki-setting-wgChatLinkUsernames-name": "Lien de discussion vers les utilisateur",
 	"managewiki-setting-wgChatLinkUsernames-help": "Lien vers les pages utilisateur dans la fenêtre de discussion principale.",
+	"managewiki-setting-wgChatMeCommand-name": "Chat Me commande",
 	"managewiki-setting-wmgWebChatServer-name": "Serveur de discussion Web",
 	"managewiki-setting-wmgWebChatServer-help": "Serveur IRC auquel se connecter, non requis lors de l'utilisation du client Web LiberaChat.",
 	"managewiki-setting-wmgWebChatChannel-name": "Canal de discussion Web",
