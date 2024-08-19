@@ -52,6 +52,7 @@
 	"group-confirmed-member": "{{GENDER:$1|确认用户}}",
 	"group-confirmed": "确认用户",
 	"group-electionadmin": "选举管理员",
+	"group-electionadmin-member": "{{GENDER:$1|选举管理员}}",
 	"group-flood-member": "{{GENDER:$1|伪机器人}}",
 	"group-flood": "伪机器人",
 	"group-founder": "创始人",
@@ -90,6 +91,8 @@
 	"group-rollbacker": "回退员",
 	"group-steward-member": "{{GENDER:$1|监管员}}",
 	"group-steward": "监管员",
+	"group-techteam-member": "{{GENDER:$1|技术团队成员}}",
+	"group-techteam": "技术团队成员",
 	"group-translationadmin-member": "{{GENDER:$1|翻译管理员}}",
 	"group-translationadmin": "翻译管理员",
 	"group-translator-member": "{{GENDER:$1|译者}}",
@@ -98,6 +101,8 @@
 	"group-trustandsafety": "信任与安全",
 	"group-wiki-creator-member": "{{GENDER:$1|wiki创建员}}",
 	"group-wiki-creator": "wiki创建员",
+	"group-wiki-mechanic-member": "{{GENDER:$1|wiki技术员}}",
+	"group-wiki-mechanic": "wiki技术员",
 	"group-wikimanager-member": "{{GENDER:$1|wiki经理}}",
 	"group-wikimanager": "wiki设置者",
 	"miraheze-categories": "分类",
@@ -171,7 +176,7 @@
 	"settings-preferences": "参数设置",
 	"settings-recentchanges": "最近更改",
 	"settings-restricted": "受限",
-	"settings-seo": "搜索引擎优化",
+	"settings-seo": "SEO",
 	"settings-socialtools": "社交工具",
 	"settings-styling": "样式",
 	"settings-wikibase": "Wikibase",
@@ -181,5 +186,6 @@
 	"sitematrix": "Miraheze wiki列表",
 	"specialpages-group-wikimanage": "wiki管理",
 	"termsofservice": "使用条款",
-	"vanishuser-log-name": "用户清除日志"
+	"vanishuser-log-name": "用户清除日志",
+	"logentry-vanishuser-action": "$1清除了一名用户。"
 }

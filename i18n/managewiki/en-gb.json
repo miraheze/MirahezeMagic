@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Piano1forte2"
+		]
+	},
+	"managewiki-setting-wmgWikiLicense-name": "Content Licence",
+	"managewiki-setting-wmgWikiLicense-help": "Each wiki on Miraheze is by default licensed under CC-BY-SA 4.0 although this can be changed to another supported licence. If you would like to release the contributions on your wiki under another licence, please let us know so that we can make it available to you. Be aware that changing the licence on your wiki can have an impact on your community and should not be done lightly.",
+	"managewiki-setting-wgRestrictDisplayTitle-help": "Restrict {{DISPLAYTITLE}} to titles that normalise to the same canonical database key. Wikis with the NoTitle extension installed have this config unset."
+}
