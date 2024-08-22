@@ -54,7 +54,7 @@ class ReplaceTextEligible extends Maintenance {
 			->from( 'archive' )
 			->distinct()
 			->caller( __METHOD__ )->fetchResultSet();
-		$this->output( snprintf( 'Got %d pages from the page table and %d deleted pages from the archive table to process, hang tight...', $pages->numRows(), $deletedPageIDs->numRows() ) );
+		$this->output( sprintf( 'Got %d pages from the page table and %d deleted pages from the archive table to process, hang tight...', $pages->numRows(), $deletedPageIDs->numRows() ) );
 
 		// Arrays to hold the names of pages preventing ReplaceText from working correctly
 		$problematicPages = [];
