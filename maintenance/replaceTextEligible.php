@@ -33,7 +33,7 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Exception;
 use Maintenance;
-use Wikimedia\Rdbms\SelectQueryBuilder;;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 class ReplaceTextEligible extends Maintenance {
 	public function __construct() {
