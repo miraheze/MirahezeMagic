@@ -124,7 +124,7 @@ class ReplaceTextEligible extends Maintenance {
 					->where( [ 'ar_page_id' => $deletedPageID->ar_page_id ] )
 					->limit( 1 )
 					->caller( __METHOD__ )->fetchRow();
-                                $problematicDeletedPages[] = $deletedPageName;
+                                $problematicDeletedPages[] = $deletedPageName->ar_page_name;
                         }
 		}
 		if ( count( $problematicPages ) > 0 || count( $problematicDeletedPages ) > 0 ) {
