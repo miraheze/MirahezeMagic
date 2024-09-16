@@ -120,6 +120,8 @@
 	"miraheze-label-managewiki-mainpage-is-domain-root": "Make the main page of this wiki use the domain root?",
 	"miraheze-label-managewiki-mediawiki-version": "MediaWiki version",
 	"miraheze-label-managewiki-primary-domain": "Primary domain",
+	"miraheze-report": "Report this page",
+	"miraheze-donatepage": "m:Special:MyLanguage/Reporting wiki content",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
 	"miraheze-sidebar-donate": "Donate",
