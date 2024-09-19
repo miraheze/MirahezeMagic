@@ -48,8 +48,8 @@
 	"extensions-specialpages": "特殊页面",
 	"extensions-variable": "变量",
 	"grant-usedatadumpapi": "创建、查看和删除转储",
-	"group-autopatrolled-member": "{{GENDER:$1|自动巡查者}}",
-	"group-autopatrolled": "自动巡查者",
+	"group-autopatrolled-member": "{{GENDER:$1|巡查豁免用户}}",
+	"group-autopatrolled": "巡查豁免用户",
 	"group-confirmed-member": "{{GENDER:$1|确认用户}}",
 	"group-confirmed": "确认用户",
 	"group-electionadmin": "选举管理员",
@@ -119,7 +119,7 @@
 	"miraheze-label-managewiki-mediawiki-version": "MediaWiki版本",
 	"miraheze-label-managewiki-primary-domain": "主域",
 	"miraheze-requestfeatures": "为wiki申请功能",
-	"miraheze-requestwiki": "申请一个wiki",
+	"miraheze-requestwiki": "申请wiki",
 	"miraheze-sidebar-donate": "捐赠",
 	"miraheze-sitenotice-closed-locked": "此 wiki 已关闭，因为 [[m:Special:MyLanguage/Stewards|管理员]] 或 [[m:Special:MyLanguage/Trust and Safety|信任与安全团队]] 已确定其违反了 Miraheze 的 [[m:Content Policy|内容政策]] 或其他全域政策。行政员们应该已经收到了电子邮件或讨论页面消息，其中包含更多信息，包括如何上诉。",
 	"miraheze-sitenotice-closed-private": "本wiki已被自动关闭，因为过去60天内'''没有任何编辑'''或者'''日志操作'''。本wiki是私有的，因此不能依照一般的重新开启请求由任意用户重新开启。如果本wiki在6个月内未重开，就会被删除。注意：如果你是本wiki的站长，你可以在[[Special:ManageWiki]]将“已关闭”取消勾选以重新开启本wiki。",
@@ -225,6 +225,7 @@
 	"sitematrix": "Miraheze wiki列表",
 	"specialpages-group-wikimanage": "wiki管理",
 	"termsofservice": "使用条款",
+	"vanishuser": "清除一名用户",
 	"vanishuser-log-name": "用户清除日志",
 	"logentry-vanishuser-action": "$1清除了一名用户。"
 }
