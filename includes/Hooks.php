@@ -620,7 +620,7 @@ class Hooks implements
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
 			$databasesArray = include "{$cwCacheDir}/databases.php";
-			$list = array_keys( $databasesArray ?? [] );
+			$list = array_keys( $databasesArray['databases'] ?? [] );
 			return false;
 		}
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
