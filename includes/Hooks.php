@@ -618,6 +618,11 @@ class Hooks implements
 
 	public function onGlobalUserPageWikis( &$list ) {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
+		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
+			$databasesArray = include "{$cwCacheDir}/databases.php";
+			$list = array_keys( $databasesArray['databases'] ?? [] );
+			return false;
+		}
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
 			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
 			$list = array_keys( $databasesArray['combi'] ?? [] );
