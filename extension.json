@@ -70,9 +70,6 @@
 		"AbuseFilterShouldFilterAction": {
 			"handler": "MirahezeMagicHooks"
 		},
-		"ArticleViewHeader": {
-			"handler": "MirahezeMagicHooks"
-		},
 		"BlockIpComplete": {
 			"handler": "MirahezeMagicHooks"
 		},
@@ -139,6 +136,7 @@
 				"MainConfig",
 				"CommentStore",
 				"DBLoadBalancerFactory",
+				"FormatterFactory",
 				"HttpRequestFactory"
 			]
 		}
