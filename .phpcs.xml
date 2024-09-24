@@ -6,6 +6,15 @@
 		<exclude name="Generic.Files.LineLength.TooLong" />
 		<exclude name="MediaWiki.Commenting" />
 	</rule>
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing.TooMuchSpaceAfterComma">
+		<severity>5</severity>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst">
+		<severity>5</severity>
+	</rule>
+	<rule ref="Squiz.WhiteSpace.MemberVarSpacing.FirstIncorrect">
+		<severity>5</severity>
+	</rule>
 	<rule ref="MediaWiki.Classes.FullQualifiedClassName">
 		<severity>5</severity>
 		<properties>
@@ -13,12 +22,6 @@
 			<property name="allowInheritance" value="false" />
 			<property name="allowFunctions" value="false" />
 		</properties>
-	</rule>
-	<rule ref="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst">
-		<severity>5</severity>
-	</rule>
-	<rule ref="Squiz.WhiteSpace.MemberVarSpacing.FirstIncorrect">
-		<severity>5</severity>
 	</rule>
 	<arg name="bootstrap" value="./vendor/mediawiki/mediawiki-codesniffer/utils/bootstrap-ci.php" />
 	<arg name="extensions" value="php" />
