@@ -35,6 +35,7 @@ use Maintenance;
 use MediaWiki\User\User;
 
 class FixImageUser extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 

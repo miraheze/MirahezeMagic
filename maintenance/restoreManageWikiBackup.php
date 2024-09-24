@@ -38,6 +38,7 @@ use Miraheze\CreateWiki\CreateWikiPhp;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 
 class RestoreManageWikiBackup extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 

@@ -14,6 +14,7 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\Shell\Shell;
 
 class SwiftDump extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 

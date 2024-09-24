@@ -37,6 +37,7 @@ use Miraheze\CreateWiki\RemoteWiki;
 use MirahezeFunctions;
 
 class ChangeMediaWikiVersion extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 
