@@ -39,6 +39,7 @@ use MediaWiki\MainConfigNames;
 use Miraheze\CreateWiki\RemoteWiki;
 
 class GenerateMirahezeSitemap extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 
