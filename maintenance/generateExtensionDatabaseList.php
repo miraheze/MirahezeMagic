@@ -29,8 +29,8 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$extArray = $this->getOption( 'extension' );
 		$directory = $this->getOption( 'directory' );
 
-		$usePhp = $this->getConfig()->get( 'CreateWikiUsePhp' );
-		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiUsePhpCache' ) );
+		$usePhp = $this->getConfig()->get( 'CreateWikiUsePhpCache' );
+		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
 
 		foreach ( $extArray as $ext ) {
 			$list = [];
