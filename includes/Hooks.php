@@ -389,7 +389,7 @@ class Hooks implements
 			] );
 
 			if ( !$status->isOK() ) {
-				$statusFormatter = MediaWikiServices::getInstance()
+				$statusFormatter = MediaWikiServices::getInstance()->getFormatterFactory()
 					->getStatusFormatter( RequestContext::getMain() );
 
 				/**
