@@ -43,6 +43,7 @@ use RecentChange;
  */
 
 class MirahezeIRCRCFeedFormatter implements RCFeedFormatter {
+
 	/**
 	 * @see RCFeedFormatter::getLine
 	 * @param array $feed

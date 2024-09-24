@@ -37,6 +37,7 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\WikiMap\WikiMap;
 
 class InsertMissingLocalUserRows extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 

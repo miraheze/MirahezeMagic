@@ -39,6 +39,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 
 class FindSQLPatches extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 
