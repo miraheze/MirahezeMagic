@@ -32,6 +32,7 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use MailAddress;
 use Maintenance;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Message\Message;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
@@ -244,8 +245,11 @@ class SendBulkEmails extends Maintenance {
 		if ( $status->isGood() ) {
 			$this->ok++;
 		} else {
+			$statusFormatter = $this->getServiceContainer()->getFormatterFactory()
+				->getStatusFormatter( RequestContext::getMain() );
+
 			$this->failed++;
-			$this->output( "ERROR - Send failed: {$status->getMessage()->text()}\n" );
+			$this->output( "ERROR - Send failed: {$statusFormatter->getMessage( $status )->text()}\n" );
 		}
 		return true;
 	}

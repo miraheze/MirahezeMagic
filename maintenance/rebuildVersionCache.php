@@ -42,7 +42,6 @@ use FormatJson;
 use Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
-use ObjectCache;
 
 /**
  * Maintenance script to rebuild the version cache.
@@ -69,7 +68,9 @@ class RebuildVersionCache extends Maintenance {
 
 		$this->saveCache( $baseDirectory );
 
-		$cache = ObjectCache::getInstance( CACHE_ANYTHING );
+		$cache = $this->getServiceContainer()
+			->getObjectCacheFactory()
+			->getInstance( CACHE_ANYTHING );
 		$coreId = $this->getGitInfo( $baseDirectory )['headSHA1'] ?? '';
 
 		$queue = array_fill_keys( array_merge(
