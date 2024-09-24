@@ -121,7 +121,6 @@ class Hooks implements
 					'CreateWikiCacheDirectory',
 					'CreateWikiGlobalWiki',
 					'EchoSharedTrackingDB',
-					'ImportDumpCentralWiki',
 					'JobTypeConf',
 					'LanguageCode',
 					'LocalDatabases',
@@ -444,7 +443,9 @@ class Hooks implements
 	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
 		global $wmgSwiftPassword;
 
-		$container = $this->options->get( 'ImportDumpCentralWiki' ) === 'metawikibeta' ?
+		$dbr = $this->dbLoadBalancerFactory->getReplicaDatabase( 'virtual-importdump' );
+
+		$container = $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :
 			'miraheze-metawiki-local-public';
 
