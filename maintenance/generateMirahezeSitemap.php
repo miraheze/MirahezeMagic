@@ -34,8 +34,8 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use GenerateSitemap;
 use Maintenance;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
-use MediaWiki\Status\Status;
 use Miraheze\CreateWiki\RemoteWiki;
 
 class GenerateMirahezeSitemap extends Maintenance {
@@ -51,6 +51,9 @@ class GenerateMirahezeSitemap extends Maintenance {
 
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 		$filePath = wfTempDir() . '/sitemaps';
+
+		$statusFormatter = $this->getServiceContainer()->getFormatterFactory()
+			->getStatusFormatter( RequestContext::getMain() );
 
 		$wiki = new RemoteWiki(
 			$dbname,
@@ -72,7 +75,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				] );
 
 				if ( !$status->isOK() ) {
-					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . Status::wrap( $status )->getWikitext() );
+					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . $statusFormatter->getWikiText( $status ) );
 				}
 			}
 
@@ -92,7 +95,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 				] );
 
 				if ( !$status->isOK() ) {
-					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . Status::wrap( $status )->getWikitext() );
+					$this->output( 'Failure in deleting sitemap ' . $sitemap . ': ' . $statusFormatter->getWikiText( $status ) );
 				}
 			}
 

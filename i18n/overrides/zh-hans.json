@@ -19,7 +19,7 @@
 	"miraheze-dberr-again": "请在几分钟后重试，这些错误通常几分钟后即可解决。如果您持续收到此错误，请查看我们的 Twitter（https://twitter.com/MirahezeStatus）以获得更多信息或者通过加入到 irc.libera.chat 上的#miraheze-tech-ops 或我们的 Discord 服务器（https://discord.gg/TVAJTE4CUn）来告知我们。",
 	"miraheze-dberr-problems": "此wiki暂时不可用",
 	"miraheze-importdump-help-reason": "请告诉我们该XML用于以下哪个目的：从另一个wiki迁入、分叉另一个wiki、还是从维基百科导入模板或页面。",
-	"miraheze-importdump-import-failed-comment": "导入提供的XML时出错。已通知网站可靠性工程团队。",
+	"miraheze-importdump-import-failed-comment": "导入提供的XML时出错。已通知技术团队。",
 	"miraheze-interwiki_intro": "这是跨wiki表的总览，跨wiki表定义用于快速链接到其他wiki及其他外部网站的快捷前缀。使用建议请查阅[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Interwiki MediaWiki.org上的手册]。\n\n请注意，所有跨wiki表添加行为均受到监控，任何试图在表中插入恶意链接的行为均会受到惩处。",
 	"miraheze-newsignuppage-loginform-tos": "我已阅读并同意\n[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用条款]和[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隐私政策]",
 	"miraheze-newsignuppage-must-accept-tos": "您必须接受使用条款才能创建账号！",

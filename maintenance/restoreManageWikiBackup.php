@@ -34,6 +34,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 use MediaWiki\MainConfigNames;
 use Miraheze\CreateWiki\CreateWikiJson;
+use Miraheze\CreateWiki\CreateWikiPhp;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 
 class RestoreManageWikiBackup extends Maintenance {
@@ -142,11 +143,19 @@ class RestoreManageWikiBackup extends Maintenance {
 			}
 		}
 
-		$cWJ = new CreateWikiJson(
-			$dbname,
-			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
-		);
-		$cWJ->resetWiki();
+		if ( $this->getConfig()->get( 'CreateWikiUsePhpCache' ) ) {
+			$cWP = new CreateWikiPhp(
+				$dbname,
+				$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+			);
+			$cWP->resetWiki();
+		} else {
+			$cWJ = new CreateWikiJson(
+				$dbname,
+				$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+			);
+			$cWJ->resetWiki();
+		}
 
 		$this->output( "Successfully restored the backup from '{$this->getOption( 'filename' )}'.\n" );
 	}

@@ -8,6 +8,7 @@
 			"Danniel07",
 			"DannyS712",
 			"Dark Dragoon",
+			"EmicraftNoob",
 			"Eulalio",
 			"Fitoschido",
 			"Hispano76",
@@ -69,8 +70,6 @@
 	"group-rollbacker": "Reversores",
 	"group-steward-member": "{{GENDER:$1|steward}}",
 	"group-steward": "Stewards",
-	"group-sre-member": "{{GENDER:$1| ingeniero de confiabilidad del sitio}}",
-	"group-sre": "Ingenieros de confiabilidad del sitio",
 	"group-translationadmin-member": "{{GENDER:$1|administrador|administradora}} de traducción",
 	"group-translationadmin": "Administradores de traducción",
 	"group-translator-member": "{{GENDER:$1|traductor|traductora}}",
@@ -189,5 +188,6 @@
 	"sitematrix": "Lista de wikis de Miraheze",
 	"specialpages-group-wikimanage": "Administración de wikis",
 	"termsofservice": "Términos de Uso",
+	"vanishuser-warning": "'''Advertencia''': ¡Vas a globalmente desaparecer a un usuario! Por favor revise todos los detalles cuidadosamente antes de proceder.",
 	"vanishuser-log-name": "Registro de desaparición de usuario"
 }

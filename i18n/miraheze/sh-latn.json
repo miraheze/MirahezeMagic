@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"BadDog",
 			"Vlad5250",
 			"Winston Sung"
 		]
@@ -64,7 +65,7 @@
 	"settings-categories": "Kategorije",
 	"settings-discussion": "Razgovor",
 	"settings-editing": "Uređivanje",
-	"settings-links": "Linkovi",
+	"settings-links": "Veze",
 	"settings-localisation": "Lokalizacija",
 	"settings-maps": "Mape",
 	"settings-notifications": "Obavještenja",
