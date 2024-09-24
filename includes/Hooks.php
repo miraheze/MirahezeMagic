@@ -2,14 +2,12 @@
 
 namespace Miraheze\MirahezeMagic;
 
-use Article;
-use DeferredUpdates;
-use ExtensionRegistry;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
@@ -26,12 +24,10 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Page\Hook\ArticleViewHeaderHook;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Shell\Shell;
 use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
@@ -46,10 +42,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
-use MobileContext;
-use ParserOutput;
 use Redis;
-use RequestContext;
 use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
@@ -57,7 +50,6 @@ use Wikimedia\Rdbms\ILBFactory;
 
 class Hooks implements
 	AbuseFilterShouldFilterActionHook,
-	ArticleViewHeaderHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
@@ -129,7 +121,6 @@ class Hooks implements
 					'CreateWikiCacheDirectory',
 					'CreateWikiGlobalWiki',
 					'EchoSharedTrackingDB',
-					'ImportDumpCentralWiki',
 					'JobTypeConf',
 					'LanguageCode',
 					'LocalDatabases',
@@ -175,31 +166,6 @@ class Hooks implements
 
 			return false;
 		}
-	}
-
-	/**
-	 * @param Article $article
-	 * @param bool|ParserOutput|null &$outputDone
-	 * @param bool &$pcache
-	 */
-	public function onArticleViewHeader( $article, &$outputDone, &$pcache ) {
-		DeferredUpdates::addCallableUpdate( static function () {
-			$context = RequestContext::getMain();
-			$timing = $context->getTiming();
-			if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' )
-				&& MobileContext::singleton()->shouldDisplayMobileView()
-			) {
-				$platform = 'mobile';
-			} else {
-				$platform = 'desktop';
-			}
-
-			$measure = $timing->measure( 'viewResponseTime', 'requestStart', 'requestShutdown' );
-			if ( $measure !== false ) {
-				MediaWikiServices::getInstance()->getStatsdDataFactory()->timing(
-					"timing.viewResponseTime.{$platform}", $measure['duration'] * 1000 );
-			}
-		} );
 	}
 
 	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
@@ -422,11 +388,14 @@ class Hooks implements
 			] );
 
 			if ( !$status->isOK() ) {
+				$statusFormatter = MediaWikiServices::getInstance()->getFormatterFactory()
+					->getStatusFormatter( RequestContext::getMain() );
+
 				/**
 				 * We need to log this, as otherwise the sitemaps may
 				 * not be being deleted for private wikis. We should know that.
 				 */
-				$statusMessage = Status::wrap( $status )->getWikitext();
+				$statusMessage = $statusFormatter->getWikiText( $status );
 				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
 			}
 		}
@@ -474,7 +443,9 @@ class Hooks implements
 	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
 		global $wmgSwiftPassword;
 
-		$container = $this->options->get( 'ImportDumpCentralWiki' ) === 'metawikibeta' ?
+		$dbr = $this->dbLoadBalancerFactory->getReplicaDatabase( 'virtual-importdump' );
+
+		$container = $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :
 			'miraheze-metawiki-local-public';
 
@@ -618,6 +589,11 @@ class Hooks implements
 
 	public function onGlobalUserPageWikis( &$list ) {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
+		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
+			$databasesArray = include "{$cwCacheDir}/databases.php";
+			$list = array_keys( $databasesArray['databases'] ?? [] );
+			return false;
+		}
 		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
 			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
 			$list = array_keys( $databasesArray['combi'] ?? [] );
@@ -661,6 +637,8 @@ class Hooks implements
 		if ( $cwConfig->get( 'Closed' ) ) {
 			if ( $cwConfig->get( 'Private' ) ) {
 				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
+			} elseif ( $cwConfig->get( 'Locked' ) ) {
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
 			} else {
 				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
 			}
@@ -670,8 +648,6 @@ class Hooks implements
 			} else {
 				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
 			}
-		} elseif ( $cwConfig->get( 'Closed' ) && $cwConfig->get( 'Locked' ) ) {
-			$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
 		}
 	}
 

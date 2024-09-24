@@ -70,9 +70,6 @@
 		"AbuseFilterShouldFilterAction": {
 			"handler": "MirahezeMagicHooks"
 		},
-		"ArticleViewHeader": {
-			"handler": "MirahezeMagicHooks"
-		},
 		"BlockIpComplete": {
 			"handler": "MirahezeMagicHooks"
 		},

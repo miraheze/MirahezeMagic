@@ -12,6 +12,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 use MediaWiki\MainConfigNames;
 use Miraheze\CreateWiki\CreateWikiJson;
+use Miraheze\CreateWiki\CreateWikiPhp;
 
 class ResetWikiCaches extends Maintenance {
 	public function __construct() {
@@ -21,11 +22,19 @@ class ResetWikiCaches extends Maintenance {
 	}
 
 	public function execute() {
-		$cWJ = new CreateWikiJson(
-			$this->getConfig()->get( MainConfigNames::DBname ),
-			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
-		);
-		$cWJ->resetWiki();
+		if ( $this->getConfig()->get( 'CreateWikiUsePhpCache' ) ) {
+			$cWP = new CreateWikiPhp(
+				$this->getConfig()->get( MainConfigNames::DBname ),
+				$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+			);
+			$cWP->resetWiki();
+		} else {
+			$cWJ = new CreateWikiJson(
+				$this->getConfig()->get( MainConfigNames::DBname ),
+				$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
+			);
+			$cWJ->resetWiki();
+		}
 
 		usleep( 20000 );
 	}

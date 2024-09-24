@@ -34,15 +34,20 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		foreach ( $extArray as $ext ) {
 			$mwSettings = $dbr->select(
 				'mw_settings',
-				's_dbname',
 				[
-					 's_extensions' . $dbr->buildLike( $dbr->anyString(), "$ext", $dbr->anyString() )
+					's_dbname',
+					's_extensions',
+				],
+				[
+					 's_extensions' . $dbr->buildLike( $dbr->anyString(), $ext, $dbr->anyString() )
 				],
 				__METHOD__,
 			);
 
-			foreach ( $mwSettings as $wiki ) {
-				$lists[$ext][$wiki->s_dbname] = [];
+			foreach ( $mwSettings as $row ) {
+				if ( in_array( $ext, json_decode( $row->s_extensions, true ) ?? [] ) ) {
+					$lists[$ext][$row->s_dbname] = [];
+				}
 			}
 		}
 
