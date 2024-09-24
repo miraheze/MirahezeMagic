@@ -25,7 +25,6 @@ use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Page\Hook\ArticleViewHeaderHook;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\Shell\Shell;
@@ -52,7 +51,6 @@ use Wikimedia\Rdbms\ILBFactory;
 
 class Hooks implements
 	AbuseFilterShouldFilterActionHook,
-	ArticleViewHeaderHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
