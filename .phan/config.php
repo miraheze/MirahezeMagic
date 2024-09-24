@@ -12,8 +12,6 @@ $cfg['directory_list'] = array_merge(
 		'../../extensions/GlobalUserPage',
 		'../../extensions/ImportDump',
 		'../../extensions/ManageWiki',
-		'../../extensions/MobileFrontend',
-		'../../extensions/Wikibase',
 	]
 );
 
@@ -27,8 +25,6 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 		'../../extensions/GlobalUserPage',
 		'../../extensions/ImportDump',
 		'../../extensions/ManageWiki',
-		'../../extensions/MobileFrontend',
-		'../../extensions/Wikibase',
 	]
 );
 
