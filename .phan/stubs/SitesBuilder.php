@@ -1,9 +1,9 @@
 <?php
 
-use MediaWiki\Site\Site;
-use MediaWiki\Site\SiteStore;
-
 namespace Wikibase\Lib\Sites {
+	use MediaWiki\Site\Site;
+	use MediaWiki\Site\SiteStore;
+
 	class SitesBuilder {
 
 		/**
