@@ -31,7 +31,6 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use Exception;
 use Maintenance;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
@@ -46,7 +45,7 @@ class ReplaceTextEligible extends Maintenance {
 		$dbr = $this->getDB( DB_REPLICA );
 
 		$pages = $dbr->newSelectQueryBuilder()
-			->select( [ 'page_id', 'page_latest', 'page_name' ]  )
+			->select( [ 'page_id', 'page_latest', 'page_name' ] )
 			->from( 'page' )
 			->caller( __METHOD__ )->fetchResultSet();
 		$deletedPageIDs = $dbr->newSelectQueryBuilder()
