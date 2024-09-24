@@ -24,6 +24,7 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
@@ -48,7 +49,6 @@ use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
-use MobileContext;
 use Redis;
 use Skin;
 use Throwable;
@@ -87,6 +87,9 @@ class Hooks implements
 	/** @var ILBFactory */
 	private $dbLoadBalancerFactory;
 
+	/** @var FormatterFactory */
+	private $formatterFactory;
+
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
@@ -94,17 +97,20 @@ class Hooks implements
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
+	 * @param FormatterFactory $formatterFactory
 	 * @param HttpRequestFactory $httpRequestFactory
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
+		FormatterFactory $formatterFactory,
 		HttpRequestFactory $httpRequestFactory
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
+		$this->formatterFactory = $formatterFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
 	}
 
@@ -112,6 +118,7 @@ class Hooks implements
 	 * @param Config $mainConfig
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
+	 * @param FormatterFactory $formatterFactory
 	 * @param HttpRequestFactory $httpRequestFactory
 	 *
 	 * @return self
@@ -120,6 +127,7 @@ class Hooks implements
 		Config $mainConfig,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
+		FormatterFactory $formatterFactory,
 		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
@@ -144,6 +152,7 @@ class Hooks implements
 			),
 			$commentStore,
 			$dbLoadBalancerFactory,
+			$formatterFactory,
 			$httpRequestFactory
 		);
 	}
@@ -175,31 +184,6 @@ class Hooks implements
 
 			return false;
 		}
-	}
-
-	/**
-	 * @param Article $article
-	 * @param bool|ParserOutput|null &$outputDone
-	 * @param bool &$pcache
-	 */
-	public function onArticleViewHeader( $article, &$outputDone, &$pcache ) {
-		DeferredUpdates::addCallableUpdate( static function () {
-			$context = RequestContext::getMain();
-			$timing = $context->getTiming();
-			if ( ExtensionRegistry::getInstance()->isLoaded( 'MobileFrontend' )
-				&& MobileContext::singleton()->shouldDisplayMobileView()
-			) {
-				$platform = 'mobile';
-			} else {
-				$platform = 'desktop';
-			}
-
-			$measure = $timing->measure( 'viewResponseTime', 'requestStart', 'requestShutdown' );
-			if ( $measure !== false ) {
-				MediaWikiServices::getInstance()->getStatsdDataFactory()->timing(
-					"timing.viewResponseTime.{$platform}", $measure['duration'] * 1000 );
-			}
-		} );
 	}
 
 	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
@@ -422,11 +406,12 @@ class Hooks implements
 			] );
 
 			if ( !$status->isOK() ) {
+				$statusFormatter = $this->formatterFactory->getStatusFormatter( RequestContext::getMain() );
 				/**
 				 * We need to log this, as otherwise the sitemaps may
 				 * not be being deleted for private wikis. We should know that.
 				 */
-				$statusMessage = Status::wrap( $status )->getWikitext();
+				$statusMessage = $statusFormatter->getWikiText( $status );
 				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
 			}
 		}
