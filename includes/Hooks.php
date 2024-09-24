@@ -21,7 +21,6 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
@@ -80,9 +79,6 @@ class Hooks implements
 	/** @var ILBFactory */
 	private $dbLoadBalancerFactory;
 
-	/** @var FormatterFactory */
-	private $formatterFactory;
-
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
 
@@ -90,20 +86,17 @@ class Hooks implements
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
-	 * @param FormatterFactory $formatterFactory
 	 * @param HttpRequestFactory $httpRequestFactory
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		FormatterFactory $formatterFactory,
 		HttpRequestFactory $httpRequestFactory
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
 		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
-		$this->formatterFactory = $formatterFactory;
 		$this->httpRequestFactory = $httpRequestFactory;
 	}
 
@@ -111,7 +104,6 @@ class Hooks implements
 	 * @param Config $mainConfig
 	 * @param CommentStore $commentStore
 	 * @param ILBFactory $dbLoadBalancerFactory
-	 * @param FormatterFactory $formatterFactory
 	 * @param HttpRequestFactory $httpRequestFactory
 	 *
 	 * @return self
@@ -120,7 +112,6 @@ class Hooks implements
 		Config $mainConfig,
 		CommentStore $commentStore,
 		ILBFactory $dbLoadBalancerFactory,
-		FormatterFactory $formatterFactory,
 		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
@@ -145,7 +136,6 @@ class Hooks implements
 			),
 			$commentStore,
 			$dbLoadBalancerFactory,
-			$formatterFactory,
 			$httpRequestFactory
 		);
 	}
@@ -399,7 +389,9 @@ class Hooks implements
 			] );
 
 			if ( !$status->isOK() ) {
-				$statusFormatter = $this->formatterFactory->getStatusFormatter( RequestContext::getMain() );
+				$statusFormatter = MediaWikiServices::getInstance()
+					->getStatusFormatter( RequestContext::getMain() );
+
 				/**
 				 * We need to log this, as otherwise the sitemaps may
 				 * not be being deleted for private wikis. We should know that.
