@@ -82,8 +82,6 @@
 	"grouppage-wiki-mechanic": "{{Notranslate}}",
 	"grouppage-wikimanager": "{{Notranslate}}",
 	"miraheze-categories": "Label for categories.\n{{Identical|Category}}",
-	"miraheze-close-email-body": "A message from the email when a wiki was closed. \"Closed\" refers to {{msg-mw|Managewiki-label-closed}}.",
-	"miraheze-close-email-subject": "A subject for the closed wiki on email.",
 	"miraheze-donate": "Label for donating to Miraheze.",
 	"miraheze-donatepage": "{{Optional|Only put the existing language pages, like <code>Donate/{{UILANGCODE}}</code>. See [https://meta.miraheze.org/wiki/Donate here].}}",
 	"miraheze-faq": "Label for the Frequently Asked Questions.\n{{Identical|FAQ}}",
