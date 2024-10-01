@@ -33,12 +33,6 @@ use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
 use Memcached;
 use MessageCache;
-use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
@@ -52,12 +46,6 @@ class Hooks implements
 	AbuseFilterShouldFilterActionHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
-	CreateWikiDeletionHook,
-	CreateWikiReadPersistentModelHook,
-	CreateWikiRenameHook,
-	CreateWikiStatePrivateHook,
-	CreateWikiTablesHook,
-	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
