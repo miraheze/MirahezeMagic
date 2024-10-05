@@ -510,6 +510,7 @@ class Hooks implements
 			'privacypage',
 			'requestwiki-error-invalidcomment',
 			'requestwiki-header',
+			'requestwiki-info-guidance',
 			'requestwiki-success',
 			'restriction-delete',
 			'restriction-protect',
