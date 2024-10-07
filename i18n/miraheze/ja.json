@@ -94,8 +94,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|ウィキ管理者}}",
 	"group-wikimanager": "ウィキ管理者",
 	"miraheze-categories": "カテゴリ",
-	"miraheze-close-email-body": "こんにちは、\n\nこのメールは、あなたのMirahezeウィキが閉鎖されたことをお知らせするものです。60日以内に編集や記録の操作を受信しないウィキは、<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">休眠ポリシー</a>(ウィキをリクエストする際に同意した)に従って、スパムを防ぐために自動的に閉じられます。\n\nウィキを再度開きたい場合は、Special:ManageWikiにアクセスし、「閉じる」ボックスのチェックを外して再度開いてください。ウィキを再開しない場合、または誰も(休眠ポリシーの再開要求セクションに従って)あなたのウィキを開くことを要求しなかった場合、あなたのウィキは永久削除の対象としてマークされることに注意してください。",
-	"miraheze-close-email-subject": "あなたのMirahezeウィキ($1)は閉鎖されました",
 	"miraheze-donate": "Mirahezeに寄付",
 	"miraheze-faq": "よくある質問と回答",
 	"miraheze-helpcenter": "Mirahezeヘルプセンターについて",

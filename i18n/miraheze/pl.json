@@ -45,8 +45,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|menedżer wiki|menedżerka wiki}}",
 	"group-wikimanager": "Menedżerowie wiki",
 	"miraheze-categories": "Kategorie",
-	"miraheze-close-email-body": "Witaj,\n\nZe względu na nieaktywność twojej wiki w przeciągu ostatnich 60 dni, zostałam ona zamknięta w związku z postanowieniami „Dormancy policy”. Jeżeli wciąż chcesz edytować swoją wiki, przejdź na stronę Specjalna:ManageWiki oraz odznacz pole „zamknięta” aby ją ponownie otworzyć.\n\nZauważ, że jeżeli nie otworzysz swojej wiki ponownie, będzie ona możliwa do zaadoptowania przez innych użytkowników. Jeżeli jej nie otworzysz, lub nikt inny jej nie adoptuje w przeciągu następnych 6 miesięcy, wiki może zostać zakwalifikowana do usunięcia.",
-	"miraheze-close-email-subject": "Wiki na Miraheze ($1) została zamknięta",
 	"miraheze-donate": "Przekaż datek Miraheze",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centrum wsparcia Miraheze",
