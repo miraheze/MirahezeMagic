@@ -11,7 +11,6 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use MediaWiki\MainConfigNames;
-use Miraheze\CreateWiki\CreateWikiPhp;
 
 class ResetWikiCaches extends Maintenance {
 
@@ -22,12 +21,9 @@ class ResetWikiCaches extends Maintenance {
 	}
 
 	public function execute() {
-		$cWP = new CreateWikiPhp(
-			$this->getConfig()->get( MainConfigNames::DBname ),
-			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
-		);
-
-		$cWP->resetWiki();
+		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
+		$data = $dataFactory->newInstance( $this->getConfig()->get( MainConfigNames::DBname ) );
+		$data->resetWikiData( isNewChanges: true );
 
 		usleep( 20000 );
 	}
