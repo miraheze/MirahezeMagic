@@ -36,7 +36,6 @@ use GenerateSitemap;
 use Maintenance;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
-use Miraheze\CreateWiki\RemoteWiki;
 
 class GenerateMirahezeSitemap extends Maintenance {
 
@@ -56,12 +55,10 @@ class GenerateMirahezeSitemap extends Maintenance {
 		$statusFormatter = $this->getServiceContainer()->getFormatterFactory()
 			->getStatusFormatter( RequestContext::getMain() );
 
-		$wiki = new RemoteWiki(
-			$dbname,
-			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
-		);
+		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
+		$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
 
-		$isPrivate = $wiki->isPrivate();
+		$isPrivate = $remoteWiki->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbname}\n" );
 
