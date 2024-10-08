@@ -46,6 +46,7 @@ use Redis;
 use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILBFactory;
 
 class Hooks implements
