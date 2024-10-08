@@ -362,7 +362,7 @@ class Hooks implements
 				 * We need to log this, as otherwise all files may not have been succesfully
 				 * moved to the new container, and they still exist locally. We should know that.
 				 */
-				wfDebugLog( 'MirahezeMagic', "The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist." );
+				wfDebugLog( 'MirahezeMagic', "The rename of wiki {$oldDbName} to {$newDbName} may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist." );
 			}
 		}
 
