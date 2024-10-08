@@ -29,7 +29,6 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$extArray = $this->getOption( 'extension' );
 		$directory = $this->getOption( 'directory' );
 
-		$usePhp = $this->getConfig()->get( 'CreateWikiUsePhpCache' );
 		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
 
 		foreach ( $extArray as $ext ) {
@@ -54,15 +53,8 @@ class GenerateExtensionDatabaseList extends Maintenance {
 			}
 
 			if ( $list ) {
-				$filePath = "{$directory}/{$ext}" . ( $usePhp ? '.php' : '.json' );
-
-				if ( $usePhp ) {
-					// Output as a PHP file with array syntax
-					$fileContent = "<?php\n\nreturn " . var_export( [ 'databases' => $list ], true ) . ";\n";
-				} else {
-					// Output as JSON
-					$fileContent = json_encode( [ 'combi' => $list ], JSON_PRETTY_PRINT );
-				}
+				$filePath = "{$directory}/{$ext}.php";
+				$fileContent = "<?php\n\nreturn " . var_export( [ 'databases' => $list ], true ) . ";\n";
 
 				file_put_contents( $filePath, $fileContent, LOCK_EX );
 			} else {
