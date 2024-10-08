@@ -33,7 +33,6 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use MediaWiki\MainConfigNames;
-use Miraheze\CreateWiki\RemoteWiki;
 use MirahezeFunctions;
 
 class ChangeMediaWikiVersion extends Maintenance {
@@ -64,6 +63,8 @@ class ChangeMediaWikiVersion extends Maintenance {
 			$dbnames[] = $this->getConfig()->get( MainConfigNames::DBname );
 		}
 
+		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
+
 		foreach ( $dbnames as $dbname ) {
 			$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 			$newVersion = $this->getOption( 'mwversion' );
@@ -74,18 +75,11 @@ class ChangeMediaWikiVersion extends Maintenance {
 					continue;
 				}
 
-				$wiki = new RemoteWiki(
-					$dbname,
-					$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
-				);
+				$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
 
-				$wiki->newRows['wiki_version'] = $newVersion;
-				$wiki->changes['mediawiki-version'] = [
-					'old' => $oldVersion,
-					'new' => $newVersion,
-				];
-
-				$wiki->commit();
+				$remoteWiki->addNewRow( row: 'wiki_version', value: $newVersion );
+				$remoteWiki->trackChange( 'mediawiki-version', $oldVersion, $newVersion );
+				$remoteWiki->commit();
 
 				$this->output( "Upgraded $dbname from $oldVersion to $newVersion\n" );
 			}
