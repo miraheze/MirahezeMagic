@@ -612,11 +612,6 @@ class Hooks implements
 			$list = array_keys( $databasesArray['databases'] ?? [] );
 			return false;
 		}
-		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
-			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
-			$list = array_keys( $databasesArray['combi'] ?? [] );
-			return false;
-		}
 
 		return true;
 	}
