@@ -608,18 +608,18 @@ class Hooks implements
 
 	public function onGlobalUserPageWikis( array &$list ): bool {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
-    
+
 		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
 			$databasesArray = include "{$cwCacheDir}/databases.php";
-        
+
 			$dbList = array_keys( $databasesArray['databases'] ?? [] );
-        
+
 			// Filter out those databases that don't have GlobalUserPage enabled
 			$list = array_filter( $dbList, static function ( $dbname ) {
 				$extensions = new ManageWikiExtensions( $dbname );
 				return in_array( 'globaluserpage', $extensions->list() );
 			} );
-        
+
 			return false;
 		}
 
