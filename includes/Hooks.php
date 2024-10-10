@@ -41,6 +41,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
+use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Redis;
 use Skin;
@@ -605,11 +606,20 @@ class Hooks implements
 		}
 	}
 
-	public function onGlobalUserPageWikis( &$list ) {
+	public function onGlobalUserPageWikis( array &$list ): bool {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
+
 		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
 			$databasesArray = include "{$cwCacheDir}/databases.php";
-			$list = array_keys( $databasesArray['databases'] ?? [] );
+
+			$dbList = array_keys( $databasesArray['databases'] ?? [] );
+
+			// Filter out those databases that don't have GlobalUserPage enabled
+			$list = array_filter( $dbList, static function ( $dbname ) {
+				$extensions = new ManageWikiExtensions( $dbname );
+				return in_array( 'globaluserpage', $extensions->list() );
+			} );
+
 			return false;
 		}
 
