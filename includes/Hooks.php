@@ -39,6 +39,10 @@ use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
+use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
+use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
+use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
@@ -66,6 +70,8 @@ class Hooks implements
 	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
+	RequestWikiFormDescriptorModifyHook,
+	RequestWikiQueueFormDescriptorModifyHook,
 	SiteNoticeAfterHook,
 	SkinAddFooterLinksHook,
 	TitleReadWhitelistHook,
@@ -138,6 +144,40 @@ class Hooks implements
 			$commentStore,
 			$dbLoadBalancerFactory,
 			$httpRequestFactory
+		);
+	}
+	
+	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
+		$testField = [
+			'label-message' => 'test',
+			'type' => 'text',
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'sitename',
+			newKey: 'test',
+			newField: $testField
+		);
+	}
+
+	public function onRequestWikiQueueFormDescriptorModify(
+		array &$formDescriptor,
+		User $user,
+		WikiRequestManager $wikiRequestManager
+	): void {
+		$testField = [
+			'label-message' => 'test',
+			'type' => 'text',
+			'section' => 'editing',
+			'default' => $wikiRequestManager->getExtraFieldData( 'test' ),
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'edit-sitename',
+			newKey: 'edit-test',
+			newField: $testField
 		);
 	}
 
