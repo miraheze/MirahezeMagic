@@ -146,7 +146,7 @@ class Hooks implements
 			$httpRequestFactory
 		);
 	}
-	
+
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
 		$testField = [
 			'label-message' => 'test',
