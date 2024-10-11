@@ -118,6 +118,12 @@
 		"RecentChange_save": {
 			"handler": "MirahezeMagicHooks"
 		},
+		"RequestWikiFormDescriptorModify": {
+			"handler": "MirahezeMagicHooks"
+		},
+		"RequestWikiQueueFormDescriptorModify": {
+			"handler": "MirahezeMagicHooks"
+		},
 		"SiteNoticeAfter": {
 			"handler": "MirahezeMagicHooks"
 		},
