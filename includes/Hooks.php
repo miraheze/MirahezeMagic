@@ -39,6 +39,10 @@ use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
+use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
+use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
+use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
@@ -66,6 +70,8 @@ class Hooks implements
 	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
+	RequestWikiFormDescriptorModifyHook,
+	RequestWikiQueueFormDescriptorModifyHook,
 	SiteNoticeAfterHook,
 	SkinAddFooterLinksHook,
 	TitleReadWhitelistHook,
@@ -140,6 +146,42 @@ class Hooks implements
 			$httpRequestFactory
 		);
 	}
+
+	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
+		$testField = [
+			'label-message' => 'requestwiki-label-nsfw',
+			'help-message' => 'requestwiki-help-nsfw',
+			'type' => 'check',
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'bio',
+			newKey: 'nsfw',
+			newField: $nsfwField
+		);
+	}
+
+	public function onRequestWikiQueueFormDescriptorModify(
+		array &$formDescriptor,
+		User $user,
+		WikiRequestManager $wikiRequestManager
+	): void {
+		$nsfwField = [
+			'label-message' => 'requestwiki-label-nsfw',
+			'type' => 'check',
+			'section' => 'editing',
+			'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'edit-bio',
+			newKey: 'edit-nsfw',
+			newField: $nsfwField
+		);
+	}
+
 
 	/**
 	 * Avoid filtering automatic account creation
