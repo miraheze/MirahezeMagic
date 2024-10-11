@@ -182,7 +182,6 @@ class Hooks implements
 		);
 	}
 
-
 	/**
 	 * Avoid filtering automatic account creation
 	 *
