@@ -1,40 +1,40 @@
 {
-	"name": "MirahezeMagic",
-	"author": [
-		"Agent Isai",
-		"John Lewis",
-		"Labster",
-		"MacFan4000",
-		"Reception123",
-		"Revi",
-		"Paladox",
-		"Southparkfan",
-		"Universal Omega"
-	],
-	"url": "https://github.com/miraheze/MirahezeMagic",
-	"descriptionmsg": "mirahezemagic-description",
-	"namemsg": "mirahezemagic-extensionname",
-	"license-name": "GPL-3.0-or-later",
-	"type": "other",
-	"requires": {
-		"MediaWiki": ">= 1.42.0",
-		"platform": {
-			"php": ">= 8.0"
-		}
-	},
-	"MessagesDirs": {
-		"MirahezeMagic": [
-			"i18n/overrides",
-			"i18n/miraheze",
-			"i18n/mirahezeprojectnames"
-		]
-	},
-	"ExtensionMessagesFiles": {
-		"MirahezeMagicAliases": "MirahezeMagicAliases.php"
-	},
-	"AutoloadNamespaces": {
-		"Miraheze\\MirahezeMagic\\": "includes/"
-	},
+        "name": "MirahezeMagic",
+        "author": [
+                "Agent Isai",
+                "John Lewis",
+                "Labster",
+                "MacFan4000",
+                "Reception123",
+                "Revi",
+                "Paladox",
+                "Southparkfan",
+                "Universal Omega"
+        ],
+        "url": "https://github.com/miraheze/MirahezeMagic",
+        "descriptionmsg": "mirahezemagic-description",
+        "namemsg": "mirahezemagic-extensionname",
+        "license-name": "GPL-3.0-or-later",
+        "type": "other",
+        "requires": {
+                "MediaWiki": ">= 1.42.0",
+                "platform": {
+                        "php": ">= 8.0"
+                }
+        },
+        "MessagesDirs": {
+                "MirahezeMagic": [
+                        "i18n/overrides",
+                        "i18n/miraheze",
+                        "i18n/mirahezeprojectnames"
+                ]
+        },
+        "ExtensionMessagesFiles": {
+                "MirahezeMagicAliases": "MirahezeMagicAliases.php"
+        },
+        "AutoloadNamespaces": {
+                "Miraheze\\MirahezeMagic\\": "includes/"
+        },
         "LogActionsHandlers": {
                 "vanishuser/*": "LogFormatter"
         },
@@ -47,126 +47,139 @@
         "LogTypes": [
                 "vanishuser"
         ],
-	"SpecialPages": {
-		"MirahezeSurvey": {
-			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
-			"services": [
-				"ConfigFactory",
-				"DBLoadBalancerFactory",
-				"UserOptionsLookup"
-			]
-		},
-		"VanishUser": {
-			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
-			"services" : [
-				"JobQueueGroupFactory",
-				"UserFactory"
-			],
-			"optional_services": [
-				"CentralAuth.CentralAuthAntiSpoofManager",
-				"CentralAuth.CentralAuthDatabaseManager",
-				"CentralAuth.GlobalRenameUserValidator"
-			]
-		}
-	},
-	"Hooks": {
-		"AbuseFilterShouldFilterAction": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"BlockIpComplete": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"ContributionsToolLinks": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"CreateWikiDeletion": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"CreateWikiReadPersistentModel": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"CreateWikiRename": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"CreateWikiStatePrivate": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"CreateWikiTables": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"CreateWikiWritePersistentModel": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"GetLocalURL::Internal": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"GlobalUserPageWikis": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"ImportDumpJobAfterImport": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"ImportDumpJobGetFile": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"MessageCacheFetchOverrides": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"MimeMagicInit": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"RecentChange_save": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"SiteNoticeAfter": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"SkinAddFooterLinks": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"TitleReadWhitelist": {
-			"handler": "MirahezeMagicHooks"
-		},
-		"UserGetRightsRemove": {
-			"handler": "MirahezeMagicHooks"
-		}
-	},
-	"HookHandlers": {
-		"MirahezeMagicHooks": {
-			"class": "Miraheze\\MirahezeMagic\\Hooks",
-			"factory": "Miraheze\\MirahezeMagic\\Hooks::factory",
-			"services": [
-				"MainConfig",
-				"CommentStore",
-				"DBLoadBalancerFactory",
-				"HttpRequestFactory"
-			]
-		}
-	},
-	"config": {
-		"MirahezeMagicAccessIdsMap": {
-			"description": "Array, in the format of wiki => [ central ids ]. Users authorized to access certain wikis to prevent global read rights from applying.",
-			"value": []
-		},
-		"MirahezeMagicMemcachedServers": {
-			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
-			"value": []
-		},
-		"MirahezeReportsBlockAlertKeywords": {
-			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
-			"value": []
-		},
-		"MirahezeReportsWriteKey": {
-			"description": "String. TSPortal write key to be used when connecting to it.",
-			"value": ""
-		},
-		"MirahezeSurveyEnabled": {
-			"description": "Boolean. Enable Miraheze Annual Survey?",
-			"value": true
-		}
-	},
-	"ConfigRegistry": {
-		"MirahezeMagic": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
-	},
-	"manifest_version": 2
+        "SpecialPages": {
+                "MirahezeSurvey": {
+                        "class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
+                        "services": [
+                                "ConfigFactory",
+                                "DBLoadBalancerFactory",
+                                "UserOptionsLookup"
+                        ]
+                },
+                "VanishUser": {
+                        "class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
+                        "services" : [
+                                "JobQueueGroupFactory",
+                                "UserFactory"
+                        ],
+                        "optional_services": [
+                                "CentralAuth.CentralAuthAntiSpoofManager",
+                                "CentralAuth.CentralAuthDatabaseManager",
+                                "CentralAuth.GlobalRenameUserValidator"
+                        ]
+                }
+        },
+        "Hooks": {
+                "AbuseFilterShouldFilterAction": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "BlockIpComplete": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "ContributionsToolLinks": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "CreateWikiDeletion": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "CreateWikiReadPersistentModel": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "CreateWikiRename": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "CreateWikiStatePrivate": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "CreateWikiTables": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "CreateWikiWritePersistentModel": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "RequestWikiFormDescriptorModifyHook": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "RequestWikiQueueFormDescriptorModifyHook": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "RequestWikiFormUtils": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "WikiRequestManager": {
+                        "handler": "MirahezeMagicHooks"
+                },
+
+                "GetLocalURL::Internal": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "GlobalUserPageWikis": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "ImportDumpJobAfterImport": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "ImportDumpJobGetFile": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "MessageCacheFetchOverrides": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "MimeMagicInit": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "RecentChange_save": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "SiteNoticeAfter": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "SkinAddFooterLinks": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "TitleReadWhitelist": {
+                        "handler": "MirahezeMagicHooks"
+                },
+                "UserGetRightsRemove": {
+                        "handler": "MirahezeMagicHooks"
+                }
+        },
+        "HookHandlers": {
+                "MirahezeMagicHooks": {
+                        "class": "Miraheze\\MirahezeMagic\\Hooks",
+                        "factory": "Miraheze\\MirahezeMagic\\Hooks::factory",
+                        "services": [
+                                "MainConfig",
+                                "CommentStore",
+                                "DBLoadBalancerFactory",
+                                "HttpRequestFactory"
+                        ]
+                }
+        },
+        "config": {
+                "MirahezeMagicAccessIdsMap": {
+                        "description": "Array, in the format of wiki => [ central ids ]. Users authorized to access certain wikis to prevent global read rights from applying.",
+                        "value": []
+                },
+                "MirahezeMagicMemcachedServers": {
+                        "description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
+                        "value": []
+                },
+                "MirahezeReportsBlockAlertKeywords": {
+                        "description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
+                        "value": []
+                },
+                "MirahezeReportsWriteKey": {
+                        "description": "String. TSPortal write key to be used when connecting to it.",
+                        "value": ""
+                },
+                "MirahezeSurveyEnabled": {
+                        "description": "Boolean. Enable Miraheze Annual Survey?",
+                        "value": true
+                }
+        },
+        "ConfigRegistry": {
+                "MirahezeMagic": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
+        },
+        "manifest_version": 2
 }
