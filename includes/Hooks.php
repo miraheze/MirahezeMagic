@@ -148,7 +148,7 @@ class Hooks implements
 	}
 
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
-		$testField = [
+		$nsfwField = [
 			'label-message' => 'requestwiki-label-nsfw',
 			'help-message' => 'requestwiki-help-nsfw',
 			'type' => 'check',
