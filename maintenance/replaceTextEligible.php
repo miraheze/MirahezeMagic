@@ -118,7 +118,7 @@ class ReplaceTextEligible extends Maintenance {
 				->caller( __METHOD__ )->fetchRow();
 			if ( str_contains( $textFlags, 'gzip' ) ) {
 				// The latest revision of this page is compressed
-				$deletedPageName = $dbr->newSelectQueryBuilder
+				$deletedPageName = $dbr->newSelectQueryBuilder()
 					->select( [ 'ar_page_name' ] )
 					->from( 'archive' )
 					->where( [ 'ar_page_id' => $deletedPageID->ar_page_id ] )
