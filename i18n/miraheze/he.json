@@ -77,8 +77,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|מנהל|מנהלת}} ויקי",
 	"group-wikimanager": "מנהלי ויקי",
 	"miraheze-categories": "קטגוריות",
-	"miraheze-close-email-body": "שלום,\n\nהמכתב הזה נועד להודיע לך שהוויקי שלך ב־Miraheze נסגר. אתרי ויקי שלא מקבלים שום עריכה או פעולות יומן בתוך 60 יום נסגרים אוטומטית כדי למנוע דואר זבל, בהתאם ל־<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">מדיניות האתרים הרדומים</a> (שהסכמת לה בעת בקשת ויקי).\n\nאם תרצה לפתוח מחדש את הוויקי, יש לבקר בדף Special:ManageWiki ולבטל את הסימון בתיבה \"סגור\" כדי לפתוח אותו מחדש. נא לשים לב לכך שאם הוויקי שלך לא ייפתח מחדש או אם אף אחד לא יבקש לפתוח את הוויקי שלך (בהתאם לסעיף בקשת פתיחה מחדש של מדיניות האתרים הרדומים), תוך 6 חודשים מעכשיו, הוויקי שלך יסומן למחיקה לצמיתות.",
-	"miraheze-close-email-subject": "הוויקי שלך ב־Miraheze שלך ($1) נסגר",
 	"miraheze-donate": "תרומה ל־Miraheze",
 	"miraheze-faq": "שאלות ותשובות נפוצות",
 	"miraheze-helpcenter": "מרכז התמיכה של Miraheze",

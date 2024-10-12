@@ -12,6 +12,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 
 class GenerateExtensionDatabaseList extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 
@@ -20,18 +21,19 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$desc = 'Extension or skin to generate database list for. ' .
 			'This option may be passed multiple times to generate multiple database lists at once.';
 
-		$this->addOption( 'directory', 'Directory to store the json file in.', true, true );
+		$this->addOption( 'directory', 'Directory to store the list files in.', true, true );
 		$this->addOption( 'extension', $desc, true, true, false, true );
 	}
 
 	public function execute() {
-		$lists = [];
-
 		$extArray = $this->getOption( 'extension' );
+		$directory = $this->getOption( 'directory' );
 
 		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
 
 		foreach ( $extArray as $ext ) {
+			$list = [];
+
 			$mwSettings = $dbr->select(
 				'mw_settings',
 				[
@@ -46,14 +48,18 @@ class GenerateExtensionDatabaseList extends Maintenance {
 
 			foreach ( $mwSettings as $row ) {
 				if ( in_array( $ext, json_decode( $row->s_extensions, true ) ?? [] ) ) {
-					$lists[$ext][$row->s_dbname] = [];
+					$list[$row->s_dbname] = [];
 				}
 			}
-		}
 
-		$directory = $this->getOption( 'directory' );
-		foreach ( $extArray as $ext ) {
-			file_put_contents( "{$directory}/{$ext}.json", json_encode( [ 'combi' => $lists[$ext] ], JSON_PRETTY_PRINT ), LOCK_EX );
+			if ( $list ) {
+				$filePath = "{$directory}/{$ext}.php";
+				$fileContent = "<?php\n\nreturn " . var_export( [ 'databases' => $list ], true ) . ";\n";
+
+				file_put_contents( $filePath, $fileContent, LOCK_EX );
+			} else {
+				$this->output( "No wikis are using {$ext} so a database list was not generated for it.\n" );
+			}
 		}
 	}
 }

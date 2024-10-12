@@ -47,6 +47,7 @@ use MediaWiki\Settings\SettingsBuilder;
  * @ingroup Maintenance
  */
 class MergeMessageFileList extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 		$this->addOption(

@@ -41,11 +41,13 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
+use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use Redis;
 use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILBFactory;
 
 class Hooks implements
@@ -168,7 +170,7 @@ class Hooks implements
 		}
 	}
 
-	public function onCreateWikiDeletion( $cwdb, $wiki ): void {
+	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
 		global $wmgSwiftPassword;
 
 		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
@@ -176,7 +178,7 @@ class Hooks implements
 			$echoSharedTrackingDB
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
-		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $wiki ] );
+		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
@@ -184,7 +186,7 @@ class Hooks implements
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $wiki
+					$manageWikiSettings->list( $var ) === $dbname
 				) {
 					$manageWikiSettings->remove( $var );
 					$manageWikiSettings->commit();
@@ -198,7 +200,7 @@ class Hooks implements
 		$containers = explode( "\n",
 			trim( Shell::command(
 				'swift', 'list',
-				'--prefix', 'miraheze-' . $wiki . '-',
+				'--prefix', 'miraheze-' . $dbname . '-',
 				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
@@ -210,7 +212,7 @@ class Hooks implements
 
 		foreach ( $containers as $container ) {
 			// Just an extra precaution to ensure we don't select the wrong containers
-			if ( !str_contains( $container, $wiki . '-' ) ) {
+			if ( !str_contains( $container, $dbname . '-' ) ) {
 				continue;
 			}
 
@@ -228,11 +230,15 @@ class Hooks implements
 				->execute();
 		}
 
-		$this->removeRedisKey( "*{$wiki}*" );
-		$this->removeMemcachedKey( ".*{$wiki}.*" );
+		$this->removeRedisKey( "*{$dbname}*" );
+		$this->removeMemcachedKey( ".*{$dbname}.*" );
 	}
 
-	public function onCreateWikiRename( $cwdb, $old, $new ): void {
+	public function onCreateWikiRename(
+		DBConnRef $cwdb,
+		string $oldDbName,
+		string $newDbName
+	): void {
 		global $wmgSwiftPassword;
 
 		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
@@ -240,7 +246,7 @@ class Hooks implements
 			$echoSharedTrackingDB
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
-		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $new ], [ 'euw_wiki' => $old ] );
+		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
@@ -248,9 +254,9 @@ class Hooks implements
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $old
+					$manageWikiSettings->list( $var ) === $oldDbName
 				) {
-					$manageWikiSettings->modify( [ $var => $new ] );
+					$manageWikiSettings->modify( [ $var => $newDbName ] );
 					$manageWikiSettings->commit();
 				}
 			}
@@ -262,7 +268,7 @@ class Hooks implements
 		$containers = explode( "\n",
 			trim( Shell::command(
 				'swift', 'list',
-				'--prefix', 'miraheze-' . $old . '-',
+				'--prefix', 'miraheze-' . $oldDbName . '-',
 				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
@@ -274,7 +280,7 @@ class Hooks implements
 
 		foreach ( $containers as $container ) {
 			// Just an extra precaution to ensure we don't select the wrong containers
-			if ( !str_contains( $container, $old . '-' ) ) {
+			if ( !str_contains( $container, $oldDbName . '-' ) ) {
 				continue;
 			}
 
@@ -301,7 +307,7 @@ class Hooks implements
 				->disableSandbox()
 				->execute();
 
-			$newContainer = str_replace( $old, $new, $container );
+			$newContainer = str_replace( $oldDbName, $newDbName, $container );
 
 			// Upload to new container
 			// We have to use exec here, as Shell::command does not work for this
@@ -357,7 +363,7 @@ class Hooks implements
 				 * We need to log this, as otherwise all files may not have been succesfully
 				 * moved to the new container, and they still exist locally. We should know that.
 				 */
-				wfDebugLog( 'MirahezeMagic', "The rename of wiki $old to $new may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist." );
+				wfDebugLog( 'MirahezeMagic', "The rename of wiki {$oldDbName} to {$newDbName} may not have been successful. Files still exist locally in {wfTempDir()} and the Swift containers for the old wiki still exist." );
 			}
 		}
 
@@ -366,16 +372,16 @@ class Hooks implements
 		Shell::makeScriptCommand(
 			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
 			[
-				'--wiki', $new
+				'--wiki', $newDbName
 			],
 			$scriptOptions
 		)->limits( $limits )->execute();
 
-		$this->removeRedisKey( "*{$old}*" );
-		$this->removeMemcachedKey( ".*{$old}.*" );
+		$this->removeRedisKey( "*{$oldDbName}*" );
+		$this->removeMemcachedKey( ".*{$oldDbName}.*" );
 	}
 
-	public function onCreateWikiStatePrivate( $dbname ): void {
+	public function onCreateWikiStatePrivate( string $dbname ): void {
 		$localRepo = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
 			'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps',
@@ -403,12 +409,12 @@ class Hooks implements
 		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
-	public function onCreateWikiTables( &$cTables ): void {
+	public function onCreateWikiTables( array &$cTables ): void {
 		$cTables['localnames'] = 'ln_wiki';
 		$cTables['localuser'] = 'lu_wiki';
 	}
 
-	public function onCreateWikiReadPersistentModel( &$pipeline ): void {
+	public function onCreateWikiReadPersistentModel( string &$pipeline ): void {
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
 			$pipeline = unserialize(
@@ -419,7 +425,7 @@ class Hooks implements
 		}
 	}
 
-	public function onCreateWikiWritePersistentModel( $pipeline ): bool {
+	public function onCreateWikiWritePersistentModel( string $pipeline ): bool {
 		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
 
@@ -475,6 +481,19 @@ class Hooks implements
 		static $keysToOverride = [
 			'centralauth-groupname',
 			'centralauth-login-error-locked',
+			'createwiki-close-email-body',
+			'createwiki-close-email-sender',
+			'createwiki-close-email-subject',
+			'createwiki-defaultmainpage',
+			'createwiki-defaultmainpage-summary',
+			'createwiki-email-body',
+			'createwiki-email-subject',
+			'createwiki-error-subdomaintaken',
+			'createwiki-help-bio',
+			'createwiki-help-category',
+			'createwiki-help-reason',
+			'createwiki-help-subdomain',
+			'createwiki-label-reason',
 			'dberr-again',
 			'dberr-problems',
 			'globalblocking-ipblocked-range',
@@ -511,6 +530,11 @@ class Hooks implements
 			'oathauth-step1',
 			'prefs-help-realname',
 			'privacypage',
+			'requestwiki-error-invalidcomment',
+			'requestwiki-info-guidance',
+			'requestwiki-info-guidance-post',
+			'requestwiki-label-agreement',
+			'requestwiki-success',
 			'restriction-delete',
 			'restriction-protect',
 			'skinname-snapwikiskin',
@@ -587,16 +611,20 @@ class Hooks implements
 		}
 	}
 
-	public function onGlobalUserPageWikis( &$list ) {
+	public function onGlobalUserPageWikis( array &$list ): bool {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
+
 		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
 			$databasesArray = include "{$cwCacheDir}/databases.php";
-			$list = array_keys( $databasesArray['databases'] ?? [] );
-			return false;
-		}
-		if ( file_exists( "{$cwCacheDir}/databases.json" ) ) {
-			$databasesArray = json_decode( file_get_contents( "{$cwCacheDir}/databases.json" ), true );
-			$list = array_keys( $databasesArray['combi'] ?? [] );
+
+			$dbList = array_keys( $databasesArray['databases'] ?? [] );
+
+			// Filter out those databases that don't have GlobalUserPage enabled
+			$list = array_filter( $dbList, static function ( $dbname ) {
+				$extensions = new ManageWikiExtensions( $dbname );
+				return in_array( 'globaluserpage', $extensions->list() );
+			} );
+
 			return false;
 		}
 

@@ -39,6 +39,7 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\User\User;
 
 class CreateUsers extends Maintenance {
+
 	private $wikiRevision = null;
 
 	private $importPrefix = '';

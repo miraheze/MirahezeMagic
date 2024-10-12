@@ -49,8 +49,6 @@
 	"group-wikimanager-member": "wikien hallinnoija{{GENDER:$1|}}",
 	"group-wikimanager": "Wikien hallinnoijat",
 	"miraheze-categories": "Luokat",
-	"miraheze-close-email-body": "Hei,\n\nkoska wikissäsi ei ole ollut muokkauksia edellisen 60 päivän aikana, se on valitettavasti suljettu <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">epäaktiivisuuskäytännön</a> vuoksi. Jos haluat edelleen muokata wikiäsi, mene sivulle Special:ManageWiki ja ota rasti pois \"suljettu\"-ruudusta avataksesi sen uudelleen.\n\nHuomioithan, että jos et avaa wikiäsi, on mahdollista, että toinen käyttäjä adoptoi sen. Jos et avaa wikiäsi tai kukaan ei adoptoi sitä 6 kuukauden kuluessa tästä hetkestä, se voidaan poistaa.",
-	"miraheze-close-email-subject": "Miraheze-wikisi ($1) on suljettu",
 	"miraheze-donate": "Lahjoita Mirahezelle",
 	"miraheze-faq": "UKK",
 	"miraheze-helpcenter": "Mirahezen apukeskus",
