@@ -639,6 +639,7 @@ class Hooks implements
 		if ( $key === 'places' ) {
 			$footerItems['termsofservice'] = $this->addFooterLink( $skin, 'termsofservice', 'termsofservicepage' );
 			$footerItems['donate'] = $this->addFooterLink( $skin, 'miraheze-donate', 'miraheze-donatepage' );
+			$footerItems['report'] = $this->addFooterLink( $skin, 'miraheze-report', 'miraheze-reportpage' );
 		}
 	}
 
