@@ -35,6 +35,7 @@ use Maintenance;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 class ReplaceTextEligible extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 
