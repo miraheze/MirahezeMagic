@@ -196,7 +196,7 @@ class Hooks implements
 			'label-message' => 'requestwiki-label-nsfwtext',
 			'type' => 'text',
 			'section' => 'editing',
-			'hide-if' => [ '!==', 'nsfw', '1' ],
+			'hide-if' => [ '!==', 'edit-nsfw', '1' ],
 			'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
 		];
 
