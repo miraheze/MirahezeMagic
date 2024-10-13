@@ -213,7 +213,7 @@ class Hooks implements
 			'label-message' => 'requestwiki-label-nsfw',
 			'type' => 'info',
 			'section' => 'details',
-			'raw' => 'true',
+			'raw' => true,
 			'default' => ( new \MediaWiki\Language\RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
 
 		RequestWikiFormUtils::insertFieldAfter(
