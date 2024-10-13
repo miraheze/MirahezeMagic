@@ -152,7 +152,11 @@
 			]
 		},
 		"RequestWiki": {
-			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki::factory",
+			"services": [
+				"MainConfig"
+			]
 		}
 	},
 	"config": {
