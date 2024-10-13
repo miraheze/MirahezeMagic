@@ -23,6 +23,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfw',
 				'help-message' => 'requestwiki-help-nsfw',
 				'help-inline' => false,
+				'section' => 'info',
 				'type' => 'check',
 			]
 		);
@@ -34,6 +35,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'nsfw', '1' ],
+				'section' => 'info',
 				'type' => 'text',
 			]
 		);
@@ -44,6 +46,7 @@ class RequestWiki implements
 			newKey: 'source',
 			newField: [
 				'label-message' => 'requestwiki-label-source',
+				'section' => 'info',
 				'type' => 'check',
 			]
 		);
@@ -55,6 +58,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'source', '1' ],
+				'section' => 'info',
 				'type' => 'url',
 			]
 		);
