@@ -210,18 +210,18 @@ class Hooks implements
 		);
 
 		$nsfwField = [
-						'label-message' => 'requestwiki-label-nsfw',
-						'type' => 'info',
-						'section' => 'details',
-						'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? 'yes' : 'no',
-			   ];
+			'label-message' => 'requestwiki-label-nsfw',
+			'type' => 'info',
+			'section' => 'details',
+			'raw' => 'true',
+			'default' => ( new \MediaWiki\Language\RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(),		];
 
-				RequestWikiFormUtils::insertFieldAfter(
-						$formDescriptor,
-						afterKey: 'details-description',
-						newKey: 'details-nsfw',
-						newField: $nsfwField
-				);
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'details-description',
+			newKey: 'details-nsfw',
+			newField: $nsfwField
+		);
 	}
 
 	/**
