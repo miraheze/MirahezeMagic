@@ -4,7 +4,7 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
-use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraData;
+use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
