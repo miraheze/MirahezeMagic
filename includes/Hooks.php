@@ -248,7 +248,7 @@ class Hooks implements
 			newKey: 'details-nsfw',
 			newField: $nsfwField
 		);
-		
+
 		$sourceField = [
 			'label-message' => 'requestwiki-label-source',
 			'type' => 'check',
