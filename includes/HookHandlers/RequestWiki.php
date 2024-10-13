@@ -117,6 +117,18 @@ class RequestWiki implements
 			newSection: 'info'
 		);
 
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'post-reason-guidance',
+			newSection: 'confirmation'
+		);
+
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'agreement',
+			newSection: 'confirmation'
+		);
+
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
 			fieldKey: 'category',
