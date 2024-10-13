@@ -117,6 +117,21 @@ class RequestWiki implements
 			newSection: 'info'
 		);
 
+		RequestWikiFormUtils::reorderFieldsInSection(
+			$formDescriptor,
+			section: 'info',
+			newOrder: [
+				'guidance',
+				'purpose',
+				'bio',
+				'nsfw',
+				'source',
+				'nsfwtext',
+				'sourceurl',
+				'reason',
+			]
+		);
+
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'post-reason-guidance',
@@ -157,21 +172,6 @@ class RequestWiki implements
 			$formDescriptor,
 			fieldKey: 'bio',
 			newProperties: [ 'help-inline' => false ]
-		);
-
-		RequestWikiFormUtils::reorderFieldsInSection(
-			$formDescriptor,
-			section: 'info',
-			newOrder: [
-				'guidance',
-				'purpose',
-				'bio',
-				'nsfw',
-				'source',
-				'nsfwtext',
-				'sourceurl',
-				'reason',
-			]
 		);
 	}
 
