@@ -69,6 +69,23 @@ class RequestWiki implements
 				'section' => 'advanced',
 			]
 		);
+		
+		RequestWikiFormUtils::insertFieldAtEndOfSection(
+			$formDescriptor,
+			section: 'advanced',
+			newKey: 'articlepath',
+			newField: [
+				'type' => 'radio',
+				'label-message' => 'miraheze-label-managewiki-article-path',
+				'options-messages' => [
+					'miraheze-label-managewiki-article-path-wiki' => '/wiki/$1',
+					'miraheze-label-managewiki-article-path-root' => '/$1',
+				],
+				'hide-if' => [ '!==', 'showadvanced', '1' ],
+				'default' => '/wiki/$1',
+				'section' => 'advanced',
+			]
+		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
