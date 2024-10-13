@@ -83,6 +83,18 @@ class RequestWiki implements
 			newSection: 'configure'
 		);
 
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'category',
+			newSection: 'configure'
+		);
+
+		RequestWikiFormUtils::updateFieldProperties(
+			$formDescriptor,
+			fieldKey: 'category',
+			newProperties: [ 'help-inline' => false ]
+		);
+
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
 			fieldKey: 'subdomain',
