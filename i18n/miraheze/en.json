@@ -201,6 +201,8 @@
 	"requestwiki-label-nsfw": "This wiki includes content that is not safe for work (NSFW)",
 	"requestwiki-help-nsfw": "A wiki is not safe for work (NSFW) if it includes graphic discussion of sex (either text or media content) or is otherwise inappropriate for those under the age of 18.",
 	"requestwiki-label-nsfwtext": "Please give us more details about the type of NSFW content that your wiki will contain",
+	"requestwiki-label-source": "This wiki is migrating from or forking an existing wiki",
+	"requestwiki-label-sourceurl": "Enter the full URL of the source wiki (the wiki you are migrating or forking from)",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
 	"right-user": "Edit pages protected as \"{{int:protect-level-user}}\"",
