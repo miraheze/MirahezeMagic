@@ -33,6 +33,7 @@ class RequestWiki implements
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
+					'MirahezeMagicRequestWikiSkins',
 				],
 				$mainConfig
 			)
@@ -90,7 +91,10 @@ class RequestWiki implements
 			newField: [
 				'type' => 'select',
 				'label-message' => 'requestwiki-label-defaultskin',
-				'options' => [ 'vector-2022' => 'vector-2022' ],
+				'options' => array_combine(
+					$this->options->get( 'MirahezeMagicRequestWikiSkins' ),
+					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
+				),
 				'default' => 'vector-2022',
 				'section' => 'configure',
 			]
