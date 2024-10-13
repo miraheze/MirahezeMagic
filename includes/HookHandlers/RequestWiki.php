@@ -72,12 +72,12 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
-			afterKey: 'private',
+			afterKey: 'category',
 			newKey: 'defaultskin',
 			newField: [
 				'type' => 'select',
 				'label-message' => 'requestwiki-label-defaultskin',
-				'options' => [ 'vector-2022' ],
+				'options' => [ 'vector-2022' => 'vector-2022' ],
 				'default' => 'vector-2022',
 				'section' => 'configure',
 			]
@@ -120,13 +120,13 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
-			fieldKey: 'private',
+			fieldKey: 'category',
 			newSection: 'configure'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
-			fieldKey: 'category',
+			fieldKey: 'private',
 			newSection: 'configure'
 		);
 
