@@ -194,7 +194,7 @@ class Hooks implements
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
-			afterKey: 'sourceurl',
+			afterKey: 'source',
 			newKey: 'sourceurl',
 			newField: $sourceurlField
 		);
