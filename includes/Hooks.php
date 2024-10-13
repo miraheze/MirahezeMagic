@@ -21,6 +21,7 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
@@ -214,7 +215,7 @@ class Hooks implements
 			'type' => 'info',
 			'section' => 'details',
 			'raw' => true,
-			'default' => ( new \MediaWiki\Language\RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
+			'default' => ( new RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
