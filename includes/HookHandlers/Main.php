@@ -1,6 +1,6 @@
 <?php
 
-namespace Miraheze\MirahezeMagic;
+namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
@@ -55,7 +55,7 @@ use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILBFactory;
 
-class Hooks implements
+class Main implements
 	AbuseFilterShouldFilterActionHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
