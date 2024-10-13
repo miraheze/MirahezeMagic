@@ -95,6 +95,12 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
+			fieldKey: 'guidance',
+			newSection: 'info'
+		);
+
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
 			fieldKey: 'purpose',
 			newSection: 'info'
 		);
@@ -145,6 +151,7 @@ class RequestWiki implements
 			$formDescriptor,
 			section: 'info',
 			newOrder: [
+				'guidance',
 				'purpose',
 				'bio',
 				'nsfw',
