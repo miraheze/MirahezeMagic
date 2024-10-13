@@ -59,6 +59,30 @@ class RequestWiki implements
 			]
 		);
 
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'subdomain',
+			newSection: 'core'
+		);
+
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'sitename',
+			newSection: 'core'
+		);
+
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'language',
+			newSection: 'core'
+		);
+		
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'private',
+			newSection: 'configure'
+		);
+
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
 			fieldKey: 'private',
