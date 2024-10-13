@@ -4,12 +4,16 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
+use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraData;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
+use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
+use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class RequestWiki implements
+	CreateWikiAfterCreationWithExtraDataHook,
 	RequestWikiFormDescriptorModifyHook,
 	RequestWikiQueueFormDescriptorModifyHook
 {
@@ -333,5 +337,34 @@ class RequestWiki implements
 				'default' => $sourceMessage->parse(),
 			]
 		);
+	}
+
+	public function onCreateWikiAfterCreationWithExtraData( array $extraData, string $dbname ): void {
+		$mwSettings = new ManageWikiSettings( $dbname );
+		$setList = $mwSettings->list();
+
+		$mwExtensions = new ManageWikiExtensions( $dbname );
+		$extList = $mwExtensions->list();
+
+		if ( $extraData['articlepath'] !== ( $setList['wgArticlePath'] ?? '/wiki/$1' ) ) {
+			$mwSettings->modify( [ 'wgArticlePath' => $extraData['articlepath'] ] );
+			$mwSettings->commit();
+		}
+
+		if ( $extraData['defaultskin'] !== ( $setList['wgDefaultSkin'] ?? 'vector-2022' ) ) {
+			if (
+				!isset( $extList[ $extraData['defaultskin'] ] ) &&
+				!in_array(
+					$extraData['defaultskin'],
+					[ 'vector', 'vector-2022' ]
+				)
+			) {
+				$mwExtensions->add( $extraData['defaultskin'] );
+				$mwExtensions->commit();
+			}
+
+			$mwSettings->modify( [ 'wgDefaultSkin' => $extraData['defaultskin'] ] );
+			$mwSettings->commit();
+		}
 	}
 }
