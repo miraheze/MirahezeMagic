@@ -15,9 +15,8 @@ class RequestWiki implements
 {
 
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
-		RequestWikiFormUtils::insertFieldAfter(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			afterKey: 'bio',
 			newKey: 'nsfw',
 			newField: [
 				'label-message' => 'requestwiki-label-nsfw',
@@ -28,9 +27,8 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::insertFieldAfter(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			afterKey: 'nsfw',
 			newKey: 'nsfwtext',
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
@@ -40,9 +38,8 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::insertFieldAfter(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			afterKey: 'purpose',
 			newKey: 'source',
 			newField: [
 				'label-message' => 'requestwiki-label-source',
@@ -51,15 +48,24 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::insertFieldAfter(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			afterKey: 'source',
 			newKey: 'sourceurl',
 			newField: [
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'source', '1' ],
 				'section' => 'info',
 				'type' => 'url',
+			]
+		);
+
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'showadvanced',
+			newField: [
+				'type' => 'check',
+				'label-message' => 'requestwiki-label-showadvanced',
+				'section' => 'advanced',
 			]
 		);
 
