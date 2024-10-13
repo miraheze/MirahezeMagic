@@ -59,20 +59,8 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::insertFieldAtBeginningOfSection(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			section: 'advanced',
-			newKey: 'showadvanced',
-			newField: [
-				'type' => 'check',
-				'label-message' => 'requestwiki-label-showadvanced',
-				'section' => 'advanced',
-			]
-		);
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'category',
 			newKey: 'defaultskin',
 			newField: [
 				'type' => 'select',
@@ -83,7 +71,17 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::insertFieldAtEndOfSection(
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'showadvanced',
+			newField: [
+				'type' => 'check',
+				'label-message' => 'requestwiki-label-showadvanced',
+				'section' => 'advanced',
+			]
+		);
+
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			section: 'advanced',
 			newKey: 'articlepath',
@@ -198,6 +196,16 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::reorderFieldsInSection(
 			$formDescriptor,
+			section: 'core',
+			newOrder: [
+				'subdomain',
+				'sitename',
+				'language',
+			]
+		);
+
+		RequestWikiFormUtils::reorderFieldsInSection(
+			$formDescriptor,
 			section: 'info',
 			newOrder: [
 				'guidance',
@@ -208,6 +216,25 @@ class RequestWiki implements
 				'nsfwtext',
 				'sourceurl',
 				'reason',
+			]
+		);
+
+		RequestWikiFormUtils::reorderFieldsInSection(
+			$formDescriptor,
+			section: 'configure',
+			newOrder: [
+				'private',
+				'category',
+				'defaultskin',
+			]
+		);
+
+		RequestWikiFormUtils::reorderFieldsInSection(
+			$formDescriptor,
+			section: 'advanced',
+			newOrder: [
+				'showadvanced',
+				'articlepath',
 			]
 		);
 
