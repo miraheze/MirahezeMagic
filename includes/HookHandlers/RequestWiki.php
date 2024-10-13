@@ -22,6 +22,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfw',
 				'help-message' => 'requestwiki-help-nsfw',
+				'help-inline' => false,
 				'type' => 'check',
 			]
 		);
@@ -56,6 +57,18 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'source', '1' ],
 				'type' => 'url',
 			]
+		);
+
+		RequestWikiFormUtils::updateFieldProperties(
+			$formDescriptor,
+			fieldKey: 'private',
+			newProperties: [ 'help-inline' => false ]
+		);
+
+		RequestWikiFormUtils::updateFieldProperties(
+			$formDescriptor,
+			fieldKey: 'bio',
+			newProperties: [ 'help-inline' => false ]
 		);
 	}
 
