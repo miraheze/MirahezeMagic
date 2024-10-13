@@ -76,7 +76,7 @@ class RequestWiki implements
 			fieldKey: 'language',
 			newSection: 'core'
 		);
-		
+
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'private',
