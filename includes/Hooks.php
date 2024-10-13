@@ -160,6 +160,7 @@ class Hooks implements
 			newKey: 'nsfw',
 			newField: $nsfwField
 		);
+		
 		$nsfwtextField = [
 			'label-message' => 'requestwiki-label-nsfwtext',
 			'hide-if' => [ '!==', 'nsfw', '1' ],
@@ -192,6 +193,7 @@ class Hooks implements
 			newKey: 'edit-nsfw',
 			newField: $nsfwField
 		);
+		
 		$nsfwtextField = [
 			'label-message' => 'requestwiki-label-nsfwtext',
 			'type' => 'text',
@@ -206,6 +208,21 @@ class Hooks implements
 			newKey: 'edit-nsfwtext',
 			newField: $nsfwtextField
 		);
+
+		$nsfwField = [
+                        'label-message' => 'requestwiki-label-nsfw',
+                        'type' => 'info',
+                        'section' => 'details',
+                        'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? 'yes' : 'no',
+               ];
+
+                RequestWikiFormUtils::insertFieldAfter(
+                        $formDescriptor,
+                        afterKey: 'details-description',
+                        newKey: 'details-nsfw',
+                        newField: $nsfwField
+                );
+
 	}
 
 	/**
