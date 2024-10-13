@@ -176,7 +176,6 @@ class Hooks implements
 		);
 		$sourceField = [
 			'label-message' => 'requestwiki-label-source',
-			'help-message' => 'requestwiki-help-source',
 			'type' => 'check',
 		];
 
