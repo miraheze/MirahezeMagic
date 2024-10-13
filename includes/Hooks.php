@@ -174,6 +174,30 @@ class Hooks implements
 			newKey: 'nsfwtext',
 			newField: $nsfwtextField
 		);
+		$sourceField = [
+			'label-message' => 'requestwiki-label-source',
+			'type' => 'check',
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'purpose',
+			newKey: 'source',
+			newField: $sourceField
+		);
+
+		$sourceurlField = [
+			'label-message' => 'requestwiki-label-sourceurl',
+			'hide-if' => [ '!==', 'source', '1' ],
+			'type' => 'url',
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'source',
+			newKey: 'sourceurl',
+			newField: $sourceurlField
+		);
 	}
 
 	public function onRequestWikiQueueFormDescriptorModify(
@@ -222,6 +246,49 @@ class Hooks implements
 			afterKey: 'details-description',
 			newKey: 'details-nsfw',
 			newField: $nsfwField
+		);
+
+		$sourceField = [
+			'label-message' => 'requestwiki-label-source',
+			'type' => 'check',
+			'section' => 'editing',
+			'default' => $wikiRequestManager->getExtraFieldData( 'source' ),
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'edit-purpose',
+			newKey: 'edit-source',
+			newField: $sourceField
+		);
+
+		$sourceurlField = [
+			'label-message' => 'requestwiki-label-sourceurl',
+			'type' => 'url',
+			'section' => 'editing',
+			'hide-if' => [ '!==', 'edit-source', '1' ],
+			'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
+		];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'edit-source',
+			newKey: 'edit-sourceurl',
+			newField: $sourceurlField
+		);
+
+		$sourceField = [
+			'label-message' => 'requestwiki-label-source',
+			'type' => 'info',
+			'section' => 'details',
+			'raw' => true,
+			'default' => ( new RawMessage( ( $wikiRequestManager->getExtraFieldData( 'source' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'details-purpose',
+			newKey: 'details-source',
+			newField: $sourceField
 		);
 	}
 
