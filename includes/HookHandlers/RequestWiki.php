@@ -59,8 +59,9 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::addFieldToEnd(
+		RequestWikiFormUtils::insertFieldAtBeginningOfSection(
 			$formDescriptor,
+			section: 'advanced',
 			newKey: 'showadvanced',
 			newField: [
 				'type' => 'check',
