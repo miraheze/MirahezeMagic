@@ -71,82 +71,85 @@
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"BlockIpComplete": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"ContributionsToolLinks": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"CreateWikiDeletion": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"CreateWikiReadPersistentModel": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"CreateWikiRename": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"CreateWikiStatePrivate": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"CreateWikiTables": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"CreateWikiWritePersistentModel": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"GetLocalURL::Internal": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"GlobalUserPageWikis": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"ImportDumpJobAfterImport": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"ImportDumpJobGetFile": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"MessageCacheFetchOverrides": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"MimeMagicInit": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"RecentChange_save": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"RequestWikiFormDescriptorModify": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "RequestWiki"
 		},
 		"RequestWikiQueueFormDescriptorModify": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "RequestWiki"
 		},
 		"SiteNoticeAfter": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"SkinAddFooterLinks": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"TitleReadWhitelist": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"UserGetRightsRemove": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		}
 	},
 	"HookHandlers": {
-		"MirahezeMagicHooks": {
-			"class": "Miraheze\\MirahezeMagic\\Hooks",
-			"factory": "Miraheze\\MirahezeMagic\\Hooks::factory",
+		"Main": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Main",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
 				"CommentStore",
 				"DBLoadBalancerFactory",
 				"HttpRequestFactory"
 			]
+		},
+		"RequestWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
 		}
 	},
 	"config": {

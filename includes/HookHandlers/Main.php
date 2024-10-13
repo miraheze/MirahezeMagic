@@ -1,6 +1,6 @@
 <?php
 
-namespace Miraheze\MirahezeMagic;
+namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
@@ -21,7 +21,6 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Language\RawMessage;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
@@ -40,10 +39,6 @@ use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
-use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
-use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
-use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
-use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
@@ -55,7 +50,7 @@ use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILBFactory;
 
-class Hooks implements
+class Main implements
 	AbuseFilterShouldFilterActionHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
@@ -71,8 +66,6 @@ class Hooks implements
 	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
 	RecentChange_saveHook,
-	RequestWikiFormDescriptorModifyHook,
-	RequestWikiQueueFormDescriptorModifyHook,
 	SiteNoticeAfterHook,
 	SkinAddFooterLinksHook,
 	TitleReadWhitelistHook,
@@ -145,150 +138,6 @@ class Hooks implements
 			$commentStore,
 			$dbLoadBalancerFactory,
 			$httpRequestFactory
-		);
-	}
-
-	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
-		$nsfwField = [
-			'label-message' => 'requestwiki-label-nsfw',
-			'help-message' => 'requestwiki-help-nsfw',
-			'type' => 'check',
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'bio',
-			newKey: 'nsfw',
-			newField: $nsfwField
-		);
-
-		$nsfwtextField = [
-			'label-message' => 'requestwiki-label-nsfwtext',
-			'hide-if' => [ '!==', 'nsfw', '1' ],
-			'type' => 'text',
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'nsfw',
-			newKey: 'nsfwtext',
-			newField: $nsfwtextField
-		);
-		$sourceField = [
-			'label-message' => 'requestwiki-label-source',
-			'type' => 'check',
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'purpose',
-			newKey: 'source',
-			newField: $sourceField
-		);
-
-		$sourceurlField = [
-			'label-message' => 'requestwiki-label-sourceurl',
-			'hide-if' => [ '!==', 'source', '1' ],
-			'type' => 'url',
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'source',
-			newKey: 'sourceurl',
-			newField: $sourceurlField
-		);
-	}
-
-	public function onRequestWikiQueueFormDescriptorModify(
-		array &$formDescriptor,
-		User $user,
-		WikiRequestManager $wikiRequestManager
-	): void {
-		$nsfwField = [
-			'label-message' => 'requestwiki-label-nsfw',
-			'type' => 'check',
-			'section' => 'editing',
-			'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'edit-bio',
-			newKey: 'edit-nsfw',
-			newField: $nsfwField
-		);
-
-		$nsfwtextField = [
-			'label-message' => 'requestwiki-label-nsfwtext',
-			'type' => 'text',
-			'section' => 'editing',
-			'hide-if' => [ '!==', 'edit-nsfw', '1' ],
-			'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'edit-nsfw',
-			newKey: 'edit-nsfwtext',
-			newField: $nsfwtextField
-		);
-
-		$nsfwField = [
-			'label-message' => 'requestwiki-label-nsfw',
-			'type' => 'info',
-			'section' => 'details',
-			'raw' => true,
-			'default' => ( new RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'details-description',
-			newKey: 'details-nsfw',
-			newField: $nsfwField
-		);
-
-		$sourceField = [
-			'label-message' => 'requestwiki-label-source',
-			'type' => 'check',
-			'section' => 'editing',
-			'default' => $wikiRequestManager->getExtraFieldData( 'source' ),
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'edit-purpose',
-			newKey: 'edit-source',
-			newField: $sourceField
-		);
-
-		$sourceurlField = [
-			'label-message' => 'requestwiki-label-sourceurl',
-			'type' => 'url',
-			'section' => 'editing',
-			'hide-if' => [ '!==', 'edit-source', '1' ],
-			'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
-		];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'edit-source',
-			newKey: 'edit-sourceurl',
-			newField: $sourceurlField
-		);
-
-		$sourceField = [
-			'label-message' => 'requestwiki-label-source',
-			'type' => 'info',
-			'section' => 'details',
-			'raw' => true,
-			'default' => ( new RawMessage( ( $wikiRequestManager->getExtraFieldData( 'source' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'details-purpose',
-			newKey: 'details-source',
-			newField: $sourceField
 		);
 	}
 
