@@ -70,6 +70,19 @@ class RequestWiki implements
 			]
 		);
 
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'private',
+			newKey: 'defaultskin',
+			newField: [
+				'type' => 'select',
+				'label-message' => 'requestwiki-label-defaultskin',
+				'options' => [ 'vector-2022' ],
+				'default' => 'vector-2022',
+				'section' => 'configure',
+			]
+		);
+
 		RequestWikiFormUtils::insertFieldAtEndOfSection(
 			$formDescriptor,
 			section: 'advanced',
