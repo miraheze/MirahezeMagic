@@ -214,7 +214,7 @@ class Hooks implements
 			'type' => 'info',
 			'section' => 'details',
 			'raw' => 'true',
-			'default' => ( new \MediaWiki\Language\RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(),		];
+			'default' => ( new \MediaWiki\Language\RawMessage( ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) ? '{{Done|Yes}}' : '{{Notdone|No}}' ) ) )->parse(), ];
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
