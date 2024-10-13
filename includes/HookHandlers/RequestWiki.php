@@ -2,6 +2,8 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\Config\Config;
+use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
 use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
@@ -17,6 +19,25 @@ class RequestWiki implements
 	RequestWikiFormDescriptorModifyHook,
 	RequestWikiQueueFormDescriptorModifyHook
 {
+
+	private ServiceOptions $options;
+
+	public function __construct( ServiceOptions $options ) {
+		$this->options = $options;
+	}
+
+	public static function factory(
+		Config $mainConfig
+	): self {
+		return new self(
+			new ServiceOptions(
+				[
+					'ManageWikiExtensions',
+				],
+				$mainConfig
+			)
+		);
+	}
 
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
 		RequestWikiFormUtils::addFieldToEnd(
@@ -356,7 +377,7 @@ class RequestWiki implements
 				!isset( $extList[ $extraData['defaultskin'] ] ) &&
 				!in_array(
 					$extraData['defaultskin'],
-					[ 'vector', 'vector-2022' ]
+					$this->options->get( 'ManageWikiExtensions' )
 				)
 			) {
 				$mwExtensions->add( $extraData['defaultskin'] );
