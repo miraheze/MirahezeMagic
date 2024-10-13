@@ -105,6 +105,12 @@ class RequestWiki implements
 			newSection: 'info'
 		);
 
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'bio',
+			newSection: 'info'
+		);
+
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
 			fieldKey: 'category',
