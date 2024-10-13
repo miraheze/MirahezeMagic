@@ -79,6 +79,9 @@
 		"ContributionsToolLinks": {
 			"handler": "Main"
 		},
+		"CreateWikiAfterCreationWithExtraData": {
+			"handler": "RequestWiki"
+		},
 		"CreateWikiDeletion": {
 			"handler": "Main"
 		},
