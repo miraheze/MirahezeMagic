@@ -69,7 +69,7 @@ class RequestWiki implements
 				'section' => 'advanced',
 			]
 		);
-		
+
 		RequestWikiFormUtils::insertFieldAtEndOfSection(
 			$formDescriptor,
 			section: 'advanced',
