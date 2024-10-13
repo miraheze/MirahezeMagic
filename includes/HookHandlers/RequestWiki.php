@@ -140,6 +140,20 @@ class RequestWiki implements
 			fieldKey: 'bio',
 			newProperties: [ 'help-inline' => false ]
 		);
+
+		RequestWikiFormUtils::reorderFieldsInSection(
+			$formDescriptor,
+			section: 'info',
+			newOrder: [
+				'purpose',
+				'bio',
+				'nsfw',
+				'source',
+				'nsfwtext',
+				'sourceurl',
+				'reason',
+			]
+		);
 	}
 
 	public function onRequestWikiQueueFormDescriptorModify(
