@@ -85,6 +85,18 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
+			fieldKey: 'subdomain',
+			newProperties: [ 'help-inline' => false ]
+		);
+
+		RequestWikiFormUtils::updateFieldProperties(
+			$formDescriptor,
+			fieldKey: 'sitename',
+			newProperties: [ 'help-inline' => false ]
+		);
+
+		RequestWikiFormUtils::updateFieldProperties(
+			$formDescriptor,
 			fieldKey: 'private',
 			newProperties: [ 'help-inline' => false ]
 		);
