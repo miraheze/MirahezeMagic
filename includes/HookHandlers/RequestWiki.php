@@ -83,7 +83,6 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			section: 'advanced',
 			newKey: 'articlepath',
 			newField: [
 				'type' => 'radio',
