@@ -109,6 +109,19 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
+			newKey: 'wddescription',
+			newField: [
+				'type' => 'text',
+				'autosize' => true,
+				'maxlength' => 512,
+				'label-message' => 'managewiki-label-description',
+				'cssclass' => 'createwiki-infuse',
+				'section' => 'configure',
+			]
+		);
+
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
 			newKey: 'showadvanced',
 			newField: [
 				'class' => HTMLToggleSwitchField::class,
