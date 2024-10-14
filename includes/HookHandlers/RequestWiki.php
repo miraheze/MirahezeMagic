@@ -4,6 +4,7 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\HTMLForm\Field\HTMLToggleSwitchField;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
@@ -587,6 +588,8 @@ class RequestWiki implements
 				'editing/core',
 			]
 		);
+
+		RequestContext::getMain()->getOutput()->enableOOUI();
 
 		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
 		// $nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
