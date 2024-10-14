@@ -604,7 +604,7 @@ class RequestWiki implements
 				'type' => 'info',
 				'section' => 'details',
 				'raw' => true,
-				'default' => $nsfwMessage->parse(),
+				'default' => $nsfwMessage,
 			]
 		);
 
