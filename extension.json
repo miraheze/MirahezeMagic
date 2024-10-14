@@ -74,7 +74,7 @@
 			"handler": "Main"
 		},
 		"BeforePageDisplay": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"BlockIpComplete": {
 			"handler": "Main"
@@ -107,7 +107,7 @@
 			"handler": "Main"
 		},
 		"HtmlPageLinkRendererEnd": {
-			"handler": "MirahezeMagicHooks"
+			"handler": "Main"
 		},
 		"ImportDumpJobAfterImport": {
 			"handler": "Main"
