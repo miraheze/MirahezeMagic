@@ -68,8 +68,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|người quản lý wiki}}",
 	"group-wikimanager": "Người quản lý Wiki",
 	"miraheze-categories": "Thể loại",
-	"miraheze-close-email-body": "Xin chào,\n\nBức thư này nhằm cho biết rằng wiki Miraheze của bạn đã bị đóng cửa. Các wiki wiki không có bất cứ sửa đổi hoặc tác vụ nhật trình nào trong vòng 60 ngày được đóng cửa tự động để chống spam, tuân theo <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Chính sách về việc wiki không hoạt động</a>, bạn đã chấp nhận chính sách này lúc khi yêu cầu wiki.\n\nNếu bạn muốn mở lại wiki này, xin hãy ghé vào Special:ManageWiki và bỏ hộp kiểm “Đã đóng” để mở lại. Lưu ý rằng nếu bạn không mở lại wiki của bạn và không có ai yêu cầu mở lại (tuân theo phần yêu cầu mở lại của Chính sách về việc wiki không hoạt động), wiki của bạn sẽ được đánh dấu là có thể bị xóa vĩnh viễn.",
-	"miraheze-close-email-subject": "Wiki Miraheze của bạn ($1) đã bị đóng cửa",
 	"miraheze-donate": "Quyên góp tới Miraheze",
 	"miraheze-faq": "Câu hỏi thường gặp",
 	"miraheze-helpcenter": "Trung tâm hỗ trợ Miraheze",

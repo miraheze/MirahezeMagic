@@ -73,8 +73,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|gestor de wiki}}",
 	"group-wikimanager": "Gestores de wiki",
 	"miraheze-categories": "Categorias",
-	"miraheze-close-email-body": "Salute,\n\nIste e-mail es pro informar te que tu wiki Miraheze ha essite claudite. Le wikis que non recipe alcun modificationes o actiones de registro in 60 dies es automaticamente claudite pro impedir le spam, in accordo con le <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Politica de Dormientia</a> (que tu acceptava quando tu requestava un wiki).\n\nSi tu vole reaperir tu wiki, per favor visita Special:ManageWiki e dismarca le quadrato \"Claudite\" pro reaperir lo. Per favor nota que si tu non reaperi tu wiki o si nulle persona requesta que tu wiki essera aperite (in accordo con le section de requesta de reapertura del Politica de Dormientia) intra 6 menses a partir de ora, tu wiki essera marcate como eligibile pro deletion permanente.",
-	"miraheze-close-email-subject": "Tu wiki Miraheze ($1) ha essite claudite",
 	"miraheze-donate": "Donar a Miraheze",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de adjuta de Miraheze",

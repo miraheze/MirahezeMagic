@@ -80,8 +80,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|wiki 管理者}}",
 	"group-wikimanager": "Wiki 管理者",
 	"miraheze-categories": "分類",
-	"miraheze-close-email-body": "您好：\n\n這封郵件是通知您，您的 Miraheze wiki 已關閉。由於您的 wiki 在過去 60 天裡未有任何編輯或日誌操作，根據<a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">休眠方針</a>(當初您同意申請 wiki的條款)。為了防止廣告入侵已將其關閉。\n\n若您仍想要編輯您的 wiki 頁面，請前往 Special:ManageWiki 來取消勾選「已關閉」方框來重新開啟。\n\n請注意如果您並沒有重新開啟您的 wiki，這有可能是其他使用者接手了您的 wiki。若您不想要重新開啟您的 wiki，或是從現在起 6 個月內沒有其他人接手您的 wiki，這會構成符合刪除的條件。",
-	"miraheze-close-email-subject": "您的Miraheze wiki（$1）已被關閉",
 	"miraheze-donate": "為 Miraheze 捐款",
 	"miraheze-faq": "常見問題",
 	"miraheze-helpcenter": "Miraheze 協助中心",

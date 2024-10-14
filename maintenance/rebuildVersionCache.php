@@ -51,6 +51,7 @@ use MediaWiki\MainConfigNames;
  * @see SpecialVersion
  */
 class RebuildVersionCache extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 

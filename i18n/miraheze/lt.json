@@ -31,8 +31,6 @@
 	"group-wiki-creator-member": "{{GENDER:$1|viki kūrėjas|viki kūrėja}}",
 	"group-wiki-creator": "Viki kūrėjai",
 	"miraheze-categories": "Kategorijos",
-	"miraheze-close-email-body": "Sveiki,\n\nŠiuo el. laišku pranešame, kad jūsų „Miraheze“ viki uždarytas. Viki, kurie per 60 dienų negauna jokių pakeitimų ar registro veiksmų, automatiškai uždaromi, kad būtų išvengta šlamšto, laikantis <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Ramybės politikos</a> (su kuria sutikote prašydami viki).\n\nJei norite iš naujo atidaryti savo viki, apsilankykite Special:ManageWiki ir atžymėkite laukelį „Uždaryta“. Atkreipkite dėmesį, kad jei per 6 mėnesius nuo dabar neatidarysite savo viki arba niekas nepaprašys, kad jūsų viki būtų atidarytas (pagal Ramybės politikos aridarymo prašymo skyrių), jūsų viki bus pažymėta kaip tinkamas ištrinti visam laikui.",
-	"miraheze-close-email-subject": "Jūsų Miraheze viki ($1) uždaryta",
 	"miraheze-donate": "Aukoti Miraheze",
 	"miraheze-faq": "DUK",
 	"miraheze-helpcenter": "Miraheze pagalbos centras",

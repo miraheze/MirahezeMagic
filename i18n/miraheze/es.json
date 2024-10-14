@@ -81,8 +81,6 @@
 	"group-wikimanager-member": "{{GENDER:$1|Gestor de wiki|Gestora de wiki}}",
 	"group-wikimanager": "Gestores de wiki",
 	"miraheze-categories": "Categorías",
-	"miraheze-close-email-body": "Hola,\n\nEste correo electrónico es para informarle que su wiki en Miraheze ha sido cerrado. Los wikis que no reciben ediciones ni registran acciones dentro de 60 días se cierran automáticamente para evitar spam, de acuerdo con la <a href=\"https://meta.miraheze.org/wiki/Special:MyLanguage/Dormancy_Policy\">Política de Inactividad</a> (que usted aceptó al solicitar un wiki).\n\nSi desea reabrir su wiki, visite Special:ManageWiki y desmarque la casilla \"Cerrado\" para volver a abrirlo. Tenga en cuenta que si no vuelve a abrir su wiki o si nadie solicita que se abra su wiki (de acuerdo con la sección de solicitud de reapertura de la Política de Inactividad) dentro de 6 meses a partir de ahora, su wiki se marcará como elegible para eliminación permanente.",
-	"miraheze-close-email-subject": "Su wiki en Miraheze ($1) ha sido cerrado",
 	"miraheze-donate": "Donar a Miraheze",
 	"miraheze-faq": "Preguntas frecuentes",
 	"miraheze-helpcenter": "Centro de ayuda de Miraheze",

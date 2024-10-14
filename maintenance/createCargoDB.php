@@ -36,6 +36,7 @@ use Maintenance;
 use MediaWiki\MainConfigNames;
 
 class CreateCargoDB extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 

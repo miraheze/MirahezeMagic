@@ -37,6 +37,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Maintenance;
 
 class AssignImportedEdits extends Maintenance {
+
 	private $importPrefix = 'imported>';
 
 	public function __construct() {

@@ -11,19 +11,17 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use MediaWiki\MainConfigNames;
-use Miraheze\CreateWiki\RemoteWiki;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class UpdatePrivateAuthUrls extends Maintenance {
+
 	public function execute() {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 
-		$wiki = new RemoteWiki(
-			$dbname,
-			$this->getServiceContainer()->get( 'CreateWikiHookRunner' )
-		);
+		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
+		$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
 
-		if ( $wiki->isPrivate() ) {
+		if ( $remoteWiki->isPrivate() ) {
 			$manageWikiSettings = new ManageWikiSettings( $dbname );
 			foreach ( $manageWikiSettings->list() as $var => $val ) {
 				if (

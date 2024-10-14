@@ -36,6 +36,7 @@ use MediaWiki\MainConfigNames;
 use Miraheze\DataDump\DataDump;
 
 class GenerateManageWikiBackup extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 		$this->addOption( 'filename', 'Filename to dump json to.', true, true );
