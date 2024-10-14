@@ -556,37 +556,43 @@ class RequestWiki implements
 			]
 		);
 
-		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
-		$nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
+		// Don't show on old requests before it was added
+		if ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) === null ) {
+			$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
+			$nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
 
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'details-description',
-			newKey: 'details-nsfw',
-			newField: [
-				'label-message' => 'requestwiki-label-nsfw',
-				'type' => 'info',
-				'section' => 'details',
-				'raw' => true,
-				'default' => $nsfwMessage->parse(),
-			]
-		);
+			RequestWikiFormUtils::insertFieldAfter(
+				$formDescriptor,
+				afterKey: 'details-description',
+				newKey: 'details-nsfw',
+				newField: [
+					'label-message' => 'requestwiki-label-nsfw',
+					'type' => 'info',
+					'section' => 'details',
+					'raw' => true,
+					'default' => $nsfwMessage->parse(),
+				]
+			);
+		}
 
-		$hasSource = $wikiRequestManager->getExtraFieldData( 'source' );
-		$sourceMessage = new RawMessage( $hasSource ? '{{Done|Yes}}' : '{{Notdone|No}}' );
+		// Don't show on old requests before it was added
+		if ( $wikiRequestManager->getExtraFieldData( 'source' ) === null ) {
+			$hasSource = $wikiRequestManager->getExtraFieldData( 'source' );
+			$sourceMessage = new RawMessage( $hasSource ? '{{Done|Yes}}' : '{{Notdone|No}}' );
 
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'details-purpose',
-			newKey: 'details-source',
-			newField: [
-				'label-message' => 'requestwiki-label-source',
-				'type' => 'info',
-				'section' => 'details',
-				'raw' => true,
-				'default' => $sourceMessage->parse(),
-			]
-		);
+			RequestWikiFormUtils::insertFieldAfter(
+				$formDescriptor,
+				afterKey: 'details-purpose',
+				newKey: 'details-source',
+				newField: [
+					'label-message' => 'requestwiki-label-source',
+					'type' => 'info',
+					'section' => 'details',
+					'raw' => true,
+					'default' => $sourceMessage->parse(),
+				]
+			);
+		}
 	}
 
 	public function onCreateWikiAfterCreationWithExtraData( array $extraData, string $dbname ): void {
