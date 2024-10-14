@@ -390,7 +390,7 @@ class RequestWiki implements
 				'type' => 'check',
 				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
-				'section' => 'advanced',
+				'section' => 'editing/advanced',
 				'default' => $wikiRequestManager->getExtraFieldData( 'mainpageroot' ),
 			]
 		);
