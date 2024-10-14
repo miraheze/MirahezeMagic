@@ -14,6 +14,7 @@ use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use OOUI\IconWidget;
 
 class RequestWiki implements
 	CreateWikiAfterCreationWithExtraDataHook,
@@ -588,7 +589,8 @@ class RequestWiki implements
 		);
 
 		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
-		$nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
+		// $nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
+		$nsfwMessage = new IconWidget( [ 'icon' => 'check' ] ) . 'Yes';
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
