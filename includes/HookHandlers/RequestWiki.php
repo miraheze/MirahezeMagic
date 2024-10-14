@@ -126,6 +126,22 @@ class RequestWiki implements
 			]
 		);
 
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'defaultextensions',
+			newField: [
+				'type' => 'multiselect',
+				'label-message' => 'requestwiki-label-defaultextensions',
+				'help-message' => 'requestwiki-help-defaultextensions',
+				'help-inline' => false,
+				'options' => [ 'test' ],
+				'hide-if' => [ '!==', 'showadvanced', '1' ],
+				'default' => [],
+				'dropdown' => true,
+				'section' => 'advanced',
+			]
+		);
+
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'subdomain',
@@ -263,6 +279,7 @@ class RequestWiki implements
 			newOrder: [
 				'showadvanced',
 				'articlepath',
+				'defaultextensions',
 			]
 		);
 
