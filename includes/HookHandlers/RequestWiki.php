@@ -4,6 +4,7 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\HTMLForm\Field\HTMLToggleSwitchField;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
 use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
@@ -48,6 +49,7 @@ class RequestWiki implements
 				'help-message' => 'requestwiki-help-nsfw',
 				'help-inline' => false,
 				'section' => 'info',
+				'cssclass' => 'createwiki-infuse',
 				'type' => 'check',
 			]
 		);
@@ -59,6 +61,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'nsfw', '1' ],
 				'section' => 'info',
+				'cssclass' => 'createwiki-infuse',
 				'type' => 'text',
 			]
 		);
@@ -69,6 +72,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-source',
 				'section' => 'info',
+				'cssclass' => 'createwiki-infuse',
 				'type' => 'check',
 			]
 		);
@@ -80,6 +84,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'source', '1' ],
 				'section' => 'info',
+				'cssclass' => 'createwiki-infuse',
 				'type' => 'url',
 			]
 		);
@@ -95,6 +100,7 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
 				),
 				'default' => 'vector-2022',
+				'cssclass' => 'createwiki-infuse',
 				'section' => 'configure',
 			]
 		);
@@ -103,7 +109,8 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'showadvanced',
 			newField: [
-				'type' => 'check',
+				'class' => HTMLToggleSwitchField::class,
+				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'advanced',
 			]
@@ -116,6 +123,7 @@ class RequestWiki implements
 				'type' => 'check',
 				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
+				'cssclass' => 'createwiki-infuse',
 				'section' => 'advanced',
 			]
 		);
@@ -131,6 +139,7 @@ class RequestWiki implements
 					'miraheze-label-managewiki-article-path-root' => '/$1',
 				],
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
+				'cssclass' => 'createwiki-infuse',
 				'default' => '/wiki/$1',
 				'section' => 'advanced',
 			]
@@ -319,6 +328,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfw',
 				'section' => 'editing/basic',
 				'type' => 'check',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
 			]
 		);
@@ -331,6 +341,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
 				'section' => 'editing/basic',
 				'type' => 'text',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
 			]
 		);
@@ -342,6 +353,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-source',
 				'section' => 'editing/basic',
 				'type' => 'check',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'source' ),
 			]
 		);
@@ -354,6 +366,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'edit-source', '1' ],
 				'section' => 'editing/basic',
 				'type' => 'url',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
 			]
 		);
@@ -369,6 +382,7 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
 				),
 				'section' => 'editing/configure',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ) ?? 'vector-2022',
 			]
 		);
@@ -377,7 +391,8 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'edit-showadvanced',
 			newField: [
-				'type' => 'toggle',
+				'class' => HTMLToggleSwitchField::class,
+				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $wikiRequestManager->getExtraFieldData( 'showadvanced' ),
@@ -392,6 +407,7 @@ class RequestWiki implements
 				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'section' => 'editing/advanced',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'mainpageroot' ),
 			]
 		);
@@ -408,6 +424,7 @@ class RequestWiki implements
 				],
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'section' => 'editing/advanced',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'articlepath' ) ?? '/wiki/$1',
 			]
 		);
@@ -425,6 +442,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'dropdown' => true,
 				'section' => 'editing/advanced',
+				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'defaultextensions' ),
 			]
 		);
