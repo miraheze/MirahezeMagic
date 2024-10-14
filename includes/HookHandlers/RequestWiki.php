@@ -541,7 +541,7 @@ class RequestWiki implements
 			$formDescriptor,
 			newSectionOrder: [
 				'details',
-				'editing',
+				'editing/core',
 			]
 		);
 
