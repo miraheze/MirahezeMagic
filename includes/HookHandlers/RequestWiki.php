@@ -592,8 +592,10 @@ class RequestWiki implements
 		RequestContext::getMain()->getOutput()->enableOOUI();
 
 		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
-		// $nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
-		$nsfwMessage = new IconWidget( [ 'icon' => 'check' ] ) . 'Yes';
+		$nsfwMessage = new RawMessage( $isNsfw ?
+			new IconWidget( [ 'icon' => 'check' ] ) . "'''Yes'''" :
+			new IconWidget( [ 'icon' => 'close' ] ) . "''No'''"
+		);
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
@@ -604,7 +606,7 @@ class RequestWiki implements
 				'type' => 'info',
 				'section' => 'details',
 				'raw' => true,
-				'default' => $nsfwMessage,
+				'default' => $nsfwMessage->parse(),
 			]
 		);
 
