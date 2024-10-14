@@ -409,5 +409,10 @@ class RequestWiki implements
 			$mwSettings->modify( [ 'wgDefaultSkin' => $extraData['defaultskin'] ] );
 			$mwSettings->commit();
 		}
+
+		if ( $extraData['defaultextensions'] ?? [] ) {
+			$mwExtensions->add( $extraData['defaultextensions'] );
+			$mwExtensions->commit();
+		}
 	}
 }
