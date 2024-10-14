@@ -170,7 +170,7 @@
 		},
 		"MirahezeMagicRequestWikiExtensions": {
 			"description": "Array. Extensions to allow to select directly from RequestWiki.",
-			"value": []
+			"value": [ "pageimages" ]
 		},
 		"MirahezeMagicRequestWikiSkins": {
 			"description": "Array. Skins to allow to select directly from RequestWiki.",
