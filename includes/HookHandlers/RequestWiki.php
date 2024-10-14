@@ -149,6 +149,7 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
 				),
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
+				'cssclass' => 'createwiki-infuse',
 				'dropdown' => true,
 				'section' => 'advanced',
 			]
@@ -376,7 +377,7 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'edit-showadvanced',
 			newField: [
-				'type' => 'check',
+				'type' => 'toggle',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $wikiRequestManager->getExtraFieldData( 'showadvanced' ),
