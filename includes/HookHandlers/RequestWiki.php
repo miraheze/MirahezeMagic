@@ -111,8 +111,7 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'wddescription',
 			newField: [
-				'type' => 'textarea',
-				'rows' => 2,
+				'type' => 'text',
 				'maxlength' => 512,
 				'label-message' => 'managewiki-label-description',
 				'cssclass' => 'createwiki-infuse',
@@ -307,6 +306,7 @@ class RequestWiki implements
 				'private',
 				'category',
 				'defaultskin',
+				'wddescription',
 			]
 		);
 
@@ -401,6 +401,18 @@ class RequestWiki implements
 				'section' => 'editing/configure',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ) ?? 'vector-2022',
+			]
+		);
+
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'edit-wddescription',
+			newField: [
+				'type' => 'text',
+				'maxlength' => 512,
+				'label-message' => 'managewiki-label-description',
+				'cssclass' => 'createwiki-infuse',
+				'section' => 'editing/configure',
 			]
 		);
 
@@ -549,6 +561,7 @@ class RequestWiki implements
 				'edit-private',
 				'edit-category',
 				'edit-defaultskin',
+				'edit-wddescription',
 			]
 		);
 
