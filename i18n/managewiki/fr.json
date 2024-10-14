@@ -5,6 +5,7 @@
 			"Balise42",
 			"Graineahumus",
 			"Kubuya kanane leopold",
+			"Orlodrim",
 			"SleaY"
 		]
 	},
@@ -168,7 +169,9 @@
 	"managewiki-setting-wgDefaultRobotPolicy-name": "Politique par défaut des robots",
 	"managewiki-setting-wgModerationEmail-name": "Courriel de modération",
 	"managewiki-setting-wgSVGMetadataCutoff-name": "Seuil des métadonnées SVG",
+	"managewiki-setting-wgSVGMetadataCutoff-help": "Ne pas lire les métadonnées SVG au-delà de ce point.",
 	"managewiki-setting-wgMaxArticleSize-name": "Taille maximale de l'article",
+	"managewiki-setting-wgMaxArticleSize-help": "Taille maximale d’une page en kilo-octets.",
 	"managewiki-setting-wgMaxImageArea-name": "Taille maximale d'image",
 	"managewiki-setting-wgFileExtensions-name": "Extensions de fichier",
 	"managewiki-setting-wgDefaultSkin-name": "Apparence par défaut",
