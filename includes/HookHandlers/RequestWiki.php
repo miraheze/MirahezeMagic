@@ -304,8 +304,6 @@ class RequestWiki implements
 			newKey: 'edit-nsfw',
 			newField: [
 				'label-message' => 'requestwiki-label-nsfw',
-				'help-message' => 'requestwiki-help-nsfw',
-				'help-inline' => false,
 				'section' => 'editing/info',
 				'type' => 'check',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
