@@ -60,8 +60,9 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'nsfw', '1' ],
-				'section' => 'info',
 				'cssclass' => 'createwiki-infuse',
+				'required' => true,
+				'section' => 'info',
 				'type' => 'text',
 			]
 		);
@@ -83,8 +84,9 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'source', '1' ],
-				'section' => 'info',
 				'cssclass' => 'createwiki-infuse',
+				'required' => true,
+				'section' => 'info',
 				'type' => 'url',
 			]
 		);
@@ -339,9 +341,10 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
-				'section' => 'editing/basic',
-				'type' => 'text',
 				'cssclass' => 'createwiki-infuse',
+				'section' => 'editing/basic',
+				'required' => true,
+				'type' => 'text',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
 			]
 		);
@@ -364,9 +367,10 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'edit-source', '1' ],
-				'section' => 'editing/basic',
-				'type' => 'url',
 				'cssclass' => 'createwiki-infuse',
+				'section' => 'editing/basic',
+				'required' => true,
+				'type' => 'url',
 				'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
 			]
 		);
