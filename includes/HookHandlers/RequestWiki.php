@@ -456,6 +456,12 @@ class RequestWiki implements
 			newSection: 'editing/info'
 		);
 
+		RequestWikiFormUtils::moveFieldToSection(
+			$formDescriptor,
+			fieldKey: 'submit-edit',
+			newSection: 'editing/advanced'
+		);
+
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
 			fieldKey: 'edit-category',
