@@ -462,36 +462,6 @@ class RequestWiki implements
 			newSection: 'editing/advanced'
 		);
 
-		RequestWikiFormUtils::updateFieldProperties(
-			$formDescriptor,
-			fieldKey: 'edit-category',
-			newProperties: [ 'help-inline' => false ]
-		);
-
-		RequestWikiFormUtils::updateFieldProperties(
-			$formDescriptor,
-			fieldKey: 'edit-url',
-			newProperties: [ 'help-inline' => false ]
-		);
-
-		RequestWikiFormUtils::updateFieldProperties(
-			$formDescriptor,
-			fieldKey: 'edit-sitename',
-			newProperties: [ 'help-inline' => false ]
-		);
-
-		RequestWikiFormUtils::updateFieldProperties(
-			$formDescriptor,
-			fieldKey: 'edit-private',
-			newProperties: [ 'help-inline' => false ]
-		);
-
-		RequestWikiFormUtils::updateFieldProperties(
-			$formDescriptor,
-			fieldKey: 'edit-bio',
-			newProperties: [ 'help-inline' => false ]
-		);
-
 		RequestWikiFormUtils::reorderFieldsInSection(
 			$formDescriptor,
 			section: 'editing/core',
