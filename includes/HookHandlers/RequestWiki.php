@@ -26,13 +26,12 @@ class RequestWiki implements
 		$this->options = $options;
 	}
 
-	public static function factory(
-		Config $mainConfig
-	): self {
+	public static function factory( Config $mainConfig ): self {
 		return new self(
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
+					'MirahezeMagicRequestWikiExtensions',
 					'MirahezeMagicRequestWikiSkins',
 				],
 				$mainConfig
@@ -134,9 +133,11 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-defaultextensions',
 				'help-message' => 'requestwiki-help-defaultextensions',
 				'help-inline' => false,
-				'options' => [ 'test' ],
+				'options' => array_combine(
+					$this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
+					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
+				),
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
-				'default' => [],
 				'dropdown' => true,
 				'section' => 'advanced',
 			]
