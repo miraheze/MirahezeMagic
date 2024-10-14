@@ -108,6 +108,17 @@ class RequestWiki implements
 				'section' => 'advanced',
 			]
 		);
+		
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'mainpageroot',
+			newField: [
+				'type' => 'check',
+				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
+				'hide-if' => [ '!==', 'showadvanced', '1' ],
+				'section' => 'advanced',
+			]
+		);
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
@@ -279,6 +290,7 @@ class RequestWiki implements
 			section: 'advanced',
 			newOrder: [
 				'showadvanced',
+				'mainpageroot',
 				'articlepath',
 				'defaultextensions',
 			]
@@ -368,6 +380,18 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $wikiRequestManager->getExtraFieldData( 'showadvanced' ),
+			]
+		);
+
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'edit-mainpageroot',
+			newField: [
+				'type' => 'check',
+				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
+				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
+				'section' => 'advanced',
+				'default' => $wikiRequestManager->getExtraFieldData( 'mainpageroot' ),
 			]
 		);
 
@@ -497,6 +521,7 @@ class RequestWiki implements
 			section: 'editing/advanced',
 			newOrder: [
 				'edit-showadvanced',
+				'edit-mainpageroot',
 				'edit-articlepath',
 				'edit-defaultextensions',
 				'submit-edit',
@@ -554,6 +579,11 @@ class RequestWiki implements
 
 		if ( $extraData['articlepath'] !== ( $setList['wgArticlePath'] ?? '/wiki/$1' ) ) {
 			$mwSettings->modify( [ 'wgArticlePath' => $extraData['articlepath'] ] );
+			$mwSettings->commit();
+		}
+
+		if ( $extraData['mainpageroot'] !== ( $setList['wgMainPageIsDomainRoot'] ?? false ) ) {
+			$mwSettings->modify( [ 'wgMainPageIsDomainRoot' => $extraData['mainpageroot'] ] );
 			$mwSettings->commit();
 		}
 
