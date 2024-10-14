@@ -557,7 +557,7 @@ class RequestWiki implements
 		);
 
 		// Don't show on old requests before it was added
-		if ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) === null ) {
+		if ( $wikiRequestManager->getExtraFieldData( 'nsfw' ) !== null ) {
 			$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
 			$nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
 
@@ -576,7 +576,7 @@ class RequestWiki implements
 		}
 
 		// Don't show on old requests before it was added
-		if ( $wikiRequestManager->getExtraFieldData( 'source' ) === null ) {
+		if ( $wikiRequestManager->getExtraFieldData( 'source' ) !== null ) {
 			$hasSource = $wikiRequestManager->getExtraFieldData( 'source' );
 			$sourceMessage = new RawMessage( $hasSource ? '{{Done|Yes}}' : '{{Notdone|No}}' );
 
