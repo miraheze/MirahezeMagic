@@ -591,10 +591,13 @@ class RequestWiki implements
 
 		RequestContext::getMain()->getOutput()->enableOOUI();
 
+		$yes = wfMessage( 'htmlform-yes' )->escaped();
+		$no = wfMessage( 'htmlform-no' )->escaped();
+
 		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
 		$nsfwMessage = new RawMessage( $isNsfw ?
-			new IconWidget( [ 'icon' => 'check', 'flags' => 'success' ] ) . " '''Yes'''" :
-			new IconWidget( [ 'icon' => 'close', 'flags' => 'progressive' ] ) . " '''No'''"
+			new IconWidget( [ 'icon' => 'check', 'flags' => 'success' ] ) . " '''{$yes}'''" :
+			new IconWidget( [ 'icon' => 'close', 'flags' => 'progressive' ] ) . " '''{$no}'''"
 		);
 
 		RequestWikiFormUtils::insertFieldAfter(
