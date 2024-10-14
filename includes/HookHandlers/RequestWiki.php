@@ -358,7 +358,7 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
 				),
 				'section' => 'editing/configure',
-				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ),
+				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ) ?? 'vector-2022',
 			]
 		);
 
@@ -385,7 +385,7 @@ class RequestWiki implements
 				],
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'section' => 'editing/advanced',
-				'default' => $wikiRequestManager->getExtraFieldData( 'articlepath' ),
+				'default' => $wikiRequestManager->getExtraFieldData( 'articlepath' ) ?? '/wiki/$1',
 			]
 		);
 
@@ -564,7 +564,7 @@ class RequestWiki implements
 		if ( $extraData['defaultskin'] !== ( $setList['wgDefaultSkin'] ?? 'vector-2022' ) ) {
 			if (
 				!isset( $extList[ $extraData['defaultskin'] ] ) &&
-				!in_array(
+				in_array(
 					$extraData['defaultskin'],
 					$this->options->get( 'ManageWikiExtensions' )
 				)
