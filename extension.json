@@ -168,6 +168,10 @@
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
 		},
+		"MirahezeMagicRequestWikiExtensions": {
+			"description": "Array. Extensions to allow to select directly from RequestWiki.",
+			"value": []
+		},
 		"MirahezeMagicRequestWikiSkins": {
 			"description": "Array. Skins to allow to select directly from RequestWiki.",
 			"value": [ "vector", "vector-2022" ]
