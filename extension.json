@@ -73,6 +73,9 @@
 		"AbuseFilterShouldFilterAction": {
 			"handler": "Main"
 		},
+		"BeforePageDisplay": {
+			"handler": "Main"
+		},
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
@@ -101,6 +104,9 @@
 			"handler": "Main"
 		},
 		"GlobalUserPageWikis": {
+			"handler": "Main"
+		},
+		"HtmlPageLinkRendererEnd": {
 			"handler": "Main"
 		},
 		"ImportDumpJobAfterImport": {
