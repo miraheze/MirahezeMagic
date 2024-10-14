@@ -594,7 +594,7 @@ class RequestWiki implements
 		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
 		$nsfwMessage = new RawMessage( $isNsfw ?
 			new IconWidget( [ 'icon' => 'check', 'flags' => 'success' ] ) . " '''Yes'''" :
-			new IconWidget( [ 'icon' => 'close', 'flags' => 'error' ] ) . " '''No'''"
+			new IconWidget( [ 'icon' => 'close', 'flags' => 'destructive' ] ) . " '''No'''"
 		);
 
 		RequestWikiFormUtils::insertFieldAfter(
