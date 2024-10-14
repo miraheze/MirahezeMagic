@@ -306,7 +306,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfw',
 				'type' => 'check',
-				'section' => 'editing',
+				'section' => 'editing/info',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
 			]
 		);
