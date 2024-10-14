@@ -411,8 +411,9 @@ class RequestWiki implements
 				'type' => 'text',
 				'maxlength' => 512,
 				'label-message' => 'managewiki-label-description',
-				'cssclass' => 'createwiki-infuse',
 				'section' => 'editing/configure',
+				'cssclass' => 'createwiki-infuse',
+				'default' => $wikiRequestManager->getExtraFieldData( 'wddescription' ),
 			]
 		);
 
@@ -633,6 +634,11 @@ class RequestWiki implements
 
 		if ( $extraData['mainpageroot'] !== ( $setList['wgMainPageIsDomainRoot'] ?? false ) ) {
 			$mwSettings->modify( [ 'wgMainPageIsDomainRoot' => $extraData['mainpageroot'] ] );
+			$mwSettings->commit();
+		}
+
+		if ( $extraData['wddescription'] !== ( $setList['wgWikiDiscoverDescription'] ?? '' ) ) {
+			$mwSettings->modify( [ 'wgWikiDiscoverDescription' => $extraData['wddescription'] ] );
 			$mwSettings->commit();
 		}
 
