@@ -527,6 +527,7 @@ class RequestWiki implements
 				'edit-showadvanced',
 				'edit-articlepath',
 				'edit-defaultextensions',
+				'submit-edit',
 			]
 		);
 
