@@ -410,7 +410,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
-			fieldKey: 'edit-subdomain',
+			fieldKey: 'edit-url',
 			newSection: 'editing/core'
 		);
 
@@ -446,7 +446,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
-			fieldKey: 'edit-reason',
+			fieldKey: 'edit-description',
 			newSection: 'editing/info'
 		);
 
@@ -490,7 +490,7 @@ class RequestWiki implements
 			$formDescriptor,
 			section: 'editing/core',
 			newOrder: [
-				'edit-subdomain',
+				'edit-url',
 				'edit-sitename',
 				'edit-language',
 			]
@@ -506,7 +506,7 @@ class RequestWiki implements
 				'edit-source',
 				'edit-nsfwtext',
 				'edit-sourceurl',
-				'edit-reason',
+				'edit-description',
 			]
 		);
 
