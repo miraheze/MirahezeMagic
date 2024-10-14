@@ -470,7 +470,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
-			fieldKey: 'edit-subdomain',
+			fieldKey: 'edit-url',
 			newProperties: [ 'help-inline' => false ]
 		);
 
@@ -534,6 +534,14 @@ class RequestWiki implements
 				'edit-articlepath',
 				'edit-defaultextensions',
 				'submit-edit',
+			]
+		);
+
+		RequestWikiFormUtils::reorderSections(
+			$formDescriptor,
+			newSectionOrder: [
+				'details',
+				'editing',
 			]
 		);
 
