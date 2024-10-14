@@ -108,7 +108,7 @@ class RequestWiki implements
 				'section' => 'advanced',
 			]
 		);
-		
+
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'mainpageroot',
