@@ -111,8 +111,8 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'wddescription',
 			newField: [
-				'type' => 'text',
-				'autosize' => true,
+				'type' => 'textarea',
+				'rows' => 2,
 				'maxlength' => 512,
 				'label-message' => 'managewiki-label-description',
 				'cssclass' => 'createwiki-infuse',
