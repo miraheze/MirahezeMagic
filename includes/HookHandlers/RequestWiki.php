@@ -441,6 +441,16 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $wikiRequestManager->getExtraFieldData( 'showadvanced' ),
+				'disable-if' => [
+					'AND',
+					[ '===', 'edit-showadvanced', '1' ],
+					[
+						'OR',
+						[ '!==', 'edit-mainpageroot', false ],
+						[ '!==', 'edit-articlepath', '/wiki/$1' ],
+						[ '!==', 'edit-defaultextensions', [] ],
+					]
+				],
 			]
 		);
 
