@@ -250,6 +250,20 @@ class RequestWiki implements
 			newSection: 'confirmation'
 		);
 
+		// We use a more descriptive label message for
+		// category, so we don't need the help message.
+		RequestWikiFormUtils::unsetFieldProperty(
+			$formDescriptor,
+			fieldKey: 'category',
+			propertyKey: 'help-message'
+		);
+
+		RequestWikiFormUtils::updateFieldProperties(
+			$formDescriptor,
+			fieldKey: 'category',
+			newProperties: [ 'label-message' => 'requestwiki-label-category' ]
+		);
+
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
 			fieldKey: 'subdomain',
