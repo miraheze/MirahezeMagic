@@ -432,6 +432,10 @@ class RequestWiki implements
 			]
 		);
 
+		$isAdvancedModified = $wikiRequestManager->getExtraFieldData( 'mainpageroot' ) !== false ||
+			$wikiRequestManager->getExtraFieldData( 'articlepath' ) !== '/wiki/$1' ||
+			$wikiRequestManager->getExtraFieldData( 'defaultextensions' ) !== [];
+
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'edit-showadvanced',
@@ -442,10 +446,8 @@ class RequestWiki implements
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
-				'default' =>
-					$wikiRequestManager->getExtraFieldData( 'mainpageroot' ) !== false ||
-					$wikiRequestManager->getExtraFieldData( 'articlepath' ) !== '/wiki/$1' ||
-					$wikiRequestManager->getExtraFieldData( 'defaultextensions' ) !== [],
+				'default' => $isAdvancedModified,
+				'disabled' => $isAdvancedModified,
 				'disable-if' => [
 					'AND',
 					[ '===', 'edit-showadvanced', '1' ],
