@@ -54,7 +54,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfw',
 				'help-message' => 'requestwiki-help-nsfw',
 				'help-inline' => false,
-				'section' => 'info',
+				'section' => 'request-info',
 				'cssclass' => 'createwiki-infuse',
 				'type' => 'check',
 			]
@@ -68,7 +68,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'nsfw', '1' ],
 				'cssclass' => 'createwiki-infuse',
 				'required' => true,
-				'section' => 'info',
+				'section' => 'request-info',
 				'type' => 'text',
 			]
 		);
@@ -78,7 +78,7 @@ class RequestWiki implements
 			newKey: 'source',
 			newField: [
 				'label-message' => 'requestwiki-label-source',
-				'section' => 'info',
+				'section' => 'request-info',
 				'cssclass' => 'createwiki-infuse',
 				'type' => 'check',
 			]
@@ -92,7 +92,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'source', '1' ],
 				'cssclass' => 'createwiki-infuse',
 				'required' => true,
-				'section' => 'info',
+				'section' => 'request-info',
 				'type' => 'url',
 			]
 		);
@@ -220,25 +220,25 @@ class RequestWiki implements
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'guidance',
-			newSection: 'info'
+			newSection: 'request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'purpose',
-			newSection: 'info'
+			newSection: 'request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'reason',
-			newSection: 'info'
+			newSection: 'request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'bio',
-			newSection: 'info'
+			newSection: 'request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
@@ -303,7 +303,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::reorderFieldsInSection(
 			$formDescriptor,
-			section: 'info',
+			section: 'request-info',
 			newOrder: [
 				'guidance',
 				'purpose',
@@ -358,7 +358,7 @@ class RequestWiki implements
 			newKey: 'edit-nsfw',
 			newField: [
 				'label-message' => 'requestwiki-label-nsfw',
-				'section' => 'editing/basic',
+				'section' => 'editing/request-info',
 				'type' => 'check',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
@@ -372,7 +372,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
 				'cssclass' => 'createwiki-infuse',
-				'section' => 'editing/basic',
+				'section' => 'editing/request-info',
 				'required' => true,
 				'type' => 'text',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
@@ -384,7 +384,7 @@ class RequestWiki implements
 			newKey: 'edit-source',
 			newField: [
 				'label-message' => 'requestwiki-label-source',
-				'section' => 'editing/basic',
+				'section' => 'editing/request-info',
 				'type' => 'check',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'source' ),
@@ -398,7 +398,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'edit-source', '1' ],
 				'cssclass' => 'createwiki-infuse',
-				'section' => 'editing/basic',
+				'section' => 'editing/request-info',
 				'required' => true,
 				'type' => 'url',
 				'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
@@ -534,19 +534,19 @@ class RequestWiki implements
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'edit-purpose',
-			newSection: 'editing/basic'
+			newSection: 'editing/request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'edit-description',
-			newSection: 'editing/basic'
+			newSection: 'editing/request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
 			fieldKey: 'edit-bio',
-			newSection: 'editing/basic'
+			newSection: 'editing/request-info'
 		);
 
 		RequestWikiFormUtils::moveFieldToSection(
@@ -567,7 +567,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::reorderFieldsInSection(
 			$formDescriptor,
-			section: 'editing/basic',
+			section: 'editing/request-info',
 			newOrder: [
 				'edit-purpose',
 				'edit-bio',
