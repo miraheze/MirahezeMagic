@@ -447,7 +447,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $isAdvancedModified,
-				'readonly' => $isAdvancedModified,
+				'disabled' => $isAdvancedModified,
 				'disable-if' => [
 					'AND',
 					[ '===', 'edit-showadvanced', '1' ],
@@ -466,7 +466,7 @@ class RequestWiki implements
 			newField: [
 				'type' => 'check',
 				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
-				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
+				'hide-if' => [ '!==', 'edit-showadvanced', '1' ] + [ 'NOT', [ $formDescriptor['edit-showadvanced']['disable-if' ] ],
 				'section' => 'editing/advanced',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'mainpageroot' ),
