@@ -16,6 +16,7 @@ use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use OOUI\IconWidget;
+use OOUI\Tag;
 
 class RequestWiki implements
 	CreateWikiAfterCreationWithExtraDataHook,
@@ -675,12 +676,18 @@ class RequestWiki implements
 			return new IconWidget( [
 				'icon' => 'check',
 				'flags' => 'success',
-			] ) . ' ' . $this->context->msg( 'htmlform-yes' )->escaped();
+			] ) . ' ' .
+			( new Tag( 'b' ) )->appendContent(
+				$this->context->msg( 'htmlform-yes' )->escaped()
+			);
 		}
 
 		return new IconWidget( [
 			'icon' => 'close',
 			'flags' => 'progressive',
-		] ) . ' ' . $this->context->msg( 'htmlform-no' )->escaped();
+		] ) . ' ' .
+		( new Tag( 'b' ) )->appendContent(
+			$this->context->msg( 'htmlform-yes' )->escaped()
+		);
 	}
 }
