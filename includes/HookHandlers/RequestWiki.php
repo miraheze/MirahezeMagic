@@ -670,7 +670,7 @@ class RequestWiki implements
 		}
 	}
 
-	private function getIconWidget( bool $fieldcheck ): string {
+	private function getDetailsWithIcon( bool $fieldCheck ): string {
 		if ( $fieldCheck ) {
 			return new IconWidget( [
 				'icon' => 'check',
