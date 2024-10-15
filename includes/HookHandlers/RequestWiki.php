@@ -16,6 +16,7 @@ use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use OOUI\IconWidget;
+use OOUI\MessageWidget;
 use OOUI\Tag;
 
 class RequestWiki implements
@@ -133,6 +134,17 @@ class RequestWiki implements
 				'class' => HTMLToggleSwitchField::class,
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
+				'section' => 'advanced',
+			]
+		);
+
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'warn',
+			newField: [
+				'type' => 'info',
+				'default' => $this->getMessageNotice(),
+				'raw' => true,
 				'section' => 'advanced',
 			]
 		);
@@ -678,6 +690,10 @@ class RequestWiki implements
 			$mwExtensions->add( $extraData['defaultextensions'] );
 			$mwExtensions->commit();
 		}
+	}
+
+	private function getMessageNotice(): string {
+		return ( new MessageWidget( [ 'label' => 'test' ] ) )->toString();
 	}
 
 	private function getDetailsWithIcon( bool $fieldCheck ): string {
