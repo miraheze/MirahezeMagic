@@ -351,6 +351,7 @@ class RequestWiki implements
 		User $user,
 		WikiRequestManager $wikiRequestManager
 	): void {
+		var_dump( $wikiRequestManager->getAllExtraData() );
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'edit-nsfw',
