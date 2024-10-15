@@ -446,9 +446,7 @@ class RequestWiki implements
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
-				'invert' => true,
 				'default' => $isAdvancedModified,
-				'disabled' => $isAdvancedModified,
 				'disable-if' => [
 					'AND',
 					[ '===', 'edit-showadvanced', '1' ],
