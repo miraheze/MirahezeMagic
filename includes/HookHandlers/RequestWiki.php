@@ -48,6 +48,9 @@ class RequestWiki implements
 	}
 
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
+		// We need to make sure we have OOUI enabled for MessageWidget
+		$this->context->getOutput()->enableOOUI();
+
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'nsfw',
