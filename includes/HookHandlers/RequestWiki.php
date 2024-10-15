@@ -134,6 +134,8 @@ class RequestWiki implements
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'advanced',
+				// We handle this manually, we don't want to save this field
+				'save' => false,
 			]
 		);
 
