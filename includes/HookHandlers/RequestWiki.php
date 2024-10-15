@@ -47,9 +47,8 @@ class RequestWiki implements
 	}
 
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
-		$formDescriptor['purpose']['options'] = [ 'test' => $formDescriptor['purpose']['options'] ];
+		$formDescriptor['purpose']['options'] = [ '' => 'test' ] + $formDescriptor['purpose']['options'];
 		$formDescriptor['purpose']['default'] = '';
-		$formDescriptor['purpose']['flatlist'] = true;
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'nsfw',
