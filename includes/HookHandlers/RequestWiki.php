@@ -445,8 +445,10 @@ class RequestWiki implements
 				'class' => HTMLToggleSwitchField::class,
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
+				'filter-callback' fn ( mixed $test ): mixed => true;
 				'section' => 'editing/advanced',
 				'default' => $isAdvancedModified,
+				'disabled' => $isAdvancedModified,
 				'disable-if' => [
 					'AND',
 					[ '===', 'edit-showadvanced', '1' ],
