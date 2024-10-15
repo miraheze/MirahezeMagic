@@ -208,6 +208,8 @@
 	"requestwiki-label-source": "This wiki is moving or forking from an existing wiki",
 	"requestwiki-label-sourceurl": "Enter the full URL of the source wiki (the wiki you are moving or forking from)",
 	"requestwiki-label-showadvanced": "Show advanced options?",
+	"requestwiki-label-wddescription": "Enter a short description of your wiki that will appear publicly in the [[Special:WikiDiscover|global directory]]:",
+	"requestwiki-help-wddescription": "You can change this in Special:ManageWiki after your wiki has been created.",
 	"requestwiki-advanced": "Advanced configuration",
 	"requestwiki-configure": "Wiki configuration",
 	"requestwiki-confirmation": "Confirmation",
