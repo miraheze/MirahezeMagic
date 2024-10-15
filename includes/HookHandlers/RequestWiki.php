@@ -687,7 +687,7 @@ class RequestWiki implements
 			'flags' => 'progressive',
 		] ) . ' ' .
 		( new Tag( 'b' ) )->appendContent(
-			$this->context->msg( 'htmlform-yes' )->escaped()
+			$this->context->msg( 'htmlform-no' )->escaped()
 		);
 	}
 }
