@@ -134,15 +134,6 @@ class RequestWiki implements
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'advanced',
-				'disable-if' => [
-					'AND',
-					[ '===', 'showadvanced', '1' ],
-					[
-						'OR',
-						[ '===', 'mainpageroot', '1' ],
-						[ '!==', 'articlepath', '/wiki/$1' ],
-					],
-				],
 			]
 		);
 
@@ -449,16 +440,10 @@ class RequestWiki implements
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
-				'default' => $wikiRequestManager->getExtraFieldData( 'showadvanced' ),
-				'disable-if' => [
-					'AND',
-					[ '===', 'edit-showadvanced', '1' ],
-					[
-						'OR',
-						[ '===', 'edit-mainpageroot', '1' ],
-						[ '!==', 'edit-articlepath', '/wiki/$1' ],
-					],
-				],
+				'default' =>
+					$wikiRequestManager->getExtraFieldData( 'mainpageroot' ) !== false ||
+					$wikiRequestManager->getExtraFieldData( 'articlepath' ) !== '/wiki/$1' ||
+					$wikiRequestManager->getExtraFieldData( 'defaultextensions' ) !== [],
 			]
 		);
 
