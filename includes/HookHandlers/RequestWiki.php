@@ -436,6 +436,8 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'edit-showadvanced',
 			newField: [
+				// We handle this manually, we don't want to save this field
+				'save' => false,
 				'class' => HTMLToggleSwitchField::class,
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
