@@ -4,9 +4,9 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\HTMLForm\Field\HTMLToggleSwitchField;
-use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
 use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
@@ -23,14 +23,17 @@ class RequestWiki implements
 	RequestWikiQueueFormDescriptorModifyHook
 {
 
+	private IContextSource $context;
 	private ServiceOptions $options;
 
-	public function __construct( ServiceOptions $options ) {
+	public function __construct( IContextSource $context, ServiceOptions $options ) {
+		$this->context = $context;
 		$this->options = $options;
 	}
 
 	public static function factory( Config $mainConfig ): self {
 		return new self(
+			RequestContext::getMain(),
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
@@ -589,16 +592,10 @@ class RequestWiki implements
 			]
 		);
 
-		RequestContext::getMain()->getOutput()->enableOOUI();
-
-		$yes = wfMessage( 'htmlform-yes' )->escaped();
-		$no = wfMessage( 'htmlform-no' )->escaped();
+		// We need to make sure we have OOUI enabled for IconWidget
+		$this->context->getOutput()->enableOOUI();
 
 		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
-		$nsfwMessage = new RawMessage( $isNsfw ?
-			new IconWidget( [ 'icon' => 'check', 'flags' => 'success' ] ) . " '''{$yes}'''" :
-			new IconWidget( [ 'icon' => 'close', 'flags' => 'progressive' ] ) . " '''{$no}'''"
-		);
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
@@ -609,12 +606,11 @@ class RequestWiki implements
 				'type' => 'info',
 				'section' => 'details',
 				'raw' => true,
-				'default' => $nsfwMessage->parse(),
+				'default' => $this->getDetailsWithIcon( $isNsfw ),
 			]
 		);
 
 		$hasSource = $wikiRequestManager->getExtraFieldData( 'source' );
-		$sourceMessage = new RawMessage( $hasSource ? '{{Done|Yes}}' : '{{Notdone|No}}' );
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
@@ -625,7 +621,7 @@ class RequestWiki implements
 				'type' => 'info',
 				'section' => 'details',
 				'raw' => true,
-				'default' => $sourceMessage->parse(),
+				'default' => $this->getDetailsWithIcon( $hasSource ),
 			]
 		);
 	}
@@ -672,5 +668,19 @@ class RequestWiki implements
 			$mwExtensions->add( $extraData['defaultextensions'] );
 			$mwExtensions->commit();
 		}
+	}
+
+	private function getIconWidget( bool $fieldcheck ): string {
+		if ( $fieldCheck ) {
+			return new IconWidget( [
+				'icon' => 'check',
+				'flags' => 'success',
+			] ) . ' ' . $this->context->msg( 'htmlform-yes' )->escaped();
+		}
+
+		return new IconWidget( [
+			'icon' => 'close',
+			'flags' => 'progressive',
+		] ) . ' ' . $this->context->msg( 'htmlform-no' )->escaped();
 	}
 }
