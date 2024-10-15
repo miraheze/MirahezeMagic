@@ -670,7 +670,7 @@ class RequestWiki implements
 		if ( $extraData['defaultskin'] !== ( $setList['wgDefaultSkin'] ?? 'vector-2022' ) ) {
 			if (
 				!isset( $extList[ $extraData['defaultskin'] ] ) &&
-				in_array(
+				array_key_exists(
 					$extraData['defaultskin'],
 					$this->options->get( 'ManageWikiExtensions' )
 				)
