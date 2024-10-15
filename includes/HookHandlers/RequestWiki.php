@@ -448,7 +448,7 @@ class RequestWiki implements
 						'OR',
 						[ '===', 'edit-mainpageroot', '1' ],
 						[ '!==', 'edit-articlepath', '/wiki/$1' ],
-						[ '!==', 'edit-defaultextensions', '[]' ],
+						[ '!==', 'edit-defaultextensions', '' ],
 					]
 				],
 			]
