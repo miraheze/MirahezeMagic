@@ -119,7 +119,8 @@ class RequestWiki implements
 			newField: [
 				'type' => 'text',
 				'maxlength' => 512,
-				'label-message' => 'managewiki-label-description',
+				'label-message' => 'requestwiki-label-wddescription',
+				'help-message' => 'requestwiki-help-wddescription',
 				'cssclass' => 'createwiki-infuse',
 				'section' => 'configure',
 			]
@@ -418,7 +419,7 @@ class RequestWiki implements
 			newField: [
 				'type' => 'text',
 				'maxlength' => 512,
-				'label-message' => 'managewiki-label-description',
+				'label-message' => 'requestwiki-label-wddescription',
 				'section' => 'editing/configure',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'wddescription' ),
