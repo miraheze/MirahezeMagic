@@ -595,7 +595,7 @@ class RequestWiki implements
 		// We need to make sure we have OOUI enabled for IconWidget
 		$this->context->getOutput()->enableOOUI();
 
-		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
+		$isNsfw = (bool)$wikiRequestManager->getExtraFieldData( 'nsfw' );
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
@@ -610,7 +610,7 @@ class RequestWiki implements
 			]
 		);
 
-		$hasSource = $wikiRequestManager->getExtraFieldData( 'source' );
+		$hasSource = (bool)$wikiRequestManager->getExtraFieldData( 'source' );
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
