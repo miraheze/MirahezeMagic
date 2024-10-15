@@ -696,7 +696,7 @@ class RequestWiki implements
 	}
 
 	private function getMessageNotice(): string {
-		return ( new MessageWidget( [ 'label' => 'test' ] ) )->toString();
+		return ( new MessageWidget( [ 'label' => 'test', 'type' => 'warning', 'inline' => true ] ) )->toString();
 	}
 
 	private function getDetailsWithIcon( bool $fieldCheck ): string {
