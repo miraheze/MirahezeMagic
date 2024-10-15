@@ -16,7 +16,6 @@ use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 use OOUI\IconWidget;
-use OOUI\MessageWidget;
 use OOUI\Tag;
 
 class RequestWiki implements
@@ -48,9 +47,6 @@ class RequestWiki implements
 	}
 
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
-		// We need to make sure we have OOUI enabled for MessageWidget
-		$this->context->getOutput()->enableOOUI();
-
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'nsfw',
@@ -137,17 +133,6 @@ class RequestWiki implements
 				'class' => HTMLToggleSwitchField::class,
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
-				'section' => 'advanced',
-			]
-		);
-
-		RequestWikiFormUtils::addFieldToEnd(
-			$formDescriptor,
-			newKey: 'warn',
-			newField: [
-				'type' => 'info',
-				'default' => $this->getMessageNotice(),
-				'raw' => true,
 				'section' => 'advanced',
 			]
 		);
@@ -345,7 +330,6 @@ class RequestWiki implements
 			section: 'advanced',
 			newOrder: [
 				'showadvanced',
-				'warn',
 				'mainpageroot',
 				'articlepath',
 				'defaultextensions',
@@ -694,10 +678,6 @@ class RequestWiki implements
 			$mwExtensions->add( $extraData['defaultextensions'] );
 			$mwExtensions->commit();
 		}
-	}
-
-	private function getMessageNotice(): string {
-		return ( new MessageWidget( [ 'label' => 'WARNING: THESE ARE ADVANCED SETTINGS', 'type' => 'warning', 'inline' => true ] ) )->toString();
 	}
 
 	private function getDetailsWithIcon( bool $fieldCheck ): string {
