@@ -200,6 +200,7 @@
 	"requestssl-text": "Welcome to RequestSSL! Please read [[Custom domains]] and make sure your domain is pointed correctly before requesting an SSL certificate here and that your wiki is created. Your custom domain request will be reviewed by a Technology team member, and it can be tracked at the page that will be given when submitting your request.\n\nIf you want to use your own SSL certificate provider instead of Let's Encrypt, please create a task on [[Phorge]].\n\nIf there is an error, or if you would like to request a redirect, please create a task on [[Phorge]].",
 	"requestwiki-label-defaultextensions": "Extensions and skins that should be enabled on your wiki by default:",
 	"requestwiki-help-defaultextensions": "You will always be able to enable or disable these later with Special:ManageWiki/extensions on your wiki after it has been created.",
+	"requestwiki-label-category": "How would you like your wiki to be categorized in the [[Special:WikiDiscover|global directory]]?",
 	"requestwiki-label-defaultskin": "What would you like the default skin of your wiki to be?",
 	"requestwiki-label-nsfw": "This wiki includes content that is not safe for work (NSFW)",
 	"requestwiki-help-nsfw": "A wiki is not safe for work (NSFW) if it includes graphic discussion of sex (either text or media content) or is otherwise inappropriate for those under the age of 18.",
