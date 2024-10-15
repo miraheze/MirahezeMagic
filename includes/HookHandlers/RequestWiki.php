@@ -446,6 +446,15 @@ class RequestWiki implements
 					$wikiRequestManager->getExtraFieldData( 'mainpageroot' ) !== false ||
 					$wikiRequestManager->getExtraFieldData( 'articlepath' ) !== '/wiki/$1' ||
 					$wikiRequestManager->getExtraFieldData( 'defaultextensions' ) !== [],
+				'disable-if' => [
+					'AND',
+					[ '===', 'edit-showadvanced', '1' ],
+					[
+						'OR',
+						[ '===', 'edit-mainpageroot', '1' ],
+						[ '!==', 'edit-articlepath', '/wiki/$1' ],
+					],
+				],
 			]
 		);
 
