@@ -174,7 +174,7 @@
 		},
 		"MirahezeMagicRequestWikiSkins": {
 			"description": "Array. Skins to allow to select directly from RequestWiki.",
-			"value": [ "vector", "vector-2022" ]
+			"value": [ "cosmos", "vector", "vector-2022" ]
 		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
