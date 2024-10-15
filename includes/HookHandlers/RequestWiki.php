@@ -345,6 +345,7 @@ class RequestWiki implements
 			section: 'advanced',
 			newOrder: [
 				'showadvanced',
+				'warn',
 				'mainpageroot',
 				'articlepath',
 				'defaultextensions',
@@ -696,7 +697,7 @@ class RequestWiki implements
 	}
 
 	private function getMessageNotice(): string {
-		return ( new MessageWidget( [ 'label' => 'test', 'type' => 'warning', 'inline' => true ] ) )->toString();
+		return ( new MessageWidget( [ 'label' => 'WARNING: THESE ARE ADVANCED SETTINGS', 'type' => 'warning', 'inline' => true ] ) )->toString();
 	}
 
 	private function getDetailsWithIcon( bool $fieldCheck ): string {
