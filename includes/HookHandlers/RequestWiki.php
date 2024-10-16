@@ -4,19 +4,16 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
-use MediaWiki\Context\IContextSource;
-use MediaWiki\Context\RequestContext;
 use MediaWiki\HTMLForm\Field\HTMLToggleSwitchField;
 use MediaWiki\User\User;
 use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
+use Miraheze\CreateWiki\RequestWiki\FormFields\DetailsWithIconField;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
-use OOUI\IconWidget;
-use OOUI\Tag;
 
 class RequestWiki implements
 	CreateWikiAfterCreationWithExtraDataHook,
@@ -24,17 +21,14 @@ class RequestWiki implements
 	RequestWikiQueueFormDescriptorModifyHook
 {
 
-	private IContextSource $context;
 	private ServiceOptions $options;
 
-	public function __construct( IContextSource $context, ServiceOptions $options ) {
-		$this->context = $context;
+	public function __construct( ServiceOptions $options ) {
 		$this->options = $options;
 	}
 
 	public static function factory( Config $mainConfig ): self {
 		return new self(
-			RequestContext::getMain(),
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
@@ -605,36 +599,27 @@ class RequestWiki implements
 			]
 		);
 
-		// We need to make sure we have OOUI enabled for IconWidget
-		$this->context->getOutput()->enableOOUI();
-
-		$isNsfw = (bool)$wikiRequestManager->getExtraFieldData( 'nsfw' );
-
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
-			afterKey: 'details-description',
-			newKey: 'details-nsfw',
+			afterKey: 'private',
+			newKey: 'nsfw',
 			newField: [
+				'class' => DetailsWithIconField::class,
 				'label-message' => 'requestwiki-label-nsfw',
-				'type' => 'info',
+				'fieldCheck' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
 				'section' => 'details',
-				'raw' => true,
-				'default' => $this->getDetailsWithIcon( $isNsfw ),
 			]
 		);
 
-		$hasSource = (bool)$wikiRequestManager->getExtraFieldData( 'source' );
-
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
-			afterKey: 'details-purpose',
-			newKey: 'details-source',
+			afterKey: 'nsfw',
+			newKey: 'source',
 			newField: [
+				'class' => DetailsWithIconField::class,
 				'label-message' => 'requestwiki-label-source',
-				'type' => 'info',
+				'fieldCheck' => $wikiRequestManager->getExtraFieldData( 'source' ),
 				'section' => 'details',
-				'raw' => true,
-				'default' => $this->getDetailsWithIcon( $hasSource ),
 			]
 		);
 	}
@@ -681,25 +666,5 @@ class RequestWiki implements
 			$mwExtensions->add( $extraData['defaultextensions'] );
 			$mwExtensions->commit();
 		}
-	}
-
-	private function getDetailsWithIcon( bool $fieldCheck ): string {
-		if ( $fieldCheck ) {
-			return new IconWidget( [
-				'icon' => 'check',
-				'flags' => 'success',
-			] ) . ' ' .
-			( new Tag( 'b' ) )->appendContent(
-				$this->context->msg( 'htmlform-yes' )->escaped()
-			);
-		}
-
-		return new IconWidget( [
-			'icon' => 'close',
-			'flags' => 'progressive',
-		] ) . ' ' .
-		( new Tag( 'b' ) )->appendContent(
-			$this->context->msg( 'htmlform-no' )->escaped()
-		);
 	}
 }
