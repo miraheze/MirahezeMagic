@@ -601,7 +601,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
-			afterKey: 'private',
+			afterKey: 'bio',
 			newKey: 'nsfw',
 			newField: [
 				'class' => DetailsWithIconField::class,
