@@ -2,10 +2,10 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
-use MediaWiki\Language\RawMessage;
 use MediaWiki\User\User;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
+use Miraheze\CreateWiki\RequestWiki\FormFields\DetailsWithIconField;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
 
@@ -89,22 +89,6 @@ class RequestWiki implements
 			]
 		);
 
-		$isNsfw = $wikiRequestManager->getExtraFieldData( 'nsfw' );
-		$nsfwMessage = new RawMessage( $isNsfw ? '{{Done|Yes}}' : '{{Notdone|No}}' );
-
-		RequestWikiFormUtils::insertFieldAfter(
-			$formDescriptor,
-			afterKey: 'details-description',
-			newKey: 'details-nsfw',
-			newField: [
-				'label-message' => 'requestwiki-label-nsfw',
-				'type' => 'info',
-				'section' => 'details',
-				'raw' => true,
-				'default' => $nsfwMessage->parse(),
-			]
-		);
-
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
 			afterKey: 'edit-purpose',
@@ -129,20 +113,28 @@ class RequestWiki implements
 				'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
 			]
 		);
-
-		$hasSource = $wikiRequestManager->getExtraFieldData( 'source' );
-		$sourceMessage = new RawMessage( $hasSource ? '{{Done|Yes}}' : '{{Notdone|No}}' );
+		
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'private',
+			newKey: 'nsfw',
+			newField: [
+				'class' => DetailsWithIconField::class,
+				'label-message' => 'requestwiki-label-nsfw',
+				'fieldCheck' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
+				'section' => 'details',
+			]
+		);
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
-			afterKey: 'details-purpose',
-			newKey: 'details-source',
+			afterKey: 'nsfw',
+			newKey: 'source',
 			newField: [
+				'class' => DetailsWithIconField::class,
 				'label-message' => 'requestwiki-label-source',
-				'type' => 'info',
+				'fieldCheck' => $wikiRequestManager->getExtraFieldData( 'source' ),
 				'section' => 'details',
-				'raw' => true,
-				'default' => $sourceMessage->parse(),
 			]
 		);
 	}
