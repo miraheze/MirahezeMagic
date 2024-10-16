@@ -113,7 +113,7 @@ class RequestWiki implements
 				'default' => $wikiRequestManager->getExtraFieldData( 'sourceurl' ),
 			]
 		);
-		
+
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
 			afterKey: 'bio',
