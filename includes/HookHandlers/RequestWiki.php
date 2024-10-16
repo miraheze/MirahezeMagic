@@ -269,12 +269,6 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::updateFieldProperties(
 			$formDescriptor,
-			fieldKey: 'reason',
-			newProperties: [ 'useeditfont' => true ]
-		);
-
-		RequestWikiFormUtils::updateFieldProperties(
-			$formDescriptor,
 			fieldKey: 'subdomain',
 			newProperties: [ 'help-inline' => false ]
 		);
