@@ -586,12 +586,15 @@ class RequestWiki implements
 				'edit-mainpageroot',
 				'edit-articlepath',
 				'edit-defaultextensions',
+				// We put the edit button in advanced
+				// just so it appears at the bottom.
 				'submit-edit',
 			]
 		);
 
 		RequestWikiFormUtils::reorderSections(
 			$formDescriptor,
+			// Everything else will be appended after
 			newSectionOrder: [
 				'details',
 				'comments',
