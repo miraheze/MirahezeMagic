@@ -79,6 +79,9 @@
 		"ContributionsToolLinks": {
 			"handler": "Main"
 		},
+		"CreateWikiAfterCreationWithExtraData": {
+			"handler": "RequestWiki"
+		},
 		"CreateWikiDeletion": {
 			"handler": "Main"
 		},
@@ -149,7 +152,11 @@
 			]
 		},
 		"RequestWiki": {
-			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki::factory",
+			"services": [
+				"MainConfig"
+			]
 		}
 	},
 	"config": {
@@ -160,6 +167,14 @@
 		"MirahezeMagicMemcachedServers": {
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
+		},
+		"MirahezeMagicRequestWikiExtensions": {
+			"description": "Array. Extensions to allow to select directly from RequestWiki.",
+			"value": [ "pageimages" ]
+		},
+		"MirahezeMagicRequestWikiSkins": {
+			"description": "Array. Skins to allow to be selected as the default skin directly from RequestWiki.",
+			"value": [ "cosmos", "vector", "vector-2022" ]
 		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
