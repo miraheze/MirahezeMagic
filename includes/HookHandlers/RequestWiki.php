@@ -527,7 +527,7 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
-			fieldKey: 'edit-description',
+			fieldKey: 'edit-reason',
 			newSection: 'editing/request-info'
 		);
 
@@ -563,7 +563,7 @@ class RequestWiki implements
 				'edit-source',
 				'edit-nsfwtext',
 				'edit-sourceurl',
-				'edit-description',
+				'edit-reason',
 			]
 		);
 
