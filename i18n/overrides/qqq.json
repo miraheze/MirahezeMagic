@@ -14,6 +14,7 @@
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-createwiki-close-email-body": "A message from the email when a wiki was closed. \"Closed\" refers to {{msg-mw|Managewiki-label-closed}}.",
+	"miraheze-createwiki-close-email-sender": "{{Optional}}",
 	"miraheze-createwiki-close-email-subject": "A subject for the closed wiki on email.",
 	"miraheze-grouppage-autoconfirmed": "{{notranslate}}",
 	"miraheze-grouppage-automoderated": "{{notranslate}}",

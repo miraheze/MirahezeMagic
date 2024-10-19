@@ -11,6 +11,7 @@
 	"miraheze-newsignuppage-must-accept-tos": "Tu devi accettare i termini d’uso per essere capace di creare un account!",
 	"miraheze-oathauth-step1": "IMPORTANTE! Leggi la pagina OATHAuth prima di attivare! Passo 1: Scarica un programma di autentificazione a due fattori",
 	"miraheze-prefs-help-realname": "Il nome reale è opzionale. Se scegli di fornirlo, questo sarà usato per darti attribuzione del tuo lavoro. Usando anche una Wiki ospitata da Miraheze, tu accetti le <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Condizioni d'uso]</span> e accetti le <span class=\"plainlinks\"> [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Politiche sulla Privacy]</span>.",
+	"miraheze-requestwiki-info-guidance": "Mancano solo un paio di sezioni! Questa è molto importante.",
 	"miraheze-restriction-delete": "Cancella",
 	"miraheze-restriction-protect": "Proteggi",
 	"miraheze-skinname-snapwikiskin": "Scatta!",
