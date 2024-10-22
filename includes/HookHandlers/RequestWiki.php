@@ -49,7 +49,6 @@ class RequestWiki implements
 				'help-message' => 'requestwiki-help-nsfw',
 				'help-inline' => false,
 				'section' => 'request-info',
-				'cssclass' => 'createwiki-infuse',
 				'type' => 'check',
 			]
 		);
@@ -60,7 +59,6 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'nsfw', '1' ],
-				'cssclass' => 'createwiki-infuse',
 				'required' => true,
 				'section' => 'request-info',
 				'type' => 'text',
@@ -73,7 +71,6 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-source',
 				'section' => 'request-info',
-				'cssclass' => 'createwiki-infuse',
 				'type' => 'check',
 			]
 		);
@@ -84,7 +81,6 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'source', '1' ],
-				'cssclass' => 'createwiki-infuse',
 				'required' => true,
 				'section' => 'request-info',
 				'type' => 'url',
@@ -102,7 +98,6 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
 				),
 				'default' => 'vector-2022',
-				'cssclass' => 'createwiki-infuse',
 				'section' => 'configure',
 			]
 		);
@@ -115,7 +110,6 @@ class RequestWiki implements
 				'maxlength' => 512,
 				'label-message' => 'requestwiki-label-wddescription',
 				'help-message' => 'requestwiki-help-wddescription',
-				'cssclass' => 'createwiki-infuse',
 				'section' => 'configure',
 			]
 		);
@@ -125,7 +119,6 @@ class RequestWiki implements
 			newKey: 'showadvanced',
 			newField: [
 				'class' => HTMLToggleSwitchField::class,
-				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'advanced',
 				// We handle this manually, we don't want to save this field
@@ -139,8 +132,8 @@ class RequestWiki implements
 			newField: [
 				'type' => 'check',
 				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
+				'help-message' => 'miraheze-help-managewiki-mainpage-is-domain-root',
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
-				'cssclass' => 'createwiki-infuse',
 				'section' => 'advanced',
 			]
 		);
@@ -156,7 +149,6 @@ class RequestWiki implements
 					'miraheze-label-managewiki-article-path-root' => '/$1',
 				],
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
-				'cssclass' => 'createwiki-infuse',
 				'default' => '/wiki/$1',
 				'section' => 'advanced',
 			]
@@ -175,7 +167,6 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
 				),
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
-				'cssclass' => 'createwiki-infuse',
 				'dropdown' => true,
 				'section' => 'advanced',
 			]
@@ -430,14 +421,14 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'edit-showadvanced',
 			newField: [
-				// We handle this manually, we don't want to save this field
-				'save' => false,
 				'class' => HTMLToggleSwitchField::class,
 				'cssclass' => 'createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $isAdvancedModified,
 				'disabled' => $isAdvancedModified,
+				// We handle this manually, we don't want to save this field
+				'save' => false,
 			]
 		);
 
