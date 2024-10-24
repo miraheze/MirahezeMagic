@@ -93,10 +93,7 @@ class RequestWiki implements
 			newField: [
 				'type' => 'select',
 				'label-message' => 'requestwiki-label-defaultskin',
-				'options' => array_combine(
-					$this->options->get( 'MirahezeMagicRequestWikiSkins' ),
-					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
-				),
+				'options' => $this->options->get( 'MirahezeMagicRequestWikiSkins' ),
 				'default' => 'vector-2022',
 				'section' => 'configure',
 			]
@@ -162,10 +159,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-defaultextensions',
 				'help-message' => 'requestwiki-help-defaultextensions',
 				'help-inline' => false,
-				'options' => array_combine(
-					$this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
-					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
-				),
+				'options' => $this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
 				'dropdown' => true,
 				'section' => 'advanced',
@@ -390,10 +384,7 @@ class RequestWiki implements
 			newField: [
 				'type' => 'select',
 				'label-message' => 'requestwiki-label-defaultskin',
-				'options' => array_combine(
-					$this->options->get( 'MirahezeMagicRequestWikiSkins' ),
-					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
-				),
+				'options' => $this->options->get( 'MirahezeMagicRequestWikiSkins' ),
 				'section' => 'editing/configure',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ) ?? 'vector-2022',
@@ -468,10 +459,7 @@ class RequestWiki implements
 			newField: [
 				'type' => 'multiselect',
 				'label-message' => 'requestwiki-label-defaultextensions',
-				'options' => array_combine(
-					$this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
-					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
-				),
+				'options' => $this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'dropdown' => true,
 				'section' => 'editing/advanced',
