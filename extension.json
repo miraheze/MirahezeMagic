@@ -170,11 +170,11 @@
 		},
 		"MirahezeMagicRequestWikiExtensions": {
 			"description": "Array. Extensions to allow to select directly from RequestWiki.",
-			"value": [ "pageimages" ]
+			"value": []
 		},
 		"MirahezeMagicRequestWikiSkins": {
 			"description": "Array. Skins to allow to be selected as the default skin directly from RequestWiki.",
-			"value": [ "cosmos", "vector", "vector-2022" ]
+			"value": [ "vector", "vector-2022" ]
 		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
