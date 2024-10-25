@@ -123,7 +123,7 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::addFieldToEnd(
+		/* RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'mainpageroot',
 			newField: [
@@ -133,7 +133,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
 				'section' => 'advanced',
 			]
-		);
+		); */
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
@@ -305,7 +305,7 @@ class RequestWiki implements
 			section: 'advanced',
 			newOrder: [
 				'showadvanced',
-				'mainpageroot',
+				// 'mainpageroot',
 				'articlepath',
 				'defaultextensions',
 			]
@@ -423,7 +423,7 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::addFieldToEnd(
+		/* RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'edit-mainpageroot',
 			newField: [
@@ -434,7 +434,7 @@ class RequestWiki implements
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'mainpageroot' ),
 			]
-		);
+		); */
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
@@ -562,7 +562,7 @@ class RequestWiki implements
 			section: 'editing/advanced',
 			newOrder: [
 				'edit-showadvanced',
-				'edit-mainpageroot',
+				// 'edit-mainpageroot',
 				'edit-articlepath',
 				'edit-defaultextensions',
 				// We put the edit button in advanced
@@ -618,10 +618,10 @@ class RequestWiki implements
 			$mwSettings->commit();
 		}
 
-		if ( $extraData['mainpageroot'] !== ( $setList['wgMainPageIsDomainRoot'] ?? false ) ) {
+		/* if ( $extraData['mainpageroot'] !== ( $setList['wgMainPageIsDomainRoot'] ?? false ) ) {
 			$mwSettings->modify( [ 'wgMainPageIsDomainRoot' => $extraData['mainpageroot'] ] );
 			$mwSettings->commit();
-		}
+		} */
 
 		if ( $extraData['wddescription'] !== ( $setList['wgWikiDiscoverDescription'] ?? '' ) ) {
 			$mwSettings->modify( [ 'wgWikiDiscoverDescription' => $extraData['wddescription'] ] );
