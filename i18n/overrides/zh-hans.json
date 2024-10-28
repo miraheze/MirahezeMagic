@@ -16,6 +16,7 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|您}}不能登录因为{{GENDER:$1|您的}}账号[[m:Special:MyLanguage/Global locks|被全域锁定]]。请联系 <code>cvt[at]miraheze.org</code> 获取更多信息或申诉。",
+	"miraheze-createwiki-defaultmainpage-summary": "欢迎来到Miraheze！",
 	"miraheze-dberr-again": "请在几分钟后重试，这些错误通常几分钟后即可解决。如果您持续收到此错误，请查看我们的 Twitter（https://twitter.com/Miraheze）以获得更多信息或者通过加入到 irc.libera.chat 上的#miraheze-tech-ops 或我们的 Discord 服务器（https://discord.gg/TVAJTE4CUn）来告知我们。",
 	"miraheze-dberr-problems": "此wiki暂时不可用",
 	"miraheze-importdump-help-reason": "请告诉我们该XML用于以下哪个目的：从另一个wiki迁入、分叉另一个wiki、还是从维基百科导入模板或页面。",

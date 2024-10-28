@@ -5,6 +5,7 @@
 			"Balise42",
 			"Graineahumus",
 			"Kubuya kanane leopold",
+			"Mahabarata",
 			"Orlodrim",
 			"SleaY"
 		]
@@ -178,6 +179,9 @@
 	"managewiki-setting-wgLogo-name": "Logo",
 	"managewiki-setting-wgFavicon-name": "Favicon",
 	"managewiki-setting-wgAppleTouchIcon-name": "Icône Apple touch",
+	"managewiki-setting-wgMetrolookMobile-name": "Metrolook Mobile",
+	"managewiki-setting-wgMetrolookMobile-help": "Lorsqu'il est activé, rend l'interface utilisateur adaptée aux mobiles.",
+	"managewiki-setting-wgMetrolookLine-name": "Ligne Metrolook",
 	"managewiki-setting-wgAllowUserCss-name": "Autoriser le CSS utilisateur",
 	"managewiki-setting-wgAllowUserCss-help": "Autoriser les feuilles de style en cascade (CSS) à l'utilisateur. Par exemple User:Username/*.css.",
 	"managewiki-setting-wgAllowUserJs-name": "Autoriser le JS utilisateur",
