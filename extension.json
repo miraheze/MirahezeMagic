@@ -175,8 +175,8 @@
 		"MirahezeMagicRequestWikiSkins": {
 			"description": "Array. Skins to allow to be selected as the default skin directly from RequestWiki, formatted as skin key => display name or message key.",
 			"value": {
-				"vector": "Vector",
-				"vector-2022": "Vector (2022)"
+				"vector": "skinname-vector",
+				"vector-2022": "skinname-vector-2022"
 			}
 		},
 		"MirahezeReportsBlockAlertKeywords": {
