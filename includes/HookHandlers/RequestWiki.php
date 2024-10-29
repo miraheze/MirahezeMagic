@@ -62,7 +62,7 @@ class RequestWiki implements
 			$formDescriptor,
 			afterKey: 'prupose',
 			newKey: 'classification',
-			newField: [
+			newField:[
 				'label-message' => 'requestwiki-label-classification',
 				'type' => 'select',
 				'options' => [
@@ -70,8 +70,8 @@ class RequestWiki implements
 					'Non-wiki community (Discord server, small group, etc.)' => 'Non-wiki community (Discord server, small group, etc.)'
 					'Wiki community (existing)' => 'Wiki community (existing)',
 					'Professional organization (company, university, association, etc.)' => 'Professional organization (company, university, association, etc.)',
-					'Other' => 'Other', 
-			],
+					'Other' => 'Other',
+				],
 		);
 	}
 
@@ -142,7 +142,7 @@ class RequestWiki implements
 					'Non-wiki community (Discord server, small group, etc.)' => 'Non-wiki community (Discord server, small group, etc.)'
 					'Wiki community (existing)' => 'Wiki community (existing)',
 					'Professional organization (company, university, association, etc.)' => 'Professional organization (company, university, association, etc.)',
-					'Other' => 'Other', 
+					'Other' => 'Other',
 				],
 				'section' => 'editing',
 				'default' => $wikiRequestManager->getExtraFieldData( 'classification' ),
