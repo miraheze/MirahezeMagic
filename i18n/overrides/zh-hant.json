@@ -4,11 +4,13 @@
 			"Key0121",
 			"Kly",
 			"WiiUf",
-			"Winston Sung"
+			"Winston Sung",
+			"沈澄心"
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被[[m:Special:MyLanguage/Global locks|全域鎖定]]，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
 	"miraheze-createwiki-close-email-sender": "Miraheze",
+	"miraheze-createwiki-defaultmainpage-summary": "歡迎來到 Miraheze！",
 	"miraheze-createwiki-email-subject": "已建立您的新 Miraheze wiki（$1）",
 	"miraheze-dberr-again": "請嘗試等待幾分鐘來重試，這些錯誤通常稍待後就會解決。若您持續收到錯誤訊息，請查看我們在推特上的頁面（https://twitter.com/MirahezeStatus）。需要更多資訊或是聯絡我們，請透過加入 irc.libera.chat 上的 #miraheze-tech-ops，或是我們的 Discord 伺服器（https://discord.gg/TVAJTE4CUn）。",
 	"miraheze-dberr-problems": "此 wiki 暫時不可用",

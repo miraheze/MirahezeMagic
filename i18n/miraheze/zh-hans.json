@@ -224,6 +224,10 @@
 	"specialpages-group-wikimanage": "wiki管理",
 	"termsofservice": "使用条款",
 	"vanishuser": "清除一名用户",
+	"vanishuser-action-label": "您'''确定'''要清除该用户吗？",
+	"vanishuser-action-help": "请确认所有详细信息均正确填写，并确认将其记录下来。",
+	"vanishuser-warning": "'''警告'''：您即将全域清除一名用户！请在继续操作前仔细检查所有详细信息。",
 	"vanishuser-log-name": "用户清除日志",
+	"vanishuser-log-header": "这是所有清除用户的基本日志。",
 	"logentry-vanishuser-action": "$1清除了一名用户。"
 }
