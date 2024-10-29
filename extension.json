@@ -169,14 +169,14 @@
 			"value": []
 		},
 		"MirahezeMagicRequestWikiExtensions": {
-			"description": "Array. Extensions to allow to select directly from RequestWiki, formatted as key (index from $wgManageWikiExtensions) => display name or message key.",
+			"description": "Array. Extensions to allow to select directly from RequestWiki, formatted as display name or message key => extension key (index from $wgManageWikiExtensions).",
 			"value": []
 		},
 		"MirahezeMagicRequestWikiSkins": {
-			"description": "Array. Skins to allow to be selected as the default skin directly from RequestWiki, formatted as skin key => display name or message key.",
+			"description": "Array. Skins to allow to be selected as the default skin directly from RequestWiki, formatted as display name or message key => skin key.",
 			"value": {
-				"vector": "skinname-vector",
-				"vector-2022": "skinname-vector-2022"
+				"skinname-vector": "vector",
+				"skinname-vector-2022": "vector-2022"
 			}
 		},
 		"MirahezeReportsBlockAlertKeywords": {
