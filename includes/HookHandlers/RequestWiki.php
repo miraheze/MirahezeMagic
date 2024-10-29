@@ -673,15 +673,15 @@ class RequestWiki implements
 	private function buildLocalizedOptions( array $options ): array {
 		$localizedOptions = [];
 
-		foreach ( $options as $key => $displayName ) {
-			$localizedMessage = $this->messageLocalizer->msg( $displayName );
+		foreach ( $options as $key => $value ) {
+			$localizedMessage = $this->messageLocalizer->msg( $key );
 
 			if ( !$localizedMessage->isDisabled() ) {
-				$localizedOptions[$key] = $localizedMessage->text();
+				$localizedOptions[$localizedMessage->text()] = $value;
 				continue;
 			}
 
-			$localizedOptions[$key] = $displayName;
+			$localizedOptions[$key] = $value;
 		}
 
 		return $localizedOptions;
