@@ -161,22 +161,24 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::addFieldToEnd(
-			$formDescriptor,
-			newKey: 'defaultextensions',
-			newField: [
-				'type' => 'multiselect',
-				'label-message' => 'requestwiki-label-defaultextensions',
-				'help-message' => 'requestwiki-help-defaultextensions',
-				'help-inline' => false,
-				'options' => $this->buildLocalizedOptions(
-					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
-				),
-				'hide-if' => [ '!==', 'showadvanced', '1' ],
-				'dropdown' => true,
-				'section' => 'advanced',
-			]
-		);
+		if ( $this->options->get( 'MirahezeMagicRequestWikiExtensions' ) ) {
+			RequestWikiFormUtils::addFieldToEnd(
+				$formDescriptor,
+				newKey: 'defaultextensions',
+				newField: [
+					'type' => 'multiselect',
+					'label-message' => 'requestwiki-label-defaultextensions',
+					'help-message' => 'requestwiki-help-defaultextensions',
+					'help-inline' => false,
+					'options' => $this->buildLocalizedOptions(
+						$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
+					),
+					'hide-if' => [ '!==', 'showadvanced', '1' ],
+					'dropdown' => true,
+					'section' => 'advanced',
+				]
+			);
+		}
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
@@ -467,22 +469,24 @@ class RequestWiki implements
 			]
 		);
 
-		RequestWikiFormUtils::addFieldToEnd(
-			$formDescriptor,
-			newKey: 'edit-defaultextensions',
-			newField: [
-				'type' => 'multiselect',
-				'label-message' => 'requestwiki-label-defaultextensions',
-				'options' => $this->buildLocalizedOptions(
-					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
-				),
-				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
-				'dropdown' => true,
-				'section' => 'editing/advanced',
-				'cssclass' => 'createwiki-infuse',
-				'default' => $wikiRequestManager->getExtraFieldData( 'defaultextensions' ),
-			]
-		);
+		if ( $this->options->get( 'MirahezeMagicRequestWikiExtensions' ) ) {
+			RequestWikiFormUtils::addFieldToEnd(
+				$formDescriptor,
+				newKey: 'edit-defaultextensions',
+				newField: [
+					'type' => 'multiselect',
+					'label-message' => 'requestwiki-label-defaultextensions',
+					'options' => $this->buildLocalizedOptions(
+						$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
+					),
+					'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
+					'dropdown' => true,
+					'section' => 'editing/advanced',
+					'cssclass' => 'createwiki-infuse',
+					'default' => $wikiRequestManager->getExtraFieldData( 'defaultextensions' ),
+				]
+			);
+		}
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
