@@ -4,8 +4,10 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\HTMLForm\Field\HTMLToggleSwitchField;
 use MediaWiki\User\User;
+use MessageLocalizer;
 use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
@@ -21,14 +23,20 @@ class RequestWiki implements
 	RequestWikiQueueFormDescriptorModifyHook
 {
 
+	private MessageLocalizer $messageLocalizer;
 	private ServiceOptions $options;
 
-	public function __construct( ServiceOptions $options ) {
+	public function __construct(
+		MessageLocalizer $messageLocalizer,
+		ServiceOptions $options
+	) {
+		$this->messageLocalizer = $messageLocalizer;
 		$this->options = $options;
 	}
 
 	public static function factory( Config $mainConfig ): self {
 		return new self(
+			RequestContext::getMain(),
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
@@ -93,7 +101,9 @@ class RequestWiki implements
 			newField: [
 				'type' => 'select',
 				'label-message' => 'requestwiki-label-defaultskin',
-				'options' => $this->options->get( 'MirahezeMagicRequestWikiSkins' ),
+				'options' => $this->buildLocalizedOptions(
+					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
+				),
 				'default' => 'vector-2022',
 				'section' => 'configure',
 			]
@@ -159,7 +169,9 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-defaultextensions',
 				'help-message' => 'requestwiki-help-defaultextensions',
 				'help-inline' => false,
-				'options' => $this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
+				'options' => $this->buildLocalizedOptions(
+					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
+				),
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
 				'dropdown' => true,
 				'section' => 'advanced',
@@ -384,7 +396,9 @@ class RequestWiki implements
 			newField: [
 				'type' => 'select',
 				'label-message' => 'requestwiki-label-defaultskin',
-				'options' => $this->options->get( 'MirahezeMagicRequestWikiSkins' ),
+				'options' => $this->buildLocalizedOptions(
+					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
+				),
 				'section' => 'editing/configure',
 				'cssclass' => 'createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ) ?? 'vector-2022',
@@ -459,7 +473,9 @@ class RequestWiki implements
 			newField: [
 				'type' => 'multiselect',
 				'label-message' => 'requestwiki-label-defaultextensions',
-				'options' => $this->options->get( 'MirahezeMagicRequestWikiExtensions' ),
+				'options' => $this->buildLocalizedOptions(
+					$this->options->get( 'MirahezeMagicRequestWikiExtensions' )
+				),
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'dropdown' => true,
 				'section' => 'editing/advanced',
@@ -648,5 +664,22 @@ class RequestWiki implements
 			$mwExtensions->add( $extraData['defaultextensions'] );
 			$mwExtensions->commit();
 		}
+	}
+
+	private function buildLocalizedOptions( array $options ): array {
+		$localizedOptions = [];
+
+		foreach ( $options as $key => $displayName ) {
+			$localizedMessage = $this->messageLocalizer->msg( $displayName );
+
+			if ( !$localizedMessage->isDisabled() ) {
+				$localizedOptions[$key] = $localizedMessage->text();
+				continue;
+			}
+
+			$localizedOptions[$key] = $displayName;
+		}
+
+		return $localizedOptions;
 	}
 }
