@@ -60,7 +60,7 @@
 	"miraheze-privacypage": "m:Special:MyLanguage/Privacy Policy",
 	"miraheze-requestwiki-error-invalidcomment": "Your wiki request contains an invalid character. Correct that and try again. If you need help, [[Help center|contact us]].",
 	"miraheze-requestwiki-info-guidance": "Just a couple sections left! This one is very important.",
-	"miraheze-requestwiki-info-guidance-post": "You're just about done. Please review to ensure you've completed all sections and provided all relevant details. When you've done so, we'll get back to you as soon as we can. Feel free to look around Meta, meet your fellow wiki operators in the meantime. We like seeing new faces here.",
+	"miraheze-requestwiki-info-guidance-post": "You're just about done. Please review to ensure you've completed all sections and provided all the relevant details. When you've done so, we'll get back to you as soon as we can. In the meantime, feel free to look around Meta and meet your fellow wiki operators. We like seeing new faces here!",
 	"miraheze-requestwiki-label-agreement": "'''I have read and accept [[Special:MyLanguage/Content Policy|Content Policy]], [[Special:MyLanguage/Dormancy Policy|Dormancy Policy]], [[Special:MyLanguage/Wiki Governance policy|Wiki Governance Policy]] and [[Special:MyLanguage/Global Conduct Policy|Global Conduct Policy]]''', and by requesting a wiki, I agree to all our [[Special:MyLanguage/Global policies|global policies]].",
 	"miraheze-requestwiki-success": "Your wiki request ($1) was successfully submitted. Your request will be reviewed by a volunteer wiki creator as soon as possible.",
 	"miraheze-restriction-delete": "Delete",
