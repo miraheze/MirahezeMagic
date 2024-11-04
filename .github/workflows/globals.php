@@ -23,3 +23,10 @@ function wfOnMediaWikiServices( MediaWikiServices $services ) {
 		return;
 	}
 }
+
+function wfInitDBConnection() {
+	return MediaWikiServices::getInstance()->getDatabaseFactory()->create( 'mysql', [
+		'host' => $GLOBALS['wgDBserver'],
+		'user' => 'root',
+	] );
+}
