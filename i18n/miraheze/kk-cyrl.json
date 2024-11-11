@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Casserium",
 			"Hedeyohu22",
 			"U.ayaao.p"
 		]
@@ -12,7 +13,7 @@
 	"extensions-skins": "Мәнерлер",
 	"extensions-specialpages": "Арнайы беттер",
 	"extensions-variable": "Айнымалылар",
-	"group-autopatrolled-member": "{{GENDER:$1|өздікті қадағалаушы}}",
+	"group-autopatrolled-member": "{{GENDER:$1|өздігінен қадағалаушы}}",
 	"group-autopatrolled": "Тексерілген қатысушылар",
 	"group-confirmed-member": "{{GENDER:$1|өздіктіқұпталған қатысушы}}",
 	"group-confirmed": "Өздіктіқұпталған қатысушылар",
