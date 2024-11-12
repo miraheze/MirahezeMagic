@@ -41,6 +41,7 @@ class CheckWikiDatabases extends Maintenance {
 
 		$this->addDescription( 'Check for wiki databases across all clusters that are missing in cw_wikis, or for cw_wikis entries that have no database in any cluster.' );
 		$this->addOption( 'inverse', 'Check for cw_wikis entries without a matching database in any cluster.', false, false );
+		$this->addOption( 'delete', 'Delete/drop missing databases or entries based on the selected option (inverse or not).', false, false );
 
 		$this->requireExtension( 'CreateWiki' );
 	}
@@ -62,11 +63,14 @@ class CheckWikiDatabases extends Maintenance {
 		}
 
 		$missingDatabases = $this->findMissingDatabases( $wikiDatabases );
-
 		if ( $missingDatabases ) {
 			$this->output( "Databases missing in cw_wikis:\n" );
 			foreach ( $missingDatabases as $dbName ) {
 				$this->output( " - $dbName\n" );
+			}
+
+			if ( $this->hasOption( 'delete' ) ) {
+				$this->dropDatabases( $missingDatabases );
 			}
 		} else {
 			$this->output( "All wiki databases are present in cw_wikis.\n" );
@@ -78,7 +82,6 @@ class CheckWikiDatabases extends Maintenance {
 		foreach ( $clusters as $cluster => $loadBalancer ) {
 			$this->output( "Connecting to cluster: $cluster...\n" );
 			$dbr = $loadBalancer->getConnection( DB_REPLICA, [], ILoadBalancer::DOMAIN_ANY );
-			// Get wiki databases from information_schema
 			$result = $dbr->newSelectQueryBuilder()
 				->select( [ 'SCHEMA_NAME' ] )
 				->from( 'information_schema.SCHEMATA' )
@@ -104,7 +107,6 @@ class CheckWikiDatabases extends Maintenance {
 
 		$missingDatabases = [];
 		foreach ( $wikiDatabases as $dbName ) {
-			// Check if the wiki database exists in cw_wikis
 			$result = $dbr->newSelectQueryBuilder()
 				->select( [ 'wiki_dbname' ] )
 				->from( 'cw_wikis' )
@@ -112,7 +114,6 @@ class CheckWikiDatabases extends Maintenance {
 				->caller( __METHOD__ )
 				->fetchRow();
 
-			// If the wiki database is not found in cw_wikis, add it to the missing list
 			if ( !$result ) {
 				$missingDatabases[] = $dbName;
 			}
@@ -145,9 +146,39 @@ class CheckWikiDatabases extends Maintenance {
 			foreach ( $missingInCluster as $dbName ) {
 				$this->output( " - $dbName\n" );
 			}
+
+			if ( $this->hasOption( 'delete' ) ) {
+				$this->deleteCwWikisEntries( $missingInCluster );
+			}
 		} else {
 			$this->output( "All cw_wikis entries have matching databases in the clusters.\n" );
 		}
+	}
+
+	private function dropDatabases( array $databases ) {
+		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
+		$this->output( "Dropping the following databases:\n" );
+		foreach ( $databases as $dbName ) {
+			$this->output( " - Dropping $dbName...\n" );
+			$dbw = $this->getServiceContainer()->getConnectionProvider()
+				->getPrimaryDatabase( $dbName );
+
+			$dbw->query( "DROP DATABASE IF EXISTS $dbName", __METHOD__ );
+		}
+		$this->output( "Database drop operation completed.\n" );
+	}
+
+	private function deleteCwWikisEntries( array $entries ) {
+		$dbw = $this->getServiceContainer()->getConnectionProvider()->getPrimaryDatabase(
+			$this->getConfig()->get( 'CreateWikiDatabase' )
+		);
+
+		$this->output( "Deleting the following cw_wikis entries:\n" );
+		foreach ( $entries as $dbName ) {
+			$this->output( " - Deleting entry $dbName from cw_wikis...\n" );
+			$dbw->delete( 'cw_wikis', [ 'wiki_dbname' => $dbName ], __METHOD__ );
+		}
+		$this->output( "cw_wikis entries deletion completed.\n" );
 	}
 }
 
