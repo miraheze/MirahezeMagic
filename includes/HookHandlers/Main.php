@@ -184,7 +184,7 @@ class Main implements
 			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
 				$wgGlobalUsageDatabase
 			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
-	
+
 			$gudDb->delete( 'globalimagelinks', [ 'gil_wiki' => $dbname ] );
 		}
 
@@ -260,7 +260,7 @@ class Main implements
 			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
 				$wgGlobalUsageDatabase
 			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
-	
+
 			$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
 		}
 
