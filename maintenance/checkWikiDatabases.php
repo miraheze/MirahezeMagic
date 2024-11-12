@@ -38,7 +38,10 @@ class CheckWikiDatabases extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
-		$this->addDescription( 'Check for wiki databases across all clusters that are missing in cw_wikis.' );
+
+		$this->addDescription( 'Check for wiki databases across all clusters that are missing in cw_wikis, or for cw_wikis entries that have no database in any cluster.' );
+		$this->addOption( 'inverse', 'Check for cw_wikis entries without a matching database in any cluster.', false, false );
+
 		$this->requireExtension( 'CreateWiki' );
 	}
 
@@ -52,6 +55,12 @@ class CheckWikiDatabases extends Maintenance {
 		}
 
 		$this->output( 'Found ' . count( $wikiDatabases ) . " wiki databases across clusters.\n" );
+
+		if ( $this->hasOption( 'inverse' ) ) {
+			$this->checkCwWikisWithoutDatabase( $wikiDatabases );
+			return;
+		}
+
 		$missingDatabases = $this->findMissingDatabases( $wikiDatabases );
 
 		if ( $missingDatabases ) {
@@ -110,6 +119,35 @@ class CheckWikiDatabases extends Maintenance {
 		}
 
 		return $missingDatabases;
+	}
+
+	private function checkCwWikisWithoutDatabase( array $wikiDatabases ) {
+		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
+			$this->getConfig()->get( 'CreateWikiDatabase' )
+		);
+
+		$missingInCluster = [];
+		$result = $dbr->newSelectQueryBuilder()
+			->select( [ 'wiki_dbname' ] )
+			->from( 'cw_wikis' )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		foreach ( $result as $row ) {
+			$dbName = $row->wiki_dbname;
+			if ( !in_array( $dbName, $wikiDatabases ) ) {
+				$missingInCluster[] = $dbName;
+			}
+		}
+
+		if ( $missingInCluster ) {
+			$this->output( "cw_wikis entries without a matching database in any cluster:\n" );
+			foreach ( $missingInCluster as $dbName ) {
+				$this->output( " - $dbName\n" );
+			}
+		} else {
+			$this->output( "All cw_wikis entries have matching databases in the clusters.\n" );
+		}
 	}
 }
 
