@@ -91,7 +91,7 @@ class CheckWikiDatabases extends Maintenance {
 		foreach ( $wikiDatabases as $dbName ) {
 			// Check if the wiki database exists in cw_wikis
 			$result = $dbr->newSelectQueryBuilder()
-				->select( 'wiki_dbname' )
+				->select( [ 'wiki_dbname' ] )
 				->from( 'cw_wikis' )
 				->where( [ 'wiki_dbname' => $dbName ] )
 				->caller( __METHOD__ )
