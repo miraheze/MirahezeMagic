@@ -64,6 +64,9 @@ class CheckSwiftContainers extends Maintenance {
 			foreach ( $missingData['uniqueCounts'] as $container => $count ) {
 				$this->output( "$container: $count\n" );
 			}
+
+			$totalCount = array_sum( $missingData['uniqueCounts'] );
+			$this->output( "Total count: $totalCount\n" );
 		} else {
 			$this->output( "All containers have matching entries in cw_wikis.\n" );
 		}
