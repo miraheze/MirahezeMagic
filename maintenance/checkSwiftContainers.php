@@ -82,7 +82,7 @@ class CheckSwiftContainers extends Maintenance {
 		->disableSandbox()
 		->execute()->getStdout();
 
-		return array_filter( explode( "\n", $swiftOutput ), fn ( $line ) => !empty( $line ) );
+		return array_filter( explode( "\n", $swiftOutput ), fn ( $line ) => (bool)$line );
 	}
 
 	private function findUnmatchedContainers( array $containers ) {
