@@ -180,7 +180,7 @@ class Main implements
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
 
-		$globalUsageDatabase = $this->options->get( 'EchoSharedTrackingDB' );
+		$globalUsageDatabase = $this->options->get( 'GlobalUsageDatabase' );
 		$gudDb = $this->dbLoadBalancerFactory->getMainLB(
 			$globalUsageDatabase
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $globalUsageDatabase );
@@ -254,6 +254,13 @@ class Main implements
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
+
+		$globalUsageDatabase = $this->options->get( 'GlobalUsageDatabase' );
+		$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+			$globalUsageDatabase
+		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $globalUsageDatabase );
+
+		$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
