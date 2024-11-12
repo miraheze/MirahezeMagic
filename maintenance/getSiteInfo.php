@@ -21,13 +21,13 @@ class GetSiteInfo extends Maintenance {
 	}
 
 	public function execute() {
-    $language = $this->getConfig()->get( MainConfigNames::LanguageCode );
-    $license = $this->getConfig()->get( MainConfigNames::RightsText );
-    $sitename = $this->getConfig()->get( MainConfigNames::Sitename );
-    $url = $this->getConfig()->get( MainConfigNames::Server );
+		$language = $this->getConfig()->get( MainConfigNames::LanguageCode );
+		$license = $this->getConfig()->get( MainConfigNames::RightsText );
+		$sitename = $this->getConfig()->get( MainConfigNames::Sitename );
+		$url = $this->getConfig()->get( MainConfigNames::Server );
 
 		$this->output( "Sitename: $sitename\nURL: $url\nLanguage: $language\nLicense: $license\n" );
-  }
+	}
 }
 
 $maintClass = GetSiteInfo::class;
