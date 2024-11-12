@@ -38,7 +38,10 @@ class CheckSwiftContainers extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
+
 		$this->addDescription( 'Check for swift containers without matching entries in cw_wikis.' );
+		$this->addOption( 'container', 'Check only certain container types.' );
+
 		$this->requireExtension( 'CreateWiki' );
 	}
 
@@ -61,12 +64,15 @@ class CheckSwiftContainers extends Maintenance {
 			}
 
 			$this->output( "Unique container counts:\n" );
-			foreach ( $missingData['uniqueCounts'] as $container => $count ) {
+			foreach ( $missingData['uniqueContainerCounts'] as $container => $count ) {
 				$this->output( "$container: $count\n" );
 			}
 
-			$totalCount = array_sum( $missingData['uniqueCounts'] );
-			$this->output( "Total count: $totalCount\n" );
+			$totalContainersCount = array_sum( $missingData['uniqueContainerCounts'] );
+			$this->output( "Total containers count: $totalContainersCount\n" );
+
+			$totalWikiCount = array_sum( $missingData['uniqueWikiCounts'] );
+			$this->output( "Total wiki count: $totalWikiCount\n" );
 		} else {
 			$this->output( "All containers have matching entries in cw_wikis.\n" );
 		}
@@ -95,12 +101,19 @@ class CheckSwiftContainers extends Maintenance {
 
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
+		$containerOption = $this->getOption( 'container', false );
+
 		$missingContainers = [];
-		$uniqueCounts = [];
+		$uniqueContainerCounts = [];
+		$uniqueWikiCounts = [];
 		foreach ( $containers as $container ) {
 			if ( preg_match( '/^miraheze-([^-]+' . preg_quote( $suffix ) . ')-(.+)$/', $container, $matches ) ) {
 				$dbName = $matches[1];
 				$containerName = $matches[2];
+
+				if ( $containerOption && $containerName !== $containerOption ) {
+					continue;
+				}
 
 				// Check if the dbname exists in cw_wikis
 				$result = $dbr->newSelectQueryBuilder()
@@ -113,17 +126,23 @@ class CheckSwiftContainers extends Maintenance {
 				// If no matching wiki is found, add to the missing list
 				if ( !$result ) {
 					$missingContainers[] = $container;
-					if ( !isset( $uniqueCounts[$containerName] ) ) {
-						$uniqueCounts[$containerName] = 0;
+					if ( !isset( $uniqueContainerCounts[$containerName] ) ) {
+						$uniqueContainerCounts[$containerName] = 0;
 					}
-					$uniqueCounts[$containerName]++;
+					$uniqueContainerCounts[$containerName]++;
+
+					if ( !isset( $uniqueWikiCounts[$dbName] ) ) {
+						$uniqueWikiCounts[$dbName] = 0;
+					}
+					$uniqueWikiCounts[$dbName]++;
 				}
 			}
 		}
 
 		return [
 			'containers' => $missingContainers,
-			'uniqueCounts' => $uniqueCounts,
+			'uniqueContainerCounts' => $uniqueContainerCounts,
+			'uniqueWikiCounts' => $uniqueWikiCounts,
 		];
 	}
 }
