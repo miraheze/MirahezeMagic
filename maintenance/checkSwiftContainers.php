@@ -52,12 +52,17 @@ class CheckSwiftContainers extends Maintenance {
 		$this->output( 'Found ' . count( $containers ) . " swift containers.\n" );
 
 		// Filter out containers with no corresponding database in cw_wikis
-		$missingContainers = $this->findUnmatchedContainers( $containers );
+		$missingData = $this->findUnmatchedContainers( $containers );
 
-		if ( $missingContainers ) {
+		if ( $missingData['containers'] ) {
 			$this->output( "Containers without matching entries in cw_wikis:\n" );
-			foreach ( $missingContainers as $container ) {
+			foreach ( $missingData['containers'] as $container ) {
 				$this->output( " - $container\n" );
+			}
+
+			$this->output( "Unique container counts:\n" );
+			foreach ( $missingData['uniqueCounts'] as $container => $count ) {
+				$this->output( "$container: $count\n" );
 			}
 		} else {
 			$this->output( "All containers have matching entries in cw_wikis.\n" );
@@ -86,10 +91,13 @@ class CheckSwiftContainers extends Maintenance {
 		);
 
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
+
 		$missingContainers = [];
+		$uniqueCounts = [];
 		foreach ( $containers as $container ) {
-			if ( preg_match( '/^miraheze-(.+' . $suffix . ')-(.+$)/', $container, $matches ) ) {
+			if ( preg_match( '/^miraheze-([^-]+' . preg_quote( $suffix ) . ')-(.+)$/', $container, $matches ) ) {
 				$dbName = $matches[1];
+				$containerName = $matches[2];
 
 				// Check if the dbname exists in cw_wikis
 				$result = $dbr->newSelectQueryBuilder()
@@ -102,11 +110,18 @@ class CheckSwiftContainers extends Maintenance {
 				// If no matching wiki is found, add to the missing list
 				if ( !$result ) {
 					$missingContainers[] = $container;
+					if ( !isset( $uniqueCounts[$containerName] ) ) {
+						$uniqueCounts[$containerName] = 0;
+					}
+					$uniqueCounts[$containerName]++;
 				}
 			}
 		}
 
-		return $missingContainers;
+		return [
+			'containers' => $missingContainers,
+			'uniqueCounts' => $uniqueCounts,
+		];
 	}
 }
 
