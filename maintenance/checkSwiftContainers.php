@@ -42,6 +42,7 @@ class CheckSwiftContainers extends Maintenance {
 		$this->addDescription( 'Check for swift containers without matching entries in cw_wikis and optionally delete them.' );
 		$this->addOption( 'container', 'Check only certain container types.' );
 		$this->addOption( 'delete', 'Delete containers without matching entries in cw_wikis.', false, false );
+		$this->addOption( 'estimate', 'Show the total storage size that would be saved without deleting.', false, false );
 
 		$this->requireExtension( 'CreateWiki' );
 	}
@@ -75,6 +76,13 @@ class CheckSwiftContainers extends Maintenance {
 			$totalWikiCount = array_sum( $missingData['uniqueWikiCounts'] );
 			$this->output( "Total wiki count: $totalWikiCount\n" );
 
+			if ( $this->hasOption( 'estimate' ) ) {
+				$totalSize = $this->estimateSize( $missingData['containers'] );
+				$contentLanguage = $this->getServiceContainer()->getContentLanguage();
+				$this->output( 'Estimated storage savings: ' . $contentLanguage->formatSize( $totalSize ) . "\n" );
+				return;
+			}
+
 			// Delete containers if the delete option is specified
 			if ( $this->hasOption( 'delete' ) ) {
 				$this->deleteContainers( $missingData['containers'] );
@@ -82,6 +90,29 @@ class CheckSwiftContainers extends Maintenance {
 		} else {
 			$this->output( "All containers have matching entries in cw_wikis.\n" );
 		}
+	}
+
+	private function estimateSize( array $containers ) {
+		global $wmgSwiftPassword;
+
+		$totalSize = 0;
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		foreach ( $containers as $container ) {
+			$output = Shell::command(
+				'swift', 'stat', $container,
+				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-U', 'mw:media',
+				'-K', $wmgSwiftPassword
+			)->limits( $limits )
+				->disableSandbox()
+				->execute()->getStdout();
+
+			if ( preg_match( '/Bytes: (\d+)/', $output, $matches ) ) {
+				$totalSize += (int)$matches[1];
+			}
+		}
+
+		return $totalSize;
 	}
 
 	private function getSwiftContainers() {
