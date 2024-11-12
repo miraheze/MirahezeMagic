@@ -180,11 +180,13 @@ class Main implements
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
 
-		$gudDb = $this->dbLoadBalancerFactory->getMainLB(
-			$wgGlobalUsageDatabase
-		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
-
-		$gudDb->delete( 'globalimagelinks', [ 'gil_wiki' => $dbname ] );
+		if ( $wgGlobalUsageDatabase ) {
+			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+				$wgGlobalUsageDatabase
+			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
+	
+			$gudDb->delete( 'globalimagelinks', [ 'gil_wiki' => $dbname ] );
+		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
@@ -254,11 +256,13 @@ class Main implements
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
 
-		$gudDb = $this->dbLoadBalancerFactory->getMainLB(
-			$wgGlobalUsageDatabase
-		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
-
-		$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
+		if ( $wgGlobalUsageDatabase ) {
+			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+				$wgGlobalUsageDatabase
+			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
+	
+			$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
+		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
