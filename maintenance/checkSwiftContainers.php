@@ -88,7 +88,7 @@ class CheckSwiftContainers extends Maintenance {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' )
 		$missingContainers = [];
 		foreach ( $containers as $container ) {
-			if ( preg_match( '/^miraheze-(.+' $suffix . ')-(.+$)/', $container, $matches ) ) {
+			if ( preg_match( '/^miraheze-(.+' . $suffix . ')-(.+$)/', $container, $matches ) ) {
 				$dbName = $matches[1];
 
 				// Check if the dbname exists in cw_wikis
