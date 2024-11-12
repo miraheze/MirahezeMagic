@@ -32,7 +32,7 @@ class SwiftDump extends Maintenance {
 		// Available disk space must be 10GB
 		$df = disk_free_space( '/tmp' );
 		if ( $df < 10 * 1024 * 1024 * 1024 ) {
-			$this->fatalError( "Not enough disk space available ( < 10GB). Aborting dump.\n" );
+			$this->fatalError( "Not enough disk space available ( < 10GB). Aborting dump...\n" );
 		}
 		// If no wiki then errror
 		if ( !$wiki ) {
