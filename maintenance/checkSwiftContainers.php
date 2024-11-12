@@ -39,8 +39,9 @@ class CheckSwiftContainers extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Check for swift containers without matching entries in cw_wikis.' );
+		$this->addDescription( 'Check for swift containers without matching entries in cw_wikis and optionally delete them.' );
 		$this->addOption( 'container', 'Check only certain container types.' );
+		$this->addOption( 'delete', 'Delete containers without matching entries in cw_wikis.', false, false );
 
 		$this->requireExtension( 'CreateWiki' );
 	}
@@ -73,6 +74,11 @@ class CheckSwiftContainers extends Maintenance {
 
 			$totalWikiCount = array_sum( $missingData['uniqueWikiCounts'] );
 			$this->output( "Total wiki count: $totalWikiCount\n" );
+
+			// Delete containers if the delete option is specified
+			if ( $this->hasOption( 'delete' ) ) {
+				$this->deleteContainers( $missingData['containers'] );
+			}
 		} else {
 			$this->output( "All containers have matching entries in cw_wikis.\n" );
 		}
@@ -88,8 +94,8 @@ class CheckSwiftContainers extends Maintenance {
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword
 		)->limits( $limits )
-		->disableSandbox()
-		->execute()->getStdout();
+			->disableSandbox()
+			->execute()->getStdout();
 
 		return array_filter( explode( "\n", $swiftOutput ), fn ( $line ) => (bool)$line );
 	}
@@ -126,14 +132,17 @@ class CheckSwiftContainers extends Maintenance {
 				// If no matching wiki is found, add to the missing list
 				if ( !$result ) {
 					$missingContainers[] = $container;
+
 					if ( !isset( $uniqueContainerCounts[$containerName] ) ) {
 						$uniqueContainerCounts[$containerName] = 0;
 					}
+
 					$uniqueContainerCounts[$containerName]++;
 
 					if ( !isset( $uniqueWikiCounts[$dbName] ) ) {
 						$uniqueWikiCounts[$dbName] = 0;
 					}
+
 					$uniqueWikiCounts[$dbName]++;
 				}
 			}
@@ -144,6 +153,25 @@ class CheckSwiftContainers extends Maintenance {
 			'uniqueContainerCounts' => $uniqueContainerCounts,
 			'uniqueWikiCounts' => $uniqueWikiCounts,
 		];
+	}
+
+	private function deleteContainers( array $containers ) {
+		global $wmgSwiftPassword;
+
+		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
+		foreach ( $containers as $container ) {
+			$this->output( "Deleting container: $container\n" );
+			Shell::command(
+				'swift', 'delete', $container,
+				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-U', 'mw:media',
+				'-K', $wmgSwiftPassword
+			)->limits( $limits )
+				->disableSandbox()
+				->execute();
+		}
+
+		$this->output( "Deletion completed.\n" );
 	}
 }
 
