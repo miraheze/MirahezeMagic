@@ -85,7 +85,7 @@ class CheckSwiftContainers extends Maintenance {
 			$this->getConfig()->get( 'CreateWikiDatabase' )
 		);
 
-		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' )
+		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 		$missingContainers = [];
 		foreach ( $containers as $container ) {
 			if ( preg_match( '/^miraheze-(.+' . $suffix . ')-(.+$)/', $container, $matches ) ) {
