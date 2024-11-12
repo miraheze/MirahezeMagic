@@ -46,13 +46,15 @@ class CheckWikiDatabases extends Maintenance {
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$clusters = $dbLoadBalancerFactory->getAllMainLBs();
 		$wikiDatabases = $this->getWikiDatabasesFromClusters( $clusters );
-		if ( empty( $wikiDatabases ) ) {
-			$this->output( "No wiki databases found.\n" );
-			return;
+
+		if ( !$wikiDatabases ) {
+			$this->fatalError( "No wiki databases found.\n" );
 		}
+
 		$this->output( 'Found ' . count( $wikiDatabases ) . " wiki databases across clusters.\n" );
 		$missingDatabases = $this->findMissingDatabases( $wikiDatabases );
-		if ( !empty( $missingDatabases ) ) {
+
+		if ( $missingDatabases ) {
 			$this->output( "Databases missing in cw_wikis:\n" );
 			foreach ( $missingDatabases as $dbName ) {
 				$this->output( " - $dbName\n" );
@@ -74,30 +76,33 @@ class CheckWikiDatabases extends Maintenance {
 				->where( [ 'SCHEMA_NAME' . $dbr->buildLike( $dbr->anyString(), $this->getConfig()->get( 'CreateWikiDatabaseSuffix' ) ) ] )
 				->caller( __METHOD__ )
 				->fetchResultSet();
+
 			foreach ( $result as $row ) {
 				$wikiDatabases[] = $row->SCHEMA_NAME;
 			}
 		}
+
 		return $wikiDatabases;
 	}
 
 	private function findMissingDatabases( array $wikiDatabases ) {
 		$dbr = $this->getServiceContainer()->getDBLoadBalancer()->getConnectionRef( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
 		$missingDatabases = [];
-	// Loop through each wiki database and check if it's missing from cw_wikis
 		foreach ( $wikiDatabases as $dbName ) {
-			// Query to check if the database exists in cw_wikis
+			// Check if the wiki database exists in cw_wikis
 			$result = $dbr->newSelectQueryBuilder()
-			->select( [ 'database_name' => 'cw.wiki_dbname' ] )
-			->from( 'cw_wikis', 'cw' )
-			->where( [ 'cw.wiki_dbname' => $dbName ] )
-			->caller( __METHOD__ )
-			->fetchRow();
-			// If the database is not found in cw_wikis, add it to the missing list
+				->select( 'wiki_dbname' )
+				->from( 'cw_wikis' )
+				->where( [ 'wiki_dbname' => $dbName ] )
+				->caller( __METHOD__ )
+				->fetchRow();
+
+			// If the wiki database is not found in cw_wikis, add it to the missing list
 			if ( !$result ) {
 				$missingDatabases[] = $dbName;
 			}
 		}
+
 		return $missingDatabases;
 	}
 }
