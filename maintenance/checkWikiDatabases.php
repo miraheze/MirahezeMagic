@@ -86,7 +86,10 @@ class CheckWikiDatabases extends Maintenance {
 	}
 
 	private function findMissingDatabases( array $wikiDatabases ) {
-		$dbr = $this->getServiceContainer()->getDBLoadBalancer()->getConnectionRef( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
+		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
+			$this->getConfig()->get( 'CreateWikiDatabase' )
+		);
+
 		$missingDatabases = [];
 		foreach ( $wikiDatabases as $dbName ) {
 			// Check if the wiki database exists in cw_wikis
