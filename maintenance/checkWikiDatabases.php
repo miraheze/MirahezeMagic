@@ -58,7 +58,7 @@ class CheckWikiDatabases extends Maintenance {
 		$this->output( 'Found ' . count( $wikiDatabases ) . " wiki databases across clusters.\n" );
 
 		if ( $this->hasOption( 'inverse' ) ) {
-			$this->checkCwWikisWithoutDatabase( $wikiDatabases );
+			$this->checkGlobalTableEntriesWithoutDatabase( $wikiDatabases );
 			return;
 		}
 
@@ -122,36 +122,56 @@ class CheckWikiDatabases extends Maintenance {
 		return $missingDatabases;
 	}
 
-	private function checkCwWikisWithoutDatabase( array $wikiDatabases ) {
+	private function checkGlobalTableEntriesWithoutDatabase( array $wikiDatabases ) {
 		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
 			$this->getConfig()->get( 'CreateWikiDatabase' )
 		);
 
-		$missingInCluster = [];
-		$result = $dbr->newSelectQueryBuilder()
-			->select( [ 'wiki_dbname' ] )
-			->from( 'cw_wikis' )
-			->caller( __METHOD__ )
-			->fetchResultSet();
+		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
-		foreach ( $result as $row ) {
-			$dbName = $row->wiki_dbname;
-			if ( !in_array( $dbName, $wikiDatabases ) ) {
-				$missingInCluster[] = $dbName;
+		$tablesToCheck = [
+			'cw_wikis' => 'wiki_dbname',
+			'gnf_files' => 'files_dbname',
+			'localnames' => 'ln_wiki',
+			'localuser' => 'lu_wiki',
+			'mw_namespaces' => 'ns_dbname',
+			'mw_permissions' => 'perm_dbname',
+			'mw_settings' => 's_dbname',
+		];
+
+		$missingInCluster = [];
+		foreach ( $tablesToCheck as $table => $field ) {
+			$this->output( "Checking table: $table, field: $field...\n" );
+			$result = $dbr->newSelectQueryBuilder()
+				->select( [ $field ] )
+				->from( $table )
+				->caller( __METHOD__ )
+				->fetchResultSet();
+
+			foreach ( $result as $row ) {
+				$dbName = $row->$field;
+				// Safety
+				if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+					continue;
+				}
+
+				if ( !in_array( $dbName, $wikiDatabases ) ) {
+					$missingInCluster[] = $dbName;
+				}
 			}
 		}
 
 		if ( $missingInCluster ) {
-			$this->output( "cw_wikis entries without a matching database in any cluster:\n" );
+			$this->output( "Entries without a matching database in any cluster:\n" );
 			foreach ( $missingInCluster as $dbName ) {
 				$this->output( " - $dbName\n" );
 			}
 
 			if ( $this->hasOption( 'delete' ) ) {
-				$this->deleteCwWikisEntries( $missingInCluster );
+				$this->deleteEntries( $missingInCluster, $tablesToCheck );
 			}
 		} else {
-			$this->output( "All cw_wikis entries have matching databases in the clusters.\n" );
+			$this->output( "All entries in specified tables have matching databases in the clusters.\n" );
 		}
 	}
 
@@ -168,17 +188,19 @@ class CheckWikiDatabases extends Maintenance {
 		$this->output( "Database drop operation completed.\n" );
 	}
 
-	private function deleteCwWikisEntries( array $entries ) {
+	private function deleteEntries( array $entries, array $tablesToCheck ) {
 		$dbw = $this->getServiceContainer()->getConnectionProvider()->getPrimaryDatabase(
 			$this->getConfig()->get( 'CreateWikiDatabase' )
 		);
 
-		$this->output( "Deleting the following cw_wikis entries:\n" );
-		foreach ( $entries as $dbName ) {
-			$this->output( " - Deleting entry $dbName from cw_wikis...\n" );
-			$dbw->delete( 'cw_wikis', [ 'wiki_dbname' => $dbName ], __METHOD__ );
+		$this->output( "Deleting entries without matching databases:\n" );
+		foreach ( $tablesToCheck as $table => $field ) {
+			foreach ( $entries as $dbName ) {
+				$this->output( " - Deleting entry $dbName from $table...\n" );
+				$dbw->delete( $table, [ $field => $dbName ], __METHOD__ );
+			}
 		}
-		$this->output( "cw_wikis entries deletion completed.\n" );
+		$this->output( "Entries deletion completed.\n" );
 	}
 }
 
