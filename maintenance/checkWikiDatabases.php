@@ -73,7 +73,10 @@ class CheckWikiDatabases extends Maintenance {
 			$result = $dbr->newSelectQueryBuilder()
 				->select( [ 'SCHEMA_NAME' ] )
 				->from( 'information_schema.SCHEMATA' )
-				->where( [ 'SCHEMA_NAME' . $dbr->buildLike( $dbr->anyString(), $this->getConfig()->get( 'CreateWikiDatabaseSuffix' ) ) ] )
+				->where( [ 'SCHEMA_NAME' . $dbr->buildLike(
+					$dbr->anyString(),
+					$this->getConfig()->get( 'CreateWikiDatabaseSuffix' )
+				) ] )
 				->caller( __METHOD__ )
 				->fetchResultSet();
 
