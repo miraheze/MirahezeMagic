@@ -171,7 +171,7 @@ class Main implements
 	}
 
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
-		global $wmgSwiftPassword;
+		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
 		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
 		$dbw = $this->dbLoadBalancerFactory->getMainLB(
@@ -179,6 +179,14 @@ class Main implements
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
+
+		if ( $wgGlobalUsageDatabase ) {
+			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+				$wgGlobalUsageDatabase
+			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
+
+			$gudDb->delete( 'globalimagelinks', [ 'gil_wiki' => $dbname ] );
+		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
@@ -239,7 +247,7 @@ class Main implements
 		string $oldDbName,
 		string $newDbName
 	): void {
-		global $wmgSwiftPassword;
+		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
 		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
 		$dbw = $this->dbLoadBalancerFactory->getMainLB(
@@ -247,6 +255,14 @@ class Main implements
 		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
+
+		if ( $wgGlobalUsageDatabase ) {
+			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+				$wgGlobalUsageDatabase
+			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
+
+			$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
+		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
 			$manageWikiSettings = new ManageWikiSettings( $db );
