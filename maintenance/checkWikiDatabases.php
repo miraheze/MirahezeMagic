@@ -55,7 +55,7 @@ class CheckWikiDatabases extends Maintenance {
 		$wikiDatabases = $this->getWikiDatabasesFromClusters( $clusters );
 
 		if ( !$wikiDatabases ) {
-			$this->fatalError( "No wiki databases found.\n" );
+			$this->fatalError( 'No wiki databases found.' );
 		}
 
 		$this->output( 'Found ' . count( $wikiDatabases ) . " wiki databases across clusters.\n" );
@@ -68,12 +68,12 @@ class CheckWikiDatabases extends Maintenance {
 		$missingDatabases = $this->findMissingDatabases( $wikiDatabases );
 		if ( $missingDatabases ) {
 			$this->output( "Databases missing in cw_wikis:\n" );
-			foreach ( $missingDatabases as $dbName ) {
+			foreach ( array_keys( $missingDatabases ) as $dbName ) {
 				$this->output( " - $dbName\n" );
 			}
 
 			if ( $this->hasOption( 'delete' ) ) {
-				$this->dropDatabases( $missingDatabases );
+				$this->dropDatabases( $missingDatabases, $clusters );
 			}
 		} else {
 			$this->output( "All wiki databases are present in cw_wikis.\n" );
@@ -106,12 +106,12 @@ class CheckWikiDatabases extends Maintenance {
 					str_ends_with( $row->SCHEMA_NAME, $suffix ) ||
 					str_ends_with( $row->SCHEMA_NAME, $suffix . 'cargo' )
 				) {
-					$wikiDatabases[] = $row->SCHEMA_NAME;
+					$wikiDatabases[$row->SCHEMA_NAME] = $cluster;
 				}
 			}
 		}
 
-		sort( $wikiDatabases );
+		ksort( $wikiDatabases );
 		return $wikiDatabases;
 	}
 
@@ -121,7 +121,7 @@ class CheckWikiDatabases extends Maintenance {
 		);
 
 		$missingDatabases = [];
-		foreach ( $wikiDatabases as $dbName ) {
+		foreach ( $wikiDatabases as $dbName => $cluster ) {
 			$trimmed = rtrim( $dbName, 'cargo' );
 			$result = $dbr->newSelectQueryBuilder()
 				->select( [ 'wiki_dbname' ] )
@@ -131,7 +131,7 @@ class CheckWikiDatabases extends Maintenance {
 				->fetchRow();
 
 			if ( !$result ) {
-				$missingDatabases[] = $dbName;
+				$missingDatabases[$dbName] = $cluster;
 			}
 		}
 
@@ -207,14 +207,12 @@ class CheckWikiDatabases extends Maintenance {
 		}
 	}
 
-	private function dropDatabases( array $databases ): void {
+	private function dropDatabases( array $databases, array $clusters ): void {
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$this->output( "Dropping the following databases:\n" );
-		foreach ( $databases as $dbName ) {
+		foreach ( $databases as $dbName => $cluster ) {
 			$this->output( " - Dropping $dbName...\n" );
-			$dbw = $this->getServiceContainer()->getConnectionProvider()
-				->getPrimaryDatabase( $dbName );
-
+			$dbw = $clusters[$cluster]->getConnection( DB_PRIMARY, [], ILoadBalancer::DOMAIN_ANY );
 			$dbw->query( "DROP DATABASE IF EXISTS $dbName", __METHOD__ );
 		}
 
