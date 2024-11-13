@@ -54,16 +54,16 @@ class CheckWikiDatabases extends Maintenance {
 
 		$wikiDatabases = $this->getWikiDatabasesFromClusters( $clusters );
 
+		if ( $this->hasOption( 'inverse' ) ) {
+			$this->checkGlobalTableEntriesWithoutDatabase( $wikiDatabases );
+			return;
+		}
+
 		if ( !$wikiDatabases ) {
 			$this->fatalError( 'No wiki databases found.' );
 		}
 
 		$this->output( 'Found ' . count( $wikiDatabases ) . " wiki databases across clusters.\n" );
-
-		if ( $this->hasOption( 'inverse' ) ) {
-			$this->checkGlobalTableEntriesWithoutDatabase( $wikiDatabases );
-			return;
-		}
 
 		$missingDatabases = $this->findMissingDatabases( $wikiDatabases );
 		if ( $missingDatabases ) {
