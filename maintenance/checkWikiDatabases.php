@@ -78,6 +78,8 @@ class CheckWikiDatabases extends Maintenance {
 	}
 
 	private function getWikiDatabasesFromClusters( array $clusters ): array {
+		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
+
 		$wikiDatabases = [];
 		foreach ( $clusters as $cluster => $loadBalancer ) {
 			// We don't need the DEFAULT cluster
@@ -91,14 +93,18 @@ class CheckWikiDatabases extends Maintenance {
 				->select( [ 'SCHEMA_NAME' ] )
 				->from( 'information_schema.SCHEMATA' )
 				->where( [ 'SCHEMA_NAME' . $dbr->buildLike(
-					$dbr->anyString(),
-					$this->getConfig()->get( 'CreateWikiDatabaseSuffix' )
+					$dbr->anyString(), $suffix, $dbr->anyString()
 				) ] )
 				->caller( __METHOD__ )
 				->fetchResultSet();
 
 			foreach ( $result as $row ) {
-				$wikiDatabases[] = $row->SCHEMA_NAME;
+				if (
+					str_ends_with( $row->SCHEMA_NAME, $suffix ) ||
+					str_ends_with( $row->SCHEMA_NAME, $suffix . 'cargo' )
+				) {
+					$wikiDatabases[] = $row->SCHEMA_NAME;
+				}
 			}
 		}
 
@@ -112,10 +118,11 @@ class CheckWikiDatabases extends Maintenance {
 
 		$missingDatabases = [];
 		foreach ( $wikiDatabases as $dbName ) {
+			$trimmed = rtrim( $dbName, 'cargo' );
 			$result = $dbr->newSelectQueryBuilder()
 				->select( [ 'wiki_dbname' ] )
 				->from( 'cw_wikis' )
-				->where( [ 'wiki_dbname' => $dbName ] )
+				->where( [ 'wiki_dbname' => $trimmed ] )
 				->caller( __METHOD__ )
 				->fetchRow();
 
