@@ -40,8 +40,8 @@ class CheckWikiDatabases extends Maintenance {
 		parent::__construct();
 
 		$this->addDescription( 'Check for wiki databases across all clusters that are missing in cw_wikis, or for cw_wikis entries that have no database in any cluster.' );
-		$this->addOption( 'inverse', 'Check for cw_wikis entries without a matching database in any cluster.', false, false );
-		$this->addOption( 'delete', 'Delete/drop missing databases or entries based on the selected option (inverse or not).', false, false );
+		$this->addOption( 'tables', 'Check for cw_wikis entries without a matching database in any cluster.', false, false );
+		$this->addOption( 'delete', 'Delete/drop missing databases or entries based on the selected option (tables or databases).', false, false );
 
 		$this->requireExtension( 'CreateWiki' );
 	}
@@ -54,7 +54,7 @@ class CheckWikiDatabases extends Maintenance {
 
 		$wikiDatabases = $this->getWikiDatabasesFromClusters( $clusters );
 
-		if ( $this->hasOption( 'inverse' ) ) {
+		if ( $this->hasOption( 'tables' ) ) {
 			$this->checkGlobalTableEntriesWithoutDatabase( $wikiDatabases );
 			return;
 		}
