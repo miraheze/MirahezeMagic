@@ -140,11 +140,11 @@ class CheckWikiDatabases extends Maintenance {
 				'mw_permissions' => 'perm_dbname',
 				'mw_settings' => 's_dbname',
 			],
-			'GlobalUsageDatabase' => [
-				'globalimagelinks' => 'gil_wiki',
-			],
 			'EchoSharedTrackingDB' => [
 				'echo_unread_wikis' => 'euw_wiki',
+			],
+			'GlobalUsageDatabase' => [
+				'globalimagelinks' => 'gil_wiki',
 			],
 		];
 
