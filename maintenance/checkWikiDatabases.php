@@ -46,7 +46,7 @@ class CheckWikiDatabases extends Maintenance {
 		$this->requireExtension( 'CreateWiki' );
 	}
 
-	public function execute() {
+	public function execute(): void {
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$clusters = $dbLoadBalancerFactory->getAllMainLBs();
 		$wikiDatabases = $this->getWikiDatabasesFromClusters( $clusters );
@@ -77,9 +77,14 @@ class CheckWikiDatabases extends Maintenance {
 		}
 	}
 
-	private function getWikiDatabasesFromClusters( array $clusters ) {
+	private function getWikiDatabasesFromClusters( array $clusters ): array {
 		$wikiDatabases = [];
 		foreach ( $clusters as $cluster => $loadBalancer ) {
+			// We don't need the DEFAULT cluster
+			if ( $cluster === 'DEFAULT' ) {
+				continue;
+			}
+
 			$this->output( "Connecting to cluster: $cluster...\n" );
 			$dbr = $loadBalancer->getConnection( DB_REPLICA, [], ILoadBalancer::DOMAIN_ANY );
 			$result = $dbr->newSelectQueryBuilder()
@@ -100,7 +105,7 @@ class CheckWikiDatabases extends Maintenance {
 		return $wikiDatabases;
 	}
 
-	private function findMissingDatabases( array $wikiDatabases ) {
+	private function findMissingDatabases( array $wikiDatabases ): array {
 		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
 			$this->getConfig()->get( 'CreateWikiDatabase' )
 		);
@@ -122,44 +127,59 @@ class CheckWikiDatabases extends Maintenance {
 		return $missingDatabases;
 	}
 
-	private function checkGlobalTableEntriesWithoutDatabase( array $wikiDatabases ) {
-		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
-			$this->getConfig()->get( 'CreateWikiDatabase' )
-		);
-
+	private function checkGlobalTableEntriesWithoutDatabase( array $wikiDatabases ): void {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
 		$tablesToCheck = [
-			'cw_wikis' => 'wiki_dbname',
-			'gnf_files' => 'files_dbname',
-			'localnames' => 'ln_wiki',
-			'localuser' => 'lu_wiki',
-			'mw_namespaces' => 'ns_dbname',
-			'mw_permissions' => 'perm_dbname',
-			'mw_settings' => 's_dbname',
+			'CreateWikiDatabase' => [
+				'cw_wikis' => 'wiki_dbname',
+				'gnf_files' => 'files_dbname',
+				'localnames' => 'ln_wiki',
+				'localuser' => 'lu_wiki',
+				'mw_namespaces' => 'ns_dbname',
+				'mw_permissions' => 'perm_dbname',
+				'mw_settings' => 's_dbname',
+			],
+			'GlobalUsageDatabase' => [
+				'globalimagelinks' => 'gil_wiki',
+			],
+			'EchoSharedTrackingDB' => [
+				'echo_unread_wikis' => 'euw_wiki',
+			],
 		];
 
 		$missingInCluster = [];
-		foreach ( $tablesToCheck as $table => $field ) {
-			$this->output( "Checking table: $table, field: $field...\n" );
-			$result = $dbr->newSelectQueryBuilder()
-				->select( [ $field ] )
-				->from( $table )
-				->caller( __METHOD__ )
-				->fetchResultSet();
 
-			foreach ( $result as $row ) {
-				$dbName = $row->$field;
-				// Safety
-				if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
-					continue;
-				}
+		foreach ( $tablesToCheck as $dbConfigKey => $tables ) {
+			$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
+				$this->getConfig()->get( $dbConfigKey )
+			);
 
-				if ( !in_array( $dbName, $wikiDatabases ) ) {
-					$missingInCluster[] = $dbName;
+			foreach ( $tables as $table => $field ) {
+				$this->output( "Checking table: $table, field: $field...\n" );
+				$result = $dbr->newSelectQueryBuilder()
+					->select( [ $field ] )
+					->from( $table )
+					->caller( __METHOD__ )
+					->fetchResultSet();
+
+				foreach ( $result as $row ) {
+					$dbName = $row->$field;
+
+					// Safety check for suffix and filtering out 'default'
+					if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+						continue;
+					}
+
+					if ( !in_array( $dbName, $wikiDatabases ) ) {
+						$missingInCluster[] = $dbName;
+					}
 				}
 			}
 		}
+
+		// Filter to only unique entries
+		$missingInCluster = array_unique( $missingInCluster );
 
 		if ( $missingInCluster ) {
 			$this->output( "Entries without a matching database in any cluster:\n" );
@@ -175,7 +195,7 @@ class CheckWikiDatabases extends Maintenance {
 		}
 	}
 
-	private function dropDatabases( array $databases ) {
+	private function dropDatabases( array $databases ): void {
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$this->output( "Dropping the following databases:\n" );
 		foreach ( $databases as $dbName ) {
@@ -185,22 +205,40 @@ class CheckWikiDatabases extends Maintenance {
 
 			$dbw->query( "DROP DATABASE IF EXISTS $dbName", __METHOD__ );
 		}
+
 		$this->output( "Database drop operation completed.\n" );
 	}
 
-	private function deleteEntries( array $entries, array $tablesToCheck ) {
-		$dbw = $this->getServiceContainer()->getConnectionProvider()->getPrimaryDatabase(
-			$this->getConfig()->get( 'CreateWikiDatabase' )
-		);
+	private function deleteEntries(
+		array $missingInCluster,
+		array $tablesToCheck
+	): void {
+		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
-		$this->output( "Deleting entries without matching databases:\n" );
-		foreach ( $tablesToCheck as $table => $field ) {
-			foreach ( $entries as $dbName ) {
-				$this->output( " - Deleting entry $dbName from $table...\n" );
-				$dbw->delete( $table, [ $field => $dbName ], __METHOD__ );
+		foreach ( $tablesToCheck as $dbConfigKey => $tables ) {
+			$dbw = $this->getServiceContainer()->getConnectionProvider()->getPrimaryDatabase(
+				$this->getConfig()->get( $dbConfigKey )
+			);
+
+			foreach ( $tables as $table => $field ) {
+				$this->output( "Deleting missing entries from table: $table, field: $field...\n" );
+
+				foreach ( $missingInCluster as $dbName ) {
+					// Only delete entries that end with the suffix for safety
+					if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+						continue;
+					}
+
+					$dbw->newDeleteQueryBuilder()
+						->deleteFrom( $table )
+						->where( [ $field => $dbName ] )
+						->caller( __METHOD__ )
+						->execute();
+				}
 			}
 		}
-		$this->output( "Entries deletion completed.\n" );
+
+		$this->output( "Deletion of missing entries completed.\n" );
 	}
 }
 
