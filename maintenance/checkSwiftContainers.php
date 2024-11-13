@@ -47,7 +47,7 @@ class CheckSwiftContainers extends Maintenance {
 		$this->requireExtension( 'CreateWiki' );
 	}
 
-	public function execute() {
+	public function execute(): void {
 		// Get the list of swift containers
 		$containers = $this->getSwiftContainers();
 		if ( !$containers ) {
@@ -92,7 +92,7 @@ class CheckSwiftContainers extends Maintenance {
 		}
 	}
 
-	private function estimateSize( array $containers ) {
+	private function estimateSize( array $containers ): int {
 		global $wmgSwiftPassword;
 
 		$totalSize = 0;
@@ -115,7 +115,7 @@ class CheckSwiftContainers extends Maintenance {
 		return $totalSize;
 	}
 
-	private function getSwiftContainers() {
+	private function getSwiftContainers(): array {
 		global $wmgSwiftPassword;
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
@@ -128,10 +128,13 @@ class CheckSwiftContainers extends Maintenance {
 			->disableSandbox()
 			->execute()->getStdout();
 
-		return array_filter( explode( "\n", $swiftOutput ), fn ( $line ) => (bool)$line );
+		return array_filter(
+			explode( "\n", $swiftOutput ),
+			fn ( string $line ): bool => (bool)$line
+		);
 	}
 
-	private function findUnmatchedContainers( array $containers ) {
+	private function findUnmatchedContainers( array $containers ): array {
 		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
 			$this->getConfig()->get( 'CreateWikiDatabase' )
 		);
@@ -186,7 +189,7 @@ class CheckSwiftContainers extends Maintenance {
 		];
 	}
 
-	private function deleteContainers( array $containers ) {
+	private function deleteContainers( array $containers ): void {
 		global $wmgSwiftPassword;
 
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
