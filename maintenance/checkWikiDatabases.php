@@ -182,7 +182,7 @@ class CheckWikiDatabases extends Maintenance {
 						continue;
 					}
 
-					if ( !in_array( $dbName, $wikiDatabases ) ) {
+					if ( !array_key_exists( $dbName, $wikiDatabases ) ) {
 						$missingInCluster[] = $dbName;
 					}
 				}
