@@ -51,7 +51,7 @@ class CheckSwiftContainers extends Maintenance {
 		// Get the list of swift containers
 		$containers = $this->getSwiftContainers();
 		if ( !$containers ) {
-			$this->fatalError( "No swift containers found.\n" );
+			$this->fatalError( 'No swift containers found.' );
 		}
 
 		$this->output( 'Found ' . count( $containers ) . " swift containers.\n" );
