@@ -48,7 +48,10 @@ class CheckWikiDatabases extends Maintenance {
 
 	public function execute(): void {
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
+
 		$clusters = $dbLoadBalancerFactory->getAllMainLBs();
+		ksort( $clusters );
+
 		$wikiDatabases = $this->getWikiDatabasesFromClusters( $clusters );
 
 		if ( !$wikiDatabases ) {
@@ -108,6 +111,7 @@ class CheckWikiDatabases extends Maintenance {
 			}
 		}
 
+		sort( $wikiDatabases );
 		return $wikiDatabases;
 	}
 
@@ -187,6 +191,7 @@ class CheckWikiDatabases extends Maintenance {
 
 		// Filter to only unique entries
 		$missingInCluster = array_unique( $missingInCluster );
+		sort( $missingInCluster );
 
 		if ( $missingInCluster ) {
 			$this->output( "Entries without a matching database in any cluster:\n" );
