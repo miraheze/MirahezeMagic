@@ -174,10 +174,8 @@ class CheckSwiftContainers extends Maintenance {
 					$uniqueContainerCounts[$containerName]++;
 
 					if ( !isset( $uniqueWikiCounts[$dbName] ) ) {
-						$uniqueWikiCounts[$dbName] = 0;
+						$uniqueWikiCounts[$dbName] = 1;
 					}
-
-					$uniqueWikiCounts[$dbName]++;
 				}
 			}
 		}
