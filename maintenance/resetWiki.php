@@ -76,7 +76,7 @@ class ResetWiki extends Maintenance {
 		$sitename = $row->wiki_sitename;
 		$language = $row->wiki_language;
 		$category = $row->wiki_category;
-		$isPrivate = (bool)$row->private;
+		$isPrivate = (bool)$row->wiki_private;
 
 		if ( !$cluster ) {
 			$this->fatalError( "Cluster for $databaseName not found in cw_wikis." );
