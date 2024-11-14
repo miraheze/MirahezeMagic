@@ -99,7 +99,7 @@ class RenameDatabase extends Maintenance {
 		if ( $newDbExists ) {
 			$this->fatalError( "Database $newDatabaseName already exists on cluster $cluster." );
 		}
-		
+
 		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
 		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
 
