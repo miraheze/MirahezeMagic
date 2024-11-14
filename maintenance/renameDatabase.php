@@ -47,11 +47,20 @@ class RenameDatabase extends Maintenance {
 	}
 
 	public function execute(): void {
-		$oldDatabaseName = $this->getOption( 'old' );
-		$newDatabaseName = $this->getOption( 'new' );
+		$oldDatabaseName = strtolower( $this->getOption( 'old' ) );
+		$newDatabaseName = strtolower( $this->getOption( 'new' ) );
 
 		if ( !$oldDatabaseName || !$newDatabaseName ) {
 			$this->fatalError( 'Both old and new database names are required.' );
+		}
+
+		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
+		if ( !str_ends_with( $oldDatabaseName, $suffix ) || !str_ends_with( $newDatabaseName, $suffix ) ) {
+			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it ends in an invalid suffix." );
+		}
+
+		if ( !ctype_alnum( $newDatabaseName ) ) {
+			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it contains non-alphanumeric characters." );
 		}
 
 		$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName\n" );
@@ -106,7 +115,7 @@ class RenameDatabase extends Maintenance {
 		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
 
 		// Create the new database
-		$dbw->query( "CREATE DATABASE $newDatabaseQuotes" );
+		$dbw->query( "CREATE DATABASE $newDatabaseQuotes", __METHOD__ );
 
 		// Fetch all tables in the old database
 		$tableNames = [];
@@ -125,7 +134,7 @@ class RenameDatabase extends Maintenance {
 		foreach ( $tableNames as $table ) {
 			$tableQuotes = $dbw->addIdentifierQuotes( $table );
 			$this->output( "Moving table $table to $newDatabaseName...\n" );
-			$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes}" );
+			$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes}", __METHOD__ );
 		}
 
 		$this->output( "Database renamed successfully on cluster $cluster.\n" );
