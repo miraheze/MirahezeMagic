@@ -39,7 +39,7 @@ class RenameDatabase extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Rename a database by creating a new one and copying all tables from the old one.' );
+		$this->addDescription( 'Rename a database by creating a new one and moving all tables from the old one.' );
 		$this->addOption( 'old', 'The name of the old database to rename.', true, true );
 		$this->addOption( 'new', 'The new name for the database.', true, true );
 
@@ -121,11 +121,11 @@ class RenameDatabase extends Maintenance {
 			$tableNames[] = $row->TABLE_NAME;
 		}
 
-		// Copy each table to the new database
+		// Rename each table to the new database
 		foreach ( $tableNames as $table ) {
 			$tableQuotes = $dbw->addIdentifierQuotes( $table );
-			$this->output( "Copying table $table to $newDatabaseName...\n" );
-			$dbw->query( "CREATE TABLE {$newDatabaseQuotes}.{$tableQuotes} AS SELECT * FROM {$oldDatabaseQuotes}.{$tableQuotes}" );
+			$this->output( "Moving table $table to $newDatabaseName...\n" );
+			$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes}" );
 		}
 
 		$this->output( "Database renamed successfully on cluster $cluster.\n" );
