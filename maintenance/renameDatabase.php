@@ -42,6 +42,8 @@ class RenameDatabase extends Maintenance {
 		$this->addDescription( 'Rename a database by creating a new one and copying all tables from the old one.' );
 		$this->addOption( 'old', 'The name of the old database to rename.', true, true );
 		$this->addOption( 'new', 'The new name for the database.', true, true );
+
+		$this->requireExtension( 'CreateWiki' );
 	}
 
 	public function execute(): void {
