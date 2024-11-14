@@ -50,8 +50,13 @@ class ResetWiki extends Maintenance {
 		$databaseName = strtolower( $this->getOption( 'dbname' ) );
 		$requester = $this->getOption( 'requester' );
 
-		if ( !$databaseName ) {
-			$this->fatalError( '--dbname is required.' );
+		if ( !$databaseName || !$requester ) {
+			$this->fatalError( 'Both --dbname and --requester are required.' );
+		}
+
+		$userFactory = $this->getServiceContainer()->getUserFactory();
+		if ( !$userFactory->newFromName( $requester ) ) {
+			$this->fatalError( "Requester '$requester' is invalid." );
 		}
 
 		$this->output( "Resetting database: $databaseName\n" );
@@ -98,10 +103,16 @@ class ResetWiki extends Maintenance {
 
 		$databaseQuotes = $dbw->addIdentifierQuotes( $databaseName );
 
+		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
+
+		// Delete the wiki from CreateWiki
+		$wikiManager = $wikiManagerFactory->newInstance( $databaseName );
+		$wikiManager->delete( force: true );
+
 		// Drop the database
 		$dbw->query( "DROP DATABASE $databaseQuotes", __METHOD__ );
 
-		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
+		// Create a new WikiManagerFactory instance
 		$wikiManager = $wikiManagerFactory->newInstance( $databaseName );
 
 		// This runs checkDatabaseName and if it returns a
