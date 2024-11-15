@@ -103,6 +103,7 @@ class ResetWiki extends Maintenance {
 
 		$databaseQuotes = $dbw->addIdentifierQuotes( $databaseName );
 
+		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
 		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
 
 		// Delete the wiki from CreateWiki
@@ -131,6 +132,9 @@ class ResetWiki extends Maintenance {
 		if ( $notCreated ) {
 			$this->fatalError( $notCreated );
 		}
+		
+		$data = $dataFactory->newInstance( $databaseName );
+		$data->resetWikiData( isNewChanges: true );
 
 		$this->output( "Database recreated successfully.\n" );
 	}
