@@ -132,7 +132,7 @@ class ResetWiki extends Maintenance {
 		if ( $notCreated ) {
 			$this->fatalError( $notCreated );
 		}
-		
+
 		$data = $dataFactory->newInstance( $databaseName );
 		$data->resetWikiData( isNewChanges: true );
 
