@@ -44,7 +44,7 @@ for wikidata in data:
         count = 0
         hits = hits + 1
     wiki = wikidata['dbname']
-    urlreq = f'https://static.miraheze.org/{wiki}/sitemaps/sitemap.xml'
+    urlreq = f'https://static.wikitide.net/{wiki}/sitemaps/sitemap.xml'
     req = reqsession.get(url=urlreq)
     if req.status_code == 429:
         print(f'Rate Limited on {wiki} backing off for {1 + int(rls)} seconds')

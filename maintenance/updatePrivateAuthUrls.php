@@ -26,9 +26,9 @@ class UpdatePrivateAuthUrls extends Maintenance {
 			foreach ( $manageWikiSettings->list() as $var => $val ) {
 				if (
 					is_string( $val ) &&
-					str_contains( $val, "static.miraheze.org/$dbname" )
+					str_contains( $val, "static.wikitide.net/$dbname" )
 				) {
-					$new = preg_replace( "/((http)?(s)?(:)?\/\/)?static.miraheze.org\/$dbname/", $this->getConfig()->get( MainConfigNames::Server ) . '/w/img_auth.php', $val );
+					$new = preg_replace( "/((http)?(s)?(:)?\/\/)?static.wikitide.net\/$dbname/", $this->getConfig()->get( MainConfigNames::Server ) . '/w/img_auth.php', $val );
 
 					$this->output( "Updating {$var} for {$dbname} '{$val} => {$new}'\n" );
 

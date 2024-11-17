@@ -100,7 +100,7 @@ class CheckSwiftContainers extends Maintenance {
 		foreach ( $containers as $container ) {
 			$output = Shell::command(
 				'swift', 'stat', $container,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -121,7 +121,7 @@ class CheckSwiftContainers extends Maintenance {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		$swiftOutput = Shell::command(
 			'swift', 'list',
-			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword
 		)->limits( $limits )
@@ -195,7 +195,7 @@ class CheckSwiftContainers extends Maintenance {
 			$this->output( "Deleting container: $container\n" );
 			Shell::command(
 				'swift', 'delete', $container,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )

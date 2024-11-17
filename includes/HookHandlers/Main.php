@@ -209,7 +209,7 @@ class Main implements
 			trim( Shell::command(
 				'swift', 'list',
 				'--prefix', 'miraheze-' . $dbname . '-',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -230,7 +230,7 @@ class Main implements
 				$container,
 				'--object-threads', '1',
 				'--container-threads', '1',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -285,7 +285,7 @@ class Main implements
 			trim( Shell::command(
 				'swift', 'list',
 				'--prefix', 'miraheze-' . $oldDbName . '-',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -304,7 +304,7 @@ class Main implements
 			$oldContainerList = Shell::command(
 				'swift', 'list',
 				$container,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -316,7 +316,7 @@ class Main implements
 				'swift', 'download',
 				$container,
 				'-D', wfTempDir() . '/' . $container,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -334,7 +334,7 @@ class Main implements
 					$newContainer,
 					wfTempDir() . '/' . $container,
 					'--object-name', '""',
-					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
 				] )
@@ -345,7 +345,7 @@ class Main implements
 			$newContainerList = Shell::command(
 				'swift', 'list',
 				$newContainer,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -360,7 +360,7 @@ class Main implements
 				Shell::command(
 					'swift', 'delete',
 					$container,
-					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
 				)->limits( $limits )
@@ -478,7 +478,7 @@ class Main implements
 			$container,
 			$importDumpRequestManager->getSplitFilePath(),
 			'-o', $filePath,
-			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword
 		)->limits( $limits )
@@ -680,17 +680,17 @@ class Main implements
 
 		if ( $cwConfig->get( 'Closed' ) ) {
 			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
 			} elseif ( $cwConfig->get( 'Locked' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
 			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
 			}
 		} elseif ( $cwConfig->get( 'Inactive' ) && $cwConfig->get( 'Inactive' ) !== 'exempt' ) {
 			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive-private' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive-private' )->parse() . '</span></div>';
 			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
 			}
 		}
 	}
