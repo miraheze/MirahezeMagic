@@ -67,7 +67,7 @@ class CheckSwiftContainers extends Maintenance {
 
 			$this->output( "Unique zone counts:\n" );
 			foreach ( $missingData['uniqueZoneCounts'] as $zone => $count ) {
-				$this->output( "$container: $count\n" );
+				$this->output( "$zone: $count\n" );
 			}
 
 			$totalContainersCount = array_sum( $missingData['uniqueZoneCounts'] );
