@@ -40,9 +40,9 @@ class CheckSwiftContainers extends Maintenance {
 		parent::__construct();
 
 		$this->addDescription( 'Check for swift containers without matching entries in cw_wikis and optionally delete them.' );
-		$this->addOption( 'container', 'Check only certain container types.' );
 		$this->addOption( 'delete', 'Delete containers without matching entries in cw_wikis.', false, false );
 		$this->addOption( 'estimate', 'Show the total storage size that would be saved without deleting.', false, false );
+		$this->addOption( 'zone', 'Check/delete only a certain zone.' );
 
 		$this->requireExtension( 'CreateWiki' );
 	}
@@ -65,12 +65,12 @@ class CheckSwiftContainers extends Maintenance {
 				$this->output( " - $container\n" );
 			}
 
-			$this->output( "Unique container counts:\n" );
-			foreach ( $missingData['uniqueContainerCounts'] as $container => $count ) {
+			$this->output( "Unique zone counts:\n" );
+			foreach ( $missingData['uniqueZoneCounts'] as $zone => $count ) {
 				$this->output( "$container: $count\n" );
 			}
 
-			$totalContainersCount = array_sum( $missingData['uniqueContainerCounts'] );
+			$totalContainersCount = array_sum( $missingData['uniqueZoneCounts'] );
 			$this->output( "Total containers count: $totalContainersCount\n" );
 
 			$totalWikiCount = array_sum( $missingData['uniqueWikiCounts'] );
@@ -141,17 +141,17 @@ class CheckSwiftContainers extends Maintenance {
 
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
-		$containerOption = $this->getOption( 'container', false );
+		$zoneOption = $this->getOption( 'zone', false );
 
 		$missingContainers = [];
-		$uniqueContainerCounts = [];
 		$uniqueWikiCounts = [];
+		$uniqueZoneCounts = [];
 		foreach ( $containers as $container ) {
 			if ( preg_match( '/^miraheze-([^-]+' . preg_quote( $suffix ) . ')-(.+)$/', $container, $matches ) ) {
-				$dbName = $matches[1];
-				$containerName = $matches[2];
+				$dbname = $matches[1];
+				$zoneName = $matches[2];
 
-				if ( $containerOption && $containerName !== $containerOption ) {
+				if ( $zoneOption && $zoneName !== $zoneOption ) {
 					continue;
 				}
 
@@ -159,7 +159,7 @@ class CheckSwiftContainers extends Maintenance {
 				$result = $dbr->newSelectQueryBuilder()
 					->select( [ 'wiki_dbname' ] )
 					->from( 'cw_wikis' )
-					->where( [ 'wiki_dbname' => $dbName ] )
+					->where( [ 'wiki_dbname' => $dbname ] )
 					->caller( __METHOD__ )
 					->fetchRow();
 
@@ -167,14 +167,14 @@ class CheckSwiftContainers extends Maintenance {
 				if ( !$result ) {
 					$missingContainers[] = $container;
 
-					if ( !isset( $uniqueContainerCounts[$containerName] ) ) {
-						$uniqueContainerCounts[$containerName] = 0;
+					if ( !isset( $uniqueZoneCounts[$zoneName] ) ) {
+						$uniqueZoneCounts[$zoneName] = 0;
 					}
 
-					$uniqueContainerCounts[$containerName]++;
+					$uniqueZoneCounts[$zoneName]++;
 
-					if ( !isset( $uniqueWikiCounts[$dbName] ) ) {
-						$uniqueWikiCounts[$dbName] = 1;
+					if ( !isset( $uniqueWikiCounts[$dbname] ) ) {
+						$uniqueWikiCounts[$dbname] = 1;
 					}
 				}
 			}
@@ -182,8 +182,8 @@ class CheckSwiftContainers extends Maintenance {
 
 		return [
 			'containers' => $missingContainers,
-			'uniqueContainerCounts' => $uniqueContainerCounts,
 			'uniqueWikiCounts' => $uniqueWikiCounts,
+			'uniqueZoneCounts' => $uniqueZoneCounts,
 		];
 	}
 
