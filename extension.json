@@ -52,7 +52,7 @@
 			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
 			"services": [
 				"ConfigFactory",
-				"DBLoadBalancerFactory",
+				"ConnectionProvider",
 				"UserOptionsLookup"
 			]
 		},
@@ -144,7 +144,7 @@
 			"services": [
 				"MainConfig",
 				"CommentStore",
-				"DBLoadBalancerFactory",
+				"ConnectionProvider",
 				"HttpRequestFactory"
 			]
 		},

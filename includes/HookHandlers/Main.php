@@ -48,7 +48,7 @@ use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\DBConnRef;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 class Main implements
 	AbuseFilterShouldFilterActionHook,
@@ -78,8 +78,8 @@ class Main implements
 	/** @var CommentStore */
 	private $commentStore;
 
-	/** @var ILBFactory */
-	private $dbLoadBalancerFactory;
+	/** @var IConnectionProvider */
+	private $connectionProvider;
 
 	/** @var HttpRequestFactory */
 	private $httpRequestFactory;
@@ -87,25 +87,25 @@ class Main implements
 	/**
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
-	 * @param ILBFactory $dbLoadBalancerFactory
+	 * @param IConnectionProvider $connectionProvider
 	 * @param HttpRequestFactory $httpRequestFactory
 	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
-		ILBFactory $dbLoadBalancerFactory,
+		IConnectionProvider $connectionProvider,
 		HttpRequestFactory $httpRequestFactory
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
-		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
+		$this->connectionProvider = $connectionProvider;
 		$this->httpRequestFactory = $httpRequestFactory;
 	}
 
 	/**
 	 * @param Config $mainConfig
 	 * @param CommentStore $commentStore
-	 * @param ILBFactory $dbLoadBalancerFactory
+	 * @param IConnectionProvider $connectionProvider
 	 * @param HttpRequestFactory $httpRequestFactory
 	 *
 	 * @return self
@@ -113,7 +113,7 @@ class Main implements
 	public static function factory(
 		Config $mainConfig,
 		CommentStore $commentStore,
-		ILBFactory $dbLoadBalancerFactory,
+		IConnectionProvider $connectionProvider,
 		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
@@ -135,7 +135,7 @@ class Main implements
 				$mainConfig
 			),
 			$commentStore,
-			$dbLoadBalancerFactory,
+			$connectionProvider,
 			$httpRequestFactory
 		);
 	}
@@ -172,17 +172,16 @@ class Main implements
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
 		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
-		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
-		$dbw = $this->dbLoadBalancerFactory->getMainLB(
-			$echoSharedTrackingDB
-		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
+		$dbw = $this->connectionProvider->getPrimaryDatabase(
+			$this->options->get( 'EchoSharedTrackingDB' )
+		);
 
 		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
 
 		if ( $wgGlobalUsageDatabase ) {
-			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+			$gudDb = $this->connectionProvider->getPrimaryDatabase(
 				$wgGlobalUsageDatabase
-			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
+			);
 
 			$gudDb->delete( 'globalimagelinks', [ 'gil_wiki' => $dbname ] );
 		}
@@ -248,17 +247,16 @@ class Main implements
 	): void {
 		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
-		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
-		$dbw = $this->dbLoadBalancerFactory->getMainLB(
-			$echoSharedTrackingDB
-		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
+		$dbw = $this->connectionProvider->getPrimaryDatabase(
+			$this->options->get( 'EchoSharedTrackingDB' )
+		);
 
 		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
 
 		if ( $wgGlobalUsageDatabase ) {
-			$gudDb = $this->dbLoadBalancerFactory->getMainLB(
+			$gudDb = $this->connectionProvider->getPrimaryDatabase(
 				$wgGlobalUsageDatabase
-			)->getMaintenanceConnectionRef( DB_PRIMARY, [], $wgGlobalUsageDatabase );
+			);
 
 			$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
 		}
@@ -464,7 +462,7 @@ class Main implements
 	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
 		global $wmgSwiftPassword;
 
-		$dbr = $this->dbLoadBalancerFactory->getReplicaDatabase( 'virtual-importdump' );
+		$dbr = $this->connectionProvider->getReplicaDatabase( 'virtual-importdump' );
 
 		$container = $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :

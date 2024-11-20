@@ -206,7 +206,6 @@ class CheckWikiDatabases extends Maintenance {
 	}
 
 	private function dropDatabases( array $databases, array $clusters ): void {
-		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$this->output( "Dropping the following databases:\n" );
 		foreach ( $databases as $dbName => $cluster ) {
 			$this->output( " - Dropping $dbName...\n" );
