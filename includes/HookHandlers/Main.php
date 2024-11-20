@@ -175,15 +175,23 @@ class Main implements
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
 			$this->options->get( 'EchoSharedTrackingDB' )
 		);
-
-		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
+		
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'echo_unread_wikis' )
+			->where( [ 'euw_wiki' => $dbname ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		if ( $wgGlobalUsageDatabase ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
 				$wgGlobalUsageDatabase
 			);
 
-			$gudDb->delete( 'globalimagelinks', [ 'gil_wiki' => $dbname ] );
+			$gudDb->newDeleteQueryBuilder()
+				->deleteFrom( 'globalimagelinks' )
+				->where( [ 'gil_wiki' => $dbname ] )
+				->caller( __METHOD__ )
+				->execute();
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
@@ -251,14 +259,24 @@ class Main implements
 			$this->options->get( 'EchoSharedTrackingDB' )
 		);
 
-		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
+		$dbw->newUpdateQueryBuilder()
+			->update( 'echo_unread_wikis' )
+			->set( [ 'euw_wiki' => $newDbName ] )
+			->where( [ 'euw_wiki' => $oldDbName ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		if ( $wgGlobalUsageDatabase ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
 				$wgGlobalUsageDatabase
 			);
 
-			$gudDb->update( 'globalimagelinks', [ 'gil_wiki' => $newDbName ], [ 'gil_wiki' => $oldDbName ] );
+			$gudDb->newUpdateQueryBuilder()
+				->update( 'globalimagelinks' )
+				->set( [ 'gil_wiki' => $newDbName ] )
+				->where( [ 'gil_wiki' => $oldDbName ] )
+				->caller( __METHOD__ )
+				->execute();
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
