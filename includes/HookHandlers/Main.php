@@ -175,7 +175,7 @@ class Main implements
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
 			$this->options->get( 'EchoSharedTrackingDB' )
 		);
-		
+
 		$dbw->newDeleteQueryBuilder()
 			->deleteFrom( 'echo_unread_wikis' )
 			->where( [ 'euw_wiki' => $dbname ] )
