@@ -8,21 +8,21 @@ use MediaWiki\Html\Html;
 use MediaWiki\SpecialPage\FormSpecialPage;
 use MediaWiki\User\Options\UserOptionsLookup;
 use stdClass;
-use Wikimedia\Rdbms\DBConnRef;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\IConnectionProvider;
+use Wikimedia\Rdbms\IDatabase;
 
 class SpecialMirahezeSurvey extends FormSpecialPage {
 
 	/** @var Config */
 	private $config;
 
-	/** @var ILBFactory */
-	private $dbLoadBalancerFactory;
+	/** @var IConnectionProvider */
+	private $connectionProvider;
 
 	/** @var UserOptionsLookup */
 	private $userOptionsLookup;
 
-	/** @var DBConnRef */
+	/** @var IDatabase */
 	private $dbw;
 
 	/** @var stdClass|bool */
@@ -30,12 +30,12 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 
 	public function __construct(
 		ConfigFactory $configFactory,
-		ILBFactory $dbLoadBalancerFactory,
+		IConnectionProvider $connectionProvider,
 		UserOptionsLookup $userOptionsLookup
 	) {
 		parent::__construct( 'MirahezeSurvey' );
 
-		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
+		$this->connectionProvider = $connectionProvider;
 		$this->userOptionsLookup = $userOptionsLookup;
 
 		$this->config = $configFactory->makeConfig( 'MirahezeMagic' );
@@ -51,8 +51,7 @@ class SpecialMirahezeSurvey extends FormSpecialPage {
 			return $out->addHTML( Html::errorBox( $this->msg( 'miraheze-survey-disabled' )->parse() ) );
 		}
 
-		$this->dbw = $this->dbLoadBalancerFactory->getMainLB( 'survey' )
-			->getConnection( DB_PRIMARY, [], 'survey' );
+		$this->dbw = $this->connectionProvider->getPrimaryDatabase( 'survey' );
 
 		$this->row = $this->dbw->selectRow(
 			'survey',
