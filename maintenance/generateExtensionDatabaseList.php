@@ -29,7 +29,8 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$extArray = $this->getOption( 'extension' );
 		$directory = $this->getOption( 'directory' );
 
-		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$dbr = $connectionProvider->getReplicaDatabase( 'virtual-createwiki' );
 
 		foreach ( $extArray as $ext ) {
 			$list = [];
