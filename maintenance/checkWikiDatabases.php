@@ -116,9 +116,8 @@ class CheckWikiDatabases extends Maintenance {
 	}
 
 	private function findMissingDatabases( array $wikiDatabases ): array {
-		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
-			$this->getConfig()->get( 'CreateWikiDatabase' )
-		);
+		$dbr = $this->getServiceContainer()->getConnectionProvider()
+			->getReplicaDatabase( 'virtual-createwiki' );
 
 		$missingDatabases = [];
 		foreach ( $wikiDatabases as $dbName => $cluster ) {
@@ -142,7 +141,7 @@ class CheckWikiDatabases extends Maintenance {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
 		$tablesToCheck = [
-			'CreateWikiDatabase' => [
+			'virtual-createwiki' => [
 				'cw_wikis' => 'wiki_dbname',
 				'gnf_files' => 'files_dbname',
 				'localnames' => 'ln_wiki',
@@ -151,20 +150,19 @@ class CheckWikiDatabases extends Maintenance {
 				'mw_permissions' => 'perm_dbname',
 				'mw_settings' => 's_dbname',
 			],
-			'EchoSharedTrackingDB' => [
+			$this->getConfig()->get( 'EchoSharedTrackingDB' ) => [
 				'echo_unread_wikis' => 'euw_wiki',
 			],
-			'GlobalUsageDatabase' => [
+			$this->getConfig()->get( 'GlobalUsageDatabase' ) => [
 				'globalimagelinks' => 'gil_wiki',
 			],
 		];
 
 		$missingInCluster = [];
 
-		foreach ( $tablesToCheck as $dbConfigKey => $tables ) {
-			$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
-				$this->getConfig()->get( $dbConfigKey )
-			);
+		foreach ( $tablesToCheck as $database => $tables ) {
+			$dbr = $this->getServiceContainer()->getConnectionProvider()
+				->getReplicaDatabase( $database );
 
 			foreach ( $tables as $table => $field ) {
 				$this->output( "Checking table: $table, field: $field...\n" );
@@ -225,10 +223,9 @@ class CheckWikiDatabases extends Maintenance {
 	): void {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
-		foreach ( $tablesToCheck as $dbConfigKey => $tables ) {
-			$dbw = $this->getServiceContainer()->getConnectionProvider()->getPrimaryDatabase(
-				$this->getConfig()->get( $dbConfigKey )
-			);
+		foreach ( $tablesToCheck as $database => $tables ) {
+			$dbw = $this->getServiceContainer()->getConnectionProvider()
+				->getPrimaryDatabase( $database );
 
 			foreach ( $tables as $table => $field ) {
 				$this->output( "Deleting missing entries from table: $table, field: $field...\n" );
