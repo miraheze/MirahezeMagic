@@ -52,7 +52,8 @@ class RestoreManageWikiBackup extends Maintenance {
 			$this->fatalError( 'Invalid wiki. You can not overwrite default.' );
 		}
 
-		$dbw = $this->getDB( DB_PRIMARY, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$dbw = $connectionProvider->getPrimaryDatabase( 'virtual-createwiki' );
 
 		$backupFile = $this->getOption( 'filename' );
 		if ( !file_exists( $backupFile ) ) {
