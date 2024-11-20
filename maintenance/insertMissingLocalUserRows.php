@@ -49,14 +49,11 @@ class InsertMissingLocalUserRows extends Maintenance {
 		$dryRun = $this->getOption( 'dry-run', false );
 		$all = $this->getOption( 'all-wikis', false );
 
-		$centralDB = $this->getServiceContainer()->getDBLoadBalancerFactory()
-			->getMainLB( $this->getConfig()->get( 'CentralAuthDatabase' ) )
-			->getMaintenanceConnectionRef( DB_REPLICA, [], $this->getConfig()->get( 'CentralAuthDatabase' ) );
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$centralDB = $connectionProvider->getReplicaDatabase( $this->getConfig()->get( 'CentralAuthDatabase' ) );
 
 		foreach ( ( $all ? $this->getConfig()->get( MainConfigNames::LocalDatabases ) : [ WikiMap::getCurrentWikiId() ] ) as $wiki ) {
-			$lb = $this->getServiceContainer()->getDBLoadBalancerFactory()->getMainLB( $wiki );
-
-			$res = $lb->getMaintenanceConnectionRef( DB_REPLICA, [], $wiki )->select(
+			$res = $connectionProvider->getReplicaDatabase( $wiki )->select(
 				'user',
 				[ 'user_name' ],
 				[
