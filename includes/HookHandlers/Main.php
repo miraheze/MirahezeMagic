@@ -87,7 +87,7 @@ class Main implements
 	/**
 	 * @param ServiceOptions $options
 	 * @param CommentStore $commentStore
-	 * @param IConnectionProvider $connectionProvider 
+	 * @param IConnectionProvider $connectionProvider
 	 * @param HttpRequestFactory $httpRequestFactory
 	 */
 	public function __construct(
@@ -105,7 +105,7 @@ class Main implements
 	/**
 	 * @param Config $mainConfig
 	 * @param CommentStore $commentStore
-	 * @param IConnectionProvider $connectionProvider 
+	 * @param IConnectionProvider $connectionProvider
 	 * @param HttpRequestFactory $httpRequestFactory
 	 *
 	 * @return self
