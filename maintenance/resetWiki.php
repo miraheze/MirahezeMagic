@@ -62,7 +62,7 @@ class ResetWiki extends Maintenance {
 		$this->output( "Resetting database: $databaseName\n" );
 
 		$dbr = $this->getServiceContainer()->getConnectionProvider()
-			->getReplicaDatabase( $this->getConfig()->get( 'CreateWikiDatabase' ) );
+			->getReplicaDatabase( 'virtual-createwiki' );
 
 		// Fetch the original data
 		$row = $dbr->newSelectQueryBuilder()

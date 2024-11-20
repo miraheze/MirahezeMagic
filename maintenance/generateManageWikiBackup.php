@@ -44,23 +44,25 @@ class GenerateManageWikiBackup extends Maintenance {
 
 	public function execute() {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-		$dbw = $this->getDB( DB_PRIMARY, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
+
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$dbr = $connectionProvider->getReplicaDatabase( 'virtual-createwiki' );
 
 		$buildArray = [];
 
-		$nsObjects = $dbw->select(
+		$nsObjects = $dbr->select(
 			'mw_namespaces',
 			'*',
 			[ 'ns_dbname' => $dbname ]
 		);
 
-		$permObjects = $dbw->select(
+		$permObjects = $dbr->select(
 			'mw_permissions',
 			'*',
 			[ 'perm_dbname' => $dbname ]
 		);
 
-		$settingsObjects = $dbw->selectRow(
+		$settingsObjects = $dbr->selectRow(
 			'mw_settings',
 			'*',
 			[ 's_dbname' => $dbname ],

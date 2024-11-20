@@ -66,7 +66,7 @@ class RenameDatabase extends Maintenance {
 		$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName\n" );
 
 		$dbr = $this->getServiceContainer()->getConnectionProvider()
-			->getReplicaDatabase( $this->getConfig()->get( 'CreateWikiDatabase' ) );
+			->getReplicaDatabase( 'virtual-createwiki' );
 
 		// Fetch the specific cluster from cw_wikis based on the old database name
 		$cluster = $dbr->newSelectQueryBuilder()

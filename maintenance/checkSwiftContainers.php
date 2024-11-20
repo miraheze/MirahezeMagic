@@ -135,9 +135,8 @@ class CheckSwiftContainers extends Maintenance {
 	}
 
 	private function findUnmatchedContainers( array $containers ): array {
-		$dbr = $this->getServiceContainer()->getConnectionProvider()->getReplicaDatabase(
-			$this->getConfig()->get( 'CreateWikiDatabase' )
-		);
+		$dbr = $this->getServiceContainer()->getConnectionProvider()
+			->getReplicaDatabase( 'virtual-createwiki' );
 
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
