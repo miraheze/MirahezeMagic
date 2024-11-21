@@ -47,7 +47,7 @@ class SwiftDump extends Maintenance {
 		// 5GB in bytes
 		$additionalSpace = 5 * 1024 * 1024 * 1024;
 		$requiredSpace = $containerSize + $additionalSpace;
-		$availableSpace = disk_free_space( '/tmp' );
+		$availableSpace = (int)disk_free_space( '/tmp' );
 
 		if ( $availableSpace < $requiredSpace ) {
 			$contentLanguage = $this->getServiceContainer()->getContentLanguage();
