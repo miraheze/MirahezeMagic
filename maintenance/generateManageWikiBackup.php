@@ -33,7 +33,6 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use MediaWiki\MainConfigNames;
-use Miraheze\DataDump\DataDump;
 
 class GenerateManageWikiBackup extends Maintenance {
 
@@ -114,7 +113,7 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 
-		$backend = DataDump::getBackend();
+		$backend = $this->getServiceContainer()->get( 'DataDumpFileBackend' )->getBackend();
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'dumps-backup' ) ] );
 
 		$backend->quickCreate( [
