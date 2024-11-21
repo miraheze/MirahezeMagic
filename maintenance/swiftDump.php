@@ -28,7 +28,7 @@ class SwiftDump extends Maintenance {
 
 		// If no wiki then error
 		if ( !$wiki ) {
-			$this->fatalError( 'No wiki has been defined' );
+			$this->fatalError( 'No wiki has been defined.' );
 		}
 
 		$this->output( "Starting swift dump for $wiki...\n" );
@@ -41,7 +41,7 @@ class SwiftDump extends Maintenance {
 			'walltime' => 0,
 		];
 
-		// Calculate the required disk space (container size + 10GB)
+		// Calculate the required disk space (container size + 5GB)
 		$containerSize = $this->getContainerSize( $container, $limits );
 
 		// 5GB in bytes
