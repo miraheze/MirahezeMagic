@@ -445,30 +445,6 @@ class Main implements
 		$cTables['localuser'] = 'lu_wiki';
 	}
 
-	public function onCreateWikiReadPersistentModel( string &$pipeline ): void {
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
-			$pipeline = unserialize(
-				$backend->getFileContents( [
-					'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
-				] )
-			);
-		}
-	}
-
-	public function onCreateWikiWritePersistentModel( string $pipeline ): bool {
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
-
-		$backend->quickCreate( [
-			'dst' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
-			'content' => $pipeline,
-			'overwrite' => true,
-		] );
-
-		return true;
-	}
-
 	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		Shell::command( '/bin/rm', $filePath )
