@@ -8,10 +8,15 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use RecentChange;
 
-class MirahezeIRCRCFeedFormatter implements IRCColourfulRCFeedFormatter {
+class MirahezeIRCRCFeedFormatter extends IRCColourfulRCFeedFormatter {
 
 	/** @inheritDoc */
 	public function getLine( array $feed, RecentChange $rc, $actionComment ) {
+		$lineFromParent = parent::getLine( $feed, $rc, $actionComment );
+		if ( $lineFromParent === null ) {
+			return null;
+		}
+
 		$mainConfig = MediaWikiServices::getInstance()->getMainConfig();
 		$dbname = $mainConfig->get( MainConfigNames::DBname );
 
@@ -33,7 +38,6 @@ class MirahezeIRCRCFeedFormatter implements IRCColourfulRCFeedFormatter {
 
 		# see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
 		# no colour (\003) switches back to the term default
-		return "$dbname \0035*\003 " .
-			parent::getLine( $feed, $rc, $actionComment );
+		return "$dbname \0035*\003 " . $lineFromParent;
 	}
 }
