@@ -38,6 +38,6 @@ class MirahezeIRCRCFeedFormatter extends IRCColourfulRCFeedFormatter {
 
 		# see http://www.irssi.org/documentation/formats for some colour codes. prefix is \003,
 		# no colour (\003) switches back to the term default
-		return "$dbname \0035*\003 " . $lineFromParent;
+		return "$dbname \0035*\003 $lineFromParent";
 	}
 }
