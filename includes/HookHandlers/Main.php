@@ -34,11 +34,9 @@ use MediaWiki\WikiMap\WikiMap;
 use Memcached;
 use MessageCache;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
@@ -55,11 +53,9 @@ class Main implements
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
-	CreateWikiReadPersistentModelHook,
 	CreateWikiRenameHook,
 	CreateWikiStatePrivateHook,
 	CreateWikiTablesHook,
-	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
