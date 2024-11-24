@@ -48,14 +48,6 @@
                 "vanishuser"
         ],
 	"SpecialPages": {
-		"MirahezeSurvey": {
-			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
-			"services": [
-				"ConfigFactory",
-				"ConnectionProvider",
-				"UserOptionsLookup"
-			]
-		},
 		"VanishUser": {
 			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
 			"services" : [
@@ -162,10 +154,6 @@
 		"MirahezeReportsWriteKey": {
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
-		},
-		"MirahezeSurveyEnabled": {
-			"description": "Boolean. Enable Miraheze Annual Survey?",
-			"value": true
 		}
 	},
 	"ConfigRegistry": {
