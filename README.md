@@ -1,4 +1,4 @@
-Collection of customized i18n messages for Miraheze. Traslations are welcome through translatewiki.net.
+Collection of customized i18n messages for Miraheze. Translations are welcome through translatewiki.net.
 
 Licensed under the GPLv3 (or later) LICENSE.
 
