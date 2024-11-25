@@ -35,7 +35,7 @@
 	"miraheze-newsignuppage-must-accept-tos": "יש לאשר את תנאי השימוש כדי ליצור חשבון!",
 	"miraheze-oathauth-step1": "חשוב! נא להקפיד לקרוא את דף ה־OATHAuth לפני הפעלה של זה! שלב 1: להוריד יישום אימות דו־שלבי",
 	"miraheze-prefs-help-realname": "לא חובה לכתוב את השם האמיתי. אם בחרת לספק אותו, זה ישמש כדי לתת לך ייחוס לעבודה שלך. כמו־כן, שימוש בוויקי שמתארח אצל Miraheze, מהווה את הסכמתך ל<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use תנאי השימוש]</span> ואת הסכמתך ל<span class=\"plainlinks\">[https://meta.miraheze.org/ wiki/Special:MyLanguage/Privacy_Policy מדיניות פרטיות]</span>.",
-	"miraheze-requestwiki-error-invalidcomment": "בקשת הוויקי שלך מכילה תו בלתי־תקין. יש לתקן את זה ולנסות שוב. אם נחוצה לך עזרה, [[Help center|נא ליצור קשר]].",
+	"miraheze-requestwiki-error-invalidcomment": "בקשת הוויקי שלך מכילה תו שגוי. יש לתקן את זה ולנסות שוב. לקבלת עזרה, נא [[Special:MyLanguage/Help center|ליצור איתנו קשר]].",
 	"miraheze-requestwiki-info-guidance": "נותרו רק כמה סעיפים! זה חשוב מאוד.",
 	"miraheze-requestwiki-info-guidance-post": "כמעט סיימת. נא לסקור את זה כדי לוודא שהשלמת את כל הסעיפים וסיפקת את כל הפרטים הרלוונטיים. לאחר מכן, אנו נחזור אליך בהקדם האפשרי. בינתיים אפשר לעיין באתר Meta ולפגוש את העמיתים שלך שמפעילים אתרי ויקי האחרים. אנחנו אוהבים לראות פה פנים חדשות!",
 	"miraheze-requestwiki-label-agreement": "'''קראתי וקיבלתי את [[Special:MyLanguage/Content Policy|מדיניות התוכן]], [[Special:MyLanguage/Dormancy Policy|מדיניות האתרים הרדומים]], [[Special:MyLanguage/Wiki Governance policy|מדיניות ניהול הוויקי]] ו[[Special:MyLanguage/Global Conduct Policy|מדיניות ההתנהגות הגלובלית]]''', ובקשת הוויקי מהווה את הסכמתי לכל [[Special:MyLanguage/Global policies|דפי המדיניות גלובליים]].",
