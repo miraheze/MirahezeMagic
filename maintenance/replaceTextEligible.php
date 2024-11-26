@@ -59,14 +59,14 @@ class ReplaceTextEligible extends Maintenance {
 			->distinct()
 			->caller( __METHOD__ )
 			->fetchResultSet();
-		$this->output( sprintf( 'Got %d pages from the page table and %d deleted pages from the archive table to process, hang tight...', $pages->numRows(), $deletedPageIDs->numRows() ) );
+		$this->output( "Got {$pages->numRows()} pages from the page table and {$deletedPageIDs->numRows()} deleted pages from the archive table to process, hang tight...\n" );
 
 		// Arrays to hold the names of pages preventing ReplaceText from working correctly
 		$problematicPages = [];
 		$problematicDeletedPages = [];
 
 		// Regular pages
-		$this->output( 'Processing regular pages' );
+		$this->output( "Processing regular pages...\n" );
 		foreach ( $pages as $page ) {
 			$isGzipped = $dbr->newSelectQueryBuilder()
 				->select( '1' )
@@ -92,7 +92,7 @@ class ReplaceTextEligible extends Maintenance {
 
 		// Deleted pages
 		// These can be undeleted on-wiki, and if so, they may also cause issues with ReplaceText
-		$this->output( 'Processing deleted pages' );
+		$this->output( "Processing deleted pages...\n" );
 		foreach ( $deletedPageIDs as $deletedPageID ) {
 			$deletedPage = $dbr->newSelectQueryBuilder()
 				->select( [ 'ar_namespace', 'ar_title' ] )
@@ -118,19 +118,22 @@ class ReplaceTextEligible extends Maintenance {
 				$problematicPages[] = $titleFormatter->formatTitle( $deletedPage->ar_namespace, $deletedPage->ar_title );
 			}
 		}
-		if ( count( $problematicPages ) > 0 || count( $problematicDeletedPages ) > 0 ) {
-			$this->output( 'ReplaceText should not be enabled on this wiki.' );
-			if ( count( $problematicPages ) > 0 ) {
-				$this->output( 'The following pages\' latest revisions are compressed:' );
-				$this->output( implode( ', ', $problematicPages ) );
-			}
-			if ( count( $problematicDeletedPages ) > 0 ) {
-				$this->output( 'The following deleted pages\' latest revisions are compressed:' );
-				$this->output( implode( ', ', $problematicDeletedPages ) );
-				$this->output( 'If these pages are undeleted with ReplaceText enabled, usage of the extension will cause problems.' );
-			}
-		} else {
-			$this->output( 'There\'s no problem with this wiki\'s pages; enabling ReplaceText in this wiki is safe.' );
+
+		if ( !$problematicPages && !$problematicDeletedPages ) {
+			$this->output( "There's no problem with this wiki's pages; enabling ReplaceText in this wiki is safe.\n" );
+			return;
+		}
+
+		$this->output( "ReplaceText should not be enabled on this wiki\n"' );
+		if ( count( $problematicPages ) > 0 ) {
+			$this->output( "The following pages' latest revisions are compressed:\n" );
+			$this->output( implode( ', ', $problematicPages ) );
+			$this->output( "\n" );
+		}
+		if ( count( $problematicDeletedPages ) > 0 ) {
+			$this->output( "The following deleted pages' latest revisions are compressed:\n" );
+			$this->output( implode( ', ', $problematicDeletedPages ) );
+			$this->output( "\nIf these pages are undeleted with ReplaceText enabled, usage of the extension will cause problems.\n" );
 		}
 	}
 }
