@@ -94,22 +94,39 @@ class ReplaceTextEligible extends Maintenance {
 		// These can be undeleted on-wiki, and if so, they may also cause issues with ReplaceText
 		$this->output( "Processing deleted pages...\n" );
 		foreach ( $deletedPageIDs as $deletedPageID ) {
-			$deletedPage = $dbr->newSelectQueryBuilder()
-				->select( [ 'ar_namespace', 'ar_title' ] )
+			// Fetch the latest slot revision ID (this part must be separated out from the rest of the JOINs,
+			// at least with my knowledge of SQL at the time of writing)
+			$slotRevisionId = $dbr->newSelectQueryBuilder()
+				->select( 'ar_rev_id' )
 				->from( 'archive' )
-				->join( 'slots', null, 'slot_revision_id = ar_rev_id' )
-				->join( 'content', null, 'content_id = slot_content_id' )
-				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) )
 				->where( [
 					'ar_page_id' => $deletedPageID->ar_page_id,
+				] )
+				->orderBy( 'ar_rev_id', SelectQueryBuilder::SORT_DESC )
+				->limit( 1 )
+				->caller( __METHOD__ )
+				->fetchField();
+
+			// No idea if this is possible, but it's midnight and I'm too lazy to think whether or not it is,
+			// so I'm adding this precaution anyway.
+			if ( $slotRevisionId === null ) {
+				continue;
+			}
+
+			$deletedPage = $dbr->newSelectQueryBuilder()
+				->select( [ 'ar_namespace', 'ar_title' ] )
+				->from( 'slots' )
+				->join( 'content', null, 'content_id = slot_content_id' )
+				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) )
+				->join( 'archive', null, 'ar_rev_id = slot_revision_id' )
+				->where( [
+					'slot_revision_id' => $slotRevisionId,
 					$dbr->expr(
 						'old_flags',
 						IExpression::LIKE,
 						new LikeValue( $dbr->anyString(), 'gzip', $dbr->anyString() ),
 					),
 				] )
-				->orderBy( 'ar_rev_id', SelectQueryBuilder::SORT_DESC )
-				->limit( 1 )
 				->caller( __METHOD__ )
 				->fetchRow();
 
