@@ -33,6 +33,7 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
 use Wikimedia\Rdbms\IExpression;
+use Wikimedia\Rdbms\LikeValue;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 class ReplaceTextEligible extends Maintenance {
@@ -81,7 +82,7 @@ class ReplaceTextEligible extends Maintenance {
 					$dbr->expr(
 						'old_flags',
 						IExpression::LIKE,
-						$dbr->buildLike( $dbr->anyString(), 'gzip', $dbr->anyString() ),
+						new LikeValue( $dbr->anyString(), 'gzip', $dbr->anyString() ),
 					),
 				] )
 				->caller( __METHOD__ )
@@ -112,7 +113,7 @@ class ReplaceTextEligible extends Maintenance {
 					$dbr->expr(
 						'old_flags',
 						IExpression::LIKE,
-						$dbr->buildLike( $dbr->anyString(), 'gzip', $dbr->anyString() ),
+						new LikeValue( $dbr->anyString(), 'gzip', $dbr->anyString() ),
 					),
 				] )
 				->orderBy( 'ar_rev_id', SelectQueryBuilder::SORT_DESC )
