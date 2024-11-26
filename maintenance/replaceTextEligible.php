@@ -46,14 +46,16 @@ class ReplaceTextEligible extends Maintenance {
 		$dbr = $this->getDB( DB_REPLICA );
 
 		$pages = $dbr->newSelectQueryBuilder()
-			->select( [ 'page_id', 'page_latest', 'page_name' ] )
+			->select( [ 'page_latest', 'page_name' ] )
 			->from( 'page' )
-			->caller( __METHOD__ )->fetchResultSet();
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		$deletedPageIDs = $dbr->newSelectQueryBuilder()
 			->select( [ 'ar_page_id' ] )
 			->from( 'archive' )
 			->distinct()
-			->caller( __METHOD__ )->fetchResultSet();
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		$this->output( sprintf( 'Got %d pages from the page table and %d deleted pages from the archive table to process, hang tight...', $pages->numRows(), $deletedPageIDs->numRows() ) );
 
 		// Arrays to hold the names of pages preventing ReplaceText from working correctly
@@ -63,25 +65,27 @@ class ReplaceTextEligible extends Maintenance {
 		// Regular pages
 		$this->output( 'Processing regular pages' );
 		foreach ( $pages as $page ) {
-			// TODO: Use JOINs?
-			$slotContentID = $dbr->newSelectQueryBuilder()
-				->select( [ 'slot_content_id' ] )
+			$isGzipped = $dbr->newSelectQueryBuilder()
+				->select( '1' )
 				->from( 'slots' )
-				->where( [ 'slot_revision_id' => $page->page_latest ] )
-				->caller( __METHOD__ )->fetchRow();
-			$contentAddress = $dbr->newSelectQueryBuilder()
-				->select( [ 'content_address' ] )
-				->from( 'content' )
-				->where( [ 'content_id' => $slotContentID ] )
-				->caller( __METHOD__ )->fetchRow();
-			$oldID = substr( $contentAddress, 3 );
-			$textFlags = $dbr->newSelectQueryBuilder()
-				->select( [ 'old_flags' ] )
-				->from( 'text' )
-				->where( [ 'old_id' => $oldID ] )
-				->caller( __METHOD__ )->fetchRow();
+				->join( 'content', null, 'content_id = slot_content_id' )
+				->join( 'text', null, $dbr->expr(
+					'old_id',
+					'=',
+					$dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ),
+				) )
+				->where( [
+					'slot_revision_id' => $page->page_latest,
+					$dbr->expr(
+						'old_flags',
+						IExpression::LIKE,
+						$dbr->buildLike( $dbr->anyString(), 'gzip', $dbr->anyString() ),
+					),
+				] )
+				->caller( __METHOD__ )
+				->fetchField();
 
-			if ( str_contains( $textFlags, 'gzip' ) ) {
+			if ( $isGzipped ) {
 				// The latest revision of this page is compressed
 				$problematicPages[] = $page->page_name;
 			}
@@ -91,40 +95,32 @@ class ReplaceTextEligible extends Maintenance {
 		// These can be undeleted on-wiki, and if so, they may also cause issues with ReplaceText
 		$this->output( 'Processing deleted pages' );
 		foreach ( $deletedPageIDs as $deletedPageID ) {
-			// TODO: Use JOINs?
-			// Get the latest revision
-			$revID = $dbr->newSelectQueryBuilder()
-				->select( [ 'ar_rev_id' ] )
+			$pageName = $dbr->newSelectQueryBuilder()
+				->select( 'ar_page_name' )
 				->from( 'archive' )
-				->where( [ 'ar_page_id' => $deletedPageID->ar_page_id ] )
+				->join( 'slots', null, 'slot_revision_id = ar_rev_id' )
+				->join( 'content', null, 'content_id = slot_content_id' )
+				->join( 'text', null, $dbr->expr(
+					'old_id',
+					'=',
+					$dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ),
+				) )
+				->where( [
+					'ar_page_id' => $deletedPageID->ar_page_id,
+					$dbr->expr(
+						'old_flags',
+						IExpression::LIKE,
+						$dbr->buildLike( $dbr->anyString(), 'gzip', $dbr->anyString() ),
+					),
+				] )
 				->orderBy( 'ar_rev_id', SelectQueryBuilder::SORT_DESC )
 				->limit( 1 )
-				->caller( __METHOD__ )->fetchRow();
-			$slotContentID = $dbr->newSelectQueryBuilder()
-				->select( [ 'slot_content_id' ] )
-				->from( 'slots' )
-				->where( [ 'slot_revision_id' => $revID ] )
-				->caller( __METHOD__ )->fetchRow();
-			$contentAddress = $dbr->newSelectQueryBuilder()
-				->select( [ 'content_address' ] )
-				->from( 'content' )
-				->where( [ 'content_id' => $slotContentID ] )
-				->caller( __METHOD__ )->fetchRow();
-			$oldID = substr( $contentAddress, 3 );
-			$textFlags = $dbr->newSelectQueryBuilder()
-				->select( [ 'old_flags' ] )
-				->from( 'text' )
-				->where( [ 'old_id' => $oldID ] )
-				->caller( __METHOD__ )->fetchRow();
-			if ( str_contains( $textFlags, 'gzip' ) ) {
+				->caller( __METHOD__ )
+				->fetchField();
+
+			if ( $pageName !== null ) {
 				// The latest revision of this page is compressed
-				$deletedPageName = $dbr->newSelectQueryBuilder()
-					->select( [ 'ar_page_name' ] )
-					->from( 'archive' )
-					->where( [ 'ar_page_id' => $deletedPageID->ar_page_id ] )
-					->limit( 1 )
-					->caller( __METHOD__ )->fetchRow();
-				$problematicDeletedPages[] = $deletedPageName->ar_page_name;
+				$problematicDeletedPages[] = $pageName;
 			}
 		}
 		if ( count( $problematicPages ) > 0 || count( $problematicDeletedPages ) > 0 ) {
