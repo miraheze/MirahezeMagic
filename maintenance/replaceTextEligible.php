@@ -72,9 +72,7 @@ class ReplaceTextEligible extends Maintenance {
 				->select( '1' )
 				->from( 'slots' )
 				->join( 'content', null, 'content_id = slot_content_id' )
-				->join( 'text', null, $dbr->buildComparison( '=', [
-					'old_id' => $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ),
-				] ) )
+				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) ),
 				->where( [
 					'slot_revision_id' => $page->page_latest,
 					$dbr->expr(
@@ -101,9 +99,7 @@ class ReplaceTextEligible extends Maintenance {
 				->from( 'archive' )
 				->join( 'slots', null, 'slot_revision_id = ar_rev_id' )
 				->join( 'content', null, 'content_id = slot_content_id' )
-				->join( 'text', null, $dbr->buildComparison( '=', [
-					'old_id' => $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ),
-				] ) )
+				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) ),
 				->where( [
 					'ar_page_id' => $deletedPageID->ar_page_id,
 					$dbr->expr(
