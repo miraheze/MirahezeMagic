@@ -73,8 +73,8 @@ class ReplaceTextEligible extends Maintenance {
 				->from( 'slots' )
 				->join( 'content', null, 'content_id = slot_content_id' )
 				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) )
-				// @phan-suppress-next-line PhanPluginMixedKeyNoKey We intentionally mix string and numeric keys since SelectQueryBuilder::where() can handle both at once
 				->where( [
+					// @phan-suppress-next-line PhanPluginMixedKeyNoKey We intentionally mix string and numeric keys since SelectQueryBuilder::where() can handle both at once
 					'slot_revision_id' => $page->page_latest,
 					$dbr->expr(
 						'old_flags',
@@ -120,8 +120,8 @@ class ReplaceTextEligible extends Maintenance {
 				->join( 'content', null, 'content_id = slot_content_id' )
 				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) )
 				->join( 'archive', null, 'ar_rev_id = slot_revision_id' )
-				// @phan-suppress-next-line PhanPluginMixedKeyNoKey We intentionally mix string and numeric keys since SelectQueryBuilder::where() can handle both at once
 				->where( [
+					// @phan-suppress-next-line PhanPluginMixedKeyNoKey We intentionally mix string and numeric keys since SelectQueryBuilder::where() can handle both at once
 					'slot_revision_id' => $slotRevisionId,
 					$dbr->expr(
 						'old_flags',
