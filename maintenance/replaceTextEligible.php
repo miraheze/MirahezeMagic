@@ -115,7 +115,7 @@ class ReplaceTextEligible extends Maintenance {
 
 			if ( $deletedPage ) {
 				// The latest revision of this page is compressed
-				$problematicPages[] = $titleFormatter->formatTitle( $deletedPage->ar_namespace, $deletedPage->ar_title );
+				$problematicDeletedPages[] = $titleFormatter->formatTitle( $deletedPage->ar_namespace, $deletedPage->ar_title );
 			}
 		}
 
