@@ -124,7 +124,7 @@ class ReplaceTextEligible extends Maintenance {
 			return;
 		}
 
-		$this->output( "ReplaceText should not be enabled on this wiki\n"' );
+		$this->output( "ReplaceText should not be enabled on this wiki\n" );
 		if ( count( $problematicPages ) > 0 ) {
 			$this->output( "The following pages' latest revisions are compressed:\n" );
 			$this->output( implode( ', ', $problematicPages ) );
