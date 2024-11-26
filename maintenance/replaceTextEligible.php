@@ -32,6 +32,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Maintenance;
+use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 class ReplaceTextEligible extends Maintenance {
