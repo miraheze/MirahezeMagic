@@ -44,9 +44,10 @@ class ReplaceTextEligible extends Maintenance {
 
 	public function execute() {
 		$dbr = $this->getDB( DB_REPLICA );
+		$titleFormatter = $this->getServiceContainer()->getTitleFormatter();
 
 		$pages = $dbr->newSelectQueryBuilder()
-			->select( [ 'page_latest', 'page_name' ] )
+			->select( [ 'page_latest', 'page_namespace', 'page_title' ] )
 			->from( 'page' )
 			->caller( __METHOD__ )
 			->fetchResultSet();
@@ -87,7 +88,7 @@ class ReplaceTextEligible extends Maintenance {
 
 			if ( $isGzipped ) {
 				// The latest revision of this page is compressed
-				$problematicPages[] = $page->page_name;
+				$problematicPages[] = $titleFormatter->formatTitle( $page->page_namespace, $page->page_title );
 			}
 		}
 
@@ -95,8 +96,8 @@ class ReplaceTextEligible extends Maintenance {
 		// These can be undeleted on-wiki, and if so, they may also cause issues with ReplaceText
 		$this->output( 'Processing deleted pages' );
 		foreach ( $deletedPageIDs as $deletedPageID ) {
-			$pageName = $dbr->newSelectQueryBuilder()
-				->select( 'ar_page_name' )
+			$deletedPage = $dbr->newSelectQueryBuilder()
+				->select( [ 'ar_namespace', 'ar_title' ] )
 				->from( 'archive' )
 				->join( 'slots', null, 'slot_revision_id = ar_rev_id' )
 				->join( 'content', null, 'content_id = slot_content_id' )
@@ -116,11 +117,11 @@ class ReplaceTextEligible extends Maintenance {
 				->orderBy( 'ar_rev_id', SelectQueryBuilder::SORT_DESC )
 				->limit( 1 )
 				->caller( __METHOD__ )
-				->fetchField();
+				->fetchRow();
 
-			if ( $pageName !== null ) {
+			if ( $deletedPage ) {
 				// The latest revision of this page is compressed
-				$problematicDeletedPages[] = $pageName;
+				$problematicPages[] = $titleFormatter->formatTitle( $deletedPage->ar_namespace, $deletedPage->ar_title );
 			}
 		}
 		if ( count( $problematicPages ) > 0 || count( $problematicDeletedPages ) > 0 ) {
