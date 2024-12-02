@@ -9,6 +9,7 @@
 			"LittlePaw365",
 			"LuciferianThomas",
 			"StarrySky",
+			"TFX202X",
 			"XtexChooser",
 			"列维劳德",
 			"沈澄心",
@@ -16,6 +17,8 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|您}}不能登录因为{{GENDER:$1|您的}}账号[[m:Special:MyLanguage/Global locks|被全域锁定]]。请联系 <code>cvt[at]miraheze.org</code> 获取更多信息或申诉。",
+	"miraheze-createwiki-close-email-body": "您好，\n\n这封电子邮件旨在通知您，您的Miraheze wiki已关闭。根据 [[m:Special:MyLanguage/Dormancy Policy|休眠政策]]（您在请 wiki时同意），60天内未收到任何编辑或记录操作的Wiki将自动关闭，以防止垃圾邮件。\n\n如果您想重新打开您的wiki，请访问Special:ManageWiki并取消选中“已关闭”框以重新打开它。请注意，如果您不重新打开您的wiki，或者从现在起6个月内没有人请求打开您的wiki（根据休眠政策的重新打开请求部分），您的wiki将被标记为可永久删除。",
+	"miraheze-createwiki-close-email-subject": "您的Miraheze wiki（$1）已被关闭",
 	"miraheze-createwiki-defaultmainpage-summary": "欢迎来到Miraheze！",
 	"miraheze-dberr-again": "请在几分钟后重试，这些错误通常几分钟后即可解决。如果您持续收到此错误，请查看我们的 Twitter（https://twitter.com/Miraheze）以获得更多信息或者通过加入到 irc.libera.chat 上的#miraheze-tech-ops 或我们的 Discord 服务器（https://discord.gg/TVAJTE4CUn）来告知我们。",
 	"miraheze-dberr-problems": "此wiki暂不可用",
