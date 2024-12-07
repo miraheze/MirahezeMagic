@@ -62,6 +62,8 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
+		global $wgDBname;
+
 		$hashConfig = new HashConfig();
 
 		$hashConfig->set( MainConfigNames::ShellRestrictionMethod, false );
@@ -127,7 +129,7 @@ class RebuildVersionCache extends Maintenance {
 			}
 		}
 
-		$job = new ClearGitInfoCache( [ 'keys' => $keys ] );
+		$job = new ClearGitInfoCache( [ 'startWiki' => $wgDBname, 'keys' => $keys ] );
 		MediaWikiServices::getInstance()->getJobQueueGroup()->push( $job );
 	}
 
