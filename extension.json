@@ -61,6 +61,17 @@
 			]
 		}
 	},
+	"JobClasses": {
+		"ClearGitInfoCache": {
+			"class": "",
+			"services": [
+				"ConfigFactory",
+				"ConnectionProvider",
+				"DataDumpFileBackend"
+			],
+			"needsPage": false
+		}
+	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
 			"handler": "Main"
