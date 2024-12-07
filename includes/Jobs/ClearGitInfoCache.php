@@ -3,19 +3,10 @@
 namespace Miraheze\DataDump\Jobs;
 
 use Job;
-use ManualLogEntry;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ConfigFactory;
-use MediaWiki\MainConfigNames;
-use MediaWiki\Shell\Shell;
-use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\User\User;
-use Miraheze\DataDump\ConfigNames;
 use Miraheze\DataDump\Services\DataDumpFileBackend;
-use MWExceptionHandler;
-use RuntimeException;
 use Wikimedia\Rdbms\IConnectionProvider;
-use Wikimedia\Rdbms\IDatabase;
 
 class ClearGitInfoCache extends Job {
 
