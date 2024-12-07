@@ -3,10 +3,6 @@
 namespace Miraheze\MirahezeMagic\Jobs;
 
 use Job;
-use MediaWiki\Config\Config;
-use MediaWiki\Config\ConfigFactory;
-use Miraheze\DataDump\Services\DataDumpFileBackend;
-use Wikimedia\Rdbms\IConnectionProvider;
 
 class ClearGitInfoCache extends Job {
 
