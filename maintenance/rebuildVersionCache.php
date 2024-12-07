@@ -63,8 +63,6 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	public function execute() {
-		global $wgDBname;
-
 		$hashConfig = new HashConfig();
 
 		$hashConfig->set( MainConfigNames::ShellRestrictionMethod, false );
