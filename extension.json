@@ -63,7 +63,7 @@
 	},
 	"JobClasses": {
 		"ClearGitInfoCache": {
-			"class": "",
+			"class": "Miraheze\\MirahezeMagic\\Jobs\\ClearGitInfoCache",
 			"services": [
 				"ConfigFactory",
 				"ConnectionProvider",
