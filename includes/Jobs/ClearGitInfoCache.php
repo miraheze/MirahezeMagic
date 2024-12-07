@@ -3,6 +3,7 @@
 namespace Miraheze\MirahezeMagic\Jobs;
 
 use Job;
+use MediaWiki\MediaWikiServices;
 
 class ClearGitInfoCache extends Job {
 
@@ -19,7 +20,15 @@ class ClearGitInfoCache extends Job {
 	}
 
 	public function run(): bool {
+		global $wgDBname;
+
 		$cache = MediaWikiServices::getInstance()->getObjectCacheFactory()->getInstance( CACHE_ANYTHING );
+
+		foreach ( $this->keys as $key ) {
+			$startWiki = $this->startWiki;
+			$key = preg_replace( "/^$startWiki:/", "$wgDBname:", $key );
+			$cache->delete( $key );
+		}
 
 		return true;
 	}
