@@ -42,6 +42,7 @@ use FormatJson;
 use Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
+use MediaWiki\MediaWikiServices;
 
 /**
  * Maintenance script to rebuild the version cache.
@@ -104,6 +105,9 @@ class RebuildVersionCache extends Maintenance {
 			);
 		}
 
+		// This will be used in the job
+		$keys = [];
+
 		$version = $this->getOption( 'version' );
 		foreach ( $extensionCredits as $extension => $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
@@ -117,10 +121,14 @@ class RebuildVersionCache extends Maintenance {
 				$memcKey = $cache->makeKey(
 					'specialversion-ext-version-text', str_replace( $baseDirectory, '/srv/mediawiki/' . $version, $extensionData['path'] ), $coreId
 				);
+				$keys[] = $memcKey;
 
 				$cache->delete( $memcKey );
 			}
 		}
+
+		$job = new ClearGitInfoCache( [ 'keys' => $keys ] );
+		MediaWikiServices::getInstance()->getJobQueueGroup()->push( $job );
 	}
 
 	private function getGitInfo( string $directory ): ?array {
