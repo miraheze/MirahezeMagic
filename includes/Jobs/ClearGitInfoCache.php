@@ -1,6 +1,6 @@
 <?php
 
-namespace Miraheze\DataDump\Jobs;
+namespace Miraheze\MirahezeMagic\Jobs;
 
 use Job;
 use MediaWiki\Config\Config;
