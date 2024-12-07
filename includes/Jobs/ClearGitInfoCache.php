@@ -21,11 +21,11 @@ class ClearGitInfoCache extends Job {
 	}
 
 	public function run(): bool {
-		$cache = MediaWikiServices::getInstance()->getObjectCacheFactory()->getInstance( CACHE_ANYTHING );
+		$cache = $this->getServiceContainer()->getObjectCacheFactory()->getInstance( CACHE_ANYTHING );
 
+		$startWiki = preg_quote( $this->startWiki );
 		foreach ( $this->getConfig()->get( MainConfigNames::LocalDatabases ) as $db ) {
 			foreach ( $this->keys as $key ) {
-				$startWiki = $this->startWiki;
 				$key = preg_replace( "/^$startWiki:/", "$db:", $key );
 				$cache->delete( $key );
 			}
