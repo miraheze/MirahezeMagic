@@ -57,7 +57,7 @@ class RebuildVersionCache extends Maintenance {
 
 		$this->addDescription( 'Rebuild the version cache' );
 		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
-		$this->addOption( 'version', 'MediaWiki version to save gitinfo.json files for' );
+		$this->addOption( 'version', 'MediaWiki version to save gitinfo.json files for', false, true );
 	}
 
 	public function execute() {
