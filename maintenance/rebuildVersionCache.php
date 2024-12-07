@@ -43,6 +43,7 @@ use Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\WikiMap\WikiMap;
 
 /**
  * Maintenance script to rebuild the version cache.
@@ -129,7 +130,7 @@ class RebuildVersionCache extends Maintenance {
 			}
 		}
 
-		$job = new ClearGitInfoCache( [ 'startWiki' => $wgDBname, 'keys' => $keys ] );
+		$job = new ClearGitInfoCache( [ 'startWiki' => WikiMap::getCurrentWikiId(), 'keys' => $keys ] );
 		MediaWikiServices::getInstance()->getJobQueueGroup()->push( $job );
 	}
 
