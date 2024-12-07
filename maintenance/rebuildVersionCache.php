@@ -129,7 +129,7 @@ class RebuildVersionCache extends Maintenance {
 		}
 
 		$job = new ClearGitInfoCache( [ 'startWiki' => WikiMap::getCurrentWikiId(), 'keys' => $keys ] );
-		MediaWikiServices::getInstance()->getJobQueueGroup()->push( $job );
+		$this->getServiceContainer()->getJobQueueGroup()->push( $job );
 	}
 
 	private function getGitInfo( string $directory ): ?array {
