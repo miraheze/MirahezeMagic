@@ -62,15 +62,7 @@
 		}
 	},
 	"JobClasses": {
-		"ClearGitInfoCache": {
-			"class": "Miraheze\\MirahezeMagic\\Jobs\\ClearGitInfoCache",
-			"services": [
-				"ConfigFactory",
-				"ConnectionProvider",
-				"DataDumpFileBackend"
-			],
-			"needsPage": false
-		}
+		"ClearGitInfoCache": "Miraheze\\MirahezeMagic\\Jobs\\ClearGitInfoCache"
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
