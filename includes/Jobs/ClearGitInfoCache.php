@@ -12,29 +12,14 @@ class ClearGitInfoCache extends Job {
 
 	public const JOB_NAME = 'ClearGitInfoCache';
 
-	private Config $config;
-	private IConnectionProvider $connectionProvider;
-	private DataDumpFileBackend $fileBackend;
+	private array $keys;
+	private string $startWiki;
 
-	private array $arguments;
-	private string $fileName;
-	private string $type;
-
-	public function __construct(
-		array $params,
-		ConfigFactory $configFactory,
-		IConnectionProvider $connectionProvider,
-		DataDumpFileBackend $fileBackend
-	) {
+	public function __construct( array $params ) {
 		parent::__construct( self::JOB_NAME, $params );
 
-		$this->arguments = $params['arguments'];
-		$this->fileName = $params['fileName'];
-		$this->type = $params['type'];
-
-		$this->config = $configFactory->makeConfig( 'DataDump' );
-		$this->connectionProvider = $connectionProvider;
-		$this->fileBackend = $fileBackend;
+		$this->startWiki = $params['startWiki'];
+		$this->keys = $params['keys'];
 	}
 
 	public function run(): bool {
