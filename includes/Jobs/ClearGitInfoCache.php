@@ -4,7 +4,6 @@ namespace Miraheze\MirahezeMagic\Jobs;
 
 use Job;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 
 class ClearGitInfoCache extends Job {
 
