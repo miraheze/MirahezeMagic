@@ -42,7 +42,6 @@ use FormatJson;
 use Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\WikiMap\WikiMap;
 
 /**
