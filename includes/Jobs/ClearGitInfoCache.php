@@ -22,7 +22,7 @@ class ClearGitInfoCache extends Job {
 	public function run(): bool {
 		$cache = $this->getServiceContainer()->getObjectCacheFactory()->getInstance( CACHE_ANYTHING );
 
-		$startWiki = preg_quote( $this->startWiki );
+		$startWiki = preg_quote( $this->startWiki, '/' );
 		foreach ( $this->getConfig()->get( MainConfigNames::LocalDatabases ) as $db ) {
 			foreach ( $this->keys as $key ) {
 				$key = preg_replace( "/^$startWiki:/", "$db:", $key );
