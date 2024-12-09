@@ -2,11 +2,12 @@
 
 namespace Miraheze\MirahezeMagic\Jobs;
 
+use GenericParameterJob;
 use Job;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 
-class ClearGitInfoCache extends Job {
+class ClearGitInfoCache extends Job implements GenericParameterJob {
 
 	public const JOB_NAME = 'ClearGitInfoCache';
 
