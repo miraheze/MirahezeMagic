@@ -34,6 +34,7 @@ require_once "$IP/maintenance/Maintenance.php";
 use Exception;
 use Maintenance;
 use MediaWiki\MainConfigNames;
+use MwSql;
 
 class MigrateSearchIndexSql extends Maintenance {
 
@@ -58,7 +59,7 @@ class MigrateSearchIndexSql extends Maintenance {
 		}
 
 		$mwSql = $this->runChild(
-			\MwSql::class,
+			MwSql::class,
 			MW_INSTALL_PATH . '/maintenance/sql.php'
 		);
 
