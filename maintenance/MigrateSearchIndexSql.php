@@ -58,7 +58,7 @@ class MigrateSearchIndexSql extends Maintenance {
 		}
 
 		$mwSql = $this->runChild(
-			MwSql::class,
+			\MwSql::class,
 			MW_INSTALL_PATH . '/maintenance/sql.php'
 		);
 
