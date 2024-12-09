@@ -43,6 +43,7 @@ use Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
 use MediaWiki\WikiMap\WikiMap;
+use Miraheze\MirahezeMagic\Jobs\ClearGitInfoCache;
 
 /**
  * Maintenance script to rebuild the version cache.
