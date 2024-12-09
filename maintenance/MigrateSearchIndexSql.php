@@ -20,7 +20,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  *
  * @file
  * @ingroup Maintenance
- * @author The-Voidwalker
+ * @author Paladox
  * @version 1.0
  */
 
