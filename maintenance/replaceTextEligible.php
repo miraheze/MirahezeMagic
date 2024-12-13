@@ -48,18 +48,18 @@ class ReplaceTextEligible extends Maintenance {
 		$dbr = $this->getDB( DB_REPLICA );
 		$titleFormatter = $this->getServiceContainer()->getTitleFormatter();
 
-		$pages = $dbr->newSelectQueryBuilder()
-			->select( [ 'page_latest', 'page_namespace', 'page_title' ] )
+		$totalPageCount = $dbr->newSelectQueryBuilder()
+			->select( 'COUNT(*)' )
 			->from( 'page' )
 			->caller( __METHOD__ )
-			->fetchResultSet();
+			->fetchField();
 		$deletedPageIDs = $dbr->newSelectQueryBuilder()
 			->select( [ 'ar_page_id' ] )
 			->from( 'archive' )
 			->distinct()
 			->caller( __METHOD__ )
 			->fetchResultSet();
-		$this->output( "Got {$pages->numRows()} pages from the page table and {$deletedPageIDs->numRows()} deleted pages from the archive table to process, hang tight...\n" );
+		$this->output( "Got {$totalPageCount} pages from the page table and {$deletedPageIDs->numRows()} deleted pages from the archive table to process, hang tight...\n" );
 
 		// Arrays to hold the names of pages preventing ReplaceText from working correctly
 		$problematicPages = [];
@@ -67,28 +67,24 @@ class ReplaceTextEligible extends Maintenance {
 
 		// Regular pages
 		$this->output( "Processing regular pages...\n" );
-		foreach ( $pages as $page ) {
-			$isGzipped = $dbr->newSelectQueryBuilder()
-				->select( '1' )
-				->from( 'slots' )
-				->join( 'content', null, 'content_id = slot_content_id' )
-				->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) )
-				->where( [
-					// @phan-suppress-next-line PhanPluginMixedKeyNoKey We intentionally mix string and numeric keys since SelectQueryBuilder::where() can handle both at once
-					'slot_revision_id' => $page->page_latest,
-					$dbr->expr(
-						'old_flags',
-						IExpression::LIKE,
-						new LikeValue( $dbr->anyString(), 'gzip', $dbr->anyString() ),
-					),
-				] )
-				->caller( __METHOD__ )
-				->fetchField();
-
-			if ( $isGzipped ) {
-				// The latest revision of this page is compressed
-				$problematicPages[] = $titleFormatter->formatTitle( $page->page_namespace, $page->page_title );
-			}
+		$gzippedPages = $dbr->newSelectQueryBuilder()
+			->select( [ 'page_namespace', 'page_title' ] )
+			->from( 'page' )
+			->join( 'slots', null, 'slot_revision_id = page_latest' )
+			->join( 'content', null, 'content_id = slot_content_id' )
+			->join( 'text', null, 'old_id = ' . $dbr->buildIntegerCast( $dbr->buildSubString( 'content_address', 4 ) ) )
+			->where( [
+				$dbr->expr(
+					'old_flags',
+					IExpression::LIKE,
+					new LikeValue( $dbr->anyString(), 'gzip', $dbr->anyString() ),
+				),
+			] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+		foreach ( $gzippedPages as $page ) {
+			// The latest revision of this page is compressed
+			$problematicPages[] = $titleFormatter->formatTitle( $page->page_namespace, $page->page_title );
 		}
 
 		// Deleted pages
