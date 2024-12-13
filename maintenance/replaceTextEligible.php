@@ -41,7 +41,7 @@ class ReplaceTextEligible extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Checks if the current wiki is eligible for enabling ReplaceText\n See https://meta.miraheze.org/wiki/Tech:Noticeboard?oldid=414759#The_state_of_the_ReplaceText_extension' );
+		$this->addDescription( "Checks if the current wiki is eligible for enabling ReplaceText\n See https://meta.miraheze.org/wiki/Tech:Noticeboard?oldid=414759#The_state_of_the_ReplaceText_extension" );
 	}
 
 	public function execute() {
