@@ -43,7 +43,7 @@
 	"group-global-ipblock-exempt": "Uitgezonderd van globale IP-adresblokkades",
 	"group-global-patroller-member": "{{GENDER:$1|globale controleur}}",
 	"group-global-patroller": "Globale controleurs",
-	"group-global-renamer-member": "{{GENDER:$1|globale hernoemer}}",
+	"group-global-renamer-member": "globale hernoem{{GENDER:$1||}}er",
 	"group-global-renamer": "Globale hernoemers",
 	"group-global-rollbacker-member": "globale terugdraai{{GENDER:$1||st}}er",
 	"group-global-rollbacker": "Globale terugdraaiers",
