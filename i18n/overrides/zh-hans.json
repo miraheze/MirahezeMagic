@@ -25,7 +25,7 @@
 	"miraheze-createwiki-email-body": "你好！\n\n您最近请求在 Miraheze 上创建一个维基。我们很高兴地通知您，它已获得批准！\n\nMiraheze 在每一步都为您提供帮助，请不要害怕提问！访问我们的 [[m:Special:MyLanguage/Help center|帮助中心]]，获取有关多种主题的详细帮助，例如使用我们的 ManageWiki 工具管理您的维基、使用图像和模板、提交任务等！\n\n请记住，所有维基必须遵守[[m:Special:MyLanguage/Content Policy|内容政策]]，否则可能会被关闭。如果您的维基偏离其批准的目的过多，也可能会被关闭。\n\n感谢您选择 Miraheze！祝您在新的维基冒险中一切顺利。",
 	"miraheze-createwiki-email-subject": "您的新 Miraheze 维基 ($1) 已创建",
 	"miraheze-createwiki-error-subdomaintaken": "您请求的子域名已被占用。可能已经有一个维基涵盖了您的主题；如果是这种情况，请为该维基做出贡献（用户创建多个同一主题的维基是被禁止的，在检测到后会被删除）。请选择另一个子域名并重试。",
-	"miraheze-createwiki-help-bio": "关于真实人物的内容必须努力限制偏见并呈现中立观点。未经明确同意，不得分享个人信息。请参见[[维基上的个人数据披露]]。",
+	"miraheze-createwiki-help-bio": "关于真实人物的内容必须努力限制偏见并呈现中立观点。未经明确同意，不得分享个人信息。请参见[[Disclosure of Personal Data on Wikis|维基上的个人数据披露]]。",
 	"miraheze-createwiki-help-category": "该类别有助于在[[Special:WikiDiscover]]等地方对维基进行排序。创建后请访问 ManageWiki 以撰写简要描述！",
 	"miraheze-createwiki-help-reason": "请随意展开框以便于编辑！不幸的是，这里没有华丽的格式，例如粗体文本、可点击链接等。",
 	"miraheze-createwiki-help-subdomain": "这将是维基的 URL。请确保它对您的维基是唯一的，而不是太通用。您的数据库名称将是这个，后面加上“wiki”，即，你的子域名+wiki。这个可以稍后更改。",
