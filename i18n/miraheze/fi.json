@@ -7,6 +7,7 @@
 			"Moj",
 			"Nike",
 			"Pyscowicz",
+			"Samoasambia",
 			"Veikk0.ma"
 		]
 	},
@@ -42,7 +43,7 @@
 	"group-translationadmin": "käännösylläpitäjät",
 	"group-translator-member": "kääntäjä",
 	"group-translator": "Kääntäjät",
-	"group-trustandsafety-member": "Trust and Safety",
+	"group-trustandsafety-member": "{{GENDER:$1|Trust and Safety -jäsen}}",
 	"group-trustandsafety": "Trust and Safety",
 	"group-wiki-creator-member": "{{GENDER:$1|wikien luoja}}",
 	"group-wiki-creator": "Wikien luojat",
