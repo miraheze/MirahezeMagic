@@ -155,7 +155,7 @@
 	"termsofservice": "Conditions d’utilisation",
 	"vanishuser": "Faire disparaître un utilisateur",
 	"vanishuser-action-label": "Voulez-vous '''vraiment''' faire disparaître cet utilisateur ?",
-	"vanishuser-action-help": "Veuillez vous assurer que tous les détails sont remplis correctement et assurez-vous de consigner ceci pour en garder la trace.",
+	"vanishuser-action-help": "Veuillez vous assurer que tous les détails sont remplis correctement et consignés dans le journal.",
 	"vanishuser-warning": "'''Attention''' : vous êtes sur le point de faire disparaître globalement un utilisateur ! Veuillez examiner attentivement tous les détails avant de continuer.",
 	"vanishuser-log-name": "Journal des disparitions d’utilisateurs",
 	"vanishuser-log-header": "Voici un journal de base de toutes les disparitions d’utilisateurs.",

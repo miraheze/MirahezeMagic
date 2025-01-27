@@ -1,18 +1,19 @@
 {
 	"@metadata": {
 		"authors": [
-			"Saederup92"
+			"Saederup92",
+			"Zakawer2"
 		]
 	},
 	"datadump-namespaceselect-label": "Navnerum",
-	"extensions-skins": "Udseende",
+	"extensions-skins": "Skins",
 	"extensions-variable": "Variabler",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatruljeret}}",
 	"group-autopatrolled": "Autopatruljerede brugere",
 	"group-confirmed-member": "{{GENDER:$1|bekræftet bruger}}",
 	"group-confirmed": "Bekræftede brugere",
 	"group-member": "Medlemmer",
-	"group-oversight-member": "oversigt",
+	"group-oversight-member": "tilsynsperson",
 	"group-rollbacker-member": "{{GENDER:$1|tilbageruller}}",
 	"group-rollbacker": "Tilbagerullere",
 	"group-steward-member": "{{GENDER:$1|forvalter}}",
@@ -24,14 +25,14 @@
 	"miraheze-categories": "Kategorier",
 	"miraheze-donate": "Donér til Miraheze",
 	"miraheze-faq": "OSS",
-	"miraheze-helpcenter": "Om Miraheze",
+	"miraheze-helpcenter": "Miraheze-hjælpecenter",
 	"miraheze-sidebar-donate": "Donér",
 	"restriction-delete": "Slet",
 	"restriction-level-user": "Tillad kun brugere der er logget ind",
 	"settings-beta": "Beta",
 	"settings-categories": "Kategorier",
 	"settings-discussion": "Diskussion",
-	"settings-editing": "Redigér",
+	"settings-editing": "Redigering",
 	"settings-maps": "Kort",
 	"settings-media": "Medier",
 	"settings-permissions": "Tilladelser",
