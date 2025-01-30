@@ -61,6 +61,9 @@
 			]
 		}
 	},
+	"JobClasses": {
+		"ClearGitInfoCache": "Miraheze\\MirahezeMagic\\Jobs\\ClearGitInfoCache"
+	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
 			"handler": "Main"
