@@ -705,7 +705,7 @@ class Main implements
 			'comment' => $this->commentStore->getComment( 'rc_comment', $recentChange->mAttribs )->text,
 		];
 
-		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );
+		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ], __METHOD__ );
 	}
 
 	public function onBlockIpComplete( $block, $user, $priorBlock ) {
@@ -723,7 +723,7 @@ class Main implements
 					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID is: ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
-				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ] );
+				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ], __METHOD__ );
 
 				break;
 			}
