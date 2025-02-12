@@ -109,7 +109,9 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$url .= "&wdwikislist=$list";
 		}
 
-		$json = $this->getServiceContainer()->getHttpRequestFactory()->get( $url, [ 'timeout' => 300 ] );
+		$json = $this->getServiceContainer()->getHttpRequestFactory()->get(
+			$url, [ 'timeout' => 300 ], __METHOD__
+		);
 
 		if ( !$json ) {
 			$json = '';
