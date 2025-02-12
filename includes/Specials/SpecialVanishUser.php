@@ -29,7 +29,7 @@ namespace Miraheze\MirahezeMagic\Specials;
  * @version 1.0
  */
 
-use ExtensionRegistry;
+use MediaWiki\Registration\ExtensionRegistry;
 use ManualLogEntry;
 use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;

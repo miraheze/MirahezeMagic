@@ -38,7 +38,7 @@ use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Status\Status;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
-use TextContent;
+use MediaWiki\Content\TextContent;
 
 /**
  * Send a bulk email message to a list of wiki account holders using

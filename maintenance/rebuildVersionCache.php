@@ -37,8 +37,8 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use ExtensionProcessor;
-use FormatJson;
+use MediaWiki\Registration\ExtensionProcessor;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;

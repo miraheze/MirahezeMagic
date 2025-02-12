@@ -2,7 +2,7 @@
 
 namespace Miraheze\MirahezeMagic;
 
-use IRCColourfulRCFeedFormatter;
+use MediaWiki\RCFeed\IRCColourfulRCFeedFormatter;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
