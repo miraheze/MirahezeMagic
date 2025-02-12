@@ -73,9 +73,9 @@ class RestoreManageWikiBackup extends Maintenance {
 			$this->fatalError( 'Aborted.', 2 );
 		}
 
-		$dbw->delete( 'mw_namespaces', [ 'ns_dbname' => $dbname ] );
-		$dbw->delete( 'mw_permissions', [ 'perm_dbname' => $dbname ] );
-		$dbw->delete( 'mw_settings', [ 's_dbname' => $dbname ] );
+		$dbw->delete( 'mw_namespaces', [ 'ns_dbname' => $dbname ], __METHOD__ );
+		$dbw->delete( 'mw_permissions', [ 'perm_dbname' => $dbname ], __METHOD__ );
+		$dbw->delete( 'mw_settings', [ 's_dbname' => $dbname ], __METHOD__ );
 
 		foreach ( $data['namespaces'] as $name => $nsData ) {
 			foreach ( $nsData as $key => $value ) {
@@ -100,7 +100,7 @@ class RestoreManageWikiBackup extends Maintenance {
 			$nsData['ns_namespace_name'] = $name;
 			$nsData['ns_dbname'] = $dbname;
 
-			$dbw->insert( 'mw_namespaces', $nsData );
+			$dbw->insert( 'mw_namespaces', $nsData, __METHOD__ );
 		}
 
 		if ( isset( $data['permissions'] ) ) {
@@ -122,7 +122,7 @@ class RestoreManageWikiBackup extends Maintenance {
 				$permData['perm_group'] = $group;
 				$permData['perm_dbname'] = $dbname;
 
-				$dbw->insert( 'mw_permissions', $permData );
+				$dbw->insert( 'mw_permissions', $permData, __METHOD__ );
 			}
 		}
 
@@ -134,7 +134,7 @@ class RestoreManageWikiBackup extends Maintenance {
 				$settingsData['s_settings'] = json_encode( $data['settings'] );
 			}
 
-			$dbw->insert( 'mw_settings', $settingsData );
+			$dbw->insert( 'mw_settings', $settingsData, __METHOD__ );
 
 			if ( isset( $data['extensions'] ) ) {
 				$mwExt = new ManageWikiExtensions( $dbname );
