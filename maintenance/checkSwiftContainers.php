@@ -130,7 +130,7 @@ class CheckSwiftContainers extends Maintenance {
 
 		return array_filter(
 			explode( "\n", $swiftOutput ),
-			fn ( string $line ): bool => (bool)$line
+			static fn ( string $line ): bool => (bool)$line
 		);
 	}
 
