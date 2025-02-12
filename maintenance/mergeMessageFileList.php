@@ -35,9 +35,9 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 # Start from scratch
-use MediaWiki\Registration\ExtensionRegistry;
-use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Settings\SettingsBuilder;
 
 /**

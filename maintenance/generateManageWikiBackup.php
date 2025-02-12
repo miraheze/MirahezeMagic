@@ -31,8 +31,8 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 
 class GenerateManageWikiBackup extends Maintenance {
 

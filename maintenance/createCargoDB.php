@@ -32,8 +32,8 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Exception;
-use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 
 class CreateCargoDB extends Maintenance {
 

@@ -37,11 +37,11 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use MediaWiki\Registration\ExtensionProcessor;
-use MediaWiki\Json\FormatJson;
-use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Config\HashConfig;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionProcessor;
 
 /**
  * Maintenance script to rebuild the version cache.

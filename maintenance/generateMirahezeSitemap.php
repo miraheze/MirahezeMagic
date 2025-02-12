@@ -33,9 +33,9 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use GenerateSitemap;
-use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 
 class GenerateMirahezeSitemap extends Maintenance {
 
