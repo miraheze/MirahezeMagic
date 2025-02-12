@@ -36,7 +36,7 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 
 class FindSQLPatches extends Maintenance {
 

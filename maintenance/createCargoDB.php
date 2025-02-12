@@ -32,8 +32,8 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Exception;
-use Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 
 class CreateCargoDB extends Maintenance {
 
@@ -54,7 +54,7 @@ class CreateCargoDB extends Maintenance {
 
 		try {
 			$dbQuotes = $dbw->addIdentifierQuotes( $cargodb );
-			$dbw->query( "CREATE DATABASE {$dbQuotes};" );
+			$dbw->query( "CREATE DATABASE {$dbQuotes};", __METHOD__ );
 		} catch ( Exception $e ) {
 			$this->fatalError( "Database '{$cargodb}' already exists." );
 		}

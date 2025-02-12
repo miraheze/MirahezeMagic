@@ -31,8 +31,8 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 
 class GenerateManageWikiBackup extends Maintenance {
 
@@ -52,13 +52,15 @@ class GenerateManageWikiBackup extends Maintenance {
 		$nsObjects = $dbr->select(
 			'mw_namespaces',
 			'*',
-			[ 'ns_dbname' => $dbname ]
+			[ 'ns_dbname' => $dbname ],
+			__METHOD__
 		);
 
 		$permObjects = $dbr->select(
 			'mw_permissions',
 			'*',
-			[ 'perm_dbname' => $dbname ]
+			[ 'perm_dbname' => $dbname ],
+			__METHOD__
 		);
 
 		$settingsObjects = $dbr->selectRow(

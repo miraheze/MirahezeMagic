@@ -32,8 +32,8 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Exception;
-use Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 use MwSql;
 
 class MigrateSearchIndexSql extends Maintenance {
@@ -53,12 +53,12 @@ class MigrateSearchIndexSql extends Maintenance {
 
 		try {
 			$table = $dbw->tableName( 'searchindex' );
-			$dbw->query( "ALTER TABLE {$table} CONVERT TO CHARACTER SET utf8mb4;" );
+			$dbw->query( "ALTER TABLE {$table} CONVERT TO CHARACTER SET utf8mb4;", __METHOD__ );
 		} catch ( Exception $e ) {
 			$this->fatalError( "Failed to alter table 'searchindex'." );
 		}
 
-		$mwSql = $this->runChild(
+		$mwSql = $this->createChild(
 			MwSql::class,
 			MW_INSTALL_PATH . '/maintenance/sql.php'
 		);
