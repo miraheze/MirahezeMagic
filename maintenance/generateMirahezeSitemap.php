@@ -98,7 +98,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			}
 
 			// Generate new dump
-			$generateSitemap = $this->runChild(
+			$generateSitemap = $this->createChild(
 				GenerateSitemap::class,
 				MW_INSTALL_PATH . '/maintenance/generateSitemap.php'
 			);
