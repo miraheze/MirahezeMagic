@@ -58,7 +58,7 @@ class MigrateSearchIndexSql extends Maintenance {
 			$this->fatalError( "Failed to alter table 'searchindex'." );
 		}
 
-		$mwSql = $this->runChild(
+		$mwSql = $this->createChild(
 			MwSql::class,
 			MW_INSTALL_PATH . '/maintenance/sql.php'
 		);
