@@ -21,7 +21,7 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Linker\Linker;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
@@ -68,49 +68,32 @@ class Main implements
 	UserGetRightsRemoveHook
 {
 
-	/** @var ServiceOptions */
-	private $options;
+	private ServiceOptions $options;
+	private CommentStore $commentStore;
+	private HttpRequestFactory $httpRequestFactory;
+	private LinkRenderer $linkRenderer;
+	private IConnectionProvider $connectionProvider;
 
-	/** @var CommentStore */
-	private $commentStore;
-
-	/** @var IConnectionProvider */
-	private $connectionProvider;
-
-	/** @var HttpRequestFactory */
-	private $httpRequestFactory;
-
-	/**
-	 * @param ServiceOptions $options
-	 * @param CommentStore $commentStore
-	 * @param IConnectionProvider $connectionProvider
-	 * @param HttpRequestFactory $httpRequestFactory
-	 */
 	public function __construct(
 		ServiceOptions $options,
 		CommentStore $commentStore,
 		IConnectionProvider $connectionProvider,
-		HttpRequestFactory $httpRequestFactory
+		HttpRequestFactory $httpRequestFactory,
+		LinkRenderer $linkRenderer
 	) {
 		$this->options = $options;
 		$this->commentStore = $commentStore;
 		$this->connectionProvider = $connectionProvider;
 		$this->httpRequestFactory = $httpRequestFactory;
+		$this->linkRenderer = $linkRenderer;
 	}
 
-	/**
-	 * @param Config $mainConfig
-	 * @param CommentStore $commentStore
-	 * @param IConnectionProvider $connectionProvider
-	 * @param HttpRequestFactory $httpRequestFactory
-	 *
-	 * @return self
-	 */
 	public static function factory(
 		Config $mainConfig,
 		CommentStore $commentStore,
 		IConnectionProvider $connectionProvider,
-		HttpRequestFactory $httpRequestFactory
+		HttpRequestFactory $httpRequestFactory,
+		LinkRenderer $linkRenderer
 	): self {
 		return new self(
 			new ServiceOptions(
@@ -132,7 +115,8 @@ class Main implements
 			),
 			$commentStore,
 			$connectionProvider,
-			$httpRequestFactory
+			$httpRequestFactory,
+			$linkRenderer
 		);
 	}
 
@@ -744,7 +728,7 @@ class Main implements
 				return;
 			}
 
-			$tools['centralauth'] = Linker::makeExternalLink(
+			$tools['centralauth'] = $this->linkRenderer->makeExternalLink(
 				'https://meta.miraheze.org/wiki/Special:CentralAuth/' . $username,
 				strtolower( $specialPage->msg( 'centralauth' )->text() )
 			);
