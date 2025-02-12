@@ -730,7 +730,8 @@ class Main implements
 
 			$tools['centralauth'] = $this->linkRenderer->makeExternalLink(
 				'https://meta.miraheze.org/wiki/Special:CentralAuth/' . $username,
-				strtolower( $specialPage->msg( 'centralauth' )->text() )
+				strtolower( $specialPage->msg( 'centralauth' )->text() ),
+				SpecialPage::getTitleFor( 'CentralAuth' )
 			);
 		}
 	}
