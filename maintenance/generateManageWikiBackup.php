@@ -52,13 +52,15 @@ class GenerateManageWikiBackup extends Maintenance {
 		$nsObjects = $dbr->select(
 			'mw_namespaces',
 			'*',
-			[ 'ns_dbname' => $dbname ]
+			[ 'ns_dbname' => $dbname ],
+			__METHOD__
 		);
 
 		$permObjects = $dbr->select(
 			'mw_permissions',
 			'*',
-			[ 'perm_dbname' => $dbname ]
+			[ 'perm_dbname' => $dbname ],
+			__METHOD__
 		);
 
 		$settingsObjects = $dbr->selectRow(
