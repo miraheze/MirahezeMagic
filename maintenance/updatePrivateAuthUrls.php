@@ -9,7 +9,7 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MainConfigNames;
 use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 

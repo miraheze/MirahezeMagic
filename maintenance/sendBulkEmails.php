@@ -31,7 +31,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use MailAddress;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Message\Message;
 use MediaWiki\Revision\SlotRecord;

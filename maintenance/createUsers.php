@@ -33,7 +33,7 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
 use MediaWiki\User\User;

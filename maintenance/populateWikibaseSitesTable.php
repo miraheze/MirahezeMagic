@@ -33,7 +33,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Exception;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
 use Wikibase\Lib\Sites\SitesBuilder;

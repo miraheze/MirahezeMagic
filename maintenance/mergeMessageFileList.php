@@ -36,7 +36,7 @@ require_once "$IP/maintenance/Maintenance.php";
 
 # Start from scratch
 use ExtensionRegistry;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Settings\SettingsBuilder;
 

@@ -39,7 +39,7 @@ require_once "$IP/maintenance/Maintenance.php";
 
 use ExtensionProcessor;
 use FormatJson;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\MainConfigNames;
 

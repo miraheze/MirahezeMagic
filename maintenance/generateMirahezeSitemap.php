@@ -33,7 +33,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use GenerateSitemap;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
 

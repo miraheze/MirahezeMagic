@@ -32,7 +32,7 @@ if ( $IP === false ) {
 
 require_once "$IP/maintenance/Maintenance.php";
 
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use Wikimedia\AtEase\AtEase;
 
 class FixUserIdLogging extends Maintenance {

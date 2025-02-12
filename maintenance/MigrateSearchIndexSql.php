@@ -32,7 +32,7 @@ if ( $IP === false ) {
 require_once "$IP/maintenance/Maintenance.php";
 
 use Exception;
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MainConfigNames;
 use MwSql;
 
