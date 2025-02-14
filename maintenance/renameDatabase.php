@@ -127,7 +127,13 @@ class RenameDatabase extends Maintenance {
 			->fetchResultSet();
 
 		foreach ( $res as $row ) {
-			$tableNames[] = $row->TABLE_NAME;
+			$tableName = $row->TABLE_NAME;
+			// We can not use RENAME TABLE on the view, so for now we
+			// just skip it. Is not actually mandatory to have
+			// and can be easily recreated.
+			if ( $tableName !== 'dpl_clview' ) {
+				$tableNames[] = $tableName;
+			}
 		}
 
 		// Rename each table to the new database
