@@ -3,12 +3,14 @@
 		"authors": [
 			"Key0121",
 			"Kly",
+			"PB2008",
 			"WiiUf",
 			"Winston Sung",
 			"沈澄心",
 			"铁桶"
 		]
 	},
+	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被[[m:Special:MyLanguage/Global locks|全域鎖定]]，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
 	"miraheze-createwiki-close-email-sender": "Miraheze",
 	"miraheze-createwiki-defaultmainpage-summary": "歡迎來到 Miraheze！",
