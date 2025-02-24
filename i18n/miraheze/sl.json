@@ -43,7 +43,7 @@
 	"group-member-member": "{{GENDER:$1|član|članica|član_ica}}",
 	"group-oversight-member": "{{GENDER:$1|moderator|moderatorka|moderator_ka}}",
 	"group-oversight": "Moderatorji",
-	"group-patroller-member": "{{GENDER:$1|pregledovalec|pregledovalka|pregledovalec_ka}}",
+	"group-patroller-member": "{{GENDER:$1|patruljer|patruljerka|patruljer̠_ka}}",
 	"group-patroller": "Pregledovalci",
 	"group-proxybot-member": "posredniški bot",
 	"group-proxybot": "Posredniški bot",

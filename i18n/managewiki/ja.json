@@ -5,7 +5,8 @@
 			"Chqaz",
 			"MathXplore",
 			"Omotecho",
-			"Waki285"
+			"Waki285",
+			"Yaakiyu.jp"
 		]
 	},
 	"managewiki-setting-wgAbuseFilterActions-name": "不正利用フィルターの操作",
@@ -194,8 +195,8 @@
 	"managewiki-setting-wgMaxImageArea-help": "画像に含めることができる最大ピクセル数を指定します。",
 	"managewiki-setting-wgFileExtensions-name": "ファイル拡張子",
 	"managewiki-setting-wgFileExtensions-help": "これは、ファイルをアップロードするための推奨拡張子のリストです。このリストで選択されていない拡張子のファイルをアップロードすると、警告が表示されます。",
-	"managewiki-setting-wgDefaultSkin-name": "デフォルト外装",
-	"managewiki-setting-wgDefaultSkin-help": "これにより、すべての利用者のビジュアル インターフェイスが選択した外装に変更されますが、利用者の個人設定によって変更することもできます。",
+	"managewiki-setting-wgDefaultSkin-name": "デフォルトスキン",
+	"managewiki-setting-wgDefaultSkin-help": "これにより、すべての利用者のビジュアル インターフェイスが選択したスキンに変更されますが、利用者の個人設定によって変更することもできます。",
 	"managewiki-setting-wgLogo-name": "ロゴ",
 	"managewiki-setting-wgLogo-help": "これにより、Miraheze のデフォルトのロゴが置き換えられます。変更方法については、https://meta.miraheze.org/wiki/ManageWiki#How_do_I_change_my_logo.2Ffavicon.3F を参照してください。",
 	"managewiki-setting-wgFavicon-name": "ファビコン",
@@ -214,7 +215,7 @@
 	"managewiki-setting-wgMetrolookUseIconWatch-help": "有効にすると、ウォッチ/ウォッチリストから除去ボタンにアイコンが使用されます。",
 	"managewiki-setting-wgMetrolookLine-name": "Metrolook 線",
 	"managewiki-setting-wgMetrolookLine-help": "設定されていない場合、img.line 要素 (サイト名と下矢印/「ファイルのアップロード」リンクの間にある上部メニューの白い区切り線) は生成されません。",
-	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-name": "RelatedArticles フッターに許可された外装",
+	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-name": "RelatedArticles フッターに許可されたスキン",
 	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-help": "フッターに関連記事が表示されるスキン名のリスト (例: 「minerva」、「vector」)。",
 	"managewiki-setting-wgMultiBoilerplateDiplaySpecialPage-name": "MultiBoilerplate 特別ページをDiplay",
 	"managewiki-setting-wgMultiBoilerplateDiplaySpecialPage-help": "設定されている場合、現在構成されているボイラープレートを表示する 特区別:Boilerplates という名前のページがウィキに追加されます。",
