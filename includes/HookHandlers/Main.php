@@ -529,6 +529,7 @@ class Main implements
 			'uploadtext',
 			'webauthn-module-description',
 			'wikibase-sitelinks-miraheze',
+			'vector-night-mode-issue-reporting-notice-url'
 		];
 
 		$languageCode = $this->options->get( MainConfigNames::LanguageCode );
