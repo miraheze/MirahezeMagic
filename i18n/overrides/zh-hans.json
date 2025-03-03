@@ -7,6 +7,7 @@
 			"CrownedWharf566",
 			"GuoPC",
 			"Hehua",
+			"Hzy980512",
 			"Kichin",
 			"Lakejason0",
 			"LittlePaw365",
@@ -41,7 +42,7 @@
 	"miraheze-importdump-help-target": "这必须是一个有效的数据库名称。要查找维基的数据库名称，请参见维基上的 Special:ManageWiki/core。\n\n如果您还没有创建您的维基，请先使用 [[Special:RequestWiki]] 请求您的维基，然后在您的维基创建后返回此处进行导入请求。",
 	"miraheze-importdump-help-upload-file": "仅允许 XML 文件。如果您的 XML 文件位于压缩档案中，请在尝试上传之前将其解压缩。\n\n请确保您上传的 XML 文件版本也包含所有修订历史记录。",
 	"miraheze-importdump-import-failed-comment": "导入提供的XML时出错。已通知技术团队。",
-	"miraheze-importtext": "请使用 [[Special:Export|导出实用程序]] 从源 wiki 导出文件。\n将其保存到您的计算机并将其上传到此处。<br />请注意，如果文件有点大（~ >2MB），您将需要[[M:Special:RequestImport|请求导入]]，因为由于技术限制，这无法在这里完成。<br />我们建议不要直接从维基百科导入信息框，请参阅[[m:Infoboxes|此页面]]了解更多信息。",
+	"miraheze-importtext": "请使用[[Special:Export|导出页面]]将文件从源wiki导出。将其保存到您的计算机后再上传到这里。<br />请注意如果文件较大（约>2MB）的话，您必须[[M:Special:RequestImport|提交导入请求]]，因为由于技术限制，不能在这里完成。<br />建议不要从维基百科直接导入信息框，详见[[m:Infoboxes|此页面]]。",
 	"miraheze-interwiki_intro": "这是跨wiki表的总览，跨wiki表定义用于快速链接到其他wiki及其他外部网站的快捷前缀。使用建议请查阅[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Interwiki MediaWiki.org上的手册]。\n\n请注意，所有跨wiki表添加行为均受到监控，任何试图在表中插入恶意链接的行为均会受到惩处。",
 	"miraheze-newsignuppage-loginform-tos": "我已阅读并同意\n[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用条款]和[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隐私政策]",
 	"miraheze-newsignuppage-must-accept-tos": "您必须接受使用条款才能创建账号！",
@@ -56,7 +57,7 @@
 	"miraheze-restriction-protect": "保护",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-uploadtext": "使用下面的表单上传文件。\n要查看或搜索以前上传的文件，请转到 [[Special:FileList|已上传文件列表]]。上传和重新上传也会记录在 [[Special:Log/upload|上传日志]] 中。删除会记录在 [[Special:Log/delete|删除日志]] 中。\n\n要将文件包含在页面中，请使用以下形式之一的链接：\n* <strong><code><nowiki>[[</nowiki> {{ns:file}}<nowiki> :File.jpg]]</nowiki></code></strong>使用文件的完整版本\n* <strong><code><nowiki>[[</nowiki> {{ns:file}}<nowiki> :File.png|200px|thumb|left|Caption]]</nowiki></code></strong>在左边距的框中使用 200 像素宽的再现，并在下方显示文本“标题”！N！* <strong><code><nowiki>[[</nowiki> {{ns:media}}<nowiki> :File.ogg]]</nowiki></code></strong>直接链接到文件而不显示文件！N！！N！请记住添加有关上传文件的许可信息（如果适用）。所有文件“必须”遵守美国版权法，包括合理使用。屡次不遵守可能会导致版权侵权和“wiki 关闭”。",
+	"miraheze-uploadtext": "使用下面的表单上传文件。要查看或搜索曾上传的文件，请查看[[Special:FileList|上传文件列表]]。上传与二次上传均会记录到[[Special:Log/upload|上传日志]]内。删除操作会记录到[[Special:Log/delete|删除日志]]内。\n\n使用下面的链接格式将文件嵌入页面：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong>：使用文件的完整版本\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|说明文字]]</nowiki></code></strong>：使用文件的200像素宽的缩略图，带方框，靠左，并带有文本“说明文字”\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong>：直接链接到文件而不显示文件内容\n\n请给上传的文件添加许可信息（如适用）。所有文件均'''必须'''遵守美国版权法，包括合理使用。多次不添加信息可能会侵犯版权并导致'''wiki被关闭'''。",
 	"miraheze-webauthn-module-description": "WebAuthn（Web 身份验证）是万维网联盟 (W3C) 发布的一项 Web 标准。WebAuthn 是 FIDO 联盟指导下的 FIDO2 项目的核心组件。该项目的目标是标准化一个使用公钥加密技术对基于 Web 的应用程序和服务的用户进行身份验证的接口。[https://en.wikipedia.org/wiki/WebAuthn 阅读更多]<br> '''请记住，您必须前往您注册了身份验证器的 wiki 才能登录'''。出于这个原因，您可能希望在 [[mh:meta|Meta]] 上注册身份验证器。",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze wiki"
 }
