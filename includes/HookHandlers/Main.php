@@ -37,6 +37,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
+use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
@@ -378,14 +379,9 @@ class Main implements
 			}
 		}
 
-		$scriptOptions = [ 'wrapper' => MW_INSTALL_PATH . '/maintenance/run.php' ];
-
 		Shell::makeScriptCommand(
-			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
-			[
-				'--wiki', $newDbName
-			],
-			$scriptOptions
+			SetContainersAccess::class,
+			[ '--wiki', $newDbName ]
 		)->limits( $limits )->execute();
 
 		$this->removeRedisKey( "*{$oldDbName}*" );
