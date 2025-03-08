@@ -72,12 +72,16 @@ class RenameDatabase extends Maintenance {
 		$cluster = $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
 			->field( 'wiki_dbcluster' )
-			->where( [ 'wiki_dbname' => $oldDatabaseName ] )
+			->where( [
+				$dbr->expr( 'wiki_dbname', '=', [
+					$newDatabaseName, $oldDatabaseName
+				] )
+			] )
 			->caller( __METHOD__ )
 			->fetchField();
 
 		if ( !$cluster ) {
-			$this->fatalError( "Cluster for $oldDatabaseName not found in cw_wikis." );
+			$this->fatalError( "Cluster for $oldDatabaseName or $newDatabaseName not found in cw_wikis." );
 		}
 
 		// Get the load balancer for the specific cluster
