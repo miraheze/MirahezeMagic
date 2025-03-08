@@ -25,13 +25,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 2.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use GenerateSitemap;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
@@ -128,5 +121,6 @@ class GenerateMirahezeSitemap extends Maintenance {
 	}
 }
 
-$maintClass = GenerateMirahezeSitemap::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return GenerateMirahezeSitemap::class;
+// @codeCoverageIgnoreEnd

@@ -33,20 +33,21 @@
 		"MirahezeMagicAliases": "MirahezeMagicAliases.php"
 	},
 	"AutoloadNamespaces": {
-		"Miraheze\\MirahezeMagic\\": "includes/"
+		"Miraheze\\MirahezeMagic\\": "includes/",
+		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
-        "LogActionsHandlers": {
-                "vanishuser/*": "LogFormatter"
-        },
-        "LogHeaders": {
-                "vanishuser": "vanishuser-log-header"
-        },
-        "LogNames": {
-                "vanishuser": "vanishuser-log-name"
-        },
-        "LogTypes": [
-                "vanishuser"
-        ],
+	"LogActionsHandlers": {
+		"vanishuser/*": "LogFormatter"
+	},
+	"LogHeaders": {
+		"vanishuser": "vanishuser-log-header"
+	},
+	"LogNames": {
+		"vanishuser": "vanishuser-log-name"
+	},
+	"LogTypes": [
+		"vanishuser"
+	],
 	"SpecialPages": {
 		"VanishUser": {
 			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",

@@ -29,13 +29,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use MediaWiki\Maintenance\Maintenance;
 
 class FindSQLPatches extends Maintenance {
@@ -113,5 +106,6 @@ class FindSQLPatches extends Maintenance {
 	}
 }
 
-$maintClass = FindSQLPatches::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return FindSQLPatches::class;
+// @codeCoverageIgnoreEnd

@@ -27,13 +27,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 4.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use MediaWiki\Maintenance\Maintenance;
 
 class AssignImportedEdits extends Maintenance {
@@ -223,5 +216,6 @@ class AssignImportedEdits extends Maintenance {
 	}
 }
 
-$maintClass = AssignImportedEdits::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return AssignImportedEdits::class;
+// @codeCoverageIgnoreEnd

@@ -24,13 +24,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
@@ -107,5 +100,6 @@ class InsertMissingLocalUserRows extends Maintenance {
 	}
 }
 
-$maintClass = InsertMissingLocalUserRows::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return InsertMissingLocalUserRows::class;
+// @codeCoverageIgnoreEnd
