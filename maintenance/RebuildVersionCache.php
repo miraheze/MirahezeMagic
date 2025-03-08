@@ -30,13 +30,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 3.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Json\FormatJson;
 use MediaWiki\MainConfigNames;
@@ -218,5 +211,6 @@ class RebuildVersionCache extends Maintenance {
 	}
 }
 
-$maintClass = RebuildVersionCache::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return RebuildVersionCache::class;
+// @codeCoverageIgnoreEnd

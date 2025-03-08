@@ -23,13 +23,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @ingroup Wikimedia
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use MailAddress;
 use MediaWiki\Content\TextContent;
 use MediaWiki\Context\RequestContext;
@@ -421,5 +414,6 @@ class SendBulkEmails extends Maintenance {
 	}
 }
 
-$maintClass = SendBulkEmails::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return SendBulkEmails::class;
+// @codeCoverageIgnoreEnd

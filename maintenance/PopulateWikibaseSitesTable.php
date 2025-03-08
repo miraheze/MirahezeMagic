@@ -25,13 +25,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use Exception;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Site\MediaWikiSite;
@@ -193,5 +186,6 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	}
 }
 
-$maintClass = PopulateWikibaseSitesTable::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return PopulateWikibaseSitesTable::class;
+// @codeCoverageIgnoreEnd

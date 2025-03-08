@@ -27,13 +27,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 define( 'MW_NO_EXTENSION_MESSAGES', 1 );
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 # Start from scratch
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
@@ -243,5 +236,6 @@ class MergeMessageFileList extends Maintenance {
 	}
 }
 
-$maintClass = MergeMessageFileList::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return MergeMessageFileList::class;
+// @codeCoverageIgnoreEnd
