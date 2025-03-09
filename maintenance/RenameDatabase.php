@@ -108,36 +108,33 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Database $newDatabaseName already exists on cluster $cluster." );
 		}
 
+		$dbCollation = $this->getConfig()->get( 'CreateWikiCollation' );
 		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
 		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
 
 		// Create the new database
-		$dbw->query( "CREATE DATABASE $newDatabaseQuotes", __METHOD__ );
+		$dbw->query( "CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};", __METHOD__ );
 
 		// Fetch all tables in the old database
-		$tableNames = [];
-		$res = $dbw->newSelectQueryBuilder()
-			->select( [ 'TABLE_NAME' ] )
+		$tableNames = $dbw->newSelectQueryBuilder()
+			->select( 'TABLE_NAME' )
 			->from( 'information_schema.TABLES' )
 			->where( [ 'TABLE_SCHEMA' => $oldDatabaseName ] )
 			->caller( __METHOD__ )
-			->fetchResultSet();
+			->fetchFieldValues();
 
-		foreach ( $res as $row ) {
-			$tableName = $row->TABLE_NAME;
+		// Rename each table to the new database
+		foreach ( $tableNames as $tableName ) {
 			// We can not use RENAME TABLE on the view, so for now we
 			// just skip it. Is not actually mandatory to have
 			// and can be easily recreated.
 			if ( $tableName !== 'dpl_clview' ) {
 				$tableNames[] = $tableName;
 			}
-		}
 
-		// Rename each table to the new database
-		foreach ( $tableNames as $table ) {
-			$tableQuotes = $dbw->addIdentifierQuotes( $table );
-			$this->output( "Moving table $table to $newDatabaseName...\n" );
-			$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes}", __METHOD__ );
+			$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
+			$this->output( "Moving table $tableName to $newDatabaseName...\n" );
+			$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
 		}
 
 		$this->output( "Database renamed successfully on cluster $cluster.\n" );
