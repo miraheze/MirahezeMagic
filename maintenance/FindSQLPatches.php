@@ -6,7 +6,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * List new or updated SQL patches between two MediaWiki versions.
  *
  * Usage:
- *     php findSQLPatches.php --from-version=current_version --to-version=new_version
+ *     php run.php MirahezeMagic:FindSQLPatches --from-version=current_version --to-version=new_version
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
