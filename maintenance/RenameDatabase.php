@@ -70,7 +70,7 @@ class RenameDatabase extends Maintenance {
 		}
 
 		if ( $dryRun ) {
-			$this->output( "DRY RUN: Wiki $oldwiki would be renamed to $newwiki" );
+			$this->output( "DRY RUN: Wiki $oldDatabaseName would be renamed to $newDatabaseName.\n" );
 		} else {
 			$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName. If this is wrong, Ctrl-C now!\n" );
 
