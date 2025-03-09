@@ -58,25 +58,32 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it contains non-alphanumeric characters." );
 		}
 
-		$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName\n" );
+		$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName. If this is wrong, Ctrl-C now!\n" );
+
+		// let's count down JUST to be safe!
+		$this->countDown( 10 );
+
+		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
+		$wikiManager = $wikiManagerFactory->newInstance( $oldDatabaseName );
+		$rename = $wikiManager->rename( $newDatabaseName );
+
+		if ( $rename ) {
+			$this->fatalError( $rename );
+		}
 
 		$dbr = $this->getServiceContainer()->getConnectionProvider()
 			->getReplicaDatabase( 'virtual-createwiki' );
 
-		// Fetch the specific cluster from cw_wikis based on the old or new database name
+		// Fetch the specific cluster from cw_wikis based on the new database name
 		$cluster = $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
 			->field( 'wiki_dbcluster' )
-			->where( [
-				$dbr->expr( 'wiki_dbname', '=', [
-					$newDatabaseName, $oldDatabaseName
-				] )
-			] )
+			->where( [ 'wiki_dbname' => $newDatabaseName ] )
 			->caller( __METHOD__ )
 			->fetchField();
 
 		if ( !$cluster ) {
-			$this->fatalError( "Cluster for $oldDatabaseName or $newDatabaseName not found in cw_wikis." );
+			$this->fatalError( "Cluster for $newDatabaseName not found in cw_wikis." );
 		}
 
 		// Get the load balancer for the specific cluster
