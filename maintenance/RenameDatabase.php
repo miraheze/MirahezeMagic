@@ -160,6 +160,8 @@ class RenameDatabase extends Maintenance {
 			try {
 				if ( $hasDPL3View && class_exists( CreateView::class ) ) {
 					$createView = $this->createChild( CreateView::class );
+					'@phan-var CreateView $createView';
+
 					$createView->setDB( $this->getDB( DB_PRIMARY, [], $newDatabaseName ) );
 					$createView->setForce();
 					$createView->execute();
