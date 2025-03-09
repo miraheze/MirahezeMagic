@@ -24,7 +24,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
+use MediaWiki\Extension\DynamicPageList3\Maintenance\CreateView;
 use MediaWiki\Maintenance\Maintenance;
+use Throwable;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class RenameDatabase extends Maintenance {
@@ -61,7 +63,7 @@ class RenameDatabase extends Maintenance {
 		$dbr = $this->getServiceContainer()->getConnectionProvider()
 			->getReplicaDatabase( 'virtual-createwiki' );
 
-		// Fetch the specific cluster from cw_wikis based on the old database name
+		// Fetch the specific cluster from cw_wikis based on the old or new database name
 		$cluster = $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
 			->field( 'wiki_dbcluster' )
@@ -79,7 +81,7 @@ class RenameDatabase extends Maintenance {
 
 		// Get the load balancer for the specific cluster
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
-		$loadBalancer = $dbLoadBalancerFactory->getAllMainLBs()[$cluster];
+		$loadBalancer = $dbLoadBalancerFactory->getAllMainLBs()[ $cluster ];
 
 		// Get the connection to the specific cluster that the wiki's database exists on
 		$dbw = $loadBalancer->getConnection( DB_PRIMARY, [], ILoadBalancer::DOMAIN_ANY );
@@ -112,32 +114,71 @@ class RenameDatabase extends Maintenance {
 		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
 		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
 
-		// Create the new database
-		$dbw->query( "CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};", __METHOD__ );
+		// Track state for rollback
+		$tablesMoved = [];
 
-		// Fetch all tables in the old database
-		$tableNames = $dbw->newSelectQueryBuilder()
-			->select( 'TABLE_NAME' )
-			->from( 'information_schema.TABLES' )
-			->where( [ 'TABLE_SCHEMA' => $oldDatabaseName ] )
-			->caller( __METHOD__ )
-			->fetchFieldValues();
+		try {
+			// Create the new database
+			$dbw->query( "CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};", __METHOD__ );
 
-		// Rename each table to the new database
-		foreach ( $tableNames as $tableName ) {
-			// We can not use RENAME TABLE on the view, so for now we
-			// just skip it. Is not actually mandatory to have
-			// and can be easily recreated.
-			if ( $tableName !== 'dpl_clview' ) {
-				$tableNames[] = $tableName;
+			// Fetch all tables in the old database
+			$tableNames = $dbw->newSelectQueryBuilder()
+				->select( 'TABLE_NAME' )
+				->from( 'information_schema.TABLES' )
+				->where( [ 'TABLE_SCHEMA' => $oldDatabaseName ] )
+				->caller( __METHOD__ )
+				->fetchFieldValues();
+
+			// Track if we have the DPL3 view (dpl_clview)
+			$hasDPL3View = false;
+
+			// Rename each table to the new database
+			foreach ( $tableNames as $tableName ) {
+				// We can not use RENAME TABLE on the view, so for now we
+				// just skip it and track that then we recreate it on the
+				// new database afterwards.
+				if ( $tableName === 'dpl_clview' ) {
+					$hasDPL3View = true;
+					continue;
+				}
+
+				$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
+				$this->output( "Moving table $tableName to $newDatabaseName...\n" );
+				$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
+				$tablesMoved[] = $tableName;
 			}
 
-			$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
-			$this->output( "Moving table $tableName to $newDatabaseName...\n" );
-			$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
-		}
+			$this->output( "Database renamed successfully on cluster $cluster.\n" );
 
-		$this->output( "Database renamed successfully on cluster $cluster.\n" );
+			try {
+				if ( $hasDPL3View && class_exists( CreateView::class ) ) {
+					$createView = $this->createChild( CreateView::class );
+					$createView->setDB( $this->getDB( DB_PRIMARY, [], $newDatabaseName ) );
+					$createView->setForce();
+					$createView->execute();
+				}
+			} catch ( Throwable $viewError ) {
+				$this->output( "Error occurred when creating dpl_clview on $newDatabaseName: " . $viewError->getMessage() . "\n" );
+			}
+		} catch ( Throwable $e ) {
+			$this->output( 'Error occurred: ' . $e->getMessage() . "\nAttempting rollback...\n" );
+
+			try {
+				// Rollback any moved tables
+				foreach ( $tablesMoved as $tableName ) {
+					$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
+					$this->output( "Rolling back table $tableName to $oldDatabaseName...\n" );
+					$dbw->query( "RENAME TABLE {$newDatabaseQuotes}.{$tableQuotes} TO {$oldDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
+				}
+
+				$this->output( "Rollback successful. You may need to DROP $newDatabaseName in order to try this again.\n" );
+			} catch ( Throwable $rollbackError ) {
+				$this->output( 'Rollback failed: ' . $rollbackError->getMessage() . "\n" );
+				$this->fatalError( 'Original error: ' . $e->getMessage() . '. Rollback error: ' . $rollbackError->getMessage() );
+			}
+
+			$this->fatalError( 'Error during rename: ' . $e->getMessage() );
+		}
 	}
 }
 
