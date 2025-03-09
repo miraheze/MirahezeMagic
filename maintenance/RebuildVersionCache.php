@@ -6,7 +6,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * Rebuild the version cache.
  *
  * Usage:
- *    php rebuildVersionCache.php
+ *    php run.php MirahezeMagic:RebuildVersionCache
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
