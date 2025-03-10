@@ -24,9 +24,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 2.0
  */
 
-use Exception;
 use MediaWiki\Extension\DynamicPageList3\Maintenance\CreateView;
 use MediaWiki\Maintenance\Maintenance;
+use RuntimeException;
 use Throwable;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -141,7 +141,7 @@ class RenameDatabase extends Maintenance {
 		$rename = $wikiManager->rename( $newDatabaseName );
 
 		if ( $rename ) {
-			throw new Exception( $rename );
+			throw new RuntimeException( $rename );
 		}
 	}
 
