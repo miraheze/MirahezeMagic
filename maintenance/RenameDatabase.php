@@ -100,7 +100,7 @@ class RenameDatabase extends Maintenance {
 				try {
 					$this->performWikiRename( $newDatabaseName, $oldDatabaseName );
 				} catch ( Throwable $t ) {
-					$this->output( "Rollback for CreateWiki rename failed: {$t->getMessage()}\n"
+					$this->output( "Rollback for CreateWiki rename failed: {$t->getMessage()}\n" );
 				}
 			}
 			$this->fatalError( "Error during rename: $errorMessage" );
