@@ -71,7 +71,6 @@ class RenameDatabase extends Maintenance {
 		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
 		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
 
-		$tablesMoved = [];
 		try {
 			$this->createNewDatabase( $dbw, $newDatabaseQuotes, $dbCollation, $dryRun );
 			$this->moveTables( $dbw, $oldDatabaseQuotes, $newDatabaseQuotes, $oldDatabaseName, $dryRun );
