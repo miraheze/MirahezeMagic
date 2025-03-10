@@ -52,9 +52,6 @@ class RenameDatabase extends Maintenance {
 	}
 
 	public function execute(): void {
-		$this->tablesMoved = [];
-		$this->hasDPL3View = false;
-
 		[ $oldDatabaseName, $newDatabaseName, $dryRun ] = $this->parseAndValidateOptions();
 		$this->validateSuffixAndAlnum( $oldDatabaseName, $newDatabaseName );
 
@@ -212,9 +209,9 @@ class RenameDatabase extends Maintenance {
 		string $newDatabaseQuotes,
 		string $oldDatabaseName,
 		bool $dryRun
-	): array {
-		$tablesMoved = [];
-		$hasDPL3View = false;
+	): void {
+		$this->tablesMoved = [];
+		$this->hasDPL3View = false;
 		$tableNames = $dbw->newSelectQueryBuilder()
 			->select( 'TABLE_NAME' )
 			->from( 'information_schema.TABLES' )
