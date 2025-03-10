@@ -24,6 +24,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 2.0
  */
 
+use Exception;
 use MediaWiki\Extension\DynamicPageList3\Maintenance\CreateView;
 use MediaWiki\Maintenance\Maintenance;
 use Throwable;
@@ -140,7 +141,7 @@ class RenameDatabase extends Maintenance {
 		$rename = $wikiManager->rename( $newDatabaseName );
 
 		if ( $rename ) {
-			throw new Throwable( $rename );
+			throw new Exception( $rename );
 		}
 	}
 
