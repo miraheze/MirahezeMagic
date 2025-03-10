@@ -10,6 +10,9 @@ CreateWiki:
 DataDump:
   branch: master
   repo: https://github.com/miraheze/DataDump
+DynamicPageList3:
+  branch: master
+  repo: https://github.com/Universal-Omega/DynamicPageList3
 Echo:
   branch: auto
   repo: auto
