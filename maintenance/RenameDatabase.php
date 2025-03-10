@@ -60,7 +60,8 @@ class RenameDatabase extends Maintenance {
 		}
 
 		if ( !$dryRun ) {
-			$this->performWikiRename( $oldDatabaseName, $newDatabaseName );
+			$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName. If this is wrong, Ctrl-C now!\n" );
+			$this->countDown( 10 );
 		}
 
 		[ $cluster, $dbw ] = $this->getClusterAndDbw( $newDatabaseName );
@@ -84,6 +85,7 @@ class RenameDatabase extends Maintenance {
 			$this->createDPL3View( $newDatabaseName, $dryRun );
 
 			if ( !$dryRun ) {
+				$this->performWikiRename( $oldDatabaseName, $newDatabaseName );
 				$this->sendNotification( $oldDatabaseName, $newDatabaseName );
 			}
 		} catch ( Throwable $t ) {
@@ -94,6 +96,13 @@ class RenameDatabase extends Maintenance {
 				$oldDatabaseName, $newDatabaseName,
 				$errorMessage, $dryRun
 			);
+			if ( !$dryRun ) {
+				try {
+					$this->performWikiRename( $newDatabaseName, $oldDatabaseName );
+				} catch ( Throwable $t ) {
+					$this->output( "Rollback for CreateWiki rename failed: {$t->getMessage()}\n"
+				}
+			}
 			$this->fatalError( "Error during rename: $errorMessage" );
 		}
 	}
@@ -127,15 +136,12 @@ class RenameDatabase extends Maintenance {
 		string $oldDatabaseName,
 		string $newDatabaseName
 	): void {
-		$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName. If this is wrong, Ctrl-C now!\n" );
-		$this->countDown( 10 );
-
 		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
 		$wikiManager = $wikiManagerFactory->newInstance( $oldDatabaseName );
 		$rename = $wikiManager->rename( $newDatabaseName );
 
 		if ( $rename ) {
-			$this->fatalError( $rename );
+			throw new Throwable( $rename );
 		}
 	}
 
