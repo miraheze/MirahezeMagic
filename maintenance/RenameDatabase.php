@@ -88,13 +88,13 @@ class RenameDatabase extends Maintenance {
 			}
 		} catch ( Throwable $t ) {
 			$errorMessage = $t->getMessage();
-			$this->output( 'Error occurred: ' . $errorMessage . "\nAttempting rollback...\n" );
+			$this->output( "Error occurred: $errorMessage\nAttempting rollback...\n" );
 			$this->rollbackTables(
 				$dbw, $oldDatabaseQuotes, $newDatabaseQuotes,
 				$oldDatabaseName, $newDatabaseName,
 				$errorMessage, $dryRun
 			);
-			$this->fatalError( 'Error during rename: ' . $errorMessage );
+			$this->fatalError( "Error during rename: $errorMessage" );
 		}
 	}
 
@@ -256,7 +256,7 @@ class RenameDatabase extends Maintenance {
 				}
 			}
 		} catch ( Throwable $t ) {
-			$this->output( "Error occurred when creating dpl_clview on $newDatabaseName: " . $t->getMessage() . "\n" );
+			$this->output( "Error occurred when creating dpl_clview on $newDatabaseName: {$t->getMessage()}\n" );
 		}
 	}
 
@@ -308,8 +308,8 @@ class RenameDatabase extends Maintenance {
 				$this->output( "Rollback successful. You may need to DROP $newDatabaseName in order to try this again.\n" );
 			}
 		} catch ( Throwable $t ) {
-			$this->output( 'Rollback failed: ' . $t->getMessage() . "\n" );
-			$this->fatalError( 'Original error: ' . $errorMessage . '. Rollback error: ' . $t->getMessage() );
+			$this->output( "Rollback failed: {$t->getMessage()}\n" );
+			$this->fatalError( "Original error: $errorMessage. Rollback error: {$t->getMessage()}" );
 		}
 	}
 }
