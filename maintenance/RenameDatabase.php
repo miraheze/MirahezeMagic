@@ -21,7 +21,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup Maintenance
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
 use MediaWiki\Extension\DynamicPageList3\Maintenance\CreateView;
@@ -31,6 +31,9 @@ use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class RenameDatabase extends Maintenance {
+
+	private array $tablesMoved = [];
+	private bool $hasDPL3View = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -49,6 +52,9 @@ class RenameDatabase extends Maintenance {
 	}
 
 	public function execute(): void {
+		$this->tablesMoved = [];
+		$this->hasDPL3View = false;
+
 		[ $oldDatabaseName, $newDatabaseName, $dryRun ] = $this->parseAndValidateOptions();
 		$this->validateSuffixAndAlnum( $oldDatabaseName, $newDatabaseName );
 
@@ -70,9 +76,7 @@ class RenameDatabase extends Maintenance {
 		$tablesMoved = [];
 		try {
 			$this->createNewDatabase( $dbw, $newDatabaseQuotes, $dbCollation, $dryRun );
-			$moveResult = $this->moveTables( $dbw, $oldDatabaseQuotes, $newDatabaseQuotes, $oldDatabaseName, $dryRun );
-			$tablesMoved = $moveResult['tablesMoved'];
-			$hasDPL3View = $moveResult['hasDPL3View'];
+			$this->moveTables( $dbw, $oldDatabaseQuotes, $newDatabaseQuotes, $oldDatabaseName, $dryRun );
 
 			if ( $dryRun ) {
 				$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
@@ -80,7 +84,7 @@ class RenameDatabase extends Maintenance {
 				$this->output( "Database renamed successfully on cluster $cluster.\n" );
 			}
 
-			$this->createDPL3View( $newDatabaseName, $dryRun, $hasDPL3View );
+			$this->createDPL3View( $newDatabaseName, $dryRun );
 
 			if ( !$dryRun ) {
 				$this->sendNotification( $oldDatabaseName, $newDatabaseName );
@@ -89,8 +93,8 @@ class RenameDatabase extends Maintenance {
 			$errorMessage = $t->getMessage();
 			$this->output( 'Error occurred: ' . $errorMessage . "\nAttempting rollback...\n" );
 			$this->rollbackTables(
-				$dbw, $tablesMoved, $oldDatabaseQuotes,
-				$newDatabaseQuotes, $oldDatabaseName,
+				$dbw, $oldDatabaseQuotes, $newDatabaseQuotes,
+				$oldDatabaseName, $newDatabaseName,
 				$errorMessage, $dryRun
 			);
 			$this->fatalError( 'Error during rename: ' . $errorMessage );
@@ -220,7 +224,7 @@ class RenameDatabase extends Maintenance {
 
 		foreach ( $tableNames as $tableName ) {
 			if ( $tableName === 'dpl_clview' ) {
-				$hasDPL3View = true;
+				$this->hasDPL3View = true;
 				continue;
 			}
 
@@ -228,24 +232,21 @@ class RenameDatabase extends Maintenance {
 
 			if ( $dryRun ) {
 				$this->output( "DRY RUN: Would execute query: RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};\n" );
-				$tablesMoved[] = $tableName;
+				$this->tablesMoved[] = $tableName;
 			} else {
 				$this->output( "Moving table $tableName to $newDatabaseQuotes...\n" );
 				$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
-				$tablesMoved[] = $tableName;
+				$this->tablesMoved[] = $tableName;
 			}
 		}
-
-		return [ 'tablesMoved' => $tablesMoved, 'hasDPL3View' => $hasDPL3View ];
 	}
 
 	private function createDPL3View(
 		string $newDatabaseName,
-		bool $dryRun,
-		bool $hasDPL3View
+		bool $dryRun
 	): void {
 		try {
-			if ( $hasDPL3View && class_exists( CreateView::class ) ) {
+			if ( $this->hasDPL3View && class_exists( CreateView::class ) ) {
 				if ( $dryRun ) {
 					$this->output( "DRY RUN: Would execute view creation for dpl_clview on $newDatabaseName.\n" );
 				} else {
@@ -286,15 +287,15 @@ class RenameDatabase extends Maintenance {
 
 	private function rollbackTables(
 		DBConnRef $dbw,
-		array $tablesMoved,
 		string $oldDatabaseQuotes,
 		string $newDatabaseQuotes,
 		string $oldDatabaseName,
+		string $newDatabaseName,
 		string $errorMessage,
 		bool $dryRun
 	): void {
 		try {
-			foreach ( $tablesMoved as $tableName ) {
+			foreach ( $this->tablesMoved as $tableName ) {
 				$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
 				if ( $dryRun ) {
 					$this->output( "DRY RUN: Would rollback table $tableName to $oldDatabaseName...\n" );
