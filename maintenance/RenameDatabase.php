@@ -27,6 +27,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 use MediaWiki\Extension\DynamicPageList3\Maintenance\CreateView;
 use MediaWiki\Maintenance\Maintenance;
 use Throwable;
+use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class RenameDatabase extends Maintenance {
@@ -48,6 +49,55 @@ class RenameDatabase extends Maintenance {
 	}
 
 	public function execute(): void {
+		[ $oldDatabaseName, $newDatabaseName, $dryRun ] = $this->parseAndValidateOptions();
+		$this->validateSuffixAndAlnum( $oldDatabaseName, $newDatabaseName );
+
+		if ( $dryRun ) {
+			$this->output( "Dry run mode enabled. No changes will be made. Use --rename to actually perform the rename.\n" );
+		}
+
+		if ( !$dryRun ) {
+			$this->performWikiRename( $oldDatabaseName, $newDatabaseName );
+		}
+
+		[ $cluster, $dbw ] = $this->getClusterAndDbw( $newDatabaseName );
+		$this->verifyDatabaseExistence( $dbw, $oldDatabaseName, $newDatabaseName, $cluster );
+
+		$dbCollation = $this->getConfig()->get( 'CreateWikiCollation' );
+		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
+		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
+
+		$tablesMoved = [];
+		try {
+			$this->createNewDatabase( $dbw, $newDatabaseQuotes, $dbCollation, $dryRun );
+			$moveResult = $this->moveTables( $dbw, $oldDatabaseQuotes, $newDatabaseQuotes, $oldDatabaseName, $dryRun );
+			$tablesMoved = $moveResult['tablesMoved'];
+			$hasDPL3View = $moveResult['hasDPL3View'];
+
+			if ( $dryRun ) {
+				$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
+			} else {
+				$this->output( "Database renamed successfully on cluster $cluster.\n" );
+			}
+
+			$this->createDPL3View( $newDatabaseName, $dryRun, $hasDPL3View );
+
+			if ( !$dryRun ) {
+				$this->sendNotification( $oldDatabaseName, $newDatabaseName );
+			}
+		} catch ( Throwable $t ) {
+			$errorMessage = $t->getMessage();
+			$this->output( 'Error occurred: ' . $errorMessage . "\nAttempting rollback...\n" );
+			$this->rollbackTables(
+				$dbw, $tablesMoved, $oldDatabaseQuotes,
+				$newDatabaseQuotes, $oldDatabaseName,
+				$errorMessage, $dryRun
+			);
+			$this->fatalError( 'Error during rename: ' . $errorMessage );
+		}
+	}
+
+	private function parseAndValidateOptions(): array {
 		$oldDatabaseName = strtolower( $this->getOption( 'old' ) );
 		$newDatabaseName = strtolower( $this->getOption( 'new' ) );
 		$dryRun = !$this->hasOption( 'rename' );
@@ -56,40 +106,42 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( 'Both old and new database names are required.' );
 		}
 
-		if ( $dryRun ) {
-			$this->output( "Dry run mode enabled. No changes will be made. Use --rename to actually perform the rename.\n" );
-		}
+		return [ $oldDatabaseName, $newDatabaseName, $dryRun ];
+	}
 
+	private function validateSuffixAndAlnum(
+		string $oldDatabaseName,
+		string $newDatabaseName
+	): void {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 		if ( !str_ends_with( $oldDatabaseName, $suffix ) || !str_ends_with( $newDatabaseName, $suffix ) ) {
 			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it ends in an invalid suffix." );
 		}
-
 		if ( !ctype_alnum( $newDatabaseName ) ) {
 			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it contains non-alphanumeric characters." );
 		}
+	}
 
-		if ( $dryRun ) {
-			$this->output( "DRY RUN: Wiki $oldDatabaseName would be renamed to $newDatabaseName.\n" );
-		} else {
-			$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName. If this is wrong, Ctrl-C now!\n" );
+	private function performWikiRename(
+		string $oldDatabaseName,
+		string $newDatabaseName
+	): void {
+		$this->output( "Renaming database: $oldDatabaseName to $newDatabaseName. If this is wrong, Ctrl-C now!\n" );
+		$this->countDown( 10 );
 
-			// let's count down JUST to be safe!
-			$this->countDown( 10 );
+		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
+		$wikiManager = $wikiManagerFactory->newInstance( $oldDatabaseName );
+		$rename = $wikiManager->rename( $newDatabaseName );
 
-			$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
-			$wikiManager = $wikiManagerFactory->newInstance( $oldDatabaseName );
-			$rename = $wikiManager->rename( $newDatabaseName );
-
-			if ( $rename ) {
-				$this->fatalError( $rename );
-			}
+		if ( $rename ) {
+			$this->fatalError( $rename );
 		}
+	}
 
+	private function getClusterAndDbw( string $newDatabaseName ): array {
 		$dbr = $this->getServiceContainer()->getConnectionProvider()
 			->getReplicaDatabase( 'virtual-createwiki' );
 
-		// Fetch the specific cluster from cw_wikis based on the new database name
 		$cluster = $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
 			->field( 'wiki_dbcluster' )
@@ -101,14 +153,19 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Cluster for $newDatabaseName not found in cw_wikis." );
 		}
 
-		// Get the load balancer for the specific cluster
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
 		$loadBalancer = $dbLoadBalancerFactory->getAllMainLBs()[ $cluster ];
-
-		// Get the connection to the specific cluster that the wiki's database exists on
 		$dbw = $loadBalancer->getConnection( DB_PRIMARY, [], ILoadBalancer::DOMAIN_ANY );
 
-		// Check if the old database exists
+		return [ $cluster, $dbw ];
+	}
+
+	private function verifyDatabaseExistence(
+		DBConnRef $dbw,
+		string $oldDatabaseName,
+		string $newDatabaseName,
+		string $cluster
+	): void {
 		$oldDbExists = $dbw->newSelectQueryBuilder()
 			->from( 'information_schema.SCHEMATA' )
 			->field( 'SCHEMA_NAME' )
@@ -120,7 +177,6 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Database $oldDatabaseName does not exist on cluster $cluster." );
 		}
 
-		// Check if the new database already exists
 		$newDbExists = $dbw->newSelectQueryBuilder()
 			->from( 'information_schema.SCHEMATA' )
 			->field( 'SCHEMA_NAME' )
@@ -131,125 +187,131 @@ class RenameDatabase extends Maintenance {
 		if ( $newDbExists ) {
 			$this->fatalError( "Database $newDatabaseName already exists on cluster $cluster." );
 		}
+	}
 
-		$dbCollation = $this->getConfig()->get( 'CreateWikiCollation' );
-		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
-		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
+	private function createNewDatabase(
+		DBConnRef $dbw,
+		string $newDatabaseQuotes,
+		string $dbCollation,
+		bool $dryRun
+	): void {
+		if ( $dryRun ) {
+			$this->output( "DRY RUN: Would execute query: CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};\n" );
+		} else {
+			$dbw->query( "CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};", __METHOD__ );
+		}
+	}
 
-		// Track state for rollback
+	private function moveTables(
+		DBConnRef $dbw,
+		string $oldDatabaseQuotes,
+		string $newDatabaseQuotes,
+		string $oldDatabaseName,
+		bool $dryRun
+	): array {
 		$tablesMoved = [];
+		$hasDPL3View = false;
+		$tableNames = $dbw->newSelectQueryBuilder()
+			->select( 'TABLE_NAME' )
+			->from( 'information_schema.TABLES' )
+			->where( [ 'TABLE_SCHEMA' => $oldDatabaseName ] )
+			->caller( __METHOD__ )
+			->fetchFieldValues();
 
-		try {
-			// Create the new database
-			if ( $dryRun ) {
-				$this->output( "DRY RUN: Would execute query: CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};\n" );
-			} else {
-				$dbw->query( "CREATE DATABASE {$newDatabaseQuotes} {$dbCollation};", __METHOD__ );
+		foreach ( $tableNames as $tableName ) {
+			if ( $tableName === 'dpl_clview' ) {
+				$hasDPL3View = true;
+				continue;
 			}
 
-			// Fetch all tables in the old database
-			$tableNames = $dbw->newSelectQueryBuilder()
-				->select( 'TABLE_NAME' )
-				->from( 'information_schema.TABLES' )
-				->where( [ 'TABLE_SCHEMA' => $oldDatabaseName ] )
-				->caller( __METHOD__ )
-				->fetchFieldValues();
+			$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
 
-			// Track if we have the DPL3 view (dpl_clview)
-			$hasDPL3View = false;
+			if ( $dryRun ) {
+				$this->output( "DRY RUN: Would execute query: RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};\n" );
+				$tablesMoved[] = $tableName;
+			} else {
+				$this->output( "Moving table $tableName to $newDatabaseQuotes...\n" );
+				$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
+				$tablesMoved[] = $tableName;
+			}
+		}
 
-			// Rename each table to the new database
-			foreach ( $tableNames as $tableName ) {
-				// We can not use RENAME TABLE on the view, so for now we
-				// just skip it and track that then we recreate it on the
-				// new database afterwards.
-				if ( $tableName === 'dpl_clview' ) {
-					$hasDPL3View = true;
-					continue;
+		return [ 'tablesMoved' => $tablesMoved, 'hasDPL3View' => $hasDPL3View ];
+	}
+
+	private function createDPL3View(
+		string $newDatabaseName,
+		bool $dryRun,
+		bool $hasDPL3View
+	): void {
+		try {
+			if ( $hasDPL3View && class_exists( CreateView::class ) ) {
+				if ( $dryRun ) {
+					$this->output( "DRY RUN: Would execute view creation for dpl_clview on $newDatabaseName.\n" );
+				} else {
+					$createView = $this->createChild( CreateView::class );
+					'@phan-var CreateView $createView';
+					$createView->setDB( $this->getDB( DB_PRIMARY, [], $newDatabaseName ) );
+					$createView->setForce();
+					$createView->execute();
+					$this->output( "Successfully created dpl_clview on $newDatabaseName.\n" );
 				}
+			}
+		} catch ( Throwable $t ) {
+			$this->output( "Error occurred when creating dpl_clview on $newDatabaseName: " . $t->getMessage() . "\n" );
+		}
+	}
 
+	private function sendNotification(
+		string $oldDatabaseName,
+		string $newDatabaseName
+	): void {
+		$user = $this->getOption( 'user' );
+		$message = "Hello!\nThis is an automatic notification from CreateWiki notifying you that " .
+			"just now $user has renamed the following wiki from CreateWiki and " .
+			"associated extensions - From $oldDatabaseName to $newDatabaseName.";
+
+		$notificationData = [
+			'type' => 'wiki-rename',
+			'subject' => 'Wiki Rename Notification',
+			'body' => $message,
+		];
+
+		$this->getServiceContainer()->get( 'CreateWikiNotificationsManager' )
+			->sendNotification(
+				data: $notificationData,
+				receivers: []
+			);
+	}
+
+	private function rollbackTables(
+		DBConnRef $dbw,
+		array $tablesMoved,
+		string $oldDatabaseQuotes,
+		string $newDatabaseQuotes,
+		string $oldDatabaseName,
+		string $errorMessage,
+		bool $dryRun
+	): void {
+		try {
+			foreach ( $tablesMoved as $tableName ) {
 				$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
 				if ( $dryRun ) {
-					$this->output( "DRY RUN: Would execute query: RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};\n" );
-					$tablesMoved[] = $tableName;
+					$this->output( "DRY RUN: Would rollback table $tableName to $oldDatabaseName...\n" );
 				} else {
-					$this->output( "Moving table $tableName to $newDatabaseName...\n" );
-					$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
-					$tablesMoved[] = $tableName;
+					$this->output( "Rolling back table $tableName to $oldDatabaseName...\n" );
+					$dbw->query( "RENAME TABLE {$newDatabaseQuotes}.{$tableQuotes} TO {$oldDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
 				}
 			}
 
 			if ( $dryRun ) {
-				$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
+				$this->output( "DRY RUN: Rollback simulation complete. You may need to DROP $newDatabaseName in order to try this again.\n" );
 			} else {
-				$this->output( "Database renamed successfully on cluster $cluster.\n" );
+				$this->output( "Rollback successful. You may need to DROP $newDatabaseName in order to try this again.\n" );
 			}
-
-			try {
-				if ( $hasDPL3View && class_exists( CreateView::class ) ) {
-					if ( $dryRun ) {
-						$this->output( "DRY RUN: Would execute view creation for dpl_clview on $newDatabaseName.\n" );
-					} else {
-						$createView = $this->createChild( CreateView::class );
-						'@phan-var CreateView $createView';
-
-						$createView->setDB( $this->getDB( DB_PRIMARY, [], $newDatabaseName ) );
-						$createView->setForce();
-						$createView->execute();
-
-						$this->output( "Successfully created dpl_clview on $newDatabaseName.\n" );
-					}
-				}
-			} catch ( Throwable $viewError ) {
-				$this->output( "Error occurred when creating dpl_clview on $newDatabaseName: " . $viewError->getMessage() . "\n" );
-			}
-
-			if ( !$dryRun ) {
-				$user = $this->getOption( 'user' );
-
-				$message = "Hello!\nThis is an automatic notification from CreateWiki notifying you that " .
-					"just now $user has renamed the following wiki from CreateWiki and " .
-					"associated extensions - From $oldDatabaseName to $newDatabaseName.";
-
-				$notificationData = [
-					'type' => 'wiki-rename',
-					'subject' => 'Wiki Rename Notification',
-					'body' => $message,
-				];
-
-				$this->getServiceContainer()->get( 'CreateWikiNotificationsManager' )
-					->sendNotification(
-						data: $notificationData,
-						// No receivers, it will send to configured email
-						receivers: []
-					);
-			}
-		} catch ( Throwable $e ) {
-			$this->output( 'Error occurred: ' . $e->getMessage() . "\nAttempting rollback...\n" );
-
-			try {
-				// Rollback any moved tables
-				foreach ( $tablesMoved as $tableName ) {
-					$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
-					if ( $dryRun ) {
-						$this->output( "DRY RUN: Would rollback table $tableName to $oldDatabaseName...\n" );
-					} else {
-						$this->output( "Rolling back table $tableName to $oldDatabaseName...\n" );
-						$dbw->query( "RENAME TABLE {$newDatabaseQuotes}.{$tableQuotes} TO {$oldDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
-					}
-				}
-
-				if ( $dryRun ) {
-					$this->output( "DRY RUN: Rollback simulation complete. You may need to DROP $newDatabaseName in order to try this again.\n" );
-				} else {
-					$this->output( "Rollback successful. You may need to DROP $newDatabaseName in order to try this again.\n" );
-				}
-			} catch ( Throwable $rollbackError ) {
-				$this->output( 'Rollback failed: ' . $rollbackError->getMessage() . "\n" );
-				$this->fatalError( 'Original error: ' . $e->getMessage() . '. Rollback error: ' . $rollbackError->getMessage() );
-			}
-
-			$this->fatalError( 'Error during rename: ' . $e->getMessage() );
+		} catch ( Throwable $t ) {
+			$this->output( 'Rollback failed: ' . $t->getMessage() . "\n" );
+			$this->fatalError( 'Original error: ' . $errorMessage . '. Rollback error: ' . $t->getMessage() );
 		}
 	}
 }
