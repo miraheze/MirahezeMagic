@@ -65,7 +65,7 @@ class RenameDatabase extends Maintenance {
 			$this->countDown( 10 );
 		}
 
-		[ $cluster, $dbw ] = $this->getClusterAndDbw( $newDatabaseName );
+		[ $cluster, $dbw ] = $this->getClusterAndDbw( $oldDatabaseName );
 		$this->verifyDatabaseExistence( $dbw, $oldDatabaseName, $newDatabaseName, $cluster );
 
 		$dbCollation = $this->getConfig()->get( 'CreateWikiCollation' );
@@ -145,19 +145,19 @@ class RenameDatabase extends Maintenance {
 		}
 	}
 
-	private function getClusterAndDbw( string $newDatabaseName ): array {
+	private function getClusterAndDbw( string $oldDatabaseName ): array {
 		$dbr = $this->getServiceContainer()->getConnectionProvider()
 			->getReplicaDatabase( 'virtual-createwiki' );
 
 		$cluster = $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
 			->field( 'wiki_dbcluster' )
-			->where( [ 'wiki_dbname' => $newDatabaseName ] )
+			->where( [ 'wiki_dbname' => $oldDatabaseName ] )
 			->caller( __METHOD__ )
 			->fetchField();
 
 		if ( !$cluster ) {
-			$this->fatalError( "Cluster for $newDatabaseName not found in cw_wikis." );
+			$this->fatalError( "Cluster for $oldDatabaseName not found in cw_wikis." );
 		}
 
 		$dbLoadBalancerFactory = $this->getServiceContainer()->getDBLoadBalancerFactory();
