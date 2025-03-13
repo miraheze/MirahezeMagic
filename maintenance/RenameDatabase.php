@@ -82,8 +82,6 @@ class RenameDatabase extends Maintenance {
 				$this->output( "Database renamed successfully on cluster $cluster.\n" );
 			}
 
-			$this->createDPL3View( $newDatabaseName, $dryRun );
-
 			if ( !$dryRun ) {
 				$this->performWikiRename( $oldDatabaseName, $newDatabaseName );
 				$this->sendNotification( $oldDatabaseName, $newDatabaseName );
@@ -105,6 +103,8 @@ class RenameDatabase extends Maintenance {
 			}
 			$this->fatalError( "Error during rename: $errorMessage" );
 		}
+
+		$this->createDPL3View( $newDatabaseName, $dryRun );
 	}
 
 	private function parseAndValidateOptions(): array {
