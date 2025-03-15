@@ -154,7 +154,7 @@ class CheckWikiDatabases extends Maintenance {
 		$missingInCluster = [];
 
 		foreach ( $tablesToCheck as $database => $tables ) {
-			if ( $database === false ) {
+			if ( !is_string( $database ) ) {
 				continue;
 			}
 
