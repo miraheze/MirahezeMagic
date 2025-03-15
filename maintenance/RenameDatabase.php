@@ -24,7 +24,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 2.0
  */
 
-use MediaWiki\Extension\DynamicPageList3\Maintenance\CreateView;
 use MediaWiki\Maintenance\Maintenance;
 use RuntimeException;
 use Throwable;
@@ -104,7 +103,12 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Error during rename: $errorMessage" );
 		}
 
-		$this->createDPL3View( $newDatabaseName, $dryRun );
+		$this->createDPL3View(
+			$dbw,
+			$oldDatabaseName,
+			$newDatabaseQuotes,
+			$dryRun
+		);
 	}
 
 	private function parseAndValidateOptions(): array {
@@ -245,24 +249,39 @@ class RenameDatabase extends Maintenance {
 	}
 
 	private function createDPL3View(
-		string $newDatabaseName,
+		DBConnRef $dbw,
+		string $oldDatabaseName,
+		string $newDatabaseQuotes,
 		bool $dryRun
 	): void {
 		try {
-			if ( $this->hasDPL3View && class_exists( CreateView::class ) ) {
+			if ( $this->hasDPL3View ) {
+				$viewDefinition = $dbw->newSelectQueryBuilder()
+					->select( 'VIEW_DEFINITION' )
+					->from( 'information_schema.VIEWS' )
+					->where( [
+						'TABLE_SCHEMA' => $oldDatabaseName,
+						'TABLE_NAME' => 'dpl_clview',
+					] )
+					->caller( __METHOD__ )
+					->fetchField();
+
+				if ( !$viewDefinition ) {
+					$this->output( "Skipping creating 'dpl_clview': Could not retrieve definition.\n" );
+					return;
+				}
+
+				$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
+
 				if ( $dryRun ) {
-					$this->output( "DRY RUN: Would execute view creation for dpl_clview on $newDatabaseName.\n" );
+					$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
 				} else {
-					$createView = $this->createChild( CreateView::class );
-					'@phan-var CreateView $createView';
-					$createView->setDB( $this->getDB( DB_PRIMARY, [], $newDatabaseName ) );
-					$createView->setForce();
-					$createView->execute();
-					$this->output( "Successfully created dpl_clview on $newDatabaseName.\n" );
+					$this->output( "Recreating view 'dpl_clview' in $newDatabaseQuotes...\n" );
+					$dbw->query( $createViewSQL, __METHOD__ );
 				}
 			}
 		} catch ( Throwable $t ) {
-			$this->output( "Error occurred when creating dpl_clview on $newDatabaseName: {$t->getMessage()}\n" );
+			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseQuotes: {$t->getMessage()}\n" );
 		}
 	}
 
