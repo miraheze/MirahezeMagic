@@ -256,32 +256,34 @@ class RenameDatabase extends Maintenance {
 		string $newDatabaseQuotes,
 		bool $dryRun
 	): void {
+		if ( !$this->hasDPL3View ) {
+			return;
+		}
+
 		try {
-			if ( $this->hasDPL3View ) {
-				$viewDefinition = $dbw->newSelectQueryBuilder()
-					->select( 'VIEW_DEFINITION' )
-					->from( 'information_schema.VIEWS' )
-					->where( [
-						'TABLE_SCHEMA' => $oldDatabaseName,
-						'TABLE_NAME' => 'dpl_clview',
-					] )
-					->caller( __METHOD__ )
-					->fetchField();
+			$viewDefinition = $dbw->newSelectQueryBuilder()
+				->select( 'VIEW_DEFINITION' )
+				->from( 'information_schema.VIEWS' )
+				->where( [
+					'TABLE_SCHEMA' => $oldDatabaseName,
+					'TABLE_NAME' => 'dpl_clview',
+				] )
+				->caller( __METHOD__ )
+				->fetchField();
 
-				if ( !$viewDefinition ) {
-					$this->output( "Skipping creating 'dpl_clview': Could not retrieve definition.\n" );
-					return;
-				}
+			if ( !$viewDefinition ) {
+				$this->output( "Skipping creating 'dpl_clview': Could not retrieve definition.\n" );
+				return;
+			}
 
-				$viewDefinition = str_replace( $oldDatabaseName, $newDatabaseName, $viewDefinition );
-				$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
+			$viewDefinition = str_replace( $oldDatabaseName, $newDatabaseName, $viewDefinition );
+			$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 
-				if ( $dryRun ) {
-					$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
-				} else {
-					$this->output( "Recreating view 'dpl_clview' in $newDatabaseName...\n" );
-					$dbw->query( $createViewSQL, __METHOD__ );
-				}
+			if ( $dryRun ) {
+				$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
+			} else {
+				$this->output( "Recreating view 'dpl_clview' in $newDatabaseName...\n" );
+				$dbw->query( $createViewSQL, __METHOD__ );
 			}
 		} catch ( Throwable $t ) {
 			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseName: {$t->getMessage()}\n" );
