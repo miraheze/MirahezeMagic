@@ -138,6 +138,7 @@ class RenameDatabase extends Maintenance {
 		if ( !str_ends_with( $oldDatabaseName, $suffix ) || !str_ends_with( $newDatabaseName, $suffix ) ) {
 			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it ends in an invalid suffix." );
 		}
+
 		if ( !ctype_alnum( $newDatabaseName ) ) {
 			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it contains non-alphanumeric characters." );
 		}
