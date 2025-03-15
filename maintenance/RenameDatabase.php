@@ -33,6 +33,7 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class RenameDatabase extends Maintenance {
 
 	private array $tablesMoved = [];
+	private bool $hasCargoDB = false;
 	private bool $hasDPL3View = false;
 
 	public function __construct() {
@@ -110,6 +111,10 @@ class RenameDatabase extends Maintenance {
 			$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
 		} else {
 			$this->output( "Database renamed successfully on cluster $cluster.\n" );
+		}
+
+		if ( $this->hasCargoDB ) {
+			$this->output( "Found Cargo database: {$oldDatabaseName}cargo. It was not renamed, you may need to rename it manually.\n" );
 		}
 	}
 
@@ -200,6 +205,14 @@ class RenameDatabase extends Maintenance {
 		if ( $newDbExists ) {
 			$this->fatalError( "Database $newDatabaseName already exists on cluster $cluster." );
 		}
+
+		// Check for cargo database
+		$this->hasCargoDB = (bool)$dbw->newSelectQueryBuilder()
+			->from( 'information_schema.SCHEMATA' )
+			->field( 'SCHEMA_NAME' )
+			->where( [ 'SCHEMA_NAME' => $oldDatabaseName . 'cargo' ] )
+			->caller( __METHOD__ )
+			->fetchField();
 	}
 
 	private function createNewDatabase(
