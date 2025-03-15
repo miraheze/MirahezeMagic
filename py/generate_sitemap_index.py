@@ -52,7 +52,7 @@ def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
     down_attempts = 1
 
     for count, wiki_data in enumerate(wikis, start=1):
-        wiki = wiki_data["dbname"]
+        wiki = wiki_data['dbname']
         sitemap_url = f'https://static.wikitide.net/{wiki}/sitemaps/sitemap.xml'
 
         print(f'[{count}/{len(wikis)}] Fetching: {sitemap_url}')
