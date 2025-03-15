@@ -6,40 +6,43 @@ import argparse
 from swiftclient import Connection
 from time import sleep
 
+
 def get_arguments() -> argparse.Namespace:
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
         description=(
-            "Generate sitemap index of all public wikis "
+            'Generate sitemap index of all public wikis '
             "and upload it to the 'root' container in Swift."
-        )
+        ),
     )
     parser.add_argument(
-        "-A", "--auth", default=os.environ.get("ST_AUTH"),
-        help="Swift authentication URL (ST_AUTH)"
+        '-A', '--auth', default=os.environ.get('ST_AUTH'),
+        help='Swift authentication URL (ST_AUTH)',
     )
     parser.add_argument(
-        "-U", "--user", default=os.environ.get("ST_USER"),
-        help="Swift authentication user (ST_USER)"
+        '-U', '--user', default=os.environ.get('ST_USER'),
+        help='Swift authentication user (ST_USER)',
     )
     parser.add_argument(
-        "-K", "--key", default=os.environ.get("ST_KEY"),
-        help="Swift authentication key (ST_KEY)"
+        '-K', '--key', default=os.environ.get('ST_KEY'),
+        help='Swift authentication key (ST_KEY)',
     )
     return parser.parse_args()
 
+
 def fetch_wiki_list() -> list[dict]:
     """Fetch the list of public Miraheze wikis."""
-    url = "https://meta.miraheze.org/w/api.php"
+    url = 'https://meta.miraheze.org/w/api.php'
     params = {
-        "action": "wikidiscover",
-        "format": "json",
-        "wdstate": "public",
-        "wdsiteprop": "dbname",
+        'action': 'wikidiscover',
+        'format': 'json',
+        'wdstate': 'public',
+        'wdsiteprop': 'dbname',
     }
     response = requests.get(url, params=params)
     response.raise_for_status()
-    return response.json().get("wikidiscover", [])
+    return response.json().get('wikidiscover', [])
+
 
 def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
     """Retrieve sitemap URLs from each wiki."""
@@ -50,23 +53,23 @@ def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
 
     for count, wiki_data in enumerate(wikis, start=1):
         wiki = wiki_data["dbname"]
-        sitemap_url = f"https://static.wikitide.net/{wiki}/sitemaps/sitemap.xml"
+        sitemap_url = f'https://static.wikitide.net/{wiki}/sitemaps/sitemap.xml'
         
-        print(f"[{count}/{len(wikis)}] Fetching: {sitemap_url}")
+        print(f'[{count}/{len(wikis)}] Fetching: {sitemap_url}')
 
         while True:
             response = session.get(sitemap_url)
 
             if response.status_code == 429:  # Rate limited
                 backoff_time = 1 + rate_limit_backoff
-                print(f"Rate-limited on {wiki}, retrying in {backoff_time} seconds...")
+                print(f'Rate-limited on {wiki}, retrying in {backoff_time} seconds...')
                 sleep(backoff_time)
                 rate_limit_backoff += 1
                 continue
 
             if response.status_code in {502, 503}:  # Server is down
                 wait_time = 3 * down_attempts
-                print(f"Server error on {wiki}, retrying in {wait_time} seconds...")
+                print(f'Server error on {wiki}, retrying in {wait_time} seconds...')
                 sleep(wait_time)
                 down_attempts += 1
                 continue
@@ -75,51 +78,55 @@ def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
 
         try:
             sitemap_data = xmltodict.parse(response.content)
-            sitemap_entries = sitemap_data.get("sitemapindex", {}).get("sitemap", [])
+            sitemap_entries = sitemap_data.get('sitemapindex', {}).get('sitemap', [])
             if isinstance(sitemap_entries, dict):  # Handle single entry case
-                sitemaps.append(sitemap_entries["loc"])
+                sitemaps.append(sitemap_entries['loc'])
             else:
-                sitemaps.extend(entry["loc"] for entry in sitemap_entries if "loc" in entry)
+                sitemaps.extend(entry['loc'] for entry in sitemap_entries if 'loc' in entry)
 
         except Exception as e:
-            print(f"Error processing {sitemap_url}: {e}")
+            print(f'Error processing {sitemap_url}: {e}')
 
         sleep(0.5)  # Prevent overwhelming the server
 
     return sitemaps
 
+
 def generate_sitemap_index(sitemaps: list[str]) -> str:
     """Generate XML sitemap index content."""
-    timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
-    sitemap_entries = "\n".join(
-        f"\t<sitemap>\n\t\t<loc>{loc}</loc>\n\t\t<lastmod>{timestamp}</lastmod>\n\t</sitemap>"
+    timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    sitemap_entries = '\n'.join(
+        f'\t<sitemap>\n\t\t<loc>{loc}</loc>\n\t\t<lastmod>{timestamp}</lastmod>\n\t</sitemap>'
         for loc in sitemaps
     )
     return f'<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{sitemap_entries}\n</sitemapindex>'
 
+
 def upload_to_swift(auth: str, user: str, key: str, content: str) -> None:
     """Upload generated sitemap index to Swift storage."""
     conn = Connection(auth, user, key, retry_on_ratelimit=True)
-    conn.put_object("root", "sitemap.xml", contents=content, content_type="application/xml")
-    print("Upload complete.")
+    conn.put_object('root', 'sitemap.xml', contents=content, content_type='application/xml')
+    print('Upload complete.')
+
 
 def main():
     args = get_arguments()
-    print("Fetching wiki list...")
+    print('Fetching wiki list...')
     wikis = fetch_wiki_list()
-    print(f"Retrieved {len(wikis)} wikis.")
+    print(f'Retrieved {len(wikis)} wikis.')
 
-    print("Fetching sitemaps...")
+    print('Fetching sitemaps...')
     sitemap_urls = fetch_sitemap_urls(wikis)
-    print(f"Retrieved {len(sitemap_urls)} sitemaps.")
+    print(f'Retrieved {len(sitemap_urls)} sitemaps.')
 
-    print("Generating sitemap index...")
+    print('Generating sitemap index...')
     sitemap_index_content = generate_sitemap_index(sitemap_urls)
 
-    print("Uploading to Swift...")
+    print('Uploading to Swift...')
     upload_to_swift(args.auth, args.user, args.key, sitemap_index_content)
 
-    print("Done.")
+    print('Done.')
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
