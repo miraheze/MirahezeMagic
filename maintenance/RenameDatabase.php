@@ -99,9 +99,10 @@ class RenameDatabase extends Maintenance {
 
 		$this->createDPL3View(
 			$dbw,
+			$oldDatabaseQuotes,
+			$newDatabaseQuotes,
 			$oldDatabaseName,
 			$newDatabaseName,
-			$newDatabaseQuotes,
 			$dryRun
 		);
 
@@ -251,9 +252,10 @@ class RenameDatabase extends Maintenance {
 
 	private function createDPL3View(
 		DBConnRef $dbw,
+		string $oldDatabaseQuotes,
+		string $newDatabaseQuotes,
 		string $oldDatabaseName,
 		string $newDatabaseName,
-		string $newDatabaseQuotes,
 		bool $dryRun
 	): void {
 		if ( !$this->hasDPL3View ) {
@@ -276,7 +278,7 @@ class RenameDatabase extends Maintenance {
 				return;
 			}
 
-			$viewDefinition = str_replace( $oldDatabaseName, $newDatabaseName, $viewDefinition );
+			$viewDefinition = str_replace( $oldDatabaseQuotes, $newDatabaseQuotes, $viewDefinition );
 			$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 
 			if ( $dryRun ) {
