@@ -25,6 +25,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\CreateWiki\ConfigNames;
 use RuntimeException;
 use Throwable;
 use Wikimedia\Rdbms\DBConnRef;
@@ -68,7 +69,7 @@ class RenameDatabase extends Maintenance {
 		[ $cluster, $dbw ] = $this->getClusterAndDbw( $oldDatabaseName );
 		$this->verifyDatabaseExistence( $dbw, $oldDatabaseName, $newDatabaseName, $cluster );
 
-		$dbCollation = $this->getConfig()->get( 'CreateWikiCollation' );
+		$dbCollation = $this->getConfig()->get( ConfigNames::Collation );
 		$oldDatabaseQuotes = $dbw->addIdentifierQuotes( $oldDatabaseName );
 		$newDatabaseQuotes = $dbw->addIdentifierQuotes( $newDatabaseName );
 
@@ -140,7 +141,7 @@ class RenameDatabase extends Maintenance {
 		string $oldDatabaseName,
 		string $newDatabaseName
 	): void {
-		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
+		$suffix = $this->getConfig()->get( ConfigNames::DatabaseSuffix );
 		if ( !str_ends_with( $oldDatabaseName, $suffix ) || !str_ends_with( $newDatabaseName, $suffix ) ) {
 			$this->fatalError( "ERROR: Cannot rename $oldDatabaseName to $newDatabaseName because it ends in an invalid suffix." );
 		}
@@ -164,8 +165,8 @@ class RenameDatabase extends Maintenance {
 	}
 
 	private function getClusterAndDbw( string $oldDatabaseName ): array {
-		$dbr = $this->getServiceContainer()->getConnectionProvider()
-			->getReplicaDatabase( 'virtual-createwiki' );
+		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
+		$dbr = $databaseUtils->getGlobalReplicaDB();
 
 		$cluster = $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
