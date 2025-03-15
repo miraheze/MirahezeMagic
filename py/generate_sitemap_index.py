@@ -31,7 +31,7 @@ def get_arguments() -> argparse.Namespace:
 
 
 def fetch_wiki_list() -> list[dict]:
-    """Fetch the list of public Miraheze wikis."""
+    """Fetch the list of public wikis from WikiDiscover."""
     url = 'https://meta.miraheze.org/w/api.php'
     params = {
         'action': 'wikidiscover',
