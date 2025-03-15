@@ -279,13 +279,13 @@ class RenameDatabase extends Maintenance {
 			}
 
 			$viewDefinition = str_replace( $oldDatabaseQuotes, $newDatabaseQuotes, $viewDefinition );
-			$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 
 			if ( $dryRun ) {
+				$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 				$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
 			} else {
 				$this->output( "Recreating view 'dpl_clview' in $newDatabaseName...\n" );
-				$dbw->query( $createViewSQL, __METHOD__ );
+				$dbw->query( "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;", __METHOD__ );
 			}
 		} catch ( Throwable $t ) {
 			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseName: {$t->getMessage()}\n" );
