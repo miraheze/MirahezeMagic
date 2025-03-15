@@ -279,13 +279,16 @@ class RenameDatabase extends Maintenance {
 			}
 
 			$viewDefinition = str_replace( $oldDatabaseQuotes, $newDatabaseQuotes, $viewDefinition );
+			$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 
 			if ( $dryRun ) {
-				$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 				$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
 			} else {
 				$this->output( "Recreating view 'dpl_clview' in $newDatabaseName...\n" );
-				$dbw->query( "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;", __METHOD__ );
+				// Since we are copying from one database to another,
+				// this should be a false positive.
+				// @phan-suppress-next-line SecurityCheck-SQLInjection
+				$dbw->query( $createViewSQL, __METHOD__ );
 			}
 		} catch ( Throwable $t ) {
 			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseName: {$t->getMessage()}\n" );
