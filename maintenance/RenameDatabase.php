@@ -75,12 +75,6 @@ class RenameDatabase extends Maintenance {
 			$this->createNewDatabase( $dbw, $newDatabaseQuotes, $dbCollation, $dryRun );
 			$this->moveTables( $dbw, $oldDatabaseQuotes, $newDatabaseQuotes, $oldDatabaseName, $dryRun );
 
-			if ( $dryRun ) {
-				$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
-			} else {
-				$this->output( "Database renamed successfully on cluster $cluster.\n" );
-			}
-
 			if ( !$dryRun ) {
 				$this->performWikiRename( $oldDatabaseName, $newDatabaseName );
 				$this->sendNotification( $oldDatabaseName, $newDatabaseName );
@@ -110,6 +104,12 @@ class RenameDatabase extends Maintenance {
 			$newDatabaseQuotes,
 			$dryRun
 		);
+
+		if ( $dryRun ) {
+			$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
+		} else {
+			$this->output( "Database renamed successfully on cluster $cluster.\n" );
+		}
 	}
 
 	private function parseAndValidateOptions(): array {
