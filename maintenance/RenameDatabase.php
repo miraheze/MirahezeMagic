@@ -299,7 +299,7 @@ class RenameDatabase extends Maintenance {
 		string $oldDatabaseName,
 		string $newDatabaseName
 	): void {
-		$user = $this->getOption( 'user' );
+		$user = str_replace( '_', ' ', $this->getOption( 'user' ) );
 		$message = "Hello!\nThis is an automatic notification from CreateWiki notifying you that " .
 			"just now $user has renamed the following wiki from CreateWiki and " .
 			"associated extensions - From $oldDatabaseName to $newDatabaseName.";
