@@ -114,7 +114,13 @@ class CheckWikiDatabases extends Maintenance {
 
 		$missingDatabases = [];
 		foreach ( $wikiDatabases as $dbName => $cluster ) {
-			$trimmed = rtrim( $dbName, 'cargo' );
+			$trimmed = $dbName;
+
+			// Trim cargo from dbName if present
+			if ( str_ends_with( $dbName, 'cargo' ) ) {
+				$trimmed = substr( $dbName, 0, -strlen( 'cargo' ) );
+			}
+
 			$result = $dbr->newSelectQueryBuilder()
 				->select( [ 'wiki_dbname' ] )
 				->from( 'cw_wikis' )
