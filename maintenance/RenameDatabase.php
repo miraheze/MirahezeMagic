@@ -109,12 +109,18 @@ class RenameDatabase extends Maintenance {
 
 		if ( $dryRun ) {
 			$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
-		} else {
-			$this->output( "Database renamed successfully on cluster $cluster.\n" );
+
+			if ( $this->hasCargoDB ) {
+				$this->output( "Found Cargo database: {$oldDatabaseName}cargo. It will not be renamed; you may need to rename it manually.\n" );
+			}
+
+			return;
 		}
 
+		$this->output( "Database renamed successfully on cluster $cluster.\n" );
+
 		if ( $this->hasCargoDB ) {
-			$this->output( "Found Cargo database: {$oldDatabaseName}cargo. It was not renamed, you may need to rename it manually.\n" );
+			$this->output( "Found Cargo database: {$oldDatabaseName}cargo. It was not renamed; you may need to rename it manually.\n" );
 		}
 	}
 
