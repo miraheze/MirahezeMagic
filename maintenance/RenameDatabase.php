@@ -294,7 +294,7 @@ class RenameDatabase extends Maintenance {
 				->fetchField();
 
 			if ( !$viewDefinition ) {
-				$this->output( "Skipping creating 'dpl_clview': Could not retrieve definition.\n" );
+				$this->output( ( $dryRun ? 'DRY RUN: ' : '' ) . "Skipping creating 'dpl_clview': Could not retrieve definition.\n" );
 				return;
 			}
 
