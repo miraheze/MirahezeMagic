@@ -106,6 +106,7 @@ class RenameDatabase extends Maintenance {
 		$this->createDPL3View(
 			$dbw,
 			$oldDatabaseName,
+			$newDatabaseName,
 			$newDatabaseQuotes,
 			$dryRun
 		);
@@ -251,6 +252,7 @@ class RenameDatabase extends Maintenance {
 	private function createDPL3View(
 		DBConnRef $dbw,
 		string $oldDatabaseName,
+		string $newDatabaseName,
 		string $newDatabaseQuotes,
 		bool $dryRun
 	): void {
@@ -271,17 +273,18 @@ class RenameDatabase extends Maintenance {
 					return;
 				}
 
+				$viewDefinition = str_replace( $oldDatabaseName, $newDatabaseName, $viewDefinition );
 				$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
 
 				if ( $dryRun ) {
 					$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
 				} else {
-					$this->output( "Recreating view 'dpl_clview' in $newDatabaseQuotes...\n" );
+					$this->output( "Recreating view 'dpl_clview' in $newDatabaseName...\n" );
 					$dbw->query( $createViewSQL, __METHOD__ );
 				}
 			}
 		} catch ( Throwable $t ) {
-			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseQuotes: {$t->getMessage()}\n" );
+			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseName: {$t->getMessage()}\n" );
 		}
 	}
 
