@@ -154,6 +154,10 @@ class CheckWikiDatabases extends Maintenance {
 		$missingInCluster = [];
 
 		foreach ( $tablesToCheck as $database => $tables ) {
+			if ( $database === false ) {
+				continue;
+			}
+
 			$dbr = $this->getServiceContainer()->getConnectionProvider()
 				->getReplicaDatabase( $database );
 
