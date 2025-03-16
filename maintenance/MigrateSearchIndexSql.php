@@ -52,7 +52,6 @@ class MigrateSearchIndexSql extends Maintenance {
 		}
 
 		$mwSql = $this->createChild( MwSql::class );
-
 		$mwSql->setArg( 0, MW_INSTALL_PATH . '/maintenance/archives/patch-searchindex-pk-titlelength.sql' );
 		$mwSql->execute();
 	}
