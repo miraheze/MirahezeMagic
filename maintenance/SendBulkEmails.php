@@ -408,10 +408,6 @@ class SendBulkEmails extends Maintenance {
 		}
 		return $list;
 	}
-
-	public function getDbType() {
-		return self::DB_NONE;
-	}
 }
 
 // @codeCoverageIgnoreStart
