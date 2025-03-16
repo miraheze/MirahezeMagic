@@ -99,7 +99,7 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Error during rename: $errorMessage" );
 		}
 
-		$this->createDPL3View(
+		$this->recreateDPL3View(
 			$dbw,
 			$oldDatabaseQuotes,
 			$newDatabaseQuotes,
@@ -271,7 +271,7 @@ class RenameDatabase extends Maintenance {
 		}
 	}
 
-	private function createDPL3View(
+	private function recreateDPL3View(
 		DBConnRef $dbw,
 		string $oldDatabaseQuotes,
 		string $newDatabaseQuotes,
