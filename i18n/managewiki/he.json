@@ -206,7 +206,7 @@
 	"managewiki-setting-wgMetrolookBartile-name": "מטרולוק – Bartile",
 	"managewiki-setting-wgMetrolookBartile-help": "כשמופעלים \"Metrolook Arrow Down\" ו־\"Metrolook Bartile\", תפריט האריחים יחולל מההודעה [[MediaWiki:Metrolook-tiles]]. אם \"Metrolook Arrow Down\" ו־\"Metrolook Bartile\" אינם מופעלים, תפריט האריחים יופק מההודעה [[MediaWiki:Metrolook-tiles-second]].",
 	"managewiki-setting-wgMetrolookMobile-name": "מטרולוק ניידים",
-	"managewiki-setting-wgMetrolookMobile-help": "כשזה מופעל, ממשק המשתמש יהיה יסתגל למכשירים ניידים.",
+	"managewiki-setting-wgMetrolookMobile-help": "כשזה מופעל, ממשק המשתמש יסתגל למכשירים ניידים.",
 	"managewiki-setting-wgMetrolookUseIconWatch-name": "מעקב בתור סמל במטרולוק",
 	"managewiki-setting-wgMetrolookUseIconWatch-help": "כשזה מופעל, הוא משתמש בסמל עבור כפתור המעקב וביטול המעקב.",
 	"managewiki-setting-wgMetrolookLine-name": "מטרולוק – קו",
