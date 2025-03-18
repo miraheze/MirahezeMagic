@@ -30,7 +30,7 @@ def get_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def fetch_wiki_list() -> list[dict]:
+def fetch_wiki_list(session: requests.Session) -> list[dict]:
     """Fetch the list of public wikis from WikiDiscover."""
     url = 'https://meta.miraheze.org/w/api.php'
     params = {
@@ -39,14 +39,13 @@ def fetch_wiki_list() -> list[dict]:
         'wdstate': 'public',
         'wdsiteprop': 'dbname',
     }
-    response = requests.get(url, params=params)
+    response = session.get(url, params=params)
     response.raise_for_status()
     return response.json().get('wikidiscover', [])
 
 
-def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
+def fetch_sitemap_urls(session: requests.Session, wikis: list[dict]) -> list[str]:
     """Retrieve sitemap URLs from each wiki."""
-    session = requests.Session()
     sitemaps = []
     rate_limit_backoff = 0
     down_attempts = 1
@@ -67,7 +66,7 @@ def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
                 rate_limit_backoff += 1
                 continue
 
-            if response.status_code in {502, 503}:  # Server is down
+            if response.status_code >= 500:  # Server is down
                 wait_time = 3 * down_attempts
                 print(f'Server error on {wiki}, retrying in {wait_time} seconds...')
                 sleep(wait_time)
@@ -77,13 +76,12 @@ def fetch_sitemap_urls(wikis: list[dict]) -> list[str]:
             break
 
         try:
-            sitemap_data = xmltodict.parse(response.content)
+            sitemap_data = xmltodict.parse(response.text)
             sitemap_entries = sitemap_data.get('sitemapindex', {}).get('sitemap', [])
             if isinstance(sitemap_entries, dict):  # Handle single entry case
                 sitemaps.append(sitemap_entries['loc'])
             else:
                 sitemaps.extend(entry['loc'] for entry in sitemap_entries if 'loc' in entry)
-
         except Exception as e:
             print(f'Error processing {sitemap_url}: {e}')
 
@@ -111,12 +109,13 @@ def upload_to_swift(auth: str, user: str, key: str, content: str) -> None:
 
 def main():
     args = get_arguments()
+    session = requests.Session()
     print('Fetching wiki list...')
-    wikis = fetch_wiki_list()
+    wikis = fetch_wiki_list(session)
     print(f'Retrieved {len(wikis)} wikis.')
 
     print('Fetching sitemaps...')
-    sitemap_urls = fetch_sitemap_urls(wikis)
+    sitemap_urls = fetch_sitemap_urls(session, wikis)
     print(f'Retrieved {len(sitemap_urls)} sitemaps.')
 
     print('Generating sitemap index...')
