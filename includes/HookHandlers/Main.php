@@ -2,7 +2,6 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
-use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
@@ -153,7 +152,7 @@ class Main implements
 		}
 	}
 
-	public function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteInfo $module, array &$result ): void {
+	public function onAPIQuerySiteInfoGeneralInfo( $module, &$result ) {
 		$result['miraheze'] = true;
 	}
 
