@@ -66,6 +66,9 @@
 		"AbuseFilterShouldFilterAction": {
 			"handler": "Main"
 		},
+		"APIQuerySiteInfoGeneralInfo": {
+			"handler": "Main"
+		},
 		"BlockIpComplete": {
 			"handler": "Main"
 		},

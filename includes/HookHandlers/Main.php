@@ -2,6 +2,7 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
@@ -12,6 +13,7 @@ use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+use MediaWiki\Hook\APIQuerySiteInfoGeneralInfoHook;
 use MediaWiki\Hook\BlockIpCompleteHook;
 use MediaWiki\Hook\ContributionsToolLinksHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
@@ -51,6 +53,7 @@ use Wikimedia\Rdbms\IConnectionProvider;
 
 class Main implements
 	AbuseFilterShouldFilterActionHook,
+	APIQuerySiteInfoGeneralInfoHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
@@ -148,6 +151,10 @@ class Main implements
 
 			return false;
 		}
+	}
+
+	public function onAPIQuerySiteInfoGeneralInfo( ApiQuerySiteInfo $module, array &$result ): void {
+		$result['miraheze'] = true;
 	}
 
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
