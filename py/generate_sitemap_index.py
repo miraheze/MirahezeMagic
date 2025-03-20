@@ -109,20 +109,21 @@ def upload_to_swift(auth: str, user: str, key: str, content: str) -> None:
 
 def main():
     args = get_arguments()
-    session = requests.Session()
-    print('Fetching wiki list...')
-    wikis = fetch_wiki_list(session)
-    print(f'Retrieved {len(wikis)} wikis.')
+    
+    with requests.Session() as session:
+        print('Fetching wiki list...')
+        wikis = fetch_wiki_list(session)
+        print(f'Retrieved {len(wikis)} wikis.')
 
-    print('Fetching sitemaps...')
-    sitemap_urls = fetch_sitemap_urls(session, wikis)
-    print(f'Retrieved {len(sitemap_urls)} sitemaps.')
+        print('Fetching sitemaps...')
+        sitemap_urls = fetch_sitemap_urls(session, wikis)
+        print(f'Retrieved {len(sitemap_urls)} sitemaps.')
 
-    print('Generating sitemap index...')
-    sitemap_index_content = generate_sitemap_index(sitemap_urls)
+        print('Generating sitemap index...')
+        sitemap_index_content = generate_sitemap_index(sitemap_urls)
 
-    print('Uploading to Swift...')
-    upload_to_swift(args.auth, args.user, args.key, sitemap_index_content)
+        print('Uploading to Swift...')
+        upload_to_swift(args.auth, args.user, args.key, sitemap_index_content)
 
     print('Done.')
 
