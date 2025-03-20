@@ -109,7 +109,7 @@ def upload_to_swift(auth: str, user: str, key: str, content: str) -> None:
 
 def main():
     args = get_arguments()
-    
+
     with requests.Session() as session:
         print('Fetching wiki list...')
         wikis = fetch_wiki_list(session)
