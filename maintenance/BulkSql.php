@@ -72,18 +72,14 @@ class BulkSql extends Maintenance {
 		}
 	}
 
-	private function getAllDatabases() {
+	private function getAllDatabases(): array {
 		$dbUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
 		$dbr = $dbUtils->getGlobalReplicaDB();
-		$rows = $dbr->newSelectQueryBuilder()
+		return $dbr->newSelectQueryBuilder()
 			->from( 'cw_wikis' )
 			->select( 'wiki_dbname' )
 			->caller( __METHOD__ )
-			->fetchResultSet();
-
-		foreach ( $rows as $row ) {
-			yield $row->wiki_dbname;
-		}
+			->fetchFieldValues();
 	}
 
 	private function getDatabasesFromFile( string $filename ) {
