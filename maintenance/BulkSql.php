@@ -24,7 +24,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-use LogicException;
 use MediaWiki\Maintenance\Maintenance;
 use MwSql;
 
