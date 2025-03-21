@@ -89,7 +89,12 @@ class BulkSql extends Maintenance {
 		}
 
 		try {
-			while ( ( $line = fgets( $file ) ) !== false ) {
+			while ( true ) {
+				$line = fgets( $file );
+				if ( $line === false ) {
+					break;
+				}
+
 				$line = trim( $line );
 				if ( $line === '' ) {
 					continue;
