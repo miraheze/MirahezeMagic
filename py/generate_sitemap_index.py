@@ -37,9 +37,9 @@ def fetch_wiki_list(session: requests.Session) -> list[dict]:
         'action': 'query',
         'format': 'json',
         'list': 'wikidiscover',
-        'wdstate': 'public',
+        'wdlimit': '500',
         'wdsiteprop': 'dbname',
-        'wdlimit': 500,
+        'wdstate': 'public',
     }
 
     wikis = []
@@ -47,7 +47,7 @@ def fetch_wiki_list(session: requests.Session) -> list[dict]:
 
     while True:
         if offset > 0:
-            params['wdoffset'] = offset
+            params['wdoffset'] = str(offset)
 
         print(f'Fetching with offset: {offset}')
 
