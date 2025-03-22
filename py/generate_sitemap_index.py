@@ -38,7 +38,7 @@ def fetch_wiki_list(session: requests.Session) -> list[dict]:
         'format': 'json',
         'list': 'wikidiscover',
         'wdlimit': '500',
-        'wdsiteprop': 'dbname',
+        'wdsiteprop': '',
         'wdstate': 'public',
     }
 
