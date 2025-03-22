@@ -97,7 +97,13 @@ def fetch_sitemap_urls(session: requests.Session, wikis: list[dict]) -> list[str
                 down_attempts += 1
                 continue
 
+            if response.status_code != 200:  # Something went wrong
+                print(f'Got status code other than 200 on {wiki}, skipping wiki')
+
             break
+
+        if response.status_code != 200:
+            continue
 
         try:
             sitemap_data = xmltodict.parse(response.text)
