@@ -34,14 +34,38 @@ def fetch_wiki_list(session: requests.Session) -> list[dict]:
     """Fetch the list of public wikis from WikiDiscover."""
     url = 'https://meta.miraheze.org/w/api.php'
     params = {
-        'action': 'wikidiscover',
+        'action': 'query',
         'format': 'json',
+        'list': 'wikidiscover',
         'wdstate': 'public',
         'wdsiteprop': 'dbname',
+        'wdlimit': 500,
     }
-    response = session.get(url, params=params)
-    response.raise_for_status()
-    return response.json().get('wikidiscover', [])
+
+    wikis = []
+    offset = 0
+
+    while True:
+        if offset > 0:
+            params['wdoffset'] = offset
+
+        print(f'Fetching with offset: {offset}')
+
+        response = session.get(url, params=params)
+        response.raise_for_status()
+
+        data = response.json().get('query', {}).get('wikidiscover', {})
+        wikis_data = data.get('wikis', {})
+        count = data.get('count', 0)
+
+        wikis.extend(wikis_data.values())
+
+        if count == 0:
+            break
+
+        offset += len(wikis_data)
+
+    return wikis
 
 
 def fetch_sitemap_urls(session: requests.Session, wikis: list[dict]) -> list[str]:
