@@ -39,7 +39,7 @@ def fetch_wiki_list(session: requests.Session) -> list[dict]:
         'list': 'wikidiscover',
         'wdlimit': '500',
         'wdsiteprop': '',
-        'wdstate': 'public',
+        'wdstate': 'open|public|unlocked',
     }
 
     wikis = []
