@@ -98,7 +98,7 @@ def fetch_sitemap_urls(session: requests.Session, wikis: list[dict]) -> list[str
                 continue
 
             if response.status_code != 200:  # Something went wrong
-                print(f'Got status code other than 200 on {wiki}, skipping wiki')
+                print(f'Got status code {response.status_code} on {wiki}, skipping wiki')
 
             break
 
