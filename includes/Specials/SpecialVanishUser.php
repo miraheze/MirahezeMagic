@@ -5,7 +5,7 @@ namespace Miraheze\MirahezeMagic\Specials;
 /**
  * Creates Special:VanishUser for Stewards to use to vanish users easily.
  * Derived from RemovePII's Special:RemovePII code located at
- * https://github.com/miraheze/RemovePII/blob/master/includes/SpecialRemovePII.php
+ * https://github.com/miraheze/RemovePII/blob/main/includes/SpecialRemovePII.php
  * Originally written by Universal Omega.
  *
  * This program is free software; you can redistribute it and/or modify
