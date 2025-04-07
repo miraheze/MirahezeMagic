@@ -422,9 +422,9 @@ class Main implements
 		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
-	public function onCreateWikiTables( array &$cTables ): void {
-		$cTables['localnames'] = 'ln_wiki';
-		$cTables['localuser'] = 'lu_wiki';
+	public function onCreateWikiTables( array &$tables ): void {
+		$tables['localnames'] = 'ln_wiki';
+		$tables['localuser'] = 'lu_wiki';
 	}
 
 	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
