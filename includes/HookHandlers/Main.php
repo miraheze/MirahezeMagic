@@ -485,6 +485,7 @@ class Main implements
 			'createwiki-label-reason',
 			'dberr-again',
 			'dberr-problems',
+			'globalblocking-blockedtext-blocker-admin',
 			'globalblocking-ipblocked-range',
 			'globalblocking-ipblocked-xff',
 			'globalblocking-ipblocked',
