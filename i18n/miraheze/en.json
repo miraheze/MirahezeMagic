@@ -20,7 +20,6 @@
 	"extensions-skins": "Skins",
 	"extensions-specialpages": "Special pages",
 	"extensions-variable": "Variables",
-	"globalblocking-blockedtext-blocker-admin": ""You can contact $1 to discuss the block. '''If you are trying to create an account, please use [[M:Special:Contact/requestaccount|this form only]] to request an account.'''",
 	"grant-usedatadumpapi": "Create, view, and delete dumps",
 	"group-autopatrolled-member": "{{GENDER:$1|autopatrolled}}",
 	"group-autopatrolled": "Autopatrolled users",
