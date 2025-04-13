@@ -221,12 +221,12 @@ class SendBulkEmails extends Maintenance {
 		}
 		if ( !$user->canReceiveEmail() ) {
 			$this->noreceive++;
-			$this->output( "WARNING - User {$username} can't receive mail\n" );
+			$this->output( "WARNING - User:{$username} can't receive mail\n" );
 			return false;
 		}
 		if ( in_array( $user->getName(), $this->optout, true ) ) {
 			$this->optedout++;
-			$this->output( "WARNING - User {$username} on opt-out list\n" );
+			$this->output( "WARNING - User:{$username} on opt-out list\n" );
 			return false;
 		}
 
