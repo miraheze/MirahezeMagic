@@ -189,7 +189,7 @@ class Main implements
 					$setConfig['type'] === 'database' &&
 					$manageWikiSettings->list( $var ) === $dbname
 				) {
-					$manageWikiSettings->remove( $var );
+					$manageWikiSettings->remove( [ $var ] );
 					$manageWikiSettings->commit();
 				}
 			}
