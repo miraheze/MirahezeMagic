@@ -42,5 +42,5 @@ class MigratePrimaryDomains extends Maintenance {
 }
 
 // @codeCoverageIgnoreStart
-return MigrateDescriptions::class;
+return MigratePrimaryDomains::class;
 // @codeCoverageIgnoreEnd
