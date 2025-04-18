@@ -16,7 +16,7 @@ class UpdatePrivateAuthUrls extends Maintenance {
 
 		if ( $remoteWiki->isPrivate() ) {
 			$manageWikiSettings = new ManageWikiSettings( $dbname );
-			foreach ( $manageWikiSettings->list() as $var => $val ) {
+			foreach ( $manageWikiSettings->list( null ) as $var => $val ) {
 				if (
 					is_string( $val ) &&
 					str_contains( $val, "static.wikitide.net/$dbname" )
