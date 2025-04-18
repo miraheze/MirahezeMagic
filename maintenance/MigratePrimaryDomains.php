@@ -35,9 +35,9 @@ class MigratePrimaryDomains extends Maintenance {
 		}
 
 		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
- 		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
- 		$data = $dataFactory->newInstance( $databaseUtils->getCentralWikiID() );
- 		$data->resetDatabaseLists( isNewChanges: true );
+		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
+		$data = $dataFactory->newInstance( $databaseUtils->getCentralWikiID() );
+		$data->resetDatabaseLists( isNewChanges: true );
 	}
 }
 
