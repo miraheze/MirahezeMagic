@@ -69,14 +69,20 @@ class ChangeMediaWikiVersion extends Maintenance {
 				}
 
 				$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
+				$remoteWiki->disableResetDatabaseLists();
 
-				$remoteWiki->addNewRow( row: 'wiki_version', value: $newVersion );
-				$remoteWiki->trackChange( 'mediawiki-version', $oldVersion, $newVersion );
+				$remoteWiki->setExtraFieldData(
+					'mediawiki-version', $newVersion, default: $oldVersion
+				);
+
 				$remoteWiki->commit();
-
 				$this->output( "Upgraded $dbname from $oldVersion to $newVersion\n" );
 			}
 		}
+
+		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
+		$data = $dataFactory->newInstance( $databaseUtils->getCentralWikiID() );
+		$data->resetDatabaseLists( isNewChanges: true );
 	}
 
 	private function getWikiDbNamesByRegex( string $pattern ): array {
