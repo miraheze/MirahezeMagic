@@ -9,7 +9,7 @@ class FixProjectNS extends Maintenance {
 
 	public function execute(): void {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-		$siteName = $this->getConfig()->get( MainConfigNames::DBname );
+		$siteName = $this->getConfig()->get( MainConfigNames::Sitename );
 		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
 		$dbw = $databaseUtils->getGlobalPrimaryDB();
 		$namespaces = $dbw->newSelectQueryBuilder()
