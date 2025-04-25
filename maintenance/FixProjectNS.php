@@ -29,7 +29,7 @@ class FixProjectNS extends Maintenance {
 				$value = $additional['wgMetaNamespaceTalk'];
 			}
 
-			$this->output( "Setting namespace {$ns->ns_namespace_id} to $value for $dbname" );
+			$this->output( "Setting namespace {$ns->ns_namespace_id} to $value for $dbname.\n" );
 
 			/* $dbw->newUpdateQueryBuilder()
 				->update( 'mw_namespaces' )
