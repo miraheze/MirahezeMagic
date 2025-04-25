@@ -28,8 +28,7 @@ class FixProjectNS extends Maintenance {
 				$value = $additional['wgMetaNamespace'] ??
 					str_replace( [ ' ', ':' ], '_', $siteName );
 			} else {
-				$value = $additional['wgMetaNamespaceTalk'] ??
-					str_replace( [ ' ', ':' ], '_', "{$siteName}_talk" );
+				$value = $additional['wgMetaNamespaceTalk'] ?? '$1_talk';
 			}
 
 			$this->output( "Setting namespace {$ns->ns_namespace_id} to $value for $dbname.\n" );
