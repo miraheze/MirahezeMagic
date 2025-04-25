@@ -31,7 +31,7 @@ class FixProjectNS extends Maintenance {
 
 			$this->output( "Setting namespace {$ns->ns_namespace_id} to $value for $dbname.\n" );
 
-			/* $dbw->newUpdateQueryBuilder()
+			$dbw->newUpdateQueryBuilder()
 				->update( 'mw_namespaces' )
 				->set( [ 'ns_namespace_name' => $value ] )
 				->where( [
@@ -39,7 +39,7 @@ class FixProjectNS extends Maintenance {
 					'ns_namespace_id' => $ns->ns_namespace_id,
 				] )
 				->caller( __METHOD__ )
-				->execute(); */
+				->execute();
 		}
 	}
 }
