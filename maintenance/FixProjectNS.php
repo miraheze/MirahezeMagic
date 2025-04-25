@@ -9,7 +9,7 @@ class FixProjectNS extends Maintenance {
 
 	public function execute(): void {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-		$siteName = $this->getConfig()->get( MainConfigNames::Sitename );
+		$siteName = trim( $this->getConfig()->get( MainConfigNames::Sitename ) );
 		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
 		$dbw = $databaseUtils->getGlobalPrimaryDB();
 		$namespaces = $dbw->newSelectQueryBuilder()
@@ -30,10 +30,6 @@ class FixProjectNS extends Maintenance {
 			} else {
 				$value = $additional['wgMetaNamespaceTalk'] ??
 					str_replace( [ ' ', ':' ], '_', "{$siteName}_talk" );
-			}
-
-			if ( strlen( $value ) <= 32 ) {
-				continue;
 			}
 
 			$this->output( "Setting namespace {$ns->ns_namespace_id} to $value for $dbname.\n" );
