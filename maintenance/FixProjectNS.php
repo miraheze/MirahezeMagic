@@ -32,6 +32,10 @@ class FixProjectNS extends Maintenance {
 					str_replace( [ ' ', ':' ], '_', "{$siteName}_talk" );
 			}
 
+			if ( strlen( $value ) <= 32 ) {
+				continue;
+			}
+
 			$this->output( "Setting namespace {$ns->ns_namespace_id} to $value for $dbname.\n" );
 
 			$dbw->newUpdateQueryBuilder()
@@ -44,6 +48,10 @@ class FixProjectNS extends Maintenance {
 				->caller( __METHOD__ )
 				->execute();
 		}
+
+		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
+		$data = $dataFactory->newInstance( $dbname );
+		$data->resetWikiData( isNewChanges: true );
 	}
 }
 
