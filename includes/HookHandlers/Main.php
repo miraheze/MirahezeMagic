@@ -602,7 +602,7 @@ class Main implements
 			$dbList = array_keys( $databasesArray['databases'] ?? [] );
 
 			// Filter out those databases that don't have GlobalUserPage enabled
-			$list = array_filter( $dbList, static function ( $dbname ) {
+			$list = array_filter( $dbList, function ( $dbname ) {
 				$extensions = $this->moduleFactory->extensions( $dbname );
 				return in_array( 'globaluserpage', $extensions->list() );
 			} );
