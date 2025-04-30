@@ -133,6 +133,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
+				"ConfigModuleFactory",
 				"CommentStore",
 				"ConnectionProvider",
 				"HttpRequestFactory",
