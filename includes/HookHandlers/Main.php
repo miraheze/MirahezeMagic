@@ -41,7 +41,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ManageWiki\Helpers\ConfigModuleFactory;
+use Miraheze\ManageWiki\Helpers\ManageWikiModuleFactory;
 use Redis;
 use Skin;
 use Throwable;
@@ -72,21 +72,21 @@ class Main implements
 
 	public function __construct(
 		private readonly ServiceOptions $options,
-		private readonly ConfigModuleFactory $moduleFactory,
 		private readonly CommentStore $commentStore,
 		private readonly IConnectionProvider $connectionProvider,
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly LinkRenderer $linkRenderer
+		private readonly LinkRenderer $linkRenderer,
+		private readonly ManageWikiModuleFactory $moduleFactory
 	) {
 	}
 
 	public static function factory(
 		Config $mainConfig,
-		ConfigModuleFactory $moduleFactory,
 		CommentStore $commentStore,
 		IConnectionProvider $connectionProvider,
 		HttpRequestFactory $httpRequestFactory,
-		LinkRenderer $linkRenderer
+		LinkRenderer $linkRenderer,
+		ManageWikiModuleFactory $moduleFactory
 	): self {
 		return new self(
 			new ServiceOptions(
@@ -106,11 +106,11 @@ class Main implements
 				],
 				$mainConfig
 			),
-			$moduleFactory,
 			$commentStore,
 			$connectionProvider,
 			$httpRequestFactory,
-			$linkRenderer
+			$linkRenderer,
+			$moduleFactory
 		);
 	}
 
