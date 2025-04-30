@@ -41,8 +41,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
-use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Miraheze\ManageWiki\Helpers\ConfigModuleFactory;
 use Redis;
 use Skin;
 use Throwable;
@@ -71,28 +70,19 @@ class Main implements
 	UserGetRightsRemoveHook
 {
 
-	private ServiceOptions $options;
-	private CommentStore $commentStore;
-	private HttpRequestFactory $httpRequestFactory;
-	private LinkRenderer $linkRenderer;
-	private IConnectionProvider $connectionProvider;
-
 	public function __construct(
-		ServiceOptions $options,
-		CommentStore $commentStore,
-		IConnectionProvider $connectionProvider,
-		HttpRequestFactory $httpRequestFactory,
-		LinkRenderer $linkRenderer
+		private readonly ServiceOptions $options,
+		private readonly ConfigModuleFactory $moduleFactory,
+		private readonly CommentStore $commentStore,
+		private readonly IConnectionProvider $connectionProvider,
+		private readonly HttpRequestFactory $httpRequestFactory,
+		private readonly LinkRenderer $linkRenderer
 	) {
-		$this->options = $options;
-		$this->commentStore = $commentStore;
-		$this->connectionProvider = $connectionProvider;
-		$this->httpRequestFactory = $httpRequestFactory;
-		$this->linkRenderer = $linkRenderer;
 	}
 
 	public static function factory(
 		Config $mainConfig,
+		ConfigModuleFactory $moduleFactory,
 		CommentStore $commentStore,
 		IConnectionProvider $connectionProvider,
 		HttpRequestFactory $httpRequestFactory,
@@ -116,6 +106,7 @@ class Main implements
 				],
 				$mainConfig
 			),
+			$moduleFactory,
 			$commentStore,
 			$connectionProvider,
 			$httpRequestFactory,
@@ -182,7 +173,7 @@ class Main implements
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = new ManageWikiSettings( $db );
+			$manageWikiSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
@@ -267,7 +258,7 @@ class Main implements
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = new ManageWikiSettings( $db );
+			$manageWikiSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
@@ -612,7 +603,7 @@ class Main implements
 
 			// Filter out those databases that don't have GlobalUserPage enabled
 			$list = array_filter( $dbList, static function ( $dbname ) {
-				$extensions = new ManageWikiExtensions( $dbname );
+				$extensions = $this->moduleFactory->extensions( $dbname );
 				return in_array( 'globaluserpage', $extensions->list() );
 			} );
 
