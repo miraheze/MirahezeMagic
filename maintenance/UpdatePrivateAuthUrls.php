@@ -4,19 +4,17 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
-use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
 
 class UpdatePrivateAuthUrls extends Maintenance {
 
 	public function execute() {
-		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
+		$configModuleFactory = $this->getServiceContainer()->get( 'ConfigModuleFactory' );
+		$core = $configModuleFactory->coreLocal();
 
-		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
-		$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
-
-		if ( $remoteWiki->isPrivate() ) {
-			$manageWikiSettings = new ManageWikiSettings( $dbname );
-			foreach ( $manageWikiSettings->list( null ) as $var => $val ) {
+		if ( $core->isPrivate() ) {
+			$mwSettings = $configModuleFactory->settingsLocal();
+			$dbname = $this->getConfig()->get( MainConfigNames::DBname );
+			foreach ( $mwSettings->list( null ) as $var => $val ) {
 				if (
 					is_string( $val ) &&
 					str_contains( $val, "static.wikitide.net/$dbname" )
@@ -25,8 +23,8 @@ class UpdatePrivateAuthUrls extends Maintenance {
 
 					$this->output( "Updating {$var} for {$dbname} '{$val} => {$new}'\n" );
 
-					$manageWikiSettings->modify( [ $var => $new ] );
-					$manageWikiSettings->commit();
+					$mwSettings->modify( [ $var => $new ] );
+					$mwSettings->commit();
 				}
 			}
 		}
