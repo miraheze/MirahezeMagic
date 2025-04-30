@@ -41,7 +41,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ManageWiki\Helpers\ManageWikiModuleFactory;
+use Miraheze\ManageWiki\Helpers\ModuleFactory;
 use Redis;
 use Skin;
 use Throwable;
@@ -76,7 +76,7 @@ class Main implements
 		private readonly IConnectionProvider $connectionProvider,
 		private readonly HttpRequestFactory $httpRequestFactory,
 		private readonly LinkRenderer $linkRenderer,
-		private readonly ManageWikiModuleFactory $moduleFactory
+		private readonly ModuleFactory $moduleFactory
 	) {
 	}
 
@@ -86,7 +86,7 @@ class Main implements
 		IConnectionProvider $connectionProvider,
 		HttpRequestFactory $httpRequestFactory,
 		LinkRenderer $linkRenderer,
-		ManageWikiModuleFactory $moduleFactory
+		ModuleFactory $moduleFactory
 	): self {
 		return new self(
 			new ServiceOptions(
