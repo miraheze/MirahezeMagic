@@ -8,11 +8,11 @@ use MediaWiki\Maintenance\Maintenance;
 class UpdatePrivateAuthUrls extends Maintenance {
 
 	public function execute() {
-		$configModuleFactory = $this->getServiceContainer()->get( 'ConfigModuleFactory' );
-		$core = $configModuleFactory->coreLocal();
+		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
+		$core = $moduleFactory->coreLocal();
 
 		if ( $core->isPrivate() ) {
-			$mwSettings = $configModuleFactory->settingsLocal();
+			$mwSettings = $moduleFactory->settingsLocal();
 			$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 			foreach ( $mwSettings->list( null ) as $var => $val ) {
 				if (
