@@ -128,8 +128,8 @@ class RestoreManageWikiBackup extends Maintenance {
 			$dbw->insert( 'mw_settings', $settingsData, __METHOD__ );
 
 			if ( isset( $data['extensions'] ) ) {
-				$configModuleFactory = $this->getServiceContainer()->get( 'ConfigModuleFactory' );
-				$mwExtensions = $configModuleFactory->extensionsLocal();
+				$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
+				$mwExtensions = $moduleFactory->extensionsLocal();
 				$mwExtensions->overwriteAll( $data['extensions'] );
 				$mwExtensions->commit();
 			}
