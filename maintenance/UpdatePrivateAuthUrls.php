@@ -14,7 +14,7 @@ class UpdatePrivateAuthUrls extends Maintenance {
 		if ( $mwCore->isPrivate() ) {
 			$mwSettings = $moduleFactory->settingsLocal();
 			$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-			foreach ( $mwSettings->list( null ) as $var => $val ) {
+			foreach ( $mwSettings->list( var: null ) as $var => $val ) {
 				if (
 					is_string( $val ) &&
 					str_contains( $val, "static.wikitide.net/$dbname" )
@@ -23,7 +23,7 @@ class UpdatePrivateAuthUrls extends Maintenance {
 
 					$this->output( "Updating {$var} for {$dbname} '{$val} => {$new}'\n" );
 
-					$mwSettings->modify( [ $var => $new ] );
+					$mwSettings->modify( [ $var => $new ], default: null );
 					$mwSettings->commit();
 				}
 			}
