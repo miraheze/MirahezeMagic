@@ -41,7 +41,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ManageWiki\Helpers\ModuleFactory;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Redis;
 use Skin;
 use Throwable;
