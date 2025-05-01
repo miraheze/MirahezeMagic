@@ -596,14 +596,14 @@ class Main implements
 	public function onGlobalUserPageWikis( array &$list ): bool {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 
-		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
-			$databasesArray = include "{$cwCacheDir}/databases.php";
+		if ( file_exists( "$cwCacheDir/databases.php" ) ) {
+			$databasesArray = include "$cwCacheDir/databases.php";
 			$dbList = array_keys( $databasesArray['databases'] ?? [] );
 
 			// Filter out those databases that don't have GlobalUserPage enabled
 			$list = array_filter( $dbList, function ( $dbname ) {
 				$mwExtensions = $this->moduleFactory->extensions( $dbname );
-				return in_array( 'globaluserpage', $mwExtensions->list() );
+				return in_array( 'globaluserpage', $mwExtensions->list(), true );
 			} );
 
 			return false;
