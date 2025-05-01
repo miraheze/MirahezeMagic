@@ -41,8 +41,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
-use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Redis;
 use Skin;
 use Throwable;
@@ -71,24 +70,14 @@ class Main implements
 	UserGetRightsRemoveHook
 {
 
-	private ServiceOptions $options;
-	private CommentStore $commentStore;
-	private HttpRequestFactory $httpRequestFactory;
-	private LinkRenderer $linkRenderer;
-	private IConnectionProvider $connectionProvider;
-
 	public function __construct(
-		ServiceOptions $options,
-		CommentStore $commentStore,
-		IConnectionProvider $connectionProvider,
-		HttpRequestFactory $httpRequestFactory,
-		LinkRenderer $linkRenderer
+		private readonly ServiceOptions $options,
+		private readonly CommentStore $commentStore,
+		private readonly IConnectionProvider $connectionProvider,
+		private readonly HttpRequestFactory $httpRequestFactory,
+		private readonly LinkRenderer $linkRenderer,
+		private readonly ModuleFactory $moduleFactory
 	) {
-		$this->options = $options;
-		$this->commentStore = $commentStore;
-		$this->connectionProvider = $connectionProvider;
-		$this->httpRequestFactory = $httpRequestFactory;
-		$this->linkRenderer = $linkRenderer;
 	}
 
 	public static function factory(
@@ -96,7 +85,8 @@ class Main implements
 		CommentStore $commentStore,
 		IConnectionProvider $connectionProvider,
 		HttpRequestFactory $httpRequestFactory,
-		LinkRenderer $linkRenderer
+		LinkRenderer $linkRenderer,
+		ModuleFactory $moduleFactory
 	): self {
 		return new self(
 			new ServiceOptions(
@@ -119,7 +109,8 @@ class Main implements
 			$commentStore,
 			$connectionProvider,
 			$httpRequestFactory,
-			$linkRenderer
+			$linkRenderer,
+			$moduleFactory
 		);
 	}
 
@@ -182,15 +173,15 @@ class Main implements
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = new ManageWikiSettings( $db );
+			$mwSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $dbname
+					$mwSettings->list( $var ) === $dbname
 				) {
-					$manageWikiSettings->remove( [ $var ] );
-					$manageWikiSettings->commit();
+					$mwSettings->remove( [ $var ], default: null );
+					$mwSettings->commit();
 				}
 			}
 		}
@@ -267,15 +258,15 @@ class Main implements
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = new ManageWikiSettings( $db );
+			$mwSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $oldDbName
+					$mwSettings->list( $var ) === $oldDbName
 				) {
-					$manageWikiSettings->modify( [ $var => $newDbName ] );
-					$manageWikiSettings->commit();
+					$mwSettings->modify( [ $var => $newDbName ], default: null );
+					$mwSettings->commit();
 				}
 			}
 		}
@@ -605,15 +596,14 @@ class Main implements
 	public function onGlobalUserPageWikis( array &$list ): bool {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 
-		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
-			$databasesArray = include "{$cwCacheDir}/databases.php";
-
+		if ( file_exists( "$cwCacheDir/databases.php" ) ) {
+			$databasesArray = include "$cwCacheDir/databases.php";
 			$dbList = array_keys( $databasesArray['databases'] ?? [] );
 
 			// Filter out those databases that don't have GlobalUserPage enabled
-			$list = array_filter( $dbList, static function ( $dbname ) {
-				$extensions = new ManageWikiExtensions( $dbname );
-				return in_array( 'globaluserpage', $extensions->list() );
+			$list = array_filter( $dbList, function ( $dbname ) {
+				$mwExtensions = $this->moduleFactory->extensions( $dbname );
+				return in_array( 'globaluserpage', $mwExtensions->list(), true );
 			} );
 
 			return false;
