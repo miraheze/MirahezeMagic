@@ -9,9 +9,9 @@ class UpdatePrivateAuthUrls extends Maintenance {
 
 	public function execute() {
 		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
-		$core = $moduleFactory->coreLocal();
+		$mwCore = $moduleFactory->coreLocal();
 
-		if ( $core->isPrivate() ) {
+		if ( $mwCore->isPrivate() ) {
 			$mwSettings = $moduleFactory->settingsLocal();
 			$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 			foreach ( $mwSettings->list( null ) as $var => $val ) {
