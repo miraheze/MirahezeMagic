@@ -173,15 +173,15 @@ class Main implements
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = $this->moduleFactory->settings( $db );
+			$mwSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $dbname
+					$mwSettings->list( $var ) === $dbname
 				) {
-					$manageWikiSettings->remove( [ $var ] );
-					$manageWikiSettings->commit();
+					$mwSettings->remove( [ $var ], default: null );
+					$mwSettings->commit();
 				}
 			}
 		}
@@ -258,15 +258,15 @@ class Main implements
 		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = $this->moduleFactory->settings( $db );
+			$mwSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $oldDbName
+					$mwSettings->list( $var ) === $oldDbName
 				) {
-					$manageWikiSettings->modify( [ $var => $newDbName ] );
-					$manageWikiSettings->commit();
+					$mwSettings->modify( [ $var => $newDbName ], default: null );
+					$mwSettings->commit();
 				}
 			}
 		}
@@ -598,13 +598,12 @@ class Main implements
 
 		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
 			$databasesArray = include "{$cwCacheDir}/databases.php";
-
 			$dbList = array_keys( $databasesArray['databases'] ?? [] );
 
 			// Filter out those databases that don't have GlobalUserPage enabled
 			$list = array_filter( $dbList, function ( $dbname ) {
-				$extensions = $this->moduleFactory->extensions( $dbname );
-				return in_array( 'globaluserpage', $extensions->list() );
+				$mwExtensions = $this->moduleFactory->extensions( $dbname );
+				return in_array( 'globaluserpage', $mwExtensions->list() );
 			} );
 
 			return false;
