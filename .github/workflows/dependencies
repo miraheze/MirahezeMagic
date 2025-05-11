@@ -4,6 +4,7 @@ AbuseFilter:
 CentralAuth:
   branch: auto
   repo: auto
+  recurse: false
 CreateWiki:
   branch: main
   repo: https://github.com/miraheze/CreateWiki
@@ -13,6 +14,7 @@ DataDump:
 Echo:
   branch: auto
   repo: auto
+  recurse: false
 GlobalUserPage:
   branch: auto
   repo: auto
