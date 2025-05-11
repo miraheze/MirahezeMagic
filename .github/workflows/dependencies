@@ -1,6 +1,7 @@
 AbuseFilter:
   branch: auto
   repo: auto
+  recurse: false
 CentralAuth:
   branch: auto
   repo: auto
