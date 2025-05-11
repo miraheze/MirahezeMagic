@@ -2,6 +2,9 @@ recurse: false
 AbuseFilter:
   branch: auto
   repo: auto
+AntiSpoof:
+  branch: auto
+  repo: auto
 CentralAuth:
   branch: auto
   repo: auto
