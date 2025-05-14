@@ -91,18 +91,18 @@ class Main implements
 		return new self(
 			new ServiceOptions(
 				[
-					'ArticlePath',
 					'CreateWikiCacheDirectory',
 					'EchoSharedTrackingDB',
-					'JobTypeConf',
-					'LanguageCode',
-					'LocalDatabases',
 					'ManageWikiSettings',
 					'MirahezeMagicAccessIdsMap',
 					'MirahezeMagicMemcachedServers',
 					'MirahezeReportsBlockAlertKeywords',
 					'MirahezeReportsWriteKey',
-					'Script',
+					MainConfigNames::ArticlePath,
+					MainConfigNames::JobTypeConf,
+					MainConfigNames::LanguageCode,
+					MainConfigNames::LocalDatabases,
+					MainConfigNames::Script,
 				],
 				$mainConfig
 			),
