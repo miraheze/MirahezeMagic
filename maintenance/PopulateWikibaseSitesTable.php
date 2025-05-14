@@ -32,7 +32,7 @@ use MediaWiki\Site\Site;
 use Wikibase\Lib\Sites\SitesBuilder;
 
 if ( !class_exists( SitesBuilder::class ) ) {
-	require_once "$IP/extensions/Wikibase/lib/includes/Sites/SitesBuilder.php";
+	require_once MW_INSTALL_PATH . '/extensions/Wikibase/lib/includes/Sites/SitesBuilder.php';
 }
 
 /**
