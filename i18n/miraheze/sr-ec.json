@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aca",
 			"BadDog",
 			"Kizule",
 			"Milicevic01",
@@ -75,7 +76,6 @@
 	"sitematrix-others": "Други Miraheze викији",
 	"sitematrix-summary": "Ова посебна страница наводи све Miraheze викије.",
 	"sitematrix": "Листа Miraheze викија",
-	"specialpages-group-wikimanage": "Вики управљање",
 	"termsofservice": "Услови коришћења",
 	"vanishuser": "Уклони корисника",
 	"vanishuser-log-name": "Дневник учтивих нестанака",

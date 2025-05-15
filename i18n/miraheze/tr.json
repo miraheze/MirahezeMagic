@@ -11,7 +11,8 @@
 			"MuratTheTurkish",
 			"SaldırganSincap",
 			"Sayginer",
-			"Sezgin İbiş"
+			"Sezgin İbiş",
+			"Slickdaddy"
 		]
 	},
 	"content-model-flow-board": "YapılandırılmışTartışmalar panosu",
@@ -54,7 +55,7 @@
 	"group-wiki-creator-member": "{{GENDER:$1|viki oluşturucusu}}",
 	"group-wiki-creator": "Viki Oluşturucuları",
 	"group-wikimanager-member": "{{GENDER:$1|viki yöneticisi}}",
-	"group-wikimanager": "Viki Yöneticileri",
+	"group-wikimanager": "Viki yöneticileri",
 	"miraheze-categories": "Kategoriler",
 	"miraheze-donate": "Miraheze'ye bağış yap",
 	"miraheze-faq": "SSS",
@@ -85,7 +86,7 @@
 	"settings-parserfunctions": "Ayrıştırıcı İşlevler",
 	"settings-permissions": "İzinler",
 	"settings-preferences": "Tercihler",
-	"settings-recentchanges": "Son Değişiklikler",
+	"settings-recentchanges": "Son değişiklikler",
 	"settings-restricted": "Kısıtlı",
 	"settings-seo": "AMO",
 	"settings-socialtools": "Sosyal Araçları",
@@ -94,7 +95,6 @@
 	"sitematrix-others": "Diğer Miraheze vikileri",
 	"sitematrix-summary": "Bu özel sayfa tüm Miraheze vikilerini listeler.",
 	"sitematrix": "Miraheze vikileri listesi",
-	"specialpages-group-wikimanage": "Viki Yönetimi",
 	"termsofservice": "Kullanım Şartları",
 	"logentry-vanishuser-action": "$1 bir kullanıcıyı kayıplara karıştırdı."
 }
