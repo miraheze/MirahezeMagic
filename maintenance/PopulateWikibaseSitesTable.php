@@ -184,8 +184,8 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$url = $siteData['url'];
 		$site->setFilePath( $url . $this->getOption( 'script-path', '/w/$1' ) );
 		$site->setPagePath( $url . $this->getOption( 'article-path',
-			$this->getConfig()->get( MainConfigNames::Conf )->get(
-				'wg' . MainConfigNames::ArticlePath, $siteData['dbname']
+			$this->getConfig()->get( 'wgConf' )->get(
+				'wgArticlePath', $siteData['dbname']
 			)
 		) );
 
