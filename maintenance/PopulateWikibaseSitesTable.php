@@ -138,10 +138,6 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	 * @return Site[]
 	 */
 	private function sitesFromData( array $data ): array {
-		if ( $data === [] ) {
-			$this->fatalError( 'Cannot decode WikiDiscover data.' );
-		}
-
 		$sites = [];
 		foreach ( $data as $groupData ) {
 			if ( strlen( $groupData['dbname'] ) > 32 ) {
