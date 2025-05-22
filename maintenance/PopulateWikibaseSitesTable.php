@@ -75,8 +75,8 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$validGroups = $this->getOption( 'valid-groups', $groups );
 
 		try {
-			$json = $this->getWikiDiscoverData( $url );
-			$sites = $this->sitesFromJson( $json );
+			$data = $this->getWikiDiscoverData( $url );
+			$sites = $this->sitesFromData( $data );
 
 			$store = $this->getServiceContainer()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
@@ -88,7 +88,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$this->output( "done.\n" );
 	}
 
-	private function getWikiDiscoverData( string $baseUrl ): string {
+	private function getWikiDiscoverData( string $baseUrl ): array {
 		$offset = 0;
 		$allWikis = [];
 
@@ -130,18 +130,15 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 		} while ( $count > 0 );
 
-		return json_encode( $allWikis );
+		return $allWikis;
 	}
 
 	/**
-	 * @param string $json
+	 * @param array $data
 	 * @return Site[]
 	 */
-	private function sitesFromJson( string $json ): array {
-		$specials = null;
-
-		$data = json_decode( $json, true );
-		if ( !is_array( $data ) ) {
+	private function sitesFromData( array $data ): array {
+		if ( $data === [] ) {
 			$this->fatalError( 'Cannot decode WikiDiscover data.' );
 		}
 
