@@ -110,6 +110,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			);
 
 			if ( !$json ) {
+				$json = '';
 				$this->fatalError( "Got no data from $url" );
 			}
 
