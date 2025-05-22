@@ -38,7 +38,7 @@ class RemoveCustomDomain extends Maintenance {
 	}
 
 	public function execute(): void {
-		$this->output( "Removing custom domain for " . $this->getOption( 'dbname' . "\n") );
+		$this->output( "Removing custom domain for " . $this->getOption( 'dbname' ) . "\n" );
 		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
 		$mwCore = $moduleFactory->core( $this->getOption( 'dbname' ) );
 		$mwCore->setServerName( "" );
