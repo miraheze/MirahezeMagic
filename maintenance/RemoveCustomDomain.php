@@ -25,9 +25,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
-use Miraheze\ManageWiki\ICoreModule;
 
 class RemoveCustomDomain extends Maintenance {
+
 	public function __construct() {
 		parent::__construct();
 
@@ -38,12 +38,12 @@ class RemoveCustomDomain extends Maintenance {
 	}
 
 	public function execute(): void {
-    $this->output( "Removing custom domain for " . $this->getOption( 'dbname' ) );
+		$this->output( "Removing custom domain for " . $this->getOption( 'dbname' ) );
 		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
 		$mwCore = $moduleFactory->core( $this->getOption( 'dbname' ) );
 		$mwCore->setServerName( "" );
 		$mwCore->commit();
-    $this->output( "Custom domain sucesfully rmeoved" );
+		$this->output( "Custom domain sucesfully rmeoved" );
 	}
 }
 
