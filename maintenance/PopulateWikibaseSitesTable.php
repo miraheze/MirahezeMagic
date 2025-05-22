@@ -27,6 +27,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use Exception;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Site\MediaWikiSite;
 use MediaWiki\Site\Site;
