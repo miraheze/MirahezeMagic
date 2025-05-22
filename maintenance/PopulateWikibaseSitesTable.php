@@ -88,36 +88,64 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$this->output( "done.\n" );
 	}
 
-	protected function getWikiDiscoverData( string $url ): string {
-		$url .= '?action=query&list=wikidiscover&wdlimit=500&wdprop=languagecode|url&wdstate=public|undeleted&format=json';
+	private function getWikiDiscoverData( string $baseUrl ): string {
+		$offset = 0;
+		$allWikis = [];
 
-		$json = $this->getServiceContainer()->getHttpRequestFactory()->get(
-			$url, [ 'timeout' => 300 ], __METHOD__
-		);
+		do {
+			$url = wfAppendQuery( $baseUrl, [
+				'action' => 'query',
+				'format' => 'json',
+				'list' => 'wikidiscover',
+				'wdlimit' => 500,
+				'wdprop' => 'languagecode|url',
+				'wdstate' => 'public|undeleted',
+				'wdoffset' => $offset,
+			] );
 
-		if ( !$json ) {
-			$this->fatalError( "Got no data from $url" );
-		}
+			$json = $this->getServiceContainer()->getHttpRequestFactory()->get(
+				$url,
+				[ 'timeout' => 300 ],
+				__METHOD__
+			);
 
-		return $json;
+			if ( !$json ) {
+				$this->fatalError( "Got no data from $url" );
+			}
+
+			$data = json_decode( $json, true );
+			if (
+				!is_array( $data ) ||
+				!isset( $data['query']['wikidiscover']['wikis'] )
+			) {
+				$this->fatalError( 'Cannot decode WikiDiscover data.' );
+			}
+
+			$wikis = $data['query']['wikidiscover']['wikis'];
+			$allWikis += $wikis;
+
+			$count = $data['query']['wikidiscover']['count'] ?? 0;
+			$offset += count( $wikis );
+
+		} while ( $count > 0 );
+
+		return json_encode( $allWikis );
 	}
 
 	/**
 	 * @param string $json
 	 * @return Site[]
 	 */
-	public function sitesFromJson( string $json ): array {
+	private function sitesFromJson( string $json ): array {
 		$specials = null;
 
 		$data = json_decode( $json, true );
-		if ( !is_array( $data ) || !isset( $data['query']['wikidiscover']['wikis'] ) ) {
+		if ( !is_array( $data ) ) {
 			$this->fatalError( 'Cannot decode WikiDiscover data.' );
 		}
 
-		$groups = $data['query']['wikidiscover']['wikis'] ?? [];
-
 		$sites = [];
-		foreach ( $groups as $groupData ) {
+		foreach ( $data as $groupData ) {
 			if ( strlen( $groupData['dbname'] ) > 32 ) {
 				continue;
 			}
