@@ -193,7 +193,11 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$site->setGroup( 'miraheze' );
 		$url = $siteData['url'];
 		$site->setFilePath( $url . $this->getOption( 'script-path', '/w/$1' ) );
-		$site->setPagePath( $url . $this->getOption( 'article-path', '/wiki/$1' ) );
+		$site->setPagePath( $url . $this->getOption( 'article-path',
+			$this->getConfig()->get( MainConfigNames::Conf )->get(
+				'wg' . MainConfigNames::ArticlePath, $siteData['dbname']
+			)
+		) );
 
 		return $site;
 	}
