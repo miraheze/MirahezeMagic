@@ -65,7 +65,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				. ' is set, the script will try to determine which site group the wiki is part of'
 				. ' and populate interwiki ids for sites in that group.', false, true );
 		$this->addOption( 'valid-groups', 'A array of valid site link groups.', false, true );
-		$this->addOption( 'all-wikis', 'Run on all wikis present in $wgLocalDatabases.' );
+		$this->addOption( 'all-wikis', 'Populates the Sites table for all wikis present in $wgLocalDatabases.' );
 	}
 
 	public function execute(): void {
