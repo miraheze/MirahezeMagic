@@ -22,7 +22,8 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @ingroup MirahezeMagic
  * @author John Lewis
  * @author Paladox
- * @version 1.0
+ * @author Universal Omega
+ * @version 2.0
  */
 
 use Exception;
@@ -43,29 +44,29 @@ if ( !class_exists( SitesBuilder::class ) ) {
  * @author Daniel Kinzler
  * @author Katie Filbert < aude.wiki@gmail.com >
  * @author Paladox
+ * @author Universal Omega
  */
 class PopulateWikibaseSitesTable extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Populate the sites table from another wiki that runs the SiteMatrix extension' );
+		$this->addDescription( 'Populate the sites table from another wiki that runs the WikiDiscover extension' );
 
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
 				. "Default is https://meta.miraheze.org/w/api.php", false, true );
-		$this->addOption( 'script-path', 'Script path to use for wikis in the site matrix. '
+		$this->addOption( 'script-path', 'Script path to use for wikis in WikiDiscover. '
 				. ' (e.g. "/w/$1")', false, true );
-		$this->addOption( 'article-path', 'Article path for wikis in the site matrix. '
+		$this->addOption( 'article-path', 'Article path for wikis in WikiDiscover. '
 				. ' (e.g. "/wiki/$1")', false, true );
 		$this->addOption( 'site-group', 'Site group that this wiki is a member of.  Used to populate '
 				. ' local interwiki identifiers in the site identifiers table.  If not set and --wiki'
 				. ' is set, the script will try to determine which site group the wiki is part of'
 				. ' and populate interwiki ids for sites in that group.', false, true );
 		$this->addOption( 'valid-groups', 'A array of valid site link groups.', false, true );
-		$this->addOption( 'wiki-list', 'A array of wikis to look for.', false, true );
 	}
 
-	public function execute() {
+	public function execute(): void {
 		$url = $this->getOption( 'load-from', 'https://meta.miraheze.org/w/api.php' );
 		$siteGroup = $this->getOption( 'site-group' );
 		$wikiId = $this->getOption( 'wiki' );
@@ -81,7 +82,6 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$store = $this->getServiceContainer()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
-
 		} catch ( Exception $e ) {
 			$this->fatalError( $e->getMessage() );
 		}
@@ -89,18 +89,8 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$this->output( "done.\n" );
 	}
 
-	/**
-	 * @param string $url
-	 *
-	 * @return string
-	 */
-	protected function getWikiDiscoverData( $url ) {
-		$url .= '?action=wikidiscover&format=json';
-
-		$list = $this->getOption( 'wiki-list' );
-		if ( $list ) {
-			$url .= "&wdwikislist=$list";
-		}
+	protected function getWikiDiscoverData( string $url ): string {
+		$url .= '?action=query&list=wikidiscover&wdlimit=500&wdprop=languagecode|url&wdstate=public&format=json';
 
 		$json = $this->getServiceContainer()->getHttpRequestFactory()->get(
 			$url, [ 'timeout' => 300 ], __METHOD__
@@ -116,27 +106,20 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 	/**
 	 * @param string $json
-	 *
 	 * @return Site[]
 	 */
-	public function sitesFromJson( $json ) {
+	public function sitesFromJson( string $json ): array {
 		$specials = null;
 
 		$data = json_decode( $json, true );
-
-		if ( !is_array( $data ) || !array_key_exists( 'wikidiscover', $data ) ) {
-			$this->fatalError( 'Cannot decode site matrix data.' );
+		if ( !is_array( $data ) || !isset( $data['query']['wikidiscover']['wikis'] ) ) {
+			$this->fatalError( 'Cannot decode WikiDiscover data.' );
 		}
 
-		$groups = $data['wikidiscover'] ?? [];
+		$groups = $data['query']['wikidiscover']['wikis'] ?? [];
 
 		$sites = [];
-
 		foreach ( $groups as $groupData ) {
-			if ( isset( $groupData['private'] ) ) {
-				continue;
-			}
-
 			if ( strlen( $groupData['dbname'] ) > 32 ) {
 				continue;
 			}
@@ -152,13 +135,12 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 	/**
 	 * Gets an array of Site objects for all sites of the same language
-	 * subdomain grouping used in the site matrix.
+	 * subdomain grouping used in WikiDiscover.
 	 *
 	 * @param array $langGroup
-	 *
 	 * @return Site[]
 	 */
-	private function getSitesFromLangGroup( array $langGroup ) {
+	private function getSitesFromLangGroup( array $langGroup ): array {
 		$sites = [];
 
 		$site = $this->getSiteFromSiteData( $langGroup );
@@ -169,12 +151,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		return $sites;
 	}
 
-	/**
-	 * @param array $siteData
-	 *
-	 * @return Site
-	 */
-	private function getSiteFromSiteData( array $siteData ) {
+	private function getSiteFromSiteData( array $siteData ): Site {
 		$site = new MediaWikiSite();
 		$site->setGlobalId( $siteData['dbname'] );
 		$site->setGroup( 'miraheze' );
