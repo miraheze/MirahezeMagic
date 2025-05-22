@@ -37,16 +37,6 @@ if ( !class_exists( SitesBuilder::class ) ) {
 	require_once MW_INSTALL_PATH . '/extensions/Wikibase/lib/includes/Sites/SitesBuilder.php';
 }
 
-/**
- * Maintenance script for populating the Sites table from another wiki that runs the
- * WikiDiscover extension.
- *
- * @license GPL-2.0-or-later
- * @author Daniel Kinzler
- * @author Katie Filbert < aude.wiki@gmail.com >
- * @author Paladox
- * @author Universal Omega
- */
 class PopulateWikibaseSitesTable extends Maintenance {
 
 	public function __construct() {
