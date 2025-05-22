@@ -113,7 +113,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				$this->fatalError( "Got no data from $url" );
 			}
 
-			$data = json_decode( $json, true );
+			$data = json_decode( $json ?? '', true );
 			if (
 				!is_array( $data ) ||
 				!isset( $data['query']['wikidiscover']['wikis'] )
@@ -121,7 +121,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				$this->fatalError( 'Cannot decode WikiDiscover data.' );
 			}
 
-			$wikis = $data['query']['wikidiscover']['wikis'];
+			$wikis = $data['query']['wikidiscover']['wikis'] ?? [];
 			$allWikis += $wikis;
 
 			$count = $data['query']['wikidiscover']['count'] ?? 0;
