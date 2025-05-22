@@ -86,6 +86,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$store = $this->getServiceContainer()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			foreach ( $wikis as $wikiId ) {
+				$this->output( "Building sites store for $wikiId\n" );
 				$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 			}
 		} catch ( Exception $e ) {
