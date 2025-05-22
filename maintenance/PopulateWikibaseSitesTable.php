@@ -76,7 +76,6 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 		try {
 			$json = $this->getWikiDiscoverData( $url );
-
 			$sites = $this->sitesFromJson( $json );
 
 			$store = $this->getServiceContainer()->getSiteStore();
@@ -90,15 +89,14 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	}
 
 	protected function getWikiDiscoverData( string $url ): string {
-		$url .= '?action=query&list=wikidiscover&wdlimit=500&wdprop=languagecode|url&wdstate=public&format=json';
+		$url .= '?action=query&list=wikidiscover&wdlimit=500&wdprop=languagecode|url&wdstate=public|undeleted&format=json';
 
 		$json = $this->getServiceContainer()->getHttpRequestFactory()->get(
 			$url, [ 'timeout' => 300 ], __METHOD__
 		);
 
 		if ( !$json ) {
-			$json = '';
-			$this->fatalError( "Got no data from $url\n" );
+			$this->fatalError( "Got no data from $url" );
 		}
 
 		return $json;
