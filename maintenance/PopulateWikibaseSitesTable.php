@@ -76,6 +76,11 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$store = $this->getServiceContainer()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			foreach ( $wikis as $wikiId ) {
+				// Skip wikis not in API response
+				if ( $allWikis && !in_array( $wikiId, array_column( $data, 'dbname' ), true ) ) {
+					continue;
+				}
+
 				$this->output( "Building sites store for $wikiId\n" );
 				$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
 			}
