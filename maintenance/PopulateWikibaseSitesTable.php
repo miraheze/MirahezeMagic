@@ -93,6 +93,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 		$allWikis = [];
 
 		do {
+			$this->output( "Fetching sites with offset: $offset\n" );
 			$url = wfAppendQuery( $baseUrl, [
 				'action' => 'query',
 				'format' => 'json',
@@ -117,7 +118,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$data = json_decode( $json, true );
 			if (
 				!is_array( $data ) ||
-				!isset( $data['query']['wikidiscover']['wikis'] )
+				!isset( $data['query']['wikidiscover'] )
 			) {
 				$this->fatalError( 'Cannot decode WikiDiscover data.' );
 			}
@@ -132,6 +133,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$offset += count( $wikis );
 
 		} while ( $count > 0 );
+
+		if ( !$allWikis ) {
+			$this->fatalError( 'No wikis found' );
+		}
 
 		return $allWikis;
 	}
