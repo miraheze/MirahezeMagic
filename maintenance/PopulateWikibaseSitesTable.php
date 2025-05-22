@@ -123,7 +123,10 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			}
 
 			$wikis = $data['query']['wikidiscover']['wikis'] ?? [];
-			$allWikis += $wikis;
+			$allWikis = array_merge(
+				$allWikis,
+				is_array( $wikis ) ? array_values( $wikis ) : []
+			);
 
 			$count = $data['query']['wikidiscover']['count'] ?? 0;
 			$offset += count( $wikis );
