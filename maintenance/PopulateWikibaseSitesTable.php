@@ -51,7 +51,7 @@ class PopulateWikibaseSitesTable extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Populate the sites table from another wiki that runs the WikiDiscover extension' );
+		$this->addDescription( 'Populate the Sites table from another wiki that runs the WikiDiscover extension.' );
 
 		$this->addOption( 'load-from', "Full URL to the API of the wiki to fetch the site info from. "
 				. "Default is https://meta.miraheze.org/w/api.php", false, true );
@@ -64,12 +64,16 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				. ' is set, the script will try to determine which site group the wiki is part of'
 				. ' and populate interwiki ids for sites in that group.', false, true );
 		$this->addOption( 'valid-groups', 'A array of valid site link groups.', false, true );
+		$this->addOption( 'all-wikis', 'Run on all wikis present in $wgLocalDatabases.' );
 	}
 
 	public function execute(): void {
 		$url = $this->getOption( 'load-from', 'https://meta.miraheze.org/w/api.php' );
 		$siteGroup = $this->getOption( 'site-group' );
-		$wikiId = $this->getOption( 'wiki' );
+		$allWikis = $this->hasOption( 'all-wikis' );
+		$wikis = $allWikis ?
+			$this->getConfig()->get( MainConfigNames::LocalDatabases ) :
+			[ $this->getConfig()->get( MainConfigNames::DBname ) ];
 
 		$groups = [ 'miraheze' ];
 		$validGroups = $this->getOption( 'valid-groups', $groups );
@@ -80,7 +84,9 @@ class PopulateWikibaseSitesTable extends Maintenance {
 
 			$store = $this->getServiceContainer()->getSiteStore();
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
-			$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
+			foreach ( $wikis as $wikiId ) {
+				$sitesBuilder->buildStore( $sites, $siteGroup, $wikiId );
+			}
 		} catch ( Exception $e ) {
 			$this->fatalError( $e->getMessage() );
 		}
