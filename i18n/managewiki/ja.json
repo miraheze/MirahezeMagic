@@ -216,7 +216,7 @@
 	"managewiki-setting-wgMetrolookUseIconWatch-help": "有効にすると、ウォッチ/ウォッチリストから除去ボタンにアイコンが使用されます。",
 	"managewiki-setting-wgMetrolookLine-name": "Metrolook 線",
 	"managewiki-setting-wgMetrolookLine-help": "設定されていない場合、img.line 要素 (サイト名と下矢印/「ファイルのアップロード」リンクの間にある上部メニューの白い区切り線) は生成されません。",
-	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-name": "RelatedArticles フッターに許可されたスキン",
+	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-name": "RelatedArticles フッターに許可された外装",
 	"managewiki-setting-wgRelatedArticlesFooterAllowedSkins-help": "フッターに関連記事が表示されるスキン名のリスト (例: 「minerva」、「vector」)。",
 	"managewiki-setting-wgMultiBoilerplateDiplaySpecialPage-name": "MultiBoilerplate 特別ページをDiplay",
 	"managewiki-setting-wgMultiBoilerplateDiplaySpecialPage-help": "設定されている場合、現在構成されているボイラープレートを表示する 特区別:Boilerplates という名前のページがウィキに追加されます。",
