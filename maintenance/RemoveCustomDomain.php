@@ -43,7 +43,7 @@ class RemoveCustomDomain extends Maintenance {
 		$mwCore = $moduleFactory->core( $this->getOption( 'dbname' ) );
 		$mwCore->setServerName( "" );
 		$mwCore->commit();
-		$this->output( "Custom domain was sucesfully rmeoved" );
+		$this->output( "Custom domain was sucesfully rmeoved\n" );
 	}
 }
 
