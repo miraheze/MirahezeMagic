@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aca",
 			"Vlad5250",
 			"Winston Sung"
 		]
@@ -9,6 +10,6 @@
 	"miraheze-restriction-protect": "Zaštiti",
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
-	"miraheze-uploadtext": "Koristite formu ispod za otpremanje datoteka.\nDa bi ste vidjeli ili pretražili ranije otpremljene datoteke, pogledajte [[Special:FileList|spisak otpremljenih datoteka]]. Otpremanja i ponovna otpremanja su također zapisana u [[Special:Log/upload|dnevniku otpremanja]], a brisanja u [[Special:Log/delete|dnevniku brisanja]].\n\nDa bi ste prikazali datoteku na stranici, koristite link na jedan od slijedećih načina:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datoteka.jpg]]</nowiki></code>''' da upotrijebite potpunu veziju datoteke\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datoteka.png|200px|thumb|lijevo|opis slike]]</nowiki></code>''' da upotrijebite smanjeni prikaz širine 200 piksela unutar okvira, s lijevim poravnanjem i ''opisom slike''.\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Datoteka.ogg]]</nowiki></code>''' za direktno povezivanje datoteke bez njenog prikazivanja\n\nNe zaboravite dodati podatke o licenci (ako je primjenjivo) za otpremanje datoteke. Sve datoteke '''moraju''' poštivati ​​zakon o autorskim pravima Sjedinjenih Američkih Država, opetovano nepoštivanje toga može rezultirati kršenjem autorskih prava i '''zatvaranjem vikija'''.",
+	"miraheze-uploadtext": "Koristite obrazac ispod za otpremanje datoteka.\nDa bi ste vidjeli ili pretražili ranije otpremljene datoteke, pogledajte [[Special:FileList|listu otpremljenih datoteka]]. Otpremanja i ponovna otpremanja su također zapisana u [[Special:Log/upload|dnevniku otpremanja]], a brisanja u [[Special:Log/delete|dnevniku brisanja]].\n\nDa bi ste prikazali datoteku na stranici, koristite vezu na jedan od slijedećih načina:\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datoteka.jpg]]</nowiki></code>''' da upotrijebite potpunu veziju datoteke\n* '''<code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Datoteka.png|200px|thumb|lijevo|opis slike]]</nowiki></code>''' da upotrijebite smanjeni prikaz širine 200 piksela unutar okvira, s lijevim poravnanjem i ''opisom slike''.\n* '''<code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Datoteka.ogg]]</nowiki></code>''' za direktno povezivanje datoteke bez njenog prikazivanja\n\nNe zaboravite dodati podatke o licenci (ako je primjenjivo) za otpremanje datoteke. Sve datoteke '''moraju''' poštivati ​​zakon o autorskim pravima Sjedinjenih Američkih Država, opetovano nepoštivanje toga može rezultirati kršenjem autorskih prava i '''zatvaranjem vikija'''.",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze vikiji"
 }
