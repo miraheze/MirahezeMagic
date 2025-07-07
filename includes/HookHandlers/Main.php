@@ -2,7 +2,9 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
+use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
@@ -41,6 +43,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
+use Miraheze\ImportDump\ImportDumpRequestManager;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Redis;
 use Skin;
@@ -118,8 +121,8 @@ class Main implements
 	 * Avoid filtering automatic account creation
 	 *
 	 * @param VariableHolder $vars
-	 * @param Title $title
-	 * @param User $user
+	 * @param Title $title @phan-unused-param
+	 * @param User $user @phan-unused-param
 	 * @param array &$skipReasons
 	 * @return bool|void
 	 */
@@ -138,15 +141,22 @@ class Main implements
 		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
 		if ( $action === 'autocreateaccount' ) {
 			$skipReasons[] = 'Blocking automatic account creation is not allowed';
-
 			return false;
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param ApiQuerySiteinfo $module @phan-unused-param
+	 */
 	public function onAPIQuerySiteInfoGeneralInfo( $module, &$result ) {
 		$result['miraheze'] = true;
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param DBConnRef $cwdb @phan-unused-param
+	 */
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
 		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
@@ -226,6 +236,10 @@ class Main implements
 		$this->removeMemcachedKey( ".*{$dbname}.*" );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param DBConnRef $cwdb @phan-unused-param
+	 */
 	public function onCreateWikiRename(
 		DBConnRef $cwdb,
 		string $oldDbName,
@@ -394,7 +408,7 @@ class Main implements
 
 		foreach ( $sitemaps as $sitemap ) {
 			$status = $localRepo->getBackend()->quickDelete( [
-				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
+				'src' => $localRepo->getZonePath( 'public' ) . "/sitemaps/$sitemap",
 			] );
 
 			if ( !$status->isOK() ) {
@@ -406,7 +420,7 @@ class Main implements
 				 * not be being deleted for private wikis. We should know that.
 				 */
 				$statusMessage = $statusFormatter->getWikiText( $status );
-				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
+				wfDebugLog( 'MirahezeMagic', "Sitemap \"$sitemap\" failed to delete for $dbname: $statusMessage" );
 			}
 		}
 
@@ -418,6 +432,10 @@ class Main implements
 		$tables['localuser'] = 'lu_wiki';
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param ImportDumpRequestManager $importDumpRequestManager @phan-unused-param
+	 */
 	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		Shell::command( '/bin/rm', $filePath )
@@ -686,6 +704,10 @@ class Main implements
 		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ], __METHOD__ );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param ?DatabaseBlock $priorBlock @phan-unused-param
+	 */
 	public function onBlockIpComplete( $block, $user, $priorBlock ) {
 		// TODO: do we want to add localization support for these keywords, so they match in other languages as well?
 		$blockAlertKeywords = $this->options->get( 'MirahezeReportsBlockAlertKeywords' );
@@ -708,6 +730,10 @@ class Main implements
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param int $id @phan-unused-param
+	 */
 	public function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
 		$username = $title->getText();
 
@@ -786,7 +812,7 @@ class Main implements
 				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
 				$redis->auth( $jobTypeConf['default']['redisConfig']['password'] );
 				$redis->del( $redis->keys( $key ) );
-			} catch ( Throwable $ex ) {
+			} catch ( Throwable ) {
 				// empty
 			}
 		}
@@ -817,7 +843,7 @@ class Main implements
 					}
 				}
 			}
-		} catch ( Throwable $ex ) {
+		} catch ( Throwable ) {
 			// empty
 		}
 	}

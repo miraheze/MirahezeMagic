@@ -46,8 +46,8 @@ class MigrateSearchIndexSql extends Maintenance {
 
 		try {
 			$table = $dbw->tableName( 'searchindex' );
-			$dbw->query( "ALTER TABLE {$table} CONVERT TO CHARACTER SET utf8mb4;", __METHOD__ );
-		} catch ( Exception $e ) {
+			$dbw->query( "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4;", __METHOD__ );
+		} catch ( Exception ) {
 			$this->fatalError( "Failed to alter table 'searchindex'." );
 		}
 

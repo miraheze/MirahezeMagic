@@ -180,8 +180,6 @@ class SpecialVanishUser extends FormSpecialPage {
 	 * @return bool|Status
 	 */
 	public function onSubmit( array $formData ) {
-		$out = $this->getOutput();
-
 		$validCentralAuth = $this->validateCentralAuth( $formData );
 		if ( !$validCentralAuth->isOK() ) {
 			return $validCentralAuth;

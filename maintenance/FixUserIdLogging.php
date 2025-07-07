@@ -44,8 +44,6 @@ class FixUserIdLogging extends Maintenance {
 
 	public function execute() {
 		$dbr = $this->getDB( DB_REPLICA );
-
-		$start = (int)$dbr->selectField( 'logging', 'MIN(log_id)', [], __METHOD__ );
 		$end = (int)$dbr->selectField( 'logging', 'MAX(log_id)', [], __METHOD__ );
 
 		$wrongLogs = 0;
