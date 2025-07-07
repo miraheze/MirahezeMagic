@@ -89,6 +89,10 @@ class FindSQLPatches extends Maintenance {
 		return $patches;
 	}
 
+	/**
+	 * @param string $oldPatch @phan-unused-param
+	 * @param string $newPatch @phan-unused-param
+	 */
 	private function isPatchUpdated( $oldPatch, $newPatch ) {
 		// TO-DO
 	}

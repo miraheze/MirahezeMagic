@@ -111,10 +111,9 @@ class PopulateWikibaseSitesTable extends Maintenance {
 				$url,
 				[ 'timeout' => 300 ],
 				__METHOD__
-			);
+			) ?? '';
 
 			if ( !$json ) {
-				$json = '';
 				$this->fatalError( "Got no data from $url" );
 			}
 
