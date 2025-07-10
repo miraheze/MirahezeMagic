@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Andygol",
 			"DDPAT",
 			"Ice bulldog",
 			"Olghinabella",
@@ -43,7 +44,7 @@
 	"group-proxybot": "Проксі-бот",
 	"group-requestwikiblocked-member": "{{GENDER:$1|Заблокований користувач RequestWiki|Заблокована користувачка RequestWiki}}",
 	"group-requestwikiblocked": "Заблоковані користувачі RequestWiki",
-	"group-rollbacker-member": "{{GENDER:$1|відкочувач|відкочувачка}}",
+	"group-rollbacker-member": "{{GENDER:$1|виконав|виконала}} відкат",
 	"group-rollbacker": "Відкочувачі",
 	"group-steward-member": "{{GENDER:$1|стюард}}",
 	"group-steward": "Стюарди",
