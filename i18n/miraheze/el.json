@@ -7,15 +7,16 @@
 			"NikosLikomitros",
 			"Nikosgranturismogt",
 			"Norhorn",
-			"Protnet"
+			"Protnet",
+			"Warudo"
 		]
 	},
 	"extensions-skins": "Θέματα εμφάνισης",
 	"group-confirmed": "Επιβεβαιωμένοι χρήστες",
-	"group-oversight-member": "επιτηρητής",
-	"group-translationadmin-member": "Διαχειριστής μετάφρασης",
+	"group-oversight-member": "{{GENDER:$1|επιτηρητής|επιτηρήτρια}}",
+	"group-translationadmin-member": "{{GENDER:$1|διαχειριστής|διαχειρίστρια}} μετάφρασης",
 	"group-translationadmin": "Διαχειριστές μετάφρασης",
-	"group-translator-member": "Μεταφραστής",
+	"group-translator-member": "{{GENDER:$1|μεταφραστής|μεταφράστρια}}",
 	"miraheze-donate": "Δωρεά",
 	"miraheze-faq": "Συχνές ερωτήσεις",
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
