@@ -529,6 +529,7 @@ class Main implements
 			'oathauth-step1',
 			'prefs-help-realname',
 			'privacypage',
+			'requestssl-help-target-subdomain',
 			'requestwiki-error-invalidcomment',
 			'requestwiki-info-guidance',
 			'requestwiki-info-guidance-post',
