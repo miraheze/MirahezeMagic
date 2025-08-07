@@ -6,7 +6,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * List new or updated maintenance scripts between two MediaWiki versions.
  *
  * Usage:
- *     php findPossibleUpgradeScripts.php --from-version=current_version --to-version=new_version
+ *     php run.php MirahezeMagic:FindPossibleUpgradeScripts --from-version=current_version --to-version=new_version
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,14 +29,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 
 class FindPossibleUpgradeScripts extends Maintenance {
 
@@ -94,6 +87,10 @@ class FindPossibleUpgradeScripts extends Maintenance {
 		return $scripts;
 	}
 
+	/**
+	 * @param string $oldScript @phan-unused-param
+	 * @param string $newScript @phan-unused-param
+	 */
 	private function isScriptUpdated( $oldScript, $newScript ) {
 		// TO-DO
 	}
@@ -122,5 +119,6 @@ class FindPossibleUpgradeScripts extends Maintenance {
 	}
 }
 
-$maintClass = FindPossibleUpgradeScripts::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return FindPossibleUpgradeScripts::class;
+// @codeCoverageIgnoreEnd

@@ -25,17 +25,10 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 2.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use GenerateSitemap;
-use Maintenance;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 
 class GenerateMirahezeSitemap extends Maintenance {
 
@@ -98,15 +91,12 @@ class GenerateMirahezeSitemap extends Maintenance {
 			}
 
 			// Generate new dump
-			$generateSitemap = $this->runChild(
-				GenerateSitemap::class,
-				MW_INSTALL_PATH . '/maintenance/generateSitemap.php'
-			);
-
+			$generateSitemap = $this->createChild( GenerateSitemap::class );
 			$generateSitemap->setOption( 'fspath', $filePath );
 			$generateSitemap->setOption( 'urlpath', '/sitemaps/' . $dbname . '/sitemaps/' );
 			$generateSitemap->setOption( 'server', $this->getConfig()->get( MainConfigNames::Server ) );
 			$generateSitemap->setOption( 'compress', 'yes' );
+			$generateSitemap->setOption( 'skip-redirects', true );
 			$generateSitemap->execute();
 
 			$backend->prepare( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
@@ -128,5 +118,6 @@ class GenerateMirahezeSitemap extends Maintenance {
 	}
 }
 
-$maintClass = GenerateMirahezeSitemap::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return GenerateMirahezeSitemap::class;
+// @codeCoverageIgnoreEnd

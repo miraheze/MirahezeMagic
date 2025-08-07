@@ -49,12 +49,6 @@
 	"miraheze-requestfeatures": "Побарај можности на вики",
 	"miraheze-requestwiki": "Побарај вики",
 	"miraheze-sidebar-donate": "Дарувајте",
-	"miraheze-survey-access-d": "Дневно",
-	"miraheze-survey-agree": "Се согласувам",
-	"miraheze-survey-disagree": "Не се согласувам",
-	"miraheze-survey-neutral": "Воздржан",
-	"miraheze-survey-no": "Не",
-	"miraheze-survey-yes": "Да",
 	"mirahezemagic-description": "Пораки, скрипти и пресретници за МедијаВики, наменски предвидени за Мирахезе",
 	"protect-level-user": "Допуштај само најавени корисници",
 	"restriction-delete": "Избриши",
@@ -80,6 +74,5 @@
 	"sitematrix-others": "Други викија на Мирахезе",
 	"sitematrix-summary": "На оваа службена страница се наведени сите викија на Мирахезе.",
 	"sitematrix": "Список на викија на Мирахезе",
-	"specialpages-group-wikimanage": "Викираководство",
 	"termsofservice": "Услови на употреба"
 }

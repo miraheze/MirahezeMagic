@@ -33,5 +33,5 @@ jobs:
           pip install -r .github/pythonchecks.txt
       - name: Run tests
         run: |
-          flake8 py --ignore=E501,W503,SFS301
+          flake8 py --ignore=E501,SFS301
           mypy py --ignore-missing-imports

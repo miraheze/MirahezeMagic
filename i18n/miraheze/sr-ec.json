@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aca",
 			"BadDog",
 			"Kizule",
 			"Milicevic01",
@@ -59,8 +60,6 @@
 	"miraheze-requestwiki": "Захтев за вики",
 	"miraheze-sidebar-donate": "Донирање",
 	"miraheze-sitenotice-learnmore": "Сазнајте више",
-	"miraheze-survey-no": "Не",
-	"miraheze-survey-yes": "Да",
 	"mirahezemagic-description": "MediaWiki поруке, скрипте и копче специфичне за Miraheze",
 	"protect-level-user": "Дозволи само пријављене кориснке",
 	"restriction-delete": "Избриши",
@@ -77,7 +76,6 @@
 	"sitematrix-others": "Други Miraheze викији",
 	"sitematrix-summary": "Ова посебна страница наводи све Miraheze викије.",
 	"sitematrix": "Листа Miraheze викија",
-	"specialpages-group-wikimanage": "Вики управљање",
 	"termsofservice": "Услови коришћења",
 	"vanishuser": "Уклони корисника",
 	"vanishuser-log-name": "Дневник учтивих нестанака",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Casserium",
 			"Hedeyohu22",
 			"U.ayaao.p"
 		]
@@ -12,7 +13,7 @@
 	"extensions-skins": "Мәнерлер",
 	"extensions-specialpages": "Арнайы беттер",
 	"extensions-variable": "Айнымалылар",
-	"group-autopatrolled-member": "{{GENDER:$1|өздікті қадағалаушы}}",
+	"group-autopatrolled-member": "{{GENDER:$1|өздігінен қадағалаушы}}",
 	"group-autopatrolled": "Тексерілген қатысушылар",
 	"group-confirmed-member": "{{GENDER:$1|өздіктіқұпталған қатысушы}}",
 	"group-confirmed": "Өздіктіқұпталған қатысушылар",
@@ -50,14 +51,6 @@
 	"miraheze-requestfeatures": "Уикидегі мүмкіндіктерді сұрау",
 	"miraheze-requestwiki": "Уики сұрау",
 	"miraheze-sidebar-donate": "Жәрдем ету",
-	"miraheze-survey-neutral": "Бейтарап",
-	"miraheze-survey-no": "Жоқ",
-	"miraheze-survey-q8-f": "ManageWiki маған қажетті икемділік береді",
-	"miraheze-survey-q8-u": "ManageWiki – бірегей сервис",
-	"miraheze-survey-q9": "Басқа уики хостинг фермаларына қарағанда Miraheze-ні таңдауыңызға қандай да бір себеп бар ма?",
-	"miraheze-survey-q11-d": "Miraheze тек сіз сияқты адамдардың [[m:Special:MyLanguage/Donate|қаржылай көмегі]] арқылы қаржыландырылады.",
-	"miraheze-survey-q11": "Miraheze туралы шындықты білетін төмендегілердің жанындағы құсбелгіні қойыңыз",
-	"miraheze-survey-yes": "Иә",
 	"protect-level-user": "Тек жүйеге кірген қатысушыларға рұқсат ету",
 	"restriction-delete": "Жою",
 	"restriction-level-user": "Тек жүйеге кірген қатысушыларға рұқсат ету",
@@ -83,6 +76,5 @@
 	"sitematrix-others": "Басқа Miraheze уикилер",
 	"sitematrix-summary": "Бұл арнайы бетте барлық Miraheze уикилерінің тізімі берілген.",
 	"sitematrix": "Miraheze-дегі уикилердің тізімі",
-	"specialpages-group-wikimanage": "Уики басқару",
 	"termsofservice": "Қолдану шарты"
 }

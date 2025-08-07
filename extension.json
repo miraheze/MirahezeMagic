@@ -17,9 +17,9 @@
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.42.0",
+		"MediaWiki": ">= 1.43.0",
 		"platform": {
-			"php": ">= 8.0"
+			"php": ">= 8.1"
 		}
 	},
 	"MessagesDirs": {
@@ -33,29 +33,22 @@
 		"MirahezeMagicAliases": "MirahezeMagicAliases.php"
 	},
 	"AutoloadNamespaces": {
-		"Miraheze\\MirahezeMagic\\": "includes/"
+		"Miraheze\\MirahezeMagic\\": "includes/",
+		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
-        "LogActionsHandlers": {
-                "vanishuser/*": "LogFormatter"
-        },
-        "LogHeaders": {
-                "vanishuser": "vanishuser-log-header"
-        },
-        "LogNames": {
-                "vanishuser": "vanishuser-log-name"
-        },
-        "LogTypes": [
-                "vanishuser"
-        ],
+	"LogActionsHandlers": {
+		"vanishuser/*": "LogFormatter"
+	},
+	"LogHeaders": {
+		"vanishuser": "vanishuser-log-header"
+	},
+	"LogNames": {
+		"vanishuser": "vanishuser-log-name"
+	},
+	"LogTypes": [
+		"vanishuser"
+	],
 	"SpecialPages": {
-		"MirahezeSurvey": {
-			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialMirahezeSurvey",
-			"services": [
-				"ConfigFactory",
-				"DBLoadBalancerFactory",
-				"UserOptionsLookup"
-			]
-		},
 		"VanishUser": {
 			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
 			"services" : [
@@ -73,6 +66,9 @@
 		"AbuseFilterShouldFilterAction": {
 			"handler": "Main"
 		},
+		"APIQuerySiteInfoGeneralInfo": {
+			"handler": "Main"
+		},
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
@@ -85,9 +81,6 @@
 		"CreateWikiDeletion": {
 			"handler": "Main"
 		},
-		"CreateWikiReadPersistentModel": {
-			"handler": "Main"
-		},
 		"CreateWikiRename": {
 			"handler": "Main"
 		},
@@ -95,9 +88,6 @@
 			"handler": "Main"
 		},
 		"CreateWikiTables": {
-			"handler": "Main"
-		},
-		"CreateWikiWritePersistentModel": {
 			"handler": "Main"
 		},
 		"GetLocalURL::Internal": {
@@ -147,8 +137,10 @@
 			"services": [
 				"MainConfig",
 				"CommentStore",
-				"DBLoadBalancerFactory",
-				"HttpRequestFactory"
+				"ConnectionProvider",
+				"HttpRequestFactory",
+				"LinkRenderer",
+				"ManageWikiModuleFactory"
 			]
 		},
 		"RequestWiki": {
@@ -186,10 +178,6 @@
 		"MirahezeReportsWriteKey": {
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
-		},
-		"MirahezeSurveyEnabled": {
-			"description": "Boolean. Enable Miraheze Annual Survey?",
-			"value": true
 		}
 	},
 	"ConfigRegistry": {

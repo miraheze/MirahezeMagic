@@ -6,7 +6,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * Rebuild the version cache.
  *
  * Usage:
- *    php rebuildVersionCache.php
+ *    php run.php MirahezeMagic:RebuildVersionCache
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,18 +30,11 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 3.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use ExtensionProcessor;
-use FormatJson;
-use Maintenance;
 use MediaWiki\Config\HashConfig;
+use MediaWiki\Json\FormatJson;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionProcessor;
 
 /**
  * Maintenance script to rebuild the version cache.
@@ -57,16 +50,14 @@ class RebuildVersionCache extends Maintenance {
 
 		$this->addDescription( 'Rebuild the version cache' );
 		$this->addOption( 'save-gitinfo', 'Save gitinfo.json files' );
-		$this->addOption( 'version', 'MediaWiki version to save gitinfo.json files for' );
+		$this->addOption( 'version', 'MediaWiki version to save gitinfo.json files for', false, true );
 	}
 
 	public function execute() {
 		$hashConfig = new HashConfig();
-
 		$hashConfig->set( MainConfigNames::ShellRestrictionMethod, false );
 
 		$baseDirectory = MW_INSTALL_PATH;
-
 		$this->saveCache( $baseDirectory );
 
 		$cache = $this->getServiceContainer()
@@ -75,14 +66,14 @@ class RebuildVersionCache extends Maintenance {
 		$coreId = $this->getGitInfo( $baseDirectory )['headSHA1'] ?? '';
 
 		$queue = array_fill_keys( array_merge(
-				glob( $baseDirectory . '/extensions/*/extension*.json' ),
-				glob( $baseDirectory . '/skins/*/skin.json' )
+				glob( "$baseDirectory/extensions/*/extension*.json" ),
+				glob( "$baseDirectory/skins/*/skin.json" )
 			),
 		true );
 
 		$processor = new ExtensionProcessor();
 
-		foreach ( $queue as $path => $mtime ) {
+		foreach ( $queue as $path => $_ ) {
 			$json = file_get_contents( $path );
 			$info = json_decode( $json, true );
 			if ( $info === null ) {
@@ -105,17 +96,17 @@ class RebuildVersionCache extends Maintenance {
 		}
 
 		$version = $this->getOption( 'version' );
-		foreach ( $extensionCredits as $extension => $extensionData ) {
+		foreach ( $extensionCredits as $extensionData ) {
 			if ( isset( $extensionData['path'] ) ) {
 				$extensionDirectory = dirname( $extensionData['path'] );
-				$extensionPath = str_replace( '/srv/mediawiki/' . $version, $baseDirectory, $extensionDirectory );
+				$extensionPath = str_replace( "/srv/mediawiki/$version", $baseDirectory, $extensionDirectory );
 
 				if ( $this->hasOption( 'save-gitinfo' ) ) {
 					$this->saveCache( $extensionPath );
 				}
 
 				$memcKey = $cache->makeKey(
-					'specialversion-ext-version-text', str_replace( $baseDirectory, '/srv/mediawiki/' . $version, $extensionData['path'] ), $coreId
+					'specialversion-ext-version-text', str_replace( $baseDirectory, "/srv/mediawiki/$version", $extensionData['path'] ), $coreId
 				);
 
 				$cache->delete( $memcKey );
@@ -124,7 +115,7 @@ class RebuildVersionCache extends Maintenance {
 	}
 
 	private function getGitInfo( string $directory ): ?array {
-		$gitDir = $directory . '/.git';
+		$gitDir = "$directory/.git";
 		if ( !file_exists( $gitDir ) ) {
 			return null;
 		}
@@ -177,7 +168,6 @@ class RebuildVersionCache extends Maintenance {
 
 	private function getCacheFilePath( string $repoDir ) {
 		$gitInfoCacheDirectory = '/srv/mediawiki/cache/' . $this->getOption( 'version' ) . '/gitinfo';
-
 		$baseDir = MW_INSTALL_PATH;
 
 		if ( $gitInfoCacheDirectory ) {
@@ -199,8 +189,8 @@ class RebuildVersionCache extends Maintenance {
 			// Transform path to git repo to something we can safely embed in
 			// a filename
 			$repoName = strtr( $repoName, DIRECTORY_SEPARATOR, '-' );
-			$fileName = 'info' . $repoName . '.json';
-			return "{$gitInfoCacheDirectory}/{$fileName}";
+			$fileName = "info$repoName.json";
+			return "$gitInfoCacheDirectory/$fileName";
 		}
 
 		return "$repoDir/gitinfo.json";
@@ -211,12 +201,13 @@ class RebuildVersionCache extends Maintenance {
 		if ( !( file_exists( $cacheDir ) || wfMkdirParents( $cacheDir, null, __METHOD__ ) )
 			|| !is_writable( $cacheDir )
 		) {
-			$this->fatalError( "Unable to create GitInfo cache \"{$cacheDir}\"" );
+			$this->fatalError( "Unable to create GitInfo cache \"$cacheDir\"" );
 		}
 
 		file_put_contents( $this->getCacheFilePath( $repoDir ), FormatJson::encode( $this->getGitInfo( $repoDir ) ) );
 	}
 }
 
-$maintClass = RebuildVersionCache::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return RebuildVersionCache::class;
+// @codeCoverageIgnoreEnd

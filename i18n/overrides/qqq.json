@@ -9,10 +9,11 @@
 			"McDutchie",
 			"RhinosF1",
 			"Robby",
-			"Verdy p"
+			"Verdy p",
+			"Woytecr"
 		]
 	},
-	"miraheze-centralauth-groupname": "Miraheze",
+	"miraheze-centralauth-groupname": "{{Optional}}",
 	"miraheze-createwiki-close-email-body": "A message from the email when a wiki was closed. \"Closed\" refers to {{msg-mw|Managewiki-label-closed}}.",
 	"miraheze-createwiki-close-email-sender": "{{Optional}}",
 	"miraheze-createwiki-close-email-subject": "A subject for the closed wiki on email.",
@@ -42,5 +43,6 @@
 	"miraheze-prefs-help-realname": "Real name is optional. If you choose to provide it, this will be used for giving you attribution for your work. Also, by using a wiki hosted by Miraheze, you agree to the <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Terms of Use]</span> and accept the <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Privacy Policy]</span>",
 	"miraheze-privacypage": "m:Special:MyLanguage/Privacy Policy",
 	"miraheze-skinname-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional.",
-	"miraheze-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional."
+	"miraheze-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional.",
+	"miraheze-vector-night-mode-issue-reporting-notice-url": "{{ignored}}\nURL for reporting issues in night mode."
 }

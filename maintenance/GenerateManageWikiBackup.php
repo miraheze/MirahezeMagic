@@ -24,16 +24,8 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
 use MediaWiki\MainConfigNames;
-use Miraheze\DataDump\DataDump;
+use MediaWiki\Maintenance\Maintenance;
 
 class GenerateManageWikiBackup extends Maintenance {
 
@@ -44,23 +36,27 @@ class GenerateManageWikiBackup extends Maintenance {
 
 	public function execute() {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-		$dbw = $this->getDB( DB_PRIMARY, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
+
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$dbr = $connectionProvider->getReplicaDatabase( 'virtual-createwiki' );
 
 		$buildArray = [];
 
-		$nsObjects = $dbw->select(
+		$nsObjects = $dbr->select(
 			'mw_namespaces',
 			'*',
-			[ 'ns_dbname' => $dbname ]
+			[ 'ns_dbname' => $dbname ],
+			__METHOD__
 		);
 
-		$permObjects = $dbw->select(
+		$permObjects = $dbr->select(
 			'mw_permissions',
 			'*',
-			[ 'perm_dbname' => $dbname ]
+			[ 'perm_dbname' => $dbname ],
+			__METHOD__
 		);
 
-		$settingsObjects = $dbw->selectRow(
+		$settingsObjects = $dbr->selectRow(
 			'mw_settings',
 			'*',
 			[ 's_dbname' => $dbname ],
@@ -112,7 +108,7 @@ class GenerateManageWikiBackup extends Maintenance {
 			];
 		}
 
-		$backend = DataDump::getBackend();
+		$backend = $this->getServiceContainer()->get( 'DataDumpFileBackend' )->getBackend();
 		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'dumps-backup' ) ] );
 
 		$backend->quickCreate( [
@@ -123,5 +119,6 @@ class GenerateManageWikiBackup extends Maintenance {
 	}
 }
 
-$maintClass = GenerateManageWikiBackup::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return GenerateManageWikiBackup::class;
+// @codeCoverageIgnoreEnd

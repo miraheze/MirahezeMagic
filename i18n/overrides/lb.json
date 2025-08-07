@@ -1,12 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
+	"miraheze-createwiki-defaultmainpage-summary": "Wëllkomm op Miraheze!",
+	"miraheze-createwiki-email-subject": "Är nei Miraheze-Wiki ($1) gouf ugeluecht",
 	"miraheze-dberr-problems": "Dës Wiki ass den Ament net disponibel",
 	"miraheze-restriction-delete": "Läschen",
 	"miraheze-restriction-protect": "Spären",
 	"miraheze-skinname-snapwikiskin": "Snap!",
-	"miraheze-snapwikiskin": "Snap!"
+	"miraheze-snapwikiskin": "Snap!",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze-Wikien"
 }

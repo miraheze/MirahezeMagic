@@ -24,15 +24,8 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 use MirahezeFunctions;
 
 class ChangeMediaWikiVersion extends Maintenance {
@@ -76,14 +69,21 @@ class ChangeMediaWikiVersion extends Maintenance {
 				}
 
 				$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
+				$remoteWiki->disableResetDatabaseLists();
 
-				$remoteWiki->addNewRow( row: 'wiki_version', value: $newVersion );
-				$remoteWiki->trackChange( 'mediawiki-version', $oldVersion, $newVersion );
+				$remoteWiki->setExtraFieldData(
+					'mediawiki-version', $newVersion, default: $oldVersion
+				);
+
 				$remoteWiki->commit();
-
 				$this->output( "Upgraded $dbname from $oldVersion to $newVersion\n" );
 			}
 		}
+
+		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
+		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
+		$data = $dataFactory->newInstance( $databaseUtils->getCentralWikiID() );
+		$data->resetDatabaseLists( isNewChanges: true );
 	}
 
 	private function getWikiDbNamesByRegex( string $pattern ): array {
@@ -100,5 +100,6 @@ class ChangeMediaWikiVersion extends Maintenance {
 	}
 }
 
-$maintClass = ChangeMediaWikiVersion::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return ChangeMediaWikiVersion::class;
+// @codeCoverageIgnoreEnd

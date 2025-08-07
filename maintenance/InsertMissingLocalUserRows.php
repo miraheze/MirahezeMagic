@@ -24,16 +24,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\WikiMap\WikiMap;
 
 class InsertMissingLocalUserRows extends Maintenance {
@@ -49,17 +42,22 @@ class InsertMissingLocalUserRows extends Maintenance {
 		$dryRun = $this->getOption( 'dry-run', false );
 		$all = $this->getOption( 'all-wikis', false );
 
-		$centralDB = $this->getServiceContainer()->getDBLoadBalancerFactory()
-			->getMainLB( $this->getConfig()->get( 'CentralAuthDatabase' ) )
-			->getMaintenanceConnectionRef( DB_REPLICA, [], $this->getConfig()->get( 'CentralAuthDatabase' ) );
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$centralDB = $connectionProvider->getReplicaDatabase( $this->getConfig()->get( 'CentralAuthDatabase' ) );
 
 		foreach ( ( $all ? $this->getConfig()->get( MainConfigNames::LocalDatabases ) : [ WikiMap::getCurrentWikiId() ] ) as $wiki ) {
-			$lb = $this->getServiceContainer()->getDBLoadBalancerFactory()->getMainLB( $wiki );
-
-			$res = $lb->getMaintenanceConnectionRef( DB_REPLICA, [], $wiki )->select(
+			$res = $connectionProvider->getReplicaDatabase( $wiki )->select(
 				'user',
 				[ 'user_name' ],
 				[
+					'user_name != "CreateWiki AI"',
+					'user_name != "CreateWiki Extension"',
+					'user_name != "RequestSSL Extension"',
+					'user_name != "RequestSSL Status Update"',
+					'user_name != "ImportDump Extension"',
+					'user_name != "ImportDump Status Update"',
+					'user_name != "Global rename script"',
+					'user_name != "⧼abusefilter-blocker⧽"',
 					'user_name != "MediaWiki default"',
 					'user_name != "New user message"',
 					'user_name != "Babel AutoCreate"',
@@ -102,5 +100,6 @@ class InsertMissingLocalUserRows extends Maintenance {
 	}
 }
 
-$maintClass = InsertMissingLocalUserRows::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return InsertMissingLocalUserRows::class;
+// @codeCoverageIgnoreEnd

@@ -2,14 +2,7 @@
 
 namespace Miraheze\MirahezeMagic\Maintenance;
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 
 class GenerateExtensionDatabaseList extends Maintenance {
 
@@ -29,7 +22,8 @@ class GenerateExtensionDatabaseList extends Maintenance {
 		$extArray = $this->getOption( 'extension' );
 		$directory = $this->getOption( 'directory' );
 
-		$dbr = $this->getDB( DB_REPLICA, [], $this->getConfig()->get( 'CreateWikiDatabase' ) );
+		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
+		$dbr = $connectionProvider->getReplicaDatabase( 'virtual-createwiki' );
 
 		foreach ( $extArray as $ext ) {
 			$list = [];
@@ -64,5 +58,6 @@ class GenerateExtensionDatabaseList extends Maintenance {
 	}
 }
 
-$maintClass = GenerateExtensionDatabaseList::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return GenerateExtensionDatabaseList::class;
+// @codeCoverageIgnoreEnd

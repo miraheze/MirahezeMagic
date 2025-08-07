@@ -2,6 +2,9 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\Api\ApiQuerySiteinfo;
+use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
+use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
@@ -21,7 +24,7 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Linker\Linker;
+use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
@@ -34,32 +37,30 @@ use MediaWiki\WikiMap\WikiMap;
 use Memcached;
 use MessageCache;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiReadPersistentModelHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiWritePersistentModelHook;
+use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
-use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Miraheze\ImportDump\ImportDumpRequestManager;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Redis;
 use Skin;
 use Throwable;
 use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\DBConnRef;
-use Wikimedia\Rdbms\ILBFactory;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 class Main implements
 	AbuseFilterShouldFilterActionHook,
+	APIQuerySiteInfoGeneralInfoHook,
 	BlockIpCompleteHook,
 	ContributionsToolLinksHook,
 	CreateWikiDeletionHook,
-	CreateWikiReadPersistentModelHook,
 	CreateWikiRenameHook,
 	CreateWikiStatePrivateHook,
 	CreateWikiTablesHook,
-	CreateWikiWritePersistentModelHook,
 	GetLocalURL__InternalHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
@@ -72,72 +73,47 @@ class Main implements
 	UserGetRightsRemoveHook
 {
 
-	/** @var ServiceOptions */
-	private $options;
-
-	/** @var CommentStore */
-	private $commentStore;
-
-	/** @var ILBFactory */
-	private $dbLoadBalancerFactory;
-
-	/** @var HttpRequestFactory */
-	private $httpRequestFactory;
-
-	/**
-	 * @param ServiceOptions $options
-	 * @param CommentStore $commentStore
-	 * @param ILBFactory $dbLoadBalancerFactory
-	 * @param HttpRequestFactory $httpRequestFactory
-	 */
 	public function __construct(
-		ServiceOptions $options,
-		CommentStore $commentStore,
-		ILBFactory $dbLoadBalancerFactory,
-		HttpRequestFactory $httpRequestFactory
+		private readonly ServiceOptions $options,
+		private readonly CommentStore $commentStore,
+		private readonly IConnectionProvider $connectionProvider,
+		private readonly HttpRequestFactory $httpRequestFactory,
+		private readonly LinkRenderer $linkRenderer,
+		private readonly ModuleFactory $moduleFactory
 	) {
-		$this->options = $options;
-		$this->commentStore = $commentStore;
-		$this->dbLoadBalancerFactory = $dbLoadBalancerFactory;
-		$this->httpRequestFactory = $httpRequestFactory;
 	}
 
-	/**
-	 * @param Config $mainConfig
-	 * @param CommentStore $commentStore
-	 * @param ILBFactory $dbLoadBalancerFactory
-	 * @param HttpRequestFactory $httpRequestFactory
-	 *
-	 * @return self
-	 */
 	public static function factory(
 		Config $mainConfig,
 		CommentStore $commentStore,
-		ILBFactory $dbLoadBalancerFactory,
-		HttpRequestFactory $httpRequestFactory
+		IConnectionProvider $connectionProvider,
+		HttpRequestFactory $httpRequestFactory,
+		LinkRenderer $linkRenderer,
+		ModuleFactory $moduleFactory
 	): self {
 		return new self(
 			new ServiceOptions(
 				[
-					'ArticlePath',
 					'CreateWikiCacheDirectory',
-					'CreateWikiGlobalWiki',
 					'EchoSharedTrackingDB',
-					'JobTypeConf',
-					'LanguageCode',
-					'LocalDatabases',
 					'ManageWikiSettings',
 					'MirahezeMagicAccessIdsMap',
 					'MirahezeMagicMemcachedServers',
 					'MirahezeReportsBlockAlertKeywords',
 					'MirahezeReportsWriteKey',
-					'Script',
+					MainConfigNames::ArticlePath,
+					MainConfigNames::JobTypeConf,
+					MainConfigNames::LanguageCode,
+					MainConfigNames::LocalDatabases,
+					MainConfigNames::Script,
 				],
 				$mainConfig
 			),
 			$commentStore,
-			$dbLoadBalancerFactory,
-			$httpRequestFactory
+			$connectionProvider,
+			$httpRequestFactory,
+			$linkRenderer,
+			$moduleFactory
 		);
 	}
 
@@ -145,8 +121,8 @@ class Main implements
 	 * Avoid filtering automatic account creation
 	 *
 	 * @param VariableHolder $vars
-	 * @param Title $title
-	 * @param User $user
+	 * @param Title $title @phan-unused-param
+	 * @param User $user @phan-unused-param
 	 * @param array &$skipReasons
 	 * @return bool|void
 	 */
@@ -165,31 +141,57 @@ class Main implements
 		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
 		if ( $action === 'autocreateaccount' ) {
 			$skipReasons[] = 'Blocking automatic account creation is not allowed';
-
 			return false;
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param ApiQuerySiteinfo $module @phan-unused-param
+	 */
+	public function onAPIQuerySiteInfoGeneralInfo( $module, &$result ) {
+		$result['miraheze'] = true;
+	}
+
+	/**
+	 * @inheritDoc
+	 * @param DBConnRef $cwdb @phan-unused-param
+	 */
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
-		global $wmgSwiftPassword;
+		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
-		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
-		$dbw = $this->dbLoadBalancerFactory->getMainLB(
-			$echoSharedTrackingDB
-		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
+		$dbw = $this->connectionProvider->getPrimaryDatabase(
+			$this->options->get( 'EchoSharedTrackingDB' )
+		);
 
-		$dbw->delete( 'echo_unread_wikis', [ 'euw_wiki' => $dbname ] );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'echo_unread_wikis' )
+			->where( [ 'euw_wiki' => $dbname ] )
+			->caller( __METHOD__ )
+			->execute();
+
+		if ( $wgGlobalUsageDatabase ) {
+			$gudDb = $this->connectionProvider->getPrimaryDatabase(
+				$wgGlobalUsageDatabase
+			);
+
+			$gudDb->newDeleteQueryBuilder()
+				->deleteFrom( 'globalimagelinks' )
+				->where( [ 'gil_wiki' => $dbname ] )
+				->caller( __METHOD__ )
+				->execute();
+		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = new ManageWikiSettings( $db );
+			$mwSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $dbname
+					$mwSettings->list( $var ) === $dbname
 				) {
-					$manageWikiSettings->remove( $var );
-					$manageWikiSettings->commit();
+					$mwSettings->remove( [ $var ], default: null );
+					$mwSettings->commit();
 				}
 			}
 		}
@@ -201,7 +203,7 @@ class Main implements
 			trim( Shell::command(
 				'swift', 'list',
 				'--prefix', 'miraheze-' . $dbname . '-',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -222,7 +224,7 @@ class Main implements
 				$container,
 				'--object-threads', '1',
 				'--container-threads', '1',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -234,30 +236,51 @@ class Main implements
 		$this->removeMemcachedKey( ".*{$dbname}.*" );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param DBConnRef $cwdb @phan-unused-param
+	 */
 	public function onCreateWikiRename(
 		DBConnRef $cwdb,
 		string $oldDbName,
 		string $newDbName
 	): void {
-		global $wmgSwiftPassword;
+		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
 
-		$echoSharedTrackingDB = $this->options->get( 'EchoSharedTrackingDB' );
-		$dbw = $this->dbLoadBalancerFactory->getMainLB(
-			$echoSharedTrackingDB
-		)->getMaintenanceConnectionRef( DB_PRIMARY, [], $echoSharedTrackingDB );
+		$dbw = $this->connectionProvider->getPrimaryDatabase(
+			$this->options->get( 'EchoSharedTrackingDB' )
+		);
 
-		$dbw->update( 'echo_unread_wikis', [ 'euw_wiki' => $newDbName ], [ 'euw_wiki' => $oldDbName ] );
+		$dbw->newUpdateQueryBuilder()
+			->update( 'echo_unread_wikis' )
+			->set( [ 'euw_wiki' => $newDbName ] )
+			->where( [ 'euw_wiki' => $oldDbName ] )
+			->caller( __METHOD__ )
+			->execute();
+
+		if ( $wgGlobalUsageDatabase ) {
+			$gudDb = $this->connectionProvider->getPrimaryDatabase(
+				$wgGlobalUsageDatabase
+			);
+
+			$gudDb->newUpdateQueryBuilder()
+				->update( 'globalimagelinks' )
+				->set( [ 'gil_wiki' => $newDbName ] )
+				->where( [ 'gil_wiki' => $oldDbName ] )
+				->caller( __METHOD__ )
+				->execute();
+		}
 
 		foreach ( $this->options->get( MainConfigNames::LocalDatabases ) as $db ) {
-			$manageWikiSettings = new ManageWikiSettings( $db );
+			$mwSettings = $this->moduleFactory->settings( $db );
 
 			foreach ( $this->options->get( 'ManageWikiSettings' ) as $var => $setConfig ) {
 				if (
 					$setConfig['type'] === 'database' &&
-					$manageWikiSettings->list( $var ) === $oldDbName
+					$mwSettings->list( $var ) === $oldDbName
 				) {
-					$manageWikiSettings->modify( [ $var => $newDbName ] );
-					$manageWikiSettings->commit();
+					$mwSettings->modify( [ $var => $newDbName ], default: null );
+					$mwSettings->commit();
 				}
 			}
 		}
@@ -269,7 +292,7 @@ class Main implements
 			trim( Shell::command(
 				'swift', 'list',
 				'--prefix', 'miraheze-' . $oldDbName . '-',
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -288,7 +311,7 @@ class Main implements
 			$oldContainerList = Shell::command(
 				'swift', 'list',
 				$container,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -300,7 +323,7 @@ class Main implements
 				'swift', 'download',
 				$container,
 				'-D', wfTempDir() . '/' . $container,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -318,7 +341,7 @@ class Main implements
 					$newContainer,
 					wfTempDir() . '/' . $container,
 					'--object-name', '""',
-					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
 				] )
@@ -329,7 +352,7 @@ class Main implements
 			$newContainerList = Shell::command(
 				'swift', 'list',
 				$newContainer,
-				'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
 				'-K', $wmgSwiftPassword
 			)->limits( $limits )
@@ -344,7 +367,7 @@ class Main implements
 				Shell::command(
 					'swift', 'delete',
 					$container,
-					'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
 					'-K', $wmgSwiftPassword
 				)->limits( $limits )
@@ -367,14 +390,9 @@ class Main implements
 			}
 		}
 
-		$scriptOptions = [ 'wrapper' => MW_INSTALL_PATH . '/maintenance/run.php' ];
-
 		Shell::makeScriptCommand(
-			MW_INSTALL_PATH . '/extensions/CreateWiki/maintenance/setContainersAccess.php',
-			[
-				'--wiki', $newDbName
-			],
-			$scriptOptions
+			SetContainersAccess::class,
+			[ '--wiki', $newDbName ]
 		)->limits( $limits )->execute();
 
 		$this->removeRedisKey( "*{$oldDbName}*" );
@@ -390,7 +408,7 @@ class Main implements
 
 		foreach ( $sitemaps as $sitemap ) {
 			$status = $localRepo->getBackend()->quickDelete( [
-				'src' => $localRepo->getZonePath( 'public' ) . '/sitemaps/' . $sitemap,
+				'src' => $localRepo->getZonePath( 'public' ) . "/sitemaps/$sitemap",
 			] );
 
 			if ( !$status->isOK() ) {
@@ -402,42 +420,22 @@ class Main implements
 				 * not be being deleted for private wikis. We should know that.
 				 */
 				$statusMessage = $statusFormatter->getWikiText( $status );
-				wfDebugLog( 'MirahezeMagic', "Sitemap \"{$sitemap}\" failed to delete: {$statusMessage}" );
+				wfDebugLog( 'MirahezeMagic', "Sitemap \"$sitemap\" failed to delete for $dbname: $statusMessage" );
 			}
 		}
 
 		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
-	public function onCreateWikiTables( array &$cTables ): void {
-		$cTables['localnames'] = 'ln_wiki';
-		$cTables['localuser'] = 'lu_wiki';
+	public function onCreateWikiTables( array &$tables ): void {
+		$tables['localnames'] = 'ln_wiki';
+		$tables['localuser'] = 'lu_wiki';
 	}
 
-	public function onCreateWikiReadPersistentModel( string &$pipeline ): void {
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-		if ( $backend->fileExists( [ 'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml' ] ) ) {
-			$pipeline = unserialize(
-				$backend->getFileContents( [
-					'src' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
-				] )
-			);
-		}
-	}
-
-	public function onCreateWikiWritePersistentModel( string $pipeline ): bool {
-		$backend = MediaWikiServices::getInstance()->getFileBackendGroup()->get( 'miraheze-swift' );
-		$backend->prepare( [ 'dir' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) ] );
-
-		$backend->quickCreate( [
-			'dst' => $backend->getContainerStoragePath( 'createwiki-persistent-model' ) . '/requestmodel.phpml',
-			'content' => $pipeline,
-			'overwrite' => true,
-		] );
-
-		return true;
-	}
-
+	/**
+	 * @inheritDoc
+	 * @param ImportDumpRequestManager $importDumpRequestManager @phan-unused-param
+	 */
 	public function onImportDumpJobAfterImport( $filePath, $importDumpRequestManager ): void {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		Shell::command( '/bin/rm', $filePath )
@@ -449,7 +447,7 @@ class Main implements
 	public function onImportDumpJobGetFile( &$filePath, $importDumpRequestManager ): void {
 		global $wmgSwiftPassword;
 
-		$dbr = $this->dbLoadBalancerFactory->getReplicaDatabase( 'virtual-importdump' );
+		$dbr = $this->connectionProvider->getReplicaDatabase( 'virtual-importdump' );
 
 		$container = $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :
@@ -462,7 +460,7 @@ class Main implements
 			$container,
 			$importDumpRequestManager->getSplitFilePath(),
 			'-o', $filePath,
-			'-A', 'https://swift-lb.miraheze.org/auth/v1.0',
+			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
 			'-K', $wmgSwiftPassword
 		)->limits( $limits )
@@ -495,6 +493,7 @@ class Main implements
 			'createwiki-label-reason',
 			'dberr-again',
 			'dberr-problems',
+			'globalblocking-blockedtext-blocker-admin',
 			'globalblocking-ipblocked-range',
 			'globalblocking-ipblocked-xff',
 			'globalblocking-ipblocked',
@@ -529,6 +528,7 @@ class Main implements
 			'oathauth-step1',
 			'prefs-help-realname',
 			'privacypage',
+			'requestssl-help-target-subdomain',
 			'requestwiki-error-invalidcomment',
 			'requestwiki-info-guidance',
 			'requestwiki-info-guidance-post',
@@ -541,6 +541,7 @@ class Main implements
 			'uploadtext',
 			'webauthn-module-description',
 			'wikibase-sitelinks-miraheze',
+			'vector-night-mode-issue-reporting-notice-url'
 		];
 
 		$languageCode = $this->options->get( MainConfigNames::LanguageCode );
@@ -613,15 +614,14 @@ class Main implements
 	public function onGlobalUserPageWikis( array &$list ): bool {
 		$cwCacheDir = $this->options->get( 'CreateWikiCacheDirectory' );
 
-		if ( file_exists( "{$cwCacheDir}/databases.php" ) ) {
-			$databasesArray = include "{$cwCacheDir}/databases.php";
-
+		if ( file_exists( "$cwCacheDir/databases.php" ) ) {
+			$databasesArray = include "$cwCacheDir/databases.php";
 			$dbList = array_keys( $databasesArray['databases'] ?? [] );
 
 			// Filter out those databases that don't have GlobalUserPage enabled
-			$list = array_filter( $dbList, static function ( $dbname ) {
-				$extensions = new ManageWikiExtensions( $dbname );
-				return in_array( 'globaluserpage', $extensions->list() );
+			$list = array_filter( $dbList, function ( $dbname ) {
+				$mwExtensions = $this->moduleFactory->extensions( $dbname );
+				return in_array( 'globaluserpage', $mwExtensions->list(), true );
 			} );
 
 			return false;
@@ -663,17 +663,17 @@ class Main implements
 
 		if ( $cwConfig->get( 'Closed' ) ) {
 			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
 			} elseif ( $cwConfig->get( 'Locked' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
 			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
 			}
 		} elseif ( $cwConfig->get( 'Inactive' ) && $cwConfig->get( 'Inactive' ) !== 'exempt' ) {
 			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive-private' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive-private' )->parse() . '</span></div>';
 			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.miraheze.org/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
+				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
 			}
 		}
 	}
@@ -701,9 +701,13 @@ class Main implements
 			'comment' => $this->commentStore->getComment( 'rc_comment', $recentChange->mAttribs )->text,
 		];
 
-		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ] );
+		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ], __METHOD__ );
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param ?DatabaseBlock $priorBlock @phan-unused-param
+	 */
 	public function onBlockIpComplete( $block, $user, $priorBlock ) {
 		// TODO: do we want to add localization support for these keywords, so they match in other languages as well?
 		$blockAlertKeywords = $this->options->get( 'MirahezeReportsBlockAlertKeywords' );
@@ -719,13 +723,17 @@ class Main implements
 					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID is: ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
-				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ] );
+				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ], __METHOD__ );
 
 				break;
 			}
 		}
 	}
 
+	/**
+	 * @inheritDoc
+	 * @param int $id @phan-unused-param
+	 */
 	public function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
 		$username = $title->getText();
 
@@ -740,9 +748,10 @@ class Main implements
 				return;
 			}
 
-			$tools['centralauth'] = Linker::makeExternalLink(
+			$tools['centralauth'] = $this->linkRenderer->makeExternalLink(
 				'https://meta.miraheze.org/wiki/Special:CentralAuth/' . $username,
-				strtolower( $specialPage->msg( 'centralauth' )->text() )
+				strtolower( $specialPage->msg( 'centralauth' )->text() ),
+				SpecialPage::getTitleFor( 'CentralAuth' )
 			);
 		}
 	}
@@ -803,7 +812,7 @@ class Main implements
 				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
 				$redis->auth( $jobTypeConf['default']['redisConfig']['password'] );
 				$redis->del( $redis->keys( $key ) );
-			} catch ( Throwable $ex ) {
+			} catch ( Throwable ) {
 				// empty
 			}
 		}
@@ -834,7 +843,7 @@ class Main implements
 					}
 				}
 			}
-		} catch ( Throwable $ex ) {
+		} catch ( Throwable ) {
 			// empty
 		}
 	}

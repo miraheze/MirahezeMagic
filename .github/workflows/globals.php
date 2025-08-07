@@ -14,7 +14,7 @@ function wfOnMediaWikiServices( MediaWikiServices $services ) {
 		$db = wfInitDBConnection();
 
 		$db->selectDomain( 'wikidb' );
-		if ( !$db->tableExists( 'echo_unread_wikis' ) ) {
+		if ( !$db->tableExists( 'echo_unread_wikis', __METHOD__ ) ) {
 			$db->sourceFile( MW_INSTALL_PATH . '/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql' );
 		}
 
@@ -22,4 +22,11 @@ function wfOnMediaWikiServices( MediaWikiServices $services ) {
 	} catch ( DBQueryError $e ) {
 		return;
 	}
+}
+
+function wfInitDBConnection() {
+	return MediaWikiServices::getInstance()->getDatabaseFactory()->create( 'mysql', [
+		'host' => $GLOBALS['wgDBserver'],
+		'user' => 'root',
+	] );
 }

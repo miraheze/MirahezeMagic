@@ -27,7 +27,6 @@
 	"miraheze-requestfeatures": "Sol·licitar característiques per a la seva wiki",
 	"miraheze-requestwiki": "Sol·licitar una wiki",
 	"miraheze-sitenotice-learnmore": "Més informació",
-	"miraheze-survey-yes": "Sí",
 	"mirahezemagic-description": "Missatges del sistema, scripts i ganxos específics per Miraheze",
 	"protect-level-user": "Només permetre usuaris registrats",
 	"restriction-delete": "Esborrar",
@@ -41,6 +40,5 @@
 	"sitematrix-others": "Altres wikis de Miraheze",
 	"sitematrix-summary": "Aquesta pàgina especial mostra totes wikis de Miraheze.",
 	"sitematrix": "Llista de wikis de Miraheze",
-	"specialpages-group-wikimanage": "Administració de Wikis",
 	"termsofservice": "Condicions d'ús"
 }

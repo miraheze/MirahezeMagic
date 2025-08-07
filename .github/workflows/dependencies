@@ -5,10 +5,10 @@ CentralAuth:
   branch: auto
   repo: auto
 CreateWiki:
-  branch: master
+  branch: main
   repo: https://github.com/miraheze/CreateWiki
 DataDump:
-  branch: master
+  branch: main
   repo: https://github.com/miraheze/DataDump
 Echo:
   branch: auto
@@ -17,8 +17,8 @@ GlobalUserPage:
   branch: auto
   repo: auto
 ImportDump:
-  branch: master
+  branch: main
   repo: https://github.com/miraheze/ImportDump
 ManageWiki:
-  branch: master
+  branch: main
   repo: https://github.com/miraheze/ManageWiki

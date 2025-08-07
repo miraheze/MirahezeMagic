@@ -20,27 +20,21 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  *
  * @file
  * @ingroup Maintenance
- * @author The-Voidwalker
+ * @author Paladox
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
 use Exception;
-use Maintenance;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Maintenance\Maintenance;
+use MwSql;
 
-class CreateCargoDB extends Maintenance {
+class MigrateSearchIndexSql extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Creates a database for Cargo for the current wiki' );
+		$this->addDescription( 'Migrates searchindex table sql' );
 	}
 
 	public function execute() {
@@ -50,16 +44,19 @@ class CreateCargoDB extends Maintenance {
 			$this->fatalError( 'Could not identify current database name!' );
 		}
 
-		$cargodb = $dbname . 'cargo';
-
 		try {
-			$dbQuotes = $dbw->addIdentifierQuotes( $cargodb );
-			$dbw->query( "CREATE DATABASE {$dbQuotes};" );
-		} catch ( Exception $e ) {
-			$this->fatalError( "Database '{$cargodb}' already exists." );
+			$table = $dbw->tableName( 'searchindex' );
+			$dbw->query( "ALTER TABLE $table CONVERT TO CHARACTER SET utf8mb4;", __METHOD__ );
+		} catch ( Exception ) {
+			$this->fatalError( "Failed to alter table 'searchindex'." );
 		}
+
+		$mwSql = $this->createChild( MwSql::class );
+		$mwSql->setArg( 0, MW_INSTALL_PATH . '/maintenance/archives/patch-searchindex-pk-titlelength.sql' );
+		$mwSql->execute();
 	}
 }
 
-$maintClass = CreateCargoDB::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return MigrateSearchIndexSql::class;
+// @codeCoverageIgnoreEnd

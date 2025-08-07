@@ -18,5 +18,6 @@
 	"miraheze-prefs-help-realname": "실명은 선택 사항입니다. 실명을 입력하면 당신의 기여에 대한 저작자 표시에 쓰이게 될 수 있습니다. 더불어, Miraheze에 호스팅된 위키를 사용함으로써 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use 이용 약관]</span>과 <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy 개인정보보호정책]</span>에 동의하는 것입니다.",
 	"miraheze-restriction-delete": "삭제",
 	"miraheze-restriction-protect": "보호",
+	"miraheze-webauthn-module-description": "웹 인증(WebAuthn)은 W3C(World Wide Web Consortium)에서 발표한 웹 표준입니다. WebAuthn은 FIDO 얼라이언스의 지도 하에 있는 FIDO2 프로젝트의 핵심 구성 요소입니다. 이 프로젝트의 목표는 공개 키 암호화를 사용하여 웹 기반 애플리케이션 및 서비스에 대한 사용자를 인증하기 위한 인터페이스를 표준화하는 것입니다. [https://en.wikipedia.org/wiki/WebAuthn 자세히 보기] <br> '''로그인하려면 인증기를 등록한 위키로 이동해야 한다는 점을 명심하세요'''. 이러한 이유로 [[mh:meta|메타]]에 인증기를 등록하는 것을 고려할 수 있습니다.",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze 위키"
 }

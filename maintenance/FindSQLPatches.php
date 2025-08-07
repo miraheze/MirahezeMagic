@@ -6,7 +6,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * List new or updated SQL patches between two MediaWiki versions.
  *
  * Usage:
- *     php findSQLPatches.php --from-version=current_version --to-version=new_version
+ *     php run.php MirahezeMagic:FindSQLPatches --from-version=current_version --to-version=new_version
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,14 +29,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
-
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
+use MediaWiki\Maintenance\Maintenance;
 
 class FindSQLPatches extends Maintenance {
 
@@ -96,6 +89,10 @@ class FindSQLPatches extends Maintenance {
 		return $patches;
 	}
 
+	/**
+	 * @param string $oldPatch @phan-unused-param
+	 * @param string $newPatch @phan-unused-param
+	 */
 	private function isPatchUpdated( $oldPatch, $newPatch ) {
 		// TO-DO
 	}
@@ -113,5 +110,6 @@ class FindSQLPatches extends Maintenance {
 	}
 }
 
-$maintClass = FindSQLPatches::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return FindSQLPatches::class;
+// @codeCoverageIgnoreEnd

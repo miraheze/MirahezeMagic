@@ -21,72 +21,66 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup MirahezeMagic
  * @author Southparkfan
+ * @author Universal Omega
  * @version 1.0
  */
 
-$IP = getenv( 'MW_INSTALL_PATH' );
-if ( $IP === false ) {
-	$IP = __DIR__ . '/../../..';
-}
+use MediaWiki\Maintenance\Maintenance;
+use Wikimedia\AtEase\AtEase;
 
-require_once "$IP/maintenance/Maintenance.php";
-
-use Maintenance;
-
-class FixUserIdRevision extends Maintenance {
+class FixUserIdLogging extends Maintenance {
 
 	/** @var array */
 	private $userCache;
 
 	public function __construct() {
 		parent::__construct();
+
 		$this->addOption( 'fix', 'Actually fix the attribution instead of just checking for wrong entries', false, false );
 
-		$this->addDescription( 'Fixes user attribution in revisions' );
+		$this->addDescription( 'Fixes user attribution in logs' );
 		$this->setBatchSize( 100 );
 	}
 
 	public function execute() {
 		$dbr = $this->getDB( DB_REPLICA );
+		$end = (int)$dbr->selectField( 'logging', 'MAX(log_id)', [], __METHOD__ );
 
-		$start = (int)$dbr->selectField( 'revision', 'MIN(rev_id)', [], __METHOD__ );
-		$end = (int)$dbr->selectField( 'revision', 'MAX(rev_id)', [], __METHOD__ );
+		$wrongLogs = 0;
 
-		$wrongRevs = 0;
-
-		$lastCheckedRevId = 0;
+		$lastCheckedLogId = 0;
 
 		do {
-			$lastCheckedRevIdNextBatch = $lastCheckedRevId + $this->getBatchSize();
-			$revRes = $dbr->select(
-				'revision',
-				[ 'rev_id', 'rev_actor' ],
-				"rev_id BETWEEN $lastCheckedRevId and $lastCheckedRevIdNextBatch",
+			$lastCheckedLogIdNextBatch = $lastCheckedLogId + $this->getBatchSize();
+			$logRes = $dbr->select(
+				'logging',
+				[ 'log_id', 'log_params', 'log_actor' ],
+				"log_id BETWEEN $lastCheckedLogId and $lastCheckedLogIdNextBatch",
 				__METHOD__
 			);
 
-			foreach ( $revRes as $revRow ) {
-				$revActor = $this->getServiceContainer()->getUserFactory()->newFromActorId( $revRow->rev_actor );
-				$goodUserId = $this->getGoodUserId( $revActor->getName() );
+			foreach ( $logRes as $logRow ) {
+				$username = $this->getServiceContainer()->getUserFactory()->newFromActorId( $logRow->log_actor );
+				$goodUserId = $this->getGoodUserId( $username->getName() );
 
-				// Ignore rev_actor 0 for maintenance scripts and such
-				if ( $revRow->rev_actor != $goodUserId ) {
+				// Ignore log_actor 0 for maintenance scripts and such
+				if ( $logRow->log_actor != $goodUserId ) {
 					// PANIC EVERYWHERE DON'T DIE ON US
-					$wrongRevs++;
+					$wrongLogs++;
 
 					if ( $this->hasOption( 'fix' ) ) {
-						$this->fixRevEntry( $revRow );
+						$this->fixLogEntry( $logRow );
 					}
 				}
 			}
 
-			$lastCheckedRevId += $this->getBatchSize();
-		} while ( $lastCheckedRevId <= $end );
+			$lastCheckedLogId += $this->getBatchSize();
+		} while ( $lastCheckedLogId <= $end );
 
-		$line = "$wrongRevs wrong revisions detected.";
+		$line = "$wrongLogs wrong logs detected.";
 
 		if ( !$this->hasOption( 'fix' ) ) {
-			$line .= ' Run this script with --fix to actually fix the revisions.';
+			$line .= ' Run this script with --fix to actually fix the log entries.';
 		}
 
 		$this->output( $line . "\n" );
@@ -123,41 +117,56 @@ class FixUserIdRevision extends Maintenance {
 		return $goodUserId;
 	}
 
-	protected function fixRevEntry( $row ) {
+	protected function fixLogEntry( $row ) {
+		$username = $this->getServiceContainer()->getUserFactory()->newFromActorId( $row->log_actor );
+
 		$dbr = $this->getDB( DB_REPLICA );
 		$dbw = $this->getDB( DB_PRIMARY );
-		$revActor = $this->getServiceContainer()->getUserFactory()->newFromActorId( $row->rev_actor );
 
-		if ( isset( $this->userCache[$revActor->getName()] ) ) {
-			$userId = $this->userCache[$revActor->getName()];
+		if ( isset( $this->userCache[$username->getName()] ) ) {
+			$userId = $this->userCache[$username->getName()];
 		} else {
 			$userId = $dbr->selectField(
 				'user',
 				'user_id',
-				[ 'user_name' => $revActor->getName() ],
+				[ 'user_name' => $username->getName() ],
 				__METHOD__
 			);
 
-			$this->userCache[$revActor->getName()] = $userId;
+			$this->userCache[$username->getName()] = $userId;
 		}
 
 		if ( !( ( is_string( $userId ) || is_numeric( $userId ) ) && $userId !== 0 ) ) {
 			$userId = 0;
 		}
 
+		AtEase::suppressWarnings();
+		$logParams = unserialize( $row->log_params );
+		AtEase::restoreWarnings();
+
+		if ( is_array( $logParams ) && isset( $logParams['4::userid'] ) ) {
+			$logParams['4::userid'] = $userId;
+		}
+
 		$updateParams = [
-			'rev_actor' => $userId,
+			'log_actor' => $userId,
 		];
 
-		$dbw->update( 'revision',
+		if ( isset( $logParams['4::userid'] ) ) {
+			$logParams = serialize( $logParams );
+			$updateParams['log_params'] = $logParams;
+		}
+
+		$dbw->update( 'logging',
 			$updateParams,
-			[ 'rev_id' => $row->rev_id ],
+			[ 'log_id' => $row->log_id ],
 			__METHOD__
 		);
 
-		$this->output( "Done! Updated rev_id {$row->rev_id} to have the rev_actor id {$userId} (for '{$revActor->getName()}') instead of {$row->rev_actor}.\n" );
+		$this->output( "Done! Updated log_id {$row->log_id} to have the log_actor id {$userId} (for '{$username->getName()}') instead of {$row->log_actor}.\n" );
 	}
 }
 
-$maintClass = FixUserIdRevision::class;
-require_once RUN_MAINTENANCE_IF_MAIN;
+// @codeCoverageIgnoreStart
+return FixUserIdLogging::class;
+// @codeCoverageIgnoreEnd
