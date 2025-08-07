@@ -704,7 +704,7 @@ class RequestWiki implements
 		foreach ( $options as $key => $value ) {
 			$localizedMessage = $this->messageLocalizer->msg( $key );
 			if ( !$localizedMessage->isDisabled() ) {
-				$localizedOptions[$localizedMessage->text()] = $value;
+				$localizedOptions[$localizedMessage->escaped()] = $value;
 				continue;
 			}
 
