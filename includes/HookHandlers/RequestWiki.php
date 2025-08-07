@@ -14,8 +14,7 @@ use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
 use Miraheze\CreateWiki\RequestWiki\FormFields\DetailsWithIconField;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
-use Miraheze\ManageWiki\Helpers\ManageWikiExtensions;
-use Miraheze\ManageWiki\Helpers\ManageWikiSettings;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 
 class RequestWiki implements
 	CreateWikiAfterCreationWithExtraDataHook,
@@ -23,25 +22,26 @@ class RequestWiki implements
 	RequestWikiQueueFormDescriptorModifyHook
 {
 
-	private MessageLocalizer $messageLocalizer;
-	private ServiceOptions $options;
-
 	public function __construct(
-		MessageLocalizer $messageLocalizer,
-		ServiceOptions $options
+		private readonly MessageLocalizer $messageLocalizer,
+		private readonly ModuleFactory $moduleFactory,
+		private readonly ServiceOptions $options
 	) {
-		$this->messageLocalizer = $messageLocalizer;
-		$this->options = $options;
 	}
 
-	public static function factory( Config $mainConfig ): self {
+	public static function factory(
+		Config $mainConfig,
+		ModuleFactory $moduleFactory
+	): self {
 		return new self(
 			RequestContext::getMain(),
+			$moduleFactory,
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
 					'MirahezeMagicRequestWikiExtensions',
 					'MirahezeMagicRequestWikiSkins',
+					'WikiDiscoverDescriptionsMaxLength',
 				],
 				$mainConfig
 			)
@@ -111,12 +111,12 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			newKey: 'wddescription',
+			newKey: 'description',
 			newField: [
 				'type' => 'text',
-				'maxlength' => 512,
-				'label-message' => 'requestwiki-label-wddescription',
-				'help-message' => 'requestwiki-help-wddescription',
+				'maxlength' => $this->options->get( 'WikiDiscoverDescriptionsMaxLength' ),
+				'label-message' => 'requestwiki-label-description',
+				'help-message' => 'requestwiki-help-description',
 				'section' => 'configure',
 			]
 		);
@@ -133,7 +133,7 @@ class RequestWiki implements
 			]
 		);
 
-		/* RequestWikiFormUtils::addFieldToEnd(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'mainpageroot',
 			newField: [
@@ -143,7 +143,7 @@ class RequestWiki implements
 				'hide-if' => [ '!==', 'showadvanced', '1' ],
 				'section' => 'advanced',
 			]
-		); */
+		);
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
@@ -310,7 +310,7 @@ class RequestWiki implements
 				'private',
 				'category',
 				'defaultskin',
-				'wddescription',
+				'description',
 			]
 		);
 
@@ -319,7 +319,7 @@ class RequestWiki implements
 			section: 'advanced',
 			newOrder: [
 				'showadvanced',
-				// 'mainpageroot',
+				'mainpageroot',
 				'articlepath',
 				'defaultextensions',
 			]
@@ -351,7 +351,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfw',
 				'section' => 'editing/request-info',
 				'type' => 'check',
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw' ),
 			]
 		);
@@ -362,7 +362,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'section' => 'editing/request-info',
 				'required' => true,
 				'type' => 'text',
@@ -377,7 +377,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-source',
 				'section' => 'editing/request-info',
 				'type' => 'check',
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'source' ),
 			]
 		);
@@ -388,7 +388,7 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-sourceurl',
 				'hide-if' => [ '!==', 'edit-source', '1' ],
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'section' => 'editing/request-info',
 				'required' => true,
 				'type' => 'url',
@@ -406,21 +406,21 @@ class RequestWiki implements
 					$this->options->get( 'MirahezeMagicRequestWikiSkins' )
 				),
 				'section' => 'editing/configure',
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'defaultskin' ) ?? 'vector-2022',
 			]
 		);
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
-			newKey: 'edit-wddescription',
+			newKey: 'edit-description',
 			newField: [
 				'type' => 'text',
-				'maxlength' => 512,
-				'label-message' => 'requestwiki-label-wddescription',
+				'maxlength' => $this->options->get( 'WikiDiscoverDescriptionsMaxLength' ),
+				'label-message' => 'requestwiki-label-description',
 				'section' => 'editing/configure',
-				'cssclass' => 'createwiki-infuse',
-				'default' => $wikiRequestManager->getExtraFieldData( 'wddescription' ),
+				'cssclass' => 'ext-createwiki-infuse',
+				'default' => $wikiRequestManager->getExtraFieldData( 'description' ),
 			]
 		);
 
@@ -433,7 +433,7 @@ class RequestWiki implements
 			newKey: 'edit-showadvanced',
 			newField: [
 				'class' => HTMLToggleSwitchField::class,
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'label-message' => 'requestwiki-label-showadvanced',
 				'section' => 'editing/advanced',
 				'default' => $isAdvancedModified,
@@ -443,7 +443,7 @@ class RequestWiki implements
 			]
 		);
 
-		/* RequestWikiFormUtils::addFieldToEnd(
+		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
 			newKey: 'edit-mainpageroot',
 			newField: [
@@ -451,10 +451,10 @@ class RequestWiki implements
 				'label-message' => 'miraheze-label-managewiki-mainpage-is-domain-root',
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'section' => 'editing/advanced',
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'mainpageroot' ),
 			]
-		); */
+		);
 
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,
@@ -468,7 +468,7 @@ class RequestWiki implements
 				],
 				'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 				'section' => 'editing/advanced',
-				'cssclass' => 'createwiki-infuse',
+				'cssclass' => 'ext-createwiki-infuse',
 				'default' => $wikiRequestManager->getExtraFieldData( 'articlepath' ) ?? '/wiki/$1',
 			]
 		);
@@ -486,7 +486,7 @@ class RequestWiki implements
 					'hide-if' => [ '!==', 'edit-showadvanced', '1' ],
 					'dropdown' => true,
 					'section' => 'editing/advanced',
-					'cssclass' => 'createwiki-infuse',
+					'cssclass' => 'ext-createwiki-infuse',
 					'default' => $wikiRequestManager->getExtraFieldData( 'defaultextensions' ),
 				]
 			);
@@ -577,7 +577,7 @@ class RequestWiki implements
 				'edit-private',
 				'edit-category',
 				'edit-defaultskin',
-				'edit-wddescription',
+				'edit-description',
 			]
 		);
 
@@ -586,7 +586,7 @@ class RequestWiki implements
 			section: 'editing/advanced',
 			newOrder: [
 				'edit-showadvanced',
-				// 'edit-mainpageroot',
+				'edit-mainpageroot',
 				'edit-articlepath',
 				'edit-defaultextensions',
 				// We put the edit button in advanced
@@ -631,55 +631,78 @@ class RequestWiki implements
 	}
 
 	public function onCreateWikiAfterCreationWithExtraData( array $extraData, string $dbname ): void {
-		$mwSettings = new ManageWikiSettings( $dbname );
-		$setList = $mwSettings->list();
+		$mwCore = $this->moduleFactory->core( $dbname );
+		$mwExtensions = $this->moduleFactory->extensions( $dbname );
+		$mwSettings = $this->moduleFactory->settings( $dbname );
 
-		$mwExtensions = new ManageWikiExtensions( $dbname );
 		$extList = $mwExtensions->list();
+		$setList = $mwSettings->listAll();
 
-		if ( $extraData['articlepath'] !== ( $setList['wgArticlePath'] ?? '/wiki/$1' ) ) {
-			$mwSettings->modify( [ 'wgArticlePath' => $extraData['articlepath'] ] );
-			$mwSettings->commit();
+		$articlePath = $extraData['articlepath'] ?? '/wiki/$1';
+		$mainPageRoot = $extraData['mainpageroot'] ?? false;
+		$description = $extraData['description'] ?? '';
+		$defaultSkin = $extraData['defaultskin'] ?? 'vector-2022';
+		$defaultExts = $extraData['defaultextensions'] ?? [];
+
+		// Settings changes — queue modifies, commit once.
+		$settingsChanged = false;
+		if ( $articlePath !== ( $setList['wgArticlePath'] ?? '/wiki/$1' ) ) {
+			$mwSettings->modify(
+				[ 'wgArticlePath' => $articlePath ],
+				default: '/wiki/$1'
+			);
+
+			$settingsChanged = true;
 		}
 
-		/* if ( $extraData['mainpageroot'] !== ( $setList['wgMainPageIsDomainRoot'] ?? false ) ) {
-			$mwSettings->modify( [ 'wgMainPageIsDomainRoot' => $extraData['mainpageroot'] ] );
-			$mwSettings->commit();
-		} */
+		if ( $mainPageRoot !== ( $setList['wgMainPageIsDomainRoot'] ?? false ) ) {
+			$mwSettings->modify(
+				[ 'wgMainPageIsDomainRoot' => $mainPageRoot ],
+				default: false
+			);
 
-		if ( $extraData['wddescription'] !== ( $setList['wgWikiDiscoverDescription'] ?? '' ) ) {
-			$mwSettings->modify( [ 'wgWikiDiscoverDescription' => $extraData['wddescription'] ] );
-			$mwSettings->commit();
+			$settingsChanged = true;
 		}
 
-		if ( $extraData['defaultskin'] !== ( $setList['wgDefaultSkin'] ?? 'vector-2022' ) ) {
+		if ( $defaultSkin !== ( $setList['wgDefaultSkin'] ?? 'vector-2022' ) ) {
+			// If the skin is not enabled but is available in ManageWiki (not a global skin), enable it.
 			if (
-				!isset( $extList[ $extraData['defaultskin'] ] ) &&
-				array_key_exists(
-					$extraData['defaultskin'],
-					$this->options->get( 'ManageWikiExtensions' )
-				)
+				!isset( $extList[$defaultSkin] ) &&
+				isset( $this->options->get( 'ManageWikiExtensions' )[$defaultSkin] )
 			) {
-				$mwExtensions->add( $extraData['defaultskin'] );
+				$mwExtensions->add( $defaultSkin );
 				$mwExtensions->commit();
 			}
 
-			$mwSettings->modify( [ 'wgDefaultSkin' => $extraData['defaultskin'] ] );
+			$mwSettings->modify(
+				[ 'wgDefaultSkin' => $defaultSkin ],
+				default: 'vector-2022'
+			);
+
+			$settingsChanged = true;
+		}
+
+		if ( $settingsChanged ) {
 			$mwSettings->commit();
 		}
 
-		if ( $extraData['defaultextensions'] ?? [] ) {
-			$mwExtensions->add( $extraData['defaultextensions'] );
+		// Extra field: description (commit only if changed)
+		if ( $description !== $mwCore->getExtraFieldData( 'description', default: '' ) ) {
+			$mwCore->setExtraFieldData( 'description', $description, default: '' );
+			$mwCore->commit();
+		}
+
+		// Extensions: add any provided defaults (commit once).
+		if ( $defaultExts ) {
+			$mwExtensions->add( $defaultExts );
 			$mwExtensions->commit();
 		}
 	}
 
 	private function buildLocalizedOptions( array $options ): array {
 		$localizedOptions = [];
-
 		foreach ( $options as $key => $value ) {
 			$localizedMessage = $this->messageLocalizer->msg( $key );
-
 			if ( !$localizedMessage->isDisabled() ) {
 				$localizedOptions[$localizedMessage->text()] = $value;
 				continue;
