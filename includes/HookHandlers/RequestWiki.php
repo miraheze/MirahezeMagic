@@ -188,7 +188,7 @@ class RequestWiki implements
 			$formDescriptor,
 			newKey: 'agreement-private',
 			newField: [
-				'type' => 'checkbox',
+				'type' => 'check',
 				'label-message' => 'requestwiki-label-agreement-private',
 				'hide-if' => [ '!==', 'private', '1' ],
 				'section' => 'confirmation',
