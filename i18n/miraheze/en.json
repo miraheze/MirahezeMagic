@@ -136,6 +136,7 @@
 	"requestwiki-help-defaultextensions": "You will always be able to enable or disable these later with Special:ManageWiki/extensions on your wiki after it has been created.",
 	"requestwiki-help-description": "You can change this in Special:ManageWiki after your wiki has been created.",
 	"requestwiki-help-nsfw": "A wiki is not safe for work (NSFW) if it includes graphic discussion of sex (either text or media content) or is otherwise inappropriate for those under the age of 18.",
+	"requestwiki-label-agreement-private": "I understand that private wikis are generally inaccessible to the public, but absolute confidentiality cannot be guaranteed. In rare circumstances, information could be exposed due to a MediaWiki security vulnerability or other unforeseen issues, so I should not store anything that must remain strictly private.",
 	"requestwiki-label-category": "How would you like your wiki to be categorized in the [[Special:WikiDiscover|global directory]]?",
 	"requestwiki-label-defaultextensions": "Extensions and skins that should be enabled on your wiki by default:",
 	"requestwiki-label-defaultskin": "What would you like the default skin of your wiki to be?",
