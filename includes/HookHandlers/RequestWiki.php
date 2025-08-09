@@ -42,6 +42,7 @@ class RequestWiki implements
 			$validator,
 			new ServiceOptions(
 				[
+					'CreateWikiUsePrivateWikis',
 					'ManageWikiExtensions',
 					'MirahezeMagicRequestWikiExtensions',
 					'MirahezeMagicRequestWikiSkins',
@@ -184,17 +185,19 @@ class RequestWiki implements
 			);
 		}
 
-		RequestWikiFormUtils::addFieldToEnd(
-			$formDescriptor,
-			newKey: 'agreement-private',
-			newField: [
-				'type' => 'check',
-				'label-message' => 'requestwiki-label-agreement-private',
-				'hide-if' => [ '!==', 'private', '1' ],
-				'section' => 'confirmation',
-				'validation-callback' => [ $this->validator, 'validateAgreement' ],
-			]
-		);
+		if ( $this->options->get( 'CreateWikiUsePrivateWikis' ) ) {
+			RequestWikiFormUtils::addFieldToEnd(
+				$formDescriptor,
+				newKey: 'agreement-private',
+				newField: [
+					'type' => 'check',
+					'label-message' => 'requestwiki-label-agreement-private',
+					'hide-if' => [ '!==', 'private', '1' ],
+					'section' => 'confirmation',
+					'validation-callback' => [ $this->validator, 'validateAgreement' ],
+				]
+			);
+		}
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
