@@ -192,7 +192,7 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-agreement-private',
 				'hide-if' => [ '!==', 'private', '1' ],
 				'section' => 'confirmation',
-				// 'validation-callback' => [ $this->validator, 'validateAgreement' ],
+				'validation-callback' => [ $this->validator, 'validateAgreement' ],
 			]
 		);
 
