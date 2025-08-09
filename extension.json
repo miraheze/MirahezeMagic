@@ -148,6 +148,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki::factory",
 			"services": [
 				"MainConfig",
+				"CreateWikiValidator",
 				"ManageWikiModuleFactory"
 			]
 		}
