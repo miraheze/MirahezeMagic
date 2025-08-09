@@ -13,6 +13,7 @@ use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
 use Miraheze\CreateWiki\RequestWiki\FormFields\DetailsWithIconField;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
+use Miraheze\CreateWiki\Services\CreateWikiValidator;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 
@@ -25,17 +26,20 @@ class RequestWiki implements
 	public function __construct(
 		private readonly MessageLocalizer $messageLocalizer,
 		private readonly ModuleFactory $moduleFactory,
+		private readonly CreateWikiValidator $validator,
 		private readonly ServiceOptions $options
 	) {
 	}
 
 	public static function factory(
 		Config $mainConfig,
+		CreateWikiValidator $validator,
 		ModuleFactory $moduleFactory
 	): self {
 		return new self(
 			RequestContext::getMain(),
 			$moduleFactory,
+			$validator,
 			new ServiceOptions(
 				[
 					'ManageWikiExtensions',
@@ -179,6 +183,18 @@ class RequestWiki implements
 				]
 			);
 		}
+
+		RequestWikiFormUtils::addFieldToEnd(
+			$formDescriptor,
+			newKey: 'agreement-private',
+			newField: [
+				'type' => 'checkbox',
+				'label-message' => 'requestwiki-label-agreement-private',
+				'hide-if' => [ '!==', 'private', '1' ],
+				'section' => 'confirmation',
+				'validation-callback' => [ $this->validator, 'validateAgreement' ],
+			]
+		);
 
 		RequestWikiFormUtils::moveFieldToSection(
 			$formDescriptor,
@@ -331,6 +347,7 @@ class RequestWiki implements
 			newOrder: [
 				'post-reason-guidance',
 				'agreement',
+				'agreement-private',
 			]
 		);
 	}
