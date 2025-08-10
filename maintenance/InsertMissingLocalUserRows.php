@@ -52,8 +52,8 @@ class InsertMissingLocalUserRows extends Maintenance {
 				[
 					'user_name != "CreateWiki AI"',
 					'user_name != "CreateWiki Extension"',
-					'user_name != "RequestSSL Extension"',
-					'user_name != "RequestSSL Status Update"',
+					'user_name != "RequestCustomDomain Extension"',
+					'user_name != "RequestCustomDomain Status Update"',
 					'user_name != "ImportDump Extension"',
 					'user_name != "ImportDump Status Update"',
 					'user_name != "Global rename script"',
