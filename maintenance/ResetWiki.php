@@ -37,6 +37,7 @@ class ResetWiki extends Maintenance {
 		$this->addOption( 'requester', 'The user to assign initial rights for.', true, true );
 
 		$this->requireExtension( 'CreateWiki' );
+		$this->requireExtension( 'ManageWiki' );
 	}
 
 	public function execute(): void {
@@ -96,7 +97,7 @@ class ResetWiki extends Maintenance {
 
 		$databaseQuotes = $dbw->addIdentifierQuotes( $databaseName );
 
-		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
+		$dataStoreFactory = $this->getServiceContainer()->get( 'ManageWikiDataStoreFactory' );
 		$wikiManagerFactory = $this->getServiceContainer()->get( 'WikiManagerFactory' );
 
 		// Delete the wiki from CreateWiki
@@ -126,8 +127,8 @@ class ResetWiki extends Maintenance {
 			$this->fatalError( $notCreated );
 		}
 
-		$data = $dataFactory->newInstance( $databaseName );
-		$data->resetWikiData( isNewChanges: true );
+		$dataStore = $dataStoreFactory->newInstance( $databaseName );
+		$dataStore->resetWikiData( isNewChanges: true );
 
 		$this->output( "Database recreated successfully.\n" );
 	}
