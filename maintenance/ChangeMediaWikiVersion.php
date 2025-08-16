@@ -62,7 +62,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 			$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 			$newVersion = $this->getOption( 'mwversion' );
 
-			if ( $newVersion !== $oldVersion && is_dir( '/srv/mediawiki/' . $newVersion ) ) {
+			if ( $newVersion !== $oldVersion && is_dir( "/srv/mediawiki/$newVersion" ) ) {
 				if ( $this->hasOption( 'dry-run' ) ) {
 					$this->output( "Dry run: Would upgrade $dbname from $oldVersion to $newVersion\n" );
 					continue;
@@ -80,10 +80,8 @@ class ChangeMediaWikiVersion extends Maintenance {
 			}
 		}
 
-		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
-		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
-		$data = $dataFactory->newInstance( $databaseUtils->getCentralWikiID() );
-		$data->resetDatabaseLists( isNewChanges: true );
+		$dataStore = $this->getServiceContainer()->get( 'CreateWikiDataStore' );
+		$dataStore->resetDatabaseLists( isNewChanges: true );
 	}
 
 	private function getWikiDbNamesByRegex( string $pattern ): array {

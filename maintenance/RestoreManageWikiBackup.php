@@ -135,9 +135,9 @@ class RestoreManageWikiBackup extends Maintenance {
 			}
 		}
 
-		$dataFactory = $this->getServiceContainer()->get( 'CreateWikiDataFactory' );
-		$data = $dataFactory->newInstance( $dbname );
-		$data->resetWikiData( isNewChanges: true );
+		$dataStoreFactory = $this->getServiceContainer()->get( 'ManageWikiDataStoreFactory' );
+		$dataStore = $dataStoreFactory->newInstance( $dbname );
+		$dataStore->resetWikiData( isNewChanges: true );
 
 		$this->output( "Successfully restored the backup from '{$this->getOption( 'filename' )}'.\n" );
 	}
