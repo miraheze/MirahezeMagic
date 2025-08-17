@@ -322,7 +322,7 @@ class CreateWiki implements
 		$this->removeMemcachedKey( ".*$oldDbName.*" );
 	}
 
-    /** @inheritDoc */
+	/** @inheritDoc */
 	public function onCreateWikiStatePrivate( string $dbname ): void {
 		$localRepo = $this->repoGroup->getLocalRepo();
 		$sitemaps = $localRepo->getBackend()->getTopFileList( [
@@ -354,7 +354,7 @@ class CreateWiki implements
 		$localRepo->getBackend()->clean( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );
 	}
 
-    /** @inheritDoc */
+	/** @inheritDoc */
 	public function onCreateWikiTables( array &$tables ): void {
 		$tables['localnames'] = 'ln_wiki';
 		$tables['localuser'] = 'lu_wiki';

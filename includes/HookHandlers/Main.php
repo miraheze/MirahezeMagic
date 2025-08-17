@@ -27,7 +27,6 @@ use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
-use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
 use Skin;

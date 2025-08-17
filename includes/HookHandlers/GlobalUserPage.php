@@ -14,7 +14,7 @@ class GlobalUserPage implements GlobalUserPageWikisHook {
 	) {
 	}
 
-    /** @inheritDoc */
+	/** @inheritDoc */
 	public function onGlobalUserPageWikis( array &$list ): bool {
 		$dbList = $this->dataStore->getAllDatabases();
 

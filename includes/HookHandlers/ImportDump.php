@@ -10,7 +10,7 @@ use Wikimedia\Rdbms\IConnectionProvider;
 
 class ImportDump implements
 	ImportDumpJobAfterImportHook,
-    ImportDumpJobGetFileHook
+	ImportDumpJobGetFileHook
 {
 
 	public function __construct(
@@ -30,7 +30,7 @@ class ImportDump implements
 			->execute();
 	}
 
-    /** @inheritDoc */
+	/** @inheritDoc */
 	public function onImportDumpJobGetFile( &$filePath, $requestManager ): void {
 		global $wmgSwiftPassword;
 
