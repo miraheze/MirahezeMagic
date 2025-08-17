@@ -5,6 +5,8 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
+use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 
 class AbuseFilter implements AbuseFilterShouldFilterActionHook {
 

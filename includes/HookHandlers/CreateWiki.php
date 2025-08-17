@@ -16,6 +16,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ManageWiki\ConfigNames;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Psr\Log\LoggerInterface;
 use Redis;
 use RepoGroup;
@@ -302,7 +303,7 @@ class CreateWiki implements
 				 * We need to log this, as otherwise all files may not have been succesfully
 				 * moved to the new container, and they still exist locally. We should know that.
 				 */
-				$this->logger->warn(
+				$this->logger->warning(
 					'The rename of wiki {old} to {new} may not have been successful. Files still exist locally in {temp} and the Swift containers for the old wiki still exist.',
 					[
 						'new' => $newDbName,
@@ -343,7 +344,7 @@ class CreateWiki implements
 				 * not be being deleted for private wikis. We should know that.
 				 */
 				$statusMessage = $statusFormatter->getWikiText( $status );
-				$this->logger->warn( 'Sitemap "{sitemap}" failed to delete for {dbname}: {status}', [
+				$this->logger->warning( 'Sitemap "{sitemap}" failed to delete for {dbname}: {status}', [
 					'dbname' => $dbname,
 					'sitemap' => $sitemap,
 					'status' => $statusMessage,
