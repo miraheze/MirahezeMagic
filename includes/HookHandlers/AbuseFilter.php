@@ -13,11 +13,9 @@ class AbuseFilter implements AbuseFilterShouldFilterActionHook {
 	/**
 	 * Avoid filtering automatic account creation
 	 *
-	 * @param VariableHolder $vars
+	 * @inheritDoc
 	 * @param Title $title @phan-unused-param
 	 * @param User $user @phan-unused-param
-	 * @param array &$skipReasons
-	 * @return bool|void
 	 */
 	public function onAbuseFilterShouldFilterAction(
 		VariableHolder $vars,
@@ -30,7 +28,6 @@ class AbuseFilter implements AbuseFilterShouldFilterActionHook {
 		}
 
 		$varManager = AbuseFilterServices::getVariablesManager();
-
 		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
 		if ( $action === 'autocreateaccount' ) {
 			$skipReasons[] = 'Blocking automatic account creation is not allowed';

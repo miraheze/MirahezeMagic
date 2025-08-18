@@ -151,7 +151,9 @@
 		},
 		"ImportDump": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump::factory",
 			"services": [
+				"MainConfig",
 				"ConnectionProvider"
 			]
 		},
@@ -179,6 +181,10 @@
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
 		},
+		"MirahezeMagicSwiftKey": {
+			"description": "String. Swift key to use for Swift shell commands.",
+			"value": ""
+		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
 			"value": []
@@ -187,9 +193,6 @@
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
 		}
-	},
-	"ConfigRegistry": {
-		"MirahezeMagic": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"manifest_version": 2
 }
