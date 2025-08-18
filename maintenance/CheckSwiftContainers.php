@@ -93,7 +93,7 @@ class CheckSwiftContainers extends Maintenance {
 				'swift', 'stat', $container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout();
@@ -112,7 +112,7 @@ class CheckSwiftContainers extends Maintenance {
 			'swift', 'list',
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
+			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' )
 		)->limits( $limits )
 			->disableSandbox()
 			->execute()->getStdout();
@@ -183,7 +183,7 @@ class CheckSwiftContainers extends Maintenance {
 				'swift', 'delete', $container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();

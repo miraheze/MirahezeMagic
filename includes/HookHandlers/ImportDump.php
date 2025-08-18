@@ -2,6 +2,8 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\Config\Config;
+use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Shell\Shell;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
@@ -14,8 +16,22 @@ class ImportDump implements
 {
 
 	public function __construct(
-		private readonly IConnectionProvider $connectionProvider
+		private readonly IConnectionProvider $connectionProvider,
+		private readonly ServiceOptions $options
 	) {
+	}
+
+	public static function factory(
+		Config $mainConfig,
+		IConnectionProvider $connectionProvider
+	): self {
+		return new self(
+			$connectionProvider,
+			new ServiceOptions(
+				[ 'MirahezeMagicSwiftKey' ],
+				$mainConfig
+			)
+		);
 	}
 
 	/**
@@ -32,8 +48,6 @@ class ImportDump implements
 
 	/** @inheritDoc */
 	public function onImportDumpJobGetFile( &$filePath, $requestManager ): void {
-		global $wmgSwiftPassword;
-
 		$dbr = $this->connectionProvider->getReplicaDatabase( 'virtual-importdump' );
 		$container = $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :
@@ -48,7 +62,7 @@ class ImportDump implements
 			'-o', $filePath,
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $wmgSwiftPassword
+			'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 		)->limits( $limits )
 			->disableSandbox()
 			->execute();

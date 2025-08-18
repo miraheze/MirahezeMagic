@@ -58,7 +58,7 @@ class SwiftDump extends Maintenance {
 			'swift', 'download', $container,
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' ),
+			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' ),
 			'-D', "/tmp/$wiki",
 			'--object-threads', '1'
 		)->limits( $limits )
@@ -86,7 +86,7 @@ class SwiftDump extends Maintenance {
 			'swift', 'stat', $container,
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
+			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' )
 		)->limits( $limits )
 			->disableSandbox()
 			->execute()->getStdout();

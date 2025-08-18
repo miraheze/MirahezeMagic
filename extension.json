@@ -151,7 +151,9 @@
 		},
 		"ImportDump": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump::factory",
 			"services": [
+				"MainConfig",
 				"ConnectionProvider"
 			]
 		},
@@ -179,7 +181,7 @@
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
 		},
-		"MirahezeMagicSwiftPassword": {
+		"MirahezeMagicSwiftKey": {
 			"description": "String. Swift key to use for Swift shell commands.",
 			"value": ""
 		},

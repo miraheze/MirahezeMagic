@@ -60,7 +60,7 @@ class CreateWiki implements
 					'EchoSharedTrackingDB',
 					'GlobalUsageDatabase',
 					'MirahezeMagicMemcachedServers',
-					'MirahezeMagicSwiftPassword',
+					'MirahezeMagicSwiftKey',
 					ConfigNames::Settings,
 					MainConfigNames::JobTypeConf,
 					MainConfigNames::LocalDatabases,
@@ -119,7 +119,7 @@ class CreateWiki implements
 				'--prefix', "miraheze-$dbname-",
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout()
@@ -140,7 +140,7 @@ class CreateWiki implements
 				'--container-threads', '1',
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();
@@ -205,7 +205,7 @@ class CreateWiki implements
 				'--prefix', "miraheze-$oldDbName-",
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout()
@@ -224,7 +224,7 @@ class CreateWiki implements
 				$container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout();
@@ -236,7 +236,7 @@ class CreateWiki implements
 				'-D', wfTempDir() . '/' . $container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();
@@ -254,7 +254,7 @@ class CreateWiki implements
 					'--object-name', '""',
 					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
-					'-K', $this->options->get( 'MirahezeMagicSwiftPassword' ),
+					'-K', $this->options->get( 'MirahezeMagicSwiftKey' ),
 				] )
 			) );
 
@@ -267,7 +267,7 @@ class CreateWiki implements
 				$newContainer,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+				'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout();
@@ -282,7 +282,7 @@ class CreateWiki implements
 					$container,
 					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
-					'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
+					'-K', $this->options->get( 'MirahezeMagicSwiftKey' )
 				)->limits( $limits )
 					->disableSandbox()
 					->execute();
