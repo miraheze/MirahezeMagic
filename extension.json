@@ -129,7 +129,10 @@
 	},
 	"HookHandlers": {
 		"AbuseFilter": {
-			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\AbuseFilter"
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\AbuseFilter",
+			"services": [
+				"AbuseFilterVariablesManager"
+			]
 		},
 		"CreateWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\CreateWiki",

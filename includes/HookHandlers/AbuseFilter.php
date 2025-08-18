@@ -2,13 +2,18 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
-use MediaWiki\Extension\AbuseFilter\AbuseFilterServices;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterShouldFilterActionHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
+use MediaWiki\Extension\AbuseFilter\Variables\VariablesManager;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 
 class AbuseFilter implements AbuseFilterShouldFilterActionHook {
+
+	public function __construct(
+		private readonly VariablesManager $variablesManager
+	) {
+	}
 
 	/**
 	 * Avoid filtering automatic account creation
@@ -27,8 +32,7 @@ class AbuseFilter implements AbuseFilterShouldFilterActionHook {
 			return;
 		}
 
-		$varManager = AbuseFilterServices::getVariablesManager();
-		$action = $varManager->getVar( $vars, 'action', 1 )->toString();
+		$action = $this->variablesManager->getVar( $vars, 'action' )->toString();
 		if ( $action === 'autocreateaccount' ) {
 			$skipReasons[] = 'Blocking automatic account creation is not allowed';
 			return false;
