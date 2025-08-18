@@ -45,6 +45,7 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ImportDump\ImportDumpRequestManager;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
+use RecentChange;
 use Redis;
 use Skin;
 use Throwable;
@@ -685,7 +686,7 @@ class Main implements
 	public function onRecentChange_save( $recentChange ) {
  		// phpcs:enable
 
-		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
+		if ( $recentChange->mAttribs['rc_source'] !== RecentChange::SRC_LOG ) {
 			return;
 		}
 
