@@ -58,7 +58,9 @@ class CreateWiki implements
 			new ServiceOptions(
 				[
 					'EchoSharedTrackingDB',
+					'GlobalUsageDatabase',
 					'MirahezeMagicMemcachedServers',
+					'MirahezeMagicSwiftPassword',
 					ConfigNames::Settings,
 					MainConfigNames::JobTypeConf,
 					MainConfigNames::LocalDatabases,
@@ -73,8 +75,6 @@ class CreateWiki implements
 	 * @param DBConnRef $cwdb @phan-unused-param
 	 */
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
-		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
-
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
 			$this->options->get( 'EchoSharedTrackingDB' )
 		);
@@ -85,9 +85,9 @@ class CreateWiki implements
 			->caller( __METHOD__ )
 			->execute();
 
-		if ( $wgGlobalUsageDatabase ) {
+		if ( $this->options->get( 'GlobalUsageDatabase' ) ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
-				$wgGlobalUsageDatabase
+				$this->options->get( 'GlobalUsageDatabase' )
 			);
 
 			$gudDb->newDeleteQueryBuilder()
@@ -119,7 +119,7 @@ class CreateWiki implements
 				'--prefix', "miraheze-$dbname-",
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout()
@@ -140,7 +140,7 @@ class CreateWiki implements
 				'--container-threads', '1',
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();
@@ -159,8 +159,6 @@ class CreateWiki implements
 		string $oldDbName,
 		string $newDbName
 	): void {
-		global $wmgSwiftPassword, $wgGlobalUsageDatabase;
-
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
 			$this->options->get( 'EchoSharedTrackingDB' )
 		);
@@ -172,9 +170,9 @@ class CreateWiki implements
 			->caller( __METHOD__ )
 			->execute();
 
-		if ( $wgGlobalUsageDatabase ) {
+		if ( $this->options->get( 'GlobalUsageDatabase' ) ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
-				$wgGlobalUsageDatabase
+				$this->options->get( 'GlobalUsageDatabase' )
 			);
 
 			$gudDb->newUpdateQueryBuilder()
@@ -207,7 +205,7 @@ class CreateWiki implements
 				'--prefix', "miraheze-$oldDbName-",
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout()
@@ -226,7 +224,7 @@ class CreateWiki implements
 				$container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout();
@@ -238,7 +236,7 @@ class CreateWiki implements
 				'-D', wfTempDir() . '/' . $container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();
@@ -256,7 +254,7 @@ class CreateWiki implements
 					'--object-name', '""',
 					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
-					'-K', $wmgSwiftPassword
+					'-K', $this->options->get( 'MirahezeMagicSwiftPassword' ),
 				] )
 			) );
 
@@ -269,7 +267,7 @@ class CreateWiki implements
 				$newContainer,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout();
@@ -284,7 +282,7 @@ class CreateWiki implements
 					$container,
 					'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 					'-U', 'mw:media',
-					'-K', $wmgSwiftPassword
+					'-K', $this->options->get( 'MirahezeMagicSwiftPassword' )
 				)->limits( $limits )
 					->disableSandbox()
 					->execute();
