@@ -4,9 +4,6 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\DBQueryError;
-use function getenv;
-use function putenv;
-use const MW_INSTALL_PATH;
 
 $wgGlobalUsageDatabase = 'wikidb';
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
