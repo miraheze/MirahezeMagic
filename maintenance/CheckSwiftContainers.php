@@ -86,8 +86,6 @@ class CheckSwiftContainers extends Maintenance {
 	}
 
 	private function estimateSize( array $containers ): int {
-		global $wmgSwiftPassword;
-
 		$totalSize = 0;
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		foreach ( $containers as $container ) {
@@ -95,7 +93,7 @@ class CheckSwiftContainers extends Maintenance {
 				'swift', 'stat', $container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute()->getStdout();
@@ -109,14 +107,12 @@ class CheckSwiftContainers extends Maintenance {
 	}
 
 	private function getSwiftContainers(): array {
-		global $wmgSwiftPassword;
-
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		$swiftOutput = Shell::command(
 			'swift', 'list',
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $wmgSwiftPassword
+			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
 		)->limits( $limits )
 			->disableSandbox()
 			->execute()->getStdout();
@@ -180,8 +176,6 @@ class CheckSwiftContainers extends Maintenance {
 	}
 
 	private function deleteContainers( array $containers ): void {
-		global $wmgSwiftPassword;
-
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		foreach ( $containers as $container ) {
 			$this->output( "Deleting container: $container\n" );
@@ -189,7 +183,7 @@ class CheckSwiftContainers extends Maintenance {
 				'swift', 'delete', $container,
 				'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 				'-U', 'mw:media',
-				'-K', $wmgSwiftPassword
+				'-K', $this->getConfig()->get( 'MirahezeMagicSwiftPassword' )
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();
