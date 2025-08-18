@@ -24,7 +24,7 @@ class MirahezeIRCRCFeedFormatter extends IRCColourfulRCFeedFormatter {
 		 * WikiTide Foundation Trust and Safety team.
 		 */
 		if (
-			$attribs['rc_type'] === RC_LOG &&
+			$attribs['rc_source'] === RecentChange::SRC_LOG &&
 			$attribs['rc_log_type'] === 'renameuser'
 		) {
 			$globalUserGroups = CentralAuthUser::getInstanceByName( $attribs['rc_user_text'] )->getGlobalGroups();

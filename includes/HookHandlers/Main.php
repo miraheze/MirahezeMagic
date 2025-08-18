@@ -29,6 +29,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
+use RecentChange;
 use Skin;
 use Wikimedia\IPUtils;
 
@@ -284,7 +285,7 @@ class Main implements
 	public function onRecentChange_save( $recentChange ) {
  		// phpcs:enable
 
-		if ( $recentChange->mAttribs['rc_type'] !== RC_LOG ) {
+		if ( $recentChange->mAttribs['rc_source'] !== RecentChange::SRC_LOG ) {
 			return;
 		}
 
