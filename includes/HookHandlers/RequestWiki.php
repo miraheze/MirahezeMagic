@@ -53,6 +53,7 @@ class RequestWiki implements
 		);
 	}
 
+	/** @inheritDoc */
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
 		RequestWikiFormUtils::addFieldToEnd(
 			$formDescriptor,

@@ -64,7 +64,7 @@
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
-			"handler": "Main"
+			"handler": "AbuseFilter"
 		},
 		"APIQuerySiteInfoGeneralInfo": {
 			"handler": "Main"
@@ -79,28 +79,28 @@
 			"handler": "RequestWiki"
 		},
 		"CreateWikiDeletion": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"CreateWikiRename": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"CreateWikiStatePrivate": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"CreateWikiTables": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"GetLocalURL::Internal": {
 			"handler": "Main"
 		},
 		"GlobalUserPageWikis": {
-			"handler": "Main"
+			"handler": "GlobalUserPage"
 		},
 		"ImportDumpJobAfterImport": {
-			"handler": "Main"
+			"handler": "ImportDump"
 		},
 		"ImportDumpJobGetFile": {
-			"handler": "Main"
+			"handler": "ImportDump"
 		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
@@ -131,16 +131,47 @@
 		}
 	},
 	"HookHandlers": {
+		"AbuseFilter": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\AbuseFilter",
+			"services": [
+				"AbuseFilterVariablesManager"
+			]
+		},
+		"CreateWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\CreateWiki",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\CreateWiki::factory",
+			"services": [
+				"MainConfig",
+				"ConnectionProvider",
+				"FormatterFactory",
+				"ManageWikiModuleFactory",
+				"RepoGroup"
+			]
+		},
+		"GlobalUserPage": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\GlobalUserPage",
+			"services": [
+				"CreateWikiDataStore",
+				"ManageWikiDataStoreFactory"
+			]
+		},
+		"ImportDump": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump::factory",
+			"services": [
+				"MainConfig",
+				"ConnectionProvider"
+			]
+		},
 		"Main": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Main",
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
 				"CommentStore",
-				"ConnectionProvider",
 				"HttpRequestFactory",
 				"LinkRenderer",
-				"ManageWikiModuleFactory"
+				"TitleFactory"
 			]
 		},
 		"RequestWiki": {
@@ -173,6 +204,10 @@
 				"skinname-vector-2022": "vector-2022"
 			}
 		},
+		"MirahezeMagicSwiftKey": {
+			"description": "String. Swift key to use for Swift shell commands.",
+			"value": ""
+		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
 			"value": []
@@ -181,9 +216,6 @@
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
 		}
-	},
-	"ConfigRegistry": {
-		"MirahezeMagic": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"manifest_version": 2
 }

@@ -49,6 +49,7 @@
 	"miraheze-newsignuppage-must-accept-tos": "您必须接受使用条款才能创建账号！",
 	"miraheze-oathauth-step1": "重要提示！启用此功能前请务必阅读 OATHAuth 页面！步骤 1：下载双因素身份验证程序",
 	"miraheze-prefs-help-realname": "真实姓名是选填项。若提供，则可能用于给您的贡献署名。另外，使用Miraheze托管的wiki，即表示您认同<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 使用条款]</span>并接受<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy 隐私政策]</span>。",
+	"miraheze-requestcustomdomain-help-target-subdomain": "这是您在wiki请求时选择的wiki当前的子域（即<code><b>example</b>.miraheze.org</code>）。",
 	"miraheze-requestwiki-error-invalidcomment": "您的 wiki 请求包含无效字符。请更正该字符并重试。如果您需要帮助，请[[Special:MyLanguage/Help center|联系我们]]。",
 	"miraheze-requestwiki-info-guidance": "只剩下几个部分了！这个部分非常重要。",
 	"miraheze-requestwiki-info-guidance-post": "您差不多完成了。请检查以确保您已完成所有部分并提供所有相关详细信息。完成后，我们会尽快回复您。在此期间，请随意浏览 Meta 并结识您的 wiki 运营同事。我们很高兴在这里看到新面孔！",

@@ -3,6 +3,7 @@
 namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
+use Wikimedia\StaticArrayWriter;
 
 class GenerateExtensionDatabaseList extends Maintenance {
 
@@ -47,12 +48,10 @@ class GenerateExtensionDatabaseList extends Maintenance {
 			}
 
 			if ( $list ) {
-				$filePath = "{$directory}/{$ext}.php";
-				$fileContent = "<?php\n\nreturn " . var_export( [ 'databases' => $list ], true ) . ";\n";
-
-				file_put_contents( $filePath, $fileContent, LOCK_EX );
+				$contents = StaticArrayWriter::write( [ 'databases' => $list ], 'Automatically generated' );
+				file_put_contents( "$directory/$ext.php", $contents, LOCK_EX );
 			} else {
-				$this->output( "No wikis are using {$ext} so a database list was not generated for it.\n" );
+				$this->output( "No wikis are using $ext so a database list was not generated for it.\n" );
 			}
 		}
 	}
