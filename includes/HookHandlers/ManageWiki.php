@@ -47,7 +47,10 @@ class ManageWiki implements
 		);
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param bool $ceMW @phan-unused-param
+	 */
 	public function onManageWikiCoreAddFormFields(
 		IContextSource $context,
 		ModuleFactory $moduleFactory,
@@ -116,7 +119,10 @@ class ManageWiki implements
 		];
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param IContextSource $context @phan-unused-param
+	 */
 	public function onManageWikiCoreFormSubmission(
 		IContextSource $context,
 		ModuleFactory $moduleFactory,
