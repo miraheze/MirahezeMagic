@@ -14,6 +14,7 @@ class RequestWiki implements
 	RequestWikiQueueFormDescriptorModifyHook
 {
 
+	/** @inheritDoc */
 	public function onRequestWikiFormDescriptorModify( array &$formDescriptor ): void {
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
