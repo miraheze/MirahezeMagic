@@ -24,9 +24,9 @@ class RequestWiki implements
 {
 
 	public function __construct(
-		private readonly MessageLocalizer $messageLocalizer,
 		private readonly ModuleFactory $moduleFactory,
 		private readonly CreateWikiValidator $validator,
+		private readonly MessageLocalizer $messageLocalizer,
 		private readonly ServiceOptions $options
 	) {
 	}
@@ -37,9 +37,9 @@ class RequestWiki implements
 		ModuleFactory $moduleFactory
 	): self {
 		return new self(
-			RequestContext::getMain(),
 			$moduleFactory,
 			$validator,
+			RequestContext::getMain(),
 			new ServiceOptions(
 				[
 					'CreateWikiUsePrivateWikis',
