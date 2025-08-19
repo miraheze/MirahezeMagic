@@ -263,19 +263,67 @@ class Main implements
 		$cwConfig = new GlobalVarConfig( 'cw' );
 		if ( $cwConfig->get( 'Closed' ) ) {
 			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
-			} elseif ( $cwConfig->get( 'Locked' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
-			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
+				$this->appendNotice(
+					$siteNotice,
+					$skin->msg( 'miraheze-sitenotice-closed-private' )->parse(),
+					'https://static.wikitide.net/metawiki/0/02/Wiki_lock.png'
+				);
+				return;
 			}
-		} elseif ( $cwConfig->get( 'Inactive' ) && $cwConfig->get( 'Inactive' ) !== 'exempt' ) {
-			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive-private' )->parse() . '</span></div>';
-			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
+
+			if ( $cwConfig->get( 'Locked' ) ) {
+				$this->appendNotice(
+					$siteNotice,
+					$skin->msg( 'miraheze-sitenotice-closed-locked' )->parse(),
+					'https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png'
+				);
+				return;
 			}
+
+			$this->appendNotice(
+				$siteNotice,
+				$skin->msg( 'miraheze-sitenotice-closed' )->parse(),
+				'https://static.wikitide.net/metawiki/0/02/Wiki_lock.png'
+			);
+			return;
 		}
+
+		$inactive = $cwConfig->get( 'Inactive' );
+		if ( $inactive && $inactive !== 'exempt' ) {
+			$msgKey = $cwConfig->get( 'Private' )
+				? 'miraheze-sitenotice-inactive-private'
+				: 'miraheze-sitenotice-inactive';
+
+			$this->appendNotice(
+				$siteNotice,
+				$skin->msg( $msgKey )->parse(),
+				'https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png'
+			);
+		}
+	}
+
+	private function appendNotice(
+		string &$siteNotice,
+		string $message,
+		string $imageUrl
+	): void {
+		$imageHtml = Html::element( 'img', [
+			'src' => $imageUrl,
+			'align' => 'left',
+			'style' => 'width: 80px; height: 90px;',
+		] );
+
+		$spanHtml = Html::rawElement( 'span',
+			[ 'class' => 'plainlinks' ],
+			$imageHtml . $message
+		);
+
+		$divHtml = Html::rawElement( 'div', [
+			'class' => 'wikitable',
+			'style' => 'text-align: center; width: 90%; margin-left: auto; margin-right: auto; padding: 15px; border: 4px solid black; background-color: #EEE;',
+		], $spanHtml );
+
+		$siteNotice .= $divHtml;
 	}
 
 	/**
