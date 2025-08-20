@@ -48,10 +48,10 @@ class GenerateMirahezeSitemap extends Maintenance {
 		$statusFormatter = $this->getServiceContainer()->getFormatterFactory()
 			->getStatusFormatter( RequestContext::getMain() );
 
-		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
-		$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
+		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
+		$mwCore = $moduleFactory->coreLocal();
 
-		$isPrivate = $remoteWiki->isPrivate();
+		$isPrivate = $mwCore->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbname}\n" );
 
