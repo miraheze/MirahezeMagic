@@ -38,6 +38,7 @@ class ManageWiki implements
 			$jobQueueGroupFactory,
 			new ServiceOptions(
 				[
+					ConfigNames::DatabaseSuffix,
 					ConfigNames::Subdomain,
 					'MirahezeMagicAllowedDomains',
 					'MirahezeMagicMediaWikiVersions',
@@ -159,7 +160,10 @@ class ManageWiki implements
 
 			$mwCore->trackChange( 'article-path', $articlePath, $formData['article-path'] );
 
-			$server = $mwCore->getServerName();
+			$server = $mwCore->getServerName() ?: substr(
+				$dbname, 0,
+				-strlen( $this->options->get( ConfigNames::DatabaseSuffix ) )
+			) . ".$primaryDomain";
 			$this->jobQueueGroupFactory->makeJobQueueGroup( $dbname )->push(
 				new CdnPurgeJob( [
 					'urls' => [
