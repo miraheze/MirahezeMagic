@@ -26,7 +26,6 @@ use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
 use RecentChange;
 use Skin;
-use Wikimedia\IPUtils;
 
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
