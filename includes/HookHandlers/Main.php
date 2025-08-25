@@ -21,6 +21,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
+use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
 use RecentChange;
