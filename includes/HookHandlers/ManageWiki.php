@@ -162,10 +162,9 @@ class ManageWiki implements
 
 			$mwCore->trackChange( 'article-path', $articlePath, $formData['article-path'] );
 
-			$server = $mwCore->getServerName() ?: substr(
-				$dbname, 0,
+			$server = $mwCore->getServerName() ?: ( substr( $dbname, 0,
 				-strlen( $this->options->get( ConfigNames::DatabaseSuffix ) )
-			) . ".$primaryDomain";
+			) . ".$primaryDomain" );
 			$this->jobQueueGroupFactory->makeJobQueueGroup( $dbname )->push(
 				new CdnPurgeJob( [
 					'urls' => [
