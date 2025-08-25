@@ -17,6 +17,8 @@ use function array_unique;
 use function asort;
 use function explode;
 use function is_dir;
+use function strlen;
+use function substr;
 use const MW_VERSION;
 
 class ManageWiki implements
