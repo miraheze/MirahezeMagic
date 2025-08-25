@@ -162,8 +162,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"HttpRequestFactory",
-				"TitleFactory"
+				"HttpRequestFactory"
 			]
 		},
 		"RequestWiki": {
