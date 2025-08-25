@@ -72,9 +72,6 @@
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
-		"ContributionsToolLinks": {
-			"handler": "Main"
-		},
 		"CreateWikiDeletion": {
 			"handler": "CreateWiki"
 		},
@@ -165,9 +162,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"CommentStore",
 				"HttpRequestFactory",
-				"LinkRenderer",
 				"TitleFactory"
 			]
 		},
