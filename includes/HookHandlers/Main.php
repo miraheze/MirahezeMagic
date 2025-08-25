@@ -21,7 +21,6 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
-use MediaWiki\Title\TitleFactory;
 use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
 use RecentChange;
@@ -42,19 +41,16 @@ class Main implements
 
 	public function __construct(
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly TitleFactory $titleFactory,
 		private readonly ServiceOptions $options
 	) {
 	}
 
 	public static function factory(
 		Config $mainConfig,
-		HttpRequestFactory $httpRequestFactory,
-		TitleFactory $titleFactory
+		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
 			$httpRequestFactory,
-			$titleFactory,
 			new ServiceOptions(
 				[
 					'MirahezeMagicAccessIdsMap',
@@ -181,9 +177,12 @@ class Main implements
 		}
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param User $user @phan-unused-param
+	 */
 	public function onTitleReadWhitelist( $title, $user, &$whitelisted ) {
-		if ( $title->equals( $this->titleFactory->newMainPage() ) ) {
+		if ( $title->isMainPage() ) {
 			$whitelisted = true;
 			return;
 		}
@@ -338,16 +337,12 @@ class Main implements
 			return '';
 		}
 
-		$title = $this->titleFactory->newFromText(
+		$url = Skin::makeInternalOrExternalUrl(
 			$skin->msg( $page )->inContentLanguage()->text()
 		);
 
-		if ( $title === null ) {
-			return '';
-		}
-
 		return Html::element( 'a',
-			[ 'href' => $title->fixSpecialName()->getLinkURL() ],
+			[ 'href' => $url ],
 			$skin->msg( $desc )->text()
 		);
 	}
