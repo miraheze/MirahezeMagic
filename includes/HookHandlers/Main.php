@@ -6,13 +6,11 @@ use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
-use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Hook\BlockIpCompleteHook;
-use MediaWiki\Hook\ContributionsToolLinksHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
 use MediaWiki\Hook\MimeMagicInitHook;
 use MediaWiki\Hook\RecentChange_saveHook;
@@ -20,11 +18,9 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
-use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleFactory;
 use MediaWiki\WikiMap\WikiMap;
@@ -36,7 +32,6 @@ use Wikimedia\IPUtils;
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
 	BlockIpCompleteHook,
-	ContributionsToolLinksHook,
 	GetLocalURL__InternalHook,
 	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
@@ -48,9 +43,7 @@ class Main implements
 {
 
 	public function __construct(
-		private readonly CommentStore $commentStore,
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly LinkRenderer $linkRenderer,
 		private readonly TitleFactory $titleFactory,
 		private readonly ServiceOptions $options
 	) {
@@ -58,15 +51,11 @@ class Main implements
 
 	public static function factory(
 		Config $mainConfig,
-		CommentStore $commentStore,
 		HttpRequestFactory $httpRequestFactory,
-		LinkRenderer $linkRenderer,
 		TitleFactory $titleFactory
 	): self {
 		return new self(
-			$commentStore,
 			$httpRequestFactory,
-			$linkRenderer,
 			$titleFactory,
 			new ServiceOptions(
 				[
@@ -156,9 +145,9 @@ class Main implements
 			'skinname-snapwikiskin',
 			'snapwikiskin',
 			'uploadtext',
+			'vector-night-mode-issue-reporting-notice-url',
 			'webauthn-module-description',
 			'wikibase-sitelinks-miraheze',
-			'vector-night-mode-issue-reporting-notice-url',
 		];
 
 		$languageCode = $this->options->get( MainConfigNames::LanguageCode );
@@ -170,7 +159,7 @@ class Main implements
 			$ucKey = ucfirst( $key );
 
 			if (
-				/*
+				/**
 				 * Override order:
 				 * 1. If the MediaWiki:$ucKey page exists, use the key unprefixed
 				 * (in all languages) with normal fallback order.  Specific
@@ -201,25 +190,21 @@ class Main implements
 			return;
 		}
 
-		$specialsArray = [
+		$allowedSpecialPages = [
 			'CentralAutoLogin',
 			'CentralLogin',
+			'ChangePassword',
 			'ConfirmEmail',
 			'CreateAccount',
 			'Notifications',
 			'OAuth',
-			'ResetPassword',
+			'PasswordReset',
+			'Userlogin',
 		];
 
-		if ( $user->isAllowed( 'interwiki' ) ) {
-			$specialsArray[] = 'Interwiki';
-		}
-
 		if ( $title->isSpecialPage() ) {
-			$rootName = strtok( $title->getText(), '/' );
-			$rootTitle = $this->titleFactory->makeTitle( $title->getNamespace(), $rootName );
-			foreach ( $specialsArray as $page ) {
-				if ( $rootTitle->equals( SpecialPage::getTitleFor( $page ) ) ) {
+			foreach ( $allowedSpecialPages as $name ) {
+				if ( $title->isSpecial( $name ) ) {
 					$whitelisted = true;
 					return;
 				}
@@ -285,21 +270,21 @@ class Main implements
 	public function onRecentChange_save( $recentChange ) {
  		// phpcs:enable
 
-		if ( $recentChange->mAttribs['rc_source'] !== RecentChange::SRC_LOG ) {
+		if ( $recentChange->getAttribute( 'rc_source' ) !== RecentChange::SRC_LOG ) {
 			return;
 		}
 
-		$globalUserGroups = CentralAuthUser::getInstanceByName( $recentChange->mAttribs['rc_user_text'] )->getGlobalGroups();
+		$globalUserGroups = CentralAuthUser::getInstanceByName( $recentChange->getAttribute( 'rc_user_text' ) )->getGlobalGroups();
 		if ( !in_array( 'trustandsafety', $globalUserGroups, true ) ) {
 			return;
 		}
 
 		$data = [
 			'writekey' => $this->options->get( 'MirahezeReportsWriteKey' ),
-			'username' => $recentChange->mAttribs['rc_user_text'],
-			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
+			'username' => $recentChange->getAttribute( 'rc_user_text' ),
+			'log' => $recentChange->getAttribute( 'rc_log_type' ) . '/' . $recentChange->getAttribute( 'rc_log_action' ),
 			'wiki' => WikiMap::getCurrentWikiId(),
-			'comment' => $this->commentStore->getComment( 'rc_comment', $recentChange->mAttribs )->text,
+			'comment' => $recentChange->getAttribute( 'rc_comment' ),
 		];
 
 		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ], __METHOD__ );
@@ -324,33 +309,8 @@ class Main implements
 				];
 
 				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ], __METHOD__ );
-				break;
-			}
-		}
-	}
-
-	/**
-	 * @inheritDoc
-	 * @param int $id @phan-unused-param
-	 */
-	public function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
-		$username = $title->getText();
-		if ( !IPUtils::isIPAddress( $username ) ) {
-			$globalUserGroups = CentralAuthUser::getInstanceByName( $username )->getGlobalGroups();
-
-			if (
-				!in_array( 'steward', $globalUserGroups, true ) &&
-				!in_array( 'global-sysop', $globalUserGroups, true ) &&
-				!$specialPage->getUser()->isAllowed( 'centralauth-lock' )
-			) {
 				return;
 			}
-
-			$tools['centralauth'] = $this->linkRenderer->makeExternalLink(
-				"https://meta.miraheze.org/wiki/Special:CentralAuth/$username",
-				mb_strtolower( $specialPage->msg( 'centralauth' )->text() ),
-				SpecialPage::getTitleFor( 'CentralAuth' )
-			);
 		}
 	}
 
