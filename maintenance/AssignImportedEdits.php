@@ -186,7 +186,7 @@ class AssignImportedEdits extends Maintenance {
 					->execute();
 				$this->output( "done.\n" );
 			}
-	
+
 			// Update recent changes if required
 			if ( $recentChangesRows ) {
 				$this->output( 'Updating recent changes...' );
