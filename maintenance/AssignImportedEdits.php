@@ -24,55 +24,51 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @author John Lewis
  * @author Paladox
  * @author Universal Omega
- * @version 4.0
+ * @version 5.0
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\User\User;
+use Wikimedia\Rdbms\Platform\ISQLPlatform;
 
 class AssignImportedEdits extends Maintenance {
 
-	private $importPrefix = 'imported>';
+	private string $importPrefix = 'imported>';
 
 	public function __construct() {
 		parent::__construct();
 
 		$this->addDescription( 'Assigns imported edits for users' );
 
-		$this->addOption( 'to', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import prefix.', false, true );
-		$this->addOption( 'from', 'Username you want edits to be assigned from. (optional), Username excluding prefix.', false, true );
-		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.', false, false );
-		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to \'imported\'.', false, false );
-		$this->addOption( 'norc', 'Don\'t update the recent changes table', false, false );
+		$this->addOption( 'to', 'Username you want edits to be assigned to. (optional), Defaults to all usernames with import prefix.', withArg: true );
+		$this->addOption( 'from', 'Username you want edits to be assigned from. (optional), Username excluding prefix.', withArg: true );
+		$this->addOption( 'no-run', 'Runs without assigning edits to users, useful for testing.' );
+		$this->addOption( 'import-prefix', 'This is the import prefix, defaults to \'imported\'.', withArg: true );
+		$this->addOption( 'norc', 'Don\'t update the recent changes table' );
 	}
 
-	public function execute() {
-		$dbr = $this->getDB( DB_REPLICA );
-
-		if ( $this->getOption( 'import-prefix' ) ) {
+	public function execute(): void {
+		$dbr = $this->getReplicaDB();
+		if ( $this->hasOption( 'import-prefix' ) ) {
 			$this->importPrefix = "{$this->getOption( 'import-prefix' )}>";
 		}
 
 		$userFactory = $this->getServiceContainer()->getUserFactory();
-
-		if ( $this->getOption( 'from' ) ) {
+		if ( $this->hasOption( 'from' ) ) {
 			$from = $this->importPrefix . $this->getOption( 'from' );
-			$row = $dbr->selectRow(
-				'actor',
-				'actor_id',
-				[
-					'actor_name' => $from,
-				],
-				__METHOD__
-			);
+			$actorId = $dbr->newSelectQueryBuilder()
+				->select( 'actor_id' )
+				->from( 'actor' )
+				->where( [ 'actor_name' => $from ] )
+				->caller( __METHOD__ )
+				->fetchField();
 
-			if ( !$row ) {
+			if ( !$actorId ) {
 				$this->fatalError( 'Invalid \'from\' user.' );
 			}
 
-			$fromUser = $userFactory->newFromActorId( $row->actor_id );
-
+			$fromUser = $userFactory->newFromActorId( $actorId );
 			$fromName = $fromUser->getName();
-
 			$toUser = $userFactory->newFromName(
 				$this->getOption( 'to' ) ?: str_replace(
 					$this->importPrefix, '', $fromName
@@ -84,27 +80,23 @@ class AssignImportedEdits extends Maintenance {
 			}
 
 			$this->assignEdits( $fromUser, $toUser );
-
 			return;
 		}
 
-		$res = $dbr->select(
-			'revision',
-			'rev_actor',
-			[],
-			__METHOD__,
-			[ 'GROUP BY' => 'rev_actor' ]
-		);
+		$actorIds = $dbr->newSelectQueryBuilder()
+			->select( 'rev_actor' )
+			->from( 'revision' )
+			->groupBy( 'rev_actor' )
+			->caller( __METHOD__ )
+			->fetchFieldValues();
 
-		if ( !$res || !is_object( $res ) ) {
-			$this->fatalError( '$res was not set to a valid array.' );
+		if ( !$actorIds ) {
+			$this->fatalError( 'No actors found.' );
 		}
 
-		foreach ( $res as $row ) {
-			$fromUser = $userFactory->newFromActorId( $row->rev_actor );
-
+		foreach ( $actorIds as $actorId ) {
+			$fromUser = $userFactory->newFromActorId( $actorId );
 			$fromName = $fromUser->getName();
-
 			$toUser = $userFactory->newFromName(
 				$this->getOption( 'to' ) ?: str_replace(
 					$this->importPrefix, '', $fromName
@@ -115,7 +107,7 @@ class AssignImportedEdits extends Maintenance {
 				continue;
 			}
 
-			if ( strpos( $fromName, $this->importPrefix ) === 0 ) {
+			if ( str_starts_with( $fromName, $this->importPrefix ) ) {
 				if ( $toUser->getId() !== 0 ) {
 					$this->assignEdits( $fromUser, $toUser );
 				}
@@ -123,95 +115,92 @@ class AssignImportedEdits extends Maintenance {
 		}
 	}
 
-	private function assignEdits( $user, $importUser ) {
-		$this->output(
-			"Assigning imported edits from " . ( strpos( $user, $this->importPrefix ) === false ? $this->importPrefix : null ) . "{$user->getName()} to {$importUser->getName()}\n"
+	private function assignEdits( User $user, User $importUser ): int {
+		$this->output( 'Assigning imported edits from ' .
+			( !str_contains( $user->getName(), $this->importPrefix ) ? $this->importPrefix : '' ) .
+			"{$user->getName()} to {$importUser->getName()}\n"
 		);
 
-		$dbw = $this->getDB( DB_PRIMARY );
+		$dbw = $this->getPrimaryDB();
 		$this->beginTransaction( $dbw, __METHOD__ );
 		$actorNormalization = $this->getServiceContainer()->getActorNormalization();
 		$fromActorId = $actorNormalization->findActorId( $user, $dbw );
 
-		# Count things
-		$this->output( "Checking current edits..." );
-
+		// Count things
+		$this->output( 'Checking current edits...' );
 		$revisionRows = $dbw->newSelectQueryBuilder()
-			->select( '*' )
+			->select( ISQLPlatform::ALL_ROWS )
 			->from( 'revision' )
 			->where( [ 'rev_actor' => $fromActorId ] )
 			->caller( __METHOD__ )
 			->fetchRowCount();
+		$this->output( "found $revisionRows.\n" );
 
-		$this->output( "found {$revisionRows}.\n" );
-
-		$this->output( "Checking deleted edits..." );
+		$this->output( 'Checking deleted edits...' );
 		$archiveRows = $dbw->newSelectQueryBuilder()
-			->select( '*' )
+			->select( ISQLPlatform::ALL_ROWS )
 			->from( 'archive' )
 			->where( [ 'ar_actor' => $fromActorId ] )
-			->caller( __METHOD__ )->fetchRowCount();
-		$this->output( "found {$archiveRows}.\n" );
+			->caller( __METHOD__ )
+			->fetchRowCount();
+		$this->output( "found $archiveRows.\n" );
 
-		# Don't count recent changes if we're not supposed to
-		if ( !$this->getOption( 'norc' ) ) {
-			$this->output( "Checking recent changes..." );
+		// Don't count recent changes if we're not supposed to
+		$recentChangesRows = 0;
+		if ( !$this->hasOption( 'norc' ) ) {
+			$this->output( 'Checking recent changes...' );
 			$recentChangesRows = $dbw->newSelectQueryBuilder()
-				->select( '*' )
+				->select( ISQLPlatform::ALL_ROWS )
 				->from( 'recentchanges' )
 				->where( [ 'rc_actor' => $fromActorId ] )
-				->caller( __METHOD__ )->fetchRowCount();
-			$this->output( "found {$recentChangesRows}.\n" );
-		} else {
-			$recentChangesRows = 0;
+				->caller( __METHOD__ )
+				->fetchRowCount();
+			$this->output( "found $recentChangesRows.\n" );
 		}
 
 		$total = $revisionRows + $archiveRows + $recentChangesRows;
-		$this->output( "\nTotal entries to change: {$total}\n" );
+		$this->output( "\nTotal entries to change: $total\n" );
 
 		$toActorId = $actorNormalization->acquireActorId( $importUser, $dbw );
-		if ( !$this->getOption( 'no-run' ) && $total ) {
+		if ( !$this->hasOption( 'no-run' ) && $total ) {
 			$this->output( "\n" );
 			if ( $revisionRows ) {
-				# Assign edits
-				$this->output( "Assigning current edits..." );
-
+				// Assign edits
+				$this->output( 'Assigning current edits...' );
 				$dbw->newUpdateQueryBuilder()
 					->update( 'revision' )
 					->set( [ 'rev_actor' => $toActorId ] )
 					->where( [ 'rev_actor' => $fromActorId ] )
-					->caller( __METHOD__ )->execute();
-
+					->caller( __METHOD__ )
+					->execute();
 				$this->output( "done.\n" );
 			}
 
 			if ( $archiveRows ) {
-				$this->output( "Assigning deleted edits..." );
-
+				$this->output( 'Assigning deleted edits...' );
 				$dbw->newUpdateQueryBuilder()
 					->update( 'archive' )
 					->set( [ 'ar_actor' => $toActorId ] )
 					->where( [ 'ar_actor' => $fromActorId ] )
-					->caller( __METHOD__ )->execute();
-
+					->caller( __METHOD__ )
+					->execute();
 				$this->output( "done.\n" );
 			}
-			# Update recent changes if required
+	
+			// Update recent changes if required
 			if ( $recentChangesRows ) {
-				$this->output( "Updating recent changes..." );
-
+				$this->output( 'Updating recent changes...' );
 				$dbw->newUpdateQueryBuilder()
 					->update( 'recentchanges' )
 					->set( [ 'rc_actor' => $toActorId ] )
 					->where( [ 'rc_actor' => $fromActorId ] )
-					->caller( __METHOD__ )->execute();
-
+					->caller( __METHOD__ )
+					->execute();
 				$this->output( "done.\n" );
 			}
 		}
 
 		$this->commitTransaction( $dbw, __METHOD__ );
-
 		return $total;
 	}
 }
