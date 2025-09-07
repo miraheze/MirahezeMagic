@@ -35,7 +35,7 @@ class Populate143MediaWikiVersion extends Maintenance {
 				$remoteWiki->setExtraFieldData(
 					'mediawiki-version',
 					$newVersion,
-					default: $oldVersion
+					default: ( $oldVersion === '1.43' ? null : $oldVersion )
 				);
 
 				$remoteWiki->commit();
