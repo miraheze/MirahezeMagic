@@ -23,7 +23,7 @@ class Populate143MediaWikiVersion extends Maintenance {
 			// If it's 1.44 keep it, otherwise set 1.43
 			$newVersion = ( $oldVersion === '1.44' ) ? '1.44' : '1.43';
 
-			if ( $newVersion !== $oldVersion && is_dir( "/srv/mediawiki/$newVersion" ) ) {
+			if ( is_dir( "/srv/mediawiki/$newVersion" ) ) {
 				if ( $this->hasOption( 'dry-run' ) ) {
 					$this->output( "Dry run: Would update $dbname from $oldVersion to $newVersion\n" );
 					continue;
