@@ -62,7 +62,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 			$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 			$newVersion = $this->getOption( 'mwversion' );
 
-			if ( $newVersion !== $oldVersion && is_dir( "/srv/mediawiki/$newVersion" ) ) {
+			if ( is_dir( "/srv/mediawiki/$newVersion" ) ) {
 				if ( $this->hasOption( 'dry-run' ) ) {
 					$this->output( "Dry run: Would upgrade $dbname from $oldVersion to $newVersion\n" );
 					continue;
