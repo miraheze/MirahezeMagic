@@ -7,7 +7,8 @@
 			"Kubuya kanane leopold",
 			"Mahabarata",
 			"Orlodrim",
-			"SleaY"
+			"SleaY",
+			"Urhixidur"
 		]
 	},
 	"managewiki-setting-wgAbuseFilterActions-name": "Actions AbuseFilter",
@@ -16,10 +17,10 @@
 	"managewiki-setting-wgAutoBlockExpiry-help": "Nombre de secondes avant l'expiration des entrées de blocage automatique. La valeur minimale autorisée est 0, tandis que la valeur maximale est de 10 ans (315360000).",
 	"managewiki-setting-wgBlockAllowsUTEdit-name": "Permet de bloquer les utilisateurs pour restreindre l'accès à la page de discussion",
 	"managewiki-setting-wgBlockAllowsUTEdit-help": "Permet à l'utilisateur bloquant d'accorder l'accès en modification à la page de discussion à l'utilisateur bloqué.",
-	"managewiki-setting-wgCookieSetOnAutoblock-name": "Cookie défini sur blocage automatique",
-	"managewiki-setting-wgCookieSetOnAutoblock-help": "Détermine s'il faut définir un cookie lorsqu'un utilisateur est bloqué automatiquement. Cela signifie qu'un utilisateur bloqué, même après s'être déconnecté et avoir changé d'adresse IP, sera toujours bloqué.",
-	"managewiki-setting-wgCookieSetOnIpBlock-name": "Cookie défini sur le bloc IP",
-	"managewiki-setting-wgCookieSetOnIpBlock-help": "Détermine s'il faut définir un cookie lorsqu'un utilisateur est bloqué automatiquement. Cela signifie qu'un utilisateur bloqué, même après s'être déconnecté et avoir changé d'adresse IP, sera toujours bloqué.",
+	"managewiki-setting-wgCookieSetOnAutoblock-name": "Témoin (''cookie'') défini sur blocage automatique",
+	"managewiki-setting-wgCookieSetOnAutoblock-help": "Détermine s’il faut définir un témoin (''cookie'') lorsqu’un utilisateur est bloqué automatiquement. Cela signifie qu’un utilisateur bloqué, même après s’être déconnecté et avoir changé d’adresse IP, sera toujours bloqué.",
+	"managewiki-setting-wgCookieSetOnIpBlock-name": "Témoin (''cookie'') défini sur le bloc IP",
+	"managewiki-setting-wgCookieSetOnIpBlock-help": "Détermine s’il faut définir un témoin (''cookie'') lorsqu’un utilisateur est bloqué automatiquement. Cela signifie qu’un utilisateur bloqué, même après s’être déconnecté et avoir changé d’adresse IP, sera toujours bloqué.",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "Confirmation par e-mail pour modifier",
 	"managewiki-setting-wgEmailConfirmToEdit-help": "Exiger des utilisateurs de confirmer l'adresse e-mail avant de pouvoir modifier. Cela désactive efficacement l'édition IP.",
 	"managewiki-setting-wgProtectSiteLimit-name": "Protéger la limite du site",

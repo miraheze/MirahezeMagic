@@ -38,7 +38,7 @@
 	"group-interwiki-admin-member": "{{GENDER:$1|إداري إنترويكي|إدارية إنترويكي}}",
 	"group-interwiki-admin": "إداري إنترويكي",
 	"group-ipblock-exempt-member": "{{GENDER:$1|مستثنى من منع الآي بي}}",
-	"group-ipblock-exempt": "إعفاء حظر IP",
+	"group-ipblock-exempt": "مستثنون من منع الأيبي",
 	"group-member": "أعضاء",
 	"group-member-member": "{{GENDER:$1|عضو|عضوة}}",
 	"group-oversight-member": "{{GENDER:$1|مراقب}}",
