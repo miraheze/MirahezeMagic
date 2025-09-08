@@ -40,6 +40,9 @@ class ChangeMediaWikiVersion extends Maintenance {
 		$this->addOption( 'regex', 'Uses a regular expression to select wikis starting with a specific pattern. Overrides the --file option.' );
 		$this->addOption( 'dry-run', 'Performs a dry run without making any changes to the wikis.' );
 
+		// All wikis
+		$this->addOption( 'all-wikis', 'Change MediaWiki version on all wikis.' );
+
 		// State options
 		$this->addOption( 'active', 'Only change MediaWiki version on active wikis.' );
 		$this->addOption( 'closed', 'Only change MediaWiki version on closed wikis.' );
@@ -57,7 +60,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 			if ( !$dbnames ) {
 				$this->fatalError( 'Unable to read file, exiting' );
 			}
-		} elseif ( $this->hasOption( 'active' ) || $this->hasOption( 'closed' ) || $this->hasOption( 'deleted' ) || $this->hasOption( 'inactive' ) ) {
+		} elseif ( $this->hasOption( 'all-wikis' ) || $this->hasOption( 'active' ) || $this->hasOption( 'closed' ) || $this->hasOption( 'deleted' ) || $this->hasOption( 'inactive' ) ) {
 			$dbnames = $this->getConfig()->get( MainConfigNames::LocalDatabases );
 		} else {
 			$dbnames[] = $this->getConfig()->get( MainConfigNames::DBname );
