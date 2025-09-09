@@ -16,6 +16,7 @@ function wfOnMediaWikiServices( MediaWikiServices $services ): void {
 		}
 
 		$db = wfInitDBConnection( $services );
+		$db->selectDomain( 'wikidb' );
 		if ( !$db->tableExists( 'echo_unread_wikis', __METHOD__ ) ) {
 			$db->sourceFile( MW_INSTALL_PATH . '/extensions/Echo/sql/mysql/tables-sharedtracking-generated.sql' );
 		}
