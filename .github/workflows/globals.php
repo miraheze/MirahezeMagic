@@ -2,7 +2,6 @@
 
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\WikiMap\WikiMap;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\DBQueryError;
 
