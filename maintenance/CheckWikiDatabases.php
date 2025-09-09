@@ -140,6 +140,9 @@ class CheckWikiDatabases extends Maintenance {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
 		$tablesToCheck = [
+			'virtual-checkuser-global' => [
+				'cuci_wiki_map' => 'ciwm_wiki',
+			],
 			'virtual-createwiki' => [
 				'cw_wikis' => 'wiki_dbname',
 				'gnf_files' => 'files_dbname',
