@@ -355,6 +355,7 @@ class CreateWiki implements
 
 	/** @inheritDoc */
 	public function onCreateWikiTables( array &$tables ): void {
+		$tables['cuci_wiki_map'] = 'ciwm_wiki';
 		$tables['localnames'] = 'ln_wiki';
 		$tables['localuser'] = 'lu_wiki';
 	}
