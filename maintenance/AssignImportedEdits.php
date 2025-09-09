@@ -122,7 +122,7 @@ class AssignImportedEdits extends Maintenance {
 		);
 
 		$dbw = $this->getPrimaryDB();
-		$this->beginTransaction( $dbw, __METHOD__ );
+		$this->beginTransactionRound( __METHOD__ );
 		$actorNormalization = $this->getServiceContainer()->getActorNormalization();
 		$fromActorId = $actorNormalization->findActorId( $user, $dbw );
 
@@ -200,7 +200,7 @@ class AssignImportedEdits extends Maintenance {
 			}
 		}
 
-		$this->commitTransaction( $dbw, __METHOD__ );
+		$this->commitTransactionRound( __METHOD__ );
 		return $total;
 	}
 }
