@@ -17,7 +17,7 @@ GlobalUserPage:
   branch: auto
   repo: auto
 ImportDump:
-  branch: test
+  branch: tests-cleanup
   repo: https://github.com/miraheze/ImportDump
 ManageWiki:
   branch: main
