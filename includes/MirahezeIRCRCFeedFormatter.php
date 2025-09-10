@@ -4,8 +4,8 @@ namespace Miraheze\MirahezeMagic;
 
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\RCFeed\IRCColourfulRCFeedFormatter;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\WikiMap\WikiMap;
-use RecentChange;
 
 class MirahezeIRCRCFeedFormatter extends IRCColourfulRCFeedFormatter {
 

@@ -37,7 +37,7 @@
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
 	"LogActionsHandlers": {
-		"vanishuser/*": "LogFormatter"
+		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},
 	"LogHeaders": {
 		"vanishuser": "vanishuser-log-header"
