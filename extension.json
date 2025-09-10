@@ -37,7 +37,7 @@
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
 	"LogActionsHandlers": {
-		"vanishuser/*": "LogFormatter"
+		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},
 	"LogHeaders": {
 		"vanishuser": "vanishuser-log-header"
@@ -70,9 +70,6 @@
 			"handler": "Main"
 		},
 		"BlockIpComplete": {
-			"handler": "Main"
-		},
-		"ContributionsToolLinks": {
 			"handler": "Main"
 		},
 		"CreateWikiDeletion": {
@@ -165,10 +162,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"CommentStore",
-				"HttpRequestFactory",
-				"LinkRenderer",
-				"TitleFactory"
+				"HttpRequestFactory"
 			]
 		},
 		"RequestWiki": {

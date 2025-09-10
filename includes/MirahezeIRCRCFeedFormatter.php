@@ -4,8 +4,8 @@ namespace Miraheze\MirahezeMagic;
 
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\RCFeed\IRCColourfulRCFeedFormatter;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\WikiMap\WikiMap;
-use RecentChange;
 
 class MirahezeIRCRCFeedFormatter extends IRCColourfulRCFeedFormatter {
 
@@ -16,24 +16,23 @@ class MirahezeIRCRCFeedFormatter extends IRCColourfulRCFeedFormatter {
 			return null;
 		}
 
-		$wikiId = WikiMap::getCurrentWikiId();
-		$attribs = $rc->getAttributes();
-
 		/**
 		 * Don't send renameuser log events to IRC for the
 		 * WikiTide Foundation Trust and Safety team.
 		 */
 		if (
-			$attribs['rc_source'] === RecentChange::SRC_LOG &&
-			$attribs['rc_log_type'] === 'renameuser'
+			$rc->getAttribute( 'rc_source' ) === RecentChange::SRC_LOG &&
+			$rc->getAttribute( 'rc_log_type' ) === 'renameuser'
 		) {
-			$globalUserGroups = CentralAuthUser::getInstanceByName( $attribs['rc_user_text'] )->getGlobalGroups();
+			$globalUserGroups = CentralAuthUser::getInstanceByName( $rc->getAttribute( 'rc_user_text' ) )->getGlobalGroups();
 			if ( in_array( 'trustandsafety', $globalUserGroups, true ) ) {
 				return null;
 			}
 		}
 
-		// Prefix is \003, no colour (\003) switches
+		$wikiId = WikiMap::getCurrentWikiId();
+
+		// Prefix is \003, no color (\003) switches
 		// back to the term default.
 		return "$wikiId \0035*\003 $lineFromParent";
 	}
