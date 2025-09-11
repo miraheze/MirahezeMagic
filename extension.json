@@ -96,6 +96,12 @@
 		"ImportDumpJobGetFile": {
 			"handler": "ImportDump"
 		},
+		"ManageWikiCoreAddFormFields": {
+			"handler": "ManageWiki"
+		},
+		"ManageWikiCoreFormSubmission": {
+			"handler": "ManageWiki"
+		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
 		},
@@ -165,6 +171,14 @@
 				"HttpRequestFactory"
 			]
 		},
+		"ManageWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki::factory",
+			"services": [
+				"MainConfig",
+				"JobQueueGroupFactory"
+			]
+		},
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
 		}
@@ -172,6 +186,14 @@
 	"config": {
 		"MirahezeMagicAccessIdsMap": {
 			"description": "Array, in the format of wiki => [ central ids ]. Users authorized to access certain wikis to prevent global read rights from applying.",
+			"value": []
+		},
+		"MirahezeMagicAllowedDomains": {
+			"description": "Array. Allowed primary domain selections in ManageWiki core.",
+			"value": []
+		},
+		"MirahezeMagicMediaWikiVersions": {
+			"description": "Array. Supported options for MediaWiki versions in ManageWiki core.",
 			"value": []
 		},
 		"MirahezeMagicMemcachedServers": {
