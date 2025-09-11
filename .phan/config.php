@@ -35,4 +35,6 @@ $cfg['suppress_issue_types'] = [
 	'SecurityCheck-LikelyFalsePositive',
 ];
 
+$cfg['enable_class_alias_support'] = false;
+
 return $cfg;
