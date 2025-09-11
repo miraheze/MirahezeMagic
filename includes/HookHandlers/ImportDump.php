@@ -7,7 +7,7 @@ use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Shell\Shell;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
-use Miraheze\ImportDump\ImportDumpRequestManager;
+use Miraheze\ImportDump\RequestManager;
 use Wikimedia\Rdbms\IConnectionProvider;
 
 class ImportDump implements
@@ -36,9 +36,12 @@ class ImportDump implements
 
 	/**
 	 * @inheritDoc
-	 * @param ImportDumpRequestManager $requestManager @phan-unused-param
+	 * @param RequestManager $requestManager @phan-unused-param
 	 */
-	public function onImportDumpJobAfterImport( $filePath, $requestManager ): void {
+	public function onImportDumpJobAfterImport(
+		string $filePath,
+		RequestManager $requestManager
+	): void {
 		$limits = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 		Shell::command( '/bin/rm', $filePath )
 			->limits( $limits )
@@ -47,7 +50,10 @@ class ImportDump implements
 	}
 
 	/** @inheritDoc */
-	public function onImportDumpJobGetFile( &$filePath, $requestManager ): void {
+	public function onImportDumpJobGetFile(
+		string &$filePath,
+		RequestManager $requestManager
+	): void {
 		$dbr = $this->connectionProvider->getReplicaDatabase( 'virtual-importdump' );
 		$container = $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :

@@ -5,6 +5,7 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
@@ -19,7 +20,6 @@ use Miraheze\ManageWiki\ConfigNames;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Psr\Log\LoggerInterface;
 use Redis;
-use RepoGroup;
 use Throwable;
 use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\DBConnRef;
@@ -355,6 +355,7 @@ class CreateWiki implements
 
 	/** @inheritDoc */
 	public function onCreateWikiTables( array &$tables ): void {
+		$tables['cuci_wiki_map'] = 'ciwm_wiki';
 		$tables['localnames'] = 'ln_wiki';
 		$tables['localuser'] = 'lu_wiki';
 	}

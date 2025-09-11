@@ -6,13 +6,11 @@ use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
 use MediaWiki\Block\DatabaseBlock;
 use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
-use MediaWiki\CommentStore\CommentStore;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Hook\BlockIpCompleteHook;
-use MediaWiki\Hook\ContributionsToolLinksHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
 use MediaWiki\Hook\MimeMagicInitHook;
 use MediaWiki\Hook\RecentChange_saveHook;
@@ -20,23 +18,18 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
-use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
-use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\Title\Title;
-use MediaWiki\Title\TitleFactory;
+use MediaWiki\RecentChanges\RecentChange;
+use MediaWiki\Skin\Skin;
+use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
-use RecentChange;
-use Skin;
-use Wikimedia\IPUtils;
 
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
 	BlockIpCompleteHook,
-	ContributionsToolLinksHook,
 	GetLocalURL__InternalHook,
 	MessageCacheFetchOverridesHook,
 	MimeMagicInitHook,
@@ -48,26 +41,17 @@ class Main implements
 {
 
 	public function __construct(
-		private readonly CommentStore $commentStore,
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly LinkRenderer $linkRenderer,
-		private readonly TitleFactory $titleFactory,
 		private readonly ServiceOptions $options
 	) {
 	}
 
 	public static function factory(
 		Config $mainConfig,
-		CommentStore $commentStore,
-		HttpRequestFactory $httpRequestFactory,
-		LinkRenderer $linkRenderer,
-		TitleFactory $titleFactory
+		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
-			$commentStore,
 			$httpRequestFactory,
-			$linkRenderer,
-			$titleFactory,
 			new ServiceOptions(
 				[
 					'MirahezeMagicAccessIdsMap',
@@ -155,9 +139,9 @@ class Main implements
 			'skinname-snapwikiskin',
 			'snapwikiskin',
 			'uploadtext',
+			'vector-night-mode-issue-reporting-notice-url',
 			'webauthn-module-description',
 			'wikibase-sitelinks-miraheze',
-			'vector-night-mode-issue-reporting-notice-url',
 		];
 
 		$languageCode = $this->options->get( MainConfigNames::LanguageCode );
@@ -169,7 +153,7 @@ class Main implements
 			$ucKey = ucfirst( $key );
 
 			if (
-				/*
+				/**
 				 * Override order:
 				 * 1. If the MediaWiki:$ucKey page exists, use the key unprefixed
 				 * (in all languages) with normal fallback order.  Specific
@@ -193,32 +177,31 @@ class Main implements
 		}
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param User $user @phan-unused-param
+	 */
 	public function onTitleReadWhitelist( $title, $user, &$whitelisted ) {
-		if ( $title->equals( $this->titleFactory->newMainPage() ) ) {
+		if ( $title->isMainPage() ) {
 			$whitelisted = true;
 			return;
 		}
 
-		$specialsArray = [
+		$allowedSpecialPages = [
 			'CentralAutoLogin',
 			'CentralLogin',
+			'ChangePassword',
 			'ConfirmEmail',
 			'CreateAccount',
 			'Notifications',
 			'OAuth',
-			'ResetPassword',
+			'PasswordReset',
+			'Userlogin',
 		];
 
-		if ( $user->isAllowed( 'interwiki' ) ) {
-			$specialsArray[] = 'Interwiki';
-		}
-
 		if ( $title->isSpecialPage() ) {
-			$rootName = strtok( $title->getText(), '/' );
-			$rootTitle = $this->titleFactory->makeTitle( $title->getNamespace(), $rootName );
-			foreach ( $specialsArray as $page ) {
-				if ( $rootTitle->equals( SpecialPage::getTitleFor( $page ) ) ) {
+			foreach ( $allowedSpecialPages as $name ) {
+				if ( $title->isSpecial( $name ) ) {
 					$whitelisted = true;
 					return;
 				}
@@ -262,19 +245,67 @@ class Main implements
 		$cwConfig = new GlobalVarConfig( 'cw' );
 		if ( $cwConfig->get( 'Closed' ) ) {
 			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-private' )->parse() . '</span></div>';
-			} elseif ( $cwConfig->get( 'Locked' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed-locked' )->parse() . '</span></div>';
-			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/0/02/Wiki_lock.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-closed' )->parse() . '</span></div>';
+				$this->appendNotice(
+					$siteNotice,
+					$skin->msg( 'miraheze-sitenotice-closed-private' )->parse(),
+					'https://static.wikitide.net/metawiki/0/02/Wiki_lock.png'
+				);
+				return;
 			}
-		} elseif ( $cwConfig->get( 'Inactive' ) && $cwConfig->get( 'Inactive' ) !== 'exempt' ) {
-			if ( $cwConfig->get( 'Private' ) ) {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive-private' )->parse() . '</span></div>';
-			} else {
-				$siteNotice .= '<div class="wikitable" style="text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;"> <span class="plainlinks"> <img src="https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png" align="left" style="width:80px;height:90px;">' . $skin->msg( 'miraheze-sitenotice-inactive' )->parse() . '</span></div>';
+
+			if ( $cwConfig->get( 'Locked' ) ) {
+				$this->appendNotice(
+					$siteNotice,
+					$skin->msg( 'miraheze-sitenotice-closed-locked' )->parse(),
+					'https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png'
+				);
+				return;
 			}
+
+			$this->appendNotice(
+				$siteNotice,
+				$skin->msg( 'miraheze-sitenotice-closed' )->parse(),
+				'https://static.wikitide.net/metawiki/0/02/Wiki_lock.png'
+			);
+			return;
 		}
+
+		$inactive = $cwConfig->get( 'Inactive' );
+		if ( $inactive && $inactive !== 'exempt' ) {
+			$msgKey = $cwConfig->get( 'Private' )
+				? 'miraheze-sitenotice-inactive-private'
+				: 'miraheze-sitenotice-inactive';
+
+			$this->appendNotice(
+				$siteNotice,
+				$skin->msg( $msgKey )->parse(),
+				'https://static.wikitide.net/metawiki/5/5f/Out_of_date_clock_icon.png'
+			);
+		}
+	}
+
+	private function appendNotice(
+		string &$siteNotice,
+		string $message,
+		string $imageUrl
+	): void {
+		$imageHtml = Html::element( 'img', [
+			'src' => $imageUrl,
+			'align' => 'left',
+			'style' => 'width: 80px; height: 90px;',
+		] );
+
+		$spanHtml = Html::rawElement( 'span',
+			[ 'class' => 'plainlinks' ],
+			$imageHtml . $message
+		);
+
+		$divHtml = Html::rawElement( 'div', [
+			'class' => 'wikitable',
+			'style' => 'text-align: center; width: 90%; margin-left: auto; margin-right: auto; padding: 15px; border: 4px solid black; background-color: var(--background-color-neutral, #EEE);',
+		], $spanHtml );
+
+		$siteNotice .= $divHtml;
 	}
 
 	/**
@@ -284,21 +315,21 @@ class Main implements
 	public function onRecentChange_save( $recentChange ) {
  		// phpcs:enable
 
-		if ( $recentChange->mAttribs['rc_source'] !== RecentChange::SRC_LOG ) {
+		if ( $recentChange->getAttribute( 'rc_source' ) !== RecentChange::SRC_LOG ) {
 			return;
 		}
 
-		$globalUserGroups = CentralAuthUser::getInstanceByName( $recentChange->mAttribs['rc_user_text'] )->getGlobalGroups();
+		$globalUserGroups = CentralAuthUser::getInstanceByName( $recentChange->getAttribute( 'rc_user_text' ) )->getGlobalGroups();
 		if ( !in_array( 'trustandsafety', $globalUserGroups, true ) ) {
 			return;
 		}
 
 		$data = [
 			'writekey' => $this->options->get( 'MirahezeReportsWriteKey' ),
-			'username' => $recentChange->mAttribs['rc_user_text'],
-			'log' => $recentChange->mAttribs['rc_log_type'] . '/' . $recentChange->mAttribs['rc_log_action'],
+			'username' => $recentChange->getAttribute( 'rc_user_text' ),
+			'log' => $recentChange->getAttribute( 'rc_log_type' ) . '/' . $recentChange->getAttribute( 'rc_log_action' ),
 			'wiki' => WikiMap::getCurrentWikiId(),
-			'comment' => $this->commentStore->getComment( 'rc_comment', $recentChange->mAttribs )->text,
+			'comment' => $recentChange->getAttribute( 'rc_comment' ),
 		];
 
 		$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/ial', [ 'postData' => $data ], __METHOD__ );
@@ -323,33 +354,8 @@ class Main implements
 				];
 
 				$this->httpRequestFactory->post( 'https://reports.miraheze.org/api/report', [ 'postData' => $data ], __METHOD__ );
-				break;
-			}
-		}
-	}
-
-	/**
-	 * @inheritDoc
-	 * @param int $id @phan-unused-param
-	 */
-	public function onContributionsToolLinks( $id, Title $title, array &$tools, SpecialPage $specialPage ) {
-		$username = $title->getText();
-		if ( !IPUtils::isIPAddress( $username ) ) {
-			$globalUserGroups = CentralAuthUser::getInstanceByName( $username )->getGlobalGroups();
-
-			if (
-				!in_array( 'steward', $globalUserGroups, true ) &&
-				!in_array( 'global-sysop', $globalUserGroups, true ) &&
-				!$specialPage->getUser()->isAllowed( 'centralauth-lock' )
-			) {
 				return;
 			}
-
-			$tools['centralauth'] = $this->linkRenderer->makeExternalLink(
-				"https://meta.miraheze.org/wiki/Special:CentralAuth/$username",
-				mb_strtolower( $specialPage->msg( 'centralauth' )->text() ),
-				SpecialPage::getTitleFor( 'CentralAuth' )
-			);
 		}
 	}
 
@@ -379,16 +385,12 @@ class Main implements
 			return '';
 		}
 
-		$title = $this->titleFactory->newFromText(
+		$url = Skin::makeInternalOrExternalUrl(
 			$skin->msg( $page )->inContentLanguage()->text()
 		);
 
-		if ( $title === null ) {
-			return '';
-		}
-
 		return Html::element( 'a',
-			[ 'href' => $title->fixSpecialName()->getLinkURL() ],
+			[ 'href' => $url ],
 			$skin->msg( $desc )->text()
 		);
 	}

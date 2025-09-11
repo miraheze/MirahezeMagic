@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bapham123",
 			"Minh Nguyen",
 			"Pisceskaze",
 			"SongNgu.xyz"
@@ -17,6 +18,13 @@
 	"managewiki-setting-wgCookieSetOnIpBlock-name": "Sử dụng tập tin cookie cùng với cấm địa chỉ IP",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "Cần xác nhận email để sửa đổi",
 	"managewiki-setting-wgEmailConfirmToEdit-help": "Yêu cầu người dùng xác nhận địa chỉ email trước khi họ có thể chỉnh sửa. Điều này vô hiệu hóa việc sửa đổi ẩn danh.",
+	"managewiki-setting-wgMediaViewerIsInBeta-name": "Bật phiên bản Beta của Media Viewer",
+	"managewiki-setting-wgPopupsBetaFeature-name": "Bật phiên bản Beta của Popups",
+	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Bật phiên bản Beta của Trình soạn thảo trực quan Wikitext",
+	"managewiki-setting-wmgWebChatServer-name": "Máy chủ WebChat",
+	"managewiki-setting-wmgWebChatServer-help": "Máy chủ IRC để kết nối. Không cần thiết khi sử dụng máy khách web LiberaChat.",
+	"managewiki-setting-wmgWebChatChannel-name": "Kênh WebChat",
+	"managewiki-setting-wmgWebChatClient-name": "Máy khách WebChat",
 	"managewiki-setting-wmgWikiLicense-name": "Giấy phép nội dung",
 	"managewiki-setting-wmgWikiLicense-help": "Mỗi wiki trên Miraheze theo mặc định được cấp phép theo CC-BY-SA 4.0, mặc dù có thể được thay đổi thành loại giấy phép được hỗ trợ khác. Nếu bạn muốn phát hành những đóng góp trên wiki của mình theo một giấy phép khác, vui lòng cho chúng tôi biết để chúng tôi có thể cung cấp nó cho bạn. Xin lưu ý rằng việc thay đổi giấy phép trên wiki của bạn có thể có tác động đến cộng đồng của bạn và không nên thực hiện một cách nhẹ nhàng.",
 	"managewiki-setting-wgCommentsInRecentChanges-name": "Cho phép Bình luận trong Thay đổi gần đây",

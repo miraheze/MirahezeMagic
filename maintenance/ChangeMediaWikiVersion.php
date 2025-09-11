@@ -21,7 +21,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup MirahezeMagic
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
 use MediaWiki\MainConfigNames;
@@ -39,19 +39,29 @@ class ChangeMediaWikiVersion extends Maintenance {
 		$this->addOption( 'file', 'Path to file where the wikinames are stored. Must be one wikidb name per line. (Optional, falls back to current dbname)', false, true );
 		$this->addOption( 'regex', 'Uses a regular expression to select wikis starting with a specific pattern. Overrides the --file option.' );
 		$this->addOption( 'dry-run', 'Performs a dry run without making any changes to the wikis.' );
+
+		// All wikis
+		$this->addOption( 'all-wikis', 'Change MediaWiki version on all wikis.' );
+
+		// State options
+		$this->addOption( 'active', 'Only change MediaWiki version on active wikis.' );
+		$this->addOption( 'closed', 'Only change MediaWiki version on closed wikis.' );
+		$this->addOption( 'deleted', 'Only change MediaWiki version on deleted wikis.' );
+		$this->addOption( 'inactive', 'Only change MediaWiki version on inactive wikis.' );
 	}
 
 	public function execute() {
 		$dbnames = [];
-
-		if ( (bool)$this->getOption( 'regex' ) ) {
+		if ( $this->hasOption( 'regex' ) ) {
 			$pattern = $this->getOption( 'regex' );
 			$dbnames = $this->getWikiDbNamesByRegex( $pattern );
-		} elseif ( (bool)$this->getOption( 'file' ) ) {
+		} elseif ( $this->hasOption( 'file' ) ) {
 			$dbnames = file( $this->getOption( 'file' ), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
 			if ( !$dbnames ) {
 				$this->fatalError( 'Unable to read file, exiting' );
 			}
+		} elseif ( $this->hasOption( 'all-wikis' ) || $this->hasOption( 'active' ) || $this->hasOption( 'closed' ) || $this->hasOption( 'deleted' ) || $this->hasOption( 'inactive' ) ) {
+			$dbnames = $this->getConfig()->get( MainConfigNames::LocalDatabases );
 		} else {
 			$dbnames[] = $this->getConfig()->get( MainConfigNames::DBname );
 		}
@@ -62,14 +72,29 @@ class ChangeMediaWikiVersion extends Maintenance {
 			$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 			$newVersion = $this->getOption( 'mwversion' );
 
-			if ( $newVersion !== $oldVersion && is_dir( "/srv/mediawiki/$newVersion" ) ) {
+			if ( is_dir( "/srv/mediawiki/$newVersion" ) ) {
+				$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
+				$remoteWiki->disableResetDatabaseLists();
+				if ( $this->hasOption( 'active' ) && ( $remoteWiki->isClosed() || $remoteWiki->isDeleted() || $remoteWiki->isInactive() ) ) {
+					continue;
+				}
+
+				if ( $this->hasOption( 'closed' ) && !$remoteWiki->isClosed() ) {
+					continue;
+				}
+
+				if ( $this->hasOption( 'deleted' ) && !$remoteWiki->isDeleted() ) {
+					continue;
+				}
+
+				if ( $this->hasOption( 'inactive' ) && !$remoteWiki->isInactive() ) {
+					continue;
+				}
+
 				if ( $this->hasOption( 'dry-run' ) ) {
 					$this->output( "Dry run: Would upgrade $dbname from $oldVersion to $newVersion\n" );
 					continue;
 				}
-
-				$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
-				$remoteWiki->disableResetDatabaseLists();
 
 				$remoteWiki->setExtraFieldData(
 					'mediawiki-version', $newVersion, default: $oldVersion

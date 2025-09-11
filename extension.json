@@ -17,7 +17,7 @@
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.43.0",
+		"MediaWiki": ">= 1.44.0",
 		"platform": {
 			"php": ">= 8.1"
 		}
@@ -37,7 +37,7 @@
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
 	"LogActionsHandlers": {
-		"vanishuser/*": "LogFormatter"
+		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},
 	"LogHeaders": {
 		"vanishuser": "vanishuser-log-header"
@@ -70,9 +70,6 @@
 			"handler": "Main"
 		},
 		"BlockIpComplete": {
-			"handler": "Main"
-		},
-		"ContributionsToolLinks": {
 			"handler": "Main"
 		},
 		"CreateWikiAfterCreationWithExtraData": {
@@ -168,10 +165,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"CommentStore",
-				"HttpRequestFactory",
-				"LinkRenderer",
-				"TitleFactory"
+				"HttpRequestFactory"
 			]
 		},
 		"RequestWiki": {
