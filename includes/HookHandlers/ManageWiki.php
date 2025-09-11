@@ -2,11 +2,11 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
-use CdnPurgeJob;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
+use MediaWiki\JobQueue\Jobs\CdnPurgeJob;
 use Miraheze\CreateWiki\ConfigNames;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Miraheze\ManageWiki\Hooks\ManageWikiCoreAddFormFieldsHook;
