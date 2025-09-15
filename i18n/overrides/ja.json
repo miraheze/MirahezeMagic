@@ -47,6 +47,7 @@
 	"miraheze-newsignuppage-must-accept-tos": "アカウントを作成するには、利用規約に同意する必要があります！",
 	"miraheze-oathauth-step1": "重要なお知らせ：この機能を有効にする前に、OATHAuthのページを必ずお読みください。\nステップ1：二要素認証プログラムをダウンロードする",
 	"miraheze-prefs-help-realname": "本名は任意です。提供することを選択した場合、これはあなたの作品の帰属を示すために使用されます。また、Mirahezeがホストするウィキを使用すると、<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use 利用規約]</span>と<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy プライバシーポリシー]</span>に同意したことになります。",
+	"miraheze-requestcustomdomain-help-target-subdomain": "これは、ウィキをリクエストしたときに選択した、現在のサブドメイン(例:<code><b>example</b>.miraheze.org</code>)です。",
 	"miraheze-requestwiki-error-invalidcomment": "ウィキ申請に無効な文字が含まれています。修正してもう一度お試しください。ヘルプが必要な場合は、[[Special:MyLanguage/Help center|お問い合わせ]]ください。",
 	"miraheze-requestwiki-info-guidance": "残りはほんの数セクションです。ここからは非常に重要です。",
 	"miraheze-requestwiki-info-guidance-post": "もうすぐです。すべてのセクションを完了し、関連する詳細をすべて入力したことを確認してください。完了したら、追ってご連絡いたします。それまでの間に、Meta を自由に見て回り、ウィキ運営者の仲間と交流しても良いでしょう。新しい顔ぶれに会えるのを楽しみにしています。",

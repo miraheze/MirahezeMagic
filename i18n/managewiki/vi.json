@@ -18,6 +18,7 @@
 	"managewiki-setting-wgCookieSetOnIpBlock-name": "Sử dụng tập tin cookie cùng với cấm địa chỉ IP",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "Cần xác nhận email để sửa đổi",
 	"managewiki-setting-wgEmailConfirmToEdit-help": "Yêu cầu người dùng xác nhận địa chỉ email trước khi họ có thể chỉnh sửa. Điều này vô hiệu hóa việc sửa đổi ẩn danh.",
+	"managewiki-setting-wgProtectSiteLimit-name": "Giới hạn khóa trang",
 	"managewiki-setting-wgMediaViewerIsInBeta-name": "Bật phiên bản Beta của Media Viewer",
 	"managewiki-setting-wgPopupsBetaFeature-name": "Bật phiên bản Beta của Popups",
 	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Bật phiên bản Beta của Trình soạn thảo trực quan Wikitext",
