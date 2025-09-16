@@ -140,23 +140,39 @@ class CheckWikiDatabases extends Maintenance {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
 		$tablesToCheck = [
+			'virtual-centralauth' => [
+				'localnames' => 'ln_wiki',
+				'localuser' => 'lu_wiki',
+			],
 			'virtual-checkuser-global' => [
 				'cuci_wiki_map' => 'ciwm_wiki',
 			],
 			'virtual-createwiki' => [
 				'cw_wikis' => 'wiki_dbname',
-				'gnf_files' => 'files_dbname',
-				'localnames' => 'ln_wiki',
-				'localuser' => 'lu_wiki',
-				'mw_namespaces' => 'ns_dbname',
-				'mw_permissions' => 'perm_dbname',
-				'mw_settings' => 's_dbname',
 			],
 			$this->getConfig()->get( 'EchoSharedTrackingDB' ) => [
 				'echo_unread_wikis' => 'euw_wiki',
 			],
+			'virtual-globalblocking' => [
+				'globalblocks' => 'gb_by_wiki',
+			],
+			'virtual-globaljsonlinks' => [
+				'globaljsonlinks' => 'gjl_wiki',
+				'globaljsonlinks_wiki' => 'gjlw_wiki',
+			],
+			'virtual-globalnewfiles' => [
+				'gnf_files' => 'files_dbname',
+			],
 			$this->getConfig()->get( 'GlobalUsageDatabase' ) => [
 				'globalimagelinks' => 'gil_wiki',
+			],
+			'virtual-managewiki' => [
+				'mw_namespaces' => 'ns_dbname',
+				'mw_permissions' => 'perm_dbname',
+				'mw_settings' => 's_dbname',
+			],
+			'virtual-matomoanalytics' => [
+				'matomo' => 'matomo_wiki',
 			],
 		];
 
