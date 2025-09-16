@@ -79,6 +79,8 @@ class Main implements
 		static $keysToOverride = [
 			'centralauth-groupname',
 			'centralauth-login-error-locked',
+			'cookieconsent-detailed-dialog-intro',
+			'cookieconsent-simple-dialog-content',
 			'createwiki-close-email-body',
 			'createwiki-close-email-sender',
 			'createwiki-close-email-subject',
