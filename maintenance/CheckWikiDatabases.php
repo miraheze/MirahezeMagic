@@ -25,6 +25,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class CheckWikiDatabases extends Maintenance {
@@ -86,7 +87,7 @@ class CheckWikiDatabases extends Maintenance {
 			$this->output( "Connecting to cluster: $cluster...\n" );
 			$dbr = $loadBalancer->getConnection( DB_REPLICA, [], ILoadBalancer::DOMAIN_ANY );
 			$result = $dbr->newSelectQueryBuilder()
-				->select( [ 'SCHEMA_NAME' ] )
+				->select( 'SCHEMA_NAME' )
 				->from( 'information_schema.SCHEMATA' )
 				->where( [ 'SCHEMA_NAME' . $dbr->buildLike(
 					$dbr->anyString(), $suffix, $dbr->anyString()
@@ -122,7 +123,7 @@ class CheckWikiDatabases extends Maintenance {
 			}
 
 			$result = $dbr->newSelectQueryBuilder()
-				->select( [ 'wiki_dbname' ] )
+				->select( 'wiki_dbname' )
 				->from( 'cw_wikis' )
 				->where( [ 'wiki_dbname' => $trimmed ] )
 				->caller( __METHOD__ )
@@ -189,7 +190,7 @@ class CheckWikiDatabases extends Maintenance {
 			foreach ( $tables as $table => $field ) {
 				$this->output( "Checking table: $table, field: $field...\n" );
 				$result = $dbr->newSelectQueryBuilder()
-					->select( [ $field ] )
+					->select( $field )
 					->from( $table )
 					->caller( __METHOD__ )
 					->fetchResultSet();
@@ -198,7 +199,7 @@ class CheckWikiDatabases extends Maintenance {
 					$dbName = $row->$field;
 
 					// Safety check for suffix and filtering out 'default'
-					if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+					if ( !str_ends_with( $dbName, $suffix ) || $dbName === ModuleFactory::DEFAULT_DBNAME ) {
 						continue;
 					}
 
@@ -232,7 +233,7 @@ class CheckWikiDatabases extends Maintenance {
 		foreach ( $databases as $dbName => $cluster ) {
 			$this->output( " - Dropping $dbName...\n" );
 			$dbw = $clusters[$cluster]->getConnection( DB_PRIMARY, [], ILoadBalancer::DOMAIN_ANY );
-			$dbw->query( "DROP DATABASE IF EXISTS $dbName", __METHOD__ );
+			$dbw->query( "DROP DATABASE IF EXISTS $dbName;", __METHOD__ );
 		}
 
 		$this->output( "Database drop operation completed.\n" );
@@ -253,7 +254,7 @@ class CheckWikiDatabases extends Maintenance {
 
 				foreach ( $missingInCluster as $dbName ) {
 					// Only delete entries that end with the suffix for safety
-					if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+					if ( !str_ends_with( $dbName, $suffix ) || $dbName === ModuleFactory::DEFAULT_DBNAME ) {
 						continue;
 					}
 
