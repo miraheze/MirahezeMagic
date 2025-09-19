@@ -21,11 +21,12 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup MirahezeMagic
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 
 class RestoreManageWikiBackup extends Maintenance {
 
@@ -38,12 +39,11 @@ class RestoreManageWikiBackup extends Maintenance {
 
 	public function execute() {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-
-		if ( $dbname === 'default' ) {
+		if ( $dbname === ModuleFactory::DEFAULT_DBNAME ) {
 			$this->fatalError( 'Invalid wiki. You can not overwrite default.' );
 		}
 
-		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
+		$databaseUtils = $this->getServiceContainer()->get( 'ManageWikiDatabaseUtils' );
 		$dbw = $databaseUtils->getGlobalPrimaryDB();
 
 		$backupFile = $this->getOption( 'filename' );
@@ -64,9 +64,23 @@ class RestoreManageWikiBackup extends Maintenance {
 			$this->fatalError( 'Aborted.', 2 );
 		}
 
-		$dbw->delete( 'mw_namespaces', [ 'ns_dbname' => $dbname ], __METHOD__ );
-		$dbw->delete( 'mw_permissions', [ 'perm_dbname' => $dbname ], __METHOD__ );
-		$dbw->delete( 'mw_settings', [ 's_dbname' => $dbname ], __METHOD__ );
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'mw_namespaces' )
+			->where( [ 'ns_dbname' => $dbname ] )
+			->caller( __METHOD__ )
+			->execute();
+
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'mw_permissions' )
+			->where( [ 'perm_dbname' => $dbname ] )
+			->caller( __METHOD__ )
+			->execute();
+
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'mw_settings' )
+			->where( [ 's_dbname' => $dbname ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		foreach ( $data['namespaces'] as $name => $nsData ) {
 			foreach ( $nsData as $key => $value ) {
@@ -91,7 +105,11 @@ class RestoreManageWikiBackup extends Maintenance {
 			$nsData['ns_namespace_name'] = $name;
 			$nsData['ns_dbname'] = $dbname;
 
-			$dbw->insert( 'mw_namespaces', $nsData, __METHOD__ );
+			$dbw->newInsertQueryBuilder()
+				->insertInto( 'mw_namespaces' )
+				->row( $nsData )
+				->caller( __METHOD__ )
+				->execute();
 		}
 
 		if ( isset( $data['permissions'] ) ) {
@@ -113,7 +131,11 @@ class RestoreManageWikiBackup extends Maintenance {
 				$permData['perm_group'] = $group;
 				$permData['perm_dbname'] = $dbname;
 
-				$dbw->insert( 'mw_permissions', $permData, __METHOD__ );
+				$dbw->newInsertQueryBuilder()
+					->insertInto( 'mw_permissions' )
+					->row( $permData )
+					->caller( __METHOD__ )
+					->execute();
 			}
 		}
 
@@ -125,7 +147,11 @@ class RestoreManageWikiBackup extends Maintenance {
 				$settingsData['s_settings'] = json_encode( $data['settings'] );
 			}
 
-			$dbw->insert( 'mw_settings', $settingsData, __METHOD__ );
+			$dbw->newInsertQueryBuilder()
+				->insertInto( 'mw_settings' )
+				->row( $settingsData )
+				->caller( __METHOD__ )
+				->execute();
 
 			if ( isset( $data['extensions'] ) ) {
 				$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );

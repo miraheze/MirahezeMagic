@@ -21,35 +21,36 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup Maintenance
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\WikiMap\WikiMap;
+use Wikimedia\Rdbms\Platform\ISQLPlatform;
 
 class InsertMissingLocalUserRows extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->addOption( 'dry-run', 'Simulate the operation without actually inserting the rows' );
-		$this->addOption( 'all-wikis', 'Run on all wikis present in $wgLocalDatabases' );
+		$this->addOption( 'dry-run', 'Simulate the operation without actually inserting the rows.' );
+		$this->addOption( 'all-wikis', 'Run on all wikis present in LocalDatabases' );
 	}
 
 	public function execute() {
-		$dryRun = $this->getOption( 'dry-run', false );
-		$all = $this->getOption( 'all-wikis', false );
+		$dryRun = $this->hasOption( 'dry-run' );
+		$all = $this->hasOption( 'all-wikis' );
 
 		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
-		$centralDB = $connectionProvider->getReplicaDatabase( $this->getConfig()->get( 'CentralAuthDatabase' ) );
+		$centralDB = $connectionProvider->getReplicaDatabase( 'virtual-centralauth' );
 
 		foreach ( ( $all ? $this->getConfig()->get( MainConfigNames::LocalDatabases ) : [ WikiMap::getCurrentWikiId() ] ) as $wiki ) {
-			$res = $connectionProvider->getReplicaDatabase( $wiki )->select(
-				'user',
-				[ 'user_name' ],
-				[
+			$res = $connectionProvider->getReplicaDatabase( $wiki )->newSelectQueryBuilder()
+				->select( 'user_name' )
+				->from( 'user' )
+				->where( [
 					'user_name != "CreateWiki AI"',
 					'user_name != "CreateWiki Extension"',
 					'user_name != "RequestCustomDomain Extension"',
@@ -64,36 +65,35 @@ class InsertMissingLocalUserRows extends Maintenance {
 					'user_name != "FuzzyBot"',
 					'user_name != "Maintenance script"',
 					'user_name != "MediaWiki message delivery"',
-					'user_name != "DynamicPageList3 extension"',
 					'user_name != "Flow talk page manager"',
 					'user_name != "Abuse filter"',
 					'user_name != "ModerationUploadStash"',
 					'user_name != "Delete page script"',
-					'user_name != "Move page script"'
-				],
-				__METHOD__
-			);
+					'user_name != "Move page script"',
+				] )
+				->caller( __METHOD__ )
+				->fetchResultSet();
 
 			foreach ( $res as $row ) {
-				$exists = $centralDB->selectRowCount(
-					'localuser',
-					'*',
-					[
+				$exists = $centralDB->newSelectQueryBuilder()
+					->select( ISQLPlatform::ALL_ROWS )
+					->from( 'localuser' )
+					->where( [
 						'lu_name' => $row->user_name,
 						'lu_wiki' => $wiki,
-					],
-					__METHOD__,
-					[ 'LIMIT' => 1 ]
-				);
+					] )
+					->limit( 1 )
+					->caller( __METHOD__ )
+					->fetchRowCount();
 
 				if ( !$exists ) {
 					$centralAuthUser = new CentralAuthUser( $row->user_name, CentralAuthUser::READ_LATEST );
-
 					if ( $dryRun ) {
-						$this->output( "Would insert row for user {$row->user_name} on wiki {$wiki}\n" );
-					} else {
-						$centralAuthUser->attach( $wiki, 'login', false, 0 );
+						$this->output( "Would insert row for user {$row->user_name} on wiki $wiki\n" );
+						continue;
 					}
+
+					$centralAuthUser->attach( $wiki, 'login', false, 0 );
 				}
 			}
 		}

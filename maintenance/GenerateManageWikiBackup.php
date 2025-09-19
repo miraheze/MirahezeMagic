@@ -21,11 +21,14 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup MirahezeMagic
  * @author Paladox
- * @version 1.0
+ * @author Universal Omega
+ * @version 2.0
  */
 
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\ManageWiki\ConfigNames;
+use Wikimedia\Rdbms\Platform\ISQLPlatform;
 
 class GenerateManageWikiBackup extends Maintenance {
 
@@ -37,38 +40,35 @@ class GenerateManageWikiBackup extends Maintenance {
 	public function execute() {
 		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
 
-		$connectionProvider = $this->getServiceContainer()->getConnectionProvider();
-		$dbr = $connectionProvider->getReplicaDatabase( 'virtual-createwiki' );
+		$databaseUtils = $this->getServiceContainer()->get( 'ManageWikiDatabaseUtils' );
+		$dbr = $databaseUtils->getGlobalReplicaDB();
+
+		$nsObjects = $dbr->newSelectQueryBuilder()
+			->select( ISQLPlatform::ALL_ROWS )
+			->from( 'mw_namespaces' )
+			->where( [ 'ns_dbname' => $dbname ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$permObjects = $dbr->newSelectQueryBuilder()
+			->select( ISQLPlatform::ALL_ROWS )
+			->from( 'mw_permissions' )
+			->where( [ 'perm_dbname' => $dbname ] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+
+		$settingsObjects = $dbr->newSelectQueryBuilder()
+			->select( ISQLPlatform::ALL_ROWS )
+			->from( 'mw_settings' )
+			->where( [ 's_dbname' => $dbname ] )
+			->caller( __METHOD__ )
+			->fetchRow();
 
 		$buildArray = [];
-
-		$nsObjects = $dbr->select(
-			'mw_namespaces',
-			'*',
-			[ 'ns_dbname' => $dbname ],
-			__METHOD__
-		);
-
-		$permObjects = $dbr->select(
-			'mw_permissions',
-			'*',
-			[ 'perm_dbname' => $dbname ],
-			__METHOD__
-		);
-
-		$settingsObjects = $dbr->selectRow(
-			'mw_settings',
-			'*',
-			[ 's_dbname' => $dbname ],
-			__METHOD__
-		);
-
 		if ( $settingsObjects != null ) {
 			$buildArray['extensions'] = json_decode( $settingsObjects->s_extensions );
-
 			$buildArray['settings'] = json_decode( $settingsObjects->s_settings, true );
-
-			foreach ( $this->getConfig()->get( 'ManageWikiSettings' ) as $setting => $options ) {
+			foreach ( $this->getConfig()->get( ConfigNames::Settings ) as $setting => $options ) {
 				if ( isset( $options['requires']['visibility']['permissions'] ) ) {
 					unset( $buildArray['settings'][$setting] );
 				}
@@ -85,14 +85,13 @@ class GenerateManageWikiBackup extends Maintenance {
 				'contentmodel' => $ns->ns_content_model,
 				'protection' => ( (bool)$ns->ns_protection ) ? $ns->ns_protection : false,
 				'aliases' => json_decode( $ns->ns_aliases, true ),
-				'additional' => json_decode( $ns->ns_additional, true )
+				'additional' => json_decode( $ns->ns_additional, true ),
 			];
 		}
 
 		foreach ( $permObjects as $perm ) {
 			$addPerms = [];
-
-			foreach ( ( $this->getConfig()->get( 'ManageWikiPermissionsAdditionalRights' )[$perm->perm_group] ?? [] ) as $right => $bool ) {
+			foreach ( ( $this->getConfig()->get( ConfigNames::PermissionsAdditionalRights )[$perm->perm_group] ?? [] ) as $right => $bool ) {
 				if ( $bool ) {
 					$addPerms[] = $right;
 				}
@@ -100,11 +99,11 @@ class GenerateManageWikiBackup extends Maintenance {
 
 			$buildArray['permissions'][$perm->perm_group] = [
 				'permissions' => array_merge( json_decode( $perm->perm_permissions, true ), $addPerms ),
-				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $this->getConfig()->get( 'ManageWikiPermissionsAdditionalAddGroups' )[$perm->perm_group] ?? [] ),
-				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $this->getConfig()->get( 'ManageWikiPermissionsAdditionalRemoveGroups' )[$perm->perm_group] ?? [] ),
+				'addgroups' => array_merge( json_decode( $perm->perm_addgroups, true ), $this->getConfig()->get( ConfigNames::PermissionsAdditionalAddGroups )[$perm->perm_group] ?? [] ),
+				'removegroups' => array_merge( json_decode( $perm->perm_removegroups, true ), $this->getConfig()->get( ConfigNames::PermissionsAdditionalRemoveGroups )[$perm->perm_group] ?? [] ),
 				'addself' => json_decode( $perm->perm_addgroupstoself, true ),
 				'removeself' => json_decode( $perm->perm_removegroupsfromself, true ),
-				'autopromote' => json_decode( $perm->perm_autopromote, true )
+				'autopromote' => json_decode( $perm->perm_autopromote, true ),
 			];
 		}
 
