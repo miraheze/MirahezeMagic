@@ -18,6 +18,7 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ManageWiki\ConfigNames;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
+use OpenSearch\ClientBuilder;
 use Psr\Log\LoggerInterface;
 use Redis;
 use Throwable;
@@ -145,6 +146,15 @@ class CreateWiki implements
 				->disableSandbox()
 				->execute();
 		}
+
+		$client = ClientBuilder::create()
+			->setHosts( [ 'https://opensearch-mw.wikitide.net' ] )
+			->build();
+
+		$indices = [ "{$dbname}_content", "{$dbname}_general" ];
+		$response = $client->indices()->delete( [
+			'index' => implode( ',', $indices ),
+		] );
 
 		$this->removeRedisKey( "*$dbname*" );
 		$this->removeMemcachedKey( ".*$dbname.*" );
