@@ -22,3 +22,6 @@ ImportDump:
 ManageWiki:
   branch: main
   repo: https://github.com/miraheze/ManageWiki
+MatomoAnalytics:
+  branch: main
+  repo: https://github.com/miraheze/MatomoAnalytics
