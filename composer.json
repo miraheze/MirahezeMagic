@@ -3,7 +3,7 @@
 	"description": "",
 	"license": "GPL-3.0-or-later",
     "require": {
-        "opensearch-project/opensearch-php": "2.4.5"
+        "opensearch-project/opensearch-php": "~2"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "48.0.0",
