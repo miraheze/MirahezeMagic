@@ -1,1 +1,2 @@
 dependencies linguist-language=yaml
+phan_dependencies linguist-language=yaml

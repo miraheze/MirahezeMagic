@@ -26,6 +26,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
+use Miraheze\MatomoAnalytics\MatomoAnalytics;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class CheckWikiDatabases extends Maintenance {
@@ -255,6 +256,12 @@ class CheckWikiDatabases extends Maintenance {
 				foreach ( $missingInCluster as $dbName ) {
 					// Only delete entries that end with the suffix for safety
 					if ( !str_ends_with( $dbName, $suffix ) || $dbName === ModuleFactory::DEFAULT_DBNAME ) {
+						continue;
+					}
+
+					if ( $table === 'matomo' ) {
+						// Use this to actually delete from Matomo as well.
+						MatomoAnalytics::deleteSite( $dbName );
 						continue;
 					}
 
