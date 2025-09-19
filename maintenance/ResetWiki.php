@@ -21,11 +21,12 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup Maintenance
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
 use MediaWiki\Maintenance\Maintenance;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\Platform\ISQLPlatform;
 
 class ResetWiki extends Maintenance {
 
@@ -55,13 +56,13 @@ class ResetWiki extends Maintenance {
 
 		$this->output( "Resetting database: $databaseName\n" );
 
-		$dbr = $this->getServiceContainer()->getConnectionProvider()
-			->getReplicaDatabase( 'virtual-createwiki' );
+		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
+		$dbr = $databaseUtils->getGlobalReplicaDB();
 
 		// Fetch the original data
 		$row = $dbr->newSelectQueryBuilder()
+			->select( ISQLPlatform::ALL_ROWS )
 			->from( 'cw_wikis' )
-			->field( '*' )
 			->where( [ 'wiki_dbname' => $databaseName ] )
 			->caller( __METHOD__ )
 			->fetchRow();
@@ -85,8 +86,8 @@ class ResetWiki extends Maintenance {
 
 		// Check if the database exists
 		$dbExists = $dbw->newSelectQueryBuilder()
+			->select( 'SCHEMA_NAME' )
 			->from( 'information_schema.SCHEMATA' )
-			->field( 'SCHEMA_NAME' )
 			->where( [ 'SCHEMA_NAME' => $databaseName ] )
 			->caller( __METHOD__ )
 			->fetchField();
@@ -105,7 +106,7 @@ class ResetWiki extends Maintenance {
 		$wikiManager->delete( force: true );
 
 		// Drop the database
-		$dbw->query( "DROP DATABASE $databaseQuotes", __METHOD__ );
+		$dbw->query( "DROP DATABASE $databaseQuotes;", __METHOD__ );
 
 		// Create a new WikiManagerFactory instance
 		$wikiManager = $wikiManagerFactory->newInstance( $databaseName );
