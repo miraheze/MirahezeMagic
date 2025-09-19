@@ -151,10 +151,27 @@ class CreateWiki implements
 			->setHosts( [ 'https://opensearch-mw.wikitide.net' ] )
 			->build();
 
-		$indices = [ "{$dbname}_content", "{$dbname}_general" ];
-		$response = $client->indices()->delete( [
-			'index' => implode( ',', $indices ),
-		] );
+        if ( $client->indices()->exists( [ 'index' => "{$dbname}_content" ] ) ) {
+			$response = $client->indices()->delete( [
+				'index' => "{$dbname}_content",
+			] );
+
+			$this->logger->debug( 'OpenSearch response when deleting index {index}: {response}', [
+				'index' => "{$dbname}_content",
+				'response' => $response,
+			] );
+		}
+
+        if ( $client->indices()->exists( [ 'index' => "{$dbname}_general" ] ) ) {
+			$response = $client->indices()->delete( [
+				'index' => "{$dbname}_general",
+			] );
+
+			$this->logger->debug( 'OpenSearch response when deleting index {index}: {response}', [
+				'index' => "{$dbname}_general",
+				'response' => $response,
+			] );
+		}
 
 		$this->removeRedisKey( "*$dbname*" );
 		$this->removeMemcachedKey( ".*$dbname.*" );
