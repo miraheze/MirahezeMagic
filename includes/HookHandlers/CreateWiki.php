@@ -151,7 +151,7 @@ class CreateWiki implements
 			->setHosts( [ 'https://opensearch-mw.wikitide.net' ] )
 			->build();
 
-        if ( $client->indices()->exists( [ 'index' => "{$dbname}_content" ] ) ) {
+		if ( $client->indices()->exists( [ 'index' => "{$dbname}_content" ] ) ) {
 			$response = $client->indices()->delete( [
 				'index' => "{$dbname}_content",
 			] );
@@ -162,7 +162,7 @@ class CreateWiki implements
 			] );
 		}
 
-        if ( $client->indices()->exists( [ 'index' => "{$dbname}_general" ] ) ) {
+		if ( $client->indices()->exists( [ 'index' => "{$dbname}_general" ] ) ) {
 			$response = $client->indices()->delete( [
 				'index' => "{$dbname}_general",
 			] );
