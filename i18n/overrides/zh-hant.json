@@ -12,6 +12,8 @@
 	},
 	"miraheze-centralauth-groupname": "Miraheze",
 	"miraheze-centralauth-login-error-locked": "因為{{GENDER:$1|您的}}帳號被[[m:Special:MyLanguage/Global locks|全域鎖定]]，{{GENDER:$1|您}}無法登入。請聯繫 <code>cvt[at]miraheze.org</code> 來獲得更多相關資訊或申訴。",
+	"miraheze-cookieconsent-detailed-dialog-intro": "<p>我們使用 cookie（和類似技術）來個人化內容、改善網站和分析流量。</p><p>我們以這些 cookie 收集您的訊息，並追蹤您在我們網站上的網路行為。透過這種方式，我們建立了您的個人資料。我們以此根據您的偏好，來調整我們的網站與情報。您可以閱讀我們的[[m:Special:MyLanguage/Privacy Policy|隱私權政策]]來了解更多資訊。</p><p>更新您的 cookie 偏好設定時，會重新載入頁面。</p>",
+	"miraheze-cookieconsent-simple-dialog-content": "<p>我們使用 cookie（和類似技術）來個人化內容、改善網站和分析流量。</p><p>我們以這些 cookie 收集您的訊息，並追蹤您在我們網站上的網路行為。透過這種方式，我們建立了您的個人資料。我們以此根據您的偏好，來調整我們的網站與情報。您可以閱讀我們的[[m:Special:MyLanguage/Privacy Policy|隱私權政策]]來了解更多資訊。</p><p>如果您想要管理您的 cookie 偏好設定，請點擊<b>管理偏好設定</b>。點選「<b>全部接受</b>」即表示您同意使用所有 cookie。您可以隨時更改或撤回您的同意。</p>",
 	"miraheze-createwiki-close-email-body": "您好：\n\n這封郵件是通知您，您的 Miraheze wiki 已關閉。由於您的 wiki 在過去 60 天裡未收到任何編輯或日誌操作，根據[[m:Special:MyLanguage/Dormancy Policy|休眠方針]](當初您同意申請 wiki的條款)，為了防止垃圾訊息已將其關閉。\n\n若您想要重啟您的 wiki，請前往 Special:ManageWiki 來取消勾選「已關閉」方框來重新開啟。請注意，如果您無意重新開啟，或是從現在開始 6 個月內沒有人請求重新開啟此 wiki（根據休眠方針的重新開啟 wiki 一節），您的 wiki 會標記成可永久刪除。",
 	"miraheze-createwiki-close-email-sender": "Miraheze",
 	"miraheze-createwiki-close-email-subject": "您的 Miraheze wiki（$1）已被關閉",

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Anpfraum",
+			"Bapham123",
 			"Minh Nguyen",
 			"NguyenHung",
 			"Pisceskaze",
@@ -24,10 +25,12 @@
 	"group-confirmed-member": "{{GENDER:$1|thành viên được xác nhận}}",
 	"group-confirmed": "Thành viên được xác nhận",
 	"group-electionadmin": "Bảo quản viên bầu chọn",
+	"group-electionadmin-member": "{{GENDER:$1|bảo quản viên biểu quyết}}",
 	"group-flood-member": "{{GENDER:$1|bot giả}}",
 	"group-flood": "Bot giả",
 	"group-founder": "Sáng lập viên",
 	"group-founder-member": "{{GENDER:$1|sáng lập viên}}",
+	"group-global-admin-member": "{{GENDER:$1|Bảo quản viên toàn cục}}",
 	"group-global-admin": "Bảo quản viên toàn cục",
 	"group-global-flood-member": "{{GENDER:$1|bot giả toàn cục}}",
 	"group-global-flood": "Bot giả toàn cục",
@@ -35,6 +38,7 @@
 	"group-global-interwiki-admin": "Bảo quản viên liên wiki toàn cục",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|người được miễn cấm IP toàn cục}}",
 	"group-global-ipblock-exempt": "Người được miễn cấm IP toàn cục",
+	"group-global-patroller-member": "{{GENDER:$1|tuần tra viên toàn cục}}",
 	"group-global-patroller": "Người tuần tra toàn cục",
 	"group-global-renamer-member": "{{GENDER:$1|người đổi tên toàn cục}}",
 	"group-global-renamer": "Người đổi tên toàn cục",

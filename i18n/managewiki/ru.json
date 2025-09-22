@@ -3,6 +3,7 @@
 		"authors": [
 			"Danvintius Bookix",
 			"Dirruw'o",
+			"Okras",
 			"Vonavy",
 			"WerySkok",
 			"Yurina Tatiana"
@@ -15,6 +16,7 @@
 	"managewiki-setting-wgBlockAllowsUTEdit-name": "Позволяет блокировать пользователей, чтобы ограничить доступ к странице обсуждения",
 	"managewiki-setting-wmgWebChatServer-name": "WebChat-сервер",
 	"managewiki-setting-wmgWebChatChannel-name": "WebChat-канал",
+	"managewiki-setting-wmgWebChatClient-name": "Клиент WebChat",
 	"managewiki-setting-wgCommentsSortDescending-name": "Сортировать комментарии по убыванию",
 	"managewiki-setting-wgCommentsSortDescending-help": "Комментарии сортируются по дате в порядке убывания, при включении новое поле для комментариев и самые свежие комментарии будут отображаться вверху.",
 	"managewiki-setting-wmgVisualEditorEnableDefault-name": "Сделать Визуальный редактор включённым для всех по умолчанию",
