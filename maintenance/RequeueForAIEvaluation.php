@@ -52,7 +52,7 @@ class RequeueForAIEvaluation extends Maintenance {
 			->from( 'cw_requests' )
 			->where( [
 				'cw_status' => $queueName,
-				$dbw->expr( 'cw_timestamp', '>', $dbw->timestamp( $this->getArg( 'from' ) ? '20250901000000' ) )
+				$dbw->expr( 'cw_timestamp', '>', $dbw->timestamp( $this->getArg( 'from', '20250901000000' ) ) )
 			] )
 			->caller( __METHOD__ )
 			->fetchResultSet();
