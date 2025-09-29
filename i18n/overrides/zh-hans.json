@@ -10,6 +10,7 @@
 			"Hzy980512",
 			"Kichin",
 			"Lakejason0",
+			"Libamidi",
 			"LittlePaw365",
 			"LuciferianThomas",
 			"StarrySky",
@@ -21,6 +22,8 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|您}}不能登录因为{{GENDER:$1|您的}}账号[[m:Special:MyLanguage/Global locks|被全域锁定]]。请联系 <code>cvt[at]miraheze.org</code> 获取更多信息或申诉。",
+	"miraheze-cookieconsent-detailed-dialog-intro": "<p>我们使用cookie（和类似技术）来个性化内容、改进网站和分析流量。</p><p>我们利用这些Cookie收集您的信息，并追踪您在我们网站上的互联网行为。通过这种方式，我们建立了您的个人资料。我们借此根据您的偏好调整我们的网站和沟通方式。您可以阅读我们的[[m:Special:MyLanguage/Privacy Policy|隐私政策]]了解更多信息。</p><p>更新您的Cookie偏好设置将重新加载页面。</p>",
+	"miraheze-cookieconsent-simple-dialog-content": "<p>我们使用cookie（和类似技术）来个性化内容、改进网站和分析流量。</p><p>我们利用这些Cookie收集您的信息，并追踪您在我们网站上的互联网行为。通过这种方式，我们建立了您的个人资料。我们借此根据您的偏好调整我们的网站和沟通方式。您可以阅读我们的[[m:Special:MyLanguage/Privacy Policy|隐私政策]]了解更多信息。</p><p>如果您想管理您的Cookie偏好设置，请点击<b>管理偏好设置</b>。点击<b>全部接受</b>即表示您同意使用所有Cookie。您可以随时更改或撤回您的同意。</p>",
 	"miraheze-createwiki-close-email-body": "您好，\n\n这封电子邮件旨在通知您，您的Miraheze wiki已关闭。根据 [[m:Special:MyLanguage/Dormancy Policy|休眠政策]]（您在请 wiki时同意），60天内未收到任何编辑或记录操作的Wiki将自动关闭，以防止垃圾邮件。\n\n如果您想重新打开您的wiki，请访问Special:ManageWiki并取消选中“已关闭”框以重新打开它。请注意，如果您不重新打开您的wiki，或者从现在起6个月内没有人请求打开您的wiki（根据休眠政策的重新打开请求部分），您的wiki将被标记为可永久删除。",
 	"miraheze-createwiki-close-email-subject": "您的Miraheze wiki（$1）已被关闭",
 	"miraheze-createwiki-defaultmainpage": "__NOTOC__\n== 欢迎来到 {{SITENAME}}! ==\n此主页面是在Wiki创建时自动生成的，似乎尚未被替换。管理员可能仍在处理主页面，因此请稍后再来查看！\n\n=== 致管理员 ===\n你好，欢迎来到你的新Wiki！感谢你选择 Miraheze 来托管你的Wiki；我们希望你会喜欢我们的托管服务。你可以随时开始你在的Wiki的工作。\n\n需要帮助吗？没问题！首先，这里有一些我们鼓励您查看的资源：\n* [[mw:Special:MyLanguage/Help:Contents|MediaWiki 指南]]，涵盖Wiki基础知识：导航、编辑、软件的一般功能\n* [[m:Special:MyLanguage/Infoboxes|信息框]] 用于您可以在Wiki上获取这些内容的各种方式。如果您不确定从哪里开始，PortableInfoboxes 是一个常见的选择\n* [[m:Special:MyLanguage/ManageWiki|管理维基]] 以进一步自定义Wiki的设置（网站图标、扩展、权限等）。请仔细阅读：某些更改可能难以撤销\n* [[m:Special:MyLanguage/FAQ|Miraheze 常见问题解答]] 以获取 Miraheze 的一般概述\n* [[mh:dev|Miraheze 开发者维基]]，这是一个供每个人（没错，就是你！）查找模板（信息框、引用等）样式和其他有用配件以美化维基的资源。您可以在 [[mh:commons|Miraheze 共享]] 找到共享的图像，并在我们的 [[mh:test|公共测试Wiki]] 上尝试管理员权限。\n\n此外，如果您不确定如何创建新页面，您有几个选项：在现有页面上创建一个链接并跟随它，编辑地址栏以访问您想要的页面，或者访问 [[Special:ManageWiki/extensions]] 并启用 [[mw:Extension:CreatePageUw|CreatePageUw]] 以在侧边栏中添加一个方便的链接！\n\n==== 我还是不理解 ''X''! ====\n没问题！并不是所有内容都在常见问题解答中，或者足够清晰，我们很乐意提供帮助！您可以在这里找到我们：\n* [[m:Special:MyLanguage/Help center|在 Miraheze Meta]]\n* 在 [https://miraheze.org/discord Discord]\n* 在 #miraheze 的 IRC 上，地址为 irc.libera.chat ([irc://irc.libera.chat/%23miraheze 直接链接]; [https://web.libera.chat/?channel=#miraheze 网页聊天])\n* 在[[phorge:|我们的问题跟踪器]]上，如果您遇到 MediaWiki 错误\n\n=== 致访问本Wiki的访客 ===\n你好，本页是Wiki的默认主页，此页面尚未被该Wiki的管理员替换。管理员可能仍在制作主页，请稍后再来查看！",
