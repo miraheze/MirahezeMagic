@@ -24,65 +24,65 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
+use JobSpecification;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
-use JobSpecification;
-use Wikimedia\Rdbms\IDatabase;
 
 class RequeueForAIEvaluation extends Maintenance {
-    public function __construct() {
-        parent::__construct();
-        $this->addDescription("Loads wiki requests in a defined queue (defaults to 'inreview') for AI evaluation.");
 
-        $this->addArg( 'from', 'Timestamp defining from when to start loading requests.', required: true );
-        $this->addOption( 'sleep', 'How many seconds the script should sleep for', required: false, withArg: true );
-        $this->addOption( 'queue-name', 'What queue should be processed?', required: false, withArg: true );
-    }
+	public function __construct() {
+		parent::__construct();
+		$this->addDescription( "Loads wiki requests in a defined queue (defaults to 'inreview') for AI evaluation." );
 
-    public function execute() {
-        $dbw = MediaWikiServices::getInstance()
-            ->getDBLoadBalancer()
-            ->getConnection( DB_PRIMARY, 'virtual-createwiki-central' );
+		$this->addArg( 'from', 'Timestamp defining from when to start loading requests.', required: true );
+		$this->addOption( 'sleep', 'How many seconds the script should sleep for', required: false, withArg: true );
+		$this->addOption( 'queue-name', 'What queue should be processed?', required: false, withArg: true );
+	}
 
-        $queueName = $this->getOption( 'queue-name', 'inreview' );
-        $this->output("Fetching all '$queueName' requests...\n");
+	public function execute() {
+		$dbw = MediaWikiServices::getInstance()
+			->getDBLoadBalancer()
+			->getConnection( DB_PRIMARY, 'virtual-createwiki-central' );
 
-        $res = $dbw->newSelectQueryBuilder()
-            ->select( 'cw_id' )
-            ->from( 'cw_requests' )
-            ->where( [
-                'cw_status' => $queueName,
-                $dbw->expr( 'cw_timestamp', '>', $dbw->timestamp( $this->getArg( 'from' ) ? '20250901000000' ) )
-            ] )
-            ->caller( __METHOD__ )
-            ->fetchResultSet();
+		$queueName = $this->getOption( 'queue-name', 'inreview' );
+		$this->output( "Fetching all '$queueName' requests...\n" );
 
-        if (!$res->numRows()) {
-            $this->output("No requests found with status '$queueName' within the specified range.\n");
-            return;
-        }
+		$res = $dbw->newSelectQueryBuilder()
+			->select( 'cw_id' )
+			->from( 'cw_requests' )
+			->where( [
+				'cw_status' => $queueName,
+				$dbw->expr( 'cw_timestamp', '>', $dbw->timestamp( $this->getArg( 'from' ) ? '20250901000000' ) )
+			] )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
-        $jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroup();
+		if ( !$res->numRows() ) {
+			$this->output( "No requests found with status '$queueName' within the specified range.\n" );
+			return;
+		}
 
-        foreach ($res as $row) {
-            $requestId = (int)$row->cw_id;
-            $this->output("Adding wiki request $requestId to queue...\n");
+		$jobQueueGroup = MediaWikiServices::getInstance()->getJobQueueGroup();
 
-            $job = new JobSpecification(
-                'RequestWikiRemoteAIJob',
-                [ 'id' => $requestId ]
-            );
+		foreach ( $res as $row ) {
+			$requestId = (int)$row->cw_id;
+			$this->output( "Adding wiki request $requestId to queue...\n" );
 
-            $jobQueueGroup->push( $job );
-            $this->output("Successfully added wiki request $requestId to the AI evaluation queue!\n");
+			$job = new JobSpecification(
+				'RequestWikiRemoteAIJob',
+				[ 'id' => $requestId ]
+			);
 
-            $sleepFor = $this->getOption( 'sleep', 30 );
-            $this->output("Sleeping for $sleepFor seconds...\n");
-            sleep( $sleepFor );
-        }
+			$jobQueueGroup->push( $job );
+			$this->output( "Successfully added wiki request $requestId to the AI evaluation queue!\n" );
 
-        $this->output("All '$queueName' requests have been queued for processing.\n");
-    }
+			$sleepFor = $this->getOption( 'sleep', 30 );
+			$this->output( "Sleeping for $sleepFor seconds...\n" );
+			sleep( $sleepFor );
+		}
+
+		$this->output( "All '$queueName' requests have been queued for processing.\n" );
+	}
 }
 
 // @codeCoverageIgnoreStart
