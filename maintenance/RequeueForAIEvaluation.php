@@ -24,7 +24,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-use JobSpecification;
+use MediaWiki\JobQueue\JobSpecification;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\MediaWikiServices;
 
@@ -47,13 +47,13 @@ class RequeueForAIEvaluation extends Maintenance {
 		$queueName = $this->getOption( 'queue-name', 'inreview' );
 		$this->output( "Fetching all '$queueName' requests...\n" );
 
+		$from = $this->getArg( 'from', '20250901000000' );
+
 		$res = $dbw->newSelectQueryBuilder()
 			->select( 'cw_id' )
 			->from( 'cw_requests' )
-			->where( [
-				'cw_status' => $queueName,
-				$dbw->expr( 'cw_timestamp', '>', $dbw->timestamp( $this->getArg( 'from', '20250901000000' ) ) )
-			] )
+			->where( [ 'cw_status' => $queueName ] )
+			->andWhere( $dbw->expr( 'cw_timestamp', '>', $dbw->timestamp( $from ) ) )
 			->caller( __METHOD__ )
 			->fetchResultSet();
 
