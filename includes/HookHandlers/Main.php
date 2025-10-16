@@ -120,6 +120,8 @@ class Main implements
 			'grouppage-sysop',
 			'grouppage-upwizcampeditors',
 			'grouppage-user',
+			'grouppage-smw-curator'
+			'grouppage-smw-editor'
 			'importdump-help-reason',
 			'importdump-help-target',
 			'importdump-help-upload-file',
