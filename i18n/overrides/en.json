@@ -50,6 +50,8 @@
 	"miraheze-grouppage-sysop": "m:Special:MyLanguage/User groups#{{int:Group-sysop}}",
 	"miraheze-grouppage-upwizcampeditors": "m:Special:MyLanguage/User groups#{{int:Group-upwizcampeditors}}",
 	"miraheze-grouppage-user": "m:Special:MyLanguage/User groups#{{int:Group-user}}",
+	"miraheze-grouppage-smw-curator": "m:Special:MyLanguage/User groups#Semantic_Mediawiki_Curator",
+	"miraheze-grouppage-smw-editor": "m:Special:MyLanguage/User groups#Semantic_Mediawiki_Editor",
 	"miraheze-importdump-help-reason": "Tell us whether the XML is for: migrating from another wiki, forking another wiki, or importing templates or pages from Wikipedia.",
 	"miraheze-importdump-help-target": "This must be a valid database name. To find the database name of the wiki, see Special:ManageWiki/core on the wiki.\n\nIf you do not yet have your wiki created, please request your wiki using [[Special:RequestWiki]] first, and then return here to make this import request once your wiki is created.",
 	"miraheze-importdump-help-upload-file": "Only XML files are permitted. If your XML file is in a compressed archive, please extract it before attempting to upload.\n\nPlease ensure that you are uploading a version of the XML files that contains all revision history as well.",
