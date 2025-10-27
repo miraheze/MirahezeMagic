@@ -4,6 +4,7 @@
 			"HanV",
 			"McDutchie",
 			"Robin van der Vliet",
+			"SaldırganSincap",
 			"Siebrand"
 		]
 	},
@@ -42,7 +43,7 @@
 	"miraheze-requestwiki-error-invalidcomment": "Uw wiki-aanvraag bevat een ongeldig teken. Corrigeer dat en probeer het opnieuw. Als u hulp nodig hebt, [[Special:MyLanguage/Help center|neem contact met ons op]].",
 	"miraheze-requestwiki-info-guidance": "Nog maar een paar secties over! Deze is erg belangrijk.",
 	"miraheze-requestwiki-info-guidance-post": "U bent bijna klaar. Controleer of u alle secties hebt ingevuld en alle relevante details hebt verstrekt. Wanneer u dat hebt gedaan, nemen we zo snel mogelijk contact met je op. Kijk ondertussen gerust rond op Meta en ontmoet uw mede-wikibeheerders. We vinden het leuk om hier nieuwe gezichten te zien!",
-	"miraheze-requestwiki-label-agreement": "'''Ik heb het [[Special:MyLanguage/Content Policy|inhoudsbeleid]], het [[Special:MyLanguage/Dormancy Policy|inactiviteitsbeleid]], het [[Special:MyLanguage/Wiki Governance policy|Wiki Governance-beleid]] en het [[Special:MyLanguage/Global Conduct Policy|globaal gedragsbeleid]] gelezen en ga hiermee akkoord. Door een wiki aan te vragen, ga ik akkoord met al onze [[Special:MyLanguage/Global policies|globale beleidsregels]].",
+	"miraheze-requestwiki-label-agreement": "'''Ik heb het [[Special:MyLanguage/Content Policy|inhoudsbeleid]], het [[Special:MyLanguage/Dormancy Policy|inactiviteitsbeleid]], het [[Special:MyLanguage/Wiki Governance policy|Wiki Governance-beleid]] en het [[Special:MyLanguage/Global Conduct Policy|globaal gedragsbeleid]]''' gelezen en ga hiermee akkoord. Door een wiki aan te vragen, ga ik akkoord met al onze [[Special:MyLanguage/Global policies|globale beleidsregels]].",
 	"miraheze-requestwiki-success": "Uw wiki-aanvraag ($1) is verzonden. Uw aanvraag wordt zo snel mogelijk beoordeeld door een vrijwillige wiki-aanmaker.",
 	"miraheze-restriction-delete": "Verwijderen",
 	"miraheze-restriction-protect": "Beveiligen",
