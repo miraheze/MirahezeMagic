@@ -3,6 +3,7 @@
 		"authors": [
 			"Geraki",
 			"Giannaras99",
+			"Jimkats",
 			"Michail Angelos Georgoulas",
 			"NikosLikomitros",
 			"Nikosgranturismogt",
@@ -17,7 +18,7 @@
 	"group-translationadmin-member": "{{GENDER:$1|διαχειριστής|διαχειρίστρια}} μετάφρασης",
 	"group-translationadmin": "Διαχειριστές μετάφρασης",
 	"group-translator-member": "{{GENDER:$1|μεταφραστής|μεταφράστρια}}",
-	"miraheze-donate": "Δωρεά",
+	"miraheze-donate": "Κάντε δωρεά στη Miraheze",
 	"miraheze-faq": "Συχνές ερωτήσεις",
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
 	"protect-level-user": "Να επιτρέπονται μόνο συνδεδεμένοι χρήστες",

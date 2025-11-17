@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bartomelow",
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
 			"Tks4Fish",
@@ -8,6 +9,8 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Você}} não pode entrar pois {{GENDER:$1|sua}} conta está travada globalmente. Por favor contate <code>cvt[em]miraheze.org</code> para mais informações ou para apelar",
+	"miraheze-createwiki-defaultmainpage-summary": "Bem-vindo ao Miraheze!",
+	"miraheze-createwiki-email-subject": "Sua nova wiki Miraheze ($1) foi criada.",
 	"miraheze-dberr-again": "Tente esperar alguns minutos e recarregar. Para mais informações sobre esse erro, confira nossa página no Twitter (Twitter.com/Miraheze) ou entre em contato com os administradores do sistema conectando-se a #miraheze em irc.libera.chat",
 	"miraheze-newsignuppage-loginform-tos": "Eu li, compreendi e concordo com o [https://meta.miraheze.org/wiki/Terms_of_Use/pt-br Termos de uso] e [https://meta.miraheze.org/wiki/Privacy_Policy/pt-br Política de Privacidade]",
 	"miraheze-newsignuppage-must-accept-tos": "Você deve aceitar os Termos de Uso para poder criar uma conta!",
@@ -15,5 +18,7 @@
 	"miraheze-prefs-help-realname": "Nome real é opcional. Se você optar por fornecê-lo, isso será usado para atribuir a você o seu trabalho. Além disso, usando um wiki hospedado pelo Miraheze, você concorda com o <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use/pt-br Terms of Use]</span> e aceitar o <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy/pt-br Política de Privacidade]</span>",
 	"miraheze-restriction-delete": "Excluir",
 	"miraheze-restriction-protect": "Proteger",
+	"miraheze-skinname-snapwikiskin": "Snap!",
+	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-wikibase-sitelinks-miraheze": "Wikis Miraheze"
 }
