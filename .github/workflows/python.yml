@@ -18,7 +18,7 @@ jobs:
       matrix:
         python: ['3.11', '3.12']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           submodules: true
       - name: Python ${{ matrix.python }}
