@@ -12,6 +12,7 @@
 	"miraheze-createwiki-defaultmainpage-summary": "Bem-vindo ao Miraheze!",
 	"miraheze-createwiki-email-subject": "Sua nova wiki Miraheze ($1) foi criada.",
 	"miraheze-dberr-again": "Tente esperar alguns minutos e recarregar. Para mais informações sobre esse erro, confira nossa página no Twitter (Twitter.com/Miraheze) ou entre em contato com os administradores do sistema conectando-se a #miraheze em irc.libera.chat",
+	"miraheze-dberr-problems": "Esta wiki está temporariamente indisponível.",
 	"miraheze-newsignuppage-loginform-tos": "Eu li, compreendi e concordo com o [https://meta.miraheze.org/wiki/Terms_of_Use/pt-br Termos de uso] e [https://meta.miraheze.org/wiki/Privacy_Policy/pt-br Política de Privacidade]",
 	"miraheze-newsignuppage-must-accept-tos": "Você deve aceitar os Termos de Uso para poder criar uma conta!",
 	"miraheze-oathauth-step1": "IMPORTANTE! Leia a página OATHAuth antes de ativar isso! Etapa 1: baixar um programa de autenticação de dois fatores",

@@ -66,6 +66,7 @@
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de ajuda do Miraheze",
 	"miraheze-label-managewiki-article-path-wiki": "Use /wiki/ para artigos",
+	"miraheze-label-managewiki-mainpage-is-domain-root": "Fazer com que a página principal desta wiki utilize a raiz do domínio?",
 	"miraheze-label-managewiki-mediawiki-version": "Versão do MediaWiki",
 	"miraheze-label-managewiki-primary-domain": "Domínio primário",
 	"miraheze-requestfeatures": "Solicitar recursos em um wiki",
