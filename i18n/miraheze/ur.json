@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
+			"BukhariSaeed",
 			"Teashae"
 		]
 	},
 	"centralauth-groupname": "میراہیزی",
 	"datadump-namespaceselect-label": "نام فضا",
 	"extensions-editors": "ایڈیٹرز",
+	"group-autopatrolled-member": "{{GENDER:$1|خودکار مراجعت شدہ}}",
 	"group-confirmed-member": "{{GENDER:$1|تصدیق شدہ صارف}}",
 	"group-confirmed": "تصدیق شدہ صارفین",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|عالمی استثناءات از آئی پی پابندی}}",
