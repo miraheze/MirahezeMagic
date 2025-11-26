@@ -44,6 +44,7 @@ class RequestWiki implements
 			newKey: 'nsfw-primary',
 			newField: [
 				'label-message' => 'requestwiki-label-nsfw-primary',
+				'help-message' => 'requestwiki-help-nsfw-primary',
 				'hide-if' => [ '!==', 'nsfw', '1' ],
 				'type' => 'check',
 			]
