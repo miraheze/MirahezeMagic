@@ -51,13 +51,13 @@ public function onManageWikiCoreFormSubmission(
 		string $dbname,
 		array $formData
 	): void {
-	if ( !isset( $formData['description'] ) ) {
+	if ( !isset( $formData['nsfw-primary'] ) ) {
 		return;
 	}
 
 	$mwCore = $moduleFactory->core( $dbname );
 	$mwCore->setExtraFieldData(
-		'description', $formData['description'], default: ''
+		'nsfw-primary', $formData['nsfw-primary'], default: ''
 	);
 }
 }
