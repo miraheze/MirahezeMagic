@@ -28,7 +28,7 @@ class ManageWiki implements
 		string $dbname,
 		bool $ceMW,
 		array &$formDescriptor
-	):
+	): void {
 
 		$mwCore = $moduleFactory->core( $dbname );
 
