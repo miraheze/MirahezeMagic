@@ -40,6 +40,17 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
+			afterKey: 'nsfwtext',
+			newKey: 'nsfw-primary',
+			newField: [
+				'label-message' => 'requestwiki-label-nsfw-primary',
+				'hide-if' => [ '!==', 'nsfw', '1' ],
+				'type' => 'check',
+			]
+		);
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
 			afterKey: 'purpose',
 			newKey: 'source',
 			newField: [
@@ -88,6 +99,19 @@ class RequestWiki implements
 			newField: [
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'type' => 'text',
+				'section' => 'editing',
+				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
+				'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
+			]
+		);
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'edit-nsfwtext',
+			newKey: 'edit-nsfw-primary',
+			newField: [
+				'label-message' => 'requestwiki-label-nsfw-primary',
+				'type' => 'check',
 				'section' => 'editing',
 				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
 				'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
