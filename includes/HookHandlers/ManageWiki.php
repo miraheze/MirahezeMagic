@@ -35,7 +35,7 @@ class ManageWiki implements
 		$formDescriptor['nsfw-primary'] = [
 			'label-message' => 'requestwiki-label-nsfw-primary',
 			'type' => 'check',
-			'default' => $mwCore->getExtraFieldData( 'description', default: '' ),
+			'default' => $mwCore->getExtraFieldData( 'nsfw-primary', default: '' ),
 			'disabled' => !$ceMW,
 			'section' => 'main',
 		];
