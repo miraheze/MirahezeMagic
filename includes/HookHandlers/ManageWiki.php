@@ -2,7 +2,6 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
-use MediaWiki\User\User;
 use MediaWiki\Config\Config;
 use MediaWiki\Context\IContextSource;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
@@ -14,7 +13,7 @@ class ManageWiki implements
 	ManageWikiCoreFormSubmissionHook
 {
 
-public function __construct(
+	public function __construct(
 		private readonly Config $config
 	) {
 	}
@@ -32,6 +31,7 @@ public function __construct(
 	):
 
 		$mwCore = $moduleFactory->core( $dbname );
+
 		$formDescriptor['nsfw-primary'] = [
 			'label-message' => 'requestwiki-label-nsfw-primary',
 			'type' => 'check',
@@ -39,25 +39,25 @@ public function __construct(
 			'disabled' => !$ceMW,
 			'section' => 'main',
 		];
-	}
+}
 
 	/**
 	 * @inheritDoc
 	 * @param IContextSource $context @phan-unused-param
 	 */
-	public function onManageWikiCoreFormSubmission(
+public function onManageWikiCoreFormSubmission(
 		IContextSource $context,
 		ModuleFactory $moduleFactory,
 		string $dbname,
 		array $formData
 	): void {
-		if ( !isset( $formData['description'] ) ) {
-			return;
-		}
-
-		$mwCore = $moduleFactory->core( $dbname );
-		$mwCore->setExtraFieldData(
-			'description', $formData['description'], default: ''
-		);
+	if ( !isset( $formData['description'] ) ) {
+		return;
 	}
+
+	$mwCore = $moduleFactory->core( $dbname );
+	$mwCore->setExtraFieldData(
+		'description', $formData['description'], default: ''
+	);
+}
 }
