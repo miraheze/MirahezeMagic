@@ -29,7 +29,6 @@ class ManageWiki implements
 		bool $ceMW,
 		array &$formDescriptor
 	): void {
-
 		$mwCore = $moduleFactory->core( $dbname );
 
 		$formDescriptor['nsfw-primary'] = [
@@ -39,25 +38,25 @@ class ManageWiki implements
 			'disabled' => !$ceMW,
 			'section' => 'main',
 		];
-}
+	}
 
 	/**
 	 * @inheritDoc
 	 * @param IContextSource $context @phan-unused-param
 	 */
-public function onManageWikiCoreFormSubmission(
+	public function onManageWikiCoreFormSubmission(
 		IContextSource $context,
 		ModuleFactory $moduleFactory,
 		string $dbname,
 		array $formData
 	): void {
-	if ( !isset( $formData['nsfw-primary'] ) ) {
-		return;
-	}
+		if ( !isset( $formData['nsfw-primary'] ) ) {
+			return;
+		}
 
-	$mwCore = $moduleFactory->core( $dbname );
-	$mwCore->setExtraFieldData(
+		$mwCore = $moduleFactory->core( $dbname );
+		$mwCore->setExtraFieldData(
 		'nsfw-primary', $formData['nsfw-primary'], default: ''
-	);
-}
+		);
+	}
 }
