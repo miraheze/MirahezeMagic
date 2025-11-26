@@ -96,6 +96,12 @@
 		"ImportDumpJobGetFile": {
 			"handler": "ImportDump"
 		},
+		"ManageWikiCoreAddFormFields": {
+			"handler": "ManageWiki"
+		},
+		"ManageWikiCoreFormSubmission": {
+			"handler": "ManageWiki"
+		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
 		},
