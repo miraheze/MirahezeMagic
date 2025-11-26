@@ -171,9 +171,13 @@
 				"HttpRequestFactory"
 			]
 		},
-		"ManageWiki": {
-			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki"
-		}
+        "ManageWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
+			"services": [
+                 "MainConfig"
+            ]
+        },
+
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
 		}
