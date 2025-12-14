@@ -45,6 +45,7 @@ class NotifyWikiUsers extends Maintenance {
 			);
 		}
 
+		$this->output( 'Selecting users from the following groups: ' . implode( ', ', $groups ) . "\n" );
 		$users = $this->getReplicaDB()->newSelectQueryBuilder()
 			->select( [ 'ug_user' ] )
 			->from( 'user_groups' )
