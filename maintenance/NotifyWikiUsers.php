@@ -45,21 +45,19 @@ class NotifyWikiUsers extends Maintenance {
 			);
 		}
 
-		$dbr = $this->getReplicaDB();
-		$users = [];
-		foreach ( $groups as $group ) {
-			$res = $dbr->newSelectQueryBuilder()
-				->select( [ 'ug_user' ] )
-				->from( 'user_groups' )
-				->where( [
-					'ug_group' => $group,
-				] )
-				->caller( __METHOD__ )
-				->fetchResultSet();
+		$res = $this->getReplicaDB()->newSelectQueryBuilder()
+			->select( [ 'ug_user' ] )
+			->from( 'user_groups' )
+			->where( [
+				'ug_group' => $groups,
+			] )
+			->groupBy( 'ug_user' )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 
-			foreach ( $res as $row ) {
-				$users[$row->ug_user] = true;
-			}
+		$users = [];
+		foreach ( $res as $row ) {
+			$users[$row->ug_user] = true;
 		}
 
 		$users = array_keys( $users );
