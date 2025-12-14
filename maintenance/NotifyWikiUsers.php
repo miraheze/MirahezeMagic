@@ -15,6 +15,7 @@ class NotifyWikiUsers extends Maintenance {
 
 		$this->addDescription( 'Send a notification to a specific set of users in a wiki.' );
 
+		$this->addOption( 'message', 'The message to send', withArg: true );
 		$this->addOption( 'header', 'Header for the notification', required: true, withArg: true );
 		$this->addOption( 'link', 'Link for the notification', withArg: true );
 		$this->addOption( 'link-label', 'Link label for the notification', withArg: true );
@@ -34,7 +35,7 @@ class NotifyWikiUsers extends Maintenance {
 		}
 
 		$header = $this->getOption( 'header' );
-		$message = $this->getStdin( Maintenance::STDIN_ALL );
+		$message = $this->getOption( 'message' ) ?? $this->getStdin( Maintenance::STDIN_ALL );
 		$link = $this->getOption( 'link' );
 		$linkLabel = $this->getOption( 'link-label', 'More information' );
 
