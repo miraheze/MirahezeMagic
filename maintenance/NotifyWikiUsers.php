@@ -45,7 +45,7 @@ class NotifyWikiUsers extends Maintenance {
 			);
 		}
 
-		$res = $this->getReplicaDB()->newSelectQueryBuilder()
+		$users = $this->getReplicaDB()->newSelectQueryBuilder()
 			->select( [ 'ug_user' ] )
 			->from( 'user_groups' )
 			->where( [
@@ -53,15 +53,7 @@ class NotifyWikiUsers extends Maintenance {
 			] )
 			->groupBy( 'ug_user' )
 			->caller( __METHOD__ )
-			->fetchResultSet();
-
-		$users = [];
-		foreach ( $res as $row ) {
-			$users[$row->ug_user] = true;
-		}
-
-		$users = array_keys( $users );
-		$userCount = count( $users );
+			->fetchFieldValues();
 
 		$extra = [
 			Event::RECIPIENTS_IDX => $users,
@@ -73,6 +65,7 @@ class NotifyWikiUsers extends Maintenance {
 			$extra['link-label'] = $linkLabel;
 		}
 
+		$userCount = count( $users );
 		$this->output( "Sending notifications to $userCount users...\n " );
 		Event::create(
 			[
