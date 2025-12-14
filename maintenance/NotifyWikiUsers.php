@@ -46,6 +46,11 @@ class NotifyWikiUsers extends Maintenance {
 			);
 		}
 
+		if ( !$groups ) {
+			$this->error( "No groups found!" );
+			return;
+		}
+
 		$this->output( 'Selecting users from the following groups: ' . implode( ', ', $groups ) . "\n" );
 		$users = $this->getReplicaDB()->newSelectQueryBuilder()
 			->select( [ 'ug_user' ] )
