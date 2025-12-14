@@ -3,9 +3,13 @@
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Extension\Notifications\Hooks\BeforeCreateEchoEventHook;
+use MediaWiki\User\Hook\UserGetDefaultOptionsHook;
 use Miraheze\MirahezeMagic\Notifications\EchoTechNotificationPresentationModel;
 
-class EchoNotifications implements BeforeCreateEchoEventHook {
+class EchoNotifications implements
+	BeforeCreateEchoEventHook,
+	UserGetDefaultOptionsHook
+{
 
 	/** @inheritDoc */
 	public function onBeforeCreateEchoEvent(
@@ -22,6 +26,11 @@ class EchoNotifications implements BeforeCreateEchoEventHook {
 			'section' => 'message',
 			'presentation-model' => EchoTechNotificationPresentationModel::class,
 		];
+	}
+
+	/** @inheritDoc */
+	public function onUserGetDefaultOptions( &$defaultOptions ) {
+		$defaultOptions['echo-subscriptions-email-mirahezemagic-tech-notification'] = true;
 	}
 
 }

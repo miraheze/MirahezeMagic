@@ -123,6 +123,9 @@
 		"TitleReadWhitelist": {
 			"handler": "Main"
 		},
+		"UserGetDefaultOptions": {
+			"handler": "EchoNotifications"
+		},
 		"UserGetRightsRemove": {
 			"handler": "Main"
 		}
