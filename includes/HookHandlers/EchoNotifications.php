@@ -7,6 +7,7 @@ use Miraheze\MirahezeMagic\Notifications\EchoTechNotificationPresentationModel;
 
 class EchoNotifications implements BeforeCreateEchoEventHook {
 
+	/** @inheritDoc */
 	public function onBeforeCreateEchoEvent(
 		array &$notifications, array &$notificationCategories, array &$notificationIcons
 	) {
