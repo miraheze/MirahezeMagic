@@ -23,7 +23,7 @@ class EchoNotifications implements
 		$notifications['mirahezemagic-tech-notification'] = [
 			'category' => 'mirahezemagic-tech-notification',
 			'group' => 'neutral',
-			'section' => 'message',
+			'section' => 'alert',
 			'presentation-model' => EchoTechNotificationPresentationModel::class,
 		];
 	}
