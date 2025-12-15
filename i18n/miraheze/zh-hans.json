@@ -170,5 +170,7 @@
 	"vanishuser-warning": "'''警告'''：您即将全域隐退一名用户！请在继续操作前仔细检查所有详细信息。",
 	"vanishuser-log-name": "用户隐退日志",
 	"vanishuser-log-header": "这是所有隐退用户的基本日志。",
-	"logentry-vanishuser-action": "$1隐退了一名用户。"
+	"logentry-vanishuser-action": "$1隐退了一名用户。",
+	"echo-category-title-mirahezemagic-tech-notification": "技术通知",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "当有技术性变动会影响到我的wiki时通知我。"
 }
