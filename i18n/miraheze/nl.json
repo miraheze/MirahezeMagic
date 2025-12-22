@@ -142,5 +142,7 @@
 	"vanishuser-warning": "'''Waarschuwing''': U staat op het punt een gebruiker wereldwijd te laten verdwijnen! Controleer alle details zorgvuldig voordat u verder gaat.",
 	"vanishuser-log-name": "Verdwijnlogboek gebruikers",
 	"vanishuser-log-header": "Dit is een basislogboek van alle verdwijningen van gebruikers.",
-	"logentry-vanishuser-action": "$1 heeft een gebruiker laten verdwijnen."
+	"logentry-vanishuser-action": "$1 heeft een gebruiker laten verdwijnen.",
+	"echo-category-title-mirahezemagic-tech-notification": "Technische melding",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Breng me op de hoogte wanneer er technische wijzigingen zijn die van invloed zijn op mijn wiki."
 }
