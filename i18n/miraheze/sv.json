@@ -87,5 +87,7 @@
 	"sitematrix-others": "Andra Miraheze-wikier",
 	"sitematrix-summary": "Denna specialsida listar alla Miraheze-wikier.",
 	"sitematrix": "Lista över Miraheze-wikier",
-	"termsofservice": "Användarvillkor"
+	"termsofservice": "Användarvillkor",
+	"echo-category-title-mirahezemagic-tech-notification": "Teknisk avisering",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Meddela mig när det sker tekniska ändringar som påverkar min wiki."
 }
