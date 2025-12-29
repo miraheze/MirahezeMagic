@@ -171,6 +171,6 @@ class RequestWiki implements
 		);
 	}
 	public function onCreateWikiCreationExtraFields( array &$extraFields ): void {
-        $extraFields['nsfw-primary'] = true;
+        $extraFields[] = 'nsfw-primary';
 	}
 }
