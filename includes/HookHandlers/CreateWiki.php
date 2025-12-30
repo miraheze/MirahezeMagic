@@ -362,20 +362,35 @@ class CreateWiki implements
 
 	private function removeRedisKey( string $key ): void {
 		$jobTypeConf = $this->options->get( MainConfigNames::JobTypeConf );
-		if ( !isset( $jobTypeConf['default']['redisServer'] ) || !$jobTypeConf['default']['redisServer'] ) {
-			return;
+		$redisSession = $wgObjectCaches['redis-session'] $this->options->get( MainConfigNames::ObjectCaches );
+
+		if ( isset( $jobTypeConf['default']['redisServer'] ) && $jobTypeConf['default']['redisServer'] ) {
+			$hostAndPort = IPUtils::splitHostAndPort( $jobTypeConf['default']['redisServer'] );
+	
+			if ( $hostAndPort ) {
+				try {
+					$redis = new Redis();
+					$redis->connect( $hostAndPort[0], $hostAndPort[1] );
+					$redis->auth( $jobTypeConf['default']['redisConfig']['password'] );
+					$redis->del( $redis->keys( $key ) );
+				} catch ( Throwable ) {
+					// empty
+				}
+			}
 		}
 
-		$hostAndPort = IPUtils::splitHostAndPort( $jobTypeConf['default']['redisServer'] );
-
-		if ( $hostAndPort ) {
-			try {
-				$redis = new Redis();
-				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
-				$redis->auth( $jobTypeConf['default']['redisConfig']['password'] );
-				$redis->del( $redis->keys( $key ) );
-			} catch ( Throwable ) {
-				// empty
+		if ( isset( $redisSession['redis-session'] ) && $redisSession['redis-session']['servers'] ) {
+			$hostAndPort = IPUtils::splitHostAndPort( $redisSession['redis-session']['servers'][0] );
+	
+			if ( $hostAndPort ) {
+				try {
+					$redis = new Redis();
+					$redis->connect( $hostAndPort[0], $hostAndPort[1] );
+					$redis->auth( $redisSession['redis-session']['password'] );
+					$redis->del( $redis->keys( $key ) );
+				} catch ( Throwable ) {
+					// empty
+				}
 			}
 		}
 	}
