@@ -366,7 +366,7 @@ class CreateWiki implements
 
 		if ( isset( $jobTypeConf['default']['redisServer'] ) && $jobTypeConf['default']['redisServer'] ) {
 			$hostAndPort = IPUtils::splitHostAndPort( $jobTypeConf['default']['redisServer'] );
-	
+
 			if ( $hostAndPort ) {
 				try {
 					$redis = new Redis();
@@ -381,7 +381,7 @@ class CreateWiki implements
 
 		if ( isset( $redisSession['redis-session'] ) && $redisSession['redis-session']['servers'] ) {
 			$hostAndPort = IPUtils::splitHostAndPort( $redisSession['redis-session']['servers'][0] );
-	
+
 			if ( $hostAndPort ) {
 				try {
 					$redis = new Redis();
