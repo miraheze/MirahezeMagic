@@ -362,7 +362,7 @@ class CreateWiki implements
 
 	private function removeRedisKey( string $key ): void {
 		$jobTypeConf = $this->options->get( MainConfigNames::JobTypeConf );
-		$redisSession = $wgObjectCaches['redis-session'] $this->options->get( MainConfigNames::ObjectCaches );
+		$redisSession = $this->options->get( MainConfigNames::ObjectCaches );
 
 		if ( isset( $jobTypeConf['default']['redisServer'] ) && $jobTypeConf['default']['redisServer'] ) {
 			$hostAndPort = IPUtils::splitHostAndPort( $jobTypeConf['default']['redisServer'] );
