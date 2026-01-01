@@ -3,9 +3,9 @@
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\User\User;
+use Miraheze\CreateWiki\Hooks\CreateWikiCreationExtraFieldsHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiCreationExtraFieldsHook;
 use Miraheze\CreateWiki\RequestWiki\FormFields\DetailsWithIconField;
 use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
@@ -170,7 +170,8 @@ class RequestWiki implements
 			]
 		);
 	}
+
 	public function onCreateWikiCreationExtraFields( array &$extraFields ): void {
-        $extraFields[] = 'nsfw-primary';
+		$extraFields[] = 'nsfw-primary';
 	}
 }
