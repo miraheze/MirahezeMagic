@@ -99,6 +99,12 @@
 		"ImportDumpJobGetFile": {
 			"handler": "ImportDump"
 		},
+		"ManageWikiCoreAddFormFields": {
+			"handler": "ManageWiki"
+		},
+		"ManageWikiCoreFormSubmission": {
+			"handler": "ManageWiki"
+		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
 		},
@@ -174,6 +180,13 @@
 				"HttpRequestFactory"
 			]
 		},
+        "ManageWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
+			"services": [
+                 "MainConfig"
+            ]
+        },
+
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
 		}
