@@ -63,6 +63,7 @@ class CreateWiki implements
 					'MirahezeMagicSwiftKey',
 					ConfigNames::Settings,
 					MainConfigNames::JobTypeConf,
+					MainConfigNames::ObjectCaches,
 					MainConfigNames::LocalDatabases,
 				],
 				$mainConfig
