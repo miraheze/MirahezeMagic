@@ -13,7 +13,7 @@ class Redis {
 
 	/**
 	 * @param string $host
-	 * @param string|int $port
+	 * @param int $port
 	 * @param int $timeout
 	 * @param string $persistent_id
 	 * @param int $retry_interval
