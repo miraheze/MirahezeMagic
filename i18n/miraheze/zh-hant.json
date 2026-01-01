@@ -142,5 +142,7 @@
 	"vanishuser-warning": "'''警告'''：您即將全域清除一名使用者！請在繼續之前，仔細檢查所有詳細內容。",
 	"vanishuser-log-name": "使用者清除日誌",
 	"vanishuser-log-header": "這是所有清除使用者的基本日誌。",
-	"logentry-vanishuser-action": "$1清除了一名使用者。"
+	"logentry-vanishuser-action": "$1清除了一名使用者。",
+	"echo-category-title-mirahezemagic-tech-notification": "技術通知",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "當有技術性上變動會影響到我的 wiki 時，請通知我。"
 }

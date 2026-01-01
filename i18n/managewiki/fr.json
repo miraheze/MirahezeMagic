@@ -134,7 +134,7 @@
 	"managewiki-setting-wgKartographerWikivoyageMode-name": "Mode Wikivoyage du cartographe",
 	"managewiki-setting-wgKartographerWikivoyageMode-help": "Active le mode Wikivoyage.",
 	"managewiki-setting-wgKartographerUseMarkerStyle-name": "Kartographer utilise Marker Style",
-	"managewiki-setting-wgKartographerUseMarkerStyle-help": "Permet à Kartographer d'extraire le style CSS à utiliser depuis le lien de GeoJSON.",
+	"managewiki-setting-wgKartographerUseMarkerStyle-help": "Permet à Kartographer d’extraire le style CSS à utiliser depuis le lien de GeoJSON.",
 	"managewiki-setting-wgEnableUploads-name": "Activer le téléversement des fichiers",
 	"managewiki-setting-wgEnableUploads-help": "Cochez ou décochez cette option si vous souhaitez activer ou désactiver le téléversement de fichiers sur votre wiki.",
 	"managewiki-setting-wgAllowCopyUploads-name": "Activer les téléversements de fichiers via une URL",

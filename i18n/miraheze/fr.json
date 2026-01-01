@@ -159,5 +159,7 @@
 	"vanishuser-warning": "'''Attention''' : vous êtes sur le point de faire disparaître globalement un utilisateur ! Veuillez examiner attentivement tous les détails avant de continuer.",
 	"vanishuser-log-name": "Journal des disparitions d’utilisateurs",
 	"vanishuser-log-header": "Voici un journal de base de toutes les disparitions d’utilisateurs.",
-	"logentry-vanishuser-action": "$1 a fait disparaître un utilisateur."
+	"logentry-vanishuser-action": "$1 a fait disparaître un utilisateur.",
+	"echo-category-title-mirahezemagic-tech-notification": "Notification technique",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Prévenez-moi en cas de changements techniques affectant mon wiki."
 }

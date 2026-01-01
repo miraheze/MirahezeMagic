@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Sabelöga",
+			"Stefan2255",
 			"WikiPhoenix"
 		]
 	},
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Du}} kunde inte logga in för att {{GENDER:$1|ditt}} konto har låsts globalt. Kontakta <code>cvt[på]miraheze.org</code> för mer information eller för att överklaga.",
-	"miraheze-dberr-again": "Försök att vänta några minuter och ladda in sidan på nytt. Kolla vårt Twitter-konto (https://twitter.com/Miraheze) eller kontakta systemadministratörerna genom att ansluta till #miraheze på irc.libera.chat för att ta reda på mer om felet.",
-	"miraheze-newsignuppage-loginform-tos": "Jag har läst, förstått och samtycker i [https://meta.miraheze.org/wiki/Terms_of_Use användarvillkoren] och [https://meta.miraheze.org/wiki/Privacy_Policy integritetspolicyn]",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Du}} kan inte logga in eftersom {{GENDER:$1|ditt}} konto är [[m:Special:MyLanguage/Global locks|globalt låst]]. Vänligen kontakta <code>cvt[at]miraheze.org</code> för mer information eller för att överklaga.",
+	"miraheze-dberr-again": "Försök igen om några minuter, dessa fel brukar lösas efter en stund. Om du får detta fel upprepade gånger, vänligen kolla vår Twitter (https://twitter.com/Miraheze) för mer information eller informera oss genom att gå med i #miraheze-tech-ops på irc.libera.chat eller vår Discord-server (https://discord.gg/TVAJTE4CUn).",
+	"miraheze-newsignuppage-loginform-tos": "Jag har läst, förstått och godkänner [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Användarvillkoren] och [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Integritetspolicyn]",
 	"miraheze-newsignuppage-must-accept-tos": "Du måste acceptera användarvillkoren för att skapa ett konto!",
-	"miraheze-oathauth-step1": "VIKTIGT! Se till att läsa OATHAuth-sidan innan du slår på detta! Steg 1: Ladda ner ett program för tvåfaktorsautensiering",
-	"miraheze-prefs-help-realname": "Riktigt namn är valfritt. Väljer du att ange det, kommer det att användas för att tillskriva dig ditt arbete. Genom att använda Miraheze accepterar du dessutom till <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use användarvillkoren]</span> och <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy integritetspolicyn]</span>.",
+	"miraheze-oathauth-step1": "VIKTIGT! Se till att läsa OATHAuth-sidan innan du aktiverar detta! Steg 1: Ladda ner ett tvåfaktorsautentiseringsprogram",
+	"miraheze-prefs-help-realname": "Riktigt namn är valfritt. Väljer du att ange det, kommer det att användas för att tillskriva dig ditt arbete. Genom att använda Miraheze accepterar du dessutom till <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Användarvillkoren]</span> och <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Integritetspolicyn]</span>.",
 	"miraheze-restriction-delete": "Radera",
 	"miraheze-restriction-protect": "Skrivskydda",
 	"miraheze-skinname-snapwikiskin": "Snäpp!",

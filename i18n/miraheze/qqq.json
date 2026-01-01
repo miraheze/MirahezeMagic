@@ -121,5 +121,7 @@
 	"sitematrix-summary": "This special page lists all Miraheze wikis.",
 	"sitematrix": "List of Miraheze wikis",
 	"termsofservice": "Terms of Use",
-	"termsofservicepage": "m:Terms of Use"
+	"termsofservicepage": "m:Terms of Use",
+	"echo-category-title-mirahezemagic-tech-notification": "Title for the tech notification category at Special:Preferences",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Tooltip for the tech notification category at Special:Preferences"
 }

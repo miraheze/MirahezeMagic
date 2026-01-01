@@ -175,5 +175,7 @@
 	"vanishuser-warning": "'''Warning''': You are about to globally vanish a user! Please review all details carefully before proceeding.",
 	"vanishuser-log-name": "User vanish log",
 	"vanishuser-log-header": "This is a basic log of all user vanishes.",
-	"logentry-vanishuser-action": "$1 vanished a user."
+	"logentry-vanishuser-action": "$1 vanished a user.",
+	"echo-category-title-mirahezemagic-tech-notification": "Tech Notification",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Notify me when there are technical changes affecting my wiki."
 }
