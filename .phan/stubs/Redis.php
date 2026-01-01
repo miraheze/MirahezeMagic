@@ -14,10 +14,10 @@ class Redis {
 	/**
 	 * @param string $host
 	 * @param int $port
-	 * @param int $timeout
-	 * @param string $persistent_id
+	 * @param float $timeout
+	 * @param string|null $persistent_id
 	 * @param int $retry_interval
-	 * @param int $read_timeout
+	 * @param float $read_timeout
 	 * @param array|null $context
 	 * @return bool
 	 */
