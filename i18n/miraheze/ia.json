@@ -133,5 +133,7 @@
 	"vanishuser-warning": "'''Attention''': Tu es sur le puncto de facer disparer globalmente un usator! Per favor revide tote le detalios attentivemente ante de continuar.",
 	"vanishuser-log-name": "Registro de disparitiones de usatores",
 	"vanishuser-log-header": "Isto es un registro de base de tote le disparitiones de usatores.",
-	"logentry-vanishuser-action": "$1 ha facite disparer un usator."
+	"logentry-vanishuser-action": "$1 ha facite disparer un usator.",
+	"echo-category-title-mirahezemagic-tech-notification": "Notification technic",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Notificar me quando il ha cambiamentos technic que influentia mi wiki."
 }

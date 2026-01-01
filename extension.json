@@ -69,6 +69,9 @@
 		"APIQuerySiteInfoGeneralInfo": {
 			"handler": "Main"
 		},
+		"BeforeCreateEchoEvent": {
+			"handler": "EchoNotifications"
+		},
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
@@ -123,6 +126,9 @@
 		"TitleReadWhitelist": {
 			"handler": "Main"
 		},
+		"UserGetDefaultOptions": {
+			"handler": "EchoNotifications"
+		},
 		"UserGetRightsRemove": {
 			"handler": "Main"
 		}
@@ -144,6 +150,9 @@
 				"ManageWikiModuleFactory",
 				"RepoGroup"
 			]
+		},
+		"EchoNotifications": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\EchoNotifications"
 		},
 		"GlobalUserPage": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\GlobalUserPage",

@@ -137,5 +137,7 @@
 	"vanishuser-warning": "'''אזהרה''': {{GENDER:|אתה עומד|את עומדת}} להעלים את המשתמש גלובלית! נא לסקור את כל הפרטים בזהירות לפני המשך.",
 	"vanishuser-log-name": "יומן העלמת משתמשים",
 	"vanishuser-log-header": "זהו יומן בסיסי של העלמות משתמשים.",
-	"logentry-vanishuser-action": "$1 העלים משתמש."
+	"logentry-vanishuser-action": "$1 העלים משתמש.",
+	"echo-category-title-mirahezemagic-tech-notification": "התראה טכנית",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "להודיע לי כשיש שינויים טכניים שמשפיעים על הוויקי שלי."
 }

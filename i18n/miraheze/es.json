@@ -124,5 +124,7 @@
 	"sitematrix": "Lista de wikis de Miraheze",
 	"termsofservice": "Términos de Uso",
 	"vanishuser-warning": "'''Advertencia''': ¡Vas a globalmente desaparecer a un usuario! Por favor revise todos los detalles cuidadosamente antes de proceder.",
-	"vanishuser-log-name": "Registro de desaparición de usuario"
+	"vanishuser-log-name": "Registro de desaparición de usuario",
+	"echo-category-title-mirahezemagic-tech-notification": "Notificación técnica",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Notificarme cuando haya cambios técnicos que afecten a mi wiki."
 }
