@@ -35,7 +35,7 @@ class RenameDatabase extends Maintenance {
 
 	private array $tablesMoved = [];
 	private bool $hasCargoDB = false;
-	private bool $hasDPL3View = false;
+	private bool $hasDPL4View = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -99,7 +99,7 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Error during rename: $errorMessage" );
 		}
 
-		$this->recreateDPL3View(
+		$this->recreateDPL4View(
 			$dbw,
 			$oldDatabaseQuotes,
 			$newDatabaseQuotes,
@@ -244,7 +244,7 @@ class RenameDatabase extends Maintenance {
 		bool $dryRun
 	): void {
 		$this->tablesMoved = [];
-		$this->hasDPL3View = false;
+		$this->hasDPL4View = false;
 		$tableNames = $dbw->newSelectQueryBuilder()
 			->select( 'TABLE_NAME' )
 			->from( 'information_schema.TABLES' )
@@ -254,7 +254,7 @@ class RenameDatabase extends Maintenance {
 
 		foreach ( $tableNames as $tableName ) {
 			if ( $tableName === 'dpl_clview' ) {
-				$this->hasDPL3View = true;
+				$this->hasDPL4View = true;
 				continue;
 			}
 
@@ -271,7 +271,7 @@ class RenameDatabase extends Maintenance {
 		}
 	}
 
-	private function recreateDPL3View(
+	private function recreateDPL4View(
 		DBConnRef $dbw,
 		string $oldDatabaseQuotes,
 		string $newDatabaseQuotes,
@@ -279,7 +279,7 @@ class RenameDatabase extends Maintenance {
 		string $newDatabaseName,
 		bool $dryRun
 	): void {
-		if ( !$this->hasDPL3View ) {
+		if ( !$this->hasDPL4View ) {
 			return;
 		}
 
