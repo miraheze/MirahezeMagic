@@ -138,5 +138,7 @@
 	"vanishuser-warning": "'''Cảnh báo''': Bạn sắp hủy bỏ một người dùng trên phạm vi toàn cục! Vui lòng xem xét cẩn thận tất cả các chi tiết trước khi tiếp tục.",
 	"vanishuser-log-name": "Nhật trình hủy bỏ người dùng",
 	"vanishuser-log-header": "Đây là nhật trình cơ bản của tất cả các lần hủy bỏ người dùng.",
-	"logentry-vanishuser-action": "$1 đã hủy bỏ một người dùng."
+	"logentry-vanishuser-action": "$1 đã hủy bỏ một người dùng.",
+	"echo-category-title-mirahezemagic-tech-notification": "Thông báo kĩ thuật",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Gửi thông báo cho tôi khi có những thay đổi kỹ thuật ảnh hưởng đến wiki của tôi."
 }
