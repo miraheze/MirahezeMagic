@@ -35,7 +35,6 @@ class RenameDatabase extends Maintenance {
 
 	private array $tablesMoved = [];
 	private bool $hasCargoDB = false;
-	private bool $hasDPL4View = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -253,13 +252,7 @@ class RenameDatabase extends Maintenance {
 			->fetchFieldValues();
 
 		foreach ( $tableNames as $tableName ) {
-			if ( $tableName === 'dpl_clview' ) {
-				$this->hasDPL4View = true;
-				continue;
-			}
-
 			$tableQuotes = $dbw->addIdentifierQuotes( $tableName );
-
 			if ( $dryRun ) {
 				$this->output( "DRY RUN: Would execute query: RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};\n" );
 				$this->tablesMoved[] = $tableName;
@@ -268,51 +261,6 @@ class RenameDatabase extends Maintenance {
 				$dbw->query( "RENAME TABLE {$oldDatabaseQuotes}.{$tableQuotes} TO {$newDatabaseQuotes}.{$tableQuotes};", __METHOD__ );
 				$this->tablesMoved[] = $tableName;
 			}
-		}
-	}
-
-	private function recreateDPL4View(
-		DBConnRef $dbw,
-		string $oldDatabaseQuotes,
-		string $newDatabaseQuotes,
-		string $oldDatabaseName,
-		string $newDatabaseName,
-		bool $dryRun
-	): void {
-		if ( !$this->hasDPL4View ) {
-			return;
-		}
-
-		try {
-			$viewDefinition = $dbw->newSelectQueryBuilder()
-				->select( 'VIEW_DEFINITION' )
-				->from( 'information_schema.VIEWS' )
-				->where( [
-					'TABLE_SCHEMA' => $oldDatabaseName,
-					'TABLE_NAME' => 'dpl_clview',
-				] )
-				->caller( __METHOD__ )
-				->fetchField();
-
-			if ( !$viewDefinition ) {
-				$this->output( ( $dryRun ? 'DRY RUN: ' : '' ) . "Skipping creating 'dpl_clview': Could not retrieve definition.\n" );
-				return;
-			}
-
-			$viewDefinition = str_replace( $oldDatabaseQuotes, $newDatabaseQuotes, $viewDefinition );
-			$createViewSQL = "CREATE VIEW {$newDatabaseQuotes}.dpl_clview AS $viewDefinition;";
-
-			if ( $dryRun ) {
-				$this->output( "DRY RUN: Would execute query: $createViewSQL\n" );
-			} else {
-				$this->output( "Recreating view 'dpl_clview' in $newDatabaseName...\n" );
-				// Since we are copying from one database to another,
-				// this should be a false positive.
-				// @phan-suppress-next-line SecurityCheck-SQLInjection
-				$dbw->query( $createViewSQL, __METHOD__ );
-			}
-		} catch ( Throwable $t ) {
-			$this->output( "Error occurred when creating 'dpl_clview' on $newDatabaseName: {$t->getMessage()}\n" );
 		}
 	}
 
