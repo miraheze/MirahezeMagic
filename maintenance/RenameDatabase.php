@@ -98,15 +98,6 @@ class RenameDatabase extends Maintenance {
 			$this->fatalError( "Error during rename: $errorMessage" );
 		}
 
-		$this->recreateDPL4View(
-			$dbw,
-			$oldDatabaseQuotes,
-			$newDatabaseQuotes,
-			$oldDatabaseName,
-			$newDatabaseName,
-			$dryRun
-		);
-
 		if ( $dryRun ) {
 			$this->output( "DRY RUN: Database rename simulation complete on cluster $cluster.\n" );
 
@@ -243,7 +234,6 @@ class RenameDatabase extends Maintenance {
 		bool $dryRun
 	): void {
 		$this->tablesMoved = [];
-		$this->hasDPL4View = false;
 		$tableNames = $dbw->newSelectQueryBuilder()
 			->select( 'TABLE_NAME' )
 			->from( 'information_schema.TABLES' )
