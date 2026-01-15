@@ -7,7 +7,8 @@
 			"Fitoschido",
 			"Kareyac",
 			"Rail",
-			"Railfail536"
+			"Railfail536",
+			"Woytecr"
 		]
 	},
 	"extensions-antispam": "Ochrona przed spamem",
@@ -38,7 +39,7 @@
 	"group-steward": "Stewards",
 	"group-translationadmin-member": "administrator tłumaczeń",
 	"group-translationadmin": "Administratorzy tłumaczeń",
-	"group-translator-member": "tłumacz",
+	"group-translator-member": "{{GENDER:$1|tłumacz|tłumaczka}}",
 	"group-translator": "Tłumacze",
 	"group-wiki-creator-member": "twórca wiki",
 	"group-wiki-creator": "Twórcy Wiki",
@@ -73,7 +74,7 @@
 	"settings-recentchanges": "Ostatnie zmiany",
 	"settings-restricted": "Zastrzeżone",
 	"settings-seo": "Optymalizacja dla wyszukiwarek",
-	"settings-socialtools": "Specjalne narzędzia",
+	"settings-socialtools": "Narzędzia społecznościowe",
 	"settings-styling": "Wygląd",
 	"sitematrix-others": "Inne wiki Miraheze",
 	"sitematrix-summary": "Ta strona specjalna zawiera listę wszystkich wiki Miraheze.",
