@@ -165,7 +165,7 @@ class CheckWikiDatabases extends Maintenance {
 			'virtual-globalnewfiles' => [
 				'gnf_files' => 'files_dbname',
 			],
-			$this->getConfig()->get( 'GlobalUsageDatabase' ) => [
+			'virtual-globalusage' => [
 				'globalimagelinks' => 'gil_wiki',
 			],
 			'virtual-managewiki' => [
