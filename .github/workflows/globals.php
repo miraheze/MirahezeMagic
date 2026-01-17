@@ -5,6 +5,7 @@ use MediaWiki\MediaWikiServices;
 use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\DBQueryError;
 
+$wgGlobalUserPageDBname = 'wikidb';
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWikiServices $services ): void {
