@@ -3,6 +3,7 @@
 		"authors": [
 			"Bapham123",
 			"Minh Nguyen",
+			"Nvdtn19",
 			"Pisceskaze",
 			"SongNgu.xyz"
 		]
@@ -17,7 +18,7 @@
 	"managewiki-setting-wgCookieSetOnAutoblock-help": "Xác định xem có nên đặt cookie khi người dùng bị tự động cấm hay không. Làm như vậy có nghĩa là người dùng bị cấm, ngay cả sau khi đăng xuất và chuyển đến địa chỉ IP mới, vẫn sẽ bị chặn.",
 	"managewiki-setting-wgCookieSetOnIpBlock-name": "Sử dụng tập tin cookie cùng với cấm địa chỉ IP",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "Cần xác nhận email để sửa đổi",
-	"managewiki-setting-wgEmailConfirmToEdit-help": "Yêu cầu người dùng xác nhận địa chỉ email trước khi họ có thể chỉnh sửa. Điều này vô hiệu hóa việc sửa đổi ẩn danh.",
+	"managewiki-setting-wgEmailConfirmToEdit-help": "Yêu cầu người dùng xác nhận địa chỉ email trước khi họ có thể sửa đổi. Việc này giúp vô hiệu hóa các sửa đổi từ người dùng chưa đăng nhập.",
 	"managewiki-setting-wgProtectSiteLimit-name": "Giới hạn khóa trang",
 	"managewiki-setting-wgMediaViewerIsInBeta-name": "Bật phiên bản Beta của Media Viewer",
 	"managewiki-setting-wgPopupsBetaFeature-name": "Bật phiên bản Beta của Popups",
