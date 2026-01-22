@@ -58,7 +58,6 @@ class CreateWiki implements
 			new ServiceOptions(
 				[
 					'EchoSharedTrackingDB',
-					'GlobalUsageDatabase',
 					'MirahezeMagicMemcachedServers',
 					'MirahezeMagicSwiftKey',
 					ConfigNames::Settings,
@@ -85,9 +84,9 @@ class CreateWiki implements
 			->caller( __METHOD__ )
 			->execute();
 
-		if ( $this->options->get( 'GlobalUsageDatabase' ) ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
-				$this->options->get( 'GlobalUsageDatabase' )
+				'virtual-globalusage'
 			);
 
 			$gudDb->newDeleteQueryBuilder()
@@ -170,9 +169,9 @@ class CreateWiki implements
 			->caller( __METHOD__ )
 			->execute();
 
-		if ( $this->options->get( 'GlobalUsageDatabase' ) ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
-				$this->options->get( 'GlobalUsageDatabase' )
+				'virtual-globalusage'
 			);
 
 			$gudDb->newUpdateQueryBuilder()
