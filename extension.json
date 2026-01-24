@@ -75,6 +75,9 @@
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
+		"CreateWikiAfterCreationWithExtraData": {
+			"handler": "RequestWiki"
+		},
 		"CreateWikiDeletion": {
 			"handler": "CreateWiki"
 		},
@@ -175,7 +178,13 @@
 			]
 		},
 		"RequestWiki": {
-			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki::factory",
+			"services": [
+				"MainConfig",
+				"CreateWikiValidator",
+				"ManageWikiModuleFactory"
+			]
 		}
 	},
 	"config": {
@@ -186,6 +195,17 @@
 		"MirahezeMagicMemcachedServers": {
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
+		},
+		"MirahezeMagicRequestWikiExtensions": {
+			"description": "Array. Extensions to allow to select directly from RequestWiki, formatted as display name or message key => extension key (index from $wgManageWikiExtensions).",
+			"value": []
+		},
+		"MirahezeMagicRequestWikiSkins": {
+			"description": "Array. Skins to allow to be selected as the default skin directly from RequestWiki, formatted as display name or message key => skin key.",
+			"value": {
+				"skinname-vector": "vector",
+				"skinname-vector-2022": "vector-2022"
+			}
 		},
 		"MirahezeMagicSwiftKey": {
 			"description": "String. Swift key to use for Swift shell commands.",
