@@ -75,6 +75,9 @@
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
+		"CreateWikiCreationExtraFieldsHook": {
+			"handler": "RequestWiki"
+		},
 		"CreateWikiDeletion": {
 			"handler": "CreateWiki"
 		},
