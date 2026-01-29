@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Red Winged Duck",
-			"Renessaince"
+			"Renessaince",
+			"Ucukor"
 		]
 	},
 	"miraheze-dberr-again": "Паспрабуйце пачакаць некалькі хвілінаў, гэтыя памылкі павінны зьнікнуць. Калі вы пастаянна атрымліваеце гэтую памылку, калі ласка, глядзіце наш twitter (https://twitter.com/Miraheze) для падрабязнасьцяў ці паведамце нам, увайшоўшы ў #miraheze-tech-ops на irc.libera.chat ці ў наш сэрвэр Discord (https://discord.gg/TVAJTE4CUn).",
 	"miraheze-newsignuppage-loginform-tos": "Я прачытаў, зразумеў і пагадзіўся з [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use умовамі выкарыстаньня] і [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy палітыкай прыватнасьці]",
-	"miraheze-newsignuppage-must-accept-tos": "Каб мець магчымасьць стварыць уліковы запіс, вы мусіце пагадзіцца з умовамі карыстаньня!",
+	"miraheze-newsignuppage-must-accept-tos": "Каб мець магчымасьць стварыць рахунак, вы мусіце пагадзіцца з умовамі ўжываньня!",
 	"miraheze-oathauth-step1": "ВАЖНА! Калі ласка, перш чым падключыць гэта, прачытайце старонку OATHAuth! Крок 1: спампаваць праграму двухфактарнай аўтарызацыі",
 	"miraheze-prefs-help-realname": "Сапраўднае імя неабавязковае. Калі вы пазначыце яго, яно будзе ўжытае, каб пазначыць вашае аўтарства. Таксама, калі вы выкарыстоўваеце вікі, якая ўтрымліваецца Miraheze, вы згаджаецеся з <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use умовамі выкарыстаньня]</span> і прымаеце <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy палітыку прыватнасьці]</span>."
 }
