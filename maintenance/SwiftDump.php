@@ -67,8 +67,11 @@ class SwiftDump extends Maintenance {
 
 		// Compress Swift container (.tar.gz)
 		Shell::command(
-			'tar', '-czf',
-			'/tmp/' . $this->getOption( 'filename' ),
+			'tar',
+			'-C',
+			'/tmp',
+			'-czf',
+			$this->getOption( 'filename' ),
 			"/tmp/$wiki",
 			'--remove-files'
 		)->limits( $limits )
