@@ -71,8 +71,8 @@ class SwiftDump extends Maintenance {
 			'-C',
 			'/tmp',
 			'-czf',
-			$this->getOption( 'filename' ),
-			"/tmp/$wiki",
+			'/tmp/' . $this->getOption( 'filename' ),
+			"$wiki",
 			'--remove-files'
 		)->limits( $limits )
 			->disableSandbox()
