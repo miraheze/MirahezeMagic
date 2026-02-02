@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bapham123",
 			"Minh Nguyen",
 			"NguyenHung",
 			"Nvdtn19",
@@ -51,6 +52,6 @@
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-uploadtext": "Sử dụng biểu mẫu bên dưới để tải tập tin lên.\nĐể xem hoặc tìm kiếm các tập tin đã tải lên trước đây, hãy truy cập [[Special:FileList|danh sách các tập tin đã tải lên]]. Các thao tác tải lên và tải lên lại cũng được ghi vào [[Special:Log/upload|nhật trình tải lên]]. Các thao tác xóa được ghi vào [[Special:Log/delete|nhật trình xóa]].\n\nĐể đưa tập tin vào một trang, hãy sử dụng liên kết có một trong các dạng sau:\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Tập tin.jpg]]</nowiki></code></strong> để sử dụng phiên bản đầy đủ của tập tin\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:Tập tin.png|200px|nhỏ|trái|Chú thích]]</nowiki></code></strong> để sử dụng bản hiển thị rộng 200 điểm ảnh trong hộp ở lề trái với dòng chữ “Chú thích” bên dưới\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:Tập tin.ogg]]</nowiki></code></strong> để liên kết trực tiếp đến tập tin mà không hiển thị tập tin\n\nHãy nhớ thêm thông tin giấy phép (nếu có) về tập tin đã tải lên. Tất cả các tập tin '''phải''' tuân theo luật bản quyền của Hoa Kỳ, bao gồm cả việc sử dụng hợp pháp. Việc không làm như vậy nhiều lần có thể dẫn đến vi phạm bản quyền cũng như khiến wiki của bạn có nguy cơ '''bị đóng'''.",
-	"miraheze-webauthn-module-description": "WebAuthn (Xác thực Web) là một tiêu chuẩn trên web do World Wide Web Consortium (W3C) xuất bản. WebAuthn là thành phần trọng tâm của Dự án FIDO2 do Liên minh FIDO điều hành. Mục tiêu của dự án là nhằm chuẩn hóa giao diện xác minh người dùng dành cho các ứng dụng web và các dịch vụ sử dụng công cụ mã hóa theo khóa công cộng. [https://en.wikipedia.org/wiki/WebAuthn Xem thêm (tiếng Anh)]. Xin lưu ý rằng bạn cần phải đăng nhập từ chính wiki mà bạn đã dùng để đăng ký thiết bị xác thực. Bạn có thể muốn đăng ký trình xác thực trên [[mh:meta|Meta]] vì lý do này.",
+	"miraheze-webauthn-module-description": "WebAuthn (Xác thực Web) là một tiêu chuẩn trên web do World Wide Web Consortium (W3C) xuất bản. WebAuthn là thành phần trọng tâm của Dự án FIDO2 do Liên minh FIDO điều hành. Mục tiêu của dự án là nhằm chuẩn hóa giao diện xác minh người dùng dành cho các ứng dụng web và các dịch vụ sử dụng công cụ mã hóa theo khóa công cộng. [https://en.wikipedia.org/wiki/WebAuthn Xem thêm (tiếng Anh)].",
 	"miraheze-wikibase-sitelinks-miraheze": "Wiki Miraheze"
 }

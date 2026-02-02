@@ -136,5 +136,6 @@
 	"vanishuser-log-name": "Dnevnik izginotij uporabnikov",
 	"vanishuser-log-header": "To je osnovni dnevnik vseh izginotij uporabnikov.",
 	"logentry-vanishuser-action": "$1 je izbrisal_a uporabnika.",
-	"echo-category-title-mirahezemagic-tech-notification": "Tehnično obvestilo"
+	"echo-category-title-mirahezemagic-tech-notification": "Tehnično obvestilo",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Obvesti me, ko pride do tehničnih sprememb, ki vplivajo na moj viki."
 }
