@@ -37,7 +37,7 @@
 	"group-member-member": "{{GENDER:$1|član|članica}}",
 	"group-oversight-member": "{{GENDER:$1|revizor|revizorka}}",
 	"group-oversight": "Revizori",
-	"group-patroller-member": "{{GENDER:$1|patrolac|patrolka}}",
+	"group-patroller-member": "{{GENDER:$1|patroler|patrolerka}}",
 	"group-patroller": "Patroleri",
 	"group-proxybot-member": "bot proksija",
 	"group-proxybot": "Bot proksija",
