@@ -9,6 +9,6 @@ class ForeignAPIRepoWithFixedUA extends ForeignAPIRepo {
 
 	public static function getUserAgent(): string {
 		$mediaWikiVersion = 'MediaWiki/' . MW_VERSION;
-		return "$mediaWikiVersion (https://miraheze.org/; tech@miraheze.org) ForeignAPIRepo/T400881";
+		return "$mediaWikiVersion (https://www.miraheze.org/; tech@miraheze.org) ForeignAPIRepo/T400881";
 	}
 }
