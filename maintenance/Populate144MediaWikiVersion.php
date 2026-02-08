@@ -6,7 +6,7 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
 use MirahezeFunctions;
 
-class Populate143MediaWikiVersion extends Maintenance {
+class Populate144MediaWikiVersion extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
@@ -20,8 +20,8 @@ class Populate143MediaWikiVersion extends Maintenance {
 		foreach ( $dbnames as $dbname ) {
 			$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 
-			// If it's 1.44 keep it, otherwise set 1.43
-			$newVersion = ( $oldVersion === '1.44' ) ? '1.44' : '1.43';
+			// If it's 1.45 keep it, otherwise set 1.44
+			$newVersion = ( $oldVersion === '1.45' ) ? '1.45' : '1.44';
 
 			if ( is_dir( "/srv/mediawiki/$newVersion" ) ) {
 				if ( $this->hasOption( 'dry-run' ) ) {
@@ -35,7 +35,7 @@ class Populate143MediaWikiVersion extends Maintenance {
 				$remoteWiki->setExtraFieldData(
 					'mediawiki-version',
 					$newVersion,
-					default: ( $oldVersion === '1.43' ? null : $oldVersion )
+					default: ( $oldVersion === '1.44' ? null : $oldVersion )
 				);
 
 				$remoteWiki->commit();
@@ -49,5 +49,5 @@ class Populate143MediaWikiVersion extends Maintenance {
 }
 
 // @codeCoverageIgnoreStart
-return Populate143MediaWikiVersion::class;
+return Populate144MediaWikiVersion::class;
 // @codeCoverageIgnoreEnd
