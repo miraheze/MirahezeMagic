@@ -11,6 +11,6 @@ class ForeignAPIRepoWithFixedUA extends ForeignAPIRepo {
 		global $wgDBname;
 
 		$mediaWikiVersion = MW_VERSION;
-		return "QuickInstantCommons/$mediaWikiVersion MediaWiki/$mediaWikiVersion $wgDBname (https://miraheze.org; tech@miraheze.org)"
+		return "QuickInstantCommons/$mediaWikiVersion MediaWiki/$mediaWikiVersion $wgDBname (https://miraheze.org; tech@miraheze.org)";
 	}
 }
