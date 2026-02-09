@@ -3,6 +3,7 @@
 		"authors": [
 			"Key0121",
 			"Kly",
+			"LowensteinYang",
 			"PB2008",
 			"WiiUf",
 			"Winston Sung",
@@ -27,7 +28,7 @@
 	"miraheze-createwiki-help-reason": "您可以隨意擴充此方框來便於編輯！（請留意此處未提供較精美的格式，像是粗體文字、可點擊連結等。）",
 	"miraheze-createwiki-help-subdomain": "這將是 wiki 的 URL。請確認這對於您的 wiki 來說會是唯一且非常見的 URL。您的資料庫名稱會以「wiki」作為結尾，例如：yoursubdomain -> yoursubdomainwiki（這可以事後更改）。",
 	"miraheze-createwiki-label-reason": "您需要告知我們您的 wiki 的「主題」（是關於什麼？）、wiki 的「範圍」（包含哪些內容？），以及任何其他您認為有幫助的資訊。這些資訊可以包括：\n* 如果是站台遷移，則為 wiki 指向到現有公共社群的連結，或者是 wiki 會涵蓋到內容的連結。\n* Wiki 可能涵蓋到哪些有爭議的內容，以及您將如何對其進行斟酌以確保其符合全域政策。\n* 假如 wiki 會涵蓋「NSFW」內容。內容政策中需要有一節專門針對此內容。\n* Wiki 是用於個人目的（您自己的作品，而不是記錄其他內容），或代表某個組織所創建，或是像 Discord 伺服器這種代表非 wiki 社群的站台。\n* 若您願意，請分享一些細節！例如是關於遊戲系列、特定地區、或是您的世界觀…\n\n有了這些訊息，我們就能判斷內容是否與 Miraheze 相容。只要內容清晰且相關，越詳細越好。內容長度可從兩句話到幾段簡短的段落不等，您可以根據自己的喜好編寫內容。\n\n'''請注意不要使用 ChatGPT 或任何其他 AI 模型：'''這些模型產出的內容很少足夠清晰或相關，並且增加了要求您用更具體的術語來重新表達或解釋的可能。\n\n----\n\n那麼，請至少用兩句話告訴我們您的 wiki 的主題和範圍…",
-	"miraheze-dberr-again": "請嘗試等待幾分鐘來重試，這些錯誤通常稍待後就會解決。若您持續收到錯誤訊息，請查看我們在推特上的頁面（https://twitter.com/Miraheze）。需要更多資訊或是聯絡我們，請透過加入 irc.libera.chat 上的 #miraheze-tech-ops，或是我們的 Discord 伺服器（https://discord.gg/TVAJTE4CUn）。",
+	"miraheze-dberr-again": "請嘗試等待幾分鐘來重試，這些錯誤通常稍待後就會解決。若您持續收到這個錯誤訊息，請加入irc.libera.chat上的 #miraheze-tech、或是我們的Discord伺服器（https://discord.gg/TVAJTE4CUn）以得到更多訊息。",
 	"miraheze-dberr-problems": "此 wiki 暫時不可用",
 	"miraheze-globalblocking-blockedtext-blocker-admin": "您可以聯絡$1討論封鎖問題。'''如果您要嘗試建立帳號，請僅使用[[M:Special:Contact/requestaccount|此表單]]來申請帳號。'''",
 	"miraheze-globalblocking-ipblocked-range": "'''您的 IP 位址已被 Miraheze [[m:Special:MyLanguage/Global blocks|全域封鎖]]。'''\n\n封鎖由$1（$2）做出。\n原因為''$3''。\n\n* 封鎖起始時間：$4 \n* 封鎖到期時間：$5 \n\n這個全域封鎖並非是特別針對您。在您的 IP 範圍內的某個使用者可能破壞了 Miraheze wiki，而導致被封鎖。另外，請注意 VPN 和其他類似服務在 Miraheze 上是[[m:Special:MyLanguage/No open proxies policy|不被允許]]的。如果您現在正在使用，請停用。若您需要進一步的幫助，請發送電子郵件給 cvt@miraheze.org，或是聯絡$1 .\n您現在的 IP 位址是 $6，被封鎖的範圍是 $7。請在您提出的任何查詢中，包含以上的所有詳細資訊。",
@@ -54,6 +55,6 @@
 	"miraheze-skinname-snapwikiskin": "Snap!",
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-uploadtext": "請使用以下的表單來上傳檔案。\n要查看或搜尋之前上傳的檔案，請前往[[Special:FileList|上傳檔案清單]]。上傳與重新上傳都會記錄在[[Special:Log/upload|上傳日誌]]裡。刪除則記錄在[[Special:Log/delete|刪除日誌]]。\n\n要在頁面裡包含檔案，請使用以下形式之一的連結：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong> 用來使用完整版本的檔案\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|Caption]]</nowiki></code></strong> 用來呈現出帶有 200 像素寬度檔案的左側方框，並在檔案下方有說明文字\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong> 用於連結到檔案但不顯示檔案內容\n\n請記得對上傳檔案添加適用的授權條款資訊。所有上傳檔案'''必須'''遵守美國版權法律以及合理使用。屢試的失敗可能會導致侵犯版權，以及'''關閉 wiki'''。",
-	"miraheze-webauthn-module-description": "WebAuthn（Web Authentication）是由全球資訊網協會（World Wide Web Consortium、W3C）發布的網路標準。WebAuthn 是在 FIDO 聯盟指引下的 FIDO2 專案之核心內容。該專案目的是要標準化基於網路應用程式且採用公鑰加密服務來驗證使用者的介面。[https://zh.wikipedia.org/wiki/WebAuthn 了解更多]。<br>'''請注意您需要在已註冊身分驗證器的 wiki 上登入'''。出於此原因，您可能會在 [[mh:meta|Meta]] 上註冊身分驗證器。",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze wiki"
+	"miraheze-webauthn-module-description": "WebAuthn（Web Authentication）是由全球資訊網協會（World Wide Web Consortium、W3C）發佈的網路標準。WebAuthn 是在FIDO聯盟指引下的FIDO2專案之核心內容。該專案目的是要標準化那個基於網路應用程式且採用公鑰加密服務來驗證使用者的介面。[https://zh.wikipedia.org/wiki/WebAuthn 了解更多]。",
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze維基"
 }
