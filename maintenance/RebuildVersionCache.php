@@ -181,7 +181,7 @@ class RebuildVersionCache extends Maintenance {
 				$repoName = $repoDir;
 			}
 
-			if ( strpos( $repoName, $realIP ) === 0 ) {
+			if ( str_starts_with( $repoName, $realIP ) ) {
 				// Strip MW_INSTALL_PATH from path
 				$repoName = substr( $repoName, strlen( $realIP ) );
 			}
