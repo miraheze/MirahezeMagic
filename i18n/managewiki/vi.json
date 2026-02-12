@@ -12,7 +12,7 @@
 	"managewiki-setting-wgAbuseFilterActions-help": "Các hành động có thể được thực hiện bởi Bộ lọc sai phạm. Khi thêm hành động mới, hãy kiểm tra xem hành động đó có bị hạn chế trong $wgAbuseFilterRestrictions không và nếu có, đừng quên thêm quyền abusefilter-modify-restricted vào nhóm người dùng phù hợp.",
 	"managewiki-setting-wgAutoBlockExpiry-name": "Hết hạn tự động cấm",
 	"managewiki-setting-wgAutoBlockExpiry-help": "Số giây trước khi lệnh tự động cấm hết hạn. Giá trị tối thiểu được phép là 0, trong khi giá trị tối đa là 10 năm (315360000).",
-	"managewiki-setting-wgBlockAllowsUTEdit-name": "Cho phép chặn người dùng để hạn chế quyền truy cập vào trang thảo luận",
+	"managewiki-setting-wgBlockAllowsUTEdit-name": "Cho phép cấm người dùng sửa trang thảo luận cá nhân",
 	"managewiki-setting-wgBlockAllowsUTEdit-help": "Cho phép người dùng chặn cấp quyền chỉnh sửa trang thảo luận cho người dùng bị chặn.",
 	"managewiki-setting-wgCookieSetOnAutoblock-name": "Sử dụng tập tin cookie cùng với tự động cấm",
 	"managewiki-setting-wgCookieSetOnAutoblock-help": "Xác định xem có nên đặt cookie khi người dùng bị tự động cấm hay không. Làm như vậy có nghĩa là người dùng bị cấm, ngay cả sau khi đăng xuất và chuyển đến địa chỉ IP mới, vẫn sẽ bị chặn.",
