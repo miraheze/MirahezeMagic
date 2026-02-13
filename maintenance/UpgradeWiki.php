@@ -235,6 +235,7 @@ class UpgradeWiki extends Maintenance {
 			$this->fatalError( "JSON file did not decode to an object: $filename" );
 		}
 
+		/** @phan-suppress-next-line PhanTypeMismatchReturnNullable */
 		return $data;
 	}
 }
