@@ -8,7 +8,7 @@ use const MW_VERSION;
 
 class ForeignAPIRepoWithFixedUA extends ForeignAPIRepo {
 
-	public static function getUserAgent(): string {
+	public function getUserAgent(): string {
 		$mediaWikiVersion = MW_VERSION;
 		$wikiId = WikiMap::getCurrentWikiId();
 		return "QuickInstantCommons/$mediaWikiVersion MediaWiki/$mediaWikiVersion $wikiId (https://miraheze.org; tech@miraheze.org)";
