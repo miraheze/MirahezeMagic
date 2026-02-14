@@ -23,9 +23,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @ingroup Wikimedia
  */
 
-use MailAddress;
 use MediaWiki\Content\TextContent;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Mail\MailAddress;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Message\Message;
 use MediaWiki\Revision\SlotRecord;
