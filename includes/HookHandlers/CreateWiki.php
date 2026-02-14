@@ -372,7 +372,7 @@ class CreateWiki implements
 			try {
 				$redis = new Redis();
 				$redis->connect( $hostAndPort[0], $hostAndPort[1] );
-				$redis->auth( $jobTypeConf['default']['redisConfig']['password'] );
+				$redis->auth( $jobTypeConf['default']['redisConfig']['password'] ?? '' );
 				$redis->del( $redis->keys( $key ) );
 			} catch ( Throwable ) {
 				// empty
