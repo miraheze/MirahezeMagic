@@ -5,7 +5,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 /**
  * JSON format:
  * {
- *   "mwversion": "1.45",
  *   "pre_patches": [
  *     "/path/to/a.sql",
  *     { "file": "/path/to/b.sql" }
@@ -81,16 +80,6 @@ class UpgradeWiki extends Maintenance {
 		$json = $this->loadJson( $jsonPath );
 
 		$this->output( "=== Running based on JSON '$jsonPath' for wiki '$wiki' ===\n" );
-		$mwVersion = $json['mwversion'] ?? null;
-		if ( $mwVersion !== null ) {
-			$this->output( "=== Switching MediaWiki version to $mwVersion for wiki '$wiki' ===\n" );
-			$this->runMaintenanceClass(
-				$wiki,
-				ChangeMediaWikiVersion::class,
-				[ 'mwversion' => $mwVersion ],
-				[]
-			);
-		}
 
 		$this->runPatchesSection( $wiki, $json, 'pre_patches', "=== Running pre-maintenance SQL patches ===\n" );
 		$this->runMaintenanceSection( $wiki, $json );
