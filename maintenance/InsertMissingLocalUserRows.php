@@ -66,7 +66,6 @@ class InsertMissingLocalUserRows extends Maintenance {
 					$dbr->expr( 'user_name', '!=', 'FuzzyBot' ),
 					$dbr->expr( 'user_name', '!=', 'Maintenance script' ),
 					$dbr->expr( 'user_name', '!=', 'MediaWiki message delivery' ),
-					$dbr->expr( 'user_name', '!=', 'Flow talk page manager' ),
 					$dbr->expr( 'user_name', '!=', 'Abuse filter' ),
 					$dbr->expr( 'user_name', '!=', 'ModerationUploadStash' ),
 					$dbr->expr( 'user_name', '!=', 'Delete page script' ),

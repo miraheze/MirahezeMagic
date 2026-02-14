@@ -41,7 +41,6 @@
 	"miraheze-grouppage-commentadmin": "m:Special:MyLanguage/User groups#{{int:Group-commentadmin}}",
 	"miraheze-grouppage-csmoderator": "m:Special:MyLanguage/User groups#{{int:Group-csmoderator}}",
 	"miraheze-grouppage-editor": "m:Special:MyLanguage/User groups#{{int:Group-editor}}",
-	"miraheze-grouppage-flow-bot": "m:Special:MyLanguage/User groups#{{int:Group-flow-bot}}",
 	"miraheze-grouppage-interface-admin": "m:Special:MyLanguage/User groups#{{int:Group-interface-admin}}",
 	"miraheze-grouppage-moderator": "m:Special:MyLanguage/User groups#{{int:Group-moderator}}",
 	"miraheze-grouppage-no-ipinfo": "m:Special:MyLanguage/User groups#{{int:Group-no-ipinfo}}",

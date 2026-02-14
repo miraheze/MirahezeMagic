@@ -111,7 +111,6 @@ class Main implements
 			'grouppage-commentadmin',
 			'grouppage-csmoderator',
 			'grouppage-editor',
-			'grouppage-flow-bot',
 			'grouppage-interface-admin',
 			'grouppage-moderator',
 			'grouppage-no-ipinfo',

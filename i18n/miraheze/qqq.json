@@ -17,7 +17,6 @@
 		]
 	},
 	"centralauth-groupname": "The name of group name in CentralAuth.",
-	"content-model-flow-board": "<!---->",
 	"datadump-namespaceselect-label": "{{Identical|Namespace}}",
 	"extensions-antispam": "Spam prevention",
 	"extensions-api": "{{optional}}\n{{identical|API}}",
