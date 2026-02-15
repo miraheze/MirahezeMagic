@@ -117,7 +117,7 @@ class RequestWiki implements
 				'type' => 'check',
 				'section' => 'editing',
 				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
-				'default' => $wikiRequestManager->getExtraFieldData( 'nsfwtext' ),
+				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw-primary' ),
 			]
 		);
 
