@@ -136,7 +136,7 @@
 	"requestwiki-help-nsfw": "A wiki includes content that not safe for work (NSFW) if it includes graphic discussion of sex (either text or media content) or content which is otherwise inappropriate for those under the age of 18.",
 	"requestwiki-label-nsfwtext": "Please give us more details about the type of NSFW content that your wiki will contain",
 	"requestwiki-label-nsfw-primary": "This wiki primarily focuses on content that is not safe to work (NSFW)",
-	"requestwiki-help-nsfw-primary": "A wiki primarily focuses on NSFW content if its main scope covers material usually marked as NSFW (a book, movies, games, etc), is a wiki where most content itself is NSFW, or otherwise focuses on content which would typically fall under an age confirmation or separation in casual settings. It does not mean cases where the wiki occasionally covers NSFW material as part of a larger work or subject."
+	"requestwiki-help-nsfw-primary": "A wiki primarily focuses on NSFW content if its main scope covers material usually marked as NSFW (a book, movies, games, etc), is a wiki where most content itself is NSFW, or otherwise focuses on content which would typically fall under an age confirmation or separation in casual settings. It does not mean cases where the wiki occasionally covers NSFW material as part of a larger work or subject.",
 	"requestwiki-label-source": "This wiki is moving or forking from an existing wiki",
 	"requestwiki-label-sourceurl": "Enter the full URL of the source wiki (the wiki you are moving or forking from)",
 	"restriction-delete": "Delete",
