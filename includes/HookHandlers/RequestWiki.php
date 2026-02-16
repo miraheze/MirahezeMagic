@@ -3,6 +3,7 @@
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\User\User;
+use Miraheze\CreateWiki\Hooks\CreateWikiCreationExtraFieldsHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiFormDescriptorModifyHook;
 use Miraheze\CreateWiki\Hooks\RequestWikiQueueFormDescriptorModifyHook;
 use Miraheze\CreateWiki\RequestWiki\FormFields\DetailsWithIconField;
@@ -10,6 +11,7 @@ use Miraheze\CreateWiki\RequestWiki\RequestWikiFormUtils;
 use Miraheze\CreateWiki\Services\WikiRequestManager;
 
 class RequestWiki implements
+	CreateWikiCreationExtraFieldsHook,
 	RequestWikiFormDescriptorModifyHook,
 	RequestWikiQueueFormDescriptorModifyHook
 {
@@ -35,6 +37,18 @@ class RequestWiki implements
 				'label-message' => 'requestwiki-label-nsfwtext',
 				'hide-if' => [ '!==', 'nsfw', '1' ],
 				'type' => 'text',
+			]
+		);
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
+			afterKey: 'nsfwtext',
+			newKey: 'nsfw-primary',
+			newField: [
+				'label-message' => 'requestwiki-label-nsfw-primary',
+				'help-message' => 'requestwiki-help-nsfw-primary',
+				'hide-if' => [ '!==', 'nsfw', '1' ],
+				'type' => 'check',
 			]
 		);
 
@@ -96,6 +110,19 @@ class RequestWiki implements
 
 		RequestWikiFormUtils::insertFieldAfter(
 			$formDescriptor,
+			afterKey: 'edit-nsfwtext',
+			newKey: 'edit-nsfw-primary',
+			newField: [
+				'label-message' => 'requestwiki-label-nsfw-primary',
+				'type' => 'check',
+				'section' => 'editing',
+				'hide-if' => [ '!==', 'edit-nsfw', '1' ],
+				'default' => $wikiRequestManager->getExtraFieldData( 'nsfw-primary' ),
+			]
+		);
+
+		RequestWikiFormUtils::insertFieldAfter(
+			$formDescriptor,
 			afterKey: 'edit-purpose',
 			newKey: 'edit-source',
 			newField: [
@@ -142,5 +169,9 @@ class RequestWiki implements
 				'section' => 'details',
 			]
 		);
+	}
+
+	public function onCreateWikiCreationExtraFields( array &$extraFields ): void {
+		$extraFields[] = 'nsfw-primary';
 	}
 }
