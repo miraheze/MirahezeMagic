@@ -2,6 +2,9 @@
 	"name": "miraheze/mirahezemagic",
 	"description": "",
 	"license": "GPL-3.0-or-later",
+    "require": {
+        "opensearch-project/opensearch-php": "~2"
+	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "50.0.0",
 		"mediawiki/mediawiki-phan-config": "0.19.0",
