@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"0x48fe75df30",
 			"94rain",
 			"A Chinese Wikipedian",
 			"A Retired User",
@@ -132,8 +133,10 @@
 	"requestcustomdomain-text": "感谢您选择Miraheze！\n\n开始之前，请务必阅读[[Custom domains|自定义域名]]。在提交自定义域名申请之前，您的域名解析必须正确指向所要求的目标。请注意，只有在您的wiki建立请求得到批准并成功创建后，您才能申请自定义域名。\n\n在大多数情况下，只要您的域名配置正确，并且您是wiki管理员，您的自定义域名应该可以在一分钟或更短的时间内完成配置。如果出现错误，或者您想请求重定向，请在[[Phorge]]上创建工单。",
 	"requestimport-text": "欢迎使用 RequestImport！要开始导入，请填写此表单，以便我们审核您的请求。技术团队成员或管理员将审核您的 wiki 请求，您可以在提交请求时提供的页面上跟踪请求。\n\n如果您在此处的上传超时或失败，请在 [[Phorge]] 上创建任务。\n\n如果您还想导入图像，请在 [[Phorge]] 上创建任务。",
 	"requestwiki-label-nsfw": "本wiki包含不适合工作场合 (NSFW) 的内容",
-	"requestwiki-help-nsfw": "如果wiki包含关于性的露骨讨论（无论是文本还是媒体内容）或者其他不适合18岁以下人士的内容，那么该wiki就不适合工作场合（NSFW）。",
+	"requestwiki-help-nsfw": "若某个wiki包含露骨的性讨论（无论是文本还是媒体形式），或其他不适合18岁以下人士观看的内容，则该wiki即包含不适合工作场合（NSFW）的内容。",
 	"requestwiki-label-nsfwtext": "请向我们提供有关您的wiki将包含的NSFW内容类型的更多详细信息",
+	"requestwiki-label-nsfw-primary": "本wiki主要关注不适合工作场合 (NSFW) 的内容",
+	"requestwiki-help-nsfw-primary": "如果一个wiki的主要内容涵盖通常被标记为NSFW（不适宜工作场所观看）的材料（例如书籍、电影、游戏等），或者其大部分内容本身NSFW，或者其内容一般需要经过年龄确认或分类，那么该wiki主要聚焦于NSFW内容。但这并不涵盖该wiki只是偶尔将NSFW材料作为其更大作品或主题的一部分的情况。",
 	"requestwiki-label-source": "此wiki正在移动或从现有wiki分叉",
 	"requestwiki-label-sourceurl": "输入源wiki（您要移动或分叉的wiki）的完整URL",
 	"restriction-delete": "删除",
