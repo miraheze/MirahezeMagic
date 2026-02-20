@@ -126,6 +126,9 @@
 		"SkinAddFooterLinks": {
 			"handler": "Main"
 		},
+		"SpecialPageBeforeExecuteHook": {
+			"handler": "Main"
+		},
 		"TitleReadWhitelist": {
 			"handler": "Main"
 		},
@@ -177,7 +180,8 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"HttpRequestFactory"
+				"HttpRequestFactory",
+				"PermissionManager"
 			]
 		},
         "ManageWiki": {

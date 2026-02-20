@@ -109,6 +109,8 @@
 	"miraheze-categories": "Categories",
 	"miraheze-donate": "Donate to Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
+	"miraheze-emailuser-disabled-title": "Emailing users is disabled",
+	"miraheze-emailuser-disabled-message": "Due to local laws and regulations (notably in Australia and the UK), EmailUser is disabled in your jurisdiction. If you need to contact another Miraheze user, please try using their talk page",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Miraheze Help Center",
 	"miraheze-label-managewiki-article-path": "Article path",
