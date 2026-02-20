@@ -235,8 +235,12 @@ class Main implements
 		}
 	}
 
-	/** @inheritDoc */
-	public function onSpecialPageBeforeExecuteHook( SpecialPage $special, $subPage ) {
+	/**
+	 * @inheritDoc
+	 * @param ?string $subPage @phan-unused-param
+	 * @throws ErrorPageError If the user is not allowed to send emails
+	 */
+	public function onSpecialPageBeforeExecute( SpecialPage $special, $subPage ) {
 		if ( !( $special instanceof SpecialEmailUser ) ) {
 			return true;
 		}
