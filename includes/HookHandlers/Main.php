@@ -26,7 +26,6 @@ use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Skin\Skin;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
-use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Specials\SpecialEmailUser;
 use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
