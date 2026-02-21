@@ -3,15 +3,12 @@
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Exception\ErrorPageError;
-use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use MediaWiki\Specials\SpecialEmailUser;
 
 class Specials implements SpecialPageBeforeExecuteHook {
 
-	public function __construct(
-		private readonly PermissionManager $permissionManager,
-	) {
+	public function __construct() {
 	}
 
 	/**
@@ -24,7 +21,7 @@ class Specials implements SpecialPageBeforeExecuteHook {
 			return true;
 		}
 
-		if ( $this->permissionManager->userHasRight( $special->getUser(), 'sendemail' ) ) {
+		if ( $special->getAuthority()->isAllowed( 'sendemail' ) ) {
 			return true;
 		}
 
