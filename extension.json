@@ -192,7 +192,7 @@
 
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
-		}
+		},
 		"Specials": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Specials",
 			"services": [
