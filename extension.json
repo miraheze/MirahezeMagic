@@ -126,7 +126,7 @@
 		"SkinAddFooterLinks": {
 			"handler": "Main"
 		},
-		"SpecialPageBeforeExecuteHook": {
+		"SpecialPageBeforeExecute": {
 			"handler": "Main"
 		},
 		"TitleReadWhitelist": {
