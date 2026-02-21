@@ -9,7 +9,6 @@ use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
-use MediaWiki\Exception\ErrorPageError;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Hook\BlockIpCompleteHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
@@ -22,11 +21,8 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
-use MediaWiki\Permissions\PermissionManager;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Skin\Skin;
-use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
-use MediaWiki\Specials\SpecialEmailUser;
 use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
 use MessageCache;
@@ -40,26 +36,22 @@ class Main implements
 	RecentChange_saveHook,
 	SiteNoticeAfterHook,
 	SkinAddFooterLinksHook,
-	SpecialPageBeforeExecuteHook,
 	TitleReadWhitelistHook,
 	UserGetRightsRemoveHook
 {
 
 	public function __construct(
 		private readonly HttpRequestFactory $httpRequestFactory,
-		private readonly PermissionManager $permissionManager,
 		private readonly ServiceOptions $options
 	) {
 	}
 
 	public static function factory(
 		Config $mainConfig,
-		HttpRequestFactory $httpRequestFactory,
-		PermissionManager $permissionManager,
+		HttpRequestFactory $httpRequestFactory
 	): self {
 		return new self(
 			$httpRequestFactory,
-			$permissionManager,
 			new ServiceOptions(
 				[
 					'MirahezeMagicAccessIdsMap',
@@ -232,23 +224,6 @@ class Main implements
 			$footerItems['termsofservice'] = $this->addFooterLink( $skin, 'termsofservice', 'termsofservicepage' );
 			$footerItems['donate'] = $this->addFooterLink( $skin, 'miraheze-donate', 'miraheze-donatepage' );
 		}
-	}
-
-	/**
-	 * @inheritDoc
-	 * @param string|null $subPage @phan-unused-param
-	 * @throws ErrorPageError If the user is not allowed to send emails
-	 */
-	public function onSpecialPageBeforeExecute( $special, $subPage ) {
-		if ( !( $special instanceof SpecialEmailUser ) ) {
-			return true;
-		}
-
-		if ( $this->permissionManager->userHasRight( $special->getUser(), 'sendemail' ) ) {
-			return true;
-		}
-
-		throw new ErrorPageError( 'miraheze-emailuser-disabled-title', 'miraheze-emailuser-disabled-message' );
 	}
 
 	/** @inheritDoc */

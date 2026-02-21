@@ -127,7 +127,7 @@
 			"handler": "Main"
 		},
 		"SpecialPageBeforeExecute": {
-			"handler": "Main"
+			"handler": "Specials"
 		},
 		"TitleReadWhitelist": {
 			"handler": "Main"
@@ -180,8 +180,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"HttpRequestFactory",
-				"PermissionManager"
+				"HttpRequestFactory"
 			]
 		},
         "ManageWiki": {
@@ -194,6 +193,12 @@
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
 		}
+		"Specials": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Specials",
+			"services": [
+				"PermissionManager"
+			]
+		},
 	},
 	"config": {
 		"MirahezeMagicAccessIdsMap": {
