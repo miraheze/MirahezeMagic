@@ -126,6 +126,9 @@
 		"SkinAddFooterLinks": {
 			"handler": "Main"
 		},
+		"SpecialPageBeforeExecute": {
+			"handler": "Specials"
+		},
 		"TitleReadWhitelist": {
 			"handler": "Main"
 		},
@@ -189,6 +192,9 @@
 
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
+		},
+		"Specials": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Specials"
 		}
 	},
 	"config": {
