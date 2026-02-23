@@ -6,6 +6,7 @@
 			"Buntschann",
 			"Chqaz",
 			"Funa-enpitu",
+			"Gurio318",
 			"Kkairri",
 			"Kokage si",
 			"LaMagiaaa",
@@ -155,5 +156,6 @@
 	"vanishuser-warning": "'''警告''': 利用者をグローバルに抹消しようとしています。続行する前に、すべての詳細を注意深く確認してください。",
 	"vanishuser-log-name": "利用者抹消記録",
 	"vanishuser-log-header": "これは、すべての利用者の抹消に関する記録です。",
-	"logentry-vanishuser-action": "$1 が利用者を抹消しました。"
+	"logentry-vanishuser-action": "$1 が利用者を抹消しました。",
+	"echo-category-title-mirahezemagic-tech-notification": "投稿通知"
 }

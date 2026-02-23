@@ -73,6 +73,8 @@
 	"group-wikimanager": "Gestores de wiki",
 	"miraheze-categories": "Categorias",
 	"miraheze-donate": "Donar a Miraheze",
+	"miraheze-emailuser-disabled-title": "Le invio de e-mail a usatores es disactivate",
+	"miraheze-emailuser-disabled-message": "A causa de leges e regulationes local in alcun jurisdictiones, ‘Inviar e-mail al usator’ ha essite disactivate. Si tu debe contactar un altere usator, per favor tenta usar su pagina de discussion.",
 	"miraheze-faq": "FAQ",
 	"miraheze-helpcenter": "Centro de adjuta de Miraheze",
 	"miraheze-label-managewiki-article-path": "Percurso al articulo",
