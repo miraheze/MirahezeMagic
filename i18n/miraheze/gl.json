@@ -74,6 +74,8 @@
 	"group-wikimanager": "Administradores de wikis",
 	"miraheze-categories": "Categorías",
 	"miraheze-donate": "Doar a Miraheze",
+	"miraheze-emailuser-disabled-title": "O envío de correos electrónicos aos usuarios está desactivado",
+	"miraheze-emailuser-disabled-message": "Debido ás leis e regulamentos locais nalgunhas xurisdicións, desactivouse o envío de correos electrónicos. Se necesitas contactar con outro usuario, utiliza a súa páxina de conversa.",
 	"miraheze-faq": "Preguntas frecuentes",
 	"miraheze-helpcenter": "Centro de axuda de Miraheze",
 	"miraheze-label-managewiki-article-path": "Ruta do artigo",
