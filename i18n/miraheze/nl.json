@@ -82,6 +82,8 @@
 	"group-wikimanager": "Wiki-beheerders",
 	"miraheze-categories": "Categorieën",
 	"miraheze-donate": "Doneer aan Miraheze",
+	"miraheze-emailuser-disabled-title": "Het versturen van e-mails naar gebruikers is uitgeschakeld",
+	"miraheze-emailuser-disabled-message": "Vanwege lokale wet- en regelgeving in sommige rechtsgebieden is EmailUser uitgeschakeld. Als u contact wilt opnemen met een andere gebruiker, probeer dan hun overlegpagina te gebruiken.",
 	"miraheze-faq": "Vraag en antwoord",
 	"miraheze-helpcenter": "Miraheze-helpcentrum",
 	"miraheze-label-managewiki-article-path": "Artikelpad",
