@@ -55,6 +55,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionRegistry;
 use MwSql;
 use function basename;
 use function class_exists;
@@ -99,6 +100,12 @@ class UpgradeWiki extends Maintenance {
 
 		$this->output( $header );
 		foreach ( $items as $item ) {
+			$requiredExtension = $item['if_extension_enabled'] ?? null;
+			if ( $requiredExtension !== null && !$this->hasExtension( $requiredExtension ) ) {
+				$this->output( "==> Skipping SQL: required extension '$requiredExtension' not enabled\n" );
+				continue;
+			}
+
 			$filename = $this->normalizePatchItemToFilename( $item, $key );
 			$this->runSqlFile( $wiki, $filename );
 		}
@@ -118,6 +125,12 @@ class UpgradeWiki extends Maintenance {
 		foreach ( $items as $idx => $item ) {
 			if ( !is_array( $item ) ) {
 				$this->fatalError( "maintenance[$idx] must be an object." );
+			}
+
+			$requiredExtension = $item['if_extension_enabled'] ?? null;
+			if ( $requiredExtension !== null && !$this->hasExtension( $requiredExtension ) ) {
+				$this->output( "==> Skipping maintenance: required extension '$requiredExtension' not enabled\n" );
+				continue;
 			}
 
 			$class = $item['class'] ?? null;
@@ -190,6 +203,10 @@ class UpgradeWiki extends Maintenance {
 		}
 
 		$maint->execute();
+	}
+
+	private function hasExtension( string $name ): bool {
+		return ExtensionRegistry::getInstance()->isEnabled( $name );
 	}
 
 	private function hasOptionKey( array $options, string $key ): bool {
