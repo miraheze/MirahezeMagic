@@ -206,7 +206,7 @@ class UpgradeWiki extends Maintenance {
 	}
 
 	private function hasExtension( string $name ): bool {
-		return ExtensionRegistry::getInstance()->isEnabled( $name );
+		return ExtensionRegistry::getInstance()->isLoaded( $name );
 	}
 
 	private function hasOptionKey( array $options, string $key ): bool {
