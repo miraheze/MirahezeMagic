@@ -12,14 +12,11 @@ class PopulateMediaWikiVersion extends Maintenance {
 		parent::__construct();
 
 		$this->addOption( 'dry-run', 'Performs a dry run without making any changes.' );
-		$this->addOption( 'old-version', 'The MediaWiki version to replace', true );
 		$this->addOption( 'new-version', 'The MediaWiki version to set', true );
 	}
 
 	public function execute() {
-		$oldVersion = $this->getOption( 'old-version' );
 		$newVersion = $this->getOption( 'new-version' );
-
 		if ( !is_dir( "/srv/mediawiki/$newVersion" ) ) {
 			$this->fatalError( "Folder /srv/mediawiki/$newVersion does not exist. Aborting." );
 		}
