@@ -58,7 +58,7 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 	protected function getUpdateKey(): string {
 		$jsonPath = $this->getOption( 'json' );
 		$json = $this->loadJson( $jsonPath );
-		return 'upgrade-wiki-' . $json['mwversion'];
+		return "upgrade-wiki-{$json['mwversion']}";
 	}
 
 	public function updateSkippedMessage(): string {
