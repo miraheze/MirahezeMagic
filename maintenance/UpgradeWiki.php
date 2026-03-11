@@ -3,35 +3,7 @@
 namespace Miraheze\MirahezeMagic\Maintenance;
 
 /**
- * JSON format:
- * {
- *   "pre_patches": [
- *     "/path/to/a.sql",
- *     { "file": "/path/to/b.sql" }
- *   ],
- *   "maintenance": [
- *     {
- *       "class": "Miraheze\\MirahezeMagic\\Maintenance\\ChangeMediaWikiVersion",
- *       "options": { "mwversion": "1.45" }
- *     },
- *     {
- *       "class": "MediaWiki\\Extension\\CentralAuth\\Maintenance\\FixRenameUserLocalLogs",
- *       "options": { "logwiki": "metawiki", "fix": true }
- *     }
- *   ],
- *   "post_patches": [
- *     "/path/to/after.sql"
- *   ]
- * }
- *
- * Notes:
- * - The runner always injects wiki context into child scripts:
- *   - 'wikidb' is set for MwSql
- *   - 'wiki' is set for maintenance scripts (unless you override it explicitly)
- * - For maintenance scripts:
- *   - "class" is required
- *   - "options" is optional (key => value)
- *   - "args" is optional (array of positional args)
+ * See https://meta.miraheze.org/wiki/Tech:Upgrading_MediaWiki for documentation.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -51,12 +23,13 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @file
  * @ingroup MirahezeMagic
  * @author Universal Omega
- * @version 1.0
+ * @version 2.0
  */
 
 use MediaWiki\Exception\MWExceptionHandler;
 use MediaWiki\Http\Telemetry;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Registration\ExtensionRegistry;
 use MwSql;
@@ -73,7 +46,7 @@ use function is_string;
 use function json_decode;
 use const FILE_APPEND;
 
-class UpgradeWiki extends Maintenance {
+class UpgradeWiki extends LoggedUpdateMaintenance {
 
 	public function __construct() {
 		parent::__construct();
@@ -82,7 +55,20 @@ class UpgradeWiki extends Maintenance {
 		$this->requireExtension( 'MirahezeMagic' );
 	}
 
-	public function execute() {
+	protected function getUpdateKey(): string {
+		$jsonPath = $this->getOption( 'json' );
+		$json = $this->loadJson( $jsonPath );
+		return "upgrade-wiki-{$json['mwversion']}";
+	}
+
+	public function updateSkippedMessage(): string {
+		$wiki = $this->getOption( 'wiki' );
+		$jsonPath = $this->getOption( 'json' );
+		$json = $this->loadJson( $jsonPath );
+		return "$wiki has already been upgraded to {$json['mwversion']}.";
+	}
+
+	protected function doDBUpdates(): bool {
 		$wiki = $this->getOption( 'wiki' );
 		$jsonPath = $this->getOption( 'json' );
 		$json = $this->loadJson( $jsonPath );
@@ -94,6 +80,7 @@ class UpgradeWiki extends Maintenance {
 			$this->runMaintenanceSection( $wiki, $json );
 			$this->runPatchesSection( $wiki, $json, 'post_patches', "=== Running post-maintenance SQL patches ===\n" );
 			$this->output( "All steps completed.\n" );
+			return true;
 		} catch ( Throwable $t ) {
 			MWExceptionHandler::rollbackPrimaryChangesAndLog( $t );
 			$this->logToFile( $t, $wiki );
@@ -104,7 +91,8 @@ class UpgradeWiki extends Maintenance {
 				'wiki' => $wiki,
 			] );
 
-			$this->fatalError( "Upgrade failed: {$t->getMessage()}" );
+			$this->error( "Upgrade failed: {$t->getMessage()}" );
+			return false;
 		}
 	}
 
@@ -196,6 +184,7 @@ class UpgradeWiki extends Maintenance {
 
 		/** @var Maintenance $maint */
 		$maint = new $class();
+		'@phan-var Maintenance $maint';
 		if ( !$this->hasOptionKey( $options, 'wiki' ) ) {
 			$maint->setOption( 'wiki', $wiki );
 		}
