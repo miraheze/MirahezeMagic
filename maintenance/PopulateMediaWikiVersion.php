@@ -12,11 +12,14 @@ class PopulateMediaWikiVersion extends Maintenance {
 		parent::__construct();
 
 		$this->addOption( 'dry-run', 'Performs a dry run without making any changes.' );
-		$this->addOption( 'new-version', 'The MediaWiki version to set', true );
+		$this->addOption( 'old-version', 'The MediaWiki version to set', true );
+		$this->addOption( 'new-version', 'The MediaWiki version to keep', true );
 	}
 
 	public function execute() {
+		$oldVersion = $this->getOption( 'old-version' );
 		$newVersion = $this->getOption( 'new-version' );
+
 		if ( !is_dir( "/srv/mediawiki/$newVersion" ) ) {
 			$this->fatalError( "Folder /srv/mediawiki/$newVersion does not exist. Aborting." );
 		}
@@ -40,7 +43,7 @@ class PopulateMediaWikiVersion extends Maintenance {
 
 			$remoteWiki->setExtraFieldData(
 				'mediawiki-version',
-				$newVersion,
+				$oldVersion,
 				default: null
 			);
 
