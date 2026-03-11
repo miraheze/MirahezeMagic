@@ -184,6 +184,7 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 
 		/** @var Maintenance $maint */
 		$maint = new $class();
+		'@phan-var Maintenance $maint';
 		if ( !$this->hasOptionKey( $options, 'wiki' ) ) {
 			$maint->setOption( 'wiki', $wiki );
 		}
