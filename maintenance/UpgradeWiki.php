@@ -109,7 +109,7 @@ class UpgradeWiki extends Maintenance {
 	}
 
 	private function logToFile( Throwable $t, string $wiki ): void {
-		$logFile = '/var/log/mediawiki/upgradewiki.log';
+		$logFile = '/var/log/mediawiki/UpgradeWiki-exceptions.log';
 		$requestId = Telemetry::getInstance()->getRequestId();
 		$time = date( 'Y-m-d H:i:s' );
 		$message = "$wiki [$requestId $time] UpgradeWiki exception\n$t\n\n";
