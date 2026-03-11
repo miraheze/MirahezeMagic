@@ -54,17 +54,24 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
+use MediaWiki\Exception\MWExceptionHandler;
+use MediaWiki\Http\Telemetry;
+use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Registration\ExtensionRegistry;
 use MwSql;
+use Throwable;
 use function basename;
 use function class_exists;
+use function date;
 use function file_get_contents;
+use function file_put_contents;
 use function is_array;
 use function is_bool;
 use function is_int;
 use function is_string;
 use function json_decode;
+use const FILE_APPEND;
 
 class UpgradeWiki extends Maintenance {
 
@@ -82,10 +89,31 @@ class UpgradeWiki extends Maintenance {
 
 		$this->output( "=== Running based on JSON '$jsonPath' for wiki '$wiki' ===\n" );
 
-		$this->runPatchesSection( $wiki, $json, 'pre_patches', "=== Running pre-maintenance SQL patches ===\n" );
-		$this->runMaintenanceSection( $wiki, $json );
-		$this->runPatchesSection( $wiki, $json, 'post_patches', "=== Running post-maintenance SQL patches ===\n" );
-		$this->output( "All steps completed.\n" );
+		try {
+			$this->runPatchesSection( $wiki, $json, 'pre_patches', "=== Running pre-maintenance SQL patches ===\n" );
+			$this->runMaintenanceSection( $wiki, $json );
+			$this->runPatchesSection( $wiki, $json, 'post_patches', "=== Running post-maintenance SQL patches ===\n" );
+			$this->output( "All steps completed.\n" );
+		} catch ( Throwable $t ) {
+			MWExceptionHandler::rollbackPrimaryChangesAndLog( $t );
+			$this->logToFile( $t, $wiki );
+			$logger = LoggerFactory::getInstance( 'UpgradeWiki' );
+			$logger->critical( 'UpgradeWiki failed on {wiki}: {message}', [
+				'exception' => $t,
+				'message' => $t->getMessage(),
+				'wiki' => $wiki,
+			] );
+
+			$this->fatalError( "Upgrade failed: {$t->getMessage()}" );
+		}
+	}
+
+	private function logToFile( Throwable $t, string $wiki ): void {
+		$logFile = '/var/log/mediawiki/debuglogs/UpgradeWiki-exceptions.log';
+		$requestId = Telemetry::getInstance()->getRequestId();
+		$time = date( 'Y-m-d H:i:s' );
+		$message = "$wiki [$requestId $time] UpgradeWiki exception\n$t\n\n";
+		file_put_contents( $logFile, $message, FILE_APPEND );
 	}
 
 	private function runPatchesSection( string $wiki, array $json, string $key, string $header ): void {
