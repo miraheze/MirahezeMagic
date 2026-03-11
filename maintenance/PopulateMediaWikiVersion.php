@@ -4,7 +4,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
-use MirahezeFunctions;
 
 class PopulateMediaWikiVersion extends Maintenance {
 
@@ -30,27 +29,25 @@ class PopulateMediaWikiVersion extends Maintenance {
 		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
 
 		foreach ( $dbnames as $dbname ) {
-			$currentVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
-			if ( $currentVersion === $newVersion ) {
+			$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
+			$remoteWiki->disableResetDatabaseLists();
+
+			$currentVersion = $remoteWiki->getExtraFieldData( 'mediawiki-version', default: null );
+			if ( $currentVersion === $oldVersion || $currentVersion === $newVersion ) {
 				continue;
 			}
 
 			if ( $this->hasOption( 'dry-run' ) ) {
-				$this->output( "Dry run: Would update $dbname from $currentVersion to $newVersion\n" );
+				$this->output( "Dry run: Would set mediawiki-version for $dbname to $oldVersion\n" );
 				continue;
 			}
 
-			$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
-			$remoteWiki->disableResetDatabaseLists();
-
 			$remoteWiki->setExtraFieldData(
-				'mediawiki-version',
-				$oldVersion,
-				default: null
+				'mediawiki-version', $oldVersion, default: null
 			);
 
 			$remoteWiki->commit();
-			$this->output( "Updated $dbname from $currentVersion to $newVersion\n" );
+			$this->output( "Set mediawiki-version for $dbname to $oldVersion\n" );
 		}
 
 		$dataStore = $this->getServiceContainer()->get( 'CreateWikiDataStore' );
