@@ -96,21 +96,23 @@ class UpgradeWiki extends Maintenance {
 			$this->output( "All steps completed.\n" );
 		} catch ( Throwable $t ) {
 			MWExceptionHandler::rollbackPrimaryChangesAndLog( $t );
-			$this->logToFile( $t );
+			$this->logToFile( $t, $wiki );
 			$logger = LoggerFactory::getInstance( 'UpgradeWiki' );
-			$logger->critical( $t->getMessage(),
-				[ 'exception' => $t ]
-			);
+			$logger->critical( 'UpgradeWiki failed on {wiki}: {message}', [
+				'exception' => $t,
+				'message' => $t->getMessage(),
+				'wiki' => $wiki,
+			] );
 
 			$this->fatalError( "Upgrade failed: {$t->getMessage()}" );
 		}
 	}
 
-	private function logToFile( Throwable $t ): void {
+	private function logToFile( Throwable $t, string $wiki ): void {
 		$logFile = '/var/log/mediawiki/upgradewiki.log';
 		$requestId = Telemetry::getInstance()->getRequestId();
 		$time = date( 'Y-m-d H:i:s' );
-		$message = "[$requestId $time] UpgradeWiki exception\n$t\n\n";
+		$message = "$wiki [$requestId $time] UpgradeWiki exception\n$t\n\n";
 		file_put_contents( $logFile, $message, FILE_APPEND );
 	}
 
