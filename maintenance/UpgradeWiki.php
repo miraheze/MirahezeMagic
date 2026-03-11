@@ -98,7 +98,7 @@ class UpgradeWiki extends Maintenance {
 			MWExceptionHandler::rollbackPrimaryChangesAndLog( $t );
 			$this->logToFile( $t );
 			$logger = LoggerFactory::getInstance( 'UpgradeWiki' );
-			$logger->error( 'UpgradeWiki failed',
+			$logger->critical( 'UpgradeWiki failed',
 				[ 'exception' => $t ]
 			);
 
