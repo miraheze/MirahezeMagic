@@ -354,6 +354,7 @@ class Main implements
 					'username' => $block->getTargetName(),
 					'reporter' => $user->getName(),
 					'report' => 'people-other',
+					'auto' => true,
 					'evidence' => 'This is an automatic report. A user was blocked on ' . WikiMap::getCurrentWikiId() . ', and the block matched keyword "' . $keyword . '." The block ID is: ' . $block->getId() . ', and the block reason is: ' . $block->getReasonComment()->text,
 				];
 
