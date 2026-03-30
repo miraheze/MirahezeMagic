@@ -51,8 +51,8 @@
 	"miraheze-categories": "Kategorije",
 	"miraheze-faq": "ČPP",
 	"miraheze-helpcenter": "Miraheze-ov centar pomoći",
-	"miraheze-requestfeatures": "Zahtjev za funkcije na vikiju",
-	"miraheze-requestwiki": "Zatraži viki",
+	"miraheze-requestfeatures": "Zahtjev za funkcije na wikiju",
+	"miraheze-requestwiki": "Zatraži wiki",
 	"miraheze-sidebar-donate": "Doniraj",
 	"miraheze-sitenotice-learnmore": "Saznajte više",
 	"mirahezemagic-description": "MediaWiki poruke, skripte i kuke, namijenjene za Miraheze",
@@ -74,8 +74,8 @@
 	"settings-recentchanges": "Nedavne izmjene",
 	"settings-styling": "Stil",
 	"shared-repo-name-mirahezecommons": "Miraheze Ostava",
-	"sitematrix-others": "Drugi Miraheze vikiji",
-	"sitematrix-summary": "Ova posebna stranica navodi sve Miraheze vikije.",
-	"sitematrix": "Lista Miraheze vikija",
+	"sitematrix-others": "Drugi Miraheze wikiji",
+	"sitematrix-summary": "Ova posebna stranica navodi sve Miraheze wikije.",
+	"sitematrix": "Lista Miraheze wikija",
 	"termsofservice": "Uslovi korišćenja"
 }
