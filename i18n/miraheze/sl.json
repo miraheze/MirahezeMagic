@@ -60,7 +60,7 @@
 	"group-steward": "Upravniki",
 	"group-techteam-member": "{{GENDER:$1|član tehnične ekipe|članica tehnične ekipe|član_ica tehnične ekipe}}",
 	"group-techteam": "Člani tehnične ekipe",
-	"group-translationadmin-member": "{{GENDER:$1|administrator prevajanja|administratorka prevajanja|administrator_ka prevajanja}}",
+	"group-translationadmin-member": "{{GENDER:$1|upravitelj prevodov|upraviteljica prevodov|upravitelj_ica prevodov}}",
 	"group-translationadmin": "Administratorji prevajanja",
 	"group-translator-member": "{{GENDER:$1|prevajalec|prevajalka|prevajalec_ka}}",
 	"group-translator": "Prevajalci",
