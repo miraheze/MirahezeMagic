@@ -32,22 +32,28 @@ class NoFollow implements
 	}
 
 	private function checkArrayForLinks( array &$items ): void {
-		foreach ( $items as $key => &$item ) {
+		foreach ( $items as &$item ) {
 			if ( $this->needsNoFollow( $item['href'] ?? '' ) ) {
 				$this->addNoFollow( $item );
 			}
 		}
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param $skin @phan-unused-param
+	 */
 	public function onSidebarBeforeOutput( $skin, &$sidebar ): void {
 		// Check sidebar links (e.g. main menu, tools)
-		foreach ( $sidebar as $section => &$items ) {
+		foreach ( $sidebar as &$items ) {
 			$this->checkArrayForLinks( $items );
 		}
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param $sktemplate @phan-unused-param
+	 */
 	public function onSkinTemplateNavigation__Universal( $sktemplate, &$links ): void {
 		// Edit/history/other views. Does not work for VE yet (depends on order of hooks?).
 		$this->checkArrayForLinks( $links['views'] );
@@ -56,7 +62,14 @@ class NoFollow implements
 		$this->checkArrayForLinks( $links['user-menu'] );
 	}
 
-	/** @inheritDoc */
+	/**
+	 * @inheritDoc
+	 * @param $skin @phan-unused-param
+	 * @param $title @phan-unused-param
+	 * @param $section @phan-unused-param
+	 * @param $sectionTitle @phan-unused-param
+	 * @param $lang @phan-unused-param
+	 */
 	public function onSkinEditSectionLinks(
 		$skin,
 		$title,
@@ -66,7 +79,7 @@ class NoFollow implements
 		$lang
 	) {
 		// Add nofollow to section editing links.
-		foreach ( $result as $key => &$link ) {
+		foreach ( $result as &$link ) {
 			if ( is_array( $link ) && array_key_exists( 'attribs', $link ) ) {
 				$this->addNoFollow( $link['attribs'] );
 			}
