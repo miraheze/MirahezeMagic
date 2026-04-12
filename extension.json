@@ -123,11 +123,20 @@
 		"RequestWikiQueueFormDescriptorModify": {
 			"handler": "RequestWiki"
 		},
+		"SidebarBeforeOutput": {
+			"handler": "NoFollow"
+		},
 		"SiteNoticeAfter": {
 			"handler": "Main"
 		},
 		"SkinAddFooterLinks": {
 			"handler": "Main"
+		},
+		"SkinEditSectionLinks": {
+			"handler": "NoFollow"
+		},
+		"SkinTemplateNavigation::Universal": {
+			"handler": "NoFollow"
 		},
 		"SpecialPageBeforeExecute": {
 			"handler": "Specials"
@@ -192,7 +201,10 @@
 				"HttpRequestFactory"
 			]
 		},
-        "ManageWiki": {
+		"NoFollow": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow"
+		},
+		"ManageWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
 			"services": [
                  "MainConfig"
