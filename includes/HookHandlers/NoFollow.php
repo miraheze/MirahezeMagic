@@ -2,25 +2,44 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\Hook\SkinEditSectionLinksHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
-use MediaWiki\Hook\SidebarBeforeOutputHook;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
 
 class NoFollow implements
 	SidebarBeforeOutputHook,
 	SkinTemplateNavigation__UniversalHook,
-	SkinEditSectionLinksHook {
+	SkinEditSectionLinksHook
+{
 
 	private string $specialPrefix;
 
 	public static function registerHooks(): void {
 		$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
 		$handler = new self();
-		$hookContainer->register( 'SidebarBeforeOutput', $handler );
-		$hookContainer->register( 'SkinTemplateNavigation::Universal', $handler );
-		$hookContainer->register( 'SkinEditSectionLinks', $handler );
+		$hookContainer->register(
+			'SidebarBeforeOutput',
+			[
+				$handler,
+				'onSidebarBeforeOutput'
+			]
+		);
+		$hookContainer->register(
+			'SkinTemplateNavigation::Universal',
+			[
+				$handler,
+				'onSkinTemplateNavigation__Universal'
+			]
+		);
+		$hookContainer->register(
+			'SkinEditSectionLinks',
+			[
+				$handler,
+				'onSkinEditSectionLinks'
+			]
+		);
 	}
 
 	public function __construct() {
