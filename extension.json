@@ -33,6 +33,9 @@
 		"Miraheze\\MirahezeMagic\\": "includes/",
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
+	"ExtensionFunctions": [
+		"Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow::registerHooks"
+	],
 	"LogActionsHandlers": {
 		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},
@@ -123,20 +126,11 @@
 		"RequestWikiQueueFormDescriptorModify": {
 			"handler": "RequestWiki"
 		},
-		"SidebarBeforeOutput": {
-			"handler": "NoFollow"
-		},
 		"SiteNoticeAfter": {
 			"handler": "Main"
 		},
 		"SkinAddFooterLinks": {
 			"handler": "Main"
-		},
-		"SkinEditSectionLinks": {
-			"handler": "NoFollow"
-		},
-		"SkinTemplateNavigation::Universal": {
-			"handler": "NoFollow"
 		},
 		"SpecialPageBeforeExecute": {
 			"handler": "Specials"
@@ -200,9 +194,6 @@
 				"MainConfig",
 				"HttpRequestFactory"
 			]
-		},
-		"NoFollow": {
-			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow"
 		},
 		"ManageWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",

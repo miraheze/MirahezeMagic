@@ -5,6 +5,7 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 use MediaWiki\Hook\SkinEditSectionLinksHook;
 use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\Hook\SidebarBeforeOutputHook;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\SpecialPage\SpecialPage;
 
 class NoFollow implements
@@ -13,6 +14,14 @@ class NoFollow implements
 	SkinEditSectionLinksHook {
 
 	private string $specialPrefix;
+
+	public static function registerHooks(): void {
+		$hookContainer = MediaWikiServices::getInstance()->getHookContainer();
+		$handler = new self();
+		$hookContainer->register( 'SidebarBeforeOutput', $handler );
+		$hookContainer->register( 'SkinTemplateNavigation::Universal', $handler );
+		$hookContainer->register( 'SkinEditSectionLinks', $handler );
+	}
 
 	public function __construct() {
 		$specialPagePath = SpecialPage::getTitleFor( 'Badtitle' )->getLocalURL();
