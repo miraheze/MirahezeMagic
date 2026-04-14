@@ -49,7 +49,7 @@ class NoFollow implements
 
 	private function needsNoFollow( string $href ): bool {
 		return str_starts_with( $href, $this->specialPrefix ) ||
-			preg_match( '/[&?](action|diff|curid|oldid)=/i', $href );
+			preg_match( '/[&?](action|veaction|diff|curid|oldid)=/i', $href );
 	}
 
 	private function addNoFollow( array &$attrs ): void {
@@ -85,6 +85,8 @@ class NoFollow implements
 	public function onSkinTemplateNavigation__Universal( $sktemplate, &$links ): void {
 		// Edit/history/other views. Does not work for VE yet (depends on order of hooks?).
 		$this->checkArrayForLinks( $links['views'] );
+		// Purge/delete/protect. Only purge matters because anons can't do the rest.
+		$this->checkArrayForLinks( $links['actions'] );
 		// Check for Special:UserLogin and Special:CreateAccount
 		// This part does not work yet because MW core drops the rel key when building the HTML output.
 		$this->checkArrayForLinks( $links['user-menu'] );
