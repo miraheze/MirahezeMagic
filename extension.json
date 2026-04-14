@@ -33,6 +33,9 @@
 		"Miraheze\\MirahezeMagic\\": "includes/",
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
+	"ExtensionFunctions": [
+		"Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow::registerHooks"
+	],
 	"LogActionsHandlers": {
 		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},
@@ -192,7 +195,7 @@
 				"HttpRequestFactory"
 			]
 		},
-        "ManageWiki": {
+		"ManageWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
 			"services": [
                  "MainConfig"
