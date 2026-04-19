@@ -40,10 +40,8 @@ class UserRights implements UserGetRightsHook {
 			);
 			$rights = array_unique(
 				array_merge(
-					[
-						$rights,
-						$toAdd
-					]
+					$rights,
+					$toAdd
 				)
 			);
 		}
