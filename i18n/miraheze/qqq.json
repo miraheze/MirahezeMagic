@@ -101,6 +101,7 @@
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",
+	"right-editallcustomprotected": "Edit pages of any custom defined protection levels.",
 	"right-user": "Edit pages protected as 'Allow only logged in users'",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",

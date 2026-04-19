@@ -143,6 +143,7 @@
 	"requestwiki-label-sourceurl": "Enter the full URL of the source wiki (the wiki you are moving or forking from)",
 	"restriction-delete": "Delete",
 	"restriction-level-user": "Allow only logged in users",
+	"right-editallcustomprotected": "Edit pages of all custom protection levels.",
 	"right-user": "Edit pages protected as \"{{int:protect-level-user}}\"",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
