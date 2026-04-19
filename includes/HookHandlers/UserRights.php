@@ -2,9 +2,11 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
+use MediaWiki\User\User;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\UserGetRightsHook;
+
 
 class UserRights implements UserGetRightsHook {
 
@@ -20,7 +22,9 @@ class UserRights implements UserGetRightsHook {
 		);
 	}
 
-	/** @inheritDoc */
+	/** @inheritDoc
+	 * @param User $user @phan-unused-param
+	 * */
 	public function onUserGetRights( $user, &$rights ) {
 		if ( in_array( 'editallcustomprotected', $rights ) ) {
 			$config = MediaWikiServices::getInstance()->getMainConfig();
