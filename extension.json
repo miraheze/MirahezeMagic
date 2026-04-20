@@ -34,8 +34,7 @@
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
 	"ExtensionFunctions": [
-		"Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow::registerHooks",
-		"Miraheze\\MirahezeMagic\\HookHandlers\\UserRights::registerHooks"
+		"Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow::registerHooks"
 	],
 	"LogActionsHandlers": {
 		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
@@ -142,6 +141,9 @@
 		"UserGetDefaultOptions": {
 			"handler": "EchoNotifications"
 		},
+		"UserGetRights": {
+			"handler": "UserRights"
+		},
 		"UserGetRightsRemove": {
 			"handler": "Main"
 		}
@@ -208,6 +210,13 @@
 		},
 		"Specials": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Specials"
+		},
+		"UserRights": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\UserRights",
+			"services": [
+				"MainConfig",
+				"ExtensionRegistry"
+			]
 		}
 	},
 	"config": {
