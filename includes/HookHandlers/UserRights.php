@@ -21,6 +21,11 @@ class UserRights implements UserGetRightsHook {
 	 * @param User $user @phan-unused-param
 	 */
 	public function onUserGetRights( $user, &$rights ) {
+		// Because tests that don't want to  have database access complain
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return;
+		}
+
 		if ( $this->extensionRegistry->isLoaded( 'CentralAuth' ) ) {
 			$hasGlobalRight = CentralAuthUser::getInstance( $user )->hasGlobalPermission( 'editallcustomprotected' );
 		} else {
