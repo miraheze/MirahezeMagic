@@ -17,10 +17,11 @@ class UserRights implements UserGetRightsHook {
 	) {
 	}
 
-	/** @inheritDoc
+	/**
+	 * @inheritDoc
 	 * @param User $user @phan-unused-param
 	 */
-	public function onUserGetRights( $user, &$rights ) {
+	public function onUserGetRights( $user, &$rights ): void {
 		// Because tests that don't want to have database access complain
 		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 			return;
