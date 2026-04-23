@@ -141,6 +141,9 @@
 		"UserGetDefaultOptions": {
 			"handler": "EchoNotifications"
 		},
+		"UserGetRights": {
+			"handler": "UserRights"
+		},
 		"UserGetRightsRemove": {
 			"handler": "Main"
 		}
@@ -207,6 +210,13 @@
 		},
 		"Specials": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Specials"
+		},
+		"UserRights": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\UserRights",
+			"services": [
+				"MainConfig",
+				"ExtensionRegistry"
+			]
 		}
 	},
 	"config": {
@@ -239,5 +249,8 @@
 			"value": ""
 		}
 	},
+	"AvailableRights": [
+		"editallcustomprotected"
+	],
 	"manifest_version": 2
 }
