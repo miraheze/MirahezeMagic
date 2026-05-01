@@ -102,4 +102,6 @@ class DeclineStaleWikiRequests extends Maintenance {
 	}
 }
 
-$maintClass = DeclineStaleRequests::class;
+// @codeCoverageIgnoreStart
+return DeclineStaleRequests::class;
+// @codeCoverageIgnoreEnd
