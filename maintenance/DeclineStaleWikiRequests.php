@@ -1,6 +1,6 @@
 <?php
 
-namespace Miraheze\CreateWiki\Maintenance;
+namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\User\User;
