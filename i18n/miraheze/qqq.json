@@ -88,6 +88,7 @@
 	"miraheze-emailuser-disabled-title": "Title for Special:EmailUser when the user cannot email users because of local laws and regulations",
 	"miraheze-emailuser-disabled-message": "Body for Special:EmailUser when the user cannot email users because of local laws and regulations",
 	"miraheze-faq": "Label for the Frequently Asked Questions.\n{{Identical|FAQ}}",
+	"miraheze-globalvanishrequest-disabled-message": "Message displayed when accessing Special:GlobalVanishRequest, which is disabled.",
 	"miraheze-helpcenter": "Link for the help center page.",
 	"miraheze-requestfeatures": "Request features on a wiki",
 	"miraheze-requestwiki": "Request a wiki",
