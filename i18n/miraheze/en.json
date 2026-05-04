@@ -112,6 +112,7 @@
 	"miraheze-emailuser-disabled-title": "Emailing users is disabled",
 	"miraheze-emailuser-disabled-message": "Due to local laws and regulations in some jurisdictions, EmailUser has been disabled. If you need to contact another user, please try using their talk page.",
 	"miraheze-faq": "FAQ",
+	"miraheze-globalvanishrequest-disabled-message": "If you wish to disable your account, use one of [[meta:Disabling an account|these methods]] documented on Miraheze Meta.",
 	"miraheze-helpcenter": "Miraheze Help Center",
 	"miraheze-label-managewiki-article-path": "Article path",
 	"miraheze-label-managewiki-article-path-root": "Don't use /wiki/ for articles (use the root path)",
