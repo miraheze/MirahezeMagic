@@ -78,7 +78,11 @@ class SpecialVanishUser extends FormSpecialPage {
 		?CentralAuthDatabaseManager $centralAuthDatabaseManager,
 		?GlobalRenameUserValidator $globalRenameUserValidator
 	) {
-		parent::__construct( 'VanishUser', 'centralauth-rename' );
+		if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+			parent::__construct( 'VanishUser' );
+		} else {
+			parent::__construct( 'VanishUser', 'centralauth-rename' );
+		}
 
 		$this->centralAuthAntiSpoofManager = $centralAuthAntiSpoofManager;
 		$this->centralAuthDatabaseManager = $centralAuthDatabaseManager;
@@ -255,6 +259,11 @@ class SpecialVanishUser extends FormSpecialPage {
 	 */
 	public function isListed() {
 		return $this->userCanExecute( $this->getUser() );
+	}
+
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'centralauth-rename';
 	}
 
 	/**
