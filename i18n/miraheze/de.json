@@ -15,6 +15,7 @@
 			"MuratTheTurkish",
 			"Nekky-chan",
 			"Pittigrilli",
+			"PretzelRocky",
 			"TMg",
 			"Talex42",
 			"TheRabbit22",
@@ -97,6 +98,8 @@
 	"miraheze-categories": "Kategorien",
 	"miraheze-donate": "Spende an Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
+	"miraheze-emailuser-disabled-title": "Das Versenden von E-Mails an Benutzer ist deaktiviert.",
+	"miraheze-emailuser-disabled-message": "Aufgrund lokaler Gesetze und Vorschriften in manchen Rechtskreisen wurde EmailUser deaktiviert. Musst du einen anderen Benutzer kontaktieren, benutze hierfür bitte dessen Diskussionsseite.",
 	"miraheze-faq": "Häufig gestellte Fragen",
 	"miraheze-helpcenter": "Miraheze-Hilfezentrum",
 	"miraheze-label-managewiki-article-path": "Artikelpfad",
@@ -121,8 +124,9 @@
 	"requestcustomdomain-text": "Willkommen bei RequestSSL! Lies bitte zuerst [[Custom domains]] und stelle sicher, dass deine Domain richtig angegeben ist, bevor du hier ein SSL-Zertifikat beantragst und dein Wiki erstellt wird. Deine Anfrage für eine eigene Domain wird von einem Mitglied des Technologie-Teams geprüft werden und kann auf der Seite verfolgt werden, auf die du mit dem Absenden deiner Anfrage weitergeleitet werden wirst.\n\nFalls ein Fehler auftritt oder du eine Weiterleitung beantragen möchtest, erstelle bitte eine Aufgabe auf [[Phorge]].",
 	"requestimport-text": "Willkommen bei RequestImport! Um mit deinem Import zu beginnen, fülle bitte dieses Formular aus, damit wir deine Anfrage prüfen können. Deine Wiki-Anfrage wird von einem Mitglied des Technik-Teams oder einem Steward geprüft und kann auf der Seite nachverfolgt werden, die beim Einreichen deiner Anfrage angegeben wird.\n\nWenn dein Upload hier zu lange dauert oder fehlschlägt, erstelle bitte eine Aufgabe auf [[Phorge]].\n\nWenn du auch Bilder importieren möchtest, erstelle bitte auch eine Aufgabe auf [[Phorge]].",
 	"requestwiki-label-nsfw": "Dieses Wiki enthält Inhalte, die nicht sicher für die Arbeit sind (NSFW)",
-	"requestwiki-help-nsfw": "Ein Wiki ist nicht sicher für die Arbeit (NSFW), wenn es grafische Darstellungen von Sex enthält (entweder Text oder Medieninhalte) oder aus anderen Gründen für Personen unter 18 Jahren ungeeignet ist.",
+	"requestwiki-help-nsfw": "Ein Wiki enthält Inhalte, die nicht sicher für die Arbeit sind (NSFW), wenn es grafische Darstellungen von Sex enthält (entweder Text oder Medieninhalte) oder Inhalte, die aus anderen Gründen für Personen unter 18 Jahren ungeeignet sind.",
 	"requestwiki-label-nsfwtext": "Bitte gib uns mehr Details über die Art der NSFW-Inhalte, die dein Wiki enthalten wird",
+	"requestwiki-label-nsfw-primary": "Dieses Wiki fokussiert sich primär auf Inhalte, die nicht für den Arbeitsplatz geeignet sind (NSFW).",
 	"requestwiki-label-source": "Dieses Wiki wird verschoben oder von einem bestehenden Wiki abgelöst",
 	"requestwiki-label-sourceurl": "Gib die vollständige URL des Quellwikis ein (das Wiki, das du verschiebst oder von dem du abspaltest)",
 	"restriction-delete": "Löschen",
@@ -158,5 +162,6 @@
 	"vanishuser-warning": "'''Warnung''': Du bist dabei, einen Benutzer global verschwinden zu lassen! Bitte überprüfe sorgfältig alle Details, bevor du fortfährst.",
 	"vanishuser-log-name": "Benutzer-Verschwinde-Logbuch",
 	"vanishuser-log-header": "Dies ist ein grundlegendes Protokoll aller verschwundenen Benutzer.",
-	"logentry-vanishuser-action": "$1 ließ einen Benutzer verschwinden."
+	"logentry-vanishuser-action": "$1 ließ einen Benutzer verschwinden.",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Benachrichtige mich bei technischen Änderungen, die mein Wiki betreffen."
 }
