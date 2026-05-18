@@ -13,7 +13,8 @@
 			"SaldırganSincap",
 			"Sayginer",
 			"Sezgin İbiş",
-			"Slickdaddy"
+			"Slickdaddy",
+			"Wooze"
 		]
 	},
 	"datadump-namespaceselect-label": "Ad alanı",
@@ -72,7 +73,7 @@
 	"group-trustandsafety-member": "{{GENDER:$1| Güven ve Emniyet üyesi}}",
 	"group-trustandsafety": "Güven ve Emniyet",
 	"group-wiki-creator-member": "{{GENDER:$1|viki oluşturucusu}}",
-	"group-wiki-creator": "Viki Oluşturucuları",
+	"group-wiki-creator": "Viki Oluşturucular",
 	"group-wikimanager-member": "{{GENDER:$1|viki yöneticisi}}",
 	"group-wikimanager": "Viki yöneticileri",
 	"miraheze-categories": "Kategoriler",
