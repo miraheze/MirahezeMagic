@@ -47,9 +47,9 @@ class CreateCargoDB extends Maintenance {
 
 		try {
 			$dbQuotes = $dbw->addIdentifierQuotes( $cargodb );
-			$dbw->query( "CREATE DATABASE {$dbQuotes};", __METHOD__ );
-		} catch ( Exception $e ) {
-			$this->fatalError( "Database '{$cargodb}' already exists." );
+			$dbw->query( "CREATE DATABASE $dbQuotes;", __METHOD__ );
+		} catch ( Exception ) {
+			$this->fatalError( "Database '$cargodb' already exists." );
 		}
 	}
 }

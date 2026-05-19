@@ -6,6 +6,7 @@
 			"Buntschann",
 			"Chqaz",
 			"Funa-enpitu",
+			"Gurio318",
 			"Kkairri",
 			"Kokage si",
 			"LaMagiaaa",
@@ -15,6 +16,7 @@
 			"MirukuPC",
 			"MuratTheTurkish",
 			"Omotecho",
+			"RYU N",
 			"Shirayuki",
 			"Waki285",
 			"Yamagata Yusuke",
@@ -26,7 +28,6 @@
 			"背番号4のエース"
 		]
 	},
-	"content-model-flow-board": "構造化された議論ボード",
 	"datadump-namespaceselect-label": "名前空間",
 	"extensions-antispam": "スパム対策",
 	"extensions-editors": "エディター",
@@ -113,11 +114,11 @@
 	"miraheze-sitenotice-inactive-private": "このウィキには、過去 60 日間に'''編集が行われていない'''または'''操作が記録されていない'''ため、自動的に「非アクティブ」としてマークされています。このウィキが「閉鎖」されるのを防ぎたい場合は、ここで活動を示してください。今後 60 日以内にこのウィキが使用されている兆候がない場合、このウィキは [[m:Special:MyLanguage/Dormancy Policy|休眠の方針]]に従って閉鎖されます (休眠の方針はウィキをリクエストする際にすべてのウィキ創設者が同意しました)。このウィキ (非公開) は、通常の公開ウィキのように、申請に応じて別の利用者が再度開くことはできません。このウィキが 135 日後も非アクティブなままである場合、このウィキは「削除」の対象となります。注: あなたがビューロクラットの場合は、[[Special:ManageWiki]]にアクセスして、自分で「非アクティブ」のチェックを外してください。",
 	"miraheze-sitenotice-inactive": "このウィキには、過去 60 日間に'''編集が行われていない'''または'''アクションが記録されていない'''ため、自動的に'''非アクティブ'''としてマークされています。このウィキが'''閉鎖'''されるのを防ぎたい場合は、ここで活動を示してください。今後 60 日以内にこのウィキが使用されている兆候がない場合、このウィキは[[m:Special:MyLanguage/Dormancy Policy|休眠の方針]]に従って閉鎖されます (休眠の方針はウィキをリクエストする際にすべてのウィキ創設者が同意しました)。このウィキが閉鎖され、135日後に誰も再開しない場合、このウィキは'''削除'''の対象となります。注: あなたがビューロクラットの場合は、[[Special:ManageWiki]] にアクセスして、自分で「非アクティブ」のチェックを外してください。",
 	"miraheze-sitenotice-learnmore": "もっと詳しく",
-	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze スタッフ'''] は、このWikiに過去45日以内に行われた[[Special:RecentChanges|'''編集''']]や [[Special:Logs|'''ログ''']] がないことに気づきました。のWikiが'''閉鎖'''されるのを防ぎたいのであれば、ここで活動の兆しを見せてください。今後15日以内にこのWikiが使われる兆しがない場合、このWikiは[https://meta.miraheze.org/wiki/Dormancy_Policy '''休眠ポリシー''']に従って閉鎖されるかもしれません。その場合、このWikiは他の利用者による引き継ぎの対象となります。もし引き継がれず、135日経っても活動していない場合、このWikiは'''削除'''の対象となります。Mirahezeの[https://meta.miraheze.org/wiki/Dormancy_Policy 休眠ポリシー]をよく理解しておいてください。このWikiに活動があれば、[[MediaWiki:Sitenotice]]にアクセスして、自分でこの通知を削除することができます。また、何か質問や心配事があれば、お気軽に[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''スチュワードの掲示板''']でご相談ください。",
+	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"><span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Miraheze スタッフ'''] は、このウィキにおいて過去45日間に[[Special:RecentChanges|'''編集''']]や[[Special:Logs|'''記録''']]が行われていないことを確認しました。このウィキが'''閉鎖'''されるのを防ぎたい場合は、何らかの活動の兆しを示してください。今後15日以内に利用の兆しが見られない場合、このウィキは[https://meta.miraheze.org/wiki/Dormancy_Policy '''休眠ポリシー''']に基づいて閉鎖される可能性があります。その場合、このウィキは他の利用者による引き継ぎの対象となります。引き継がれず、さらに135日間活動がない状態が続いた場合、このウィキは'''削除'''の対象となります。Miraheze の[https://meta.miraheze.org/wiki/Dormancy_Policy 休眠ポリシー]をよく理解してください。このウィキに活動がある場合は、[[MediaWiki:Sitenotice]] にアクセスしてこの通知を自分で除去できます。その他、不明な点があれば、お気軽に[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''スチュワードの掲示板''']でご相談ください。</span></div>",
 	"mirahezemagic-description": "Miraheze固有のMediaWikiメッセージ・スクリプト・フック",
 	"protect-level-user": "登録利用者にのみ許可",
+	"requestcustomdomain-text": "Mirahezeをお選びいただきありがとうございます!\n\n始める前に、[[Custom domains|カスタムドメイン]]を読み、カスタムドメインのリクエストを行う前にドメインが正しく指定されていることを確認してください。なお、カスタムドメインのリクエストは、ウィキのリクエストが承認され、ウィキが作成された後でのみ可能です。\n\nほとんどの場合、ドメインが正しく設定されており、かつウィキのビューロクラットである場合、カスタムドメインは1分以内に設定されます。エラーが発生した場合、またはリダイレクトを依頼したい場合は、[[Phorge]]でタスクを作成してください。",
 	"requestimport-text": "取り込み申請へようこそ!取り込みを開始するには、申請を確認できるよう、このフォームにご記入ください。あなたの申請は技術チームまたはスチュワードによって検討され、申請の送信時に表示されるページで追跡できます。\n\nアップロード中に XML ダンプがタイムアウトした場合は、[[Phorge]] でタスクを作成してください。\n\n画像もインポートしたい場合は、[[Phorge]] でタスクを作成してください。",
-	"requestssl-text": "RequestSSLへようこそ！SSL証明書をリクエストする前に[[Custom domains|カスタムドメイン]]を読み、ドメインが正しく指定されていることを確認してください。カスタムドメインのリクエストは技術チームによってレビューされ、リクエスト送信時に表示されるページで追跡できます。\n\nエラーが発生した場合、またはリダイレクトを依頼したい場合は、[[Phorge]]でタスクを作成してください。",
 	"requestwiki-label-nsfw": "このウィキには職場では安全でないコンテンツ (NSFW) が含まれています",
 	"requestwiki-help-nsfw": "性に関する露骨な議論 (テキストまたはメディアコンテンツ) が含まれている場合、または18歳未満の利用者にとって不適切な場合、ウィキは職場では安全でない (NSFW) とみなされます。",
 	"requestwiki-label-nsfwtext": "あなたのウィキに含まれるNSFWコンテンツの種類について詳細を教えてください",
@@ -148,7 +149,6 @@
 	"sitematrix-others": "その他の Miraheze ウィキ",
 	"sitematrix-summary": "この特別ページはMirahezeのウィキの一覧です。",
 	"sitematrix": "Mirahezeウィキの一覧",
-	"specialpages-group-wikimanage": "ウィキ管理",
 	"termsofservice": "利用規約",
 	"vanishuser": "利用者を抹消する",
 	"vanishuser-action-label": "この利用者を本当に抹消したいですか?",
@@ -156,5 +156,6 @@
 	"vanishuser-warning": "'''警告''': 利用者をグローバルに抹消しようとしています。続行する前に、すべての詳細を注意深く確認してください。",
 	"vanishuser-log-name": "利用者抹消記録",
 	"vanishuser-log-header": "これは、すべての利用者の抹消に関する記録です。",
-	"logentry-vanishuser-action": "$1 が利用者を抹消しました。"
+	"logentry-vanishuser-action": "$1 が利用者を抹消しました。",
+	"echo-category-title-mirahezemagic-tech-notification": "投稿通知"
 }

@@ -13,6 +13,7 @@
 			"Fitoschido",
 			"Hispano76",
 			"Jakeukalane",
+			"JorgeElias2302",
 			"Jruigar138",
 			"La Mantis",
 			"MarcoAurelio",
@@ -22,7 +23,6 @@
 			"Wynter"
 		]
 	},
-	"content-model-flow-board": "tablero StructuredDiscussions",
 	"datadump-namespaceselect-label": "Espacio de nombres",
 	"extensions-antispam": "Prevención de spam",
 	"extensions-editors": "Editores",
@@ -40,6 +40,7 @@
 	"group-electionadmin-member": "{{GENDER:$1|Administrador electoral}}",
 	"group-flood-member": "{{GENDER:$1|inundador|inundadora}}",
 	"group-flood": "Inundadores",
+	"group-global-admin": "Administradores globales",
 	"group-global-flood-member": "{{GENDER:$1|inundador|inundadora}} global",
 	"group-global-flood": "Inundadores globales",
 	"group-global-interwiki-admin-member": "{{GENDER:$1|administrador|administradora}} global de interwiki",
@@ -122,8 +123,9 @@
 	"sitematrix-others": "Otras wikis de Miraheze",
 	"sitematrix-summary": "Esta página especial enumera todas las wikis de Miraheze.",
 	"sitematrix": "Lista de wikis de Miraheze",
-	"specialpages-group-wikimanage": "Administración de wikis",
 	"termsofservice": "Términos de Uso",
 	"vanishuser-warning": "'''Advertencia''': ¡Vas a globalmente desaparecer a un usuario! Por favor revise todos los detalles cuidadosamente antes de proceder.",
-	"vanishuser-log-name": "Registro de desaparición de usuario"
+	"vanishuser-log-name": "Registro de desaparición de usuario",
+	"echo-category-title-mirahezemagic-tech-notification": "Notificación técnica",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Notificarme cuando haya cambios técnicos que afecten a mi wiki."
 }

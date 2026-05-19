@@ -15,8 +15,6 @@ class SwiftDump extends Maintenance {
 	}
 
 	public function execute() {
-		global $wmgSwiftPassword;
-
 		$wiki = $this->getConfig()->get( MainConfigNames::DBname );
 
 		// If no wiki then error
@@ -60,18 +58,21 @@ class SwiftDump extends Maintenance {
 			'swift', 'download', $container,
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $wmgSwiftPassword,
+			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' ),
 			'-D', "/tmp/$wiki",
-			'--object-threads', '1',
+			'--object-threads', '1'
 		)->limits( $limits )
 			->disableSandbox()
 			->execute();
 
 		// Compress Swift container (.tar.gz)
 		Shell::command(
-			'tar', '-czf',
+			'tar',
+			'-C',
+			'/tmp',
+			'-czf',
 			'/tmp/' . $this->getOption( 'filename' ),
-			"/tmp/$wiki",
+			"$wiki",
 			'--remove-files'
 		)->limits( $limits )
 			->disableSandbox()
@@ -84,13 +85,11 @@ class SwiftDump extends Maintenance {
 		string $container,
 		array $limits
 	): int {
-		global $wmgSwiftPassword;
-
 		$output = Shell::command(
 			'swift', 'stat', $container,
 			'-A', 'https://swift-lb.wikitide.net/auth/v1.0',
 			'-U', 'mw:media',
-			'-K', $wmgSwiftPassword
+			'-K', $this->getConfig()->get( 'MirahezeMagicSwiftKey' )
 		)->limits( $limits )
 			->disableSandbox()
 			->execute()->getStdout();

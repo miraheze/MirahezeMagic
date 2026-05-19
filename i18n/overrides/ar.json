@@ -8,7 +8,7 @@
 		]
 	},
 	"miraheze-centralauth-groupname": "ميراهيز",
-	"miraheze-dberr-again": "يرجى المحاولة مرة أخرى بعد بضع دقائق، وعادةً ما يتم حل هذه الأخطاء بحلول ذلك الوقت. إذا كنت تتلقى هذا الخطأ باستمرار، فيرجى التحقق من حسابنا على تويتر (https://twitter.com/Miraheze) لمزيد من المعلومات أو إبلاغنا من خلال الانضمام إلى #miraheze-tech-ops على irc.libera.chat أو خادم Discord الخاص بنا (https://discord.gg/TVAJTE4CUn).",
+	"miraheze-dberr-again": "يرجى المحاولة مرة أخرى بعد بضع دقائق، وعادةً ما تُحل هذه الأخطاء بحلول ذلك الوقت. إذا استمر ظهور هذا الخطأ، يمكنك الانضمام إلى قناة #miraheze-tech على irc.libera.chat أو خادم Discord الخاص بنا (https://discord.gg/TVAJTE4CUn) لمزيد من المعلومات.",
 	"miraheze-importtext": "يرجى تصدير الملف من ويكي المصدر باستخدام أداة التصدير [[Special:Export|]].\nاحفظه على جهاز الكمبيوتر الخاص بك وقم بتحميله هنا.<br /> يرجى ملاحظة أنه إذا كان الملف كبيرًا بعض الشيء (~ >2 ميجا بايت)، فسوف تحتاج إلى [[M:Special:RequestImport|طلب استيراد]] حيث لا يمكن القيام بذلك هنا بسبب القيود الفنية.<br /> نحن ننصح بعدم استيراد صناديق المعلومات مباشرة من ويكيبيديا، يرجى الاطلاع على [[m:Infoboxes|هذه الصفحة]] لمزيد من المعلومات.",
 	"miraheze-newsignuppage-loginform-tos": "لقد قرأت وفهمت ووافقت على [https://meta.miraheze.org/wiki/Terms_of_Use شروط الاستخدام] و[https://meta.miraheze.org/wiki/Privacy_Policy سياسة الخصوصية]",
 	"miraheze-newsignuppage-must-accept-tos": "يجب عليك قبول شروط الاستخدام حتى تتمكن من إنشاء حساب!",

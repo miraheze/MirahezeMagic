@@ -48,10 +48,10 @@ class GenerateMirahezeSitemap extends Maintenance {
 		$statusFormatter = $this->getServiceContainer()->getFormatterFactory()
 			->getStatusFormatter( RequestContext::getMain() );
 
-		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
-		$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
+		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
+		$mwCore = $moduleFactory->coreLocal();
 
-		$isPrivate = $remoteWiki->isPrivate();
+		$isPrivate = $mwCore->isPrivate();
 		if ( $isPrivate ) {
 			$this->output( "Deleting sitemap for wiki {$dbname}\n" );
 
@@ -96,6 +96,7 @@ class GenerateMirahezeSitemap extends Maintenance {
 			$generateSitemap->setOption( 'urlpath', '/sitemaps/' . $dbname . '/sitemaps/' );
 			$generateSitemap->setOption( 'server', $this->getConfig()->get( MainConfigNames::Server ) );
 			$generateSitemap->setOption( 'compress', 'yes' );
+			$generateSitemap->setOption( 'skip-redirects', true );
 			$generateSitemap->execute();
 
 			$backend->prepare( [ 'dir' => $localRepo->getZonePath( 'public' ) . '/sitemaps' ] );

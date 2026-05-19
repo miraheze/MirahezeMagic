@@ -13,7 +13,7 @@ class Memcached {
 
 	/**
 	 * @param string $host
-	 * @param string|int $port
+	 * @param int $port
 	 * @param int $weight
 	 */
 	public function addServer( $host, $port, $weight = 0 ) {

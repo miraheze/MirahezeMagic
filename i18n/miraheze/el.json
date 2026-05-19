@@ -3,20 +3,22 @@
 		"authors": [
 			"Geraki",
 			"Giannaras99",
+			"Jimkats",
 			"Michail Angelos Georgoulas",
 			"NikosLikomitros",
 			"Nikosgranturismogt",
 			"Norhorn",
-			"Protnet"
+			"Protnet",
+			"Warudo"
 		]
 	},
 	"extensions-skins": "Θέματα εμφάνισης",
 	"group-confirmed": "Επιβεβαιωμένοι χρήστες",
-	"group-oversight-member": "επιτηρητής",
-	"group-translationadmin-member": "Διαχειριστής μετάφρασης",
+	"group-oversight-member": "{{GENDER:$1|επιτηρητής|επιτηρήτρια}}",
+	"group-translationadmin-member": "{{GENDER:$1|διαχειριστής|διαχειρίστρια}} μετάφρασης",
 	"group-translationadmin": "Διαχειριστές μετάφρασης",
-	"group-translator-member": "Μεταφραστής",
-	"miraheze-donate": "Δωρεά",
+	"group-translator-member": "{{GENDER:$1|μεταφραστής|μεταφράστρια}}",
+	"miraheze-donate": "Κάντε δωρεά στη Miraheze",
 	"miraheze-faq": "Συχνές ερωτήσεις",
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
 	"protect-level-user": "Να επιτρέπονται μόνο συνδεδεμένοι χρήστες",
@@ -24,6 +26,5 @@
 	"settings-links": "Σύνδεσμοι",
 	"settings-media": "Πολυμέσο",
 	"settings-permissions": "Άδειες",
-	"specialpages-group-wikimanage": "Διαχείριση βίκι",
 	"termsofservice": "Όροι χρήσης"
 }

@@ -87,6 +87,10 @@ class FindPossibleUpgradeScripts extends Maintenance {
 		return $scripts;
 	}
 
+	/**
+	 * @param string $oldScript @phan-unused-param
+	 * @param string $newScript @phan-unused-param
+	 */
 	private function isScriptUpdated( $oldScript, $newScript ) {
 		// TO-DO
 	}

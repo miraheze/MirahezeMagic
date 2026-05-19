@@ -1,12 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Aca",
 			"BadDog",
 			"Vlad5250",
 			"Winston Sung"
 		]
 	},
-	"content-model-flow-board": "ploča Strukturiranih rasprava",
 	"datadump-namespaceselect-label": "Imenski prostor",
 	"extensions-antispam": "Sprečavanje spama",
 	"extensions-editors": "Uređivači",
@@ -36,8 +36,8 @@
 	"group-member-member": "{{GENDER:$1|član|članica}}",
 	"group-oversight-member": "{{GENDER:$1|revizor|revizorka}}",
 	"group-oversight": "Revizori",
-	"group-patroller-member": "{{GENDER:$1|patrolac|patrolka}}",
-	"group-patroller": "Patrolci",
+	"group-patroller-member": "{{GENDER:$1|patroler|patrolerka}}",
+	"group-patroller": "Patroleri",
 	"group-proxybot-member": "bot proksija",
 	"group-proxybot": "Bot proksija",
 	"group-rollbacker-member": "{{GENDER:$1|vraćač|vraćačica}}",
@@ -51,8 +51,8 @@
 	"miraheze-categories": "Kategorije",
 	"miraheze-faq": "ČPP",
 	"miraheze-helpcenter": "Miraheze-ov centar pomoći",
-	"miraheze-requestfeatures": "Zahtjev za funkcije na vikiju",
-	"miraheze-requestwiki": "Zatraži viki",
+	"miraheze-requestfeatures": "Zahtjev za funkcije na wikiju",
+	"miraheze-requestwiki": "Zatraži wiki",
 	"miraheze-sidebar-donate": "Doniraj",
 	"miraheze-sitenotice-learnmore": "Saznajte više",
 	"mirahezemagic-description": "MediaWiki poruke, skripte i kuke, namijenjene za Miraheze",
@@ -68,14 +68,14 @@
 	"settings-links": "Veze",
 	"settings-localisation": "Lokalizacija",
 	"settings-maps": "Mape",
-	"settings-notifications": "Obavještenja",
-	"settings-permissions": "Dozvole",
+	"settings-notifications": "Obavijesti",
+	"settings-permissions": "Dopuštenja",
 	"settings-preferences": "Postavke",
 	"settings-recentchanges": "Nedavne izmjene",
 	"settings-styling": "Stil",
 	"shared-repo-name-mirahezecommons": "Miraheze Ostava",
-	"sitematrix-others": "Drugi Miraheze vikiji",
-	"sitematrix-summary": "Ova posebna stranica navodi sve Miraheze vikije.",
-	"sitematrix": "Lista Miraheze vikija",
-	"termsofservice": "Uslovi korišćenja"
+	"sitematrix-others": "Drugi Miraheze wikiji",
+	"sitematrix-summary": "Ova posebna stranica navodi sve Miraheze wikije.",
+	"sitematrix": "Lista Miraheze wikija",
+	"termsofservice": "Uvjeti korišćenja"
 }

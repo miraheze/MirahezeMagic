@@ -13,7 +13,6 @@
 			"Southparkfan"
 		]
 	},
-	"content-model-flow-board": "Gestructureerd discussiebord",
 	"datadump-namespaceselect-label": "Naamruimte",
 	"extensions-antispam": "Spampreventie",
 	"extensions-editors": "Bewerkers",
@@ -83,6 +82,8 @@
 	"group-wikimanager": "Wiki-beheerders",
 	"miraheze-categories": "Categorieën",
 	"miraheze-donate": "Doneer aan Miraheze",
+	"miraheze-emailuser-disabled-title": "Het versturen van e-mails naar gebruikers is uitgeschakeld",
+	"miraheze-emailuser-disabled-message": "Vanwege lokale wet- en regelgeving in sommige rechtsgebieden is EmailUser uitgeschakeld. Als u contact wilt opnemen met een andere gebruiker, probeer dan hun overlegpagina te gebruiken.",
 	"miraheze-faq": "Vraag en antwoord",
 	"miraheze-helpcenter": "Miraheze-helpcentrum",
 	"miraheze-label-managewiki-article-path": "Artikelpad",
@@ -103,11 +104,13 @@
 	"miraheze-warnmessage": "<div class=\"wikitable\" style=\"text-align: center; width: 90%; margin-left: auto; margin-right:auto; padding: 15px; border: 4px solid black; background-color: #EEE;\"> <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Stewards%27_noticeboard '''Het personeel van Miraheze'''] heeft opgemerkt dat er op deze wiki in de afgelopen 45 dagen niets is [[Special:RecentChanges|'''bewerkt''']] of [[Special:Logs|'''gelogd''']]. Als u wilt voorkomen dat deze wiki '''gesloten''' wordt, moet u hier wat tekenen van activiteit gaan vertonen. Als er binnen de komende 15 dagen geen tekenen zijn dat deze wiki wordt gebruikt, kan deze wiki krachtens het [https://meta.miraheze.org/wiki/Dormancy_Policy inactiviteitsbeleid] worden gesloten. Deze wiki kan dan door een andere gebruiker geadopteerd worden. Als dat niet gebeurt en de wiki over 135 dagen nog altijd inactief is, kan deze wiki '''verwijderd''' worden. Maak uzelf vertrouwd met Miraheze's [https://meta.miraheze.org/wiki/Dormancy_Policy inactiviteitsbeleid]. Als er toch activiteit op deze wiki is, dan kunt u op [[MediaWiki:Sitenotice]] dit bericht zelf verwijderen. Als u nog andere vragen of opmerkingen heeft, aarzel dan niet om  [https://meta.miraheze.org/wiki/Stewards%27_noticeboard contact] met ons op te nemen.</span></div>",
 	"mirahezemagic-description": "MediaWiki-berichten, scripts en hooks gemaakt voor Miraheze",
 	"protect-level-user": "Alleen ingelogde gebruikers toestaan",
+	"requestcustomdomain-text": "Bedankt voor uw keuze voor Miraheze!\n\nLees voordat u begint eerst [[Custom domains|Eigen domeinen]]. Uw domein moet naar de juiste plaats verwijzen voordat u een eigen domein aanvraagt. Houd er rekening mee dat u pas een eigen domein kunt aanvragen nadat uw wiki-aanvraag is goedgekeurd en de wiki is aangemaakt.\n\nIn de meeste gevallen, mits uw domein correct is ingesteld en u een bureaucraat op de wiki bent, zou uw eigen domein binnen een minuut of minder moeten zijn geconfigureerd. Als er een fout optreedt of als u een doorverwijzing wilt aanvragen, maak dan een taak aan op [[Phorge]].",
 	"requestimport-text": "Welkom bij RequestImport! Om aan de slag te gaan met uw import, vult u dit formulier in zodat we het kunnen beoordelen. Uw wiki-verzoek zal worden beoordeeld door een lid van het technologie-team of een steward, en kan worden gevolgd op de pagina die zal worden gegeven wanneer u uw verzoek indient.\n\nAls uw upload mislukt of een time-out krijgt, maak dan een taak aan op [[Phorge]].\n\nWilt u ook afbeeldingen importeren, maak ook dan een taak aan op [[Phorge]].",
-	"requestssl-text": "Welkom bij RequestSSL! Lees [[Custom domains|Eigen domeinen]] en zorg ervoor dat uw domein correct is toegewezen en dat uw wiki is aangemaakt voordat u hier een SSL-certificaat aanvraagt. Uw aanvraag voor een eigen domein wordt beoordeeld door een lid van het technologieteam. U kunt de voortgang van uw aanvraag volgen op de pagina die wordt weergegeven bij het indienen ervan.\n\nAls er een fout optreedt, of als u een doorverwijzing wilt aanvragen, maak dan een taak aan op [[Phorge]].",
 	"requestwiki-label-nsfw": "Deze wiki bevat inhoud die niet veilig is voor op het werk (NSFW)",
-	"requestwiki-help-nsfw": "Een wiki is niet veilig voor op het werk (NSFW) als deze expliciete discussies over seks bevat (hetzij in tekst, hetzij in media-inhoud) of op een andere manier ongepast is voor personen jonger dan 18 jaar.",
+	"requestwiki-help-nsfw": "Een wiki bevat inhoud die niet geschikt is voor werk (NSFW) als deze expliciete beschrijvingen van seks bevat (in tekst of video) of inhoud die anderszins ongepast is voor personen onder de 18 jaar.",
 	"requestwiki-label-nsfwtext": "Geef ons meer details over het type NSFW-inhoud dat op uw wiki komt",
+	"requestwiki-label-nsfw-primary": "Deze wiki bevat inhoud die niet veilig is voor op het werk (NSFW)",
+	"requestwiki-help-nsfw-primary": "Een wiki richt zich primair op NSFW-content als de hoofdinhoud materiaal omvat dat doorgaans als NSFW wordt gemarkeerd (een boek, films, games, enz.), als het een wiki is waarvan de meeste content zelf NSFW is, of als de focus ligt op content die in informele contexten doorgaans onder een leeftijdsbeperking of -scheiding zou vallen. Dit betekent niet dat de wiki af en toe NSFW-materiaal behandelt als onderdeel van een groter werk of onderwerp.",
 	"requestwiki-label-source": "Deze wiki verhuist of splitst zich af van een bestaande wiki",
 	"requestwiki-label-sourceurl": "Voer de volledige URL in van de bronwiki (de wiki waarvan u verhuist of die u afsplitst)",
 	"restriction-delete": "Verwijderen",
@@ -135,7 +138,6 @@
 	"sitematrix-others": "Andere Miraheze-wiki's",
 	"sitematrix-summary": "Deze speciale pagina laat een lijst van alle Miraheze-wiki's zien.",
 	"sitematrix": "Lijst van Miraheze wiki's",
-	"specialpages-group-wikimanage": "Wikibeheer",
 	"termsofservice": "Gebruiksvoorwaarden",
 	"vanishuser": "Een gebruiker laten verdwijnen",
 	"vanishuser-action-label": "Wilt u '''echt''' deze gebruiker laten verdwijnen?",
@@ -143,5 +145,7 @@
 	"vanishuser-warning": "'''Waarschuwing''': U staat op het punt een gebruiker wereldwijd te laten verdwijnen! Controleer alle details zorgvuldig voordat u verder gaat.",
 	"vanishuser-log-name": "Verdwijnlogboek gebruikers",
 	"vanishuser-log-header": "Dit is een basislogboek van alle verdwijningen van gebruikers.",
-	"logentry-vanishuser-action": "$1 heeft een gebruiker laten verdwijnen."
+	"logentry-vanishuser-action": "$1 heeft een gebruiker laten verdwijnen.",
+	"echo-category-title-mirahezemagic-tech-notification": "Technische melding",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Breng me op de hoogte wanneer er technische wijzigingen zijn die van invloed zijn op mijn wiki."
 }

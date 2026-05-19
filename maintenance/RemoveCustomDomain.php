@@ -20,43 +20,33 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  *
  * @file
  * @ingroup Maintenance
- * @author Paladox
+ * @author MacFan4000
  * @version 1.0
  */
 
-use Exception;
-use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
-use MwSql;
 
-class MigrateSearchIndexSql extends Maintenance {
+class RemoveCustomDomain extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Migrates searchindex table sql' );
+		$this->addDescription( 'Removes the custom domain for the specified wiki.' );
+		$this->addOption( 'dbname', 'Wiki DB name to remove the custom domain for' );
+
+		$this->requireExtension( 'CreateWiki' );
 	}
 
-	public function execute() {
-		$dbw = $this->getDB( DB_PRIMARY );
-		$dbname = $this->getConfig()->get( MainConfigNames::DBname );
-		if ( $dbname === null ) {
-			$this->fatalError( 'Could not identify current database name!' );
-		}
-
-		try {
-			$table = $dbw->tableName( 'searchindex' );
-			$dbw->query( "ALTER TABLE {$table} CONVERT TO CHARACTER SET utf8mb4;", __METHOD__ );
-		} catch ( Exception $e ) {
-			$this->fatalError( "Failed to alter table 'searchindex'." );
-		}
-
-		$mwSql = $this->createChild( MwSql::class );
-		$mwSql->setArg( 0, MW_INSTALL_PATH . '/maintenance/archives/patch-searchindex-pk-titlelength.sql' );
-		$mwSql->execute();
+	public function execute(): void {
+		$this->output( "Removing custom domain for " . $this->getOption( 'dbname' ) . "\n" );
+		$moduleFactory = $this->getServiceContainer()->get( 'ManageWikiModuleFactory' );
+		$mwCore = $moduleFactory->core( $this->getOption( 'dbname' ) );
+		$mwCore->setServerName( "" );
+		$mwCore->commit();
+		$this->output( "Custom domain was sucesfully rmeoved\n" );
 	}
 }
 
 // @codeCoverageIgnoreStart
-return MigrateSearchIndexSql::class;
+return RemoveCustomDomain::class;
 // @codeCoverageIgnoreEnd

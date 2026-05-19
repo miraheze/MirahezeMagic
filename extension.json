@@ -17,10 +17,7 @@
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.43.0",
-		"platform": {
-			"php": ">= 8.0"
-		}
+		"MediaWiki": ">= 1.45.0"
 	},
 	"MessagesDirs": {
 		"MirahezeMagic": [
@@ -36,8 +33,11 @@
 		"Miraheze\\MirahezeMagic\\": "includes/",
 		"Miraheze\\MirahezeMagic\\Maintenance\\": "maintenance/"
 	},
+	"ExtensionFunctions": [
+		"Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow::registerHooks"
+	],
 	"LogActionsHandlers": {
-		"vanishuser/*": "LogFormatter"
+		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},
 	"LogHeaders": {
 		"vanishuser": "vanishuser-log-header"
@@ -64,40 +64,52 @@
 	},
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
-			"handler": "Main"
+			"handler": "AbuseFilter"
+		},
+		"ContentSecurityPolicyDirectives": {
+			"handler": "ContentSecurityPolicy"
 		},
 		"APIQuerySiteInfoGeneralInfo": {
 			"handler": "Main"
 		},
+		"BeforeCreateEchoEvent": {
+			"handler": "EchoNotifications"
+		},
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
-		"ContributionsToolLinks": {
-			"handler": "Main"
+		"CreateWikiCreationExtraFields": {
+			"handler": "RequestWiki"
 		},
 		"CreateWikiDeletion": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"CreateWikiRename": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"CreateWikiStatePrivate": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"CreateWikiTables": {
-			"handler": "Main"
+			"handler": "CreateWiki"
 		},
 		"GetLocalURL::Internal": {
 			"handler": "Main"
 		},
 		"GlobalUserPageWikis": {
-			"handler": "Main"
+			"handler": "GlobalUserPage"
 		},
 		"ImportDumpJobAfterImport": {
-			"handler": "Main"
+			"handler": "ImportDump"
 		},
 		"ImportDumpJobGetFile": {
-			"handler": "Main"
+			"handler": "ImportDump"
+		},
+		"ManageWikiCoreAddFormFields": {
+			"handler": "ManageWiki"
+		},
+		"ManageWikiCoreFormSubmission": {
+			"handler": "ManageWiki"
 		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
@@ -120,30 +132,92 @@
 		"SkinAddFooterLinks": {
 			"handler": "Main"
 		},
+		"SpecialPageBeforeExecute": {
+			"handler": "Specials"
+		},
 		"TitleReadWhitelist": {
 			"handler": "Main"
+		},
+		"UserGetDefaultOptions": {
+			"handler": "EchoNotifications"
 		},
 		"UserGetRightsRemove": {
 			"handler": "Main"
 		}
 	},
 	"HookHandlers": {
+		"AbuseFilter": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\AbuseFilter",
+			"services": [
+				"AbuseFilterVariablesManager"
+			]
+		},
+		"ContentSecurityPolicy": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ContentSecurityPolicy",
+			"services": [
+				"MainConfig"
+			]
+		},
+		"CreateWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\CreateWiki",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\CreateWiki::factory",
+			"services": [
+				"MainConfig",
+				"ConnectionProvider",
+				"FormatterFactory",
+				"ManageWikiModuleFactory",
+				"RepoGroup"
+			]
+		},
+		"EchoNotifications": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\EchoNotifications"
+		},
+		"GlobalUserPage": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\GlobalUserPage",
+			"services": [
+				"CreateWikiDataStore",
+				"ManageWikiDataStoreFactory"
+			]
+		},
+		"ImportDump": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump",
+			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump::factory",
+			"services": [
+				"MainConfig",
+				"ConnectionProvider"
+			]
+		},
 		"Main": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Main",
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\Main::factory",
 			"services": [
 				"MainConfig",
-				"CommentStore",
-				"ConnectionProvider",
-				"HttpRequestFactory",
-				"LinkRenderer"
+				"HttpRequestFactory"
 			]
 		},
+		"ManageWiki": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
+			"services": [
+                 "MainConfig"
+            ]
+        },
+
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
+		},
+		"Specials": {
+			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\Specials"
 		}
 	},
 	"config": {
+		"MirahezeMagicCSPHeaderDefault": {
+			"description": "Associative array mapping CSP directive names to source strings serving as the default CSP for all wikis.",
+			"value": {}
+		},
+		"MirahezeMagicCSPHeaderOverrides": {
+			"description": "Associative array mapping CSP directive names to source strings for this wiki to be appended to the final CSP header.",
+			"value": {}
+		},
 		"MirahezeMagicAccessIdsMap": {
 			"description": "Array, in the format of wiki => [ central ids ]. Users authorized to access certain wikis to prevent global read rights from applying.",
 			"value": []
@@ -151,6 +225,10 @@
 		"MirahezeMagicMemcachedServers": {
 			"description": "Array. Memcached servers to use for clearing memcached keys when a wiki is deleted or renamed.",
 			"value": []
+		},
+		"MirahezeMagicSwiftKey": {
+			"description": "String. Swift key to use for Swift shell commands.",
+			"value": ""
 		},
 		"MirahezeReportsBlockAlertKeywords": {
 			"description": "Array. Words in block reasons which trigger a report being sent to TSPortal.",
@@ -160,9 +238,6 @@
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
 		}
-	},
-	"ConfigRegistry": {
-		"MirahezeMagic": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	},
 	"manifest_version": 2
 }

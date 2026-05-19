@@ -17,7 +17,6 @@
 		]
 	},
 	"centralauth-groupname": "The name of group name in CentralAuth.",
-	"content-model-flow-board": "<!---->",
 	"datadump-namespaceselect-label": "{{Identical|Namespace}}",
 	"extensions-antispam": "Spam prevention",
 	"extensions-api": "{{optional}}\n{{identical|API}}",
@@ -85,6 +84,8 @@
 	"miraheze-categories": "Label for categories.\n{{Identical|Category}}",
 	"miraheze-donate": "Label for donating to Miraheze.",
 	"miraheze-donatepage": "{{Optional|Only put the existing language pages, like <code>Donate/{{USERLANGUAGE}}</code>. See [https://meta.miraheze.org/wiki/Donate here].}}",
+	"miraheze-emailuser-disabled-title": "Title for Special:EmailUser when the user cannot email users because of local laws and regulations",
+	"miraheze-emailuser-disabled-message": "Body for Special:EmailUser when the user cannot email users because of local laws and regulations",
 	"miraheze-faq": "Label for the Frequently Asked Questions.\n{{Identical|FAQ}}",
 	"miraheze-helpcenter": "Link for the help center page.",
 	"miraheze-requestfeatures": "Request features on a wiki",
@@ -120,7 +121,8 @@
 	"sitematrix-others": "Other Miraheze wikis",
 	"sitematrix-summary": "This special page lists all Miraheze wikis.",
 	"sitematrix": "List of Miraheze wikis",
-	"specialpages-group-wikimanage": "Wiki Management",
 	"termsofservice": "Terms of Use",
-	"termsofservicepage": "m:Terms of Use"
+	"termsofservicepage": "m:Terms of Use",
+	"echo-category-title-mirahezemagic-tech-notification": "Title for the tech notification category at Special:Preferences",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Tooltip for the tech notification category at Special:Preferences"
 }

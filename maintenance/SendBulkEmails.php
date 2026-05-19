@@ -23,9 +23,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @ingroup Wikimedia
  */
 
-use MailAddress;
 use MediaWiki\Content\TextContent;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Mail\MailAddress;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Message\Message;
 use MediaWiki\Revision\SlotRecord;
@@ -221,12 +221,12 @@ class SendBulkEmails extends Maintenance {
 		}
 		if ( !$user->canReceiveEmail() ) {
 			$this->noreceive++;
-			$this->output( "WARNING - User {$username} can't receive mail\n" );
+			$this->output( "WARNING - User:{$username} can't receive mail\n" );
 			return false;
 		}
 		if ( in_array( $user->getName(), $this->optout, true ) ) {
 			$this->optedout++;
-			$this->output( "WARNING - User {$username} on opt-out list\n" );
+			$this->output( "WARNING - User:{$username} on opt-out list\n" );
 			return false;
 		}
 
@@ -250,8 +250,8 @@ class SendBulkEmails extends Maintenance {
 	/**
 	 * Hook handler for the UserMailerTransformMessage hook.
 	 *
-	 * @param MailAddress[] $to List of mail recipients
-	 * @param MailAddress $from Mail sender
+	 * @param MailAddress[] $to @phan-unused-param
+	 * @param MailAddress $from @phan-unused-param
 	 * @param string &$subject Message subject
 	 * @param array &$headers Email headers
 	 * @param string|array &$body Message body
@@ -319,9 +319,9 @@ class SendBulkEmails extends Maintenance {
 			$uname = $this->getOption( 'reply-to' );
 			$rt = $this->getServiceContainer()->getUserFactory()->newFromName( $uname );
 			if ( !$rt || !$rt->getId() ) {
-				$rt = new User;
-				$this->fatalError( "ERROR - Unknown user {$uname}" );
+				$this->fatalError( "ERROR - Unknown user $uname" );
 			}
+			$rt ??= new User;
 			return MailAddress::newFromUser( $rt );
 		}
 		return null;

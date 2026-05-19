@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bapham123",
 			"Minh Nguyen",
+			"Nvdtn19",
 			"Pisceskaze",
 			"SongNgu.xyz"
 		]
@@ -10,13 +12,21 @@
 	"managewiki-setting-wgAbuseFilterActions-help": "Các hành động có thể được thực hiện bởi Bộ lọc sai phạm. Khi thêm hành động mới, hãy kiểm tra xem hành động đó có bị hạn chế trong $wgAbuseFilterRestrictions không và nếu có, đừng quên thêm quyền abusefilter-modify-restricted vào nhóm người dùng phù hợp.",
 	"managewiki-setting-wgAutoBlockExpiry-name": "Hết hạn tự động cấm",
 	"managewiki-setting-wgAutoBlockExpiry-help": "Số giây trước khi lệnh tự động cấm hết hạn. Giá trị tối thiểu được phép là 0, trong khi giá trị tối đa là 10 năm (315360000).",
-	"managewiki-setting-wgBlockAllowsUTEdit-name": "Cho phép chặn người dùng để hạn chế quyền truy cập vào trang thảo luận",
+	"managewiki-setting-wgBlockAllowsUTEdit-name": "Cho phép cấm người dùng sửa trang thảo luận cá nhân",
 	"managewiki-setting-wgBlockAllowsUTEdit-help": "Cho phép người dùng chặn cấp quyền chỉnh sửa trang thảo luận cho người dùng bị chặn.",
 	"managewiki-setting-wgCookieSetOnAutoblock-name": "Sử dụng tập tin cookie cùng với tự động cấm",
 	"managewiki-setting-wgCookieSetOnAutoblock-help": "Xác định xem có nên đặt cookie khi người dùng bị tự động cấm hay không. Làm như vậy có nghĩa là người dùng bị cấm, ngay cả sau khi đăng xuất và chuyển đến địa chỉ IP mới, vẫn sẽ bị chặn.",
 	"managewiki-setting-wgCookieSetOnIpBlock-name": "Sử dụng tập tin cookie cùng với cấm địa chỉ IP",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "Cần xác nhận email để sửa đổi",
-	"managewiki-setting-wgEmailConfirmToEdit-help": "Yêu cầu người dùng xác nhận địa chỉ email trước khi họ có thể chỉnh sửa. Điều này vô hiệu hóa việc sửa đổi ẩn danh.",
+	"managewiki-setting-wgEmailConfirmToEdit-help": "Yêu cầu người dùng xác nhận địa chỉ email trước khi họ có thể sửa đổi. Việc này giúp vô hiệu hóa các sửa đổi từ người dùng chưa đăng nhập.",
+	"managewiki-setting-wgProtectSiteLimit-name": "Giới hạn khóa trang",
+	"managewiki-setting-wgMediaViewerIsInBeta-name": "Bật phiên bản Beta của Media Viewer",
+	"managewiki-setting-wgPopupsBetaFeature-name": "Bật phiên bản Beta của Popups",
+	"managewiki-setting-wgVisualEditorEnableWikitextBetaFeature-name": "Bật phiên bản Beta của Trình soạn thảo trực quan Wikitext",
+	"managewiki-setting-wmgWebChatServer-name": "Máy chủ WebChat",
+	"managewiki-setting-wmgWebChatServer-help": "Máy chủ IRC để kết nối. Không cần thiết khi sử dụng máy khách web LiberaChat.",
+	"managewiki-setting-wmgWebChatChannel-name": "Kênh WebChat",
+	"managewiki-setting-wmgWebChatClient-name": "Máy khách WebChat",
 	"managewiki-setting-wmgWikiLicense-name": "Giấy phép nội dung",
 	"managewiki-setting-wmgWikiLicense-help": "Mỗi wiki trên Miraheze theo mặc định được cấp phép theo CC-BY-SA 4.0, mặc dù có thể được thay đổi thành loại giấy phép được hỗ trợ khác. Nếu bạn muốn phát hành những đóng góp trên wiki của mình theo một giấy phép khác, vui lòng cho chúng tôi biết để chúng tôi có thể cung cấp nó cho bạn. Xin lưu ý rằng việc thay đổi giấy phép trên wiki của bạn có thể có tác động đến cộng đồng của bạn và không nên thực hiện một cách nhẹ nhàng.",
 	"managewiki-setting-wgCommentsInRecentChanges-name": "Cho phép Bình luận trong Thay đổi gần đây",

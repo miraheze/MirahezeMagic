@@ -5,7 +5,7 @@ namespace Miraheze\MirahezeMagic\Specials;
 /**
  * Creates Special:VanishUser for Stewards to use to vanish users easily.
  * Derived from RemovePII's Special:RemovePII code located at
- * https://github.com/miraheze/RemovePII/blob/master/includes/SpecialRemovePII.php
+ * https://github.com/miraheze/RemovePII/blob/main/includes/SpecialRemovePII.php
  * Originally written by Universal Omega.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -29,7 +29,6 @@ namespace Miraheze\MirahezeMagic\Specials;
  * @version 1.0
  */
 
-use ManualLogEntry;
 use MediaWiki\Extension\CentralAuth\CentralAuthDatabaseManager;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUser;
 use MediaWiki\Extension\CentralAuth\GlobalRename\GlobalRenameUserDatabaseUpdates;
@@ -41,6 +40,7 @@ use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
 use MediaWiki\Extension\CentralAuth\Widget\HTMLGlobalUserTextField;
 use MediaWiki\Html\Html;
 use MediaWiki\JobQueue\JobQueueGroupFactory;
+use MediaWiki\Logging\ManualLogEntry;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SpecialPage\FormSpecialPage;
 use MediaWiki\SpecialPage\SpecialPage;
@@ -78,7 +78,11 @@ class SpecialVanishUser extends FormSpecialPage {
 		?CentralAuthDatabaseManager $centralAuthDatabaseManager,
 		?GlobalRenameUserValidator $globalRenameUserValidator
 	) {
-		parent::__construct( 'VanishUser', 'centralauth-rename' );
+		if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
+			parent::__construct( 'VanishUser' );
+		} else {
+			parent::__construct( 'VanishUser', 'centralauth-rename' );
+		}
 
 		$this->centralAuthAntiSpoofManager = $centralAuthAntiSpoofManager;
 		$this->centralAuthDatabaseManager = $centralAuthDatabaseManager;
@@ -180,8 +184,6 @@ class SpecialVanishUser extends FormSpecialPage {
 	 * @return bool|Status
 	 */
 	public function onSubmit( array $formData ) {
-		$out = $this->getOutput();
-
 		$validCentralAuth = $this->validateCentralAuth( $formData );
 		if ( !$validCentralAuth->isOK() ) {
 			return $validCentralAuth;
@@ -259,11 +261,16 @@ class SpecialVanishUser extends FormSpecialPage {
 		return $this->userCanExecute( $this->getUser() );
 	}
 
+	/** @inheritDoc */
+	public function getRestriction(): string {
+		return 'centralauth-rename';
+	}
+
 	/**
 	 * @return string
 	 */
 	protected function getGroupName() {
-		return 'wikimanage';
+		return 'login';
 	}
 
 	/**

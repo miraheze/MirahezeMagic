@@ -25,6 +25,8 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
+use Miraheze\MatomoAnalytics\MatomoAnalytics;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class CheckWikiDatabases extends Maintenance {
@@ -86,7 +88,7 @@ class CheckWikiDatabases extends Maintenance {
 			$this->output( "Connecting to cluster: $cluster...\n" );
 			$dbr = $loadBalancer->getConnection( DB_REPLICA, [], ILoadBalancer::DOMAIN_ANY );
 			$result = $dbr->newSelectQueryBuilder()
-				->select( [ 'SCHEMA_NAME' ] )
+				->select( 'SCHEMA_NAME' )
 				->from( 'information_schema.SCHEMATA' )
 				->where( [ 'SCHEMA_NAME' . $dbr->buildLike(
 					$dbr->anyString(), $suffix, $dbr->anyString()
@@ -122,7 +124,7 @@ class CheckWikiDatabases extends Maintenance {
 			}
 
 			$result = $dbr->newSelectQueryBuilder()
-				->select( [ 'wiki_dbname' ] )
+				->select( 'wiki_dbname' )
 				->from( 'cw_wikis' )
 				->where( [ 'wiki_dbname' => $trimmed ] )
 				->caller( __METHOD__ )
@@ -140,20 +142,39 @@ class CheckWikiDatabases extends Maintenance {
 		$suffix = $this->getConfig()->get( 'CreateWikiDatabaseSuffix' );
 
 		$tablesToCheck = [
-			'virtual-createwiki' => [
-				'cw_wikis' => 'wiki_dbname',
-				'gnf_files' => 'files_dbname',
+			'virtual-centralauth' => [
 				'localnames' => 'ln_wiki',
 				'localuser' => 'lu_wiki',
-				'mw_namespaces' => 'ns_dbname',
-				'mw_permissions' => 'perm_dbname',
-				'mw_settings' => 's_dbname',
+			],
+			'virtual-checkuser-global' => [
+				'cuci_wiki_map' => 'ciwm_wiki',
+			],
+			'virtual-createwiki' => [
+				'cw_wikis' => 'wiki_dbname',
 			],
 			$this->getConfig()->get( 'EchoSharedTrackingDB' ) => [
 				'echo_unread_wikis' => 'euw_wiki',
 			],
-			$this->getConfig()->get( 'GlobalUsageDatabase' ) => [
+			'virtual-globalblocking' => [
+				'globalblocks' => 'gb_by_wiki',
+			],
+			'virtual-globaljsonlinks' => [
+				'globaljsonlinks' => 'gjl_wiki',
+				'globaljsonlinks_wiki' => 'gjlw_wiki',
+			],
+			'virtual-globalnewfiles' => [
+				'gnf_files' => 'files_dbname',
+			],
+			'virtual-globalusage' => [
 				'globalimagelinks' => 'gil_wiki',
+			],
+			'virtual-managewiki' => [
+				'mw_namespaces' => 'ns_dbname',
+				'mw_permissions' => 'perm_dbname',
+				'mw_settings' => 's_dbname',
+			],
+			'virtual-matomoanalytics' => [
+				'matomo' => 'matomo_wiki',
 			],
 		];
 
@@ -170,7 +191,7 @@ class CheckWikiDatabases extends Maintenance {
 			foreach ( $tables as $table => $field ) {
 				$this->output( "Checking table: $table, field: $field...\n" );
 				$result = $dbr->newSelectQueryBuilder()
-					->select( [ $field ] )
+					->select( $field )
 					->from( $table )
 					->caller( __METHOD__ )
 					->fetchResultSet();
@@ -179,7 +200,7 @@ class CheckWikiDatabases extends Maintenance {
 					$dbName = $row->$field;
 
 					// Safety check for suffix and filtering out 'default'
-					if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+					if ( !str_ends_with( $dbName, $suffix ) || $dbName === ModuleFactory::DEFAULT_DBNAME ) {
 						continue;
 					}
 
@@ -213,7 +234,7 @@ class CheckWikiDatabases extends Maintenance {
 		foreach ( $databases as $dbName => $cluster ) {
 			$this->output( " - Dropping $dbName...\n" );
 			$dbw = $clusters[$cluster]->getConnection( DB_PRIMARY, [], ILoadBalancer::DOMAIN_ANY );
-			$dbw->query( "DROP DATABASE IF EXISTS $dbName", __METHOD__ );
+			$dbw->query( "DROP DATABASE IF EXISTS $dbName;", __METHOD__ );
 		}
 
 		$this->output( "Database drop operation completed.\n" );
@@ -234,7 +255,13 @@ class CheckWikiDatabases extends Maintenance {
 
 				foreach ( $missingInCluster as $dbName ) {
 					// Only delete entries that end with the suffix for safety
-					if ( !str_ends_with( $dbName, $suffix ) || $dbName === 'default' ) {
+					if ( !str_ends_with( $dbName, $suffix ) || $dbName === ModuleFactory::DEFAULT_DBNAME ) {
+						continue;
+					}
+
+					if ( $table === 'matomo' ) {
+						// Use this to actually delete from Matomo as well.
+						MatomoAnalytics::deleteSite( $dbName );
 						continue;
 					}
 

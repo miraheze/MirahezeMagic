@@ -118,7 +118,7 @@
 	"managewiki-setting-wgRottenLinksCurlTimeout-name": "סף פסק זמן של RottenLinks",
 	"managewiki-setting-wgRottenLinksCurlTimeout-help": "מספר השניות לפני שבקשת RottenLinks לא מחזירה תגובה. ערך מזערי: 10. ערך מרבי: 120.",
 	"managewiki-setting-wgLocaltimezone-name": "אזור זמן",
-	"managewiki-setting-wgLocaltimezone-help": "זה יתאים את הזמן של הוויקי שלך על פני השעון לאיזור זמן שנבחר עבור כל המשתמשים, אולם ניתן לשנות זאת באמצעות העדפות המשתמש.",
+	"managewiki-setting-wgLocaltimezone-help": "זה יתאים את הזמן של הוויקי שלך על פני השעון לאזור זמן שנבחר עבור כל המשתמשים, אולם ניתן לשנות זאת באמצעות העדפות המשתמש.",
 	"managewiki-setting-wmgTranslateDocumentationLanguageCode-name": "קוד שפה של תיעוד הודעות",
 	"managewiki-setting-wmgTranslateDocumentationLanguageCode-help": "קוד שפה לתיעוד הודעות.",
 	"managewiki-setting-wgULSAnonCanChangeLanguage-name": "לאפשר למשתמשים אנונימיים לשנות שפה",
