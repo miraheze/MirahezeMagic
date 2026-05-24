@@ -16,6 +16,7 @@
 			"Verdy p"
 		]
 	},
+	"action-editallcustomprotected": "{{doc-action|editallcustomprotected}}",
 	"centralauth-groupname": "The name of group name in CentralAuth.",
 	"datadump-namespaceselect-label": "{{Identical|Namespace}}",
 	"extensions-antispam": "Spam prevention",
@@ -101,6 +102,7 @@
 	"protect-level-user": "Allow only logged in users",
 	"restriction-delete": "Delete\n{{Identical|Delete}}",
 	"restriction-level-user": "Allow only logged in users",
+	"right-editallcustomprotected": "{{doc-right|editallcustomprotected}}",
 	"right-user": "Edit pages protected as 'Allow only logged in users'",
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
