@@ -14,7 +14,7 @@
 	"managewiki-setting-wgBlockAllowsUTEdit-name": "Maakt het mogelijk bij het blokkeren ook de toegang tot overlegpagina’s te beperken",
 	"managewiki-setting-wgBlockAllowsUTEdit-help": "Hiermee kan de blokkerende gebruiker bewerkingsrechten voor de overlegpagina verlenen aan de geblokkeerde gebruiker.",
 	"managewiki-setting-wgCookieSetOnAutoblock-name": "Cookie plaatsen bij automatisch blokkeren",
-	"managewiki-setting-wgCookieSetOnAutoblock-help": "Bepaalt of er een cookie moet worden geplaatst wanneer een gebruiker automatisch wordt geblokkeerd. Dit betekent dat een geblokkeerde gebruiker, ook nadat hij is uitgelogd en naar een nieuw IP-adres is verhuisd, nog steeds wordt geblokkeerd.",
+	"managewiki-setting-wgCookieSetOnAutoblock-help": "Bepaalt of er een cookie moet worden geplaatst wanneer een gebruiker automatisch wordt geblokkeerd. Dit betekent dat een geblokkeerde gebruiker, ook nadat deze is afgemeld en naar een nieuw IP-adres is verhuisd, nog steeds wordt geblokkeerd.",
 	"managewiki-setting-wgCookieSetOnIpBlock-name": "Cookie plaatsen bij blokkeren IP-adres",
 	"managewiki-setting-wgCookieSetOnIpBlock-help": "Bepaalt of er een cookie moet worden geplaatst wanneer een niet aangemelde wordt geblokkeerd. Dit betekent dat een geblokkeerde gebruiker, ook nadat hij naar een nieuw IP-adres is verhuisd, nog steeds geblokkeerd zal zijn.",
 	"managewiki-setting-wgEmailConfirmToEdit-name": "E-mailadres bevestigen voor bewerken",
