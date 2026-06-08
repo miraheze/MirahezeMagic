@@ -2,16 +2,17 @@
 	"@metadata": {
 		"authors": [
 			"McDutchie",
+			"Wizzard",
 			"Yardom78"
 		]
 	},
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Váš}} účet nie je možné prihlásiť, pretože {{GENDER:$1|Váš}} účet je globálne uzamknutý. Prosím kontaktujte <code>cvt[na]miraheze.org</code> pre viac informácií, alebo pre žiadosť o odomknutie.",
-	"miraheze-dberr-again": "Skúste počkať niekoľko minúť a načítajte znovu. Pre viac informácií o tejto chybe navštívte našu twitter stránku (https://twitter.com/Miraheze) alebo kontaktujte správcu systému #miraheze na irc.libera.chat.",
-	"miraheze-importtext": "Prosím exportujte súbor zo zdroja wiki použitím [[Special:Export|nástroje pre export]].\nUložte ho do Vášho počítača a nahrajte sem. <br /> Prosím berte na vedomie, že ak je súbor väčší než (~ >5MB) musíte požiadať o import tu -> [[M:Moving_a_wiki_to_Miraheze#Request_import]].",
-	"miraheze-newsignuppage-loginform-tos": "Čítal/a som, rozumiem a súhlasím s [https://meta.miraheze.org/wiki/Terms_of_Use Podmienkami používania] a so [https://meta.miraheze.org/wiki/Privacy_Policy Zásadami ochrany súkromia]",
+	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Nemôžete}} sa prihlásiť, pretože {{GENDER:$1|váš}} účet je [[m:Special:MyLanguage/Global locks|globálne uzamknutý]]. Pre viac informácií alebo odvolanie kontaktujte <code>cvt[at]miraheze.org</code>.",
+	"miraheze-dberr-again": "Skúste to prosím znova o niekoľko minút, tieto chyby sa dovtedy zvyčajne vyriešia. Ak sa vám táto chyba zobrazuje opakovane, môžete sa pridať do #miraheze-tech na irc.libera.chat alebo na náš Discord server (https://discord.gg/TVAJTE4CUn) pre ďalšie informácie.",
+	"miraheze-importtext": "Exportujte prosím súbor zo zdrojovej wiki pomocou [[Special:Export|exportného nástroja]].\nUložte ho do počítača a nahrajte sem.<br /> Upozorňujeme, že ak je súbor väčší (~ >2MB), budete musieť [[M:Special:RequestImport|požiadať o import]], pretože tu to kvôli technickým obmedzeniam nie je možné.<br />Neodporúčame importovať infoboxy priamo z Wikipédie, viac informácií nájdete na [[m:Infoboxes|tejto stránke]].",
+	"miraheze-newsignuppage-loginform-tos": "Prečítal/a som si, rozumiem a súhlasím s [https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Podmienkami používania] a [https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Zásadami ochrany súkromia]",
 	"miraheze-newsignuppage-must-accept-tos": "Pre vytvorenie účtu musíte súhlasiť s podmienkami používania!",
 	"miraheze-oathauth-step1": "DÔLEŽITÉ! Prosím prečítajte si stránku OATHAuth pred tým než toto povolíte! Krok 1: Stiahnite si dvoj faktorový autentifikačný program",
-	"miraheze-prefs-help-realname": "Skutočné meno nie je povinné. Ak sa rozhodnete ho uviesť, bude uvádzané pri Vašej práci. Taktiež používaním Miraheze súhlasíte s<span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Podmienkami používania]</span> a súhlasíte so <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Zásadami ochrany súkromia]</span>.",
+	"miraheze-prefs-help-realname": "Skutočné meno je voliteľné. Ak sa ho rozhodnete uviesť, použije sa na pripísanie vašej práce. Používaním wiki hosťovanej na Miraheze tiež súhlasíte s <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Terms_of_Use Podmienkami používania]</span> a akceptujete <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Special:MyLanguage/Privacy_Policy Zásady ochrany súkromia]</span>.",
 	"miraheze-restriction-delete": "Vymazať",
 	"miraheze-restriction-protect": "Chrániť",
 	"miraheze-skinname-snapwikiskin": "Prásk!",
