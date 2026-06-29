@@ -154,7 +154,7 @@
 	"managewiki-setting-wgMSU_confirmReplace-name": "MsUpload 교체 확인",
 	"managewiki-setting-wgMSU_confirmReplace-help": "설정하면 \"파일을 대체할까요?\" 체크박스를 표시합니다.",
 	"managewiki-setting-wgMSU_showAutoCat-name": "MsUpload 자동 분류 표시",
-	"managewiki-setting-wgMSU_showAutoCat-help": "설정하면 카테고리 문서를 편집하는 동안 업로드된 파일이 해당 분류에 추가됩니다.",
+	"managewiki-setting-wgMSU_showAutoCat-help": "설정하면 분류 문서를 편집하는 동안 업로드된 파일이 해당 분류에 추가됩니다.",
 	"managewiki-setting-wgMSU_useDragDrop-name": "MsUpload 드래그 앤 드롭 사용",
 	"managewiki-setting-wgMSU_useDragDrop-help": "설정하면 드래그 앤 드롭 영역이 표시됩니다.",
 	"managewiki-setting-wgCommonsMetadataForceRecalculate-name": "원격 이미지 설명 구문 분석 강제",
