@@ -2,15 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Jdx",
+			"PanWor",
 			"Rail",
 			"Railfail536"
 		]
 	},
-	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|}}Nie możesz się zalogować, ponieważ {{GENDER:$1|}}twoje konto jest globalnie zablokowane. Skontaktuj się z nami na adres <code>cvt[na]miraheze.org</code>, aby uzyskać więcej informacji lub przedyskutować blokadę.",
+	"miraheze-centralauth-login-error-locked": "Nie możesz się zalogować, ponieważ Twoje konto jest [[m:Special:MyLanguage/Global locks|globalnie zablokowane]]. Skontaktuj się z nami pod adresem <code>cvt[małpa]miraheze.org</code>, aby uzyskać więcej informacji lub złożyć odwołanie.",
 	"miraheze-dberr-again": "Spróbuj poczekać kilka minut, a następnie odśwież stronę. Aby uzyskać więcej informacji o tym błędzie, sprawdź naszą stronę na Twitterze (https://twitter.com/Miraheze) lub skontaktuj się z administratorami systemu na kanale #miraheze-sr w sieci irc.libera.chat.",
 	"miraheze-newsignuppage-loginform-tos": "Przeczytałem, zrozumiałem oraz akceptuję [https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania] i [https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]",
 	"miraheze-newsignuppage-must-accept-tos": "Musisz zaakceptować Zasady użytkowania aby móc założyć konto!",
-	"miraheze-oathauth-step1": "UWAGA! Upewnij się że {{GENDER:|przeczytałeś|przeczytałaś}} stronę OATHAuth przed włączeniem tej funkcji! Krok 1: Pobierz program do uwierzytelniania dwuskładnikowego",
+	"miraheze-oathauth-step1": "UWAGA! Upewnij się, że {{GENDER:|przeczytałeś stronę|przeczytałaś stronę|znasz treść strony}} OATHAuth przed włączeniem tej funkcji! Krok 1: Pobierz program do uwierzytelniania dwuskładnikowego",
 	"miraheze-prefs-help-realname": "Imię i nazwisko jest opcjonalne. Jeśli zdecydujesz się je podać, zostaną użyte, by udokumentować twoje autorstwo. Ponadto korzystając z wiki hostowanej przez Miraheze akceptujesz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Terms_of_Use Zasady użytkowania]</span> oraz <span class=\"plainlinks\">[https://meta.miraheze.org/wiki/Privacy_Policy Politykę prywatności]</span>",
 	"miraheze-restriction-delete": "Usuń",
 	"miraheze-restriction-protect": "Zabezpiecz",
