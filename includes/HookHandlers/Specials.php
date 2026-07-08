@@ -3,6 +3,7 @@
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Exception\ErrorPageError;
+use MediaWiki\SpecialPage\DisabledSpecialPage;
 use MediaWiki\SpecialPage\Hook\SpecialPageBeforeExecuteHook;
 use MediaWiki\Specials\SpecialEmailUser;
 
@@ -26,5 +27,14 @@ class Specials implements SpecialPageBeforeExecuteHook {
 		}
 
 		throw new ErrorPageError( 'miraheze-emailuser-disabled-title', 'miraheze-emailuser-disabled-message' );
+	}
+
+	/** @inheritDoc */
+	public function onSpecialPage_initList( array &$specialPages ) {
+		if ( !isset( $specialPages['GlobalVanishRequest'] ) ) {
+			return true;
+		}
+
+		$specialPages['GlobalVanishRequest'] = DisabledSpecialPage::getCallback( 'GlobalVanishRequest', 'miraheze-globalvanishrequest-disabled-message' );
 	}
 }
