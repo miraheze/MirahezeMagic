@@ -237,6 +237,10 @@
 		"MirahezeReportsWriteKey": {
 			"description": "String. TSPortal write key to be used when connecting to it.",
 			"value": ""
+		},
+		"MirahezeMagicVanishUserCustomNotice": {
+			"description": "String. A custom warning, legal notice, or internal policy URL displayed to administrators on Special:VanishUser.",
+			"value": ""
 		}
 	},
 	"manifest_version": 2
