@@ -40,6 +40,8 @@
 	"group-global-patroller-member": "{{GENDER:$1|global patroller}}",
 	"group-global-renamer": "Global renamers",
 	"group-global-renamer-member": "{{GENDER:$1|global renamer}}",
+	"group-global-admin": "Global Administrators",
+	"group-global-admin-member": "{{GENDER:$1|global administrator}}",
 	"group-interwiki-admin-member": "{{GENDER:$1|interwiki administrator}}",
 	"group-interwiki-admin": "Interwiki administrators",
 	"group-ipblock-exempt-member": "{{GENDER:$1|IP block exempt}}",
