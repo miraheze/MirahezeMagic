@@ -87,6 +87,7 @@
 	"grouppage-patroller": "m:Special:MyLanguage/User groups#{{int:Group-patroller}}",
 	"grouppage-proxybot": "m:User:Proxybot",
 	"grouppage-requestwikiblocked": "m:Special:MyLanguage/Meta:RequestWiki blocked users",
+	"grouppage-rollbacker": "m:Special:MyLanguage/User groups#{{int:Group-rollbacker}}",
 	"grouppage-steward": "m:Special:MyLanguage/Stewards",
 	"grouppage-techteam": "m:Special:MyLanguage/Tech:Volunteers",
 	"grouppage-translationadmin": "m:Special:MyLanguage/User groups#{{int:Group-translationadmin}}",
