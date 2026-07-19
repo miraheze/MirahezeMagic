@@ -79,7 +79,6 @@
 	"grouppage-global-ipblock-exempt": "m:Special:MyLanguage/Global IP block exemption",
 	"grouppage-global-patroller": "m:Special:MyLanguage/Global Patrollers",
 	"grouppage-global-renamer": "m:Special:MyLanguage/Global renamers",
-	"grouppage-global-sysop": "m:Special:MyLanguage/Global Administrators",
 	"grouppage-interwiki-admin": "m:Special:MyLanguage/Interwiki administrators",
 	"grouppage-ipblock-exempt": "m:Special:MyLanguage/User groups#{{int:Group-ipblock-exempt}}",
 	"grouppage-member": "m:Special:MyLanguage/User groups#{{int:Group-member}}",
