@@ -25,6 +25,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\ManageWiki\Helpers\Utils\DatabaseUtils;
 use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\LikeValue;
 use Wikimedia\StaticArrayWriter;
@@ -41,24 +42,34 @@ class GenerateExtensionDatabaseList extends Maintenance {
 
 		$this->addOption( 'directory', 'Directory to store the list files in.', true, true );
 		$this->addOption( 'extension', $desc, true, true, multiOccurrence: true );
+		$this->addOption( 'exclude-deleted', 'Exclude deleted wikis from the generated list.' );
 	}
 
 	public function execute() {
 		$extArray = $this->getOption( 'extension' );
 		$directory = $this->getOption( 'directory' );
+		$excludeDeleted = $this->hasOption( 'exclude-deleted' );
 
+		/** @var DatabaseUtils $databaseUtils */
 		$databaseUtils = $this->getServiceContainer()->get( 'ManageWikiDatabaseUtils' );
+		'@phan-var DatabaseUtils $databaseUtils';
 		$dbr = $databaseUtils->getGlobalReplicaDB();
 
 		foreach ( $extArray as $ext ) {
-			$mwSettings = $dbr->newSelectQueryBuilder()
+			$queryBuilder = $dbr->newSelectQueryBuilder()
 				->table( 'mw_settings' )
 				->fields( [ 's_dbname', 's_extensions' ] )
 				->where( $dbr->expr( 's_extensions', IExpression::LIKE,
 					new LikeValue( $dbr->anyString(), $ext, $dbr->anyString() )
 				) )
-				->caller( __METHOD__ )
-				->fetchResultSet();
+				->caller( __METHOD__ );
+
+			if ( $excludeDeleted ) {
+				$queryBuilder->join( 'cw_wikis', null, [ 'wiki_dbname = s_dbname' ] )
+					->andWhere( [ 'wiki_deleted' => 0 ] );
+			}
+
+			$mwSettings = $queryBuilder->fetchResultSet();
 
 			$list = [];
 			foreach ( $mwSettings as $row ) {
