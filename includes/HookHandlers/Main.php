@@ -137,7 +137,7 @@ class Main implements
 			'requestwiki-info-guidance',
 			'requestwiki-info-guidance-post',
 			'requestwiki-label-agreement',
-			'requestwiki-moredetails-reopened'
+			'requestwiki-moredetails-reopened',
 			'requestwiki-success',
 			'restriction-delete',
 			'restriction-protect',
