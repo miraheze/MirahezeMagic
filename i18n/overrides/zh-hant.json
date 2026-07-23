@@ -49,6 +49,7 @@
 	"miraheze-requestwiki-info-guidance": "只剩幾個部分了！這一段非常重要。",
 	"miraheze-requestwiki-info-guidance-post": "您即將完成所有流程。請檢閱並確認您已完成所有部分，並提供所有相關詳細資訊。在完成後，我們會盡快回覆您。在此期間，歡迎您瀏覽 Meta 並結識您的 wiki 運作夥伴。我們很高興在此見到新面孔！",
 	"miraheze-requestwiki-label-agreement": "'''我已閱讀並接受[[Special:MyLanguage/Content Policy|內容政策]]、[[Special:MyLanguage/Dormancy Policy|休眠政策]]、[[Special:MyLanguage/Wiki Governance policy|wiki 治理政策]]與[[Special:MyLanguage/Global Conduct Policy|全域行為政策]]'''，並依請求 wiki 行為，代表我同意我們所有的[[Special:MyLanguage/Global policies|全域政策]]。",
+	"miraheze-requestwiki-moredetails-reopened": "感謝您更新您的 wiki 申請。您的 wiki 申請已重新進入人工審核佇列，大約需要 2-3 天才能再次審核。在此期間，您無需進行任何操作。",
 	"miraheze-requestwiki-success": "已成功提交您的 wiki 申請（$1）。Wiki 建立者志工會盡快審核您的申請。",
 	"miraheze-restriction-delete": "刪除",
 	"miraheze-restriction-protect": "保護",

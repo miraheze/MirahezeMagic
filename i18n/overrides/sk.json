@@ -44,6 +44,7 @@
 	"miraheze-requestwiki-info-guidance": "Ostali už len dve sekcie! Táto je veľmi dôležitá.",
 	"miraheze-requestwiki-info-guidance-post": "Ste takmer na konci. Skontrolujte prosím, či ste dokončili všetky sekcie a uviedli všetky relevantné údaje. Keď tak urobíte, ozveme sa vám čo najskôr. Vtedy si môžete kľudne obzrieť Meta a spoznať svojich spoluprevádzkovateľov wiki. Radi tu vidíme nové tváre!",
 	"miraheze-requestwiki-label-agreement": "'''Prečítal(a) som a prijímam [[Special:MyLanguage/Content Policy|Smernicu o obsahu]], [[Special:MyLanguage/Dormancy Policy|Smernicu o neaktivite]], [[Special:MyLanguage/Wiki Governance policy|Smernicu o správe wiki]] a [[Special:MyLanguage/Global Conduct Policy|Globálnu smernicu o správaní]]''', a žiadosťou o wiki súhlasím so všetkými našimi [[Special:MyLanguage/Global policies|globálnymi smernicami]].",
+	"miraheze-requestwiki-moredetails-reopened": "Ďakujeme za aktualizáciu vašej požiadavky na wiki. Vaša požiadavka na wiki je teraz späť v rade na posúdenie ľudským recenzentom a jej opätovné posúdenie bude trvať približne 2–3 dni. Medzitým nemusíte robiť nič.",
 	"miraheze-requestwiki-success": "Vaša žiadosť o wiki ($1) bola úspešne odoslaná. Vašu žiadosť čo najskôr preskúma dobrovoľný tvorca wiki.",
 	"miraheze-restriction-delete": "Vymazať",
 	"miraheze-restriction-protect": "Chrániť",
