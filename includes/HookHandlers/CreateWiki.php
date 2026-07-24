@@ -18,6 +18,8 @@ use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
 use Miraheze\ManageWiki\ConfigNames;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
+use OpenSearch\ClientBuilder;
+use OpenSearch\Common\Exceptions\NoNodesAvailableException;
 use Psr\Log\LoggerInterface;
 use Redis;
 use Throwable;
@@ -143,6 +145,36 @@ class CreateWiki implements
 			)->limits( $limits )
 				->disableSandbox()
 				->execute();
+		}
+
+		try {
+			$client = ClientBuilder::create()
+				->setHosts( [ 'https://opensearch-mw.wikitide.net' ] )
+				->build();
+
+			if ( $client->indices()->exists( [ 'index' => "{$dbname}_content" ] ) ) {
+				$response = $client->indices()->delete( [
+					'index' => "{$dbname}_content",
+				] );
+
+				$this->logger->debug( 'OpenSearch response when deleting index {index}: {response}', [
+					'index' => "{$dbname}_content",
+					'response' => $response,
+				] );
+			}
+
+			if ( $client->indices()->exists( [ 'index' => "{$dbname}_general" ] ) ) {
+				$response = $client->indices()->delete( [
+					'index' => "{$dbname}_general",
+				] );
+
+				$this->logger->debug( 'OpenSearch response when deleting index {index}: {response}', [
+					'index' => "{$dbname}_general",
+					'response' => $response,
+				] );
+			}
+		} catch ( NoNodesAvailableException ) {
+			$this->logger->error( 'OpenSearch failed to find any nodes.' );
 		}
 
 		$this->removeRedisKey( "*$dbname*" );
