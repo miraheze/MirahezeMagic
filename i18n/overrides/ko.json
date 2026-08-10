@@ -48,6 +48,7 @@
 	"miraheze-requestwiki-info-guidance": "이제 몇 부분만 남았습니다! 이 부분은 정말 중요합니다.",
 	"miraheze-requestwiki-info-guidance-post": "거의 다 되셨습니다. 모든 항목을 작성하고 관련 정보를 모두 입력했는지 다시 한번 확인해 주세요. 확인 후 최대한 빨리 연락드리겠습니다. 그동안 메타를 둘러보시고 다른 위키 운영자들과 교류해 보세요. 새로운 사용자는 언제나 환영합니다!",
 	"miraheze-requestwiki-label-agreement": "'''본인은 [[Special:MyLanguage/Content Policy|콘텐츠 정책]], [[Special:MyLanguage/Dormancy Policy|휴면 정책]], [[Special:MyLanguage/Wiki Governance policy|위키 관리 정책]] 및 [[Special:MyLanguage/Global Conduct Policy|전역 행동 정책]]을 읽고 동의하며, 위키 생성을 요청함으로써 당사의 모든 [[Special:MyLanguage/Global policies|전역 정책]]에 동의합니다.'''",
+	"miraheze-requestwiki-moredetails-reopened": "위키 요청을 업데이트해 주셔서 감사합니다. 당신의 위키 요청은 이제 담당자가 검토할 대기열에 다시 추가되었으며, 재검토에는 약 2~3일이 소요될 예정입니다. 그동안 별도로 해야할 일은 없습니다.",
 	"miraheze-requestwiki-success": "위키 요청($1)이 성공적으로 제출되었습니다. 요청은 자원봉사 위키 작성자에 의해 조속히 검토될 것입니다.",
 	"miraheze-restriction-delete": "삭제",
 	"miraheze-restriction-protect": "보호",
