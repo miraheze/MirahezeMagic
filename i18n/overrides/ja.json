@@ -20,6 +20,8 @@
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "[[m:Special:MyLanguage/Global locks|グローバルロック]]のため、{{GENDER:$1|あなた}}はログインできません。詳細または異議申し立てについては、<code>cvt[at]miraheze.org</code>までお問い合わせください。",
+	"miraheze-cookieconsent-detailed-dialog-intro": "<p>私たちは、コンテンツのパーソナライズ、ウェブサイトの改善、トラフィック分析のために、Cookie (および類似の技術)を使用しています。</p><p>これらのCookieにより、お客様に関する情報を収集し、当社のウェブサイト内でのインターネット上の行動を追跡します。これにより、あなたの個人プロファイルを作成します。そして、あなたの好みに合わせてウェブサイトとコミュニケーションを最適化します。詳細については、[[m:Special:MyLanguage/Privacy Policy|プライバシーポリシー]]をご覧ください。</p><p>Cookieの設定を更新すると、ページが再読み込みされます。</p>",
+	"miraheze-cookieconsent-simple-dialog-content": "<p>私たちは、コンテンツのパーソナライズ、ウェブサイトの改善、トラフィック分析のために、Cookie (および類似の技術) を使用しています。</p><p>これらのCookieにより、お客様に関する情報を収集し、当ウェブサイト内でのインターネット上の行動を追跡します。これにより、あなたの個人プロファイルを作成します。そして、あなたの好みに合わせてウェブサイトやコミュニケーションを最適化します。詳細については、[[m:Special:MyLanguage/Privacy Policy|プライバシーポリシー]]をご覧ください。</p><p>Cookieの設定を変更したい場合は、 <b>「設定を管理」</b>をクリックしてください。 <b>「すべて同意する」</b>をクリックすると、すべてのCookieの使用に同意したことになります。同意はいつでも変更または撤回できます。</p>",
 	"miraheze-createwiki-close-email-body": "こんにちは、\n\nこのメールは、あなたのMirahezeウィキが閉鎖されたことをお知らせするものです。60日以内に編集や記録の操作が行われなかったウィキは、[[m:Special:MyLanguage/Dormancy Policy|休眠の方針]] (ウィキをリクエストする際に同意した) に従って、スパムを防ぐために自動的に閉鎖されます。\n\nウィキを再度開きたい場合は、Special:ManageWikiにアクセスし、「閉鎖」ボックスのチェックを外して再度開いてください。ウィキを再開しない場合、または誰も(休眠の方針の再開リクエストセクションに従って)あなたのウィキを開くことをリクエストしなかった場合、あなたのウィキは永久削除の対象としてマークされることに注意してください。",
 	"miraheze-createwiki-close-email-sender": "Miraheze",
 	"miraheze-createwiki-close-email-subject": "あなたのMirahezeウィキ ($1) は閉鎖されました",
@@ -54,6 +56,7 @@
 	"miraheze-requestwiki-info-guidance": "残りはほんの数セクションです。ここからは非常に重要です。",
 	"miraheze-requestwiki-info-guidance-post": "もうすぐです。すべてのセクションを完了し、関連する詳細をすべて入力したことを確認してください。完了したら、追ってご連絡いたします。それまでの間に、Meta を自由に見て回り、ウィキ運営者の仲間と交流しても良いでしょう。新しい顔ぶれに会えるのを楽しみにしています。",
 	"miraheze-requestwiki-label-agreement": "'''私は[[Special:MyLanguage/Content Policy|コンテンツ・ポリシー]]、[[Special:MyLanguage/Dormancy Policy|休眠の方針]]、[[Special:MyLanguage/Wiki Governance policy|ウィキガバナンス方針]]、および[[Special:MyLanguage/Global Conduct Policy|グローバル行動方針]]を読み、同意します。'''また、ウィキを申請することにより、すべての[[Special:MyLanguage/Global policies|グローバル方針]]に同意します。",
+	"miraheze-requestwiki-moredetails-reopened": "ウィキ申請の更新ありがとうございます。申請は現在、担当者によるレビュー待ちリストに追加されており、再レビューには約2～3日かかります。その間、特に何もする必要はありません。",
 	"miraheze-requestwiki-success": "あなたのウィキの申請 ($1) は正常に受理されました。申請はボランティアのウィキ作成者によって可能な限り速やかに審査されます。",
 	"miraheze-restriction-delete": "削除",
 	"miraheze-restriction-protect": "保護",
