@@ -305,10 +305,12 @@ class Main implements
 			$imageHtml . $message
 		);
 
+		$clearHtml = Html::Element( 'div', [ 'style' => 'clear: both;' ] );
+
 		$divHtml = Html::rawElement( 'div', [
 			'class' => 'wikitable',
 			'style' => 'text-align: center; width: 90%; margin-left: auto; margin-right: auto; padding: 15px; border: 4px solid black; background-color: var(--background-color-neutral, #EEE);',
-		], $spanHtml . '<div style="clear: both;"></div>' );
+		], $spanHtml . $clearHtml );
 
 		$siteNotice .= $divHtml;
 	}
