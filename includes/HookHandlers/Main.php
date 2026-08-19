@@ -305,7 +305,7 @@ class Main implements
 			$imageHtml . $message
 		);
 
-		$clearHtml = Html::Element( 'div', [ 'style' => 'clear: both;' ] );
+		$clearHtml = Html::element( 'div', [ 'style' => 'clear: both;' ] );
 
 		$divHtml = Html::rawElement( 'div', [
 			'class' => 'wikitable',
