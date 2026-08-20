@@ -132,6 +132,9 @@
 		"SkinAddFooterLinks": {
 			"handler": "Main"
 		},
+		"SpecialPage_initList": {
+			"handler": "Specials"
+		},
 		"SpecialPageBeforeExecute": {
 			"handler": "Specials"
 		},
