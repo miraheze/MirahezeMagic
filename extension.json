@@ -48,10 +48,24 @@
 	"LogTypes": [
 		"vanishuser"
 	],
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "MirahezeMagic/modules"
+	},
+	"ResourceModules": {
+		"ext.mirahezeMagic.consoleMessage": {
+			"packageFiles": [
+				"ext.mirahezeMagic.consoleMessage.js"
+			],
+			"messages": [
+				"miraheze-console-message"
+			]
+		}
+	},
 	"SpecialPages": {
 		"VanishUser": {
 			"class": "Miraheze\\MirahezeMagic\\Specials\\SpecialVanishUser",
-			"services" : [
+			"services": [
 				"JobQueueGroupFactory",
 				"UserFactory"
 			],
@@ -65,6 +79,9 @@
 	"Hooks": {
 		"AbuseFilterShouldFilterAction": {
 			"handler": "AbuseFilter"
+		},
+		"BeforePageDisplay": {
+			"handler": "Main"
 		},
 		"ContentSecurityPolicyDirectives": {
 			"handler": "ContentSecurityPolicy"
@@ -201,10 +218,9 @@
 		"ManageWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ManageWiki",
 			"services": [
-                 "MainConfig"
-            ]
-        },
-
+				"MainConfig"
+			]
+		},
 		"RequestWiki": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\RequestWiki"
 		},
