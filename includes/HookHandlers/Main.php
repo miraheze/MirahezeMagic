@@ -19,6 +19,7 @@ use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\RecentChanges\RecentChange;
@@ -29,6 +30,7 @@ use MessageCache;
 
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
+	BeforePageDisplayHook,
 	BlockIpCompleteHook,
 	GetLocalURL__InternalHook,
 	MessageCacheFetchOverridesHook,
@@ -212,6 +214,14 @@ class Main implements
 				}
 			}
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 * @param Skin $skin @phan-unused-param
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		$out->addModules( 'ext.mirahezeMagic.consoleMessage' );
 	}
 
 	/** @inheritDoc */
