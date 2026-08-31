@@ -101,5 +101,6 @@
 	"sitematrix-summary": "Ta strona specjalna zawiera listę wszystkich wiki Miraheze.",
 	"sitematrix": "Wiki lista Miraheze",
 	"termsofservice": "Warunki korzystania",
+	"logentry-vanishuser-action": "$1 wymazał(a) użytkownika.",
 	"echo-pref-tooltip-mirahezemagic-tech-notification": "Powiadom mnie, gdy nastąpią zmiany techniczne dotyczące mojej wiki."
 }
