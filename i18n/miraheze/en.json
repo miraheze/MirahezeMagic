@@ -99,6 +99,7 @@
 	"grouppage-wiki-creator": "m:Special:MyLanguage/Meta:Wiki reviewers",
 	"grouppage-wiki-mechanic": "m:Special:MyLanguage/Wiki Mechanics",
 	"miraheze-categories": "Categories",
+	"miraheze-console-message": "Welcome to Miraheze. This wiki enforces a Content Security Policy (CSP). If you are seeing CSP errors and something is not working, see https://meta.miraheze.org/wiki/Help:Content_Security_Policy for help.",
 	"miraheze-donate": "Donate to Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-emailuser-disabled-title": "Emailing users is disabled",
