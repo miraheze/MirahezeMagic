@@ -91,7 +91,6 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 
 		try {
 			$this->assertRunningVersion( $json );
-
 			if ( $this->hasOption( 'change-version' ) ) {
 				$this->runVersionChange( $wiki, $json );
 			}
