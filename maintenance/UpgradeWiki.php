@@ -158,10 +158,11 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 			$this->fatalError( "JSON key 'mwversion' must be a non-empty string." );
 		}
 
-		if ( !str_starts_with( MW_VERSION, $mwversion ) ) {
+		$runningVersion = MW_VERSION;
+		if ( !str_starts_with( $runningVersion, $mwversion ) ) {
 			$this->currentStep = 'validating running MediaWiki version';
 			$this->fatalError(
-				'This script is running under MediaWiki ' . MW_VERSION . ", but the JSON targets $mwversion. "
+				"This script is running under MediaWiki $runningVersion, but the JSON targets $mwversion. "
 				. 'Make sure to run this script on the target version.'
 			);
 		}
