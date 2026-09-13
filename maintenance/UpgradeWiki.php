@@ -44,9 +44,13 @@ use function is_bool;
 use function is_int;
 use function is_string;
 use function json_decode;
+use function register_shutdown_function;
 use const FILE_APPEND;
 
 class UpgradeWiki extends LoggedUpdateMaintenance {
+
+	private ?string $currentStep = null;
+	private bool $completed = false;
 
 	public function __construct() {
 		parent::__construct();
@@ -71,6 +75,10 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 	protected function doDBUpdates(): bool {
 		$wiki = $this->getOption( 'wiki' );
 		$jsonPath = $this->getOption( 'json' );
+
+		$this->currentStep = "loading JSON file '$jsonPath'";
+		$this->registerFailureShutdownHandler( $wiki );
+
 		$json = $this->loadJson( $jsonPath );
 
 		$this->output( "=== Running based on JSON '$jsonPath' for wiki '$wiki' ===\n" );
@@ -80,20 +88,46 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 			$this->runMaintenanceSection( $wiki, $json );
 			$this->runPatchesSection( $wiki, $json, 'post_patches', "=== Running post-maintenance SQL patches ===\n" );
 			$this->output( "All steps completed.\n" );
+			$this->completed = true;
 			return true;
 		} catch ( Throwable $t ) {
 			MWExceptionHandler::rollbackPrimaryChangesAndLog( $t );
 			$this->logToFile( $t, $wiki );
 			$logger = LoggerFactory::getInstance( 'UpgradeWiki' );
-			$logger->critical( 'UpgradeWiki failed on {wiki}: {message}', [
+			$logger->critical( 'UpgradeWiki failed on {wiki} during {step}: {message}', [
 				'exception' => $t,
 				'message' => $t->getMessage(),
+				'step' => $this->currentStep,
 				'wiki' => $wiki,
 			] );
 
-			$this->error( "Upgrade failed: {$t->getMessage()}" );
+			$this->error( "Upgrade failed during {$this->currentStep}: {$t->getMessage()}" );
+			$this->completed = true;
 			return false;
 		}
+	}
+
+	private function registerFailureShutdownHandler( string $wiki ): void {
+		register_shutdown_function( function () use ( $wiki ): void {
+			if ( $this->completed ) {
+				return;
+			}
+
+			$step = $this->currentStep ?? 'an unknown step';
+			$logFile = '/var/log/mediawiki/debuglogs/UpgradeWiki-exceptions.log';
+			$requestId = Telemetry::getInstance()->getRequestId();
+			$time = date( 'Y-m-d H:i:s' );
+			$message = "$wiki [$requestId $time] UpgradeWiki exited unexpectedly while $step. "
+				. "This is almost always a fatalError() call, check this run's stderr output "
+				. "for the actual message.\n\n";
+			file_put_contents( $logFile, $message, FILE_APPEND );
+
+			$logger = LoggerFactory::getInstance( 'UpgradeWiki' );
+			$logger->critical( 'UpgradeWiki on {wiki} exited unexpectedly while {step}', [
+				'step' => $step,
+				'wiki' => $wiki,
+			] );
+		} );
 	}
 
 	private function logToFile( Throwable $t, string $wiki ): void {
@@ -111,6 +145,7 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		}
 
 		if ( !is_array( $items ) ) {
+			$this->currentStep = "validating JSON key '$key'";
 			$this->fatalError( "JSON key '$key' must be an array." );
 		}
 
@@ -123,6 +158,7 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 			}
 
 			$filename = $this->normalizePatchItemToFilename( $item, $key );
+			$this->currentStep = "running SQL patch '$filename' from '$key'";
 			$this->runSqlFile( $wiki, $filename );
 		}
 	}
@@ -134,12 +170,14 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		}
 
 		if ( !is_array( $items ) ) {
+			$this->currentStep = "validating JSON key 'maintenance'";
 			$this->fatalError( "JSON key 'maintenance' must be an array." );
 		}
 
 		$this->output( "=== Running maintenance scripts ===\n" );
 		foreach ( $items as $idx => $item ) {
 			if ( !is_array( $item ) ) {
+				$this->currentStep = "validating maintenance[$idx]";
 				$this->fatalError( "maintenance[$idx] must be an object." );
 			}
 
@@ -151,20 +189,24 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 
 			$class = $item['class'] ?? null;
 			if ( !is_string( $class ) || $class === '' ) {
+				$this->currentStep = "validating maintenance[$idx].class";
 				$this->fatalError( "maintenance[$idx].class must be a non-empty string." );
 			}
 
 			$options = $item['options'] ?? [];
 			$args = $item['args'] ?? [];
 			if ( $options !== [] && !is_array( $options ) ) {
+				$this->currentStep = "validating maintenance[$idx].options for $class";
 				$this->fatalError( "maintenance[$idx].options must be an object (key/value) if present." );
 			}
 
 			if ( $args !== [] && !is_array( $args ) ) {
+				$this->currentStep = "validating maintenance[$idx].args for $class";
 				$this->fatalError( "maintenance[$idx].args must be an array if present." );
 			}
 
 			$this->output( "==> Maintenance: $class\n" );
+			$this->currentStep = "running maintenance class '$class'";
 			$this->runMaintenanceClass( $wiki, $class, $options, $args );
 		}
 	}
