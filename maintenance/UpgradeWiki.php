@@ -60,7 +60,9 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		$this->addOption( 'json', 'Path to JSON file.', true, true );
 		$this->addOption(
 			'change-version',
-			'Run ChangeMediaWikiVersion first, setting mwversion to the JSON\'s mwversion key, before any patches or maintenance scripts run.'
+			'Run ChangeMediaWikiVersion first, setting mwversion to the JSON\'s mwversion key, ' .
+				'before any patches or maintenance scripts run. This should only be used if ' .
+				'running on a single wiki.'
 		);
 		$this->requireExtension( 'MirahezeMagic' );
 	}
