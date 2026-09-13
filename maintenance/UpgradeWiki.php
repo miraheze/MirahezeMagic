@@ -56,6 +56,10 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		parent::__construct();
 		$this->addDescription( 'Run a wiki upgrade defined in a JSON file (patches + maintenance steps).' );
 		$this->addOption( 'json', 'Path to JSON file.', true, true );
+		$this->addOption(
+			'change-version',
+			'Run ChangeMediaWikiVersion first, setting mwversion to the JSON\'s mwversion key, before any patches or maintenance scripts run.'
+		);
 		$this->requireExtension( 'MirahezeMagic' );
 	}
 
@@ -84,6 +88,10 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		$this->output( "=== Running based on JSON '$jsonPath' for wiki '$wiki' ===\n" );
 
 		try {
+			if ( $this->hasOption( 'change-version' ) ) {
+				$this->runVersionChange( $wiki, $json );
+			}
+
 			$this->runPatchesSection( $wiki, $json, 'pre_patches', "=== Running pre-maintenance SQL patches ===\n" );
 			$this->runMaintenanceSection( $wiki, $json );
 			$this->runPatchesSection( $wiki, $json, 'post_patches', "=== Running post-maintenance SQL patches ===\n" );
@@ -136,6 +144,18 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		$time = date( 'Y-m-d H:i:s' );
 		$message = "$wiki [$requestId $time] UpgradeWiki exception\n$t\n\n";
 		file_put_contents( $logFile, $message, FILE_APPEND );
+	}
+
+	private function runVersionChange( string $wiki, array $json ): void {
+		$mwversion = $json['mwversion'] ?? null;
+		if ( !is_string( $mwversion ) || $mwversion === '' ) {
+			$this->currentStep = "validating JSON key 'mwversion'";
+			$this->fatalError( "JSON key 'mwversion' must be a non-empty string to use --change-version." );
+		}
+
+		$this->output( "=== Running ChangeMediaWikiVersion to set mwversion to '$mwversion' ===\n" );
+		$this->currentStep = "running ChangeMediaWikiVersion to set mwversion to '$mwversion'";
+		$this->runMaintenanceClass( $wiki, ChangeMediaWikiVersion::class, [ 'mwversion' => $mwversion ], [] );
 	}
 
 	private function runPatchesSection( string $wiki, array $json, string $key, string $header ): void {
