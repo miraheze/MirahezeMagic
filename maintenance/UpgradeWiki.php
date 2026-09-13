@@ -45,7 +45,9 @@ use function is_int;
 use function is_string;
 use function json_decode;
 use function register_shutdown_function;
+use function str_starts_with;
 use const FILE_APPEND;
+use const MW_VERSION;
 
 class UpgradeWiki extends LoggedUpdateMaintenance {
 
@@ -88,6 +90,8 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		$this->output( "=== Running based on JSON '$jsonPath' for wiki '$wiki' ===\n" );
 
 		try {
+			$this->assertRunningVersion( $json );
+
 			if ( $this->hasOption( 'change-version' ) ) {
 				$this->runVersionChange( $wiki, $json );
 			}
@@ -146,12 +150,24 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		file_put_contents( $logFile, $message, FILE_APPEND );
 	}
 
-	private function runVersionChange( string $wiki, array $json ): void {
+	private function assertRunningVersion( array $json ): void {
 		$mwversion = $json['mwversion'] ?? null;
 		if ( !is_string( $mwversion ) || $mwversion === '' ) {
 			$this->currentStep = "validating JSON key 'mwversion'";
-			$this->fatalError( "JSON key 'mwversion' must be a non-empty string to use --change-version." );
+			$this->fatalError( "JSON key 'mwversion' must be a non-empty string." );
 		}
+
+		if ( !str_starts_with( MW_VERSION, $mwversion ) ) {
+			$this->currentStep = 'validating running MediaWiki version';
+			$this->fatalError(
+				'This script is running under MediaWiki ' . MW_VERSION . ", but the JSON targets $mwversion. "
+				. 'Make sure to run this script on the target version.'
+			);
+		}
+	}
+
+	private function runVersionChange( string $wiki, array $json ): void {
+		$mwversion = $json['mwversion'];
 
 		$this->output( "=== Running ChangeMediaWikiVersion to set mwversion to '$mwversion' ===\n" );
 		$this->currentStep = "running ChangeMediaWikiVersion to set mwversion to '$mwversion'";
