@@ -32,6 +32,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use MediaWiki\Maintenance\Maintenance;
 use MediaWiki\Registration\ExtensionRegistry;
+use MirahezeFunctions;
 use MwSql;
 use Throwable;
 use function basename;
@@ -83,6 +84,14 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 	protected function doDBUpdates(): bool {
 		$wiki = $this->getOption( 'wiki' );
 		$jsonPath = $this->getOption( 'json' );
+
+		if ( !$this->hasOption( 'force' ) ) {
+			$version = MirahezeFunctions::getMediaWikiVersion( $wiki );
+			$mwversion = $json['mwversion'] ?? null;
+			if ( $version === $mwversion ) {
+				return true;
+			}
+		}
 
 		$this->currentStep = "loading JSON file '$jsonPath'";
 		$this->registerFailureShutdownHandler( $wiki );
