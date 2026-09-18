@@ -89,6 +89,7 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 			$version = MirahezeFunctions::getMediaWikiVersion( $wiki );
 			$mwversion = $json['mwversion'] ?? null;
 			if ( $version === $mwversion ) {
+				$this->output( "Skipping upgrade for '$wiki', already on '$mwversion'.\n" );
 				return true;
 			}
 		}
