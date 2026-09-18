@@ -85,6 +85,10 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		$wiki = $this->getOption( 'wiki' );
 		$jsonPath = $this->getOption( 'json' );
 
+		$this->currentStep = "loading JSON file '$jsonPath'";
+		$this->registerFailureShutdownHandler( $wiki );
+
+		$json = $this->loadJson( $jsonPath );
 		if ( !$this->hasOption( 'force' ) ) {
 			$version = MirahezeFunctions::getMediaWikiVersion( $wiki );
 			$mwversion = $json['mwversion'] ?? null;
@@ -93,11 +97,6 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 				return true;
 			}
 		}
-
-		$this->currentStep = "loading JSON file '$jsonPath'";
-		$this->registerFailureShutdownHandler( $wiki );
-
-		$json = $this->loadJson( $jsonPath );
 
 		$this->output( "=== Running based on JSON '$jsonPath' for wiki '$wiki' ===\n" );
 
