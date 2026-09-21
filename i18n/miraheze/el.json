@@ -8,6 +8,7 @@
 			"NikosLikomitros",
 			"Nikosgranturismogt",
 			"Norhorn",
+			"PrinceAzuka134",
 			"Protnet",
 			"Warudo"
 		]
@@ -21,6 +22,7 @@
 	"miraheze-donate": "Κάντε δωρεά στη Miraheze",
 	"miraheze-faq": "Συχνές ερωτήσεις",
 	"miraheze-requestwiki": "Ζητήστε ένα βίκι",
+	"miraheze-sitenotice-closed-locked": "Αυτό το βικι έχει κλείσει επειδή οι [[m:Special:MyLanguage/Stewards|Stewards]] ή [[m:Special:MyLanguage/Trust and Safety|Trust and Safety]] έχουν διαπιστώσει ότι παραβιάζει την [[m:Content Policy|Content Policy]] του Miraheze ή άλλες παγκόσμιες πολιτικές. Οι γραφειοκράτες θα έπρεπε να έχουν λάβει είτε ένα email είτε ένα μήνυμα στη σελίδα συζήτησης με περισσότερες πληροφορίες, συμπεριλαμβανομένου του τρόπου άσκησης έφεσης.",
 	"protect-level-user": "Να επιτρέπονται μόνο συνδεδεμένοι χρήστες",
 	"restriction-delete": "Διαγραφή",
 	"settings-links": "Σύνδεσμοι",
