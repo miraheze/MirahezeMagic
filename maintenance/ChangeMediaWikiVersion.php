@@ -69,9 +69,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 		$remoteWikiFactory = $this->getServiceContainer()->get( 'RemoteWikiFactory' );
 
 		foreach ( $dbnames as $dbname ) {
-			$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 			$newVersion = $this->getOption( 'mwversion' );
-
 			if ( is_dir( "/srv/mediawiki/$newVersion" ) ) {
 				$remoteWiki = $remoteWikiFactory->newInstance( $dbname );
 				$remoteWiki->disableResetDatabaseLists();
@@ -91,6 +89,7 @@ class ChangeMediaWikiVersion extends Maintenance {
 					continue;
 				}
 
+				$oldVersion = MirahezeFunctions::getMediaWikiVersion( $dbname );
 				if ( $this->hasOption( 'dry-run' ) ) {
 					$this->output( "Dry run: Would upgrade $dbname from $oldVersion to $newVersion\n" );
 					continue;
