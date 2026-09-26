@@ -89,7 +89,7 @@ class UpgradeWiki extends LoggedUpdateMaintenance {
 		$this->registerFailureShutdownHandler( $wiki );
 
 		$json = $this->loadJson( $jsonPath );
-		if ( !$this->hasOption( 'force' ) ) {
+		if ( $this->hasOption( 'change-version' ) && !$this->hasOption( 'force' ) ) {
 			$version = MirahezeFunctions::getMediaWikiVersion( $wiki );
 			$mwversion = $json['mwversion'] ?? null;
 			if ( $version === $mwversion ) {
