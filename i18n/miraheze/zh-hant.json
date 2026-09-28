@@ -15,6 +15,7 @@
 			"铁桶"
 		]
 	},
+	"action-editallcustomprotected": "編輯所有自訂保護等級的頁面",
 	"datadump-namespaceselect-label": "命名空間",
 	"extensions-antispam": "垃圾訊息預防",
 	"extensions-editors": "編輯器",
@@ -111,6 +112,7 @@
 	"requestwiki-label-sourceurl": "請輸入來源 wiki（您要移動或分叉的 wiki）的完整 URL。",
 	"restriction-delete": "刪除",
 	"restriction-level-user": "只允許已登入使用者",
+	"right-editallcustomprotected": "編輯所有自訂保護等級的頁面",
 	"right-user": "編輯頁面保護為「{{int:protect-level-user}}」",
 	"settings-anti-spam": "反垃圾訊息",
 	"settings-beta": "測試",
