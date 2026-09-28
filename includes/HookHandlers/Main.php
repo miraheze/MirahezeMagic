@@ -22,8 +22,8 @@ use MediaWiki\RecentChanges\Hook\RecentChange_saveHook;
 use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Skin\Hook\SiteNoticeAfterHook;
 use MediaWiki\Skin\Hook\SkinAddFooterLinksHook;
-use MediaWiki\Specials\Hook\BlockIpCompleteHook;
 use MediaWiki\Skin\Skin;
+use MediaWiki\Specials\Hook\BlockIpCompleteHook;
 use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
 
