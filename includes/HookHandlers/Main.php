@@ -18,6 +18,7 @@ use MediaWiki\Hook\SiteNoticeAfterHook;
 use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Language\MessageCache;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
@@ -25,7 +26,6 @@ use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Skin\Skin;
 use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
-use MessageCache;
 
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
