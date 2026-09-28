@@ -44,8 +44,8 @@ use MediaWiki\Logging\ManualLogEntry;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\SpecialPage\FormSpecialPage;
 use MediaWiki\SpecialPage\SpecialPage;
-use MediaWiki\Status\Status;
 use MediaWiki\User\UserFactory;
+use StatusValue;
 
 class SpecialVanishUser extends FormSpecialPage {
 
@@ -78,11 +78,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		?CentralAuthDatabaseManager $centralAuthDatabaseManager,
 		?GlobalRenameUserValidator $globalRenameUserValidator
 	) {
-		if ( version_compare( MW_VERSION, '1.46', '>=' ) ) {
-			parent::__construct( 'VanishUser' );
-		} else {
-			parent::__construct( 'VanishUser', 'centralauth-rename' );
-		}
+		parent::__construct( 'VanishUser' );
 
 		$this->centralAuthAntiSpoofManager = $centralAuthAntiSpoofManager;
 		$this->centralAuthDatabaseManager = $centralAuthDatabaseManager;
@@ -146,16 +142,16 @@ class SpecialVanishUser extends FormSpecialPage {
 
 	/**
 	 * @param array $formData
-	 * @return Status
+	 * @return StatusValue
 	 */
 	public function validateCentralAuth( array $formData ) {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CentralAuth' ) ) {
-			return Status::newFatal( 'removepii-centralauth-notinstalled' );
+			return StatusValue::newFatal( 'removepii-centralauth-notinstalled' );
 		}
 
 		$oldUser = $this->userFactory->newFromName( $formData['oldname'] );
 		if ( !$oldUser ) {
-			return Status::newFatal( 'centralauth-rename-doesnotexist' );
+			return StatusValue::newFatal( 'centralauth-rename-doesnotexist' );
 		}
 
 		$oldCentral = CentralAuthUser::getInstanceByName( $formData['oldname'] );
@@ -164,16 +160,16 @@ class SpecialVanishUser extends FormSpecialPage {
 		if ( ( $oldCentral->isSuppressed() || $oldCentral->isHidden() ) &&
 			!$canSuppress
 		) {
-			return Status::newFatal( 'centralauth-rename-doesnotexist' );
+			return StatusValue::newFatal( 'centralauth-rename-doesnotexist' );
 		}
 
 		if ( $oldUser->getName() === $this->getUser()->getName() ) {
-			return Status::newFatal( 'centralauth-rename-cannotself' );
+			return StatusValue::newFatal( 'centralauth-rename-cannotself' );
 		}
 
 		$newUser = $this->userFactory->newFromName( $formData['newname'] );
 		if ( !$newUser ) {
-			return Status::newFatal( 'centralauth-rename-badusername' );
+			return StatusValue::newFatal( 'centralauth-rename-badusername' );
 		}
 
 		return $this->globalRenameUserValidator->validate( $oldUser, $newUser );
@@ -181,7 +177,7 @@ class SpecialVanishUser extends FormSpecialPage {
 
 	/**
 	 * @param array $formData
-	 * @return bool|Status
+	 * @return bool|StatusValue
 	 */
 	public function onSubmit( array $formData ) {
 		$validCentralAuth = $this->validateCentralAuth( $formData );
@@ -193,7 +189,7 @@ class SpecialVanishUser extends FormSpecialPage {
 		$newUser = $this->userFactory->newFromName( $formData['newname'], UserFactory::RIGOR_CREATABLE );
 
 		if ( !$oldUser || !$newUser ) {
-			return Status::newFatal( 'unknown-error' );
+			return StatusValue::newFatal( 'unknown-error' );
 		}
 
 		$globalRenameUser = new GlobalRenameUser(

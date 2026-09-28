@@ -2,10 +2,10 @@
 
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
-use MediaWiki\Hook\SidebarBeforeOutputHook;
-use MediaWiki\Hook\SkinEditSectionLinksHook;
-use MediaWiki\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Skin\Hook\SidebarBeforeOutputHook;
+use MediaWiki\Skin\Hook\SkinEditSectionLinksHook;
+use MediaWiki\Skin\Hook\SkinTemplateNavigation__UniversalHook;
 use MediaWiki\SpecialPage\SpecialPage;
 
 class NoFollow implements

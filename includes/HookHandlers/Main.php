@@ -5,27 +5,27 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 use MediaWiki\Api\ApiQuerySiteinfo;
 use MediaWiki\Api\Hook\APIQuerySiteInfoGeneralInfoHook;
 use MediaWiki\Block\DatabaseBlock;
-use MediaWiki\Cache\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
-use MediaWiki\Hook\BlockIpCompleteHook;
 use MediaWiki\Hook\GetLocalURL__InternalHook;
 use MediaWiki\Hook\MimeMagicInitHook;
-use MediaWiki\Hook\RecentChange_saveHook;
-use MediaWiki\Hook\SiteNoticeAfterHook;
-use MediaWiki\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Html\Html;
 use MediaWiki\Http\HttpRequestFactory;
+use MediaWiki\Language\Hook\MessageCacheFetchOverridesHook;
+use MediaWiki\Language\MessageCache;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
+use MediaWiki\RecentChanges\Hook\RecentChange_saveHook;
 use MediaWiki\RecentChanges\RecentChange;
+use MediaWiki\Skin\Hook\SiteNoticeAfterHook;
+use MediaWiki\Skin\Hook\SkinAddFooterLinksHook;
 use MediaWiki\Skin\Skin;
+use MediaWiki\Specials\Hook\BlockIpCompleteHook;
 use MediaWiki\User\User;
 use MediaWiki\WikiMap\WikiMap;
-use MessageCache;
 
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
