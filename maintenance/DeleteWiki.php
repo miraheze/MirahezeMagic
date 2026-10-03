@@ -28,14 +28,15 @@ use MediaWiki\Maintenance\Maintenance;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\Platform\ISQLPlatform;
 
-class ResetWiki extends Maintenance {
+class DeleteWiki extends Maintenance {
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Resets a wiki database to what it is when it is first created.' );
-		$this->addOption( 'dbname', 'The database name of the wiki to reset.', true, true );
-		$this->addOption( 'requester', 'The user to assign initial rights for.', true, true );
+		$this->addDescription( 'Deletes a wiki database. Use --reset to recreate it.' );
+		$this->addOption( 'dbname', 'The database name of the wiki to delete.', true, true );
+		$this->addOption( 'requester', 'The user to assign initial rights for (required with --reset).', false, true );
+		$this->addOption( 'reset', 'Reset/recreate the wiki after deletion.' );
 
 		$this->requireExtension( 'CreateWiki' );
 		$this->requireExtension( 'ManageWiki' );
@@ -44,17 +45,24 @@ class ResetWiki extends Maintenance {
 	public function execute(): void {
 		$databaseName = strtolower( $this->getOption( 'dbname' ) );
 		$requester = $this->getOption( 'requester' );
+		$doReset = $this->hasOption( 'reset' );
 
-		if ( !$databaseName || !$requester ) {
-			$this->fatalError( 'Both --dbname and --requester are required.' );
+		if ( !$databaseName ) {
+			$this->fatalError( 'The --dbname option is required.' );
 		}
 
-		$userFactory = $this->getServiceContainer()->getUserFactory();
-		if ( !$userFactory->newFromName( $requester ) ) {
-			$this->fatalError( "Requester '$requester' is invalid." );
+		if ( $doReset && !$requester ) {
+			$this->fatalError( '--requester is required when using --reset.' );
 		}
 
-		$this->output( "Resetting database: $databaseName\n" );
+		if ( $doReset ) {
+			$userFactory = $this->getServiceContainer()->getUserFactory();
+			if ( !$userFactory->newFromName( $requester ) ) {
+				$this->fatalError( "Requester '$requester' is invalid." );
+			}
+		}
+
+		$this->output( "Deleting database: $databaseName\n" );
 
 		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
 		$dbr = $databaseUtils->getGlobalReplicaDB();
@@ -108,6 +116,11 @@ class ResetWiki extends Maintenance {
 		// Drop the database
 		$dbw->query( "DROP DATABASE $databaseQuotes;", __METHOD__ );
 
+		if ( !$doReset ) {
+			$this->output( "Database deleted successfully.\n" );
+			return;
+		}
+
 		// Create a new WikiManagerFactory instance
 		$wikiManager = $wikiManagerFactory->newInstance( $databaseName );
 
@@ -136,5 +149,5 @@ class ResetWiki extends Maintenance {
 }
 
 // @codeCoverageIgnoreStart
-return ResetWiki::class;
+return DeleteWiki::class;
 // @codeCoverageIgnoreEnd
