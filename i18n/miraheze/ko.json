@@ -16,6 +16,7 @@
 			"그냥기여자"
 		]
 	},
+	"action-editallcustomprotected": "모든 사용자 지정 보호 수준의 페이지를 편집",
 	"centralauth-groupname": "미라헤즈",
 	"datadump-namespaceselect-label": "이름공간",
 	"extensions-antispam": "스팸 막기",
@@ -26,6 +27,8 @@
 	"extensions-specialpages": "특수 문서",
 	"extensions-variable": "변수",
 	"grant-usedatadumpapi": "덤프 생성, 보기, 삭제",
+	"group-assistant-steward": "{{GENDER:$1|보조 사무장}}",
+	"group-assistant-steward-member": "{{GENDER:$1|보조 사무장}}",
 	"group-autopatrolled": "점검 면제자",
 	"group-autopatrolled-member": "점검 면제자",
 	"group-confirmed": "인증된 사용자",
@@ -111,6 +114,7 @@
 	"requestwiki-label-sourceurl": "원본 위키(이동하거나 포크하려는 위키)의 전체 URL을 입력하세요.",
 	"restriction-delete": "삭제",
 	"restriction-level-user": "로그인한 사용자에게만 허용",
+	"right-editallcustomprotected": "모든 사용자 지정 보호 수준의 페이지를 편집",
 	"right-user": "\"{{int:protect-level-user}}\" 단계로 보호된 문서를 편집",
 	"settings-anti-spam": "스팸 방지",
 	"settings-beta": "베타",
