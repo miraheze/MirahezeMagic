@@ -14,6 +14,7 @@
 			"Libamidi",
 			"LittlePaw365",
 			"LuciferianThomas",
+			"MxPAPERBAG",
 			"Pawsdt",
 			"StarrySky",
 			"TFX202X",
@@ -67,5 +68,5 @@
 	"miraheze-snapwikiskin": "Snap!",
 	"miraheze-uploadtext": "使用下面的表单上传文件。要查看或搜索曾上传的文件，请查看[[Special:FileList|上传文件列表]]。上传与二次上传均会记录到[[Special:Log/upload|上传日志]]内。删除操作会记录到[[Special:Log/delete|删除日志]]内。\n\n使用下面的链接格式将文件嵌入页面：\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.jpg]]</nowiki></code></strong>：使用文件的完整版本\n* <strong><code><nowiki>[[</nowiki>{{ns:file}}<nowiki>:File.png|200px|thumb|left|说明文字]]</nowiki></code></strong>：使用文件的200像素宽的缩略图，带方框，靠左，并带有文本“说明文字”\n* <strong><code><nowiki>[[</nowiki>{{ns:media}}<nowiki>:File.ogg]]</nowiki></code></strong>：直接链接到文件而不显示文件内容\n\n请给上传的文件添加许可信息（如适用）。所有文件均'''必须'''遵守美国版权法，包括合理使用。多次不添加信息可能会侵犯版权并导致'''wiki被关闭'''。",
 	"miraheze-webauthn-module-description": "WebAuthn（Web身份验证）是万维网联盟 (W3C) 发布的一项 Web 标准。WebAuthn是FIDO联盟指导下的FIDO2项目的核心组件。该项目的目标是标准化一个使用公钥加密技术对基于Web的应用程序和服务的用户进行身份验证的接口。[https://en.wikipedia.org/wiki/WebAuthn 阅读更多]",
-	"miraheze-wikibase-sitelinks-miraheze": "Miraheze wiki"
+	"miraheze-wikibase-sitelinks-miraheze": "Miraheze 维基"
 }

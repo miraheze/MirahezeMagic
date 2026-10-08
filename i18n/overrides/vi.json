@@ -46,6 +46,7 @@
 	"miraheze-requestwiki-info-guidance": "Chỉ còn vài phần nữa thôi! Phần này rất quan trọng.",
 	"miraheze-requestwiki-info-guidance-post": "Bạn sắp hoàn tất rồi. Vui lòng xem lại để đảm bảo bạn đã hoàn thành tất cả các phần và cung cấp mọi thông tin chi tiết có liên quan. Khi bạn đã hoàn tất, chúng tôi sẽ phản hồi bạn sớm nhất có thể. Hãy thoải mái xem xung quanh Meta, gặp gỡ những người điều hành wiki khác trong thời gian chờ đợi. Chúng tôi thích nhìn thấy những gương mặt mới ở đây.",
 	"miraheze-requestwiki-label-agreement": "'''Tôi đã đọc và chấp nhận [[Special:MyLanguage/Content Policy|Chính sách nội dung]], [[Special:MyLanguage/Dormancy Policy|Chính sách không hoạt động]], [[Special:MyLanguage/Wiki Governance policy|Chính sách quản trị wiki]] và [[Special:MyLanguage/Global Conduct Policy|Chính sách ứng xử toàn cục]]''', và bằng cách yêu cầu một wiki, tôi đồng ý với tất cả [[Special:MyLanguage/Global policies|chính sách toàn cục]] tại đây.",
+	"miraheze-requestwiki-moredetails-reopened": "Cảm ơn bạn đã cập nhật yêu cầu wiki của mình. Yêu cầu wiki của bạn hiện đã được đưa trở lại hàng chờ để người duyệt xem xét, và quá trình xem xét sẽ mất khoảng 2-3 ngày. Bạn không cần phải làm gì trong thời gian chờ đợi.",
 	"miraheze-requestwiki-success": "Yêu cầu wiki của bạn ($1) đã được gửi thành công. Yêu cầu của bạn sẽ được một người tạo wiki tình nguyện xem xét trong thời gian sớm nhất có thể.",
 	"miraheze-restriction-delete": "Xóa",
 	"miraheze-restriction-protect": "Khóa",
