@@ -105,6 +105,7 @@
 	"grouppage-wiki-creator": "{{Notranslate}}",
 	"grouppage-wiki-mechanic": "{{Notranslate}}",
 	"miraheze-categories": "Label for categories.\n{{Identical|Category}}",
+	"miraheze-console-message": "Message logged to the browser console pointing users experiencing Content Security Policy (CSP) errors to a help page. See [https://issue-tracker.miraheze.org/T15875 T15875] and [https://meta.miraheze.org/wiki/Help:Content_Security_Policy Help:Content Security Policy].",
 	"miraheze-donate": "Label for donating to Miraheze.",
 	"miraheze-donatepage": "{{Optional|Only put the existing language pages, like <code>Donate/{{USERLANGUAGE}}</code>. See [https://meta.miraheze.org/wiki/Donate here].}}",
 	"miraheze-emailuser-disabled-title": "Title for Special:EmailUser when the user cannot email users because of local laws and regulations",

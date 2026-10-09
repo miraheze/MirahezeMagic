@@ -16,6 +16,7 @@ use MediaWiki\Http\HttpRequestFactory;
 use MediaWiki\Language\Hook\MessageCacheFetchOverridesHook;
 use MediaWiki\Language\MessageCache;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Output\Hook\BeforePageDisplayHook;
 use MediaWiki\Permissions\Hook\TitleReadWhitelistHook;
 use MediaWiki\Permissions\Hook\UserGetRightsRemoveHook;
 use MediaWiki\RecentChanges\Hook\RecentChange_saveHook;
@@ -29,6 +30,7 @@ use MediaWiki\WikiMap\WikiMap;
 
 class Main implements
 	APIQuerySiteInfoGeneralInfoHook,
+	BeforePageDisplayHook,
 	BlockIpCompleteHook,
 	GetLocalURL__InternalHook,
 	MessageCacheFetchOverridesHook,
@@ -212,6 +214,14 @@ class Main implements
 				}
 			}
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 * @param Skin $skin @phan-unused-param
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		$out->addModules( 'ext.mirahezeMagic.consoleMessage' );
 	}
 
 	/** @inheritDoc */
