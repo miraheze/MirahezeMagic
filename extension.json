@@ -158,7 +158,8 @@
 		"ContentSecurityPolicy": {
 			"class": "Miraheze\\MirahezeMagic\\HookHandlers\\ContentSecurityPolicy",
 			"services": [
-				"MainConfig"
+				"MainConfig",
+				"ExtensionRegistry"
 			]
 		},
 		"CreateWiki": {
@@ -220,8 +221,20 @@
 		}
 	},
 	"config": {
-		"MirahezeMagicCSPHeaderDefault": {
-			"description": "Associative array mapping CSP directive names to source strings serving as the default CSP for all wikis.",
+		"MirahezeMagicCSPServices": {
+			"description": "Associative array mapping a key (e.g. youtube) to an array with a human-readable label (e.g. YouTube) and the CSP directives it needs.",
+			"value": {}
+		},
+		"MirahezeMagicCSPEnabledServices": {
+			"description": "Array of keys in $wgMirahezeMagicCSPServices. The CSP directives corresponding to these services are added to the CSP of this wiki. Configurable through ManageWiki.",
+			"value": []
+		},
+		"MirahezeMagicCSPHeaderEssential": {
+			"description": "Associative array mapping CSP directive names to source strings that every wiki needs. Always present in the CSP header.",
+			"value": {}
+		},
+		"MirahezeMagicCSPHeaderExtensionServices": {
+			"description": "Associative array mapping extension names to keys of $wgMirahezeMagicCSPServices. Extension services are added to the CSP as long as the extension is installed, regardless of $wgMirahezeMagicCSPEnabledServices.",
 			"value": {}
 		},
 		"MirahezeMagicCSPHeaderOverrides": {
