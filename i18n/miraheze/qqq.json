@@ -129,6 +129,7 @@
 	"settings-anti-spam": "Anti Spam",
 	"settings-beta": "Beta",
 	"settings-categories": "{{identical|Category}}",
+	"settings-csp": "Label for the Content Security Policy (CSP) section",
 	"settings-discussion": "{{identical|Discussion}}",
 	"settings-editing": "Editing\n{{Identical|Editing}}",
 	"settings-links": "Links\n{{Identical|Link}}",
