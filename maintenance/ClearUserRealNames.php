@@ -41,7 +41,7 @@ class ClearUserRealNames extends Maintenance {
 	}
 
 	protected function processUsers( array $userIds, IDatabase $dbw ) {
-		if ( !$userBatch ) {
+		if ( !$userIds ) {
 			return;
 		}
     	if ( $this->getOption( 'dry-run' )) {
@@ -64,7 +64,7 @@ class ClearUserRealNames extends Maintenance {
 		$dbw = $this->getUserDB();
 		do {
 			$this->output( "\t ... querying from '$lastUserId'\n" );
-			$users = $dbw->newSelectQueryBuilder()
+			$userIds = $dbw->newSelectQueryBuilder()
 				->select( 'user_id' )
 				->from( 'user' )
 				->where( $dbw->expr( 'user_real_name', '!=', '' ) )
@@ -72,11 +72,11 @@ class ClearUserRealNames extends Maintenance {
 				->orderBy( 'user_id ASC' )
 				->limit( $this->getBatchSize() )
 				->caller( __METHOD__ )->fetchFieldValues();
-      		if ( $users ) {
-        		yield $users;
-        		$lastUserId = end( $users );
+      		if ( $userIds ) {
+        		yield $userIds;
+        		$lastUserId = end( $userIds );
       		}
-    	} while ( count( $users ) === $this->getBatchSize() );
+    	} while ( count( $userIds ) === $this->getBatchSize() );
   	}
 }
 
