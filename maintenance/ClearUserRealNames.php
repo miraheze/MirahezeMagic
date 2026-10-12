@@ -21,7 +21,7 @@ class ClearUserRealNames extends Maintenance {
 	public function __construct() {
 		parent::__construct();
 		$this->addDescription( "Deletes users' real names." );
-		$this->setBatchSize( 5000 );
+		$this->setBatchSize( 500 );
 		$this->addOption( "dry-run", "Do not make live changes" );
 	}
 	
