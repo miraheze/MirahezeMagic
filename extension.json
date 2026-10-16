@@ -58,7 +58,8 @@
 				"ext.mirahezeMagic.consoleMessage.js"
 			],
 			"messages": [
-				"miraheze-console-message"
+				"miraheze-console-message",
+				"miraheze-console-csp-notify"
 			]
 		}
 	},
