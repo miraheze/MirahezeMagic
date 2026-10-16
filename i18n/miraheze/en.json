@@ -100,6 +100,8 @@
 	"grouppage-wiki-mechanic": "m:Special:MyLanguage/Wiki Mechanics",
 	"miraheze-categories": "Categories",
 	"miraheze-console-message": "Welcome to Miraheze. This wiki enforces a Content Security Policy (CSP). If you are seeing CSP errors and something is not working, see $1 for help.",
+	"miraheze-console-csp-notify": "CSP ([$1 more info]) violation that may cause issues detected. Affected URIs: $2",
+	"miraheze-console-csp-notify-truncate": "...and $1 more. See DevTools for more information.",
 	"miraheze-donate": "Donate to Miraheze",
 	"miraheze-donatepage": "m:Special:MyLanguage/Donate",
 	"miraheze-emailuser-disabled-title": "Emailing users is disabled",
