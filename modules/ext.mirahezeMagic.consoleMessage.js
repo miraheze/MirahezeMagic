@@ -12,12 +12,15 @@
 		'░██       ░██ ░██████ ░██     ░██ ░██    ░██ ░██     ░██ ░██████████ ░█████████ ░██████████'
 	].join( '\n' );
 
+	const cspHelpLink = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy';
+	const loggedCspUris = [];
+
 	// Log a help message in the browser console so that users who are debugging
 	// CSP errors see it alongside the browser's CSP violation messages.
 	// https://issue-tracker.miraheze.org/T15875
 	const help = mw.message(
 		'miraheze-console-message',
-		'https://meta.miraheze.org/wiki/Help:Content_Security_Policy'
+		cspHelpLink
 	).text();
 
 	console.log(
@@ -25,4 +28,21 @@
 		'color: #ffc200; font-size: xx-small; font-family: monospace;',
 		'color: #ffc200; font-size: larger;',
 	);
+
+	// event: https://developer.mozilla.org/en-US/docs/Web/API/SecurityPolicyViolationEvent
+	function onCspViolation(event) {
+		loggedCspUris.push(event.blockedURI);
+		const text = mw.message( 
+			'miraheze-console-csp-notify',
+			cspHelpLink,
+			$(`<ul>${loggedCspUris.map((uri) => `<li><a href=${uri} rel="noreferrer noopener" target="_blank">${uri}</a></li>`).join('')}</ul>`)
+		).parseDom();
+		// Tag so it stacks with more violations
+		mw.notify(text, { tag: 'miraheze-console-csp-notify', autoHideSeconds: 'long' });
+	};
+
+	const userGroups = mw.config.get('wgUserGroups');
+	if (userGroups.includes('bureaucrat') || userGroups.includes('sysop') || userGroups.includes('interface-admin')) {
+		window.addEventListener("securitypolicyviolation", onCspViolation);
+	};
 }() );
