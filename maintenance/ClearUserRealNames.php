@@ -3,12 +3,11 @@
 namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
-
 use Wikimedia\Rdbms\IDatabase;
 
 /**
  * Clears the `user_real_name` field from the database.
- * 
+ *
  * Written using [DeleteLocalPasswords.php](https://doc.wikimedia.org/mediawiki-core/1.46.1/php/DeleteLocalPasswords_8php_source.html)
  * as underlying reference.
  *
@@ -16,6 +15,7 @@ use Wikimedia\Rdbms\IDatabase;
  * @ingroup Maintenance
  */
 class ClearUserRealNames extends Maintenance {
+
 	protected int $total = 0;
 
 	public function __construct() {
@@ -24,15 +24,15 @@ class ClearUserRealNames extends Maintenance {
 		$this->setBatchSize( 500 );
 		$this->addOption( "dry-run", "Do not make live changes" );
 	}
-	
+
 	public function execute() {
-		if ( $this->getOption( 'dry-run' )) {
+		if ( $this->getOption( 'dry-run' ) ) {
 			$this->output( "A dry run will be executed. No live changes will be made to the database.\n" );
 		}
 		foreach ( $this->getUserBatches() as $userBatch ) {
 			$this->processUsers( $userBatch, $this->getUserDB() );
 		}
- 
+
 		$this->output( "done. (wrote $this->total rows)\n" );
 	}
 
@@ -44,8 +44,8 @@ class ClearUserRealNames extends Maintenance {
 		if ( !$userIds ) {
 			return;
 		}
-		if ( $this->getOption( 'dry-run' )) {
-			$this->total += count($userIds);
+		if ( $this->getOption( 'dry-run' ) ) {
+			$this->total += count( $userIds );
 			$this->output( "[DRY RUN] Updated {$this->total} rows\n" );
 		} else {
 			$this->beginTransactionRound( __METHOD__ );
