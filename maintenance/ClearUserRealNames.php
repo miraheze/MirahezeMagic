@@ -28,10 +28,10 @@ class ClearUserRealNames extends Maintenance {
 	public function execute() {
 		if ( $this->getOption( 'dry-run' )) {
 			$this->output( "A dry run will be executed. No live changes will be made to the database.\n" );
-    	}
-    	foreach ( $this->getUserBatches() as $userBatch ) {
+		}
+		foreach ( $this->getUserBatches() as $userBatch ) {
 			$this->processUsers( $userBatch, $this->getUserDB() );
-    	}
+		}
  
 		$this->output( "done. (wrote $this->total rows)\n" );
 	}
@@ -44,18 +44,20 @@ class ClearUserRealNames extends Maintenance {
 		if ( !$userIds ) {
 			return;
 		}
-    	if ( $this->getOption( 'dry-run' )) {
+		if ( $this->getOption( 'dry-run' )) {
 			$this->total += count($userIds);
 			$this->output( "[DRY RUN] Updated {$this->total} rows\n" );
 		} else {
+			$this->beginTransactionRound( __METHOD__ );
 			$dbw->newUpdateQueryBuilder()
 				->update( 'user' )
 				->set( [ 'user_real_name' => '' ] )
 				->where( [ 'user_id' => $userIds ] )
-				->caller( __METHOD__ )->execute();
-      		$this->total += $dbw->affectedRows();
-      		$this->output( "Updated {$this->total} rows\n" );
-      		$this->waitForReplication();
+				->caller( __METHOD__ )
+				->execute();
+			$this->total += $dbw->affectedRows();
+			$this->output( "Updated {$this->total} rows\n" );
+			$this->commitTransactionRound( __METHOD__ );
 		}
 	}
 
@@ -72,12 +74,12 @@ class ClearUserRealNames extends Maintenance {
 				->orderBy( 'user_id ASC' )
 				->limit( $this->getBatchSize() )
 				->caller( __METHOD__ )->fetchFieldValues();
-      		if ( $userIds ) {
-        		yield $userIds;
-        		$lastUserId = end( $userIds );
-      		}
-    	} while ( count( $userIds ) === $this->getBatchSize() );
-  	}
+			if ( $userIds ) {
+				yield $userIds;
+				$lastUserId = end( $userIds );
+			}
+		} while ( count( $userIds ) === $this->getBatchSize() );
+	}
 }
 
 $maintClass = ClearUserRealNames::class;
