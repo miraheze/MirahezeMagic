@@ -91,6 +91,7 @@
 	"group-wiki-mechanic": "ウィキ整備士",
 	"group-wiki-mechanic-member": "{{GENDER:$1|ウィキ整備士}}",
 	"miraheze-categories": "カテゴリ",
+	"miraheze-console-message": "Mirahezeへようこそ。このウィキはコンテンツセキュリティポリシー (CSP) を適用しています。CSPエラーが表示されたり、何かがうまく動作しない場合は、ヘルプ $1 を参照してください。",
 	"miraheze-donate": "Mirahezeに寄付",
 	"miraheze-emailuser-disabled-title": "利用者へのメール送信は無効になっています",
 	"miraheze-emailuser-disabled-message": "一部の地域では、現地の法律や規制により、メール送信機能が無効になっています。他の利用者に連絡する必要がある場合は、その利用者のトークページをご利用ください。",

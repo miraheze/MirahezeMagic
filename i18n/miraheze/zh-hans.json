@@ -107,6 +107,7 @@
 	"group-wiki-mechanic": "wiki技术员",
 	"group-wiki-mechanic-member": "{{GENDER:$1|wiki技术员}}",
 	"miraheze-categories": "分类",
+	"miraheze-console-message": "欢迎来到Miraheze。本维基启用了内容安全策略（CSP）。如果您遇到CSP错误或某些功能无法正常工作，请参阅$1获取帮助。",
 	"miraheze-donate": "给Miraheze捐款",
 	"miraheze-emailuser-disabled-title": "已禁用向用户发送电子邮件的功能。",
 	"miraheze-emailuser-disabled-message": "由于某些地区的当地法律法规限制，电子邮件用户功能已被禁用。如果您需要联系其他用户，请尝试使用他们的讨论页。",
