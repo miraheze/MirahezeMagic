@@ -106,8 +106,7 @@ class SpecialVanishUser extends FormSpecialPage {
 
 		$formDescriptor['warning'] = [
 			'type' => 'info',
-			'help' => Html::warningBox( $this->msg( 'vanishuser-warning' )->parse() ),
-			'raw-help' => true,
+			'help-raw' => Html::warningBox( $this->msg( 'vanishuser-warning' )->parse() ),
 			'hide-if' => [ '!==', 'wpconfirm', '1' ]
 		];
 
