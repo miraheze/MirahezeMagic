@@ -40,12 +40,27 @@
 		uriSet.add(event.blockedURI);
 		const truncatedUris = loggedCspUris.slice(0, 5);
 		const truncatedRemainderUris = loggedCspUris.slice(5);
-		const violationLinks = truncatedUris.map((uri) =>
-			`<li><a href=${uri} rel="noreferrer noopener" target="_blank">${uri}</a></li>`
-		).join('');
+		const violationLinks = truncatedUris.map((uri) => {
+			const $item = $( '<li>' );
+			// In case something like data:123 gets blocked by the CSP
+			if (/^https?:/.test(uri)) {
+				$item.append(
+					$( '<a>' ).attr( {
+						href: uri,
+						rel: 'noreferrer noopener',
+						target: '_blank'
+					} ).text( uri )
+				);
+			} else {
+				$item.append(
+					document.createTextNode(uri)
+				);
+			}
+			return $item;
+		});
 		const truncationMessage = truncatedRemainderUris.length > 0 ? mw.message('miraheze-csp-notification-truncate', truncatedRemainderUris.length).text() : '';
 		const violationLinkText = $( '<div>' )
-			.append(`<ul>${violationLinks}</ul>`)
+			.append($( '<ul>' ).append( violationLinks ))
 			.append(document.createTextNode( truncationMessage ))
 			.contents();
 		const text = mw.message(
