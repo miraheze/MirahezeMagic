@@ -147,7 +147,6 @@ class Main implements
 			'snapwikiskin',
 			'uploadtext',
 			'vector-night-mode-issue-reporting-notice-url',
-			'webauthn-module-description',
 			'wikibase-sitelinks-miraheze',
 		];
 
