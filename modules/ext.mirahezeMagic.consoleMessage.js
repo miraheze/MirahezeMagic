@@ -40,18 +40,22 @@
 		uriSet.add(event.blockedURI);
 		const truncatedUris = loggedCspUris.slice(0, 5);
 		const truncatedRemainderUris = loggedCspUris.slice(5);
+		const violationLinks = truncatedUris.map((uri) =>
+			`<li><a href=${uri} rel="noreferrer noopener" target="_blank">${uri}</a></li>`
+		).join('');
+		const truncationMessage = truncatedRemainderUris.length > 0 ? mw.message('miraheze-csp-notification-truncate', truncatedRemainderUris.length).text() : '';
+		const violationLinkText = $( '<div>' )
+			.append(`<ul>${violationLinks}</ul>`)
+			.append(document.createTextNode( truncationMessage ))
+			.contents();
 		const text = mw.message(
 			'miraheze-csp-notification',
 			cspHelpLink,
-			$(`<ul>${truncatedUris.map((uri) =>
-				`<li><a href=${uri} rel="noreferrer noopener" target="_blank">${uri}</a></li>`
-			).join('')}${
-				truncatedRemainderUris.length > 0 ? mw.message('miraheze-csp-notification-truncate', truncatedRemainderUris.length): ''
-			}</ul>`)
+			violationLinkText
 		).parseDom();
 		// Tag so it stacks with more violations
 		mw.notify(text, { tag: 'miraheze-csp-notification', autoHideSeconds: 'long' });
-	};
+	}
 
 	const userGroups = mw.config.get('wgUserGroups');
 	const action = mw.config.get('wgAction');
@@ -61,5 +65,5 @@
 		(action === 'edit' || action === 'submit')
 	) {
 		window.addEventListener('securitypolicyviolation', onCspViolation);
-	};
+	}
 }() );
