@@ -12,7 +12,7 @@
 		'░██       ░██ ░██████ ░██     ░██ ░██    ░██ ░██     ░██ ░██████████ ░█████████ ░██████████'
 	].join( '\n' );
 
-	const cspHelpLink = 'https://meta.miraheze.org/wiki/Help:CSP_violation_notices';
+	const cspHelpLink = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy_violation_notices';
 	const cspHelpLinkConsole = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy';
 
 	// Log a help message in the browser console so that users who are debugging
