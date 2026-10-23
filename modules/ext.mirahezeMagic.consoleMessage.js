@@ -29,18 +29,14 @@
 		'color: #ffc200; font-size: larger;',
 	);
 
-	const loggedCspUris = [];
-	const uriSet = new Set();
+	const loggedCspUris = new Set();
 	// event: https://developer.mozilla.org/en-US/docs/Web/API/SecurityPolicyViolationEvent
 	function onCspViolation(event) {
-		if ( uriSet.has(event.blockedURI) ) {
+		if ( loggedCspUris.has(event.blockedURI) ) {
 			return;
 		}
-		loggedCspUris.push(event.blockedURI);
-		uriSet.add(event.blockedURI);
-		const truncatedUris = loggedCspUris.slice(0, 5);
-		const truncatedRemainderUris = loggedCspUris.slice(5);
-		const violationLinks = truncatedUris.map((uri) => {
+		loggedCspUris.add(event.blockedURI);
+		const violationLinks = Array.from(loggedCspUris).slice(0, 5).map((uri) => {
 			const $item = $( '<li>' );
 			// In case something like data:123 gets blocked by the CSP
 			if (/^https?:/.test(uri)) {
@@ -58,7 +54,8 @@
 			}
 			return $item;
 		});
-		const truncationMessage = truncatedRemainderUris.length > 0 ? mw.message('miraheze-csp-notification-truncate', truncatedRemainderUris.length).text() : '';
+		const remainingUris = loggedCspUris.size - 5;
+		const truncationMessage = remainingUris > 0 ? mw.message('miraheze-csp-notification-truncate', remainingUris).text() : '';
 		const violationLinkText = $( '<div>' )
 			.append($( '<ul>' ).append( violationLinks ))
 			.append(document.createTextNode( truncationMessage ))
