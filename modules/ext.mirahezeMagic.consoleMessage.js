@@ -76,6 +76,7 @@
 	const action = mw.config.get('wgAction');
 	if (
 		userGroups.includes('autoconfirmed') ||
+		// In new wikis the founder is a non-autoconfirmed sysop
 		userGroups.includes('sysop') ||
 		(action === 'edit' || action === 'submit')
 	) {
