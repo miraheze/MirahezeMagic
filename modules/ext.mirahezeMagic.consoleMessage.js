@@ -12,7 +12,6 @@
 		'░██       ░██ ░██████ ░██     ░██ ░██    ░██ ░██     ░██ ░██████████ ░█████████ ░██████████'
 	].join( '\n' );
 
-	// 
 	const cspHelpLink = 'https://meta.miraheze.org/wiki/Help:CSP_violation_notices';
 	const cspHelpLinkConsole = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy';
 	const loggedCspUris = [];
@@ -35,8 +34,8 @@
 	function onCspViolation(event) {
 		loggedCspUris.push(event.blockedURI);
 		const truncatedUris = loggedCspUris.slice(0, 5);
-		const truncatedRemainderUris = loggedCspUris.slice(6);
-		const text = mw.message( 
+		const truncatedRemainderUris = loggedCspUris.slice(5);
+		const text = mw.message(
 			'miraheze-csp-notification',
 			cspHelpLink,
 			$(`<ul>${truncatedUris.map((uri) =>
