@@ -23,23 +23,25 @@
 		cspHelpLinkConsole
 	).text();
 
+	// eslint-disable-next-line no-console
 	console.log(
 		'%c' + wordmark + '\n\n%c' + help,
 		'color: #ffc200; font-size: xx-small; font-family: monospace;',
-		'color: #ffc200; font-size: larger;',
+		'color: #ffc200; font-size: larger;'
 	);
 
 	const loggedCspUris = new Set();
+
 	// event: https://developer.mozilla.org/en-US/docs/Web/API/SecurityPolicyViolationEvent
-	function onCspViolation(event) {
-		if ( loggedCspUris.has(event.blockedURI) ) {
+	function onCspViolation( event ) {
+		if ( loggedCspUris.has( event.blockedURI ) ) {
 			return;
 		}
-		loggedCspUris.add(event.blockedURI);
-		const violationLinks = Array.from(loggedCspUris).slice(0, 5).map((uri) => {
+		loggedCspUris.add( event.blockedURI );
+		const violationLinks = Array.from( loggedCspUris ).slice( 0, 5 ).map( ( uri ) => {
 			const $item = $( '<li>' );
 			// In case something like data:123 gets blocked by the CSP
-			if (/^https?:/.test(uri)) {
+			if ( /^https?:/.test( uri ) ) {
 				$item.append(
 					$( '<a>' ).attr( {
 						href: uri,
@@ -49,34 +51,34 @@
 				);
 			} else {
 				$item.append(
-					document.createTextNode(uri)
+					document.createTextNode( uri )
 				);
 			}
 			return $item;
-		});
+		} );
 		const remainingUris = loggedCspUris.size - 5;
-		const truncationMessage = remainingUris > 0 ? mw.message('miraheze-csp-notification-truncate', remainingUris).text() : '';
-		const violationLinkText = $( '<div>' )
-			.append($( '<ul>' ).append( violationLinks ))
-			.append(document.createTextNode( truncationMessage ))
+		const truncationMessage = remainingUris > 0 ? mw.message( 'miraheze-csp-notification-truncate', remainingUris ).text() : '';
+		const $violationLinkText = $( '<div>' )
+			.append( $( '<ul>' ).append( violationLinks ) )
+			.append( document.createTextNode( truncationMessage ) )
 			.contents();
 		const text = mw.message(
 			'miraheze-csp-notification',
 			cspHelpLink,
-			violationLinkText
+			$violationLinkText
 		).parseDom();
 		// Tag so it stacks with more violations
-		mw.notify(text, { tag: 'miraheze-csp-notification', autoHideSeconds: 'long' });
+		mw.notify( text, { tag: 'miraheze-csp-notification', autoHideSeconds: 'long' } );
 	}
 
-	const userGroups = mw.config.get('wgUserGroups');
-	const action = mw.config.get('wgAction');
+	const userGroups = mw.config.get( 'wgUserGroups' );
+	const action = mw.config.get( 'wgAction' );
 	if (
-		userGroups.includes('autoconfirmed') ||
+		userGroups.includes( 'autoconfirmed' ) ||
 		// In new wikis the founder is a non-autoconfirmed sysop
-		userGroups.includes('sysop') ||
-		(action === 'edit' || action === 'submit')
+		userGroups.includes( 'sysop' ) ||
+		( action === 'edit' || action === 'submit' )
 	) {
-		window.addEventListener('securitypolicyviolation', onCspViolation);
+		window.addEventListener( 'securitypolicyviolation', onCspViolation );
 	}
 }() );
