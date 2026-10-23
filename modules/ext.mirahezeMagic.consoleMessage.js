@@ -14,7 +14,6 @@
 
 	const cspHelpLink = 'https://meta.miraheze.org/wiki/Help:CSP_violation_notices';
 	const cspHelpLinkConsole = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy';
-	const loggedCspUris = [];
 
 	// Log a help message in the browser console so that users who are debugging
 	// CSP errors see it alongside the browser's CSP violation messages.
@@ -30,9 +29,15 @@
 		'color: #ffc200; font-size: larger;',
 	);
 
+	const loggedCspUris = [];
+	const uriSet = new Set();
 	// event: https://developer.mozilla.org/en-US/docs/Web/API/SecurityPolicyViolationEvent
 	function onCspViolation(event) {
+		if ( uriSet.has(event.blockedURI) ) {
+			return;
+		}
 		loggedCspUris.push(event.blockedURI);
+		uriSet.add(event.blockedURI);
 		const truncatedUris = loggedCspUris.slice(0, 5);
 		const truncatedRemainderUris = loggedCspUris.slice(5);
 		const text = mw.message(
