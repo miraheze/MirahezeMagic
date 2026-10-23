@@ -59,7 +59,7 @@
 			],
 			"messages": [
 				"miraheze-console-message",
-				"miraheze-console-csp-notify"
+				"miraheze-csp-notification"
 			]
 		}
 	},

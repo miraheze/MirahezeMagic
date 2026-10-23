@@ -37,16 +37,16 @@
 		const truncatedUris = loggedCspUris.slice(0, 5);
 		const truncatedRemainderUris = loggedCspUris.slice(6);
 		const text = mw.message( 
-			'miraheze-console-csp-notify',
+			'miraheze-csp-notification',
 			cspHelpLink,
 			$(`<ul>${truncatedUris.map((uri) =>
 				`<li><a href=${uri} rel="noreferrer noopener" target="_blank">${uri}</a></li>`
 			).join('')}${
-				truncatedRemainderUris.length > 0 ? mw.message('miraheze-console-csp-notify-truncate', truncatedRemainderUris.length): ''
+				truncatedRemainderUris.length > 0 ? mw.message('miraheze-csp-notification-truncate', truncatedRemainderUris.length): ''
 			}</ul>`)
 		).parseDom();
 		// Tag so it stacks with more violations
-		mw.notify(text, { tag: 'miraheze-console-csp-notify', autoHideSeconds: 'long' });
+		mw.notify(text, { tag: 'miraheze-csp-notification', autoHideSeconds: 'long' });
 	};
 
 	const userGroups = mw.config.get('wgUserGroups');
