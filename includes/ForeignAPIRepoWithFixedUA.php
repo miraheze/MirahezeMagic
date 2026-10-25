@@ -20,6 +20,8 @@ use const MW_VERSION;
 
 class ForeignAPIRepoWithFixedUA extends ForeignAPIRepo {
 
+	private const int API_TIMEOUT = 8;
+	private const int API_CONNECT_TIMEOUT = 2;
 	private const int FAILURE_WINDOW = 30;
 	private const int FAILURE_THRESHOLD = 5;
 	private const int BREAKER_OPEN_TIME = 60;
@@ -67,14 +69,20 @@ class ForeignAPIRepoWithFixedUA extends ForeignAPIRepo {
 		}
 
 		$proxied = false;
-		if (
-			$this->apiProxy !== null &&
-			$this->apiBase !== null &&
-			str_starts_with( $url, $this->apiBase )
-		) {
-			$url = $this->apiProxy . substr( $url, strlen( $this->apiBase ) );
-			$options['noProxy'] = true;
-			$proxied = true;
+		if ( $this->apiBase !== null && str_starts_with( $url, $this->apiBase ) ) {
+			if ( $timeout === 'default' ) {
+				$timeout = self::API_TIMEOUT;
+			}
+
+			if ( !isset( $options['connectTimeout'] ) ) {
+				$options['connectTimeout'] = self::API_CONNECT_TIMEOUT;
+			}
+
+			if ( $this->apiProxy !== null ) {
+				$url = $this->apiProxy . substr( $url, strlen( $this->apiBase ) );
+				$options['noProxy'] = true;
+				$proxied = true;
+			}
 		}
 
 		$start = microtime( true );
