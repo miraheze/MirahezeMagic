@@ -8,7 +8,8 @@
 			"Nike",
 			"Pyscowicz",
 			"Samoasambia",
-			"Veikk0.ma"
+			"Veikk0.ma",
+			"Wikipeedikko"
 		]
 	},
 	"datadump-namespaceselect-label": "Nimiavaruus",
@@ -57,6 +58,7 @@
 	"miraheze-sitenotice-inactive": "Tässä wikissä '''ei ole muokkauksia''' tai '''lokitoimintoja''' viimeisten 45 päivän ajalta, minkä johdosta se on merkitty '''inaktiiviseksi'''. Jos haluat estää wikin joutumisen '''suljetuksi''', ala osoittaa täällä aktiivisuuden merkkejä. Jos tätä ei tapahdu seuraavien 15 päivän sisällä, wiki saatetaan sulkea [[m:Dormancy Policy|epäaktiivisuuskäytännön]] nojalla. Tällöin wiki tulee olemaan muiden käyttäjien adoptoitavissa. Jos wikiä ei adoptoida eikä se aktivoidu 135 päivän sisällä tästä hetkestä, se voidaan '''poistaa'''. Tutustuthan siis Mirahezen [[m:Dormancy Policy|epäaktiivisuuskäytäntöön]]. Jos sinulla on byrokraatin oikeudet, voit poistaa inaktivisuus-merkinnän toimintosivulla [[Special:ManageWiki]]. Jos sinulla on jotain kysyttävää tai ongelmia, kysy rohkeasti apua [[m:Stewards' noticeboard|ylivalvojien ilmoitustaululla]].",
 	"mirahezemagic-description": "MediaWiki-viestejä, komentosarjoja ja haaroja, joita Miraheze käyttää",
 	"protect-level-user": "Salli vain kirjautuneet käyttäjät",
+	"requestwiki-label-nsfw-primary": "Tässä wikissä on ensisijaisesti sisältöä, joka ei sovellu työpaikalle (NSFW)",
 	"restriction-delete": "Poista",
 	"restriction-level-user": "Salli vain kirjautuneet käyttäjät",
 	"right-user": "Muokata sivuja, jotka on suojattu tasolle ”{{int:protect-level-user}}”",
