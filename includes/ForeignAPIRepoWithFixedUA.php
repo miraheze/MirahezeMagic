@@ -4,11 +4,14 @@ namespace Miraheze\MirahezeMagic;
 
 use MediaWiki\FileRepo\ForeignAPIRepo;
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\WikiMap\WikiMap;
+use RuntimeException;
 use function array_filter;
 use function array_values;
 use function count;
 use function is_array;
+use function is_object;
 use function ksort;
 use function microtime;
 use function mt_rand;
@@ -55,6 +58,43 @@ class ForeignAPIRepoWithFixedUA extends ForeignAPIRepo {
 
 		ksort( $query );
 		return parent::fetchImageQuery( $query );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function newFile( $title, $time = false ) {
+		$file = parent::newFile( $title, $time );
+		$this->ensureHandlerLanguage( $file );
+		return $file;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function findFile( $title, $options = [] ) {
+		$file = parent::findFile( $title, $options );
+		$this->ensureHandlerLanguage( $file );
+		return $file;
+	}
+
+	private function ensureHandlerLanguage( mixed $file ): void {
+		if ( !is_object( $file ) || !$file->exists() ) {
+			return;
+		}
+
+		$handler = $file->getHandler();
+		if ( !$handler ) {
+			return;
+		}
+
+		try {
+			$handler->getLanguage();
+		} catch ( RuntimeException ) {
+			$handler->setLanguage(
+				MediaWikiServices::getInstance()->getContentLanguage()
+			);
+		}
 	}
 
 	/**
