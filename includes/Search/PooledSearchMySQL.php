@@ -10,28 +10,43 @@ use Throwable;
 
 class PooledSearchMySQL extends SearchMySQL {
 
-	private const string POOL_TYPE = 'FullTextSearch';
+	private const string WIKI_POOL_TYPE = 'FullTextSearchWiki';
+	private const string SERVER_POOL_TYPE = 'FullTextSearch';
 
 	/**
 	 * @param string $term
 	 * @return SqlSearchResultSet|Status|null
 	 */
 	protected function doSearchTextInDB( $term ) {
-		$work = new PoolCounterWorkViaCallback( self::POOL_TYPE, $this->getPoolKey(), [
+		[ $wiki, $server ] = $this->getPoolKeys();
+
+		$error = static fn ( Status $status ): Status => $status;
+
+		$serverWork = new PoolCounterWorkViaCallback( self::SERVER_POOL_TYPE, $server, [
 			'doWork' => fn () => parent::doSearchTextInDB( $term ),
-			'error' => static fn ( Status $status ): Status => $status,
+			'error' => $error,
 		] );
 
-		return $work->execute();
+		$wikiWork = new PoolCounterWorkViaCallback( self::WIKI_POOL_TYPE, $wiki, [
+			'doWork' => static fn () => $serverWork->execute(),
+			'error' => $error,
+		] );
+
+		return $wikiWork->execute();
 	}
 
-	private function getPoolKey(): string {
+	/**
+	 * @return string[]
+	 */
+	private function getPoolKeys(): array {
 		try {
-			$server = $this->dbProvider->getReplicaDatabase()->getServerName();
+			$db = $this->dbProvider->getReplicaDatabase();
+			return [
+				'search:wiki:' . $db->getDomainID(),
+				'search:server:' . $db->getServerName(),
+			];
 		} catch ( Throwable ) {
-			$server = 'unknown';
+			return [ 'search:wiki:unknown', 'search:server:unknown' ];
 		}
-
-		return 'search:' . $server;
 	}
 }
