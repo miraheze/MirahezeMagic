@@ -57,8 +57,13 @@
 			"packageFiles": [
 				"ext.mirahezeMagic.consoleMessage.js"
 			],
+			"dependencies": [
+				"mediawiki.jqueryMsg"
+			],
 			"messages": [
-				"miraheze-console-message"
+				"miraheze-console-message",
+				"miraheze-csp-notification",
+				"miraheze-csp-notification-truncate"
 			]
 		}
 	},

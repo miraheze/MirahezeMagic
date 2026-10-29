@@ -12,17 +12,73 @@
 		'░██       ░██ ░██████ ░██     ░██ ░██    ░██ ░██     ░██ ░██████████ ░█████████ ░██████████'
 	].join( '\n' );
 
+	const cspHelpLink = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy_violation_notices';
+	const cspHelpLinkConsole = 'https://meta.miraheze.org/wiki/Help:Content_Security_Policy';
+
 	// Log a help message in the browser console so that users who are debugging
 	// CSP errors see it alongside the browser's CSP violation messages.
 	// https://issue-tracker.miraheze.org/T15875
 	const help = mw.message(
 		'miraheze-console-message',
-		'https://meta.miraheze.org/wiki/Help:Content_Security_Policy'
+		cspHelpLinkConsole
 	).text();
 
+	// eslint-disable-next-line no-console
 	console.log(
 		'%c' + wordmark + '\n\n%c' + help,
 		'color: #ffc200; font-size: xx-small; font-family: monospace;',
-		'color: #ffc200; font-size: larger;',
+		'color: #ffc200; font-size: larger;'
 	);
+
+	const loggedCspUris = new Set();
+
+	// event: https://developer.mozilla.org/en-US/docs/Web/API/SecurityPolicyViolationEvent
+	function onCspViolation( event ) {
+		if ( loggedCspUris.has( event.blockedURI ) ) {
+			return;
+		}
+		loggedCspUris.add( event.blockedURI );
+		const violationLinks = Array.from( loggedCspUris ).slice( 0, 5 ).map( ( uri ) => {
+			const $item = $( '<li>' );
+			// In case something like data:123 gets blocked by the CSP
+			if ( /^https?:/.test( uri ) ) {
+				$item.append(
+					$( '<a>' ).attr( {
+						href: uri,
+						rel: 'noreferrer noopener',
+						target: '_blank'
+					} ).text( uri )
+				);
+			} else {
+				$item.append(
+					document.createTextNode( uri )
+				);
+			}
+			return $item;
+		} );
+		const remainingUris = loggedCspUris.size - 5;
+		const truncationMessage = remainingUris > 0 ? mw.message( 'miraheze-csp-notification-truncate', remainingUris ).text() : '';
+		const $violationLinkText = $( '<div>' )
+			.append( $( '<ul>' ).append( violationLinks ) )
+			.append( document.createTextNode( truncationMessage ) )
+			.contents();
+		const text = mw.message(
+			'miraheze-csp-notification',
+			cspHelpLink,
+			$violationLinkText
+		).parseDom();
+		// Tag so it stacks with more violations
+		mw.notify( text, { tag: 'miraheze-csp-notification', autoHideSeconds: 'long' } );
+	}
+
+	const userGroups = mw.config.get( 'wgUserGroups' );
+	const action = mw.config.get( 'wgAction' );
+	if (
+		userGroups.includes( 'autoconfirmed' ) ||
+		// In new wikis the founder is a non-autoconfirmed sysop
+		userGroups.includes( 'sysop' ) ||
+		( action === 'edit' || action === 'submit' )
+	) {
+		window.addEventListener( 'securitypolicyviolation', onCspViolation );
+	}
 }() );
