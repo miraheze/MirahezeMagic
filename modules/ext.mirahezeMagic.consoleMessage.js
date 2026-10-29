@@ -34,6 +34,9 @@
 
 	// event: https://developer.mozilla.org/en-US/docs/Web/API/SecurityPolicyViolationEvent
 	function onCspViolation( event ) {
+		if ( event.disposition !== 'enforce' ) {
+			return;
+		}
 		if ( loggedCspUris.has( event.blockedURI ) ) {
 			return;
 		}
