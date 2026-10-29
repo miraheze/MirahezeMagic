@@ -144,5 +144,7 @@
 	"vanishuser-warning": "'''Внимание''': Вы собираетесь глобально удалить пользователя! Пожалуйста, внимательно изучите всю информацию, прежде чем продолжить.",
 	"vanishuser-log-name": "Журнал удаления пользователей",
 	"vanishuser-log-header": "Это основной журнал всех удалений пользователей.",
-	"logentry-vanishuser-action": "$1 {{GENDER:$1|удалил|удалила}} пользователя."
+	"logentry-vanishuser-action": "$1 {{GENDER:$1|удалил|удалила}} пользователя.",
+	"echo-category-title-mirahezemagic-tech-notification": "Технические уведомления",
+	"echo-pref-tooltip-mirahezemagic-tech-notification": "Уведомлять меня о технических изменениях, затрагивающих мою вики."
 }
