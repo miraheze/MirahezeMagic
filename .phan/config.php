@@ -33,8 +33,11 @@ $cfg['exclude_analysis_directory_list'] = array_merge(
 $cfg['suppress_issue_types'] = [
 	'PhanAccessMethodInternal',
 	'SecurityCheck-LikelyFalsePositive',
+	// Remove after MirahezeMagic requires 1.47
+	'UnusedPluginSuppression',
 ];
 
-$cfg['enable_class_alias_support'] = false;
+// Enable after MirahezeMagic requires 1.47
+$cfg['enable_class_alias_support'] = true;
 
 return $cfg;
