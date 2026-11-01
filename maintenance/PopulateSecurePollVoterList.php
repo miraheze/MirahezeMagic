@@ -2,7 +2,6 @@
 
 namespace Miraheze\MirahezeMagic\Maintenance;
 
-use MediaWiki\Extension\CentralAuth\CentralAuthServices;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
 use Throwable;
@@ -335,8 +334,8 @@ class PopulateSecurePollVoterList extends Maintenance {
 	}
 
 	private function getWikiContributions( string $wiki, ?string $before ): array {
-		$caDbManager = CentralAuthServices::getDatabaseManager();
-		$dbr = $caDbManager->getLocalDB( DB_REPLICA, $wiki );
+		$databaseUtils = $this->getServiceContainer()->get( 'CreateWikiDatabaseUtils' );
+		$dbr = $databaseUtils->getRemoteWikiReplicaDB( $wiki );
 
 		$actorCounts = [];
 
