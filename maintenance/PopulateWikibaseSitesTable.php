@@ -73,7 +73,8 @@ class PopulateWikibaseSitesTable extends Maintenance {
 			$data = $this->getWikiDiscoverData( $url );
 			$sites = $this->sitesFromData( $data );
 
-			$store = $this->getServiceContainer()->getSiteStore();
+			// The service is deprecated with 1.47, but SitesBuilder still expects SiteStore.
+			$store = $this->getServiceContainer()->get( 'SiteStore' );
 			$sitesBuilder = new SitesBuilder( $store, $validGroups );
 			foreach ( $wikis as $wikiId ) {
 				// Skip wikis not in API response

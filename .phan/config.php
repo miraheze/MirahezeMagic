@@ -35,6 +35,7 @@ $cfg['suppress_issue_types'] = [
 	'SecurityCheck-LikelyFalsePositive',
 ];
 
-$cfg['enable_class_alias_support'] = false;
+// Disable after MirahezeMagic requires 1.47
+$cfg['enable_class_alias_support'] = true;
 
 return $cfg;
