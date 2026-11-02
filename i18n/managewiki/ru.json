@@ -73,6 +73,7 @@
 	"managewiki-setting-wgAllowImageTag-name": "Разрешить тег изображений",
 	"managewiki-setting-wgAllowImageTag-help": "Разрешает использование тега img в вики-разметке.",
 	"managewiki-setting-wgSVGConverter-name": "SVG-конвертер",
+	"managewiki-setting-wgMSU_confirmReplace-help": "Если установлено, отображает флажок «Заменить файл».",
 	"managewiki-setting-wgServer-name": "Пользовательский домен",
 	"managewiki-setting-wgMaxArticleSize-name": "Максимальный размер статьи",
 	"managewiki-setting-wgMaxArticleSize-help": "Максимальный размер страницы в килобайтах.",

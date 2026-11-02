@@ -69,6 +69,8 @@
 	"group-wiki-mechanic-member": "{{GENDER:$1|mecánico|mecánica}} de wikis",
 	"miraheze-categories": "Categorías",
 	"miraheze-console-message": "Recibe a benvida a Miraheze. Este wiki aplica unha política de seguranza de contido (CSP). Se ves erros de CSP e algo non funciona, consulta $1 para obter axuda.",
+	"miraheze-csp-notification": "Detectouse unha [$1 violación da política de seguranza de contido (CSP)]. Enderezos URI afectados: $2",
+	"miraheze-csp-notification-truncate": "... e $1 máis. Consulta as ferramentas para desenvolvedores para obter máis información.",
 	"miraheze-donate": "Doar a Miraheze",
 	"miraheze-emailuser-disabled-title": "O envío de correos electrónicos aos usuarios está desactivado",
 	"miraheze-emailuser-disabled-message": "Debido ás leis e regulamentos locais nalgunhas xurisdicións, desactivouse o envío de correos electrónicos. Se necesitas contactar con outro usuario, utiliza a súa páxina de conversa.",

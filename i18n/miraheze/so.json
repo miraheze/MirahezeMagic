@@ -68,6 +68,8 @@
 	"group-wiki-mechanic-member": "{{GENDER:$1|farsamayaqaanka wiki-ga}}",
 	"miraheze-categories": "Qaybaha",
 	"miraheze-console-message": "Ku soo dhawoow Miraheze. Wiki-gani wuxuu dhaqan geliyaa Siyaasadda Amniga Nuxurka (CSP). Haddii aad arkayso khaladaadka CSP oo wax aanay shaqaynayn, ka eeg $1 si aad u hesho caawimaad.",
+	"miraheze-csp-notification": "[$1 Xadgudubka CSP] ayaa la ogaaday. URI-yada ay saamaysay: $2",
+	"miraheze-csp-notification-truncate": "...iyo $1 kale. Ka eeg DevTools macluumaad dheeraad ah.",
 	"miraheze-donate": "Ku deeq Miraheze",
 	"miraheze-emailuser-disabled-title": "U-dirista iimayllada isticmaalayaasha waa la joojiyey",
 	"miraheze-emailuser-disabled-message": "Sababo la xiriira sharciyada iyo xeerarka maxalliga ah ee ka jira qaar ka mid ah gobollada, EmailUser waa la joojiyey. Haddii aad u baahan tahay inaad la xiriirto isticmaale kale, fadlan isku day inaad isticmaasho boggiisa wada hadalka.",
