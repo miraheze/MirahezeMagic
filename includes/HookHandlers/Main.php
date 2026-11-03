@@ -307,7 +307,7 @@ class Main implements
 		$imageHtml = Html::element( 'img', [
 			'src' => $imageUrl,
 			'align' => 'left',
-			'style' => 'width: 80px; height: 90px;',
+			'style' => 'max-width: 80px; max-height: 90px;',
 		] );
 
 		$spanHtml = Html::rawElement( 'span',
@@ -315,10 +315,12 @@ class Main implements
 			$imageHtml . $message
 		);
 
+		$clearHtml = Html::element( 'div', [ 'style' => 'clear: both;' ] );
+
 		$divHtml = Html::rawElement( 'div', [
 			'class' => 'wikitable',
 			'style' => 'text-align: center; width: 90%; margin-left: auto; margin-right: auto; padding: 15px; border: 4px solid black; background-color: var(--background-color-neutral, #EEE);',
-		], $spanHtml );
+		], $spanHtml . $clearHtml );
 
 		$siteNotice .= $divHtml;
 	}
