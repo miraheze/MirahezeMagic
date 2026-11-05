@@ -108,7 +108,7 @@
 	"group-wiki-mechanic": "wiki技术员",
 	"group-wiki-mechanic-member": "{{GENDER:$1|wiki技术员}}",
 	"miraheze-categories": "分类",
-	"miraheze-console-message": "欢迎来到Miraheze。本维基启用了内容安全策略（CSP）。如果您遇到CSP错误或某些功能无法正常工作，请参阅$1 获取帮助。",
+	"miraheze-console-message": "欢迎来到Miraheze。本wiki启用了内容安全策略（CSP）。如果您遇到CSP错误或某些功能无法正常工作，请参阅$1 获取帮助。",
 	"miraheze-csp-notification": "检测到[$1 CSP 违规]。受影响的URI：$2",
 	"miraheze-csp-notification-truncate": "…还有另外$1个。更多信息请参见开发者工具。",
 	"miraheze-donate": "给Miraheze捐款",
