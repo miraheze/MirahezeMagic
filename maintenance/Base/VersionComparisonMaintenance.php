@@ -33,6 +33,34 @@ use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Throwable;
+use function array_is_list;
+use function array_map;
+use function array_merge;
+use function basename;
+use function define;
+use function defined;
+use function dirname;
+use function file_get_contents;
+use function glob;
+use function in_array;
+use function is_array;
+use function is_dir;
+use function is_file;
+use function json_decode;
+use function json_encode;
+use function ksort;
+use function preg_match;
+use function preg_match_all;
+use function str_replace;
+use function strlen;
+use function substr;
+use function var_export;
+use const GLOB_BRACE;
+use const GLOB_NOSORT;
+use const GLOB_ONLYDIR;
+use const JSON_UNESCAPED_SLASHES;
+use const JSON_UNESCAPED_UNICODE;
+use const PREG_SET_ORDER;
 
 abstract class VersionComparisonMaintenance extends Maintenance {
 
