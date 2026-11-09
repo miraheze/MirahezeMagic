@@ -30,21 +30,36 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use PhpToken;
 use function array_diff;
 use function array_diff_key;
 use function array_intersect_key;
 use function array_is_list;
 use function array_keys;
 use function array_map;
+use function array_merge;
 use function count;
+use function file_get_contents;
+use function glob;
 use function implode;
 use function is_array;
 use function ksort;
 use function str_contains;
 use function str_starts_with;
+use function strcmp;
+use function strlen;
 use function substr;
+use function uksort;
+use const T_CONSTANT_ENCAPSED_STRING;
+use const T_VARIABLE;
 
 class FindConfigChanges extends VersionComparisonMaintenance {
+
+	private const string CONFIG_PATH = '/srv/mediawiki/config/';
+
+	private const string MAIN_CONFIG_FILE = 'LocalSettings.php';
+
+	private ?array $configUsage = null;
 
 	public function __construct() {
 		parent::__construct();
@@ -143,7 +158,51 @@ class FindConfigChanges extends VersionComparisonMaintenance {
 
 	private function setMarker( string $name ): string {
 		global $wgConf;
-		return isset( $wgConf->settings[$name] ) ? ' (set in config)' : '';
+
+		$this->configUsage ??= $this->loadConfigUsage();
+		$places = [];
+		foreach ( $this->configUsage as $file => $names ) {
+			if ( isset( $names[$name] ) ) {
+				$places[] = $file;
+			}
+		}
+
+		if ( !$places && isset( $wgConf->settings[$name] ) ) {
+			$places[] = '$wgConf';
+		}
+
+		return $places ? ' (set in config: ' . implode( ', ', $places ) . ')' : '';
+	}
+
+	private function loadConfigUsage(): array {
+		$files = array_merge(
+			glob( self::CONFIG_PATH . '*.php' ) ?: [],
+			glob( self::CONFIG_PATH . 'initialise/*.php' ) ?: []
+		);
+
+		$usage = [];
+		foreach ( $files as $path ) {
+			$code = file_get_contents( $path );
+			if ( $code === false ) {
+				continue;
+			}
+
+			$file = substr( $path, strlen( self::CONFIG_PATH ) );
+			foreach ( PhpToken::tokenize( $code ) as $token ) {
+				if ( $token->is( T_VARIABLE ) && str_starts_with( $token->text, '$wg' ) ) {
+					$usage[$file][substr( $token->text, 1 )] = true;
+				} elseif ( $token->is( T_CONSTANT_ENCAPSED_STRING ) && str_starts_with( $token->text, "'wg" ) ) {
+					$usage[$file][substr( $token->text, 1, -1 )] = true;
+				}
+			}
+		}
+
+		uksort(
+			$usage,
+			static fn ( string $a, string $b ): int => ( $b === self::MAIN_CONFIG_FILE ) <=> ( $a === self::MAIN_CONFIG_FILE ) ?: strcmp( $a, $b )
+		);
+
+		return $usage;
 	}
 
 	private function collect( string $version ): array {
