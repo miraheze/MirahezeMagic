@@ -29,24 +29,19 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-use MediaWiki\Maintenance\Maintenance;
+use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
 
-class FindSQLPatches extends Maintenance {
+class FindSQLPatches extends VersionComparisonMaintenance {
 
 	public function __construct() {
 		parent::__construct();
 
 		$this->addDescription( 'List new or updated SQL patches between two MediaWiki versions.' );
-
-		$this->addOption( 'from-version', 'MediaWiki version to start from', true, true );
-		$this->addOption( 'to-version', 'MediaWiki version to end with', true, true );
 	}
 
 	public function execute() {
-		$fromVersion = $this->getOption( 'from-version' );
-		$toVersion = $this->getOption( 'to-version' );
 		$patches = [];
-		$this->findPatches( $fromVersion, $toVersion, $patches );
+		$this->findPatches( $this->getFromVersion(), $this->getToVersion(), $patches );
 		foreach ( $patches as $patch ) {
 			$this->output( $patch . "\n" );
 		}
@@ -72,7 +67,7 @@ class FindSQLPatches extends Maintenance {
 	private function findSqlPatches( $version ) {
 		$patches = [];
 
-		$files = $this->findFilesRecursively( '/srv/mediawiki-staging/' . $version . '/**/*.sql' );
+		$files = $this->findFilesRecursively( $this->getVersionPath( $version ) . '/**/*.sql' );
 
 		foreach ( $files as $file ) {
 			if (
@@ -95,18 +90,6 @@ class FindSQLPatches extends Maintenance {
 	 */
 	private function isPatchUpdated( $oldPatch, $newPatch ) {
 		// TO-DO
-	}
-
-	private function findFilesRecursively( $pattern ) {
-		$files = glob( $pattern );
-		foreach ( glob( dirname( $pattern ) . '/*', GLOB_ONLYDIR | GLOB_NOSORT ) as $dir ) {
-			$files = array_merge(
-				[],
-				...[ $files, $this->findFilesRecursively( $dir . '/' . basename( $pattern ) ) ]
-			);
-		}
-
-		return $files;
 	}
 }
 
