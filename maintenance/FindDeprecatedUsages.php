@@ -89,8 +89,8 @@ use const T_ENUM;
 use const T_EXTENDS;
 use const T_FINAL;
 use const T_FN;
-use const T_FUNC_C;
 use const T_FUNCTION;
+use const T_FUNC_C;
 use const T_IMPLEMENTS;
 use const T_INSTANCEOF;
 use const T_INTERFACE;
@@ -98,10 +98,10 @@ use const T_LOGICAL_AND;
 use const T_LOGICAL_OR;
 use const T_MATCH;
 use const T_METHOD_C;
+use const T_NAMESPACE;
 use const T_NAME_FULLY_QUALIFIED;
 use const T_NAME_QUALIFIED;
 use const T_NAME_RELATIVE;
-use const T_NAMESPACE;
 use const T_NEW;
 use const T_NS_SEPARATOR;
 use const T_NULLSAFE_OBJECT_OPERATOR;
@@ -144,10 +144,13 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 
 	private const string MAIN_CONFIG_NAMES = 'mediawiki\\mainconfignames';
 
+	/** @var array{declared: array<string, array<string, mixed>>, hard: array<string, array<string, array<string, string>>>} */
 	private array $fromIndex = [];
 
+	/** @var array{declared: array<string, array<string, mixed>>, hard: array<string, array<string, array<string, string>>>} */
 	private array $toIndex = [];
 
+	/** @var array{declared: array<string, array<string, mixed>>, hard: array<string, array<string, array<string, string>>>} */
 	private array $localIndex = [];
 
 	private string $droppedTablePattern = '';
@@ -265,6 +268,9 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		) );
 	}
 
+	/**
+	 * @return array{declared: array<string, array<string, mixed>>, hard: array<string, array<string, array<string, string>>>}
+	 */
 	private function newIndex(): array {
 		return [
 			'declared' => [
@@ -503,6 +509,7 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		$count = count( $tokens );
 		$depth = 0;
 		$parameter = [];
+		/** @var array<int, PhpToken[]> $parameters */
 		$parameters = [];
 
 		for ( $j = $open; $j < $count; $j++ ) {
@@ -789,10 +796,14 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		}
 
 		$visited[$lower] = true;
-		foreach ( [ $this->localIndex, $this->toIndex ] as $index ) {
-			if ( isset( $index['declared']['props'][$lower][$property] ) ) {
-				return $index['declared']['props'][$lower][$property];
-			}
+		$local = $this->localIndex['declared']['props'][$lower][$property] ?? '';
+		if ( $local !== '' ) {
+			return $local;
+		}
+
+		$core = $this->toIndex['declared']['props'][$lower][$property] ?? '';
+		if ( $core !== '' ) {
+			return $core;
 		}
 
 		$parents = array_merge(
