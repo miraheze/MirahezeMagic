@@ -339,7 +339,7 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 				}
 
 				foreach ( $data as $table ) {
-					if ( !is_array( $table ) || !isset( $table['name'], $table['columns'] ) || !is_array( $table['columns'] ) ) {
+					if ( !is_array( $table ) || !isset( $table['name'] ) || !isset( $table['columns'] ) || !is_array( $table['columns'] ) ) {
 						continue;
 					}
 
