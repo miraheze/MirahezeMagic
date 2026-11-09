@@ -31,6 +31,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\MainConfigNames;
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use function array_filter;
 use function array_is_list;
 use function array_key_exists;
 use function array_keys;
@@ -220,6 +221,10 @@ class FindAuthorizationChanges extends VersionComparisonMaintenance {
 
 	private function add( array &$entries, string $key, mixed $value, string $source ): void {
 		$value = $this->normalize( $value );
+		if ( is_array( $value ) && array_is_list( $value ) && $value === array_filter( $value, 'is_scalar' ) ) {
+			sort( $value );
+		}
+
 		if ( isset( $entries[$key] ) ) {
 			$old = $entries[$key]['value'];
 			if ( is_array( $old ) && is_array( $value ) && array_is_list( $old ) && array_is_list( $value ) ) {
