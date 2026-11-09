@@ -31,6 +31,21 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\MainConfigNames;
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use function array_is_list;
+use function array_key_exists;
+use function array_keys;
+use function array_merge;
+use function array_unique;
+use function array_values;
+use function count;
+use function file_get_contents;
+use function implode;
+use function is_array;
+use function ksort;
+use function preg_match_all;
+use function sort;
+use function str_contains;
+use const PREG_SET_ORDER;
 
 class FindAuthorizationChanges extends VersionComparisonMaintenance {
 
