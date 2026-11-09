@@ -30,23 +30,21 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use MediaWiki\Maintenance\Maintenance;
+use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
 
-class FindPossibleUpgradeScripts extends Maintenance {
+class FindPossibleUpgradeScripts extends VersionComparisonMaintenance {
+
+	private const array SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
 
 	public function __construct() {
 		parent::__construct();
 
 		$this->addDescription( 'List new or updated maintenance scripts between two MediaWiki versions.' );
-
-		$this->addOption( 'from-version', 'MediaWiki version to start from', true, true );
-		$this->addOption( 'to-version', 'MediaWiki version to end with', true, true );
 	}
 
 	public function execute() {
-		$fromVersion = $this->getOption( 'from-version' );
-		$toVersion = $this->getOption( 'to-version' );
 		$scripts = [];
-		$this->findScripts( $fromVersion, $toVersion, $scripts );
+		$this->findScripts( $this->getFromVersion(), $this->getToVersion(), $scripts );
 		foreach ( $scripts as $script ) {
 			$this->output( $script . $this->findExtendedClass( $script ) . "\n" );
 		}
@@ -72,16 +70,10 @@ class FindPossibleUpgradeScripts extends Maintenance {
 	private function findMaintenanceScripts( $version ) {
 		$scripts = [];
 
-		$files1 = $this->findFilesRecursively( '/srv/mediawiki-staging/' . $version . '/**/**/maintenance/*.php' );
-		$files2 = $this->findFilesRecursively( '/srv/mediawiki-staging/' . $version . '/**/**/**/maintenance/*.php' );
-		$coreFiles = $this->findFilesRecursively( '/srv/mediawiki-staging/' . $version . '/maintenance/*.php' );
-
-		foreach ( array_merge( $files1, $files2, $coreFiles ) as $file ) {
-			if ( str_contains( $file, '/tests/' ) ) {
-				continue;
+		foreach ( $this->iterateFiles( $this->getVersionPath( $version ), self::SKIPPED_DIRECTORIES ) as $file ) {
+			if ( str_ends_with( $file, '.php' ) && str_contains( $file, '/maintenance/' ) ) {
+				$scripts[basename( $file )] = $file;
 			}
-
-			$scripts[basename( $file )] = $file;
 		}
 
 		return $scripts;
@@ -93,18 +85,6 @@ class FindPossibleUpgradeScripts extends Maintenance {
 	 */
 	private function isScriptUpdated( $oldScript, $newScript ) {
 		// TO-DO
-	}
-
-	private function findFilesRecursively( $pattern ) {
-		$files = glob( $pattern );
-		foreach ( glob( dirname( $pattern ) . '/*', GLOB_ONLYDIR | GLOB_NOSORT ) as $dir ) {
-			$files = array_merge(
-				[],
-				...[ $files, $this->findFilesRecursively( $dir . '/' . basename( $pattern ) ) ]
-			);
-		}
-
-		return $files;
 	}
 
 	private function findExtendedClass( $script ) {
