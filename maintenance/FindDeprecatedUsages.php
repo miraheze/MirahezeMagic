@@ -508,9 +508,7 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		$result = [ 'params' => [], 'promoted' => [], 'return' => '', 'types' => [], 'end' => $open ];
 		$count = count( $tokens );
 		$depth = 0;
-		/** @var PhpToken[] $current */
-		$current = [];
-		/** @var array<int, PhpToken[]> $parameters */
+		$parameter = [];
 		$parameters = [];
 
 		for ( $j = $open; $j < $count; $j++ ) {
@@ -528,25 +526,25 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 			} elseif ( $token->text === ')' || $token->text === ']' ) {
 				$depth--;
 				if ( $depth === 0 ) {
-					$parameters[] = $current;
+					$parameters[] = $parameter;
 					$result['end'] = $j;
 					break;
 				}
 			} elseif ( $token->text === ',' && $depth === 1 ) {
-				$parameters[] = $current;
-				$current = [];
+				$parameters[] = $parameter;
+				$parameter = [];
 				continue;
 			}
 
-			$current[] = $token;
+			$parameter[] = $token;
 		}
 
 		foreach ( $parameters as $parameter ) {
-			/** @var PhpToken[] $names */
 			$names = [];
 			$modifier = false;
 			$intersection = false;
 			$variable = null;
+			/** @phan-suppress-next-line PhanEmptyForeach */
 			foreach ( $parameter as $token ) {
 				if ( $token->is( self::MODIFIERS ) ) {
 					$modifier = true;
@@ -592,7 +590,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 
 		$colon = $tokens[$result['end'] + 1] ?? null;
 		if ( $colon && $colon->text === ':' ) {
-			/** @var PhpToken[] $names */
 			$names = [];
 			$union = false;
 			for ( $j = $result['end'] + 2; $j < $count && $tokens[$j]->text !== '{' && $tokens[$j]->text !== ';'; $j++ ) {
