@@ -508,7 +508,8 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		$result = [ 'params' => [], 'promoted' => [], 'return' => '', 'types' => [], 'end' => $open ];
 		$count = count( $tokens );
 		$depth = 0;
-		$parameter = [];
+		/** @var PhpToken[] $current */
+		$current = [];
 		/** @var array<int, PhpToken[]> $parameters */
 		$parameters = [];
 
@@ -527,17 +528,17 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 			} elseif ( $token->text === ')' || $token->text === ']' ) {
 				$depth--;
 				if ( $depth === 0 ) {
-					$parameters[] = $parameter;
+					$parameters[] = $current;
 					$result['end'] = $j;
 					break;
 				}
 			} elseif ( $token->text === ',' && $depth === 1 ) {
-				$parameters[] = $parameter;
-				$parameter = [];
+				$parameters[] = $current;
+				$current = [];
 				continue;
 			}
 
-			$parameter[] = $token;
+			$current[] = $token;
 		}
 
 		foreach ( $parameters as $parameter ) {
