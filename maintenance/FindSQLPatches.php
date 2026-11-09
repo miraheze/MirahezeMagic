@@ -30,6 +30,10 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use function array_key_exists;
+use function basename;
+use function count;
+use function str_contains;
 
 class FindSQLPatches extends VersionComparisonMaintenance {
 
