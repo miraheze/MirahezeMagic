@@ -31,6 +31,13 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use function array_key_exists;
+use function basename;
+use function count;
+use function file_get_contents;
+use function preg_match;
+use function str_contains;
+use function str_ends_with;
 
 class FindPossibleUpgradeScripts extends VersionComparisonMaintenance {
 
