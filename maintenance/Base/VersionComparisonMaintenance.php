@@ -32,6 +32,7 @@ use MediaWiki\Registration\ExtensionRegistry;
 use RecursiveCallbackFilterIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 use Throwable;
 use function array_is_list;
 use function array_map;
@@ -112,7 +113,7 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 
 		$filter = new RecursiveCallbackFilterIterator(
 			new RecursiveDirectoryIterator( $root, FilesystemIterator::SKIP_DOTS ),
-			static fn ( $current ) => !$current->isDir() ||
+			static fn ( SplFileInfo $current ): bool => !$current->isDir() ||
 				!in_array( $current->getFilename(), $skippedDirectories, true )
 		);
 
