@@ -34,6 +34,18 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\MainConfigNames;
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use function array_diff_key;
+use function array_keys;
+use function array_unique;
+use function count;
+use function file_get_contents;
+use function implode;
+use function is_string;
+use function ksort;
+use function preg_match;
+use function preg_match_all;
+use function str_contains;
+use function str_ends_with;
 
 class FindNewVirtualDomains extends VersionComparisonMaintenance {
 
