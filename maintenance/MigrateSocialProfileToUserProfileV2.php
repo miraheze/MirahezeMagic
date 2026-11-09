@@ -63,7 +63,7 @@ class MigrateSocialProfileToUserProfileV2 extends Maintenance {
 	}
 
 	private function migrateAboutText( bool $dryRun ): int {
-		$dbr = $this->getReplicaDB();
+		$dbr = $this->getDB( DB_REPLICA );
 		if ( !$dbr->tableExists( 'user_profile', __METHOD__ ) ) {
 			$this->output( "No user_profile table; skipping about text.\n" );
 			return 0;
