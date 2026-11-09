@@ -122,11 +122,11 @@ class FindConfigChanges extends VersionComparisonMaintenance {
 				$parts[] = '-' . $item;
 			}
 		} else {
-			foreach ( array_diff_key( $new, $old ) as $key => $value ) {
+			foreach ( array_keys( array_diff_key( $new, $old ) ) as $key ) {
 				$parts[] = '+' . $key;
 			}
 
-			foreach ( array_diff_key( $old, $new ) as $key => $value ) {
+			foreach ( array_keys( array_diff_key( $old, $new ) ) as $key ) {
 				$parts[] = '-' . $key;
 			}
 
