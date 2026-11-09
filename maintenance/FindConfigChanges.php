@@ -30,6 +30,19 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use function array_diff;
+use function array_diff_key;
+use function array_intersect_key;
+use function array_is_list;
+use function array_keys;
+use function array_map;
+use function count;
+use function implode;
+use function is_array;
+use function ksort;
+use function str_contains;
+use function str_starts_with;
+use function substr;
 
 class FindConfigChanges extends VersionComparisonMaintenance {
 
