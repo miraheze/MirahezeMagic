@@ -45,13 +45,12 @@ use function ksort;
 use function preg_match;
 use function preg_match_all;
 use function str_contains;
-use function str_ends_with;
 
 class FindNewVirtualDomains extends VersionComparisonMaintenance {
 
 	private const string DB_USAGE = '/ConnectionProvider|getPrimaryDatabase|getReplicaDatabase|VirtualDomain|VIRTUAL_|LoadBalancer/';
 
-	private const array SKIPPED_DIRECTORIES = [ 'tests', 'node_modules', '.git', 'i18n', 'docs' ];
+	protected const array SKIPPED_DIRECTORIES = [ 'tests', 'node_modules', '.git', 'i18n', 'docs' ];
 
 	public function __construct() {
 		parent::__construct();
@@ -103,11 +102,7 @@ class FindNewVirtualDomains extends VersionComparisonMaintenance {
 		}
 
 		foreach ( $roots as $name => $root ) {
-			foreach ( $this->iterateFiles( $root, self::SKIPPED_DIRECTORIES ) as $file ) {
-				if ( !str_ends_with( $file, '.php' ) ) {
-					continue;
-				}
-
+			foreach ( $this->iteratePhpFiles( $root, self::SKIPPED_DIRECTORIES ) as $file ) {
 				$contents = file_get_contents( $file );
 				if ( $contents === false || !str_contains( $contents, 'virtual-' ) ) {
 					continue;

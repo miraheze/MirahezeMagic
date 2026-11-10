@@ -34,10 +34,14 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 use Throwable;
+use function array_filter;
 use function array_is_list;
+use function array_key_exists;
 use function array_map;
 use function array_merge;
+use function array_values;
 use function basename;
+use function count;
 use function define;
 use function defined;
 use function dirname;
@@ -52,9 +56,14 @@ use function json_encode;
 use function ksort;
 use function preg_match;
 use function preg_match_all;
+use function str_contains;
+use function str_ends_with;
 use function str_replace;
+use function strcmp;
 use function strlen;
+use function strtolower;
 use function substr;
+use function usort;
 use function var_export;
 use const GLOB_BRACE;
 use const GLOB_NOSORT;
@@ -69,7 +78,7 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 
 	protected const string MANIFEST_PATTERN = '/^(extension|skin)(-[A-Za-z0-9._-]+)?\.json$/';
 
-	protected const array MANIFEST_SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
+	protected const array SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
 
 	public function __construct() {
 		parent::__construct();
@@ -80,6 +89,18 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 
 	protected function addEnabledOnlyOption(): void {
 		$this->addOption( 'enabled-only', 'Only include extensions and skins loaded on this wiki' );
+	}
+
+	protected function addExtensionOption(): void {
+		$this->addOption( 'extension', 'Only include the extension or skin with this name or directory', false, true );
+	}
+
+	protected function addFilterOption( string $description ): void {
+		$this->addOption( 'filter', $description, false, true );
+	}
+
+	protected function getFilter(): ?string {
+		return $this->getOption( 'filter' );
 	}
 
 	protected function getFromVersion(): string {
@@ -106,6 +127,18 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 		return $files;
 	}
 
+	protected function relativePath( string $file, string $version ): string {
+		return substr( $file, strlen( $this->getVersionPath( $version ) ) + 1 );
+	}
+
+	protected function iteratePhpFiles( string $root, array $skippedDirectories = self::SKIPPED_DIRECTORIES ): iterable {
+		foreach ( $this->iterateFiles( $root, $skippedDirectories ) as $file ) {
+			if ( str_ends_with( $file, '.php' ) ) {
+				yield $file;
+			}
+		}
+	}
+
 	protected function iterateFiles( string $root, array $skippedDirectories ): iterable {
 		if ( !is_dir( $root ) ) {
 			return;
@@ -130,7 +163,7 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 		$entries = [];
 
 		foreach ( glob( $base . '/{extensions,skins}/*', GLOB_BRACE | GLOB_ONLYDIR ) ?: [] as $dir ) {
-			foreach ( $this->iterateFiles( $dir, self::MANIFEST_SKIPPED_DIRECTORIES ) as $file ) {
+			foreach ( $this->iterateFiles( $dir, self::SKIPPED_DIRECTORIES ) as $file ) {
 				if ( !preg_match( self::MANIFEST_PATTERN, basename( $file ) ) ) {
 					continue;
 				}
@@ -161,6 +194,24 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 		}
 
 		return $entries;
+	}
+
+	/**
+	 * @param array<int, array{name: string, dir: string, path: string, file: string, info: array}> $entries
+	 * @return array<int, array{name: string, dir: string, path: string, file: string, info: array}>
+	 */
+	protected function selectEntries( array $entries ): array {
+		$only = $this->getOption( 'extension' );
+		if ( $only === null ) {
+			return $entries;
+		}
+
+		$only = strtolower( $only );
+		return array_values( array_filter(
+			$entries,
+			static fn ( array $entry ): bool => strtolower( $entry['name'] ) === $only ||
+				strtolower( $entry['dir'] ) === $only
+		) );
 	}
 
 	protected function findManifests( string $version ): array {
@@ -195,6 +246,89 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 		}
 
 		return $schema;
+	}
+
+	/**
+	 * @param array<string, array{value: mixed}> $from
+	 * @param array<string, array{value: mixed}> $to
+	 * @return array{new: array<string, array>, removed: array<string, array>, changed: array<string, array>}
+	 */
+	protected function compareEntries( array $from, array $to, ?string $filter ): array {
+		$new = [];
+		$removed = [];
+		$changed = [];
+
+		foreach ( $to as $key => $entry ) {
+			if ( $filter !== null && !str_contains( $key, $filter ) ) {
+				continue;
+			}
+
+			if ( !isset( $from[$key] ) ) {
+				$new[$key] = $entry;
+			} elseif ( $from[$key]['value'] !== $entry['value'] ) {
+				$changed[$key] = [ $from[$key], $entry ];
+			}
+		}
+
+		foreach ( $from as $key => $entry ) {
+			if ( !isset( $to[$key] ) && ( $filter === null || str_contains( $key, $filter ) ) ) {
+				$removed[$key] = $entry;
+			}
+		}
+
+		return [ 'new' => $new, 'removed' => $removed, 'changed' => $changed ];
+	}
+
+	/**
+	 * @param array{new: array, removed: array, changed: array} $changes
+	 */
+	protected function outputChangeCounts( array $changes ): void {
+		$this->output(
+			"\nNew: " . count( $changes['new'] ) . ', removed: ' . count( $changes['removed'] ) .
+			', changed: ' . count( $changes['changed'] ) . "\n"
+		);
+	}
+
+	protected function outputCount( int $count ): void {
+		$this->output( "\nCount: " . $count . "\n" );
+	}
+
+	/**
+	 * @param array<string, string> $fromFiles Paths keyed by file name
+	 * @param array<string, string> $toFiles Paths keyed by file name
+	 * @return string[]
+	 */
+	protected function findNewOrUpdatedFiles( array $fromFiles, array $toFiles ): array {
+		$files = [];
+		foreach ( $toFiles as $filename => $file ) {
+			if ( !array_key_exists( $filename, $fromFiles ) || $this->isFileUpdated( $fromFiles[$filename], $file ) ) {
+				$files[] = $file;
+			}
+		}
+
+		return $files;
+	}
+
+	/**
+	 * @param string $oldFile @phan-unused-param
+	 * @param string $newFile @phan-unused-param
+	 */
+	protected function isFileUpdated( string $oldFile, string $newFile ): bool {
+		// TO-DO
+		return false;
+	}
+
+	/**
+	 * @param array<int, array> $findings Each item needs file and line keys
+	 * @return array<int, array>
+	 */
+	protected function sortByLocation( array $findings ): array {
+		usort(
+			$findings,
+			static fn ( array $a, array $b ): int => strcmp( $a['file'], $b['file'] ) ?: $a['line'] <=> $b['line']
+		);
+
+		return $findings;
 	}
 
 	protected function normalize( mixed $value ): mixed {

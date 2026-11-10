@@ -29,12 +29,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use Miraheze\MirahezeMagic\Maintenance\Base\PhpAnalysisMaintenance;
 use PhpToken;
-use function array_filter;
-use function array_key_exists;
 use function array_merge;
-use function array_values;
 use function basename;
 use function count;
 use function file_get_contents;
@@ -44,16 +41,9 @@ use function is_file;
 use function preg_match;
 use function preg_replace;
 use function str_contains;
-use function str_ends_with;
-use function strcmp;
-use function strlen;
 use function strtolower;
-use function substr;
-use function usort;
-use const T_COMMENT;
 use const T_CONSTANT_ENCAPSED_STRING;
 use const T_DIR;
-use const T_DOC_COMMENT;
 use const T_ENCAPSED_AND_WHITESPACE;
 use const T_FUNCTION;
 use const T_NULLSAFE_OBJECT_OPERATOR;
@@ -61,11 +51,8 @@ use const T_OBJECT_OPERATOR;
 use const T_RETURN;
 use const T_STRING;
 use const T_VARIABLE;
-use const T_WHITESPACE;
 
-class FindSQLPatches extends VersionComparisonMaintenance {
-
-	private const array SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
+class FindSQLPatches extends PhpAnalysisMaintenance {
 
 	private const array UPDATE_CALLS = [
 		'addextensionupdate',
@@ -83,8 +70,10 @@ class FindSQLPatches extends VersionComparisonMaintenance {
 	}
 
 	public function execute() {
-		$patches = [];
-		$this->findPatches( $this->getFromVersion(), $this->getToVersion(), $patches );
+		$patches = $this->findNewOrUpdatedFiles(
+			$this->findSqlPatches( $this->getFromVersion() ),
+			$this->findSqlPatches( $this->getToVersion() )
+		);
 		foreach ( $patches as $patch ) {
 			$this->output( $patch . "\n" );
 		}
@@ -98,22 +87,7 @@ class FindSQLPatches extends VersionComparisonMaintenance {
 			$this->output( $update['file'] . ':' . $update['line'] . ' ' . $update['text'] . "\n" );
 		}
 
-		$this->output( "\nCount: " . ( count( $patches ) + count( $updates ) ) . "\n" );
-	}
-
-	private function findPatches( $fromVersion, $toVersion, &$patches ) {
-		$fromPatches = $this->findSqlPatches( $fromVersion );
-		$toPatches = $this->findSqlPatches( $toVersion );
-		foreach ( $toPatches as $patch ) {
-			$filename = basename( $patch );
-			if ( array_key_exists( $filename, $fromPatches ) ) {
-				if ( $this->isPatchUpdated( $fromPatches[$filename], $patch ) ) {
-					$patches[] = $patch;
-				}
-			} else {
-				$patches[] = $patch;
-			}
-		}
+		$this->outputCount( count( $patches ) + count( $updates ) );
 	}
 
 	private function findSqlPatches( $version ) {
@@ -137,14 +111,6 @@ class FindSQLPatches extends VersionComparisonMaintenance {
 	}
 
 	/**
-	 * @param string $oldPatch @phan-unused-param
-	 * @param string $newPatch @phan-unused-param
-	 */
-	private function isPatchUpdated( $oldPatch, $newPatch ) {
-		// TO-DO
-	}
-
-	/**
 	 * @return array<int, array{file: string, line: int, text: string}>
 	 */
 	private function findNewInlineUpdates( string $fromVersion, string $toVersion ): array {
@@ -156,12 +122,7 @@ class FindSQLPatches extends VersionComparisonMaintenance {
 			}
 		}
 
-		usort(
-			$new,
-			static fn ( array $a, array $b ): int => strcmp( $a['file'], $b['file'] ) ?: $a['line'] <=> $b['line']
-		);
-
-		return $new;
+		return $this->sortByLocation( $new );
 	}
 
 	/**
@@ -172,70 +133,20 @@ class FindSQLPatches extends VersionComparisonMaintenance {
 		$updates = [];
 
 		foreach ( [ 'extensions', 'skins' ] as $directory ) {
-			foreach ( $this->iterateFiles( $base . '/' . $directory, self::SKIPPED_DIRECTORIES ) as $file ) {
-				if ( !str_ends_with( $file, '.php' ) ) {
-					continue;
-				}
-
+			foreach ( $this->iteratePhpFiles( $base . '/' . $directory ) as $file ) {
 				$code = file_get_contents( $file );
 				if ( $code !== false && preg_match( '/addExtensionUpdate|dropExtensionTable|addPostDatabaseUpdateMaintenance/', $code ) ) {
-					$this->scanUpdateCalls( $this->tokenize( $code ), substr( $file, strlen( $base ) + 1 ), $updates );
+					$this->scanUpdateCalls( $this->tokenize( $code ), $this->relativePath( $file, $version ), $updates );
 				}
 			}
 		}
 
 		$core = $base . self::CORE_UPDATER;
 		if ( is_file( $core ) ) {
-			$this->scanCoreUpdateList( $this->tokenize( (string)file_get_contents( $core ) ), substr( $core, strlen( $base ) + 1 ), $updates );
+			$this->scanCoreUpdateList( $this->tokenize( (string)file_get_contents( $core ) ), $this->relativePath( $core, $version ), $updates );
 		}
 
 		return $updates;
-	}
-
-	/**
-	 * @return PhpToken[]
-	 */
-	private function tokenize( string $code ): array {
-		return array_values( array_filter(
-			PhpToken::tokenize( $code ),
-			static fn ( PhpToken $token ): bool => !$token->is( [ T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ] )
-		) );
-	}
-
-	/**
-	 * @return array<int, PhpToken[]>
-	 */
-	private function splitArguments( array $tokens, int $open ): array {
-		$arguments = [];
-		$current = [];
-		$depth = 0;
-		$count = count( $tokens );
-		for ( $j = $open; $j < $count; $j++ ) {
-			$text = $tokens[$j]->text;
-			if ( $text === '(' || $text === '[' ) {
-				$depth++;
-				if ( $depth === 1 ) {
-					continue;
-				}
-			} elseif ( $text === ')' || $text === ']' ) {
-				$depth--;
-				if ( $depth === 0 ) {
-					break;
-				}
-			} elseif ( $text === ',' && $depth === 1 ) {
-				$arguments[] = $current;
-				$current = [];
-				continue;
-			}
-
-			$current[] = $tokens[$j];
-		}
-
-		if ( $current ) {
-			$arguments[] = $current;
-		}
-
-		return $arguments;
 	}
 
 	private function hasPatchPath( array $tokens ): bool {
