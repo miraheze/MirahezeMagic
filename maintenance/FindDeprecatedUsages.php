@@ -29,7 +29,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  * @version 1.0
  */
 
-use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
+use Miraheze\MirahezeMagic\Maintenance\Base\PhpAnalysisMaintenance;
 use PhpToken;
 use function array_diff_key;
 use function array_filter;
@@ -55,21 +55,15 @@ use function preg_match_all;
 use function preg_quote;
 use function str_contains;
 use function str_ends_with;
-use function str_replace;
 use function str_starts_with;
-use function strcmp;
 use function strlen;
 use function strpos;
-use function strrchr;
-use function strstr;
 use function strtolower;
 use function strtoupper;
 use function substr;
 use function substr_count;
-use function usort;
 use const PREG_SET_ORDER;
 use const T_ABSTRACT;
-use const T_AS;
 use const T_ATTRIBUTE;
 use const T_BOOLEAN_AND;
 use const T_BOOLEAN_OR;
@@ -77,11 +71,9 @@ use const T_CATCH;
 use const T_CLASS;
 use const T_CLASS_C;
 use const T_COALESCE;
-use const T_COMMENT;
 use const T_CONST;
 use const T_CONSTANT_ENCAPSED_STRING;
 use const T_CURLY_OPEN;
-use const T_DOC_COMMENT;
 use const T_DOLLAR_OPEN_CURLY_BRACES;
 use const T_DOUBLE_COLON;
 use const T_ENCAPSED_AND_WHITESPACE;
@@ -100,10 +92,8 @@ use const T_MATCH;
 use const T_METHOD_C;
 use const T_NAME_FULLY_QUALIFIED;
 use const T_NAME_QUALIFIED;
-use const T_NAME_RELATIVE;
 use const T_NAMESPACE;
 use const T_NEW;
-use const T_NS_SEPARATOR;
 use const T_NULLSAFE_OBJECT_OPERATOR;
 use const T_OBJECT_OPERATOR;
 use const T_PRIVATE;
@@ -116,11 +106,8 @@ use const T_TRAIT;
 use const T_USE;
 use const T_VAR;
 use const T_VARIABLE;
-use const T_WHITESPACE;
 
-class FindDeprecatedUsages extends VersionComparisonMaintenance {
-
-	private const array SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
+class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 
 	private const array CORE_DIRECTORIES = [ 'includes', 'maintenance', 'languages' ];
 
@@ -132,8 +119,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 	private const array MODIFIERS = [ T_PUBLIC, T_PROTECTED, T_PRIVATE, T_STATIC, T_FINAL, T_ABSTRACT, T_READONLY, T_VAR ];
 
 	private const array CLASS_KEYWORDS = [ T_CLASS, T_INTERFACE, T_TRAIT, T_ENUM ];
-
-	private const array NAME_TOKENS = [ T_STRING, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED, T_NAME_RELATIVE ];
 
 	private const array CLASS_CONTEXT = [ T_NEW, T_EXTENDS, T_IMPLEMENTS, T_INSTANCEOF, T_CATCH ];
 
@@ -168,7 +153,7 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 
 		$this->addEnabledOnlyOption();
 		$this->addOption( 'new-only', 'Only report code that became hard deprecated between the two versions' );
-		$this->addOption( 'extension', 'Only scan the extension or skin with this name or directory', false, true );
+		$this->addExtensionOption();
 	}
 
 	public function execute() {
@@ -198,7 +183,7 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		foreach ( $files as $file ) {
 			$code = file_get_contents( $file );
 			if ( $code !== false ) {
-				$this->scanFile( $code, substr( $file, strlen( $base ) + 1 ), $found );
+				$this->scanFile( $code, $this->relativePath( $file, $toVersion ), $found );
 			}
 		}
 
@@ -213,10 +198,8 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 
 		$files = [];
 		foreach ( array_keys( $directories ) as $directory ) {
-			foreach ( $this->iterateFiles( $directory, self::SKIPPED_DIRECTORIES ) as $file ) {
-				if ( str_ends_with( $file, '.php' ) ) {
-					$files[$file] = $file;
-				}
+			foreach ( $this->iteratePhpFiles( $directory ) as $file ) {
+				$files[$file] = $file;
 			}
 		}
 
@@ -230,10 +213,7 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 			static fn ( array $item ): bool => !$newOnly || $item['status'] === 'REMOVED' || $item['new']
 		) );
 
-		usort(
-			$results,
-			static fn ( array $a, array $b ): int => strcmp( $a['file'], $b['file'] ) ?: $a['line'] <=> $b['line']
-		);
+		$results = $this->sortByLocation( $results );
 
 		$totals = [];
 		foreach ( $results as $item ) {
@@ -252,20 +232,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 
 		$this->output( "\nCount: " . count( $results ) . ( $summary ? ' (' . implode( ', ', $summary ) . ')' : '' ) . "\n" );
 		$this->output( 'PHP files scanned: ' . $fileCount . "\n" );
-	}
-
-	private function selectEntries( array $entries ): array {
-		$only = $this->getOption( 'extension' );
-		if ( $only === null ) {
-			return $entries;
-		}
-
-		$only = strtolower( $only );
-		return array_values( array_filter(
-			$entries,
-			static fn ( array $entry ): bool => strtolower( $entry['name'] ) === $only ||
-				strtolower( $entry['dir'] ) === $only
-		) );
 	}
 
 	/**
@@ -420,13 +386,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		return preg_match( '/since\s+v?(\d+\.\d+)/i', $text, $matches ) ? $matches[1] : '';
 	}
 
-	private function tokenize( string $code ): array {
-		return array_values( array_filter(
-			PhpToken::tokenize( $code ),
-			static fn ( PhpToken $token ): bool => !$token->is( [ T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ] )
-		) );
-	}
-
 	private function declaredKey( string $kind, string $key ): string {
 		if ( $kind === 'constant' ) {
 			$position = strpos( $key, '::' );
@@ -445,43 +404,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		if ( !isset( $index['hard'][$kind][$lookup] ) ) {
 			$index['hard'][$kind][$lookup] = [ 'name' => $key, 'since' => $since ];
 		}
-	}
-
-	private function skipAttribute( array $tokens, int $i ): int {
-		$depth = 0;
-		$count = count( $tokens );
-		for ( $j = $i; $j < $count; $j++ ) {
-			if ( $tokens[$j]->is( T_ATTRIBUTE ) || $tokens[$j]->text === '[' ) {
-				$depth++;
-			} elseif ( $tokens[$j]->text === ']' ) {
-				$depth--;
-				if ( $depth === 0 ) {
-					return $j;
-				}
-			}
-		}
-
-		return $count - 1;
-	}
-
-	private function stringsInCall( array $tokens, int $open ): array {
-		$strings = [];
-		$depth = 0;
-		$count = count( $tokens );
-		for ( $j = $open; $j < $count; $j++ ) {
-			if ( $tokens[$j]->text === '(' ) {
-				$depth++;
-			} elseif ( $tokens[$j]->text === ')' ) {
-				$depth--;
-				if ( $depth === 0 ) {
-					break;
-				}
-			} elseif ( $tokens[$j]->is( T_CONSTANT_ENCAPSED_STRING ) ) {
-				$strings[] = str_replace( '\\\\', '\\', substr( $tokens[$j]->text, 1, -1 ) );
-			}
-		}
-
-		return $strings;
 	}
 
 	private function typeName( string $text, int $id, string $namespace, array $imports, string $class ): string {
@@ -648,48 +570,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		}
 
 		return $types;
-	}
-
-	private function tokenizeWithDocs( string $code ): array {
-		$tokens = [];
-		$docs = [];
-		$pending = '';
-		foreach ( PhpToken::tokenize( $code ) as $token ) {
-			if ( $token->is( [ T_WHITESPACE, T_COMMENT ] ) ) {
-				continue;
-			}
-
-			if ( $token->is( T_DOC_COMMENT ) ) {
-				$pending = $token->text;
-				continue;
-			}
-
-			if ( $pending !== '' ) {
-				$docs[count( $tokens )] = $pending;
-				$pending = '';
-			}
-
-			$tokens[] = $token;
-		}
-
-		return [ $tokens, $docs ];
-	}
-
-	private function matchBackward( array $tokens, int $close ): int {
-		$depth = 0;
-		for ( $j = $close; $j >= 0; $j-- ) {
-			$text = $tokens[$j]->text;
-			if ( $text === ')' || $text === ']' ) {
-				$depth++;
-			} elseif ( $text === '(' || $text === '[' ) {
-				$depth--;
-				if ( $depth === 0 ) {
-					return $j;
-				}
-			}
-		}
-
-		return -1;
 	}
 
 	/**
@@ -1180,24 +1060,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 		}
 	}
 
-	private function resolveClass( string $name, int $type, string $namespace, array $imports ): string {
-		if ( $type === T_NAME_FULLY_QUALIFIED ) {
-			return ltrim( $name, '\\' );
-		}
-
-		if ( $type === T_NAME_RELATIVE ) {
-			return ( $namespace !== '' ? $namespace . '\\' : '' ) . substr( $name, strlen( 'namespace\\' ) );
-		}
-
-		$first = strstr( $name, '\\', true );
-		$alias = strtolower( $first === false ? $name : $first );
-		if ( isset( $imports[$alias] ) ) {
-			return $imports[$alias] . ( $first === false ? '' : substr( $name, strlen( $first ) ) );
-		}
-
-		return ( $namespace !== '' ? $namespace . '\\' : '' ) . $name;
-	}
-
 	private function checkClass( string $name, string $file, int $line, array &$found ): void {
 		$lookup = strtolower( ltrim( $name, '\\' ) );
 		if ( !$this->checkHard( 'class', $lookup, $file, $line, $found ) ) {
@@ -1222,65 +1084,6 @@ class FindDeprecatedUsages extends VersionComparisonMaintenance {
 				!isset( $this->fromIndex['hard']['config'][$name] ), $file, $line
 			);
 		}
-	}
-
-	private function parseImport(
-		array $tokens,
-		int $i,
-		array &$imports,
-		array &$functionImports,
-		array &$constImports,
-		array &$entries
-	): int {
-		$count = count( $tokens );
-		$type = 'class';
-		$j = $i + 1;
-		if ( $tokens[$j]->is( T_FUNCTION ) ) {
-			$type = 'function';
-			$j++;
-		} elseif ( $tokens[$j]->is( T_CONST ) ) {
-			$type = 'const';
-			$j++;
-		}
-
-		$prefix = '';
-		$entryType = $type;
-		for ( ; $j < $count && $tokens[$j]->text !== ';'; $j++ ) {
-			$token = $tokens[$j];
-			if ( $token->is( T_FUNCTION ) ) {
-				$entryType = 'function';
-			} elseif ( $token->is( T_CONST ) ) {
-				$entryType = 'const';
-			} elseif ( $token->text === ',' || $token->text === '}' ) {
-				$entryType = $type;
-			} elseif ( $token->is( [ T_STRING, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED ] ) ) {
-				$name = ltrim( $token->text, '\\' );
-				if ( isset( $tokens[$j + 1] ) && $tokens[$j + 1]->is( T_NS_SEPARATOR ) ) {
-					$prefix = $name . '\\';
-					$j += 2;
-					continue;
-				}
-
-				$fq = $prefix . $name;
-				$alias = substr( strrchr( '\\' . $fq, '\\' ), 1 );
-				if ( isset( $tokens[$j + 1] ) && $tokens[$j + 1]->is( T_AS ) && isset( $tokens[$j + 2] ) ) {
-					$alias = $tokens[$j + 2]->text;
-					$j += 2;
-				}
-
-				if ( $entryType === 'function' ) {
-					$functionImports[strtolower( $alias )] = $fq;
-				} elseif ( $entryType === 'const' ) {
-					$constImports[$alias] = $fq;
-				} else {
-					$imports[strtolower( $alias )] = $fq;
-				}
-
-				$entries[] = [ $entryType, $fq, $token->line ];
-			}
-		}
-
-		return $j;
 	}
 
 	private function expressionEnd( array $tokens, int $start ): int {
