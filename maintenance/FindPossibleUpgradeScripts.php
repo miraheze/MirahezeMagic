@@ -31,17 +31,13 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 use MediaWiki\Maintenance\Maintenance;
 use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
-use function array_key_exists;
 use function basename;
 use function count;
 use function file_get_contents;
 use function preg_match;
 use function str_contains;
-use function str_ends_with;
 
 class FindPossibleUpgradeScripts extends VersionComparisonMaintenance {
-
-	private const array SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
 
 	public function __construct() {
 		parent::__construct();
@@ -50,48 +46,27 @@ class FindPossibleUpgradeScripts extends VersionComparisonMaintenance {
 	}
 
 	public function execute() {
-		$scripts = [];
-		$this->findScripts( $this->getFromVersion(), $this->getToVersion(), $scripts );
+		$scripts = $this->findNewOrUpdatedFiles(
+			$this->findMaintenanceScripts( $this->getFromVersion() ),
+			$this->findMaintenanceScripts( $this->getToVersion() )
+		);
 		foreach ( $scripts as $script ) {
 			$this->output( $script . $this->findExtendedClass( $script ) . "\n" );
 		}
 
-		$this->output( "\nCount: " . count( $scripts ) . "\n" );
-	}
-
-	private function findScripts( $fromVersion, $toVersion, &$scripts ) {
-		$fromScripts = $this->findMaintenanceScripts( $fromVersion );
-		$toScripts = $this->findMaintenanceScripts( $toVersion );
-		foreach ( $toScripts as $script ) {
-			$filename = basename( $script );
-			if ( array_key_exists( $filename, $fromScripts ) ) {
-				if ( $this->isScriptUpdated( $fromScripts[$filename], $script ) ) {
-					$scripts[] = $script;
-				}
-			} else {
-				$scripts[] = $script;
-			}
-		}
+		$this->outputCount( count( $scripts ) );
 	}
 
 	private function findMaintenanceScripts( $version ) {
 		$scripts = [];
 
-		foreach ( $this->iterateFiles( $this->getVersionPath( $version ), self::SKIPPED_DIRECTORIES ) as $file ) {
-			if ( str_ends_with( $file, '.php' ) && str_contains( $file, '/maintenance/' ) ) {
+		foreach ( $this->iteratePhpFiles( $this->getVersionPath( $version ) ) as $file ) {
+			if ( str_contains( $file, '/maintenance/' ) ) {
 				$scripts[basename( $file )] = $file;
 			}
 		}
 
 		return $scripts;
-	}
-
-	/**
-	 * @param string $oldScript @phan-unused-param
-	 * @param string $newScript @phan-unused-param
-	 */
-	private function isScriptUpdated( $oldScript, $newScript ) {
-		// TO-DO
 	}
 
 	private function findExtendedClass( $script ) {
