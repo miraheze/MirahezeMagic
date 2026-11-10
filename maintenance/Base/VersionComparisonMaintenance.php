@@ -80,11 +80,17 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 
 	protected const array SKIPPED_DIRECTORIES = [ '.git', 'node_modules', 'tests', 'vendor' ];
 
+	protected const bool COMPARES_VERSIONS = true;
+
 	public function __construct() {
 		parent::__construct();
 
-		$this->addOption( 'from-version', 'MediaWiki version to start from', true, true );
-		$this->addOption( 'to-version', 'MediaWiki version to end with', true, true );
+		if ( static::COMPARES_VERSIONS ) {
+			$this->addOption( 'from-version', 'MediaWiki version to start from', true, true );
+			$this->addOption( 'to-version', 'MediaWiki version to end with', true, true );
+		} else {
+			$this->addOption( 'mwversion', 'MediaWiki version to scan', true, true );
+		}
 	}
 
 	protected function addEnabledOnlyOption(): void {
@@ -101,6 +107,10 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 
 	protected function getFilter(): ?string {
 		return $this->getOption( 'filter' );
+	}
+
+	protected function getVersion(): string {
+		return $this->getOption( 'mwversion' );
 	}
 
 	protected function getFromVersion(): string {
