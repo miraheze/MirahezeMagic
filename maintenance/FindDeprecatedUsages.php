@@ -30,7 +30,6 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use Miraheze\MirahezeMagic\Maintenance\Base\PhpAnalysisMaintenance;
-use PhpToken;
 use function array_diff_key;
 use function array_filter;
 use function array_key_last;
