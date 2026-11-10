@@ -319,8 +319,8 @@ abstract class VersionComparisonMaintenance extends Maintenance {
 	}
 
 	/**
-	 * @param array<int, array{file: string, line: int}> $findings
-	 * @return array<int, array{file: string, line: int}>
+	 * @param array<int, array> $findings Each item needs file and line keys
+	 * @return array<int, array>
 	 */
 	protected function sortByLocation( array $findings ): array {
 		usort(
