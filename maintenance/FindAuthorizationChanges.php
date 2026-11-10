@@ -38,14 +38,12 @@ use function array_keys;
 use function array_merge;
 use function array_unique;
 use function array_values;
-use function count;
 use function file_get_contents;
 use function implode;
 use function is_array;
 use function ksort;
 use function preg_match_all;
 use function sort;
-use function str_contains;
 use const PREG_SET_ORDER;
 
 class FindAuthorizationChanges extends VersionComparisonMaintenance {
@@ -81,54 +79,30 @@ class FindAuthorizationChanges extends VersionComparisonMaintenance {
 		$this->addDescription( 'List new, removed or changed rights, groups, grants and namespaces between two MediaWiki versions.' );
 
 		$this->addEnabledOnlyOption();
-		$this->addOption( 'filter', 'Only show entries whose key contains this text', false, true );
+		$this->addFilterOption( 'Only show entries whose key contains this text' );
 	}
 
 	public function execute() {
 		$from = $this->collect( $this->getFromVersion() );
 		$to = $this->collect( $this->getToVersion() );
-		$filter = $this->getOption( 'filter' );
+		$changes = $this->compareEntries( $from, $to, $this->getFilter() );
 
-		$new = [];
-		$removed = [];
-		$changed = [];
-
-		foreach ( $to as $key => $entry ) {
-			if ( $filter !== null && !str_contains( $key, $filter ) ) {
-				continue;
-			}
-
-			if ( !isset( $from[$key] ) ) {
-				$new[$key] = $entry;
-			} elseif ( $from[$key]['value'] !== $entry['value'] ) {
-				$changed[$key] = [ $from[$key], $entry ];
-			}
-		}
-
-		foreach ( $from as $key => $entry ) {
-			if ( !isset( $to[$key] ) && ( $filter === null || str_contains( $key, $filter ) ) ) {
-				$removed[$key] = $entry;
-			}
-		}
-
-		foreach ( $new as $key => $entry ) {
+		foreach ( $changes['new'] as $key => $entry ) {
 			$this->output( 'NEW ' . $key . ' [' . $this->sources( $entry ) . '] ' . $this->short( $entry['value'] ) . "\n" );
 		}
 
-		foreach ( $removed as $key => $entry ) {
+		foreach ( $changes['removed'] as $key => $entry ) {
 			$this->output( 'REMOVED ' . $key . ' [' . $this->sources( $entry ) . '] ' . $this->short( $entry['value'] ) . "\n" );
 		}
 
-		foreach ( $changed as $key => [ $old, $current ] ) {
+		foreach ( $changes['changed'] as $key => [ $old, $current ] ) {
 			$this->output(
 				'CHANGED ' . $key . ' [' . $this->sources( $current ) . '] ' .
 				$this->short( $old['value'] ) . ' => ' . $this->short( $current['value'] ) . "\n"
 			);
 		}
 
-		$this->output(
-			"\nNew: " . count( $new ) . ', removed: ' . count( $removed ) . ', changed: ' . count( $changed ) . "\n"
-		);
+		$this->outputChangeCounts( $changes );
 	}
 
 	private function sources( array $entry ): string {
