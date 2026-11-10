@@ -138,6 +138,12 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 	/** @var array{declared: array<string, array<string, mixed>>, hard: array<string, array<string, array<string, string>>>} */
 	private array $localIndex = [];
 
+	private array $guards = [];
+
+	private int $targetId = 0;
+
+	private int $position = 0;
+
 	private string $droppedTablePattern = '';
 
 	private string $droppedColumnPattern = '';
@@ -158,6 +164,7 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 
 	public function execute() {
 		$toVersion = $this->getToVersion();
+		$this->targetId = $this->versionId( $toVersion );
 		$this->fromIndex = $this->buildCoreIndex( $this->getFromVersion() );
 		$this->toIndex = $this->buildCoreIndex( $toVersion );
 		$this->localIndex = $this->newIndex();
@@ -218,9 +225,10 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 		$totals = [];
 		foreach ( $results as $item ) {
 			$since = $item['since'] !== '' ? ' (since ' . $item['since'] . ')' : '';
+			$guarded = $item['guard'] !== '' ? ' (guarded by ' . $item['guard'] . ')' : '';
 			$uses = $item['count'] > 1 ? ' x' . $item['count'] : '';
 			$this->output(
-				$item['file'] . ':' . $item['line'] . ' ' . $item['status'] . ' ' . $item['kind'] . ' ' . $item['name'] . $since . $uses . "\n"
+				$item['file'] . ':' . $item['line'] . ' ' . $item['status'] . ' ' . $item['kind'] . ' ' . $item['name'] . $since . $guarded . $uses . "\n"
 			);
 			$totals[$item['status']] = ( $totals[$item['status']] ?? 0 ) + 1;
 		}
@@ -1004,7 +1012,12 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 	}
 
 	private function record( array &$found, string $status, string $kind, string $name, string $since, bool $new, string $file, int $line ): void {
-		$key = $file . '|' . $status . '|' . $kind . '|' . $name;
+		if ( $this->isGuarded( $this->guards, $this->position, $this->targetId ) ) {
+			return;
+		}
+
+		$guard = $this->findGuardCheck( $this->guards, $this->position ) ?? '';
+		$key = $file . '|' . $status . '|' . $kind . '|' . $name . '|' . $guard;
 		if ( isset( $found[$key] ) ) {
 			$found[$key]['count']++;
 			return;
@@ -1018,6 +1031,7 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 			'name' => $name,
 			'since' => $since,
 			'new' => $new,
+			'guard' => $guard,
 			'count' => 1,
 		];
 	}
@@ -1119,6 +1133,7 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 	private function scanFile( string $code, string $file, array &$found ): void {
 		[ $tokens, $docs ] = $this->tokenizeWithDocs( $code );
 		$count = count( $tokens );
+		$this->guards = $this->findGuards( $tokens, [ 'mw_version' ], [] );
 
 		$namespace = '';
 		$imports = [];
@@ -1136,6 +1151,7 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 			$token = $tokens[$i];
 			$prev = $tokens[$i - 1] ?? null;
 			$next = $tokens[$i + 1] ?? null;
+			$this->position = $token->pos;
 
 			if ( $token->text === '{' || $token->is( [ T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES ] ) ) {
 				$depth++;
@@ -1446,6 +1462,8 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 				$this->checkRemoved( 'constant', $constImports[$text] ?? $text, $file, $token->line, $found );
 			}
 		}
+
+		$this->guards = [];
 	}
 }
 
