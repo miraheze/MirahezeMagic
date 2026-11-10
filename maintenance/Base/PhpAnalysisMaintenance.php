@@ -28,10 +28,12 @@ namespace Miraheze\MirahezeMagic\Maintenance\Base;
 
 use PhpToken;
 use function array_filter;
+use function array_keys;
 use function array_slice;
 use function array_values;
 use function count;
 use function explode;
+use function implode;
 use function in_array;
 use function ltrim;
 use function min;
@@ -273,27 +275,23 @@ abstract class PhpAnalysisMaintenance extends VersionComparisonMaintenance {
 	/**
 	 * @param array<int, array{from: int, to: int, bound: int, check: ?string}> $guards
 	 */
-	protected function isGuarded( array $guards, int $position, int $targetId ): bool {
+	protected function findGuardCheck( array $guards, int $position, int $targetId ): ?string {
+		$labels = [];
 		foreach ( $guards as $guard ) {
-			if ( $position >= $guard['from'] && $position <= $guard['to'] && $guard['bound'] <= $targetId ) {
-				return true;
+			if ( $position < $guard['from'] || $position > $guard['to'] ) {
+				continue;
+			}
+
+			if ( $guard['bound'] <= $targetId ) {
+				$labels['version check'] = true;
+			}
+
+			if ( $guard['check'] !== null ) {
+				$labels[$guard['check']] = true;
 			}
 		}
 
-		return false;
-	}
-
-	/**
-	 * @param array<int, array{from: int, to: int, bound: int, check: ?string}> $guards
-	 */
-	protected function findGuardCheck( array $guards, int $position ): ?string {
-		foreach ( $guards as $guard ) {
-			if ( $guard['check'] !== null && $position >= $guard['from'] && $position <= $guard['to'] ) {
-				return $guard['check'];
-			}
-		}
-
-		return null;
+		return $labels ? implode( ', ', array_keys( $labels ) ) : null;
 	}
 
 	/**
