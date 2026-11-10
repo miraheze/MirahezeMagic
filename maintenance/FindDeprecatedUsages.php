@@ -1012,11 +1012,7 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 	}
 
 	private function record( array &$found, string $status, string $kind, string $name, string $since, bool $new, string $file, int $line ): void {
-		if ( $this->isGuarded( $this->guards, $this->position, $this->targetId ) ) {
-			return;
-		}
-
-		$guard = $this->findGuardCheck( $this->guards, $this->position ) ?? '';
+		$guard = $this->findGuardCheck( $this->guards, $this->position, $this->targetId ) ?? '';
 		$key = $file . '|' . $status . '|' . $kind . '|' . $name . '|' . $guard;
 		if ( isset( $found[$key] ) ) {
 			$found[$key]['count']++;
