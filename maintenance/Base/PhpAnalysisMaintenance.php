@@ -28,22 +28,38 @@ namespace Miraheze\MirahezeMagic\Maintenance\Base;
 
 use PhpToken;
 use function array_filter;
+use function array_slice;
 use function array_values;
 use function count;
+use function explode;
+use function in_array;
 use function ltrim;
+use function min;
 use function str_replace;
 use function strlen;
 use function strrchr;
 use function strstr;
 use function strtolower;
 use function substr;
+use function trim;
+use const PHP_INT_MAX;
 use const T_AS;
 use const T_ATTRIBUTE;
+use const T_BOOLEAN_AND;
+use const T_BOOLEAN_OR;
 use const T_COMMENT;
 use const T_CONST;
 use const T_CONSTANT_ENCAPSED_STRING;
+use const T_CURLY_OPEN;
 use const T_DOC_COMMENT;
+use const T_DOLLAR_OPEN_CURLY_BRACES;
+use const T_ELSE;
+use const T_ELSEIF;
 use const T_FUNCTION;
+use const T_IF;
+use const T_LNUMBER;
+use const T_LOGICAL_AND;
+use const T_LOGICAL_OR;
 use const T_NAME_FULLY_QUALIFIED;
 use const T_NAME_QUALIFIED;
 use const T_NAME_RELATIVE;
@@ -252,5 +268,218 @@ abstract class PhpAnalysisMaintenance extends VersionComparisonMaintenance {
 		}
 
 		return $arguments;
+	}
+
+	/**
+	 * @param array<int, array{from: int, to: int, bound: int, check: ?string}> $guards
+	 */
+	protected function isGuarded( array $guards, int $position, int $targetId ): bool {
+		foreach ( $guards as $guard ) {
+			if ( $position >= $guard['from'] && $position <= $guard['to'] && $guard['bound'] <= $targetId ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param array<int, array{from: int, to: int, bound: int, check: ?string}> $guards
+	 */
+	protected function findGuardCheck( array $guards, int $position ): ?string {
+		foreach ( $guards as $guard ) {
+			if ( $guard['check'] !== null && $position >= $guard['from'] && $position <= $guard['to'] ) {
+				return $guard['check'];
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param string[] $versionNames Constants or variables used with version_compare()
+	 * @param string[] $idNames Constants holding an integer version compared directly
+	 * @return array<int, array{from: int, to: int, bound: int, check: ?string}>
+	 */
+	protected function findGuards( array $tokens, array $versionNames, array $idNames ): array {
+		$guards = [];
+		$count = count( $tokens );
+		for ( $i = 0; $i < $count; $i++ ) {
+			if ( $tokens[$i]->id !== T_IF ) {
+				continue;
+			}
+
+			$elseBound = PHP_INT_MAX;
+			$chainCheck = null;
+			$j = $i;
+			while ( true ) {
+				$open = $j + 1;
+				if ( ( $tokens[$open]->text ?? '' ) !== '(' ) {
+					break;
+				}
+
+				$close = $open;
+				$depth = 0;
+				for ( ; $close < $count; $close++ ) {
+					if ( $tokens[$close]->text === '(' ) {
+						$depth++;
+					} elseif ( $tokens[$close]->text === ')' && --$depth === 0 ) {
+						break;
+					}
+				}
+
+				if ( $close >= $count - 1 || $tokens[$close + 1]->text === ':' ) {
+					break;
+				}
+
+				$guard = $this->parseGuard( array_slice( $tokens, $open + 1, $close - $open - 1 ), $versionNames, $idNames );
+				$end = $this->skipBody( $tokens, $close + 1 );
+				$bound = min( $elseBound, $guard['then'] );
+				$check = $chainCheck ?? $guard['check'];
+				if ( $bound < PHP_INT_MAX || $check !== null ) {
+					$guards[] = [
+						'from' => $tokens[$close + 1]->pos,
+						'to' => $tokens[$end]->pos,
+						'bound' => $bound,
+						'check' => $check,
+					];
+				}
+
+				$elseBound = min( $elseBound, $guard['else'] );
+				$chainCheck ??= $guard['check'];
+				$next = $end + 1;
+				if ( isset( $tokens[$next] ) && $tokens[$next]->id === T_ELSEIF ) {
+					$j = $next;
+					continue;
+				}
+
+				if ( isset( $tokens[$next] ) && $tokens[$next]->id === T_ELSE ) {
+					if ( isset( $tokens[$next + 1] ) && $tokens[$next + 1]->id === T_IF ) {
+						$j = $next + 1;
+						continue;
+					}
+
+					if ( ( $elseBound < PHP_INT_MAX || $chainCheck !== null ) && isset( $tokens[$next + 1] ) ) {
+						$elseEnd = $this->skipBody( $tokens, $next + 1 );
+						$guards[] = [
+							'from' => $tokens[$next + 1]->pos,
+							'to' => $tokens[$elseEnd]->pos,
+							'bound' => $elseBound,
+							'check' => $chainCheck,
+						];
+					}
+				}
+
+				break;
+			}
+		}
+
+		return $guards;
+	}
+
+	/**
+	 * @return array{then: int, else: int, check: ?string}
+	 */
+	private function parseGuard( array $condition, array $versionNames, array $idNames ): array {
+		$none = [ 'then' => PHP_INT_MAX, 'else' => PHP_INT_MAX, 'check' => null ];
+		$operators = [ '<' => '<', 'lt' => '<', '<=' => '<=', 'le' => '<=', '>' => '>', 'gt' => '>', '>=' => '>=', 'ge' => '>=' ];
+		$checks = [
+			'function_exists',
+			'class_exists',
+			'interface_exists',
+			'trait_exists',
+			'enum_exists',
+			'defined',
+			'method_exists',
+			'property_exists',
+			'is_callable',
+		];
+		$hasAnd = false;
+		$terms = [];
+		$check = null;
+		$total = count( $condition );
+
+		for ( $k = 0; $k < $total; $k++ ) {
+			$token = $condition[$k];
+			$name = strtolower( ltrim( $token->text, '\\' ) );
+			$next = $condition[$k + 1] ?? null;
+			if ( $token->id === T_BOOLEAN_OR || $token->id === T_LOGICAL_OR ) {
+				return $none;
+			}
+
+			if ( $token->id === T_BOOLEAN_AND || $token->id === T_LOGICAL_AND ) {
+				$hasAnd = true;
+			} elseif ( in_array( $name, $idNames, true ) && $next !== null && isset( $operators[$next->text] ) && ( $condition[$k + 2]->id ?? null ) === T_LNUMBER ) {
+				$terms[] = [ $operators[$next->text], (int)$condition[$k + 2]->text ];
+			} elseif ( $name === 'version_compare' && $next !== null && $next->text === '(' ) {
+				if ( $k > 0 && $condition[$k - 1]->text === '!' ) {
+					return $none;
+				}
+
+				$arguments = $this->splitArguments( $condition, $k + 1 );
+				if ( count( $arguments ) !== 3 || count( $arguments[0] ) !== 1 || count( $arguments[1] ) !== 1 || count( $arguments[2] ) !== 1 ) {
+					continue;
+				}
+
+				$operator = $operators[strtolower( trim( $arguments[2][0]->text, '\'"' ) )] ?? null;
+				if ( in_array( strtolower( ltrim( $arguments[0][0]->text, '\\' ) ), $versionNames, true ) && $operator !== null ) {
+					$terms[] = [ $operator, $this->versionId( trim( $arguments[1][0]->text, '\'"' ) ) ];
+				}
+			} elseif ( in_array( $name, $checks, true ) && $next !== null && $next->text === '(' ) {
+				$check ??= $name;
+			}
+		}
+
+		$result = [ 'then' => PHP_INT_MAX, 'else' => PHP_INT_MAX, 'check' => $check ];
+		foreach ( $terms as [ $operator, $id ] ) {
+			if ( $operator === '<' ) {
+				$result['then'] = min( $result['then'], $id );
+			} elseif ( $operator === '<=' ) {
+				$result['then'] = min( $result['then'], $id + 1 );
+			}
+		}
+
+		if ( !$hasAnd && count( $terms ) === 1 ) {
+			[ $operator, $id ] = $terms[0];
+			if ( $operator === '>=' ) {
+				$result['else'] = $id;
+			} elseif ( $operator === '>' ) {
+				$result['else'] = $id + 1;
+			}
+		}
+
+		return $result;
+	}
+
+	protected function versionId( string $version ): int {
+		$parts = explode( '.', $version );
+		return (int)$parts[0] * 10000 + (int)( $parts[1] ?? 0 ) * 100 + (int)( $parts[2] ?? 0 );
+	}
+
+	protected function skipBody( array $tokens, int $from ): int {
+		$count = count( $tokens );
+		$j = $from;
+		while ( $j < $count && $tokens[$j]->text !== '{' && $tokens[$j]->text !== ';' ) {
+			$j++;
+		}
+
+		if ( $j >= $count || $tokens[$j]->text === ';' ) {
+			return $j;
+		}
+
+		$depth = 0;
+		for ( ; $j < $count; $j++ ) {
+			$token = $tokens[$j];
+			if ( $token->text === '{' || $token->id === T_CURLY_OPEN || $token->id === T_DOLLAR_OPEN_CURLY_BRACES ) {
+				$depth++;
+			} elseif ( $token->text === '}' ) {
+				$depth--;
+				if ( $depth === 0 ) {
+					return $j;
+				}
+			}
+		}
+
+		return $j;
 	}
 }
