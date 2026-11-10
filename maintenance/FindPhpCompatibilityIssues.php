@@ -9,6 +9,7 @@ use Miraheze\MirahezeMagic\Maintenance\Base\PhpAnalysisMaintenance;
 use PhpToken;
 use Throwable;
 use function array_pop;
+use function basename;
 use function class_exists;
 use function count;
 use function end;
@@ -185,13 +186,18 @@ class FindPhpCompatibilityIssues extends PhpAnalysisMaintenance {
 		$fileCount = 0;
 		foreach ( $roots as $root ) {
 			foreach ( $this->iteratePhpFiles( $root ) as $file ) {
+				$relative = $this->relativePath( $file, $version );
+				if ( $relative === 'extensions/MirahezeMagic/maintenance/' . basename( __FILE__ ) ) {
+					continue;
+				}
+
 				$code = file_get_contents( $file );
 				if ( $code === false ) {
 					continue;
 				}
 
 				$fileCount++;
-				$this->scanFile( $code, $this->relativePath( $file, $version ), $targets, $found );
+				$this->scanFile( $code, $relative, $targets, $found );
 			}
 		}
 
@@ -495,7 +501,7 @@ class FindPhpCompatibilityIssues extends PhpAnalysisMaintenance {
 	}
 
 	private function reportSerialization( array $serialization, string $file, array $targets, array &$found ): void {
-		if ( isset( $serialization['__serialize'], $serialization['__unserialize'] ) ) {
+		if ( isset( $serialization['__serialize'] ) && isset( $serialization['__unserialize'] ) ) {
 			return;
 		}
 
@@ -610,8 +616,8 @@ class FindPhpCompatibilityIssues extends PhpAnalysisMaintenance {
 				}
 			}
 
-			$nested = $token->id === T_FUNCTION && $j > $open ||
-				$token->id === T_CLASS && ( $tokens[$j - 1]->id ?? null ) !== T_DOUBLE_COLON;
+			$nested = ( $token->id === T_FUNCTION && $j > $open ) ||
+				( $token->id === T_CLASS && ( $tokens[$j - 1]->id ?? null ) !== T_DOUBLE_COLON );
 			if ( $nested ) {
 				$j = $this->skipBody( $tokens, $j );
 				continue;
