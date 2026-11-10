@@ -38,13 +38,11 @@ use function array_is_list;
 use function array_keys;
 use function array_map;
 use function array_merge;
-use function count;
 use function file_get_contents;
 use function glob;
 use function implode;
 use function is_array;
 use function ksort;
-use function str_contains;
 use function str_starts_with;
 use function strcmp;
 use function strlen;
@@ -67,7 +65,7 @@ class FindConfigChanges extends VersionComparisonMaintenance {
 		$this->addDescription( 'List new, removed or changed default configuration settings between two MediaWiki versions.' );
 
 		$this->addEnabledOnlyOption();
-		$this->addOption( 'filter', 'Only show settings whose name contains this text', false, true );
+		$this->addFilterOption( 'Only show settings whose name contains this text' );
 	}
 
 	public function execute() {
@@ -75,49 +73,25 @@ class FindConfigChanges extends VersionComparisonMaintenance {
 		$from = $this->collect( $this->getFromVersion() );
 		$to = $this->collect( $toVersion );
 		$obsolete = $this->loadCoreSchema( $toVersion )['obsolete-config'] ?? [];
-		$filter = $this->getOption( 'filter' );
+		$changes = $this->compareEntries( $from, $to, $this->getFilter() );
 
-		$new = [];
-		$removed = [];
-		$changed = [];
-
-		foreach ( $to as $name => $entry ) {
-			if ( $filter !== null && !str_contains( $name, $filter ) ) {
-				continue;
-			}
-
-			if ( !isset( $from[$name] ) ) {
-				$new[$name] = $entry;
-			} elseif ( $from[$name]['value'] !== $entry['value'] ) {
-				$changed[$name] = [ $from[$name], $entry ];
-			}
-		}
-
-		foreach ( $from as $name => $entry ) {
-			if ( !isset( $to[$name] ) && ( $filter === null || str_contains( $name, $filter ) ) ) {
-				$removed[$name] = $entry;
-			}
-		}
-
-		foreach ( $new as $name => $entry ) {
+		foreach ( $changes['new'] as $name => $entry ) {
 			$this->output( 'NEW $' . $name . ' [' . $entry['source'] . '] ' . $this->short( $entry['value'] ) . "\n" );
 		}
 
-		foreach ( $removed as $name => $entry ) {
+		foreach ( $changes['removed'] as $name => $entry ) {
 			$note = isset( $obsolete[substr( $name, 2 )] ) ? ' obsolete: ' . $obsolete[substr( $name, 2 )] : '';
 			$this->output( 'REMOVED $' . $name . ' [' . $entry['source'] . ']' . $this->setMarker( $name ) . $note . "\n" );
 		}
 
-		foreach ( $changed as $name => [ $old, $current ] ) {
+		foreach ( $changes['changed'] as $name => [ $old, $current ] ) {
 			$this->output(
 				'CHANGED $' . $name . ' [' . $current['source'] . ']' . $this->setMarker( $name ) . ' ' .
 				$this->describeChange( $old['value'], $current['value'] ) . "\n"
 			);
 		}
 
-		$this->output(
-			"\nNew: " . count( $new ) . ', removed: ' . count( $removed ) . ', changed: ' . count( $changed ) . "\n"
-		);
+		$this->outputChangeCounts( $changes );
 	}
 
 	private function describeChange( mixed $old, mixed $new ): string {
