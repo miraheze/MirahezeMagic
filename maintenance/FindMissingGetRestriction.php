@@ -4,12 +4,9 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 
 /** Temporary: will be removed once 1.47 is deployed everywhere and all issues here are fixed */
 
-use Miraheze\MirahezeMagic\Maintenance\Base\VersionComparisonMaintenance;
-use PhpToken;
-use function array_filter;
+use Miraheze\MirahezeMagic\Maintenance\Base\PhpAnalysisMaintenance;
 use function array_keys;
 use function array_pop;
-use function array_values;
 use function count;
 use function end;
 use function file_get_contents;
@@ -17,44 +14,29 @@ use function implode;
 use function in_array;
 use function ltrim;
 use function str_contains;
-use function str_ends_with;
-use function strcmp;
 use function strlen;
-use function strrchr;
 use function strrpos;
-use function strstr;
 use function strtolower;
 use function substr;
-use function usort;
-use const T_AS;
 use const T_CLASS;
-use const T_COMMENT;
-use const T_CONST;
 use const T_CURLY_OPEN;
-use const T_DOC_COMMENT;
 use const T_DOLLAR_OPEN_CURLY_BRACES;
 use const T_DOUBLE_COLON;
 use const T_EXTENDS;
 use const T_FUNCTION;
-use const T_NAME_FULLY_QUALIFIED;
 use const T_NAME_QUALIFIED;
-use const T_NAME_RELATIVE;
 use const T_NAMESPACE;
 use const T_NEW;
-use const T_NS_SEPARATOR;
 use const T_STRING;
 use const T_USE;
-use const T_WHITESPACE;
 
-class FindMissingGetRestriction extends VersionComparisonMaintenance {
+class FindMissingGetRestriction extends PhpAnalysisMaintenance {
 
-	private const array SKIPPED_DIRECTORIES = [ '.git', '.phan', 'node_modules', 'stubs', 'tests', 'vendor' ];
+	protected const array SKIPPED_DIRECTORIES = [ '.git', '.phan', 'node_modules', 'stubs', 'tests', 'vendor' ];
 
 	private const string ROOT_CLASS = 'specialpage';
 
 	private const array EMPTY_VALUES = [ '', "''", '""', 'null', 'false' ];
-
-	private const array NAME_TOKENS = [ T_STRING, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED, T_NAME_RELATIVE ];
 
 	private array $classes = [];
 
@@ -68,20 +50,16 @@ class FindMissingGetRestriction extends VersionComparisonMaintenance {
 		$this->addDescription( 'List special pages that pass a restriction to the SpecialPage constructor without overriding getRestriction().' );
 
 		$this->addEnabledOnlyOption();
-		$this->addOption( 'extension', 'Only scan the extension or skin with this name or directory', false, true );
+		$this->addExtensionOption();
 	}
 
 	public function execute() {
 		$version = $this->getToVersion();
 		$base = $this->getVersionPath( $version );
-		$only = $this->getOption( 'extension' );
-		$only = $only === null ? null : strtolower( $only );
 
 		$paths = [];
-		foreach ( $this->findManifestFiles( $version ) as $entry ) {
-			if ( $only === null || strtolower( $entry['name'] ) === $only || strtolower( $entry['dir'] ) === $only ) {
-				$paths[$entry['path']] = true;
-			}
+		foreach ( $this->selectEntries( $this->findManifestFiles( $version ) ) as $entry ) {
+			$paths[$entry['path']] = true;
 		}
 
 		foreach ( [ 'includes', 'languages', 'maintenance' ] as $directory ) {
@@ -118,16 +96,12 @@ class FindMissingGetRestriction extends VersionComparisonMaintenance {
 			$this->classify( $instance['call'], $this->overridesRestriction( $key ), $instance['file'], $instance['name'], $results );
 		}
 
-		usort(
-			$results,
-			static fn ( array $a, array $b ): int => strcmp( $a[0], $b[0] ) ?: $a[1] <=> $b[1]
-		);
-
-		foreach ( $results as [ $file, $line, $name, $text ] ) {
-			$this->output( $file . ':' . $line . ' ' . $name . ' ' . $text . "\n" );
+		$results = $this->sortByLocation( $results );
+		foreach ( $results as $result ) {
+			$this->output( $result['file'] . ':' . $result['line'] . ' ' . $result['name'] . ' ' . $result['text'] . "\n" );
 		}
 
-		$this->output( "\nCount: " . count( $results ) . "\n" );
+		$this->outputCount( count( $results ) );
 	}
 
 	private function classify( array $call, bool $overridden, string $file, string $name, array &$results ): void {
@@ -139,15 +113,11 @@ class FindMissingGetRestriction extends VersionComparisonMaintenance {
 			return;
 		}
 
-		$results[] = [ $file, $call['line'], $name, $call['text'] ];
+		$results[] = [ 'file' => $file, 'line' => $call['line'], 'name' => $name, 'text' => $call['text'] ];
 	}
 
 	private function scanDirectory( string $directory, string $base, bool $extension ): void {
-		foreach ( $this->iterateFiles( $directory, self::SKIPPED_DIRECTORIES ) as $file ) {
-			if ( !str_ends_with( $file, '.php' ) ) {
-				continue;
-			}
-
+		foreach ( $this->iteratePhpFiles( $directory, self::SKIPPED_DIRECTORIES ) as $file ) {
 			$code = file_get_contents( $file );
 			if ( $code !== false && ( str_contains( $code, 'class ' ) || str_contains( $code, 'new ' ) ) ) {
 				$this->parseFile( $code, substr( $file, strlen( $base ) + 1 ), $extension );
@@ -236,71 +206,15 @@ class FindMissingGetRestriction extends VersionComparisonMaintenance {
 		return strtolower( $position === false ? $name : substr( $name, $position + 1 ) );
 	}
 
-	private function resolveClass( string $name, int $type, string $namespace, array $imports ): string {
-		if ( $type === T_NAME_FULLY_QUALIFIED ) {
-			return ltrim( $name, '\\' );
-		}
-
-		if ( $type === T_NAME_RELATIVE ) {
-			return ( $namespace !== '' ? $namespace . '\\' : '' ) . substr( $name, strlen( 'namespace\\' ) );
-		}
-
-		$first = strstr( $name, '\\', true );
-		$alias = strtolower( $first === false ? $name : $first );
-		if ( isset( $imports[$alias] ) ) {
-			return $imports[$alias] . ( $first === false ? '' : substr( $name, strlen( $first ) ) );
-		}
-
-		return ( $namespace !== '' ? $namespace . '\\' : '' ) . $name;
-	}
-
-	private function parseImport( array $tokens, int $i, array &$imports ): int {
-		$count = count( $tokens );
-		$j = $i + 1;
-		if ( $tokens[$j]->is( [ T_FUNCTION, T_CONST ] ) ) {
-			while ( $j < $count && $tokens[$j]->text !== ';' ) {
-				$j++;
-			}
-
-			return $j;
-		}
-
-		$prefix = '';
-		for ( ; $j < $count && $tokens[$j]->text !== ';'; $j++ ) {
-			$token = $tokens[$j];
-			if ( !$token->is( [ T_STRING, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED ] ) ) {
-				continue;
-			}
-
-			$name = ltrim( $token->text, '\\' );
-			if ( isset( $tokens[$j + 1] ) && $tokens[$j + 1]->is( T_NS_SEPARATOR ) ) {
-				$prefix = $name . '\\';
-				$j += 2;
-				continue;
-			}
-
-			$full = $prefix . $name;
-			$alias = substr( strrchr( '\\' . $full, '\\' ), 1 );
-			if ( isset( $tokens[$j + 1] ) && $tokens[$j + 1]->is( T_AS ) && isset( $tokens[$j + 2] ) ) {
-				$alias = $tokens[$j + 2]->text;
-				$j += 2;
-			}
-
-			$imports[strtolower( $alias )] = $full;
-		}
-
-		return $j;
-	}
-
 	private function parseFile( string $code, string $file, bool $extension ): void {
-		$tokens = array_values( array_filter(
-			PhpToken::tokenize( $code ),
-			static fn ( PhpToken $token ): bool => !$token->is( [ T_WHITESPACE, T_COMMENT, T_DOC_COMMENT ] )
-		) );
+		$tokens = $this->tokenize( $code );
 
 		$count = count( $tokens );
 		$namespace = '';
 		$imports = [];
+		$functionImports = [];
+		$constImports = [];
+		$entries = [];
 		$depth = 0;
 		$stack = [];
 		$pending = null;
@@ -337,7 +251,7 @@ class FindMissingGetRestriction extends VersionComparisonMaintenance {
 			}
 
 			if ( $token->is( T_USE ) && !$stack && $next && $next->text !== '(' ) {
-				$i = $this->parseImport( $tokens, $i, $imports );
+				$i = $this->parseImport( $tokens, $i, $imports, $functionImports, $constImports, $entries );
 				continue;
 			}
 
