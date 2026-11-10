@@ -30,6 +30,7 @@ namespace Miraheze\MirahezeMagic\Maintenance;
  */
 
 use Miraheze\MirahezeMagic\Maintenance\Base\PhpAnalysisMaintenance;
+use PhpToken;
 use function array_diff_key;
 use function array_filter;
 use function array_key_last;
@@ -423,6 +424,7 @@ class FindDeprecatedUsages extends PhpAnalysisMaintenance {
 	}
 
 	/**
+	 * @param PhpToken[] $tokens
 	 * @return array{params: array<string, string>, promoted: array<string, string>, return: string, types: PhpToken[], end: int}
 	 */
 	private function parseSignature( array $tokens, int $open, string $namespace, array $imports, string $class ): array {
