@@ -25,15 +25,13 @@ namespace Miraheze\MirahezeMagic\Maintenance;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\Maintenance;
+use MediaWiki\Registration\ExtensionRegistry;
 use RuntimeException;
+use SocialProfileFileBackend;
+use Telepedia\UserProfileV2\Avatar\UserProfileV2AvatarBackend;
+use Telepedia\UserProfileV2\ProfileFields;
 use Throwable;
 
-/**
- * Migrate SocialProfile about text and largest avatars to UserProfileV2 on Miraheze.
- *
- * @since 1.46
- * @ingroup Maintenance
- */
 class MigrateSocialProfileToUserProfileV2 extends Maintenance {
 
 	private const AVATAR_EXTENSIONS = [ 'png', 'gif', 'jpg', 'jpeg' ];
@@ -63,34 +61,74 @@ class MigrateSocialProfileToUserProfileV2 extends Maintenance {
 	}
 
 	private function migrateAboutText( bool $dryRun ): int {
-		$dbr = $this->getDB( DB_REPLICA );
+		$dbr = $this->getReplicaDB();
 		if ( !$dbr->tableExists( 'user_profile', __METHOD__ ) ) {
 			$this->output( "No user_profile table; skipping about text.\n" );
 			return 0;
 		}
-		$rows = $dbr->newSelectQueryBuilder()
+
+		$hasPrivacyTable = $dbr->tableExists( 'user_fields_privacy', __METHOD__ );
+
+		$queryBuilder = $dbr->newSelectQueryBuilder()
 			->select( [ 'up_about', 'actor_user' ] )
 			->from( 'user_profile' )
-			->join( 'actor', null, [ 'actor.actor_id = user_profile.up_actor' ] )
-			->caller( __METHOD__ )
-			->fetchResultSet();
+			->join( 'actor', null, [ 'actor.actor_id = user_profile.up_actor' ] );
+		if ( $hasPrivacyTable ) {
+			$queryBuilder->select( 'ufp_privacy' )->leftJoin(
+				'user_fields_privacy',
+				null,
+				[
+					'ufp_actor = user_profile.up_actor',
+					'ufp_field_key' => 'up_about',
+				]
+			);
+		}
+		$rows = $queryBuilder->caller( __METHOD__ )->fetchResultSet();
+
 		$services = $this->getServiceContainer();
 		$options = $services->getUserOptionsManager();
 		$userFactory = $services->getUserFactory();
-		$migrated = $skipped = $errors = 0;
+
+		$aboutField = $this->getAboutField();
+		if ( $aboutField === null ) {
+			$this->output( "UserProfileV2 has no profile-aboutme field; skipping about text.\n" );
+			return 0;
+		}
+		$maxLength = ProfileFields::getMaxLength( $aboutField );
+
+		$migrated = $skipped = $skippedPrivacy = $truncated = $errors = 0;
 		foreach ( $rows as $row ) {
-			if ( !$row->actor_user || trim( $row->up_about ) === '' ) {
+			if ( !$row->actor_user || trim( (string)$row->up_about ) === '' ) {
 				continue;
 			}
+
+			// Skip hidden, friends-only or FOAF-only fields; UserProfileV2 has no visibility model.
+			if ( $hasPrivacyTable && ( $row->ufp_privacy ?? 'public' ) !== 'public' ) {
+				$skippedPrivacy++;
+				continue;
+			}
+
 			$user = $userFactory->newFromId( (int)$row->actor_user );
 			try {
 				if ( !$user->isRegistered() || (string)$options->getOption( $user, 'profile-aboutme' ) !== '' ) {
 					$skipped++;
 					continue;
 				}
+
+				$about = trim( (string)$row->up_about );
+				if ( $maxLength !== null && mb_strlen( $about ) > $maxLength ) {
+					$about = mb_substr( $about, 0, $maxLength );
+					$truncated++;
+				}
+
+				$error = ProfileFields::validateValue( $aboutField, $about );
+				if ( $error !== null ) {
+					throw new RuntimeException( "about text failed validation: {$error}" );
+				}
+
 				$this->output( "About: {$user->getName()}\n" );
 				if ( !$dryRun ) {
-					$options->setOption( $user, 'profile-aboutme', (string)$row->up_about );
+					$options->setOption( $user, 'profile-aboutme', $about );
 					$options->saveOptions( $user );
 				}
 				$migrated++;
@@ -99,43 +137,78 @@ class MigrateSocialProfileToUserProfileV2 extends Maintenance {
 				$errors++;
 			}
 		}
-		$this->output( "About: migrated {$migrated}, skipped {$skipped}, errors {$errors}\n" );
+
+		$this->output(
+			"About: migrated {$migrated}, skipped {$skipped}, " .
+			"skipped (non-public) {$skippedPrivacy}, truncated {$truncated}, " .
+			"errors {$errors}\n"
+		);
 		return $errors;
+	}
+
+	private function getAboutField(): ?array {
+		foreach ( ProfileFields::getEditableFields() as $field ) {
+			if ( ( $field['key'] ?? '' ) === 'profile-aboutme' ) {
+				return $field;
+			}
+		}
+
+		return null;
 	}
 
 	private function migrateAvatars( bool $dryRun ): int {
 		$services = $this->getServiceContainer();
-		// Both extensions use Miraheze's local repository backend.
-		$backend = $services->getRepoGroup()->getLocalRepo()->getBackend();
-		$sourceDir = $backend->getContainerStoragePath( 'avatars' );
-		$targetDir = $backend->getContainerStoragePath( 'upv2avatars' );
-		$sourceExists = $backend->directoryExists( [ 'dir' => $sourceDir ] );
+
+		// SocialProfile may be uninstalled, so fall back to the local repo backend.
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'SocialProfile' ) ) {
+			$sourceBackendObj = new SocialProfileFileBackend( 'avatars' );
+			$sourceBackend = $sourceBackendObj->getFileBackend();
+			$sourceDir = $sourceBackendObj->getContainerStoragePath();
+		} else {
+			$sourceBackend = $services->getRepoGroup()->getLocalRepo()->getBackend();
+			$sourceDir = $sourceBackend->getContainerStoragePath( 'avatars' );
+		}
+
+		$targetBackendObj = new UserProfileV2AvatarBackend( 'upv2avatars' );
+		$targetBackend = $targetBackendObj->getFileBackend();
+		$targetDir = $targetBackendObj->getContainerStoragePath();
+
+		$sourceExists = $sourceBackend->directoryExists( [ 'dir' => $sourceDir ] );
 		if ( $sourceExists === false ) {
 			$this->output( "No SocialProfile avatars; skipping avatars.\n" );
 			return 0;
 		}
-		$files = $sourceExists === null ? null : $backend->getTopFileList( [ 'dir' => $sourceDir ] );
+		$files = $sourceExists === null ? null : $sourceBackend->getTopFileList( [ 'dir' => $sourceDir ] );
 		if ( $files === null ) {
 			$this->fatalError( 'Could not list SocialProfile avatars.' );
 		}
+
 		$formatter = $services->getFormatterFactory()->getStatusFormatter( RequestContext::getMain() );
 		if ( !$dryRun ) {
-			$status = $backend->prepare( [ 'dir' => $targetDir ] );
+			$status = $targetBackend->prepare( [ 'dir' => $targetDir ] );
 			if ( !$status->isOK() ) {
 				$this->fatalError( $formatter->getWikiText( $status ) );
 			}
 		}
+
+		$userProfileV2Config = $services->getConfigFactory()->makeConfig( 'UserProfileV2' );
+		$useGlobalAvatars = (bool)$userProfileV2Config->get( 'UserProfileV2UseGlobalAvatars' );
+		$centralIdLookup = $services->getCentralIdLookup();
+
 		$dbname = preg_quote( $this->getConfig()->get( MainConfigNames::DBname ), '/' );
 		// SocialProfile writes all four sizes together; only the largest is needed.
 		$pattern = '/^' . $dbname . '_(\d+)_l\.(png|gif|jpg|jpeg)$/';
+
 		$userFactory = $services->getUserFactory();
 		$cache = $services->getObjectCacheFactory()->getLocalClusterInstance();
+
 		$migrated = $skipped = $errors = 0;
 		foreach ( $files as $path ) {
 			$name = basename( $path );
 			if ( !preg_match( $pattern, $name, $matches ) ) {
 				continue;
 			}
+
 			$userId = (int)$matches[1];
 			$user = $userFactory->newFromId( $userId );
 			try {
@@ -143,27 +216,41 @@ class MigrateSocialProfileToUserProfileV2 extends Maintenance {
 					$skipped++;
 					continue;
 				}
+
+				// UserProfileV2 stores global avatars under the central ID.
+				$targetUserId = $useGlobalAvatars
+					? $centralIdLookup->centralIdFromLocalUser( $user )
+					: $userId;
+				if ( $targetUserId === 0 ) {
+					throw new RuntimeException( 'no central account for a global avatar' );
+				}
+
 				foreach ( self::AVATAR_EXTENSIONS as $ext ) {
-					$exists = $backend->fileExists( [ 'src' => "$targetDir/avatar_$userId.$ext" ] );
+					$exists = $targetBackend->fileExists( [ 'src' => "$targetDir/avatar_$targetUserId.$ext" ] );
 					if ( $exists === null ) {
-						throw new RuntimeException( 'Could not check the existing avatar.' );
+						throw new RuntimeException( 'could not check the existing avatar' );
 					}
 					if ( $exists ) {
 						$skipped++;
 						continue 2;
 					}
 				}
+
 				$this->output( "Avatar: {$user->getName()} ({$name})\n" );
 				if ( !$dryRun ) {
-					$status = $backend->copy( [
+					$status = $targetBackend->copy( [
 						'src' => "$sourceDir/$name",
-						'dst' => "$targetDir/avatar_$userId.{$matches[2]}",
+						'dst' => "$targetDir/avatar_$targetUserId.{$matches[2]}",
 						'overwrite' => false,
 					] );
 					if ( !$status->isGood() ) {
 						throw new RuntimeException( $formatter->getWikiText( $status ) );
 					}
-					$cache->delete( $cache->makeKey( 'user', 'userprofilev2', 'avatar', $userId ) );
+
+					$cacheKey = $useGlobalAvatars
+						? $cache->makeGlobalKey( 'user', 'userprofilev2', 'avatar', $targetUserId )
+						: $cache->makeKey( 'user', 'userprofilev2', 'avatar', $targetUserId );
+					$cache->delete( $cacheKey );
 				}
 				$migrated++;
 			} catch ( Throwable $e ) {
@@ -171,6 +258,7 @@ class MigrateSocialProfileToUserProfileV2 extends Maintenance {
 				$errors++;
 			}
 		}
+
 		$this->output( "Avatars: migrated {$migrated}, skipped {$skipped}, errors {$errors}\n" );
 		return $errors;
 	}
