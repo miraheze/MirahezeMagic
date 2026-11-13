@@ -43,5 +43,13 @@
 	"miraheze-privacypage": "m:Special:MyLanguage/Privacy Policy",
 	"miraheze-skinname-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional.",
 	"miraheze-snapwikiskin": "The name of a graphical user interface skin. An [[:w:Onomatopoeia|onomatopoeia]]. Translation optional.",
+	"miraheze-userprofilev2-github": "Label for the GitHub field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-github-help": "Help text for the GitHub field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-github-name": "{{Optional}}\nService name of GitHub in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-github-placeholder": "Placeholder text for the GitHub field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-roblox": "Label for the Roblox field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-roblox-help": "Help text for the Roblox field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-roblox-name": "{{Optional}}\nService name of Roblox in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"miraheze-userprofilev2-roblox-placeholder": "Placeholder text for the Roblox field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
 	"miraheze-vector-night-mode-issue-reporting-notice-url": "{{ignored}}\nURL for reporting issues in night mode."
 }
