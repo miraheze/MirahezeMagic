@@ -77,11 +77,11 @@
 	"miraheze-userprofilev2-github": "GitHub Username",
 	"miraheze-userprofilev2-github-help": "Your GitHub username.",
 	"miraheze-userprofilev2-github-name": "GitHub",
-	"miraheze-userprofilev2-github-placeholder": "Username",
+	"miraheze-userprofilev2-github-placeholder": "joebloggs",
 	"miraheze-userprofilev2-roblox": "Roblox Username",
 	"miraheze-userprofilev2-roblox-help": "Your Roblox username.",
 	"miraheze-userprofilev2-roblox-name": "Roblox",
-	"miraheze-userprofilev2-roblox-placeholder": "Username",
+	"miraheze-userprofilev2-roblox-placeholder": "joebloggs",
 	"miraheze-webauthn-module-description": "WebAuthn (Web Authentication) is a web standard published by the World Wide Web Consortium (W3C). WebAuthn is a core component of the FIDO2 Project under the guidance of the FIDO Alliance. The goal of the project is to standardize an interface for authenticating users to web-based applications and services using public-key cryptography. [https://en.wikipedia.org/wiki/WebAuthn Read more]",
 	"miraheze-wikibase-sitelinks-miraheze": "Miraheze wikis",
 	"miraheze-vector-night-mode-issue-reporting-notice-url": "https://issue-tracker.miraheze.org/maniphest/task/edit/form/20/"
