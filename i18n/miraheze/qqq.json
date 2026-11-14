@@ -151,6 +151,14 @@
 	"sitematrix": "List of Miraheze wikis",
 	"termsofservice": "Terms of Use",
 	"termsofservicepage": "m:Terms of Use",
+	"userprofilev2-github": "Label for the GitHub field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-github-help": "Help text for the GitHub field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-github-name": "{{Optional}}\nService name of GitHub in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-github-placeholder": "{{Ignored}}\nPlaceholder text for the GitHub field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-roblox": "Label for the Roblox field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-roblox-help": "Help text for the Roblox field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-roblox-name": "{{Optional}}\nService name of Roblox in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
+	"userprofilev2-roblox-placeholder": "{{Ignored}}\nPlaceholder text for the Roblox field in [[mw:Extension:UserProfileV2|Extension:UserProfileV2]].",
 	"echo-category-title-mirahezemagic-tech-notification": "Title for the tech notification category at Special:Preferences",
 	"echo-pref-tooltip-mirahezemagic-tech-notification": "Tooltip for the tech notification category at Special:Preferences"
 }
