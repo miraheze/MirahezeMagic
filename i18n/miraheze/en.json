@@ -290,7 +290,7 @@
 	"userprofilev2-wikimedia-name": "Wikimedia",
 	"userprofilev2-wikimedia-placeholder": "User:Joebloggs",
 	"userprofilev2-xiaohongshu": "Xiaohongshu User ID",
-	"userprofilev2-xiaohongshu-help": "Your 24-character Xiaohongshu user ID, found in your profile URL after /user/profile/. Do not enter your Xiaohongshu ID (rednote ID).",
+	"userprofilev2-xiaohongshu-help": "Your 24-character hexadecimal Xiaohongshu user ID, found in your profile URL after /user/profile/. Do not enter your Xiaohongshu ID (rednote ID).",
 	"userprofilev2-xiaohongshu-name": "Xiaohongshu",
 	"userprofilev2-xiaohongshu-placeholder": "5a6b7c8...",
 	"userprofilev2-youtube": "YouTube Handle",
