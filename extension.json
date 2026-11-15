@@ -133,6 +133,9 @@
 		"ManageWikiCoreFormSubmission": {
 			"handler": "ManageWiki"
 		},
+		"MediaWikiServices": {
+			"handler": "Specials"
+		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
 		},
@@ -153,9 +156,6 @@
 		},
 		"SkinAddFooterLinks": {
 			"handler": "Main"
-		},
-		"SpecialPage_initList": {
-			"handler": "Specials"
 		},
 		"SpecialPageBeforeExecute": {
 			"handler": "Specials"
