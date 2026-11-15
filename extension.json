@@ -133,6 +133,9 @@
 		"ManageWikiCoreFormSubmission": {
 			"handler": "ManageWiki"
 		},
+		"MediaWikiServices": {
+			"handler": "Specials"
+		},
 		"MessageCacheFetchOverrides": {
 			"handler": "Main"
 		},
