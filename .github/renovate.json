@@ -12,11 +12,12 @@
 		"pip_requirements",
 		"composer"
 	],
-	"github-actions": {
-		"managerFilePatterns": [
-			"/^\\.github/workflows/python\\.yml$/"
-		]
-	},
+	"includePaths": [
+		".github/workflows/python.yml",
+		".github/pythonchecks.txt",
+		"composer.json",
+		"composer.lock"
+	],
 	"pip_requirements": {
 		"managerFilePatterns": [
 			"/^\\.github/pythonchecks\\.txt$/"
