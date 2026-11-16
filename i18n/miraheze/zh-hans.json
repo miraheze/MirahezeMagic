@@ -115,6 +115,7 @@
 	"miraheze-emailuser-disabled-title": "已禁用向用户发送电子邮件的功能。",
 	"miraheze-emailuser-disabled-message": "由于某些地区的当地法律法规限制，电子邮件用户功能已被禁用。如果您需要联系其他用户，请尝试使用他们的讨论页。",
 	"miraheze-faq": "常见问题",
+	"miraheze-globalvanishrequest-disabled-message": "如果您希望停用您的账号，请使用Miraheze Meta上记录的[[meta:Disabling an account|这些方法]]之一。",
 	"miraheze-helpcenter": "Miraheze帮助中心",
 	"miraheze-label-managewiki-article-path": "条目路径",
 	"miraheze-label-managewiki-article-path-root": "不使用 /wiki/ 作为条目路径（而是使用根路径）",
