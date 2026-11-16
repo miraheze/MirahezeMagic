@@ -1,0 +1,52 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:recommended"
+	],
+	"labels": [
+		"dependencies"
+	],
+	"prHourlyLimit": 0,
+	"enabledManagers": [
+		"github-actions",
+		"pip_requirements",
+		"composer"
+	],
+	"github-actions": {
+		"managerFilePatterns": [
+			"/^\\.github/workflows/python\\.yml$/"
+		]
+	},
+	"pip_requirements": {
+		"managerFilePatterns": [
+			"/^\\.github/pythonchecks\\.txt$/"
+		]
+	},
+	"packageRules": [
+		{
+			"matchManagers": [
+				"github-actions"
+			],
+			"groupName": "github actions",
+			"separateMajorMinor": false,
+			"automerge": true,
+			"automergeType": "branch"
+		},
+		{
+			"matchManagers": [
+				"pip_requirements"
+			],
+			"groupName": "python test tooling",
+			"separateMajorMinor": false,
+			"automerge": true,
+			"automergeType": "branch"
+		},
+		{
+			"matchManagers": [
+				"composer"
+			],
+			"automerge": true,
+			"automergeType": "branch"
+		}
+	]
+}
