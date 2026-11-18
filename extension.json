@@ -127,6 +127,9 @@
 		"ImportDumpJobGetFile": {
 			"handler": "ImportDump"
 		},
+		"ImportDumpRequestStatusUpdate": {
+			"handler": "ImportDump"
+		},
 		"ManageWikiCoreAddFormFields": {
 			"handler": "ManageWiki"
 		},

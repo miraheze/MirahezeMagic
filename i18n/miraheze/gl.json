@@ -75,6 +75,7 @@
 	"miraheze-emailuser-disabled-title": "O envío de correos electrónicos aos usuarios está desactivado",
 	"miraheze-emailuser-disabled-message": "Debido ás leis e regulamentos locais nalgunhas xurisdicións, desactivouse o envío de correos electrónicos. Se necesitas contactar con outro usuario, utiliza a súa páxina de conversa.",
 	"miraheze-faq": "Preguntas frecuentes",
+	"miraheze-globalvanishrequest-disabled-message": "Se queres desactivar a túa conta, utiliza un [[meta:Disabling an account|destes métodos]] documentados en Miraheze Meta.",
 	"miraheze-helpcenter": "Centro de axuda de Miraheze",
 	"miraheze-label-managewiki-article-path": "Ruta do artigo",
 	"miraheze-label-managewiki-article-path-root": "Non empregues «/wiki/» para os artigos (utiliza a ruta raíz)",

@@ -69,6 +69,7 @@
 	"miraheze-emailuser-disabled-title": "Pošiljanje e-pošte uporabnikom je onemogočeno",
 	"miraheze-emailuser-disabled-message": "Zaradi lokalnih zakonov in predpisov v nekaterih jurisdikcijah je bil EmailUser onemogočen. Če želite stopiti v stik z drugim uporabnikom, poskusite uporabiti njegovo pogovorno stran.",
 	"miraheze-faq": "PPV",
+	"miraheze-globalvanishrequest-disabled-message": "Če želite onemogočiti svoj račun, uporabite eno od [[meta:Disabling an account|teh metod]], dokumentiranih na Miraheze Meta.",
 	"miraheze-helpcenter": "Forum za pomoč Mirahezeja",
 	"miraheze-label-managewiki-article-path": "Pot članka",
 	"miraheze-label-managewiki-article-path-root": "Za članke ne uporabljajte /wiki/ (uporabite korensko pot)",

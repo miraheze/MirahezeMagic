@@ -74,6 +74,7 @@
 	"miraheze-emailuser-disabled-title": "U-dirista iimayllada isticmaalayaasha waa la joojiyey",
 	"miraheze-emailuser-disabled-message": "Sababo la xiriira sharciyada iyo xeerarka maxalliga ah ee ka jira qaar ka mid ah gobollada, EmailUser waa la joojiyey. Haddii aad u baahan tahay inaad la xiriirto isticmaale kale, fadlan isku day inaad isticmaasho boggiisa wada hadalka.",
 	"miraheze-faq": "Su'aalaha inta badan la isweydiiyo",
+	"miraheze-globalvanishrequest-disabled-message": "Haddii aad rabto inaad damiso akoonkaaga, isticmaal mid ka mid ah [[meta:Disabling an account|hababkan]] ee lagu diiwaangeliyay Miraheze Meta.",
 	"miraheze-helpcenter": "Xarunta Caawinta Miraheze",
 	"miraheze-label-managewiki-article-path": "Jidka maqaalka",
 	"miraheze-label-managewiki-article-path-root": "Ha u isticmaalin /wiki/ maqaallada (isticmaal jidka xididka)",
