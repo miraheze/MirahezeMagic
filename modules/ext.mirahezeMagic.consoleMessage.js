@@ -71,7 +71,7 @@
 			$violationLinkText
 		).parseDom();
 		// Tag so it stacks with more violations
-		mw.notify( text, { tag: 'miraheze-csp-notification', autoHideSeconds: 'long' } );
+		mw.notify( text, { tag: 'miraheze-csp-notification', autoHide: false } );
 	}
 
 	const userGroups = mw.config.get( 'wgUserGroups' );
