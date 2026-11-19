@@ -3,7 +3,8 @@
 		"authors": [
 			"Casserium",
 			"Hedeyohu22",
-			"U.ayaao.p"
+			"U.ayaao.p",
+			"Wikuiser"
 		]
 	},
 	"extensions-antispam": "Спамнан қорғау",
@@ -19,8 +20,8 @@
 	"group-confirmed-member": "{{GENDER:$1|өздіктіқұпталған қатысушы}}",
 	"group-global-ipblock-exempt": "Жаһандық IP блоктарына ерекшеліктер",
 	"group-global-ipblock-exempt-member": "{{GENDER:$1|IP бұғатынан босату}}",
-	"group-interwiki-admin": "Интеруики әкімшісі",
-	"group-interwiki-admin-member": "интеруики әкімшісі",
+	"group-interwiki-admin": "Интеруики администраторлары",
+	"group-interwiki-admin-member": "{{GENDER:$1|интеруики администраторы}}",
 	"group-member": "Мүшелер",
 	"group-member-member": "{{GENDER:$1|мүше}}",
 	"group-oversight": "Анықтаушылар",

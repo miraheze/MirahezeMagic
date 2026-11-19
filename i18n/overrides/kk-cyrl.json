@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Arystanbek",
-			"U.ayaao.p"
+			"U.ayaao.p",
+			"Wikuiser"
 		]
 	},
 	"miraheze-centralauth-login-error-locked": "{{GENDER:$1|Сіздің}} парақшаңыз [[m:Special:MyLanguage/Global locks|жаһандық құлыптаулы]] болғаннан жүйеге кіре алмайсыз. Қосымша ақпарат алу немесе шағымдану үшін <code>cvt[at]miraheze.org</code> хабарласыңыз.",

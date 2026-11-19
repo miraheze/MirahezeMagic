@@ -37,7 +37,6 @@
 	"miraheze-globalblocking-ipblocked": "'''IP adresiniz Miraheze genelinde [[m:Special:MyLanguage/Global blocks|küresel olarak engellenmiştir]].'''\n\nEngelleme $1 ($2) tarafından yapılmıştır.",
 	"miraheze-importdump-help-reason": "XML'in ne için olduğunu bize söyleyin: başka bir vikiden taşınma, başka bir vikiden çatallama veya şablon ya da sayfa içe aktarma.",
 	"miraheze-importdump-help-target": "Bu geçerli bir veritabanı adı olmalıdır. Vikinin veritabanı adını bulmak için vikideki Special:ManageWiki/core sayfasına bakın.",
-	"miraheze-importdump-help-upload-file": "Yalnızca XML dosyalarına izin verilir. XML dosyanız sıkıştırılmış bir arşivdeyse, yüklemeye çalışmadan önce lütfen çıkarın.",
 	"miraheze-importdump-import-failed-comment": "Sağlanan XML içe aktarılırken bir hata oluştu. Teknoloji ekibi bilgilendirildi.",
 	"miraheze-importtext": "Lütfen dosyayı [[Special:Export|dışa aktarma aracını]] kullanarak kaynak vikiden dışa aktarın.\nBilgisayarınıza kaydedin ve buraya yükleyin.",
 	"miraheze-interwiki_intro": "Bu, farklı vikiler ve diğer web sitelerine hızlı bağlantı kurmak için kullanılan ön ek kısayollarını tanımlayan vikiler arası tablonun genel görünümüdür.",

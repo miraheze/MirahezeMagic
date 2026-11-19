@@ -47,7 +47,6 @@
 	"miraheze-globalblocking-ipblocked": "您的 IP 地址在 Miraheze 上已被 [[m:Special:MyLanguage/Global blocks|全域封禁]]。\n\n此全域封禁可能并不是专门针对您的。使用您 IP 的某人可能干扰了一个 Miraheze 维基，导致了此封锁。此外，请注意，Miraheze 上 [[m:Special:MyLanguage/No open proxies policy|不允许]] 使用开放代理和其他类似服务。如果您现在正在使用，请禁用它。如果您需要进一步的帮助，请发送电子邮件至 cvt[at]miraheze.org 或联系 $1。\n该区块由 $1 ($2) 发布。\n\n给出的理由是“$3”。\n您当前的 IP 地址是 $6。\n\n* 块开始：$4\n* 区块过期：$5\n请在您提出的任何查询中包含上述所有细节。",
 	"miraheze-importdump-help-reason": "请告诉我们该XML用于以下哪个目的：从另一个wiki迁入、分叉另一个wiki、还是从维基百科导入模板或页面。",
 	"miraheze-importdump-help-target": "这必须是一个有效的数据库名称。要查找维基的数据库名称，请参见维基上的 Special:ManageWiki/core。\n\n如果您还没有创建您的维基，请先使用 [[Special:RequestWiki]] 请求您的维基，然后在您的维基创建后返回此处进行导入请求。",
-	"miraheze-importdump-help-upload-file": "仅允许 XML 文件。如果您的 XML 文件位于压缩档案中，请在尝试上传之前将其解压缩。\n\n请确保您上传的 XML 文件版本也包含所有修订历史记录。",
 	"miraheze-importdump-import-failed-comment": "导入提供的XML时出错。已通知技术团队。",
 	"miraheze-importtext": "请使用[[Special:Export|导出页面]]将文件从源wiki导出。将其保存到您的计算机后再上传到这里。<br />请注意如果文件较大（约>2MB）的话，您必须[[M:Special:RequestImport|提交导入请求]]，因为由于技术限制，不能在这里完成。<br />建议不要从维基百科直接导入信息框，详见[[m:Infoboxes|此页面]]。",
 	"miraheze-interwiki_intro": "这是跨wiki表的总览，跨wiki表定义用于快速链接到其他wiki及其他外部网站的快捷前缀。使用建议请查阅[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Interwiki MediaWiki.org上的手册]。\n\n请注意，所有跨wiki表添加行为均受到监控，任何试图在表中插入恶意链接的行为均会受到惩处。",

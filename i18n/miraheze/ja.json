@@ -98,6 +98,7 @@
 	"miraheze-emailuser-disabled-title": "利用者へのメール送信は無効になっています",
 	"miraheze-emailuser-disabled-message": "一部の地域では、現地の法律や規制により、メール送信機能が無効になっています。他の利用者に連絡する必要がある場合は、その利用者のトークページをご利用ください。",
 	"miraheze-faq": "よくある質問と回答",
+	"miraheze-globalvanishrequest-disabled-message": "アカウントを無効にしたい場合は、Miraheze Metaに記載されている[[meta:Disabling an account|これらの方法]]を使用してください。",
 	"miraheze-helpcenter": "Mirahezeヘルプセンターについて",
 	"miraheze-label-managewiki-article-path": "記事パス",
 	"miraheze-label-managewiki-article-path-root": "記事に /wiki/ を使わない (rootパスを使う)",
