@@ -14,6 +14,7 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ImportDump\Hooks\ImportDumpRequestStatusUpdateHook;
 use Miraheze\ImportDump\RequestManager;
 use Miraheze\ImportDump\RequestStatus;
+use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
@@ -34,6 +35,7 @@ class ImportDump implements
 	private const array LIMITS = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 	public function __construct(
+		private readonly DataStoreFactory $dataStoreFactory,
 		private readonly IConnectionProvider $connectionProvider,
 		private readonly ModuleFactory $moduleFactory,
 		private readonly ServiceOptions $options,
@@ -42,10 +44,12 @@ class ImportDump implements
 
 	public static function factory(
 		Config $mainConfig,
+		DataStoreFactory $dataStoreFactory,
 		IConnectionProvider $connectionProvider,
 		ModuleFactory $moduleFactory
 	): self {
 		return new self(
+			$dataStoreFactory,
 			$connectionProvider,
 			$moduleFactory,
 			new ServiceOptions(
@@ -68,9 +72,18 @@ class ImportDump implements
 		$settings['allowEntityImport'] = (bool)$this->moduleFactory
 			->settings( $target )->list( 'wmgAllowEntityImport' );
 
-		$permissions = $this->moduleFactory->permissions( $target );
+		// The live permissions of ManageWiki leave out the additional rights and the read right
+		// of private wikis, so the merged data is used. ManageWiki gives everyone read on a wiki
+		// that is not private, whether or not the group has a row.
+		$isPrivate = $this->dataStoreFactory->newInstance( $target )->isPrivate();
+		$permissions = $this->moduleFactory->permissions( $target )->getCachedData( $isPrivate );
+
 		foreach ( [ '*', 'user', ...$requesterGroups ] as $group ) {
-			$rights = array_merge( $rights, $permissions->list( $group )['permissions'] );
+			$rights = array_merge( $rights, $permissions[$group]['permissions'] ?? [] );
+		}
+
+		if ( !$isPrivate ) {
+			$rights[] = 'read';
 		}
 
 		$rights = array_values( array_unique( $rights ) );

@@ -219,6 +219,7 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump::factory",
 			"services": [
 				"MainConfig",
+				"ManageWikiDataStoreFactory",
 				"ConnectionProvider",
 				"ManageWikiModuleFactory"
 			]
