@@ -58,13 +58,22 @@ class ImportDump implements
 	/** @inheritDoc */
 	public function onImportDumpGetTargetState(
 		string $target,
+		array $requesterGroups,
 		?array &$extensions,
-		array &$settings
+		array &$settings,
+		array &$rights
 	): void {
 		$extensions = $this->moduleFactory->extensions( $target )->listNames();
 
 		$settings['allowEntityImport'] = (bool)$this->moduleFactory
 			->settings( $target )->list( 'wmgAllowEntityImport' );
+
+		$permissions = $this->moduleFactory->permissions( $target );
+		foreach ( [ '*', 'user', ...$requesterGroups ] as $group ) {
+			$rights = array_merge( $rights, $permissions->list( $group )['permissions'] );
+		}
+
+		$rights = array_values( array_unique( $rights ) );
 	}
 
 	/**
