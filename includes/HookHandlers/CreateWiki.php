@@ -360,9 +360,10 @@ class CreateWiki implements
 		$tables['localuser'] = 'lu_wiki';
 	}
 
+	/**
+	 * @suppress PhanUndeclaredClassReference,UnusedSuppression DbDomains is only available in Echo 1.47 and later
+	 */
 	private function getEchoSharedDatabase(): IDatabase|false {
-		// DbDomains is only available in Echo 1.47 and later
-		// @phan-suppress-next-line PhanUndeclaredClassReference
 		if ( class_exists( DbDomains::class ) ) {
 			$mapping = $this->options->get( MainConfigNames::VirtualDomainsMapping );
 			if ( !isset( $mapping['virtual-echo-shared'] ) ) {
