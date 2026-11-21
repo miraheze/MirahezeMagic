@@ -67,8 +67,11 @@ class ImportDump implements
 		array &$settings,
 		array &$rights
 	): void {
-		$extensions = $this->moduleFactory->extensions( $target )->listNames();
+		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+			return;
+		}
 
+		$extensions = $this->moduleFactory->extensions( $target )->listNames();
 		$settings['allowEntityImport'] = (bool)$this->moduleFactory
 			->settings( $target )->list( 'wmgAllowEntityImport' );
 
