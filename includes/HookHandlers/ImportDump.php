@@ -8,15 +8,18 @@ use MediaWiki\Deferred\DeferredUpdates;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\Shell\Shell;
 use Miraheze\ImportDump\ConfigNames;
+use Miraheze\ImportDump\Hooks\ImportDumpGetTargetStateHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ImportDump\Hooks\ImportDumpRequestStatusUpdateHook;
 use Miraheze\ImportDump\RequestManager;
 use Miraheze\ImportDump\RequestStatus;
+use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
 
 class ImportDump implements
+	ImportDumpGetTargetStateHook,
 	ImportDumpJobAfterImportHook,
 	ImportDumpJobGetFileHook,
 	ImportDumpRequestStatusUpdateHook
@@ -32,21 +35,45 @@ class ImportDump implements
 
 	public function __construct(
 		private readonly IConnectionProvider $connectionProvider,
+		private readonly ModuleFactory $moduleFactory,
 		private readonly ServiceOptions $options,
 	) {
 	}
 
 	public static function factory(
 		Config $mainConfig,
-		IConnectionProvider $connectionProvider
+		IConnectionProvider $connectionProvider,
+		ModuleFactory $moduleFactory
 	): self {
 		return new self(
 			$connectionProvider,
+			$moduleFactory,
 			new ServiceOptions(
 				[ ConfigNames::FileExpiryDays, 'MirahezeMagicSwiftKey' ],
 				$mainConfig
 			)
 		);
+	}
+
+	/** @inheritDoc */
+	public function onImportDumpGetTargetState(
+		string $target,
+		array $requesterGroups,
+		?array &$extensions,
+		array &$settings,
+		array &$rights
+	): void {
+		$extensions = $this->moduleFactory->extensions( $target )->listNames();
+
+		$settings['allowEntityImport'] = (bool)$this->moduleFactory
+			->settings( $target )->list( 'wmgAllowEntityImport' );
+
+		$permissions = $this->moduleFactory->permissions( $target );
+		foreach ( [ '*', 'user', ...$requesterGroups ] as $group ) {
+			$rights = array_merge( $rights, $permissions->list( $group )['permissions'] );
+		}
+
+		$rights = array_values( array_unique( $rights ) );
 	}
 
 	/**

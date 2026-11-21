@@ -121,6 +121,9 @@
 		"GlobalUserPageWikis": {
 			"handler": "GlobalUserPage"
 		},
+		"ImportDumpGetTargetState": {
+			"handler": "ImportDump"
+		},
 		"ImportDumpJobAfterImport": {
 			"handler": "ImportDump"
 		},
@@ -216,7 +219,8 @@
 			"factory": "Miraheze\\MirahezeMagic\\HookHandlers\\ImportDump::factory",
 			"services": [
 				"MainConfig",
-				"ConnectionProvider"
+				"ConnectionProvider",
+				"ManageWikiModuleFactory"
 			]
 		},
 		"Main": {
