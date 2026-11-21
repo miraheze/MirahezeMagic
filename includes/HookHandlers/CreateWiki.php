@@ -5,6 +5,7 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Extension\Notifications\DbDomains;
 use MediaWiki\Extension\Notifications\DbFactory;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\FormatterFactory;
@@ -360,7 +361,9 @@ class CreateWiki implements
 	}
 
 	private function getEchoSharedDatabase(): IDatabase|false {
-		if ( class_exists( 'MediaWiki\\Extension\\Notifications\\DbDomains' ) ) {
+		// DbDomains is only available in Echo 1.47 and later
+		// @phan-suppress-next-line PhanUndeclaredClassReference
+		if ( class_exists( DbDomains::class ) ) {
 			$mapping = $this->options->get( MainConfigNames::VirtualDomainsMapping );
 			if ( !isset( $mapping['virtual-echo-shared'] ) ) {
 				return false;
