@@ -5,8 +5,6 @@ namespace Miraheze\MirahezeMagic\HookHandlers;
 use MediaWiki\Config\Config;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Context\RequestContext;
-use MediaWiki\Extension\Notifications\DbDomains;
-use MediaWiki\Extension\Notifications\DbFactory;
 use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Logger\LoggerFactory;
@@ -26,7 +24,6 @@ use Throwable;
 use Wikimedia\IPUtils;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\IConnectionProvider;
-use Wikimedia\Rdbms\IDatabase;
 
 class CreateWiki implements
 	CreateWikiDeletionHook,
@@ -65,7 +62,6 @@ class CreateWiki implements
 					ConfigNames::Settings,
 					MainConfigNames::JobTypeConf,
 					MainConfigNames::LocalDatabases,
-					MainConfigNames::VirtualDomainsMapping,
 				],
 				$mainConfig
 			)
@@ -77,14 +73,15 @@ class CreateWiki implements
 	 * @param DBConnRef $cwdb @phan-unused-param
 	 */
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
-		$dbw = $this->getEchoSharedDatabase();
-		if ( $dbw ) {
-			$dbw->newDeleteQueryBuilder()
-				->deleteFrom( 'echo_unread_wikis' )
-				->where( [ 'euw_wiki' => $dbname ] )
-				->caller( __METHOD__ )
-				->execute();
-		}
+		$dbw = $this->connectionProvider->getPrimaryDatabase(
+			'virtual-echo-shared'
+		);
+
+		$dbw->newDeleteQueryBuilder()
+			->deleteFrom( 'echo_unread_wikis' )
+			->where( [ 'euw_wiki' => $dbname ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
@@ -160,15 +157,16 @@ class CreateWiki implements
 		string $oldDbName,
 		string $newDbName
 	): void {
-		$dbw = $this->getEchoSharedDatabase();
-		if ( $dbw ) {
-			$dbw->newUpdateQueryBuilder()
-				->update( 'echo_unread_wikis' )
-				->set( [ 'euw_wiki' => $newDbName ] )
-				->where( [ 'euw_wiki' => $oldDbName ] )
-				->caller( __METHOD__ )
-				->execute();
-		}
+		$dbw = $this->connectionProvider->getPrimaryDatabase(
+			'virtual-echo-shared'
+		);
+
+		$dbw->newUpdateQueryBuilder()
+			->update( 'echo_unread_wikis' )
+			->set( [ 'euw_wiki' => $newDbName ] )
+			->where( [ 'euw_wiki' => $oldDbName ] )
+			->caller( __METHOD__ )
+			->execute();
 
 		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
 			$gudDb = $this->connectionProvider->getPrimaryDatabase(
@@ -358,25 +356,6 @@ class CreateWiki implements
 		$tables['cuci_wiki_map'] = 'ciwm_wiki';
 		$tables['localnames'] = 'ln_wiki';
 		$tables['localuser'] = 'lu_wiki';
-	}
-
-	/**
-	 * @suppress PhanUndeclaredClassReference,UnusedSuppression DbDomains is only available in Echo 1.47 and later
-	 */
-	private function getEchoSharedDatabase(): IDatabase|false {
-		if ( class_exists( DbDomains::class ) ) {
-			$mapping = $this->options->get( MainConfigNames::VirtualDomainsMapping );
-			if ( !isset( $mapping['virtual-echo-shared'] ) ) {
-				return false;
-			}
-
-			return $this->connectionProvider->getPrimaryDatabase( 'virtual-echo-shared' );
-		}
-
-		// Echo does not register virtual domains in MediaWiki 1.46
-		/** @var IDatabase|false $dbw */
-		$dbw = DbFactory::newFromDefault()->getSharedDb( DB_PRIMARY );
-		return $dbw;
 	}
 
 	private function removeRedisKey( string $key ): void {
