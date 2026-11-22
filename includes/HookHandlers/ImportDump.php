@@ -21,9 +21,11 @@ use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
+use function array_filter;
 use function array_merge;
 use function array_unique;
 use function array_values;
+use function explode;
 use function in_array;
 
 class ImportDump implements
@@ -149,28 +151,56 @@ class ImportDump implements
 		}
 
 		$objectPath = $requestManager->getSplitFilePath();
-		$command = [
-			'swift', 'post',
-			'-H', 'X-Delete-After: ' . ( $days * 86400 ),
-			$this->getContainer(),
-			$objectPath,
-			...$this->getAuthArguments(),
-		];
+		$isImages = $requestManager->getType() === RequestType::Images;
+		$container = $this->getContainer();
+		$authArguments = $this->getAuthArguments();
+		$expiry = 'X-Delete-After: ' . ( $days * 86400 );
 
-		DeferredUpdates::addCallableUpdate( static function () use ( $command, $objectPath ): void {
+		DeferredUpdates::addCallableUpdate( static function () use (
+			$objectPath, $isImages, $container, $authArguments, $expiry
+		): void {
 			$logger = LoggerFactory::getInstance( 'MirahezeMagic' );
 
 			try {
-				$result = Shell::command( $command )
-					->limits( self::LIMITS )
-					->disableSandbox()
-					->execute();
+				$objects = [ $objectPath ];
+				if ( $isImages ) {
+					$list = Shell::command(
+						'swift', 'list', $container,
+						'--prefix', $objectPath . '/',
+						...$authArguments
+					)->limits( self::LIMITS )
+						->disableSandbox()
+						->execute();
 
-				if ( $result->getExitCode() !== 0 ) {
-					$logger->warning( 'Failed to set expiry on {object}: {error}', [
-						'object' => $objectPath,
-						'error' => $result->getStderr(),
-					] );
+					if ( $list->getExitCode() !== 0 ) {
+						$logger->warning( 'Failed to list {object}: {error}', [
+							'object' => $objectPath,
+							'error' => $list->getStderr(),
+						] );
+
+						return;
+					}
+
+					$objects = array_values( array_filter( explode( "\n", $list->getStdout() ) ) );
+				}
+
+				foreach ( $objects as $object ) {
+					$result = Shell::command(
+						'swift', 'post',
+						'-H', $expiry,
+						$container,
+						$object,
+						...$authArguments
+					)->limits( self::LIMITS )
+						->disableSandbox()
+						->execute();
+
+					if ( $result->getExitCode() !== 0 ) {
+						$logger->warning( 'Failed to set expiry on {object}: {error}', [
+							'object' => $object,
+							'error' => $result->getStderr(),
+						] );
+					}
 				}
 			} catch ( Throwable $e ) {
 				$logger->error( 'Failed to set expiry on {object}', [
