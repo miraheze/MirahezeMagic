@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Miraheze\MirahezeMagic\HookHandlers;
 
 use MediaWiki\Config\Config;
@@ -12,12 +14,16 @@ use Miraheze\ImportDump\Hooks\ImportDumpGetTargetStateHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobAfterImportHook;
 use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ImportDump\Hooks\ImportDumpRequestStatusUpdateHook;
-use Miraheze\ImportDump\RequestManager;
-use Miraheze\ImportDump\RequestStatus;
+use Miraheze\ImportDump\Request\RequestManager;
+use Miraheze\ImportDump\Request\RequestStatus;
 use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
+use function array_merge;
+use function array_unique;
+use function array_values;
+use function in_array;
 
 class ImportDump implements
 	ImportDumpGetTargetStateHook,
@@ -27,9 +33,9 @@ class ImportDump implements
 {
 
 	private const array EXPIRABLE_STATUSES = [
-		RequestStatus::STATUS_COMPLETE,
-		RequestStatus::STATUS_DECLINED,
-		RequestStatus::STATUS_FAILED,
+		RequestStatus::Complete,
+		RequestStatus::Declined,
+		RequestStatus::Failed,
 	];
 
 	private const array LIMITS = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
@@ -120,18 +126,18 @@ class ImportDump implements
 
 	/**
 	 * @inheritDoc
-	 * @param string $oldStatus @phan-unused-param
+	 * @param RequestStatus $oldStatus @phan-unused-param
 	 */
 	public function onImportDumpRequestStatusUpdate(
 		RequestManager $requestManager,
-		string $newStatus,
-		string $oldStatus
+		RequestStatus $newStatus,
+		RequestStatus $oldStatus
 	): void {
 		if ( !in_array( $newStatus, self::EXPIRABLE_STATUSES, true ) ) {
 			return;
 		}
 
-		$days = (int)( $this->options->get( ConfigNames::FileExpiryDays )[$newStatus] ?? 0 );
+		$days = (int)( $this->options->get( ConfigNames::FileExpiryDays )[$newStatus->value] ?? 0 );
 		if ( $days <= 0 ) {
 			return;
 		}
@@ -170,7 +176,7 @@ class ImportDump implements
 	}
 
 	private function getContainer(): string {
-		$dbr = $this->connectionProvider->getReplicaDatabase( 'virtual-importdump' );
+		$dbr = $this->connectionProvider->getReplicaDatabase( RequestManager::VIRTUAL_DOMAIN );
 		return $dbr->getDomainID() === 'metawikibeta' ?
 			'miraheze-metawikibeta-local-public' :
 			'miraheze-metawiki-local-public';
