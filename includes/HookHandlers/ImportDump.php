@@ -32,12 +32,6 @@ class ImportDump implements
 	ImportDumpRequestStatusUpdateHook
 {
 
-	private const array EXPIRABLE_STATUSES = [
-		RequestStatus::Complete,
-		RequestStatus::Declined,
-		RequestStatus::Failed,
-	];
-
 	private const array LIMITS = [ 'memory' => 0, 'filesize' => 0, 'time' => 0, 'walltime' => 0 ];
 
 	public function __construct(
@@ -133,7 +127,7 @@ class ImportDump implements
 		RequestStatus $newStatus,
 		RequestStatus $oldStatus
 	): void {
-		if ( !in_array( $newStatus, self::EXPIRABLE_STATUSES, true ) ) {
+		if ( !in_array( $newStatus, RequestManager::EXPIRABLE_STATUSES, true ) ) {
 			return;
 		}
 
