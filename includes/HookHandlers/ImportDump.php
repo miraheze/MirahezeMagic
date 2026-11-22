@@ -16,6 +16,7 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ImportDump\Hooks\ImportDumpRequestStatusUpdateHook;
 use Miraheze\ImportDump\Request\RequestManager;
 use Miraheze\ImportDump\Request\RequestStatus;
+use Miraheze\ImportDump\Request\RequestType;
 use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
@@ -107,11 +108,22 @@ class ImportDump implements
 		string &$filePath,
 		RequestManager $requestManager
 	): void {
+		$arguments = [ '-o', $filePath ];
+		$objectPath = $requestManager->getSplitFilePath();
+		if ( $requestManager->getType() === RequestType::Images ) {
+			$objectPath = '';
+			$arguments = [
+				'--prefix', $requestManager->getSplitFilePath() . '/',
+				'--remove-prefix',
+				'-D', $filePath,
+			];
+		}
+
 		Shell::command(
 			'swift', 'download',
 			$this->getContainer(),
-			$requestManager->getSplitFilePath(),
-			'-o', $filePath,
+			...( $objectPath !== '' ? [ $objectPath ] : [] ),
+			...$arguments,
 			...$this->getAuthArguments()
 		)->limits( self::LIMITS )
 			->disableSandbox()
