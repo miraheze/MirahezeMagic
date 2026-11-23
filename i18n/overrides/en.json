@@ -53,6 +53,7 @@
 	"miraheze-grouppage-smweditor": "m:Special:MyLanguage/User groups#{{int:Group-smweditor}}",
 	"miraheze-importdump-help-reason": "Tell us whether the XML is for: migrating from another wiki, forking another wiki, or importing templates or pages from Wikipedia.",
 	"miraheze-importdump-help-target": "This must be a valid database name. To find the database name of the wiki, see Special:ManageWiki/core on the wiki.\n\nIf you do not yet have your wiki created, please request your wiki using [[Special:RequestWiki]] first, and then return here to make this import request once your wiki is created.",
+	"miraheze-importdump-images-comment": "Imported from $1 in [[meta:Special:RequestImportQueue/$3|import request #$3]]",
 	"miraheze-importdump-images-failed-comment": "There was an error while importing the provided images. The Technology team has been notified.",
 	"miraheze-importdump-import-failed-comment": "There was an error while importing the provided XML. The Technology team has been notified.",
 	"miraheze-importtext": "Please export the file from the source wiki using the [[Special:Export|export utility]].\nSave it to your computer and upload it here.<br /> Please note that if the file is a bit large (~ >2MB) you will need to [[M:Special:RequestImport|request an import]] as this cannot be done here due to technical limitations.<br />We advise against importing infoboxes directly from Wikipedia, please see [[m:Infoboxes|this page]] for more information.",
