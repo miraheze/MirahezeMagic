@@ -16,13 +16,17 @@ use Miraheze\ImportDump\Hooks\ImportDumpJobGetFileHook;
 use Miraheze\ImportDump\Hooks\ImportDumpRequestStatusUpdateHook;
 use Miraheze\ImportDump\Request\RequestManager;
 use Miraheze\ImportDump\Request\RequestStatus;
+use Miraheze\ImportDump\Request\RequestType;
 use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
+use function array_filter;
 use function array_merge;
+use function array_slice;
 use function array_unique;
 use function array_values;
+use function explode;
 use function in_array;
 
 class ImportDump implements
@@ -118,6 +122,42 @@ class ImportDump implements
 			->execute();
 	}
 
+	/** @inheritDoc */
+	public function onImportImagesJobGetFiles(
+		string $directory,
+		RequestManager $requestManager,
+		int $offset,
+		int $limit
+	): void {
+		$container = $this->getContainer();
+		$authArguments = $this->getAuthArguments();
+		$prefix = $requestManager->getSplitFilePath() . '/';
+
+		$objects = [ '--prefix', $prefix, '--remove-prefix' ];
+		if ( $limit > 0 ) {
+			$list = Shell::command( 'swift', 'list', $container, '--prefix', $prefix, ...$authArguments )
+				->limits( self::LIMITS )
+				->disableSandbox()
+				->execute();
+
+			$all = array_values( array_filter( explode( "\n", $list->getStdout() ) ) );
+			$names = array_slice( $all, $offset, $limit );
+			if ( !$names ) {
+				return;
+			}
+
+			$objects = $names;
+		}
+
+		Shell::command(
+			'swift', 'download',
+			$container,
+			...[ ...$objects, '-D', $directory, ...$authArguments ]
+		)->limits( self::LIMITS )
+			->disableSandbox()
+			->execute();
+	}
+
 	/**
 	 * @inheritDoc
 	 * @param RequestStatus $oldStatus @phan-unused-param
@@ -136,21 +176,30 @@ class ImportDump implements
 			return;
 		}
 
-		$objectPath = $requestManager->getSplitFilePath();
-		$command = [
-			'swift', 'post',
-			'-H', 'X-Delete-After: ' . ( $days * 86400 ),
-			$this->getContainer(),
-			$objectPath,
-			...$this->getAuthArguments(),
-		];
+		// The files of an images request are removed by the ExpireFiles maintenance script instead,
+		// because every image would need an expiry of its own.
+		if ( $requestManager->getType() === RequestType::Images ) {
+			return;
+		}
 
-		DeferredUpdates::addCallableUpdate( static function () use ( $command, $objectPath ): void {
+		$objectPath = $requestManager->getSplitFilePath();
+		$container = $this->getContainer();
+		$authArguments = $this->getAuthArguments();
+		$expiry = 'X-Delete-After: ' . ( $days * 86400 );
+
+		DeferredUpdates::addCallableUpdate( static function () use (
+			$objectPath, $container, $authArguments, $expiry
+		): void {
 			$logger = LoggerFactory::getInstance( 'MirahezeMagic' );
 
 			try {
-				$result = Shell::command( $command )
-					->limits( self::LIMITS )
+				$result = Shell::command(
+					'swift', 'post',
+					'-H', $expiry,
+					$container,
+					$objectPath,
+					...$authArguments
+				)->limits( self::LIMITS )
 					->disableSandbox()
 					->execute();
 
