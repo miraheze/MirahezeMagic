@@ -21,11 +21,9 @@ use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
-use function array_filter;
 use function array_merge;
 use function array_unique;
 use function array_values;
-use function explode;
 use function in_array;
 
 class ImportDump implements
@@ -110,23 +108,32 @@ class ImportDump implements
 		string &$filePath,
 		RequestManager $requestManager
 	): void {
-		$arguments = [ '-o', $filePath ];
-		$objectPath = $requestManager->getSplitFilePath();
-		if ( $requestManager->getType() === RequestType::Images ) {
-			$objectPath = '';
-			$arguments = [
-				'--prefix', $requestManager->getSplitFilePath() . '/',
-				'--remove-prefix',
-				'-D', $filePath,
-			];
-		}
+		Shell::command(
+			'swift', 'download',
+			$this->getContainer(),
+			$requestManager->getSplitFilePath(),
+			'-o', $filePath,
+			...$this->getAuthArguments()
+		)->limits( self::LIMITS )
+			->disableSandbox()
+			->execute();
+	}
+
+	/** @inheritDoc */
+	public function onImportImagesJobGetFiles(
+		string $directory,
+		RequestManager $requestManager,
+		array $names
+	): void {
+		$objects = $names ?: [
+			'--prefix', $requestManager->getSplitFilePath() . '/',
+			'--remove-prefix',
+		];
 
 		Shell::command(
 			'swift', 'download',
 			$this->getContainer(),
-			...( $objectPath !== '' ? [ $objectPath ] : [] ),
-			...$arguments,
-			...$this->getAuthArguments()
+			...[ ...$objects, '-D', $directory, ...$this->getAuthArguments() ]
 		)->limits( self::LIMITS )
 			->disableSandbox()
 			->execute();
@@ -150,57 +157,38 @@ class ImportDump implements
 			return;
 		}
 
+		// The files of an images request are removed by the ExpireFiles maintenance script instead,
+		// because every image would need an expiry of its own.
+		if ( $requestManager->getType() === RequestType::Images ) {
+			return;
+		}
+
 		$objectPath = $requestManager->getSplitFilePath();
-		$isImages = $requestManager->getType() === RequestType::Images;
 		$container = $this->getContainer();
 		$authArguments = $this->getAuthArguments();
 		$expiry = 'X-Delete-After: ' . ( $days * 86400 );
 
 		DeferredUpdates::addCallableUpdate( static function () use (
-			$objectPath, $isImages, $container, $authArguments, $expiry
+			$objectPath, $container, $authArguments, $expiry
 		): void {
 			$logger = LoggerFactory::getInstance( 'MirahezeMagic' );
 
 			try {
-				$objects = [ $objectPath ];
-				if ( $isImages ) {
-					$list = Shell::command(
-						'swift', 'list', $container,
-						'--prefix', $objectPath . '/',
-						...$authArguments
-					)->limits( self::LIMITS )
-						->disableSandbox()
-						->execute();
+				$result = Shell::command(
+					'swift', 'post',
+					'-H', $expiry,
+					$container,
+					$objectPath,
+					...$authArguments
+				)->limits( self::LIMITS )
+					->disableSandbox()
+					->execute();
 
-					if ( $list->getExitCode() !== 0 ) {
-						$logger->warning( 'Failed to list {object}: {error}', [
-							'object' => $objectPath,
-							'error' => $list->getStderr(),
-						] );
-
-						return;
-					}
-
-					$objects = array_values( array_filter( explode( "\n", $list->getStdout() ) ) );
-				}
-
-				foreach ( $objects as $object ) {
-					$result = Shell::command(
-						'swift', 'post',
-						'-H', $expiry,
-						$container,
-						$object,
-						...$authArguments
-					)->limits( self::LIMITS )
-						->disableSandbox()
-						->execute();
-
-					if ( $result->getExitCode() !== 0 ) {
-						$logger->warning( 'Failed to set expiry on {object}: {error}', [
-							'object' => $object,
-							'error' => $result->getStderr(),
-						] );
-					}
+				if ( $result->getExitCode() !== 0 ) {
+					$logger->warning( 'Failed to set expiry on {object}: {error}', [
+						'object' => $objectPath,
+						'error' => $result->getStderr(),
+					] );
 				}
 			} catch ( Throwable $e ) {
 				$logger->error( 'Failed to set expiry on {object}', [
