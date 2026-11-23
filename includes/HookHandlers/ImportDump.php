@@ -28,6 +28,7 @@ use function array_unique;
 use function array_values;
 use function explode;
 use function in_array;
+use function is_array;
 
 class ImportDump implements
 	ImportDumpGetTargetStateHook,
@@ -74,6 +75,11 @@ class ImportDump implements
 		$extensions = $this->moduleFactory->extensions( $target )->listNames();
 		$settings['allowEntityImport'] = (bool)$this->moduleFactory
 			->settings( $target )->list( 'wmgAllowEntityImport' );
+
+		$fileExtensions = $this->moduleFactory->settings( $target )->list( 'wgFileExtensions' );
+		if ( is_array( $fileExtensions ) && $fileExtensions !== [] ) {
+			$settings['fileExtensions'] = array_values( $fileExtensions );
+		}
 
 		// The live permissions of ManageWiki leave out the additional rights and the read right
 		// of private wikis, so the merged data is used. ManageWiki gives everyone read on a wiki
