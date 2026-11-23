@@ -125,6 +125,8 @@ class Main implements
 			'grouppage-smweditor',
 			'importdump-help-reason',
 			'importdump-help-target',
+			'importdump-images-comment',
+			'importdump-images-failed-comment',
 			'importdump-import-failed-comment',
 			'importtext',
 			'interwiki_intro',
