@@ -21,9 +21,12 @@ use Miraheze\ManageWiki\Helpers\Factories\DataStoreFactory;
 use Miraheze\ManageWiki\Helpers\Factories\ModuleFactory;
 use Throwable;
 use Wikimedia\Rdbms\IConnectionProvider;
+use function array_filter;
 use function array_merge;
+use function array_slice;
 use function array_unique;
 use function array_values;
+use function explode;
 use function in_array;
 
 class ImportDump implements
@@ -123,17 +126,33 @@ class ImportDump implements
 	public function onImportImagesJobGetFiles(
 		string $directory,
 		RequestManager $requestManager,
-		array $names
+		int $offset,
+		int $limit
 	): void {
-		$objects = $names ?: [
-			'--prefix', $requestManager->getSplitFilePath() . '/',
-			'--remove-prefix',
-		];
+		$container = $this->getContainer();
+		$authArguments = $this->getAuthArguments();
+		$prefix = $requestManager->getSplitFilePath() . '/';
+
+		$objects = [ '--prefix', $prefix, '--remove-prefix' ];
+		if ( $limit > 0 ) {
+			$list = Shell::command( 'swift', 'list', $container, '--prefix', $prefix, ...$authArguments )
+				->limits( self::LIMITS )
+				->disableSandbox()
+				->execute();
+
+			$all = array_values( array_filter( explode( "\n", $list->getStdout() ) ) );
+			$names = array_slice( $all, $offset, $limit );
+			if ( !$names ) {
+				return;
+			}
+
+			$objects = $names;
+		}
 
 		Shell::command(
 			'swift', 'download',
-			$this->getContainer(),
-			...[ ...$objects, '-D', $directory, ...$this->getAuthArguments() ]
+			$container,
+			...[ ...$objects, '-D', $directory, ...$authArguments ]
 		)->limits( self::LIMITS )
 			->disableSandbox()
 			->execute();
