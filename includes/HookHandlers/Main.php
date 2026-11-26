@@ -135,7 +135,7 @@ class Main implements
 			'requestimport-help-target',
 			'requestimport-images-comment',
 			'requestimport-images-failed-comment',
-			'requestimport-import-failed-comment',
+			'requestimport-xml-failed-comment',
 			'requestwiki-error-invalidcomment',
 			'requestwiki-info-guidance',
 			'requestwiki-info-guidance-post',
