@@ -74,7 +74,7 @@
 	"managewiki-setting-wgVisualEditorEnableWikitext-name": "{{doc-MirahezeManageWiki-name|wgVisualEditorEnableWikitext}}\n\nSee {{msg-mw|Visualeditor-preference-newwikitexteditor-enable}}",
 	"managewiki-setting-wgVisualEditorEnableWikitext-help": "{{doc-MirahezeManageWiki-help|wgVisualEditorEnableWikitext}}",
 	"managewiki-setting-wgVisualEditorUseSingleEditTab-name": "{{doc-MirahezeManageWiki-name|wgVisualEditorUseSingleEditTab}}",
-	"managewiki-setting-wgVisualEditorUseSingleEditTab-help": "{{doc-MirahezeManageWiki-help|wgVisualEditorUseSingleEditTab}}",
+	"managewiki-setting-wgVisualEditorUseSingleEditTab-help": "{{doc-MirahezeManageWiki-help|wgVisualEditorUseSingleEditTab}}\n\nRefers to {{msg-mw|managewiki-setting-wmgVisualEditorEnableDefault-name}}",
 	"managewiki-setting-wgAllowSlowParserFunctions-name": "{{doc-MirahezeManageWiki-name|wgAllowSlowParserFunctions}}",
 	"managewiki-setting-wgAllowSlowParserFunctions-help": "{{doc-MirahezeManageWiki-help|wgAllowSlowParserFunctions}}",
 	"managewiki-setting-wgPFEnableStringFunctions-name": "{{doc-MirahezeManageWiki-name|wgPFEnableStringFunctions}}",
