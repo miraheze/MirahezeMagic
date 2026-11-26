@@ -57,7 +57,6 @@ class CreateWiki implements
 			LoggerFactory::getInstance( 'MirahezeMagic' ),
 			new ServiceOptions(
 				[
-					'EchoSharedTrackingDB',
 					'MirahezeMagicMemcachedServers',
 					'MirahezeMagicSwiftKey',
 					ConfigNames::Settings,
@@ -75,7 +74,7 @@ class CreateWiki implements
 	 */
 	public function onCreateWikiDeletion( DBConnRef $cwdb, string $dbname ): void {
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
-			$this->options->get( 'EchoSharedTrackingDB' )
+			'virtual-echo-shared'
 		);
 
 		$dbw->newDeleteQueryBuilder()
@@ -159,7 +158,7 @@ class CreateWiki implements
 		string $newDbName
 	): void {
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
-			$this->options->get( 'EchoSharedTrackingDB' )
+			'virtual-echo-shared'
 		);
 
 		$dbw->newUpdateQueryBuilder()

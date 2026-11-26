@@ -36,6 +36,9 @@
 	"ExtensionFunctions": [
 		"Miraheze\\MirahezeMagic\\HookHandlers\\NoFollow::registerHooks"
 	],
+	"DatabaseVirtualDomains": [
+		"virtual-echo-shared"
+	],
 	"LogActionsHandlers": {
 		"vanishuser/*": "MediaWiki\\Logging\\LogFormatter"
 	},

@@ -6,6 +6,7 @@ use Wikimedia\Rdbms\Database;
 use Wikimedia\Rdbms\DBQueryError;
 
 $wgGlobalUserPageDBname = 'wikidb';
+$wgVirtualDomainsMapping['virtual-echo-shared'] = [ 'db' => 'wikidb' ];
 $wgHooks['MediaWikiServices'][] = 'wfOnMediaWikiServices';
 
 function wfOnMediaWikiServices( MediaWikiServices $services ): void {
