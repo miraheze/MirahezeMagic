@@ -12,8 +12,6 @@ use MediaWiki\MainConfigNames;
 use MediaWiki\Shell\Shell;
 use Memcached;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
-use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiTablesHook;
 use Miraheze\CreateWiki\Maintenance\SetContainersAccess;
@@ -28,8 +26,7 @@ use Wikimedia\Rdbms\IConnectionProvider;
 
 class CreateWiki implements
 	CreateWikiDeletionHook,
-	CreateWikiAfterCreationWithExtraDataHook
-	CreateWikiRenameHook,
+	CreateWikiAfterCreationWithExtraDataHookCreateWikiRenameHook,
 	CreateWikiStatePrivateHook,
 	CreateWikiTablesHook
 {
