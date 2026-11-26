@@ -26,7 +26,8 @@ use Wikimedia\Rdbms\IConnectionProvider;
 
 class CreateWiki implements
 	CreateWikiDeletionHook,
-	CreateWikiAfterCreationWithExtraDataHookCreateWikiRenameHook,
+	CreateWikiAfterCreationWithExtraDataHook,
+	CreateWikiRenameHook,
 	CreateWikiStatePrivateHook,
 	CreateWikiTablesHook
 {
