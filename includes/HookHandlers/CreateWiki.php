@@ -11,6 +11,7 @@ use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Shell\Shell;
 use Memcached;
+use Miraheze\CreateWiki\Hooks\CreateWikiAfterCreationWithExtraDataHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiStatePrivateHook;
@@ -27,6 +28,7 @@ use Wikimedia\Rdbms\IConnectionProvider;
 
 class CreateWiki implements
 	CreateWikiDeletionHook,
+	CreateWikiAfterCreationWithExtraDataHook,
 	CreateWikiRenameHook,
 	CreateWikiStatePrivateHook,
 	CreateWikiTablesHook
@@ -66,6 +68,19 @@ class CreateWiki implements
 				$mainConfig
 			)
 		);
+	}
+
+	/** @inheritDoc */
+	public function onCreateWikiAfterCreationWithExtraData( array $extraData, string $dbname ): void {
+		if ( empty( $extraData['source'] ) ) {
+			return;
+		}
+		$mwSettings = $this->moduleFactory->settings( $dbname );
+		$mwSettings->modify( [
+			'wgMirahezeCommons' => false,
+			'wgUseQuickInstantCommons' => false,
+		], default: null );
+		$mwSettings->commit();
 	}
 
 	/**

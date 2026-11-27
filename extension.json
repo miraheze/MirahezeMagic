@@ -103,6 +103,9 @@
 		"BlockIpComplete": {
 			"handler": "Main"
 		},
+		"CreateWikiAfterCreationWithExtraData": {
+			"handler": "CreateWiki"
+		},
 		"CreateWikiCreationExtraFields": {
 			"handler": "RequestWiki"
 		},
