@@ -207,7 +207,8 @@
 				"ConnectionProvider",
 				"FormatterFactory",
 				"ManageWikiModuleFactory",
-				"RepoGroup"
+				"RepoGroup",
+				"MainWANObjectCache"
 			]
 		},
 		"EchoNotifications": {

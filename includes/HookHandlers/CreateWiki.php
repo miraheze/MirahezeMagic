@@ -10,6 +10,7 @@ use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Shell\Shell;
+use MediaWiki\Utils\BatchRowIterator;
 use Memcached;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
@@ -22,6 +23,7 @@ use Psr\Log\LoggerInterface;
 use Redis;
 use Throwable;
 use Wikimedia\IPUtils;
+use Wikimedia\ObjectCache\WANObjectCache;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\IConnectionProvider;
 
@@ -32,11 +34,14 @@ class CreateWiki implements
 	CreateWikiTablesHook
 {
 
+	private const int CENTRAL_AUTH_CACHE_BATCH_SIZE = 500;
+
 	public function __construct(
 		private readonly IConnectionProvider $connectionProvider,
 		private readonly FormatterFactory $formatterFactory,
 		private readonly ModuleFactory $moduleFactory,
 		private readonly RepoGroup $repoGroup,
+		private readonly WANObjectCache $wanCache,
 		private readonly LoggerInterface $logger,
 		private readonly ServiceOptions $options
 	) {
@@ -47,13 +52,15 @@ class CreateWiki implements
 		IConnectionProvider $connectionProvider,
 		FormatterFactory $formatterFactory,
 		ModuleFactory $moduleFactory,
-		RepoGroup $repoGroup
+		RepoGroup $repoGroup,
+		WANObjectCache $wanCache
 	): self {
 		return new self(
 			$connectionProvider,
 			$formatterFactory,
 			$moduleFactory,
 			$repoGroup,
+			$wanCache,
 			LoggerFactory::getInstance( 'MirahezeMagic' ),
 			new ServiceOptions(
 				[
@@ -148,15 +155,32 @@ class CreateWiki implements
 		$this->removeMemcachedKey( ".*$dbname.*" );
 	}
 
-	/**
-	 * @inheritDoc
-	 * @param DBConnRef $cwdb @phan-unused-param
-	 */
+	/** @inheritDoc */
 	public function onCreateWikiRename(
 		DBConnRef $cwdb,
 		string $oldDbName,
 		string $newDbName
 	): void {
+		$queryBuilder = $cwdb->newSelectQueryBuilder()
+			->from( 'localuser' )
+			->where( [ 'lu_wiki' => $newDbName ] )
+			->caller( __METHOD__ );
+		$cache = $this->wanCache;
+
+		// Purge after commit so the cache can refill from the renamed attachments.
+		$cwdb->onTransactionCommitOrIdle( static function () use ( $cwdb, $queryBuilder, $cache ): void {
+			$batches = new BatchRowIterator( $cwdb, $queryBuilder, 'lu_name', self::CENTRAL_AUTH_CACHE_BATCH_SIZE );
+			foreach ( $batches as $rows ) {
+				foreach ( $rows as $row ) {
+					// Match CentralAuthUser::getCacheKey() since quickInvalidateCache() requires a writable wiki.
+					$cache->delete( $cache->makeGlobalKey( 'centralauth-user', hash( 'sha256', $row->lu_name ) ) );
+				}
+				if ( count( $rows ) < self::CENTRAL_AUTH_CACHE_BATCH_SIZE ) {
+					break;
+				}
+			}
+		}, __METHOD__ );
+
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
 			'virtual-echo-shared'
 		);
