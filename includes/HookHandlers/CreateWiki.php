@@ -9,7 +9,6 @@ use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
 use MediaWiki\Utils\BatchRowIterator;
 use Memcached;
@@ -24,6 +23,7 @@ use Psr\Log\LoggerInterface;
 use Redis;
 use Throwable;
 use Wikimedia\IPUtils;
+use Wikimedia\ObjectCache\WANObjectCache;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\IConnectionProvider;
 
@@ -41,6 +41,7 @@ class CreateWiki implements
 		private readonly FormatterFactory $formatterFactory,
 		private readonly ModuleFactory $moduleFactory,
 		private readonly RepoGroup $repoGroup,
+		private readonly WANObjectCache $wanCache,
 		private readonly LoggerInterface $logger,
 		private readonly ServiceOptions $options
 	) {
@@ -51,13 +52,15 @@ class CreateWiki implements
 		IConnectionProvider $connectionProvider,
 		FormatterFactory $formatterFactory,
 		ModuleFactory $moduleFactory,
-		RepoGroup $repoGroup
+		RepoGroup $repoGroup,
+		WANObjectCache $wanCache
 	): self {
 		return new self(
 			$connectionProvider,
 			$formatterFactory,
 			$moduleFactory,
 			$repoGroup,
+			$wanCache,
 			LoggerFactory::getInstance( 'MirahezeMagic' ),
 			new ServiceOptions(
 				[
@@ -163,10 +166,10 @@ class CreateWiki implements
 			->from( 'localuser' )
 			->where( [ 'lu_wiki' => $newDbName ] )
 			->caller( __METHOD__ );
+		$cache = $this->wanCache;
 
 		// Purge after commit so the cache can refill from the renamed attachments.
-		$cwdb->onTransactionCommitOrIdle( static function () use ( $cwdb, $queryBuilder ): void {
-			$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$cwdb->onTransactionCommitOrIdle( static function () use ( $cwdb, $queryBuilder, $cache ): void {
 			$batches = new BatchRowIterator( $cwdb, $queryBuilder, 'lu_name', self::CENTRAL_AUTH_CACHE_BATCH_SIZE );
 			foreach ( $batches as $rows ) {
 				foreach ( $rows as $row ) {
