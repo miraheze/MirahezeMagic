@@ -9,7 +9,9 @@ use MediaWiki\FileRepo\RepoGroup;
 use MediaWiki\Language\FormatterFactory;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Shell\Shell;
+use MediaWiki\Utils\BatchRowIterator;
 use Memcached;
 use Miraheze\CreateWiki\Hooks\CreateWikiDeletionHook;
 use Miraheze\CreateWiki\Hooks\CreateWikiRenameHook;
@@ -31,6 +33,8 @@ class CreateWiki implements
 	CreateWikiStatePrivateHook,
 	CreateWikiTablesHook
 {
+
+	private const int CENTRAL_AUTH_CACHE_BATCH_SIZE = 500;
 
 	public function __construct(
 		private readonly IConnectionProvider $connectionProvider,
@@ -149,15 +153,32 @@ class CreateWiki implements
 		$this->removeMemcachedKey( ".*$dbname.*" );
 	}
 
-	/**
-	 * @inheritDoc
-	 * @param DBConnRef $cwdb @phan-unused-param
-	 */
+	/** @inheritDoc */
 	public function onCreateWikiRename(
 		DBConnRef $cwdb,
 		string $oldDbName,
 		string $newDbName
 	): void {
+		$queryBuilder = $cwdb->newSelectQueryBuilder()
+			->from( 'localuser' )
+			->where( [ 'lu_wiki' => $newDbName ] )
+			->caller( __METHOD__ );
+
+		// Purge after commit so the cache can refill from the renamed attachments.
+		$cwdb->onTransactionCommitOrIdle( static function () use ( $cwdb, $queryBuilder ): void {
+			$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+			$batches = new BatchRowIterator( $cwdb, $queryBuilder, 'lu_name', self::CENTRAL_AUTH_CACHE_BATCH_SIZE );
+			foreach ( $batches as $rows ) {
+				foreach ( $rows as $row ) {
+					// Match CentralAuthUser::getCacheKey() since quickInvalidateCache() requires a writable wiki.
+					$cache->delete( $cache->makeGlobalKey( 'centralauth-user', hash( 'sha256', $row->lu_name ) ) );
+				}
+				if ( count( $rows ) < self::CENTRAL_AUTH_CACHE_BATCH_SIZE ) {
+					break;
+				}
+			}
+		}, __METHOD__ );
+
 		$dbw = $this->connectionProvider->getPrimaryDatabase(
 			$this->options->get( 'EchoSharedTrackingDB' )
 		);
